@@ -1,0 +1,3 @@
+application/config/general.php
+application/models/arcmodel.php
+application/models/mysqlmodel.php
