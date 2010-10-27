@@ -35,11 +35,7 @@ class Info extends SM_Controller {
 	public $data_types = array(
 		'lca' => array(
 			'label' => 'Life Cycle Assessment',
-<<<<<<< .mine
-			'description' => 'Life Cycle Assessment is',
-=======
 			'description' => 'Life Cycle Assessment is.',
->>>>>>> .r21
 			'stages' => array(
 				'processdescription' => array(
 						'name' => 'processDescription',

@@ -21,22 +21,7 @@ class About extends SM_Controller {
 		$this->data('title', "About Open Sustainability Info");
 		$this->style(Array(''));
 		$this->display("Opensustainability.info", "info_view");
-	}
-	
-	public function team()
-	{		
-		$this->data('title', "Team Open Sustainability Info");
-		$this->style(Array(''));
-		$this->display("Opensustainability.info", "team_view");
-	}
-	
-	
-	public function garden()
-	{		
-		$this->data('title', "App Garden");
-		$this->style(Array(''));
-		$this->display("Opensustainability.info", "garden_view");
-	}
+	}	
 	
 }
 ?>
