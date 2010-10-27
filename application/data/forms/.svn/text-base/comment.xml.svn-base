@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<form name="comment" action="">
+  <fieldset name="Your Comment" linked_type="sioc:post">
+    <comment_title rules="trim|xss_clean">
+	  <label>Title</label>
+      <type>text</type>
+	  <linked_type>dcterms:title</linked_type>
+    </comment_title>
+    <comment_comment rules="trim|xss_clean">
+	  <label>Comment</label>
+      <type>textarea</type>
+	  <linked_type>sioc:content</linked_type>
+    </comment_comment>
+    <comment_author rules="trim|xss_clean">
+	  <label>Author</label>
+      <type>hidden</type>
+	  <linked_type>sioc:UserAccount</linked_type>
+    </comment_author>    
+    <comment_uri rules="trim|xss_clean">
+	  <label>uri</label>
+      <type>hidden</type>
+	  <linked_type>sioc:post</linked_type>
+    </comment_uri>
+      <comment_submit>
+        <type>button</type>
+        <value>Submit Comment</value>
+      </comment_submit>
+
+  </fieldset>
+
+</form>

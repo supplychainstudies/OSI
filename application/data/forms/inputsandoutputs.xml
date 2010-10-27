@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<form action="info/create/lca/inputsandoutputs" name="lca">
+	<fieldset name="Inputs and Outputs" linked_type="lca:inputsandoutputs">
+		<identification_number rules="trim">
+		  <label>Identification Number</label>
+	      <type>text</type>
+		  <linked_type>lca:ioIdentificationNumber</linked_type>
+	    </identification_number>		
+		<direction rules="trim">
+		  <label>Direction</label>
+	      <type>dropdown</type>
+		  <options>
+			<input>input</input>
+			<output>output</output>
+		  </options>
+		  <linked_type>lca:ioDirection</linked_type>
+	    </direction>
+		<group rules="trim">
+		  <label>Group</label>
+	      <type>text</type>
+		  <linked_type>lca:ioGroup</linked_type>
+	    </group>	
+		<receiving_environment rules="trim">
+		  <label>Receiving Environment</label>
+	      <type>text</type>
+		  <linked_type>lca:ioReceivingEnvironment</linked_type>
+	    </receiving_environment>
+		<receiving_environment_specification rules="trim">
+		  <label>Receiving Environment Specification</label>
+	      <type>text</type>
+		  <linked_type>lca:ioReceivingEnvironmentSpecification</linked_type>
+	    </receiving_environment_specification>
+		<environment_condition rules="trim">
+		  <label>Environment Condition</label>
+	      <type>text</type>
+		  <linked_type>lca:ioEnvironmentCondition</linked_type>
+	    </environment_condition>
+		<geographical_location rules="trim">
+		  <label>Geographical Location</label>
+	      <type>text</type>
+		  <linked_type>lca:ioGeographicalLocation</linked_type>
+	    </geographical_location>
+		<fieldset name="Related External System" linked_type="lca:ioRelatedExternalSystem">
+			<origin_or_destination rules="trim">
+			  <label>Origin or Destination</label>
+		      <type>text</type>
+			  <linked_type>lca:ioOriginorDestination</linked_type>
+		    </origin_or_destination>			
+			<transport_type rules="trim">
+			  <label>Transport Type</label>
+		      <type>text</type>
+			  <linked_type>lca:ioTransportType</linked_type>
+		    </transport_type>
+			<information_reference rules="trim">
+			  <label>Information Reference</label>
+		      <type>text</type>
+			  <linked_type>lca:ioInformationReference</linked_type>
+		    </information_reference>
+		</fieldset>
+		<internal_location rules="trim">
+		  <label>Internal Location</label>
+	      <type>text</type>
+		  <linked_type>lca:ioInternalLocation</linked_type>
+	    </internal_location>
+		<fieldset name="Name" linked_type="lca:ioName">
+			<name_text rules="trim">
+			  <label>Name (Text)</label>
+		      <type>text</type>
+			  <linked_type>lca:ioNameText</linked_type>
+		    </name_text>			
+			<reference_to_nomenclature_ rules="trim">
+			  <label>Reference to Nomenclature</label>
+		      <type>text</type>
+			  <linked_type>lca:ioReferencetoNomenclature</linked_type>
+		    </reference_to_nomenclature_>
+			<specification_of_name rules="trim">
+			  <label>Specification of Name</label>
+		      <type>text</type>
+			  <linked_type>lca:ioSpecificationofName</linked_type>
+		    </specification_of_name>
+		</fieldset>	
+		<fieldset name="Property" linked_type="lca:ioProperty" multiple="yes">
+			<property_name rules="trim">
+			  <label>Name</label>
+		      <type>text</type>
+			  <linked_type>lca:ioPropertyName</linked_type>
+		    </property_name>			
+			<property_unit rules="trim">
+			  <label>Unit</label>
+		      <type>text</type>
+			  <linked_type>lca:ioPropertyUnit</linked_type>
+		    </property_unit>
+			<property_amount rules="trim">
+			  <label>Amount</label>
+		      <type>text</type>
+			  <linked_type>lca:ioPropertyAmount</linked_type>
+		    </property_amount>
+		</fieldset>
+		<fieldset name="Amount" linked_type="lca:ioAmount" multiple="yes">
+			<amount_name rules="trim">
+			  <label>Name</label>
+		      <type>text</type>
+			  <linked_type>lca:ioAmountName</linked_type>
+		    </amount_name>
+			<fieldset name="Unit" linked_type="lca:ioAmountUnit">
+				<symbol rules="trim">
+				  <label>Symbol or Name</label>
+			      <type>text</type>
+				  <linked_type>lca:ioAmountUnitSymbol</linked_type>
+			    </symbol>				
+				<explanation rules="trim">
+				  <label>Explanation</label>
+			      <type>text</type>
+				  <linked_type>lca:ioAmountUnitExplanation</linked_type>
+			    </explanation>
+			</fieldset>
+			<fieldset name="Parameter" linked_type="lca:ioAmountUnit" multiple="yes">
+				<parameter_name rules="trim">
+				  <label>Name</label>
+			      <type>text</type>
+				  <linked_type>lca:ioAmountParameterName</linked_type>
+			    </parameter_name>				
+				<parameter_value rules="trim">
+				  <label>Value</label>
+			      <type>text</type>
+				  <linked_type>lca:ioAmountParameterValue</linked_type>
+			    </parameter_value>
+			</fieldset>
+			<fieldset name="Mathematical Model" linked_type="lca:mathematicalModel">
+			    <io_formulae rules="trim">
+				  <label>Formulae</label>
+			      <type>text</type>
+				  <linked_type>lca:formulae</linked_type>
+			    </io_formulae>
+			    <io_variable_name rules="trim">
+				  <label>Variable Name</label>
+			      <type>text</type>
+				  <linked_type>lca:mathematicalModelVariableName</linked_type>
+			    </io_variable_name>
+			    <io_variable_value rules="trim">
+				  <label>Variable Value</label>
+			      <type>text</type>
+				 <linked_type>lca:mathematicalModelVariableValue</linked_type>
+			    </io_variable_value>
+			</fieldset>
+			<fieldset name="Documentation" linked_type="lca:documentation" multiple="yes">
+			    <data_collection rules="trim">
+				  <label>Data Collection</label>
+			      <type>text</type>
+				  <linked_type>lca:dataCollection</linked_type>
+			    </data_collection>
+			    <collection_date rules="trim">
+				  <label>Collection Date</label>
+			      <type>text</type>
+				  <linked_type>lca:collectionDate</linked_type>
+			    </collection_date>
+			    <data_treatment rules="trim">
+				  <label>Data Treatment</label>
+			      <type>text</type>
+				 <linked_type>lca:dataTreatment</linked_type>
+			    </data_treatment>
+			    <data_source rules="trim">
+				  <label>Data Source</label>
+			      <type>text</type>
+				  <linked_type>lca:dataSource</linked_type>
+				  <multiple>yes</multiple>
+			    </data_source>			
+			</fieldset>			
+		</fieldset>
+    <submit>
+        <type>submit</type>
+        <value>Submit</value>
+    </submit>		
+	</fieldset>
+	
+</form>

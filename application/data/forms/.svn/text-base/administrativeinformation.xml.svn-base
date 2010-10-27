@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<form action="info/create/lca/administrativeinformation" name="lca">
+  <fieldset name="Administrative Information" linked_type="lca:administrativeInformation">
+    <identification_number rules="trim|xss_clean">
+	  <label>Identification Number</label>
+      <type>text</type>
+	  <linked_type>lca:identificationNumber</linked_type>
+    </identification_number>
+    <registration_authority rules="trim|xss_clean">
+	  <label>Registration Authority</label>
+      <type>text</type>
+	  <linked_type>lca:registrationAuthority</linked_type>
+    </registration_authority>
+    <version_number rules="trim|xss_clean">
+	  <label>Version Number</label>
+      <type>text</type>
+	  <linked_type>lca:versionNumber</linked_type>
+    </version_number>    
+    <data_commissioner rules="trim|xss_clean">
+	  <label>Data Commissioner</label>
+      <type>text</type>
+	  <linked_type>lca:dataCommissioner</linked_type>
+    </data_commissioner>
+    <data_generator rules="trim|xss_clean">
+	  <label>Data Generator</label>
+      <type>text</type>
+	  <linked_type>lca:dataGenerator</linked_type>
+    </data_generator>
+    <data_documentor rules="trim|xss_clean">
+	  <label>Data Documentor</label>
+      <type>text</type>
+	  <linked_type>lca:dataDocumentor</linked_type>
+    </data_documentor>
+    <date_completed rules="trim|xss_clean">
+	  <label>Date Completed</label>
+      <type>text</type>
+	  <note>Must be in mm/dd/yyyy format</note>
+	  <linked_type>lca:dateCompleted</linked_type>
+    </date_completed>
+    <publication rules="trim|xss_clean">
+	  <label>Publication</label>
+      <type>text</type>
+	  <linked_type>lca:publication</linked_type>
+	  <multiple>yes</multiple>
+    </publication>
+    <copyright rules="trim|xss_clean">
+	  <label>Copyright</label>
+      <type>text</type>
+	  <linked_type>lca:copyright</linked_type>
+    </copyright>
+    <access_restrictions rules="trim|xss_clean">
+	  <label>Access Restrictions</label>
+      <type>text</type>
+	  <linked_type>lca:accessRestrictions</linked_type>
+    </access_restrictions>
+  </fieldset>
+      <submit>
+        <type>submit</type>
+        <value>Submit</value>
+      </submit>
+</form>
+

@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store
+END
+ARC2_StoreCBJSONLoader.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreCBJSONLoader.php
+END
+ARC2_StoreTurtleLoader.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreTurtleLoader.php
+END
+ARC2_StoreConstructQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreConstructQueryHandler.php
+END
+ARC2_StoreHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreHelper.php
+END
+ARC2_Store.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_Store.php
+END
+ARC2_StoreEndpoint.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreEndpoint.php
+END
+ARC2_StoreTableManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreTableManager.php
+END
+ARC2_StoreRDFXMLLoader.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreRDFXMLLoader.php
+END
+ARC2_StoreDeleteQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreDeleteQueryHandler.php
+END
+ARC2_StoreAtomLoader.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreAtomLoader.php
+END
+ARC2_StoreInsertQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreInsertQueryHandler.php
+END
+ARC2_StoreDumpQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreDumpQueryHandler.php
+END
+ARC2_RemoteStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_RemoteStore.php
+END
+ARC2_StoreSGAJSONLoader.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreSGAJSONLoader.php
+END
+ARC2_StoreDumper.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreDumper.php
+END
+ARC2_StoreRSSLoader.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreRSSLoader.php
+END
+ARC2_StoreSPOGLoader.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreSPOGLoader.php
+END
+ARC2_StoreSemHTMLLoader.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreSemHTMLLoader.php
+END
+ARC2_StoreAskQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreAskQueryHandler.php
+END
+ARC2_StoreQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreQueryHandler.php
+END
+ARC2_StoreLoadQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreLoadQueryHandler.php
+END
+ARC2_StoreSelectQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreSelectQueryHandler.php
+END
+ARC2_StoreDescribeQueryHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/arc2/store/ARC2_StoreDescribeQueryHandler.php
+END

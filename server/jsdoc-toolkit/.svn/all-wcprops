@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit
+END
+changes.txt
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/changes.txt
+END
+jsrun.sh
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/jsrun.sh
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/README.txt
+END
+jsrun.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/jsrun.jar
+END
+jsdebug.jar
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/jsdebug.jar
+END

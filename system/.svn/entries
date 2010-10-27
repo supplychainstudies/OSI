@@ -1,0 +1,55 @@
+10
+
+dir
+22
+https://sourcemap.svn.codebasehq.com/opensustainability/open/trunk/system
+https://sourcemap.svn.codebasehq.com/opensustainability/open
+
+
+
+2010-07-13T20:51:46.541092Z
+12
+bianca
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+26a347a8-1f3a-42fc-9b37-1fc517fbbfe2
+
+scaffolding
+dir
+
+plugins
+dir
+
+helpers
+dir
+
+language
+dir
+
+database
+dir
+
+logs
+dir
+
+fonts
+dir
+
+codeigniter
+dir
+
+libraries
+dir
+

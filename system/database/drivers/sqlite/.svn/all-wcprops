@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/opensustainability/open/!svn/ver/11/trunk/system/database/drivers/sqlite
+END
+sqlite_driver.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/opensustainability/open/!svn/ver/11/trunk/system/database/drivers/sqlite/sqlite_driver.php
+END
+sqlite_result.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/opensustainability/open/!svn/ver/11/trunk/system/database/drivers/sqlite/sqlite_result.php
+END
+sqlite_forge.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/opensustainability/open/!svn/ver/11/trunk/system/database/drivers/sqlite/sqlite_forge.php
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/opensustainability/open/!svn/ver/11/trunk/system/database/drivers/sqlite/index.html
+END
+sqlite_utility.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/opensustainability/open/!svn/ver/11/trunk/system/database/drivers/sqlite/sqlite_utility.php
+END

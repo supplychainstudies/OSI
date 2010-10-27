@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/templates/jsdoc
+END
+class.tmpl
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/templates/jsdoc/class.tmpl
+END
+symbol.tmpl
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/templates/jsdoc/symbol.tmpl
+END
+allclasses.tmpl
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/templates/jsdoc/allclasses.tmpl
+END
+publish.js
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/templates/jsdoc/publish.js
+END
+index.tmpl
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/templates/jsdoc/index.tmpl
+END
+allfiles.tmpl
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/opensustainability/open/!svn/ver/11/trunk/server/jsdoc-toolkit/templates/jsdoc/allfiles.tmpl
+END

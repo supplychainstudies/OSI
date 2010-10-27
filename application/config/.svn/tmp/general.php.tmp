@@ -1,0 +1,45 @@
+<?php
+
+# General framework config =================================================
+$config['base_url']	= "http://localhost/~zapico/opensustainability/opensustainability-open/trunk/"; # Base url for sourcemap.
+$config['index_page'] = ""; # Will either be this or index.php/
+$config['log_threshold'] = 4; # Codeigniter logging level (reccomend 4 for dev).
+<<<<<<< .mine
+$config['log_path'] = '/log';
+$config['cache_path'] = '/Users/zapico/Repos/opensustainability/opensustainability-open/trunk/server/cache/'; # Cache path
+=======
+$config['log_path'] = '';
+$config['cache_path'] = '/Users/bianca/'; # Cache path
+>>>>>>> .r16
+$config['compress_output'] = FALSE;
+
+date_default_timezone_set('America/New_York'); # e.g. 'America/Los_Angeles'
+error_reporting(E_ALL); # PHP error reporting (recommend E_ALL for dev)
+
+# Sourcemap specific config ================================================
+$config['deploystatus'] = "local"; # Sets some system behaviors. (local, stage)
+$config['version'] = "0.8.0"; # Current version string.
+$config['statistics'] = false; # If statistics should be cached.
+
+# Minification config =====================================================
+<<<<<<< .mine
+$min_cachePath = '/Users/zapico/Repos/opensustainability/opensustainability-open/trunk/server/cache/min/'; # Path to minification cache
+=======
+$min_cachePath = '/Users/bianca/'; # Path to minification cache
+>>>>>>> .r16
+$min_documentRoot = ''; # The document root for min (often empty)
+
+# Database config =========================================================
+<<<<<<< .mine
+$config['dbtype'] = "mysql"; # Either mysql or postgresql.
+$db['default']['hostname'] = "verdemedia.org"; # Almost always local host, unless tunneling.
+$db['default']['username'] = "admin_test_osi"; # DB Username
+$db['default']['password'] = "opendataforall"; # DB Password
+$db['default']['database'] = "test_osi"; # Sourcemap database name.
+$db['default']['cachedir'] = "/Users/zapico/Repos/opensustainability/opensustainability-open/trunk/server/cache/db/"; # Path to db cache=======
+$config['dbtype'] = ""; # Either mysql or postgresql.
+$db['default']['hostname'] = ""; # Almost always local host, unless tunneling.
+$db['default']['username'] = ""; # DB Username
+$db['default']['password'] = ""; # DB Password
+$db['default']['database'] = ""; # Sourcemap database name.
+$db['default']['cachedir'] = "/Users/bianca/"; # Path to db cache>>>>>>> .r16

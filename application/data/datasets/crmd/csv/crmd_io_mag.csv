@@ -1,0 +1,36 @@
+input,raw material,technosphere,Dredged sand,http://dbpedia.org/class/yago/Kilogram113724582,111
+input,raw material,technosphere,Crushed Quartz,http://dbpedia.org/class/yago/Kilogram113724582,333
+input,raw material,technosphere,Limestone,http://dbpedia.org/class/yago/Kilogram113724582,119
+input,raw material,technosphere,Soda Ash,http://dbpedia.org/class/yago/Kilogram113724582,144
+input,raw material,technosphere,Syenite,http://dbpedia.org/class/yago/Kilogram113724582,30
+input,raw material,technosphere,Saltcake,http://dbpedia.org/class/yago/Kilogram113724582,5
+input,raw material,technosphere,Cullet,http://dbpedia.org/class/yago/Kilogram113724582,368
+input,raw material,technosphere,Selenium,http://dbpedia.org/class/yago/Kilogram113724582,7.03
+input,raw material,technosphere,Detergent,http://dbpedia.org/class/yago/Kilogram113724582,0.18
+input,raw material,technosphere,Carbocite,http://dbpedia.org/class/yago/Kilogram113724582,1.88
+input,raw material,technosphere,Melite 40 (Fe-Al-Silicate Slag),http://dbpedia.org/class/yago/Kilogram113724582,7
+input,energy,,Coal,MJ,474
+input,energy,,Petroleum,MJ,2100
+input,energy,,Natural gas,MJ,9230
+input,energy,,Nuclear,MJ,364
+input,energy,,Feedstock,MJ,72
+input,raw material,,Fuel related water,http://dbpedia.org/class/yago/Liter113624190,34
+input,raw material,,Process related water,http://dbpedia.org/class/yago/Liter113624190,141
+output,emission,air,Carbon dioxide,http://dbpedia.org/class/yago/Kilogram113724582,564
+output,emission,air,Carbon monoxide,http://dbpedia.org/class/yago/Kilogram113724582,279
+output,emission,air,Sulphur oxides (reported as SO2),http://dbpedia.org/class/yago/Kilogram113724582,4.58
+output,emission,air,Nitrogen oxides (reported as NO2),http://dbpedia.org/class/yago/Kilogram113724582,3.21
+output,emission,air,Methane,http://dbpedia.org/class/yago/Kilogram113724582,1.14
+output,emission,air,Dust & particles (includes metals),http://dbpedia.org/class/yago/Kilogram113724582,1.17,Total of Metals and metal compounds and PM10
+output,emission,air,Acid gases,http://dbpedia.org/class/yago/Kilogram113724582,0.0722
+output,emission,air,NMHC (non-methane hydrocarbons),http://dbpedia.org/class/yago/Kilogram113724582,0.241
+output,emission,water,Phosphates and ammonia,http://dbpedia.org/class/yago/Kilogram113724582,0.00148
+output,emission,water,Oils and greases,http://dbpedia.org/class/yago/Kilogram113724582,0.00453
+output,emission,water,Suspended solids,http://dbpedia.org/class/yago/Kilogram113724582,0.0372
+output,emission,water,Other organics,http://dbpedia.org/class/yago/Kilogram113724582,0.0000127
+output,emission,water,Heavy Metals,http://dbpedia.org/class/yago/Kilogram113724582,0.3
+output,emission,water,BOD,http://dbpedia.org/class/yago/Kilogram113724582,0.00796
+output,emission,water,COD,http://dbpedia.org/class/yago/Kilogram113724582,0.0669
+output,emission,water,Dissolved solids,http://dbpedia.org/class/yago/Kilogram113724582,0.945
+output,emission,land,Process related wastes,http://dbpedia.org/class/yago/Kilogram113724582,124
+output,emission,land,Municipal wastes,http://dbpedia.org/class/yago/Kilogram113724582,0.56

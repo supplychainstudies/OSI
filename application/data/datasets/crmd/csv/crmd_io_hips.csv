@@ -1,0 +1,38 @@
+input,raw material,technosphere,Process Chemicals,24,http://dbpedia.org/class/yago/Kilogram113724582,Includes additives. catalysts. chemicals. etc.
+input,energy,,Coal,3320,MJ
+input,energy,,Crude Oil,11700,MJ
+input,energy,,Natural Gas,29200,MJ
+input,energy,,Hydro,245,MJ
+input,energy,,Nuclear,1100,MJ
+input,energy,,Other,0.258,MJ
+input,energy,,Coal (Feedstock),742,MJ,Feedstock values are the theoretical energy that could be recovered via combustion
+input,energy,,Crude Oil (Feedstock),28500,MJ,Feedstock values are the theoretical energy that could be recovered via combustion
+input,energy,,Natural Gas (Feedstock),12600,MJ,Feedstock values are the theoretical energy that could be recovered via combustion
+output,emission,air,Carbon dioxide,2200,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,air,Carbon monoxide,1.4,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,air,Sulphur oxides,5.6,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,air,Nitrogen oxides,7.2,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,air,Methane,26,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,air,Dust & particles (includes metals),2.81,http://dbpedia.org/class/yago/Kilogram113724582,Total of Metals and metal compounds and PM10
+output,emission,air,Acid gases,0.11,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,air,VOC,6.1,http://dbpedia.org/class/yago/Kilogram113724582,VOCs may or may not include compounds already listed under 'hydrocarbons' or 'other organic compounds'
+output,emission,air,Hydrocarbons (unspecified),0.7,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,air,Nitrogen,9.1,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,air,Other organic compounds,0.028,http://dbpedia.org/class/yago/Kilogram113724582,Includes oxygenated hydrocarbons. halogenated hydrocarbons. nitrogen-containing hydrocarbons. etc.
+output,emission,air,Other,0.025,http://dbpedia.org/class/yago/Kilogram113724582,Includes compounds not containing both carbon and hydrogen
+output,emission,water,Phosphates and ammonia,0.018,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,Oils and greases,0.28,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,Suspended solids,4.1,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,Other organics,0.055,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,Other,2.3,http://dbpedia.org/class/yago/Kilogram113724582,Includes compounds not containing both carbon and hydrogen
+output,emission,water,Hydrocarbons,0.085,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,Metals,0.66,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,Heavy Metals,Acids,0.022,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,BOD,0.083,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,COD,3.7,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,Salinity,4.9,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,water,Dissolved solids,23,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,land,RCRA D (EPA-regulated non-hazardous waste),78,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,land,RCRA C (EPA-regulated hazardous waste),2.8,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,deepwell,RCRA D (EPA-regulated non-hazardous waste),13,http://dbpedia.org/class/yago/Kilogram113724582
+output,emission,deepwell,RCRA C (EPA-regulated hazardous waste),0.015,http://dbpedia.org/class/yago/Kilogram113724582

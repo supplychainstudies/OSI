@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/extensions
+END
+testdox.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/extensions/testdox.php
+END
+pear_test_case.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/extensions/pear_test_case.php
+END
+phpunit_test_case.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/extensions/phpunit_test_case.php
+END

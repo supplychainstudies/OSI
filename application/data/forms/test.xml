@@ -1,0 +1,22 @@
+<form action="sandbox" name="lca">
+  <fieldset name="Process" linked_type="lca:process">
+	<fieldset name="Inputs and Outputs" linked_type="lca:inputsandoutputs" multiple="yes">
+			<fieldset name="Parameter" linked_type="lca:ioAmountUnit" multiple="yes">
+				<parameter_name rules="trim">
+				  <label>Name</label>
+			      <type>text</type>
+				  <linked_type>lca:ioAmountParameterName</linked_type>
+			    </parameter_name>				
+				<parameter_value rules="trim">
+				  <label>Value</label>
+			      <type>text</type>
+				  <linked_type>lca:ioAmountParameterValue</linked_type>
+			    </parameter_value>
+			</fieldset>	
+		</fieldset>
+    <submit>
+        <type>submit</type>
+        <value>Submit</value>
+    </submit>	
+  </fieldset>
+</form>

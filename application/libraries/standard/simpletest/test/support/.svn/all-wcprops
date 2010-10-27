@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/test/support
+END
+empty_test_file.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/test/support/empty_test_file.php
+END
+spl_examples.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/test/support/spl_examples.php
+END
+upload_sample.txt
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/test/support/upload_sample.txt
+END
+test1.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/test/support/test1.php
+END
+latin1_sample
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/test/support/latin1_sample
+END
+supplementary_upload_sample.txt
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/opensustainability/open/!svn/ver/11/trunk/application/libraries/standard/simpletest/test/support/supplementary_upload_sample.txt
+END

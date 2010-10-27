@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify
+END
+ImportProcessor.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/ImportProcessor.php
+END
+Lines.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/Lines.php
+END
+Build.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/Build.php
+END
+Logger.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/Logger.php
+END
+CommentPreserver.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/CommentPreserver.php
+END
+Source.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/Source.php
+END
+YUICompressor.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/YUICompressor.php
+END
+HTML.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/HTML.php
+END
+Packer.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/Packer.php
+END
+CSS.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/opensustainability/open/!svn/ver/11/trunk/server/min/lib/Minify/CSS.php
+END

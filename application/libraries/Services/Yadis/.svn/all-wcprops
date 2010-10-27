@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis
+END
+Yadis.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis/Yadis.php
+END
+Manager.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis/Manager.php
+END
+ParanoidHTTPFetcher.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis/ParanoidHTTPFetcher.php
+END
+ParseHTML.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis/ParseHTML.php
+END
+HTTPFetcher.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis/HTTPFetcher.php
+END
+XML.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis/XML.php
+END
+XRDS.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis/XRDS.php
+END
+PlainHTTPFetcher.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/opensustainability/open/!svn/ver/22/trunk/application/libraries/Services/Yadis/PlainHTTPFetcher.php
+END
