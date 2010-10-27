@@ -129,16 +129,16 @@ class Info extends SM_Controller {
 					
 					// if this is a new entry (as opposed to an addition to an existing entry) add a triple which defines its data type
 					if ($local_URI == null) {
-						$triples[] = Array("subject" => "http://opensustainability.info/".$URI, "predicate" => "rdfs:type", "object" => $data_type);
+						$triples[] = Array("subject" => "http://db.opensustainability.info/".$URI, "predicate" => "rdfs:type", "object" => $data_type);
 						// If the author is logged in, add their id to the document
 						if($this->session->userdata('logged_in')) {
-							$triples[] = Array("subject" => "http://opensustainability.info/".$URI, "predicate" => "dc:author", "object" => $this->session->userdata('user_email'));							
+							$triples[] = Array("subject" => "http://db.opensustainability.info/".$URI, "predicate" => "dc:author", "object" => $this->session->userdata('user_email'));							
 						}
 					}
 					
 					// Figure out what paths (that lead to the stage) exist for this uri, and which paths must be added
 					// For instance, if you're adding a "process description" to an "LCA" record, you must point the uri to the "life cycle inventory", the "life cycle inventory" to the "process" and then point the "process" to the "process description"
-					$previous_bnode = "http://opensustainability.info/".$URI;
+					$previous_bnode = "http://db.opensustainability.info/".$URI;
 					if ($this->data_types[$data_type]['stages'][$stage]['path'] != "") {
 						foreach (explode("->", $this->data_types[$data_type]['stages'][$stage]['path']) as $next) {						
 							@$results = $this->arcmodel->getNextBnode($previous_bnode, $next);
@@ -244,11 +244,11 @@ class Info extends SM_Controller {
  	         
  	        // Get the impacts 
  	        $triples = array(); 
- 	        $triples = $this->arcmodel->getTriples("http://opensustainability.info/".$URI); 
+ 	        $triples = $this->arcmodel->getTriples("http://db.opensustainability.info/".$URI); 
  	        $this->data("triples", $triples); 
  	        // Get the impacts 
  	        $impacts = array(); 
- 	        $impacts = $this->arcmodel->getImpacts("http://opensustainability.info/".$URI); 
+ 	        $impacts = $this->arcmodel->getImpacts("http://db.opensustainability.info/".$URI); 
  	        $this->data("impacts", $impacts); 
  	        $this->display("View", "data_view"); 
  	    }
@@ -265,7 +265,7 @@ class Info extends SM_Controller {
 =======
 		// Get the data
 >>>>>>> .r21
-		@$data_type = $this->arcmodel->getDataType("http://opensustainability.info/".$URI);
+		@$data_type = $this->arcmodel->getDataType("http://db.opensustainability.info/".$URI);
 		$stages = $this->stages;
 		$view_string = "";
 		
@@ -284,7 +284,7 @@ class Info extends SM_Controller {
 <<<<<<< .mine
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
-		$comments = $this->arcmodel->getComments("http://opensustainability.info/".$URI);
+		$comments = $this->arcmodel->getComments("http://db.opensustainability.info/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
 		$this->display("View", "view");		
@@ -306,11 +306,11 @@ class Info extends SM_Controller {
 		
 		// Get the impacts
 		$triples = array();
-		$triples = $this->arcmodel->getTriples("http://opensustainability.info/".$URI);
+		$triples = $this->arcmodel->getTriples("http://db.opensustainability.info/".$URI);
 		$this->data("triples", $triples);
 		// Get the impacts
 		$impacts = array();
-		$impacts = $this->arcmodel->getImpacts("http://opensustainability.info/".$URI);
+		$impacts = $this->arcmodel->getImpacts("http://db.opensustainability.info/".$URI);
 		$this->data("impacts", $impacts);
 		$this->display("View", "data_view");
 		
@@ -352,49 +352,33 @@ class Info extends SM_Controller {
 		}
 	}
 	
-<<<<<<< .mine
+
 
 	/***
     * @public
     * Shows all data entries
 	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
     */
-=======
 	// Public function for exploring the repository
->>>>>>> .r21
 	public function browse() {
 		
 		// Querying the database for all records		
 		@$records = $this->arcmodel->getRecords();
-<<<<<<< .mine
-		$view_string = "";	
-		$impact_categories = array();
-		$this->style(Array('demo_page.css', 'demo_table.css', 'visualize.css'));
-		$this->script(Array('jquery.dataTables.js', 'visualize.jquery.js','browse.js'));
-=======
 		// Initializing array
->>>>>>> .r21
 		$set = array();
-<<<<<<< .mine
-		// Go through all the records
-=======
+
 		// Filling the arry with the records
->>>>>>> .r21
 		foreach ($records as $key => $record) {	
 			// Go through each field
 			foreach ($record as $_key => $field) {
 				// if its a uri, get the label and store that instead 
 				// rewrite this into a better function later
 				if (strpos($field, "dbpedia") !== false) {
-<<<<<<< .mine
-					@$set[$key][$_key] = $this->getLabel($field, 'rdfs:type');
-=======
 					$set[$key][$_key] = $this->getLabel($field, 'rdfs:type');		
->>>>>>> .r21
 				} else {
 					$set[$key][$_key] = $field;
 				}
-<<<<<<< .mine
+/*
 			}
 			// Get all the Impacts 
 			@$impacts = $this->arcmodel->getImpacts($record['link']);
@@ -415,9 +399,8 @@ class Info extends SM_Controller {
 					}					
 				}
 			}		
-=======
+*/
 			}	
->>>>>>> .r21
 		}
 		// Send data to the view
 		$this->data("set", $set);
@@ -431,11 +414,11 @@ class Info extends SM_Controller {
     */	
 	public function edit($URI, $stage = null) {
 		
-		@$data_type = $this->arcmodel->getDataType("http://opensustainability.info/".$URI);
+		@$data_type = $this->arcmodel->getDataType("http://db.opensustainability.info/".$URI);
 		$stages = $this->data_types[$data_type]['stages']; 
 		$view_string = "";
 		foreach ($stages as $key => $_stage) {
-			@$xarray = $this->arcmodel->getStage("http://opensustainability.info/".$URI, $_stage['path'], $_stage['name']);
+			@$xarray = $this->arcmodel->getStage("http://db.opensustainability.info/".$URI, $_stage['path'], $_stage['name']);
 			if ($xarray != false) {
 				@$data = $this->form_extended->load($key);	
 				$view_string .= $this->form_extended->build_edit($xarray, $data)."<br>";
