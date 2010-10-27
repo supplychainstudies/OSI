@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller for initial load of sourcemap.
+ * Controller for initial load
  *
  * @version 0.7.5
  * @author sourcemap@media.mit.edu

@@ -1,3 +1,4 @@
 application/config/general.php
+application/config/database.php
 application/models/arcmodel.php
 application/models/mysqlmodel.php
