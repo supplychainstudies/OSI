@@ -38,7 +38,7 @@ h1#title {
 #columnleft{
 	float:left;
 	text-align: left;
-	width:500px;
+	width:550px;
 	padding-top: 20px;
 	padding-bottom: 60px;
 }
@@ -265,3 +265,48 @@ a:hover{
 
 .imge a:hover {text-decoration: none; 
 	background:none;}
+	
+/* Divs for showing impacts*/
+
+#allresources {
+	
+}
+.resource {
+	float: left;
+	background-color: #29ABE2;
+	height: 80px;
+	width: 80px;
+	margin: 5px;
+	padding: 10px;
+	text-align: center;	
+}
+
+.resource p{
+	color: #ffffff;
+	font-weight: bold;
+	text-align: center;	
+}
+
+.resource p a{
+	color: #ffffff;
+	font-weight: bold;
+	text-align: center;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

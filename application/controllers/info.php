@@ -93,10 +93,6 @@ class Info extends SM_Controller {
 						)
 			);
 	
-	// Default controller, redirects appropriately.
-	public function index() {
-	}
-		
 
 	public function create($data_type = null, $stage = null, $local_URI = null) {
 	/***
@@ -347,7 +343,7 @@ class Info extends SM_Controller {
 	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
     */
 	// Public function for exploring the repository
-	public function browse() {
+	public function index() {
 		
 		// Querying the database for all records		
 		@$records = $this->arcmodel->getRecords();
@@ -366,7 +362,7 @@ class Info extends SM_Controller {
 					$set[$key][$_key] = $field;
 				}
 			}
-			// Get all the Impacts 		
+			/*/ Get all the Impacts 		
 			@$impacts = $this->arcmodel->getImpacts($record['link']);
 			// For each impact
 			foreach ($impacts as $impact) {
@@ -384,7 +380,7 @@ class Info extends SM_Controller {
 						$set[$key][$impact['impactCategory']][$__key] = $_field;
 					}					
 				}
-			}		
+			}	*/	
 			
 	
 		

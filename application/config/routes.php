@@ -39,7 +39,7 @@
 |
 */
 
-$route['default_controller'] = "home";
+$route['default_controller'] = "info";
 $route['scaffolding_trigger'] = "";
 $route['docs'] = "sitemaps/documentation";
 $route['(:num)'] = "info/view/$1";

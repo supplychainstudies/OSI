@@ -13,17 +13,26 @@
 	<?= $navigationDisplay;?>
 	
 	<div id="columnleft">
-		<h1>Existing resources<h1>
+		<div id="all_resources">
 				<?
 					foreach ($set as $row) {
-						echo '<p>'.$row['processName'];
-						echo '<a href="/info/showRDF/'.$row['link'].'">RDF</a>';
-						echo '<a href="/info/showJSON/'.$row['link'].'">JSON</a><p/>';
+						echo '<div class="resource"><p><a href="info/view/'.$row['link'].'">'.$row['processName'].'</a><p/></div>';
+						/*echo '<a href="/info/showRDF/'.$row['link'].'">RDF</a>';
+						echo '<a href="/info/showJSON/'.$row['link'].'">JSON</a>';*/
 					}
 				?>
-
+		</div>
 	</div>
 
+
+<div id="columnright">
+	<h1 class="hand">We want sustainability information to be free, open and easy to use.</h1>
+	<br/><br/>
+	<p>Login</p>
+	<p>Register</p>
+	<p>Create new</p>
+	<p>Search</p>
+	</div>
 	<?=$footerDisplay;?>
 </div>
 
