@@ -44,7 +44,7 @@ class Users extends SM_Controller {
 		} else if (isset($_SERVER['HTTP_REFERER']) == true) {
 			$refer = $_SERVER['HTTP_REFERER'];
 		} else {
-			$refer = "http://opensustainability.info";
+			$refer = "http://db.opensustainability.info";
 		}
 			
 		header ("Location: " . $refer);			
@@ -158,7 +158,7 @@ class Users extends SM_Controller {
 			} else if (isset($_SERVER['HTTP_REFERER']) == true) {
 				$refer = $_SERVER['HTTP_REFERER'];
 			} else {
-				$refer = "http://opensustainability.info";
+				$refer = "http://db.opensustainability.info";
 			}
 
 			header ("Location: " . $refer);			

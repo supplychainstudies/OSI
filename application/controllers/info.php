@@ -194,7 +194,6 @@ class Info extends SM_Controller {
 		}
 	}	// End of function create
 
-<<<<<<< .mine
 	/***
     * @public
     * If the datatype is not chosen,  print out the list of data types
@@ -256,15 +255,10 @@ class Info extends SM_Controller {
     * @public
     * Grabs all the triples for a particular URI and shows it in a friendly, human readable way
     */
-=======
 	// Showing a single data point? What does this function do?
->>>>>>> .r21
 	public function view($URI = null) {	
-<<<<<<< .mine
-		// Get the data type for the uri
-=======
+
 		// Get the data
->>>>>>> .r21
 		@$data_type = $this->arcmodel->getDataType("http://db.opensustainability.info/".$URI);
 		$stages = $this->stages;
 		$view_string = "";
@@ -281,26 +275,17 @@ class Info extends SM_Controller {
 		$this->data("URI", $URI);
 		$this->script(Array('comments.js'));
 		$this->data("view_string", $view_string);
-<<<<<<< .mine
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
 		$comments = $this->arcmodel->getComments("http://db.opensustainability.info/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
 		$this->display("View", "view");		
-=======
-		$this->display("View", "data_view");		
->>>>>>> .r21
 	} 
 
 	
-<<<<<<< .mine
-	/***
-    * @public
-    * Grabs all the triples for a particular URI and shows it in RDF
-    */
-=======
-	// Testing a new view page. Jorge
+
+	/* Testing a new view page. Jorge
 	public function test_view($URI = null)
 	{	
 		
@@ -314,12 +299,14 @@ class Info extends SM_Controller {
 		$this->data("impacts", $impacts);
 		$this->display("View", "data_view");
 		
-	}
+	}*/
+	
+	
 	public function test() {
 		$this->open_id->loginopenid();	
 	}
 	
->>>>>>> .r21
+
 	public function viewRDF($URI = null) {
 		@$rdf = $this->arcmodel->getRDF("/".$URI);
 		header('Content-type: text/xml');
@@ -378,9 +365,8 @@ class Info extends SM_Controller {
 				} else {
 					$set[$key][$_key] = $field;
 				}
-/*
 			}
-			// Get all the Impacts 
+			// Get all the Impacts 		
 			@$impacts = $this->arcmodel->getImpacts($record['link']);
 			// For each impact
 			foreach ($impacts as $impact) {
@@ -399,12 +385,13 @@ class Info extends SM_Controller {
 					}					
 				}
 			}		
-*/
-			}	
+			
+	
+		
 		}
 		// Send data to the view
-		$this->data("set", $set);
-		$this->display("Browse", "browse_view");		
+		$this->data("set",$set);
+		$this->display("Browse","browse_view");		
 	}
 	
 	/***
