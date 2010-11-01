@@ -69,27 +69,27 @@ class Info extends SM_Controller {
 					'processdescription' => array(
 							'name' => 'processDescription',
 					 		'label' => 'Process Description',
-							'path' => 'lifeCycleInventory->process'
+							'path' => 'create->lifeCycleInventory->process'
 						),
 					'inputsandoutputs' => array(
 							'name' => 'inputsandoutputs',
 							'label' => 'Process Inputs and Outputs (Multiple Entries Possible)',
-							'path' => 'lifeCycleInventory->process'	
+							'path' => 'create->lifeCycleInventory->process'	
 						),
 					'modelingandvalidation' => array(	
 							'name' => 'modelingandValidation',
 							'label' => 'Modeling and Validation Information',
-							'path' => 'lifeCycleInventory'
+							'path' => 'create->lifeCycleInventory'
 						),
 					'administrativeinformation' => array(
 							'name' => 'administrativeInformation',
 							'label' => 'Administrative Information',
-							'path' => 'lifeCycleInventory'
+							'path' => 'create->lifeCycleInventory'
 						),
 					'impactassessment' => array(
 							'name' => 'impactAssessment',
 							'label' => 'Impact Assessment (Multiple Entries Possible)',
-							'path' => ''
+							'path' => 'create->impactAssessment'
 						)
 			);
 	
@@ -254,7 +254,7 @@ class Info extends SM_Controller {
 				$view_string .= $this->form_extended->build_views($xarray, $data)."<br>";
 			}				
 		}
-		//$view_string .= '<div style="float: right; clear: both;"><a href="http://db.opensustainability.info/'.$URI.'.rdf">[ Get this in RDF ]</a> -  <a href="http://db.opensustainability.info/'.$URI.'.json">[ Get this in JSON ]</a></div>' . $view_string;
+		$view_string .= '<div style="float: right; clear: both;"><a href="http://db.opensustainability.info/'.$URI.'.rdf">[ Get this in RDF ]</a> -  <a href="http://db.opensustainability.info/'.$URI.'.json">[ Get this in JSON ]</a></div>' . $view_string;
 		$this->data("URI", $URI);
 		$this->script(Array('comments.js'));
 		$this->data("view_string", $view_string);
