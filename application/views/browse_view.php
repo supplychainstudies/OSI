@@ -30,9 +30,7 @@
 <div id="columnright">
 	<h1 class="hand">We want sustainability information to be free, open and easy to use.</h1>
 	<br/><br/>
-	<p>Login</p>
-	<p>Register</p>
-	<p><a href="/info/create">Create new</a></p>
+	<h1 class="hand">Click on the resources to get the information in JSON.</h1>
 	</div>
 	<?=$footerDisplay;?>
 </div>
