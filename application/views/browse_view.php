@@ -16,7 +16,9 @@
 		<div id="all_resources">
 				<?
 					foreach ($set as $row) {
-						echo '<div class="resource"><p><a href="info/view/'.$row['link'].'">'.$row['processName'].'</a><p/></div>';
+						// Remove the opensustainability part of the url
+						$myString = str_replace ("http://opensustainability.info/", "", $row['link']);
+						echo '<div class="resource"><p><a href="info/showJSON/'.$myString.'">'.$row['processName'].'</a><p/></div>';
 						/*echo '<a href="/info/showRDF/'.$row['link'].'">RDF</a>';
 						echo '<a href="/info/showJSON/'.$row['link'].'">JSON</a>';*/
 					}
@@ -30,8 +32,7 @@
 	<br/><br/>
 	<p>Login</p>
 	<p>Register</p>
-	<p>Create new</p>
-	<p>Search</p>
+	<p><a href="/info/create">Create new</a></p>
 	</div>
 	<?=$footerDisplay;?>
 </div>

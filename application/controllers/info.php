@@ -233,80 +233,51 @@ class Info extends SM_Controller {
 		
 	}
 
-   // Testing a new view page. Jorge 
- 	    public function test_view($URI = null) 
- 	    {     
- 	         
- 	        // Get the impacts 
- 	        $triples = array(); 
- 	        $triples = $this->arcmodel->getTriples("http://db.opensustainability.info/".$URI); 
- 	        $this->data("triples", $triples); 
- 	        // Get the impacts 
- 	        $impacts = array(); 
- 	        $impacts = $this->arcmodel->getImpacts("http://db.opensustainability.info/".$URI); 
- 	        $this->data("impacts", $impacts); 
- 	        $this->display("View", "data_view"); 
- 	    }
+
 	/***
     * @public
     * Grabs all the triples for a particular URI and shows it in a friendly, human readable way
     */
 	// Showing a single data point? What does this function do?
 	public function view($URI = null) {	
-
 		// Get the data
-		@$data_type = $this->arcmodel->getDataType("http://db.opensustainability.info/".$URI);
+		@$data_type = $this->arcmodel->getDataType("http://opensustainability.info/".$URI);
 		$stages = $this->stages;
-		$view_string = "";
-		
-		// Loop through each stage and print all entries for that
-		foreach ($stages as $key => $_stage) {
-			@$xarray = $this->arcmodel->getStage($URI, $_stage['path'], $_stage['name']);
-			if ($xarray != false) {
-				@$data = $this->form_extended->load($key);	
-				@$view_string .= $this->form_extended->build_views($xarray, $data)."<br>";
-			}				
+		// Get all the Impacts 		
+		@$impacts = $this->arcmodel->getImpacts("http://opensustainability.info/".$URI);
+		// For each impact
+		@$set = array();
+		foreach ($impacts as $impact) {		
+			// append impacts to the correct record in the set variable
+			foreach ($impact as $__key => $_field) {
+				// if its a uri, get the label and store that instead
+				// rewrite this into a better function later
+				if (strpos($_field, "dbpedia") !== false) {
+					@$set[$impact['impactCategory']][$__key] = $this->getLabel($_field, 'rdfs:type');
+				} else {
+					$set[$impact['impactCategory']][$__key] = $_field;
+				}					
+			}
 		}
-		$view_string = '<div style="float: right; clear: both;"><a href="/'.$URI.'.rdf">[ Get this in RDF ]</a> -  <a href="/'.$URI.'.json">[ Get this in JSON ]</a></div>' . $view_string;
+		
+		$this->data("set", $set);
 		$this->data("URI", $URI);
+		$this->data("triples", $triples);
+		$this->data("type", $data_type);
 		$this->script(Array('comments.js'));
-		$this->data("view_string", $view_string);
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
-		$comments = $this->arcmodel->getComments("http://db.opensustainability.info/".$URI);
+		$comments = $this->arcmodel->getComments("http://opensustainability.info/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
-		$this->display("View", "view");		
-	} 
-
-	
-
-	/* Testing a new view page. Jorge
-	public function test_view($URI = null)
-	{	
-		
-		// Get the impacts
-		$triples = array();
-		$triples = $this->arcmodel->getTriples("http://db.opensustainability.info/".$URI);
-		$this->data("triples", $triples);
-		// Get the impacts
-		$impacts = array();
-		$impacts = $this->arcmodel->getImpacts("http://db.opensustainability.info/".$URI);
-		$this->data("impacts", $impacts);
-		$this->display("View", "data_view");
-		
-	}*/
-	
-	
-	public function test() {
-		$this->open_id->loginopenid();	
-	}
-	
+		$this->display("View", "data_view");		
+	}	
 
 	public function viewRDF($URI = null) {
-		@$rdf = $this->arcmodel->getRDF("/".$URI);
+		@$rdf = $this->arcmodel->getRDF("http://opensustainability.info/".$URI);
 		header('Content-type: text/xml');
-		echo $rdf;
+		$this->data("rdf", $rdf);
+		$this->display("View", "view");
 	}
 
 
@@ -315,7 +286,7 @@ class Info extends SM_Controller {
     * Grabs all the triples for a particular URI and shows it in JSON
     */	
 	public function viewJSON($URI = null) {
-		@$json = $this->arcmodel->getJSON("/".$URI);
+		@$json = $this->arcmodel->getJSON("http://opensustainability.info/".$URI);
 		header('Content-type: application/json');
 		echo $json;
 	}
