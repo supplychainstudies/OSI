@@ -40,27 +40,27 @@ class Info extends SM_Controller {
 				'processdescription' => array(
 						'name' => 'processDescription',
 				 		'label' => 'Process Description',
-						'path' => 'lifeCycleInventory->process'
+						'path' => 'create->lifeCycleInventory->process'
 					),
 				'inputsandoutputs' => array(
 						'name' => 'inputsandoutputs',
 						'label' => 'Process Inputs and Outputs (Multiple Entries Possible)',
-						'path' => 'lifeCycleInventory->process'	
+						'path' => 'create->lifeCycleInventory->process'	
 					),
 				'modelingandvalidation' => array(	
 						'name' => 'modelingandValidation',
 						'label' => 'Modeling and Validation Information',
-						'path' => 'lifeCycleInventory'
+						'path' => 'create->lifeCycleInventory'
 					),
 				'administrativeinformation' => array(
 						'name' => 'administrativeInformation',
 						'label' => 'Administrative Information',
-						'path' => 'lifeCycleInventory'
+						'path' => 'create->lifeCycleInventory'
 					),
 				'impactassessment' => array(
 						'name' => 'impactAssessment',
 						'label' => 'Impact Assessment (Multiple Entries Possible)',
-						'path' => ''
+						'path' => 'create->impactAssessment'
 					)
 			)
 		)
