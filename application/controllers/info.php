@@ -198,7 +198,7 @@ class Info extends SM_Controller {
 		$intro = "<div>What kind of data would you like to submit? Select a data type: (Actually, we only have Life Cycle Assessment right now. Email us if you would like to work with us on adding your own.)</div>\n";
 		$intro .= "<ul>\n";
 		foreach ($this->data_types as $key => $_data_type) {
-			$intro .= "<li><h1><a href=\"create".$key."/\">".$_data_type['label']."</a></li></h1>\n" . 
+			$intro .= "<li><h1><a href=\"create/".$key."/\">".$_data_type['label']."</a></li></h1>\n" . 
 			$_data_type['description'] . "\n" . 
 			"<div>When creating an LCA Document, you can complete any or all of the sections below</div>" .	
 			"<ul>\n";
@@ -269,7 +269,7 @@ class Info extends SM_Controller {
 
 	public function viewRDF($URI = null) {
 		@$rdf = $this->arcmodel->getRDF("http://opensustainability.info/".$URI);
-		//header('Content-type: text/xml');
+		header('Content-type: text/xml');
 		echo $rdf;
 	}	
 
