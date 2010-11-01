@@ -40,27 +40,27 @@ class Info extends SM_Controller {
 				'processdescription' => array(
 						'name' => 'processDescription',
 				 		'label' => 'Process Description',
-						'path' => 'create->lifeCycleInventory->process'
+						'path' => 'lifeCycleInventory->process'
 					),
 				'inputsandoutputs' => array(
 						'name' => 'inputsandoutputs',
 						'label' => 'Process Inputs and Outputs (Multiple Entries Possible)',
-						'path' => 'create->lifeCycleInventory->process'	
+						'path' => 'lifeCycleInventory->process'	
 					),
 				'modelingandvalidation' => array(	
 						'name' => 'modelingandValidation',
 						'label' => 'Modeling and Validation Information',
-						'path' => 'create->lifeCycleInventory'
+						'path' => 'lifeCycleInventory'
 					),
 				'administrativeinformation' => array(
 						'name' => 'administrativeInformation',
 						'label' => 'Administrative Information',
-						'path' => 'create->lifeCycleInventory'
+						'path' => 'lifeCycleInventory'
 					),
 				'impactassessment' => array(
 						'name' => 'impactAssessment',
 						'label' => 'Impact Assessment (Multiple Entries Possible)',
-						'path' => 'create->impactAssessment'
+						'path' => 'impactAssessment'
 					)
 			)
 		)
@@ -69,27 +69,27 @@ class Info extends SM_Controller {
 					'processdescription' => array(
 							'name' => 'processDescription',
 					 		'label' => 'Process Description',
-							'path' => 'create->lifeCycleInventory->process'
+							'path' => 'lifeCycleInventory->process'
 						),
 					'inputsandoutputs' => array(
 							'name' => 'inputsandoutputs',
 							'label' => 'Process Inputs and Outputs (Multiple Entries Possible)',
-							'path' => 'create->lifeCycleInventory->process'	
+							'path' => 'lifeCycleInventory->process'	
 						),
 					'modelingandvalidation' => array(	
 							'name' => 'modelingandValidation',
 							'label' => 'Modeling and Validation Information',
-							'path' => 'create->lifeCycleInventory'
+							'path' => 'lifeCycleInventory'
 						),
 					'administrativeinformation' => array(
 							'name' => 'administrativeInformation',
 							'label' => 'Administrative Information',
-							'path' => 'create->lifeCycleInventory'
+							'path' => 'lifeCycleInventory'
 						),
 					'impactassessment' => array(
 							'name' => 'impactAssessment',
 							'label' => 'Impact Assessment (Multiple Entries Possible)',
-							'path' => 'create->impactAssessment'
+							'path' => ''
 						)
 			);
 	
@@ -204,7 +204,7 @@ class Info extends SM_Controller {
 			"<ul>\n";
 		
 			foreach ($_data_type['stages'] as $_key => $_stage) {
-				$intro .= "<li><a href=\"".$key."/".$_key."/\">".$_stage['label']."</a></li>\n";
+				$intro .= "<li><a href=\"create/".$key."/".$_key."/\">".$_stage['label']."</a></li>\n";
 			}					
 			$intro .= "</ul>";			
 		}
