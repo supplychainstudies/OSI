@@ -240,45 +240,38 @@ class Info extends SM_Controller {
     */
 	// Showing a single data point? What does this function do?
 	public function view($URI = null) {	
+
 		// Get the data
 		@$data_type = $this->arcmodel->getDataType("http://opensustainability.info/".$URI);
 		$stages = $this->stages;
-		// Get all the Impacts 		
-		@$impacts = $this->arcmodel->getImpacts("http://opensustainability.info/".$URI);
-		// For each impact
-		@$set = array();
-		foreach ($impacts as $impact) {		
-			// append impacts to the correct record in the set variable
-			foreach ($impact as $__key => $_field) {
-				// if its a uri, get the label and store that instead
-				// rewrite this into a better function later
-				if (strpos($_field, "dbpedia") !== false) {
-					@$set[$impact['impactCategory']][$__key] = $this->getLabel($_field, 'rdfs:type');
-				} else {
-					$set[$impact['impactCategory']][$__key] = $_field;
-				}					
-			}
-		}
+		$view_string = "";
 		
-		$this->data("set", $set);
+		// Loop through each stage and print all entries for that
+		foreach ($stages as $key => $_stage) {
+			@$xarray = $this->arcmodel->getStage($URI, $_stage['path'], $_stage['name']);
+			if ($xarray != false) {
+				@$data = $this->form_extended->load($key);	
+				$view_string .= $this->form_extended->build_views($xarray, $data)."<br>";
+			}				
+		}
+		//$view_string .= '<div style="float: right; clear: both;"><a href="http://db.opensustainability.info/'.$URI.'.rdf">[ Get this in RDF ]</a> -  <a href="http://db.opensustainability.info/'.$URI.'.json">[ Get this in JSON ]</a></div>' . $view_string;
 		$this->data("URI", $URI);
-		$this->data("triples", $triples);
-		$this->data("type", $data_type);
 		$this->script(Array('comments.js'));
+		$this->data("view_string", $view_string);
+
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
 		$comments = $this->arcmodel->getComments("http://opensustainability.info/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
-		$this->display("View", "data_view");		
+		$this->display("View", "view");		
 	}	
 
 	public function viewRDF($URI = null) {
 		@$rdf = $this->arcmodel->getRDF("http://opensustainability.info/".$URI);
 		header('Content-type: text/xml');
-		$this->data("rdf", $rdf);
-		$this->display("View", "view");
-	}
+		echo $rdf;
+	}	
 
 
 	/***

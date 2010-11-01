@@ -31,7 +31,7 @@
 
 
 	<div id="columnright">
-	<? 
+	<? /*
 
 		if ($header == "login") {
 
@@ -41,12 +41,10 @@
 
 			include_once('parts/header_loggedin.php'); 
 
-		}
+		}*/
 
 	?>
 	</div>
-
-
 			<?=$footerDisplay;?>
 		</div>
 
