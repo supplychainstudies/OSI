@@ -17,6 +17,13 @@
 	</div>
 	<div class="footer-list">
 	<ul>
+	<li><p><a href="https://db.opensustainability.info/">Database</a> </p></li>
+	<li><p>API: coming soon</p></li>
+	<li><p>Formats: coming soon</p></li>
+	</ul>	
+	</div>
+	<div class="footer-list">
+	<ul>
 	<li><p><a href="https://sourcemap.codebasehq.com/opensustainability/">Project Management</a> </p></li>
 	<li><p>API</p></li>
 	<li><p>Source Code | License</p></li>
