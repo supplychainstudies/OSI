@@ -1,5 +1,3 @@
-
-
 {
 	"form-name": "Add a LCA Process",
 	"description": "This is a simple form for submitting an LCA process",

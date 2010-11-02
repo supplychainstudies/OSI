@@ -148,10 +148,7 @@ class Form_extended extends Form {
 
 
 	public function build_views ($xarray, $group, $depth = 0) {  
-	    /***
-	     * @private
-	     * Build a fieldset
-	     */
+
 	        static $first_run;
 	        static $tabindex;
 
@@ -162,11 +159,10 @@ class Form_extended extends Form {
 	            $first_run = false;
 	        }
 	        $tabs = repeater("\t", $depth);
-	/*
-			$html_header = "<h". $depth . ">" . $group['__attrs']['linked_type']) . "</h" . $depth . ">\n";
-			$html_content = "";
-
-			*/
+	
+			//$html_header = "<h". $depth . ">" . $group['__attrs']['linked_type']) . "</h" . $depth . ">\n";
+			//$html_content = "";
+			
 			$html_before = "$tabs\t".'<ul class="layout">'."\n";
 			$html = "";
 	        foreach ($group as $name => $val) {
@@ -200,7 +196,8 @@ class Form_extended extends Form {
 			if ($html != "") {
 				return $html_before.$html.$html_after;
 			}
-	    } /* END build_group */
+	   
+	}
 
 
 

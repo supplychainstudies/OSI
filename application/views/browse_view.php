@@ -18,7 +18,7 @@
 					foreach ($set as $row) {
 						// Remove the opensustainability part of the url
 						$myString = str_replace ("http://opensustainability.info/", "", $row['link']);
-						echo '<div class="resource"><p><a href="info/viewJSON/'.$myString.'">'.$row['processName'].'</a><p/></div>';
+						echo '<div class="resource"><p><a href="info/view/'.$myString.'">'.$row['processName'].'</a><p/></div>';
 						/*echo '<a href="/info/showRDF/'.$row['link'].'">RDF</a>';
 						echo '<a href="/info/showJSON/'.$row['link'].'">JSON</a>';*/
 					}
@@ -30,7 +30,7 @@
 <div id="columnright">
 	<h1 class="hand">We want sustainability information to be free, open and easy to use.</h1>
 	<br/><br/>
-	<h1 class="hand">Click on the resources to get the information in JSON.</h1>
+	<p><a href="/info/browse">Browse resource</a>
 	<p><a href="/info/create">Create new resource</a>
 	</div>
 	<?=$footerDisplay;?>

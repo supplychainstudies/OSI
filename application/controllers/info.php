@@ -195,20 +195,19 @@ class Info extends SM_Controller {
     * If the datatype is not chosen,  print out the list of data types
     */
 	function datatypeMenu() {
-		$intro = "<div>What kind of data would you like to submit? Select a data type: (Actually, we only have Life Cycle Assessment right now. Email us if you would like to work with us on adding your own.)</div>\n";
-		$intro .= "<ul>\n";
+		$intro = "<div><h1>Add new Life Cycle Assessment data:</h1><p><i>(We will add more formatas in the future. Email us if you would like to work with us on adding your own.)</i></p></div>\n";
+		$intro .= "<br/>";
 		foreach ($this->data_types as $key => $_data_type) {
-			$intro .= "<li><h1><a href=\"create/".$key."/\">".$_data_type['label']."</a></li></h1>\n" . 
-			$_data_type['description'] . "\n" . 
-			"<div>When creating an LCA Document, you can complete any or all of the sections below</div>" .	
+			//$intro .= "<li><h1><a href=\"create/".$key."/\">".$_data_type['label']."</a></li></h1>\n" . 
+			//$_data_type['description'] . "\n" . 
+			"<p>When creating an LCA Document, you can complete any or all of the sections below</p>" .	
 			"<ul>\n";
 		
 			foreach ($_data_type['stages'] as $_key => $_stage) {
-				$intro .= "<li><a href=\"create/".$key."/".$_key."/\">".$_stage['label']."</a></li>\n";
+				$intro .= "<a><a href=\"create/".$key."/".$_key."/\">".$_stage['label']."</a></p><br/>";
 			}					
-			$intro .= "</ul>";			
+			$intro .= "<br/>";			
 		}
-		$intro .= "</ul>\n";
 
 		$this->data("view_string", $intro);
 		$this->display("Menu", "view");		
@@ -248,13 +247,15 @@ class Info extends SM_Controller {
 		
 		// Loop through each stage and print all entries for that
 		foreach ($stages as $key => $_stage) {
-			@$xarray = $this->arcmodel->getStage($URI, $_stage['path'], $_stage['name']);
+			@$xarray = $this->arcmodel->getStage("http://opensustainability.info/".$URI, $_stage['path'], $_stage['name']);
 			if ($xarray != false) {
 				@$data = $this->form_extended->load($key);	
-				$view_string .= $this->form_extended->build_views($xarray, $data)."<br>";
+				$view_string .= $this->form_extended->build_views($xarray, $data)."<br/>";
 			}				
 		}
-		$view_string .= '<div style="float: right; clear: both;"><a href="http://db.opensustainability.info/'.$URI.'.rdf">[ Get this in RDF ]</a> -  <a href="http://db.opensustainability.info/'.$URI.'.json">[ Get this in JSON ]</a></div>' . $view_string;
+		$links = '<p><a href="http://db.opensustainability.info/'.$URI.'.rdf">Get this RDF</a></p>
+		<p><a href="http://db.opensustainability.info/'.$URI.'.json">Get this in JSON</a></p>';
+		$this->data("links", $links);
 		$this->data("URI", $URI);
 		$this->script(Array('comments.js'));
 		$this->data("view_string", $view_string);

@@ -9,7 +9,6 @@
  * @version 2010-01-30
  * 
 */
-
 ARC2::inc('RDFSerializer');
 
 class ARC2_RDFXMLSerializer extends ARC2_RDFSerializer {
