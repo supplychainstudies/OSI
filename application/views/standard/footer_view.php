@@ -25,8 +25,9 @@
 	<div class="footer-list">
 	<ul>
 	<li><p><a href="https://sourcemap.codebasehq.com/opensustainability/">Project Management</a> </p></li>
-	<li><p>API</p></li>
-	<li><p>Source Code | License</p></li>
+	<li><p><a href="http://github.com/zapico/OSI_OpenDatabase">Source Code</a></p></li>
+	<li><p><a href="http://github.com/zapico/OSI_OpenDatabase/blob/master/license/mit.txt/">License</p></a></li>
 	</ul>	
 	</div>
 </div>
+

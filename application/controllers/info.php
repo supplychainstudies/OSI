@@ -268,8 +268,14 @@ class Info extends SM_Controller {
 		$this->display("View", "view");		
 	}	
 
+	
+	/***
+    * @public
+    * Grabs all the triples for a particular URI and shows it in RDF
+    */
 	public function viewRDF($URI = null) {
 		@$rdf = $this->arcmodel->getRDF("http://opensustainability.info/".$URI);
+		$rdf = str_replace("\n","", $rdf);
 		header('Content-type: text/xml');
 		echo $rdf;
 	}	
