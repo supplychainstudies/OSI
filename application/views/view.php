@@ -42,7 +42,7 @@
 				}
 
 			?></p>
-			<p><a href="/info/browse">Browse resource</a></p>
+			<p><a href="/">Browse resources</a></p>
 			<p><a href="/info/create">Create new resource</a></p>
 	<? /*
 
