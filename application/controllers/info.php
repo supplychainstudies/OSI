@@ -275,8 +275,9 @@ class Info extends SM_Controller {
     */
 	public function viewRDF($URI = null) {
 		@$rdf = $this->arcmodel->getRDF("http://opensustainability.info/".$URI);
-		header('Content-type: text/xml');
-		echo str_replace("\n","", $rdf);
+		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
+		header('Content-type: text/plain');
+		echo $rdf;
 	}	
 
 
