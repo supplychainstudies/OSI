@@ -23,7 +23,8 @@ class Form {
      * @constructor
      */
         $obj =& get_instance();    
-        $obj->load->library('xml');
+        $obj->load->library(array('xml','recaptcha'));
+	    $obj->lang->load('recaptcha');
         $this->ci =& $obj;  
     } /*** END ***/
     
@@ -277,13 +278,14 @@ class Form {
         $valid_type = array(
             'text', 'textarea', 'password', 'file',
             'dropdown', 'radio', 'checkbox',
-            'submit', 'button', 'hidden', 'open'
+            'submit', 'button', 'hidden', 'open', 'recaptcha', 'lookup'
         );
         $tabs = "";
 			//repeater("\t", $depth);
+
 		$fieldset_name = str_replace(" ", "_", strtolower($group['__attrs']['name']));
 		$html ="";
-        $html  .= sprintf ("$tabs".'<h1 class="level%s">%s</h1>', $depth, $group['__attrs']['name']);
+        $html  .= sprintf ("$tabs".'<h1 class="level%s">%s<img src="/assets/images/toggle.jpg" onClick="toggle(\'%s\')" /></h1>', $depth, $group['__attrs']['name'], $fieldset_name);
 
         if (isset ($group['__attrs']['text']) && $text = $group['__attrs']['text']) {
             $html .= "$tabs\t<div class=\"level".$depth."\"><p>$text</p></div>\n";
@@ -297,12 +299,20 @@ class Form {
             $html .= "$tabs". preg_replace("|\n\t+|", "\n$tabs\t", $errors) ."\n";
             $first_run = false;
         }
-
-
+		// Fix this later
+		$is_multiple = false;
+		if (isset($def['multiple']) == true) {
+				if ($def['multiple'] == "yes") {
+					$is_multiple = true;
+				}
+		}
+		
         $html .= "$tabs\t".'<ul class="layout">'."\n";
 
 		if (isset($group['__attrs']['multiple']) == true) {
-			$multiple = $multiple."[0]";						
+			if ($group['__attrs']['multiple'] == "yes") {
+			$multiple = $multiple."[0]";
+			}						
 		}
         foreach ($group as $name => $val) {	
             if ($name == '__attrs') {
@@ -324,7 +334,6 @@ class Form {
 
                         $def[$key] = $val[0];
                     }
-
                     // Skips defs that have no type attribute
                     if (! isset($def['type']) || ! in_array ($def['type'], $valid_type)) {
                         continue;
@@ -359,14 +368,25 @@ class Form {
                         ? sprintf('tabindex="%s" name="%s"', $tabindex++, $name)
                         : sprintf('name="%s"', $name);
 */
-
+					$is_multiple = false;
+					if (isset($def['multiple']) == true) {
+							if ($def['multiple'] == "yes") {
+								$is_multiple = true;
+							}
+					} 
+					$field_multiple = $multiple;
 					if ($def['type'] == 'hidden') {
 						 $idname = sprintf('name="%s"', $name."_".$multiple);
-					} elseif (isset($def['multiple']) == true) {
+					} elseif ($is_multiple == true) {
 						$field_multiple = $multiple . "[0]";
 						$idname = sprintf('name="%s"', $name."_".$field_multiple);
 					} else {
                         $idname = sprintf('tabindex="%s" name="%s"', $tabindex++, $name."_".$multiple);
+					}
+					
+					// assign classes to the input based on the rules. this is so jquery can be used for the rules instead
+					if(isset($this->rules[$name])) {
+						$idname .= " class=\"" . str_replace("|", " ", $this->rules[$name]) . "\"";
 					}
 
                     // Add "*" on required items
@@ -384,10 +404,34 @@ class Form {
 
                     // Handle non-input elements
                     switch ($def['type']) {
+					case 'recaptcha':
+						$recaptcha_config = $this->ci->recaptcha->get_html();
+						$input = '<script type="text/javascript">' 
+						  . 'var RecaptchaOptions = { '
+						  . 'theme:"' . $recaptcha_config['theme'] . '",'
+						  . 'lang:"' . $recaptcha_config['lang'] . '"'
+						  . '};'
+						. '</script>'
+						. '<script type="text/javascript" src="' . $recaptcha_config['server'] . '/challenge?k=<?= ' . $recaptcha_config['key'] . $recaptcha_config['errorpart'] . '"></script>'
+						. '<noscript>'
+								. '<iframe src="' . $recaptcha_config['server'] . '/noscript?lang=' . $recaptcha_config['lang'] . '&k=<?= ' . $recaptcha_config['key'] . $recaptcha_config['errorpart'] . '" height="300" width="500" frameborder="0"></iframe><br/>\n'
+								. '<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>'
+								. '<input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>'
+						. '</noscript>';
+						break;
                     case 'textarea':
                         $input  = "$tabs\t\t<textarea $idname %s>". $def['value'] ."</textarea>\n";
                         unset ($def['type'], $def['value']);
-                        break;  
+                        break; 
+ 					case 'lookup':
+						$input = "";
+						$input .= '<input type="text" onClick="lookup(\'' . $name . '\', \'' . $def['lookup'] . '\')" />';
+						break;
+					case 'search':
+						$input = "";
+						$input .= '<input type="text" onClick="lookup(\'' . $name . '\', \'' . $def['lookup'] . '\')" value="Search" />';
+						$input .= '<div id="' . $name . '_searchresults"></div><div id="' . $name . '_new"></div>';
+						break;
                     case 'dropdown':
                         $def['value'] != false && $def['selected'] = $def['value'];
                         unset ($def['value']);
@@ -410,6 +454,25 @@ class Form {
                             continue(2);
                         }
                         break;
+						case 'radio':
+	                        $def['value'] != false && $def['selected'] = $def['value'];
+	                        unset ($def['value']);
+							$input = "";
+	                        if (isset ($def['options'])) {
+	                            foreach ($def['options'] as $_key => $_val) {
+	                                $_val = is_array ($_val) ? $_val[0] : $_val;
+
+	                                $sel = isset ($def['selected']) && $def['selected'] == $_key
+	                                    ? ' selected="selected"' : '';
+
+	                                $input .= "$tabs\t\t\t<input type=\"radio\" value=\"$_key\" $idname $sel>$_val\n";
+	                            }
+	                            unset ($def['type'], $def['options'], $def['selected']);
+	                        }
+	                        else {
+	                            continue(2);
+	                        }
+	                        break;
                     case 'hidden':
                         $input = "$tabs\t<input $idname %s />\n";
                         break;
@@ -444,9 +507,9 @@ class Form {
                         ? ''
                         : "$tabs\t</li>\n";
 
-					if (isset($def['multiple']) == true) {
-						$multiple_string = str_replace("]", "",str_replace("[", "", str_replace("][", "-", $field_multiple)));
-						$row =  "<div id=\"div_".$name."\">".$row."</div>$tabs\t\t<div id=\"div_multiple_".$name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/button".$depth.".gif\"  value=\"Another &gt;&gt;\" onClick=\"addField('".$name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$name."_counter_".$multiple_string."\" name=\"".$name."_counter_".$multiple_string."\" value=\"0\">\n";
+					if ($is_multiple == true) {
+							$multiple_string = str_replace("]", "",str_replace("[", "", str_replace("][", "-", $field_multiple)));
+							$row =  "<div id=\"div_".$name."\">".$row."</div>$tabs\t\t<div id=\"div_multiple_".$name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/button".$depth.".gif\"  value=\"Another &gt;&gt;\" onClick=\"addField('".$name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$name."_counter_".$multiple_string."\" name=\"".$name."_counter_".$multiple_string."\" value=\"0\">\n";
 					}
                     $html .= "$row";
                 }
@@ -454,9 +517,9 @@ class Form {
         }  
 
         $html .= "$tabs\t".'</ul>'."\n";
-		if (isset($group['__attrs']['multiple']) == true) {
+		if ($is_multiple == true) {
 			$multiple_string = str_replace("]", "",str_replace("[", "", str_replace("][", "-", $multiple)));
-			$html .= "$tabs".'</div>'."<div id=\"div_multiple_".$fieldset_name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/tab".$depth.".gif\" value=\"Another &gt;&gt;\" class=\"more\" onClick=\"addField('".$fieldset_name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$fieldset_name."_counter_".$multiple_string."\"  name=\"".$fieldset_name."_counter_".$multiple_string."\" value=\"0\">\n";
+			$html .= "$tabs".'</div>'."<div id=\"div_multiple_".$fieldset_name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/tab".$depth.".gif\" value=\"Another &gt;&gt;\" class=\"more\" onClick=\"addField('".$fieldset_name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$fieldset_name."_counter_".$multiple_string."\"  name=\"".$fieldset_name."_counter_".$multiple_string."\" value=\"0\">\n";			
 		} else {
         	$html .= "$tabs".'</div>'."\n";			
 		}

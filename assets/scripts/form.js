@@ -37,3 +37,17 @@ function toggle_delete(field) {
 		$("input[name='" + field + "']").removeAttr('disabled');
 	}
 }
+
+
+$("form").submit(function() {
+	var to_submit = true;
+  $(".required").each(function() {
+		if($(this).val() == "") {
+			$(this).addClass('require');		
+			to_submit = false;
+		} else {
+			$(this).addClass('require_ok');		
+		}
+	});
+	return to_submit;
+});

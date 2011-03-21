@@ -48,6 +48,23 @@ class Name_conversion {
 
 	/***
     * @public
+    * converts a name to to a linked type. Just means, no spaces and first letter lower case. submit something like "Impact Assessment" and it will return "impactAssessment"
+    */
+	public function toLinkedType2($name) {
+		$new_name = "";
+		foreach(explode("_", $name) as $word) {
+			if ($new_name == "") {
+				$new_name = $new_name . strtolower($word);
+			} else {
+				$new_name = $new_name . ucfirst(strtolower($word));
+			}
+		}
+		return $new_name;
+	}
+	
+
+	/***
+    * @public
     * converts a name to a link-friendly string. submit something like "Impact Assessment" and it will return "impactassessment"
     */	
 	public function toLink($name) {
@@ -60,8 +77,19 @@ class Name_conversion {
     * converts a name to a field name. submit something like "Impact Assessment" and it will return "impact_assessment"
     */	
 	public function toFieldName($name) {
-		return strtolower(str_replace($name, " ", "_"));
+		return strtolower(str_replace(" ", "_", $name));
 	}
+	
+	// found http://snipplr.com/view/2809/convert-string-to-slug/
+	public function slug($str)  {
+   		$str = strtolower(trim($str));
+   		$str = preg_replace('/[^a-z0-9-]/', '-', $str);
+   		$str = preg_replace('/-+/', "-", $str);
+   		return $str;
+   }
 
+	public function toURI($type, $name) {
+		return "http://db.opensustaianbility.info/rdfspace/" . $type . "/" . $this->slug($name) . rand(999999,10000000);
+	}
 }
 ?>
