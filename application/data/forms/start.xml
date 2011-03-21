@@ -1,0 +1,107 @@
+<form action="/lca/create" name="start">
+	<blank rules="">
+        <type>hidden</type>
+        <value>true</value>
+    </blank>	
+  <fieldset name="Process/Product/Service">
+		<name rules="trim">
+			<label>Name</label>
+			<type>text</type>
+		  	<linked_type>rdfs:label</linked_type>
+		</name>	
+		<description rules="trim">
+			<label>Description</label>
+			<type>textarea</type>
+		  	<linked_type>rdfs:description</linked_type>
+		</description>			
+		<productServiceName rules="trim">
+			<label>Product/Service</label>
+			<type>text</type>
+		</productServiceName>
+		<ioQuantity rules="trim">
+			<label>Quantity</label>
+			<type>text</type>
+		</ioQuantity>		
+		<ioUnit rules="trim">
+			<label>Unit</label>
+			<type>lookup</type>
+			<lookup>unit</lookup>
+		</ioUnit>			
+	</fieldset>
+	<fieldset name="Publication">	
+		<author rules="trim">
+			<label>Author</label>
+			<type>text</type>
+		</author>
+		<title rules="trim">
+			<label>Title</label>
+			<type>text</type>
+		</title>
+		<email rules="trim">
+			<label>Email</label>
+			<type>text</type>
+		</email>	
+		<link rules="trim">
+			<label>Publication Link</label>
+			<type>text</type>
+		</link>		
+	</fieldset>
+	<fieldset name="Flow" multiple="yes">	
+		<io rules="trim">
+			<label>Input/Output</label>
+			<type>radio</type>
+			<options>
+				<Input>Input</Input>
+				<Output>Output</Output>
+			</options>
+		</io>
+		<exchangeType rules="trim">
+			<label>Transfer/Flow</label>
+			<type>radio</type>
+			<options>
+				<Input>Exchange between the process and the environment</Input>
+				<Output>Exchange between processes</Output>
+			</options>
+		</exchangeType>
+		<substanceName rules="trim">
+			<label>Substance Name</label>
+			<type>text</type>
+		</substanceName>
+		<ioQuantity rules="trim">
+			<label>Quantity</label>
+			<type>text</type>
+		</ioQuantity>		
+		<ioUnit rules="trim">
+			<label>Unit</label>
+			<type>lookup</type>
+			<lookup>unit</lookup>
+		</ioUnit>		
+	</fieldset>
+	<fieldset name="Impact Assessment" multiple="yes">	
+		<impactCategory rules="trim">
+			<label>Impact Category</label>
+			<type>lookup</type>
+			<lookup>impact category</lookup>
+		</impactCategory>
+		<impactIndicator rules="trim">
+			<label>Impact Indicator</label>
+			<type>lookup</type>
+			<lookup>impact indicator</lookup>
+		</impactIndicator>
+		<assessmentQuantity rules="trim">
+			<label>Quantity</label>
+			<type>text</type>
+		</assessmentQuantity>		
+		<assessmentUnit rules="trim">
+			<label>Unit</label>
+			<type>lookup</type>
+			<lookup>unit</lookup>
+		</assessmentUnit>		
+	</fieldset>
+	<fieldset name="Submit">	
+	    <submit rules="">
+	        <type>submit</type>
+	        <value>Submit</value>
+	    </submit>
+	</fieldset>
+</form>

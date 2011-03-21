@@ -37,23 +37,45 @@ class Form_extended extends Form {
 
             $first_run = false;
         }
-
-		$triples = array();	
-		$new_subject_attrs = "_:" . str_replace("lca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);
-		$triples_attrs = array();
-		$triples_attrs[] = array(
-			'subject' => $subject,
-			'predicate' => $group['__attrs']['linked_type'],
-			'object' => $new_subject_attrs 
-		);		
+		
+		$triples = array();				
+		
+		if (isset($group['__attrs']['root']) == true) {
+			$name = "";
+			if ($group['__attrs']['root'] == "person") {
+				$name = $post_data['firstName_'] . $post_data['lastName_'];
+			}
+			elseif ($group['__attrs']['root'] == "classification") {
+				$name = "";
+			}
+			elseif ($group['__attrs']['root'] == "bibliography") {
+				$name = str_replace(" ", "", $post_data['title_']);
+			}
+			if ($subject != "") {
+				$subject = "http://db.opensustainability.info/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);	
+				$new_subject_attrs = "_:" . str_replace("oslca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);
+			} else {
+				$new_subject_attrs = "http://db.opensustainability.info/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);
+			}
+		} else {
+			$new_subject_attrs = "_:" . str_replace("oslca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);	
+		}
+			$triples_attrs[] = array(
+				'subject' => $subject,
+				'predicate' => $group['__attrs']['linked_type'],
+				'object' => $new_subject_attrs 
+			);
+		
         foreach ($group as $name => $val) {
             if ($name == '__attrs') {
                 continue;
             }
             elseif ($name == 'fieldset') {
-				
                 foreach ($val as $_group) {	
 					$count = 0;
+					if (isset($_group['__attrs']['root']) == true) {
+						
+					}
 					if (isset($_group['__attrs']['multiple']) == true) {
 						
 						if (is_array($path) == true) {
@@ -90,34 +112,37 @@ class Form_extended extends Form {
             else {
 				$name = $name."_";
 				$values = "";
-				if (is_array($path) == true && is_array($post_data[$name]) == true) {
-					$multiple = "[" . implode("][", $path) . "]";
-					eval("\$values = \$post_data[\"$name\"]$multiple;");					
-				} else {
-					$values = $post_data[$name];
+				if (isset($post_data[$name]) == true) {
+					if (is_array($path) == true && is_array($post_data[$name]) == true) {
+						$multiple = "[" . implode("][", $path) . "]";
+						eval("\$values = \$post_data[\"$name\"]$multiple;");					
+					} else {
+						$values = $post_data[$name];
+					}
+					var_dump($values);
+					if (isset($val[0]['linked_type']) == true) {		
+						if(is_array($values) == true) {				
+								foreach ($values as $value) {				
+									if ($value != "") {
+										$triples[] = array(
+											'subject' => $new_subject_attrs,
+											'predicate' => $val[0]['linked_type'][0],
+											'object' => $value
+										);
+									}									
+								}
+						}
+						else {
+							if ($values != "") {
+								$triples[] = array(
+									'subject' => $new_subject_attrs,
+									'predicate' => $val[0]['linked_type'][0],
+									'object' => $values
+								);
+							}						
+						}
+	                }
 				}
-				if (isset($val[0]['linked_type']) == true) {		
-					if(is_array($values) == true) {				
-							foreach ($values as $value) {				
-								if ($value != "") {
-									$triples[] = array(
-										'subject' => $new_subject_attrs,
-										'predicate' => $val[0]['linked_type'][0],
-										'object' => $value
-									);
-								}									
-							}
-					}
-					else {
-						if ($values != "") {
-							$triples[] = array(
-								'subject' => $new_subject_attrs,
-								'predicate' => $val[0]['linked_type'][0],
-								'object' => $values
-							);
-						}						
-					}
-                }
             }             
         }  
 		if(isset($triples) == true) {
@@ -141,7 +166,6 @@ class Form_extended extends Form {
             	$triples = array_merge($triples, $triples_down);
 			}
         }
-
         return $triples;   
     } /*** END build ***/
 

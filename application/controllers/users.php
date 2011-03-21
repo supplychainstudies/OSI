@@ -12,14 +12,51 @@
 
 
 class Users extends SM_Controller {
+	var $CI;
+	var $user_table = 'users';
+	var $openid_table = 'users_openids';
+	var $foaf_table = 'users_foaf';
+		
 	public function Users() {
 		parent::SM_Controller();
 		//$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
 		$this->load->library(Array('SimpleLoginSecure'));
 		$this->lang->load('openid', 'english');
-	    $this->load->library('openid');
+	    $this->load->library(Array('openid','form_extended', 'form_validation'));
 	    $this->load->helper('url');
 
+	}
+	
+	public function index() {
+		// Step 1: Find out if someone is already logged in
+			// If so, go to dashboard
+		if($this->session->userdata('id') == true) {
+			redirect('users/dashboard');
+		// If not logged in, figure out whether there is post info from janrain
+		} else {
+			// If there is post info from janrain, figure out whether this person is already in the system
+			if (isset($_POST) == true) {
+				if (isset($_POST['token']) == true) {
+					// if they are already in the system, log them in and send them to the dashboard
+					$auth_info = $this->janrainAuthInfo();
+					if ($this->simpleloginsecure->openID($auth_info['profile']['identifier']) != false) {
+						$this->session->set_userdata('id', $this->simpleloginsecure->openID($auth_info['profile']['identifier']));
+						redirect('users/dashboard');
+					// If they are not in the system yet, pass them to the register form
+					} else {
+						$this->register($auth_info);
+					}				
+				} elseif (isset($_POST['user_name']) == true && isset($_POST['password']) == true) {
+					$this->simpleloginsecure->login($_POST['user_name'], $_POST['password']);
+					if($this->session->userdata('id') == true) {
+						redirect('users/dashboard');
+					}
+				}
+			// If there is no post from Janrain, redirect them to the register page
+			} else {
+				redirect('users/register');
+			}
+		} // end of not logged in
 	}
 	
 	public function login() { 
@@ -44,7 +81,7 @@ class Users extends SM_Controller {
 		} else if (isset($_SERVER['HTTP_REFERER']) == true) {
 			$refer = $_SERVER['HTTP_REFERER'];
 		} else {
-			$refer = "http://db.opensustainability.info";
+			$refer = "http://opensustainability.info";
 		}
 			
 		header ("Location: " . $refer);			
@@ -56,117 +93,125 @@ class Users extends SM_Controller {
 
 	public function logout() {
 		$this->simpleloginsecure->logout();
-		$this->session->unset_userdata('logged_in');
 		$this->session->unset_userdata('id');		
 		$this->session->sess_destroy();
-		header ("Location: " . $_SERVER['SERVER_NAME']);		
+		redirect("/");		
 	}
 	
-	public function create() {
-		if (isset($_POST['user_name']) == true && isset($_POST['password']) == true) {
-			$this->simpleloginsecure->create($_POST['user_name'], $_POST['password']);
-		} else {
-			$the_form = '<form method="post">' . 
-						'<h1 class="level0">Login</h1><div class="level0">' . 
-						'<ul class="layout">' .
-						'<li>' .
-						'<label>User Name</label>' .
-						'<input id="user_name" name="user_name" type="text" />' . 
-						'</li>' . 
-						'<li>' .
-						'<label>Password</label>' .
-						'<input id="password" name="password" type="password" />' . 
-						'</li>' .
-						'<input type="submit">' . 						
-						'</ul></div>' .
-						'</form>';
-			$this->style(Array('style.css'));
-			$this->data("form_string", $the_form);
-			$this->display("Form", "form_view");			
+	
+	
+	public function janrainAuthInfo() {
+		$rpx_api_key = '5d4fd93930fd5fb1e3c91eeaf3340da29ff4a617';
+
+		/*
+		Set this to true if your application is Pro or Enterprise.
+		Set this to false if your application is Basic or Plus.
+		*/
+		$engage_pro = false;
+
+		/* STEP 1: Extract token POST parameter */
+		$token = $_POST['token'];
+
+		if(strlen($token) == 40) {//test the length of the token; it should be 40 characters
+
+		  /* STEP 2: Use the token to make the auth_info API call */
+		  $post_data = array('token' => $token,
+		                     'apiKey' => $rpx_api_key,
+		                     'format' => 'json',
+		                     'extended' => 'true');
+
+		  $curl = curl_init();
+		  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		  curl_setopt($curl, CURLOPT_URL, 'https://rpxnow.com/api/v2/auth_info');
+		  curl_setopt($curl, CURLOPT_POST, true);
+		  curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
+		  curl_setopt($curl, CURLOPT_HEADER, false);
+		  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		  curl_setopt($curl, CURLOPT_FAILONERROR, true);
+		  $result = curl_exec($curl);
+		  curl_close($curl);	
+		  $auth_info = json_decode($result, true);
+		  return $auth_info;
 		}
-		
 	}
-		
-	public function loginopenid($user_id) {
-		 // Before we check if the username is in fact an OpenID, we must secure
-		// the variable. OpenID refers to the url as $user_id, so be sure to assign
-		// the value of the inputted openid to $user_id. Here is have used
-		// $this->username but this might change on your system.
-		$user_id = htmlspecialchars($user_id);
-
-		// Load the neccessary OpenID libraries as shown by the example.
-		$this->lang->load('openid', 'english');
-		$this->load->library('openid');
-
-		$this->config->load('openid');
-		$req = $this->config->item('openid_required');
-		$opt = $this->config->item('openid_optional');
-		$policy = site_url($this->config->item('openid_policy'));
-		$request_to = site_url($this->config->item('openid_request_to'));
-
-		$this->openid->set_request_to($request_to);
-		$this->openid->set_trust_root(base_url());
-		$this->openid->set_args(null);
-		$this->openid->set_sreg(true, $req, $opt, $policy);
-		$pape_policy_uris = array();
-		$this->openid->set_pape(true, $pape_policy_uris);
-		$this->openid->authenticate($user_id);
-	}
-    // Policy
-    function policy()
-    {
-      $this->load->view('view_policy');
-    }
-    
-    // set message
-    function _set_message($error, $msg, $val = '', $sub = '%s')
-    {
-        //return str_replace($sub, $val, $this->lang->line($msg));
-		if ($error) {
-			header( 'Location: /users/policy' ) ;
-		}
-    }
-    
-    // Check
-    public function check()
-    {    
-      $this->config->load('openid');
-      $request_to = site_url($this->config->item('openid_request_to'));
-      
-      $this->openid->set_request_to($request_to);
-    $response = $this->openid->getResponse();
-
-    switch ($response->status)
-    {
-        case Auth_OpenID_CANCEL:
-            $data['msg'] = $this->lang->line('openid_cancel');
-            break;
-        case Auth_OpenID_FAILURE:
-			$this->session->set_userdata(array('loginfail'  => 'fail'));  
-            $data['error'] = $this->_set_message('openid_failure', $response->message);
-            break;
-        case Auth_OpenID_SUCCESS:
-            $openid = $response->getDisplayIdentifier();
-            $esc_identity = htmlspecialchars($openid, ENT_QUOTES);
-			$this->session->set_userdata(array('id' => $openid));
-            $this->session->unset_userdata('loginfail');  
-
-
-			if ($this->session->userdata('last_page')) {
-				$refer = $this->session->userdata('last_page');
-				$this->session->unset_userdata('last_page');
-			} else if (isset($_SERVER['HTTP_REFERER']) == true) {
-				$refer = $_SERVER['HTTP_REFERER'];
-			} else {
-				$refer = "http://db.opensustainability.info";
+	
+	public function register($auth_info = false) {
+		$pass_data = array ();
+		if ($auth_info != false) {
+		  if(isset($auth_info['profile']['identifier']) == true) {
+				$pass_data['openid'] = $auth_info['profile']['identifier'];
 			}
-
-			header ("Location: " . $refer);			
-
-            //$sreg_resp = Auth_OpenID_SRegResponse::fromSuccessResponse($response);
-            //$sreg = $sreg_resp->contents();
-            //$pape_resp = Auth_OpenID_PAPE_Response::fromSuccessResponse($response);
+		  if(isset($auth_info['profile']['preferredUsername']) == true) {
+				$pass_data['user_name'] = $auth_info['profile']['preferredUsername'];
+			}
+		  if(isset($auth_info['profile']['email']) == true) {
+				$pass_data['email'] = $auth_info['profile']['email'];
+			}
 		}
+		$this->data("pass_data", $pass_data);
+		$data = $this->form_extended->load('register'); 
+		$the_form = $this->form_extended->build();
+		$this->script(Array('form.js','register.js'));
+		$this->style(Array('style.css','form.css'));
+		$this->data("form_string", $the_form);
+		$this->display("Form", "form_view");					
+	}
+	
+	public function registered() {
+		// Note: Most validation had already been done using jquery
+		// Step 1: Check recaptcha
+		if ($this->form_validation->run()) {
+			// Recaptcha is fine!
+			$this->CI =& get_instance();
+			// Step 1: Write the user name, email, password to db
+			// Step 2: Get the unique id	
+			
+			$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
+		
+			// Step 3: If there is an openid, write to db
+			if (isset($_POST['openid_']) == true) {
+				$data = array(
+							'user_id' => $id,
+							'openid_url' => $_POST['openid_']
+						);
+
+				$this->CI->db->set($data); 
+
+				if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
+					return false;
+			}
+			// Step 4: If there is a foaf URI, write to db
+			if (isset($_POST['foaf_']) == true) {
+				$data = array(
+							'user_id' => $id,
+							'foaf_uri' => $_POST['foaf_']
+						);
+
+				$this->CI->db->set($data); 
+
+				if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
+					return false;			
+			}
+			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
+			    redirect('/users/dashboard/');
+			}		
+		} else {
+		// Recaptcha isn't fine, reload page
+			echo "oops";
+			//redirect('/users/register/');
+		}
+	}
+	
+	public function dashboard() {
+		$user_data = "";
+		if($this->session->userdata('id') == true) {
+		    $user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
+		} else {
+			echo "not logged in";
+		}	
+		$this->data("user_data", $user_data);
+		$this->style(Array('style.css'));
+		$this->display("Dashboard", "dashboard_view");				
 	}
 	
 }
