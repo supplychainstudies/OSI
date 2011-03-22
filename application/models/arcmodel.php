@@ -329,18 +329,21 @@ class ArcModel extends Model{
 	 * Retrieves and returns summary information for all existing records
 	 * @return $records Array	
 	 */
-	public function simpleSearch($variable, $value) {
+	public function simpleSearch($variable = null, $value = null) {
 		$URIs = array();
 		$q = "select ?uri where { " . 
-			" ?uri '" . $this->config['ns']['eco'] . "models' ?bnode . " . 	
-			" ?bnode '" . $this->config['ns']['rdfs'] . "label' '".$value."' . " . 			
-			"}";
+			" ?uri '" . $this->config['ns']['eco'] . "models' ?bnode . " ;
+		if ($value != null) {
+			$q .= " ?bnode '" . $this->config['ns']['rdfs'] . "label' '".$value."' . "; 				
+		} 			
+		$q .= "}";
 		$records = $this->executeQuery($q);	
 		foreach ($records as $record) {
 			$URIs[] = $record['uri'];
 		}
 		return $URIs;
 	}
+
 
 
 	/**

@@ -86,22 +86,24 @@ class SIAPI extends SM_Controller {
 	}
 	
 	public function search($encode = "json") {
+		$checked_URIs = array();
 		if ($search_terms = $_GET) {
-			$checked_URIs = array();
 			$URIs = array();
 			$results = array();
 			foreach ($search_terms as $field=>$value) {
 				$URIs = array_merge($URIs,@$this->arcmodel->simpleSearch($field, $value));
 			}
-			foreach ($URIs as $URI) {
-				if (in_array($URI, $checked_URIs) == false) {
-					$checked_URIs[] = $URI;
-				$results[$URI] = array (
-					'uri' => $URI,
-					'impactAssessments' => $this->convertImpactAssessments(@$this->arcmodel->getImpactAssessments($URI)),
-					'quantitativeReference' => $this->convertQR(@$this->arcmodel->getQR($URI))
-					);
-				}
+		} else {
+			$URIs = @$this->arcmodel->simpleSearch();
+		}
+		foreach ($URIs as $URI) {
+			if (in_array($URI, $checked_URIs) == false) {
+				$checked_URIs[] = $URI;
+			$results[$URI] = array (
+				'uri' => $URI,
+				'impactAssessments' => $this->convertImpactAssessments(@$this->arcmodel->getImpactAssessments($URI)),
+				'quantitativeReference' => $this->convertQR(@$this->arcmodel->getQR($URI))
+				);
 			}
 		}
 		if ($encode == 'json') {
