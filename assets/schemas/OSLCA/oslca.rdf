@@ -1,0 +1,671 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">]>
+
+<rdf:RDF xmlns="http://purl.org/net/xamde/ns/os#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:log="http://www.w3.org/2000/10/swap/log#"
+    xmlns:os="http://purl.org/net/xamde/ns/os#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:s="http://www.schemaweb.info/schemas/meta/rdf/"
+    xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:bibo="http://purl.org/ontology/bibo/">
+
+<owl:Ontology rdf:ID="os_lca">
+      <dc:title>Life Cycle Assessment Vocabulary</dc:title>
+      <dc:description>Based on the ISO 14048 standard. </dc:description>
+      <dc:created>2010-06-02</dc:created>
+      <dc:modified></dc:modified>
+      <owl:versionInfo>0.1</owl:versionInfo>
+      <s:contact>
+          <foaf:Person>
+              <rdfs:seeAlso rdf:resource="http://www.biancasayan.com/foaf.rdf" />
+          </foaf:Person>
+      </s:contact>
+      <s:location rdf:resource="http://opensustainability.info/life_cycle_assessment.rdfs" />
+      <s:namespace>http://opensustainability.info/life_cycle_assessment#</s:namespace>
+      <owl:imports rdf:resource="http://www.w3.org/2000/01/rdf-schema"/>
+      <owl:imports rdf:resource="http://www.w3.org/2002/07/owl"/>
+
+
+  <owl:Class rdf:ID="activityDataset">
+		<owl:Class rdf:ID="activityDescription" text="Contains content-related metainformation for the activity.">
+			<owl:Property rdf:ID="name">
+			  <rdfs:label xml:lang="en-gb">Name</rdfs:label>
+			  <linked_type>dc:title</linked_type>
+		      			  <multiple>yes</multiple>
+		    </name>
+			<owl:Class rdf:ID="activity" multiple="yes" text="Comprises information which identifies and characterises one particular dataset (=unit process or system terminated).">
+				<owl:subClassOf rdf:about="" />
+				<owl:Property rdf:ID="activityName">
+				  <rdfs:label xml:lang="en-gb">Name</rdfs:label>
+				  <linked_type>dc:title</linked_type>
+				  <multiple>yes</multiple>
+			    </activityName>
+			</fieldset>
+			<owl:Class rdf:ID="classification">
+				<owl:Property rdf:ID="classification">
+				  <rdfs:label xml:lang="en-gb">Classification</rdfs:label>
+				  <multiple>yes</multiple>
+			    </classification>
+			</fieldset>
+			<owl:Class rdf:ID="geography" text="Describes the geographic location for which the dataset is supposed to be valid.">
+				<owl:Property rdf:ID="comment">
+					<rdfs:label xml:lang="en-gb">Comment</rdfs:label>
+									  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<rdfs:comment>A general comment can be made about each individual exchange.</rdfs:comment>
+				</comment>
+			</fieldset>
+			<owl:Class rdf:ID="technology" text="Describes the technological properties of the unit process.">
+				<owl:Property rdf:ID="comment">
+					<rdfs:label xml:lang="en-gb">Comment</rdfs:label>
+									  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<rdfs:comment>A general comment can be made about each individual exchange.</rdfs:comment>
+				</comment>
+				<owl:Property rdf:ID="technologyLevel">
+					<rdfs:label xml:lang="en-gb">Technology Level</rdfs:label>
+									  	<linked_type>oslca:comment</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>yes</multiple>
+					<rdfs:comment>The terms used does not necessarily reflect the age of the technologies. A modern technology can be a century old, if it is still the most competitive technology, and an old technology can be relatively young, if it is one that has quickly become superseded by other more competitive ones. The technology level is relative to the year for which the data are valid, as given under Time Period. In a time series, the same technology can move between different technology levels over time. The same technology can also be given different technology levels in different geographical locations, even in the same year.</rdfs:comment>
+					<owl:oneOf rdf:parseType="Collection">
+
+						<undefined>0 = undefined - For market activities that do not have a technology level.
+							</undefined>
+						<new>1 = New - For a technology assumed to be on some aspects technically superior to modern technology, but not yet the most commonly installed when investment is based on purely economic considerations.
+						</new>
+						<modern>2 = Modern - For a technology currently used when installing new capacity, when investment is based on purely economic considerations (most competitive technology).
+						</modern>
+						<current>3 = Current (default) - For a technology in between modern and old.
+						</current>
+						<old>4 = Old - For a technology that is currently taken out of use, when decommissioning is based on purely economic considerations (least competitive technology).
+						</old>
+						<outdated>5 = Outdated - For a technology no longer in use.
+						</outdated>
+					</owl:oneOf>
+
+				</technologyLevel>								
+			</fieldset>		
+			<owl:Class rdf:ID="timePeriod" text="Characterises the temporal properties of the unit activity (or system terminated) at issue./Describes start and end date of the time period for which the dataset is valid.">
+				<owl:Property rdf:ID="comment">
+					<rdfs:label xml:lang="en-gb">Comment</rdfs:label>
+									  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<rdfs:comment>A general comment can be made about each individual exchange.</rdfs:comment>
+				</comment>
+				<start_date rules="trim">
+					<rdfs:label xml:lang="en-gb">Start Date</rdfs:label>
+									  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>no</multiple>
+					<rdfs:comment>Start date of the time period for which the dataset is valid, presented as a complete date (year-month-day).</rdfs:comment>
+				</start_date>				
+				<end_date rules="trim">
+					<rdfs:label xml:lang="en-gb">End Date</rdfs:label>
+									  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+					<rdfs:comment>End date of the time period for which the dataset is valid, presented as a complete date (year-month-day).</rdfs:comment>
+				</end_date>				
+				<owl:Property rdf:ID="isDataValidForEntirePeriod">
+					<rdfs:label xml:lang="en-gb">Is Data Valid For Entire Period</rdfs:label>
+									  	<linked_type>oslca:isDataValidForEntirePeriod</linked_type>
+					<datatype>xsd:boolean</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+					<rdfs:comment>Indicates whether or not the activity data (elementary and intermediate exchanges reported under flow data) are valid for the entire time period stated. If not, explanations may be given under 'comment'.</rdfs:comment>
+				</isDataValidForEntirePeriod>
+			</fieldset>
+			<owl:Class rdf:ID="macroEconomicScenarios" text="Characterises the temporal properties of the unit activity (or system terminated) at issue.">
+				<owl:Class rdf:ID="macroEconomicScenario" text="Characterises the temporal properties of the unit activity (or system terminated) at issue.">
+					<owl:Property rdf:ID="name">
+						<rdfs:label xml:lang="en-gb">Name</rdfs:label>
+											  	<linked_type>oslca:name</linked_type>
+						<datatype>TString80</datatype>
+						<optional>no</optional>
+						<multiple>no</multiple>
+					</name>
+					<owl:Property rdf:ID="comment">
+						<rdfs:label xml:lang="en-gb">Comment</rdfs:label>
+											  	<linked_type>oslca:comment</linked_type>
+						<datatype>TString32000</datatype>
+						<optional>no</optional>
+						<multiple>no</multiple>
+					</comment>
+				</fieldset>
+				<owl:Property rdf:ID="contextName">
+					<rdfs:label xml:lang="en-gb">Context Name</rdfs:label>
+									  	<linked_type>oslca:contextName</linked_type>
+					<datatype>TString32000</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</contextName>				
+				<owl:Property rdf:ID="originalSource">
+					<rdfs:label xml:lang="en-gb">Original Source</rdfs:label>
+									  	<linked_type>oslca:originalSource</linked_type>
+					<datatype>xsd:anyURI</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</originalSource>
+				<owl:Property rdf:ID="majorRelease">
+					<rdfs:label xml:lang="en-gb">Major Release</rdfs:label>
+									  	<linked_type>oslca:majorRelease</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</majorRelease>
+				<owl:Property rdf:ID="minorRelease">
+					<rdfs:label xml:lang="en-gb">Minor Release</rdfs:label>
+									  	<linked_type>oslca:minorRelease</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</minorRelease>
+				<owl:Property rdf:ID="majorRevision">
+					<rdfs:label xml:lang="en-gb">Major Revision</rdfs:label>
+									  	<linked_type>oslca:majorRevision</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</majorRevision>
+				<owl:Property rdf:ID="minorRevision">
+					<rdfs:label xml:lang="en-gb">Minor Revision</rdfs:label>
+									  	<linked_type>oslca:minorRevision</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</minorRevision>
+			</fieldset>
+		</fieldset>
+		<owl:Class rdf:ID="modellingAndValidation" text="Contains meta information about how unit processes are modelled and about the review/validation of the dataset.">		
+			<owl:Property rdf:ID="name">
+			  <rdfs:label xml:lang="en-gb">Name</rdfs:label>
+			  <linked_type>dc:title</linked_type>
+		      			  <multiple>yes</multiple>
+		    </name>
+			<owl:Class rdf:ID="representativeness" text="Contains information about the representativeness of the unit process data (meta information and flow data).">
+				<owl:Property rdf:ID="systemModelName">
+					<rdfs:label xml:lang="en-gb">systemModelName</rdfs:label>
+									  	<linked_type>oslca:systemModelName</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</systemModelName>				
+				<owl:Property rdf:ID="samplingProcedure">
+					<rdfs:label xml:lang="en-gb">samplingProcedure</rdfs:label>
+									  	<linked_type>oslca:samplingProcedure</linked_type>
+					<datatype>TString32000</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+				</samplingProcedure>				
+				<owl:Property rdf:ID="extrapolations">
+					<rdfs:label xml:lang="en-gb">extrapolations</rdfs:label>
+									  	<linked_type>oslca:extrapolations</linked_type>
+					<datatype>TString32000</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<rdfs:comment>Describes extrapolations of data from another time period, another geographical area or another technology and the way these extrapolations have been carried out. It should be reported whether different extrapolations have been done on the level of individual exchanges. If data representative for a activity operated in one country is used for another country's activity, its original representativity can be indicated here. Changes in mean values due to extrapolations may also be reported here.</rdfs:comment>
+				</extrapolations>
+				<owl:Property rdf:ID="percent">
+					<rdfs:label xml:lang="en-gb">percent</rdfs:label>
+									  	<linked_type>oslca:extrapolations</linked_type>
+					<datatype>TString32000</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<rdfs:comment>Percent of data sampled out of the total that the activity is intended to represent (as given by the fields under Geography, Technology and Time Period).</rdfs:comment>
+				</percent>
+				<owl:Property rdf:ID="systemModelId">
+					<rdfs:label xml:lang="en-gb">systemModelId</rdfs:label>
+									  	<linked_type>oslca:systemModelId</linked_type>
+					<datatype>xsd:uri</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<rdfs:comment>The system model describes how activity datasets are linked to form product systems. Some options in the ecoinvent network are 'undefined', 'attributional, average current suppliers, revenue allocation', 'consequential, small-scale, long-term decisions'.</rdfs:comment>
+				</systemModelId>				
+			</fieldset>				
+			<owl:Class rdf:ID="review" text="Contains information about the reviewers' comments on the dataset content.">
+				<owl:Property rdf:ID="submit">
+				  <rdfs:label xml:lang="en-gb">Name</rdfs:label>
+			    </submit>
+			</fieldset>
+		</fieldset>
+		<owl:Class rdf:ID="administrativeInformation" text="Contains the administrative information about the dataset at issue: The persons that compiled and entered the dataset in the database and about kind of publication and the accessibility of the dataset, timestamp, version and internalVersion number as well as language and localLanguage code.">
+			<owl:Property rdf:ID="space">
+				<rdfs:label xml:lang="en-gb">Space</rdfs:label>
+							  	<linked_type>hidden</linked_type>
+				<optional>no</optional>
+				<multiple>no</multiple>
+			</space>			
+				<fieldset name="Data Entry By" linked_type="foaf:Person">
+				<owl:Property rdf:ID="firstName">
+					<rdfs:label xml:lang="en-gb">First Name</rdfs:label>
+									  	<linked_type>foaf:firstName</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</firstName>
+				<owl:Property rdf:ID="lastName">
+					<rdfs:label xml:lang="en-gb">Last Name</rdfs:label>
+									  	<linked_type>foaf:lastName</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</lastName>
+				<owl:Property rdf:ID="email">
+					<rdfs:label xml:lang="en-gb">Email Address</rdfs:label>
+									  	<linked_type>foaf:mbox_sha1sum</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</email>
+				<owl:Property rdf:ID="search">
+					<rdfs:label xml:lang="en-gb">Search for a Person</rdfs:label>
+									  	<linked_type>na</linked_type>
+					<lookup>foaf</lookup>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</search>
+			</fieldset>
+							
+			<owl:Class rdf:ID="dataGeneratorAndPublication" text="Contains information about who collected, compiled or published the orginal data. This may or may not be the same person as under 'DataEntryBy'. Furthermore contains information about kind of publication underlying the dataset and the accessibility of the dataset.">
+				<fieldset name="person" linked_type="foaf:Person">
+				<owl:Property rdf:ID="firstName">
+					<rdfs:label xml:lang="en-gb">First Name</rdfs:label>
+									  	<linked_type>foaf:firstName</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</firstName>
+				<owl:Property rdf:ID="lastName">
+					<rdfs:label xml:lang="en-gb">Last Name</rdfs:label>
+									  	<linked_type>foaf:lastName</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</lastName>
+				<owl:Property rdf:ID="email">
+					<rdfs:label xml:lang="en-gb">Email Address</rdfs:label>
+									  	<linked_type>foaf:mbox_sha1sum</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</email>
+				<owl:Property rdf:ID="search">
+					<rdfs:label xml:lang="en-gb">Search for a Person</rdfs:label>
+									  	<linked_type></linked_type>
+					<lookup>foaf</lookup>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</search>
+			</fieldset>
+				<owl:Property rdf:ID="dataPublishedIn">
+					<rdfs:label xml:lang="en-gb">data Published In</rdfs:label>
+									  	<linked_type>oslca:dataPublishedIn</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>yes</optional>
+					<multiple>no</multiple>
+					<rdfs:comment>The codes are: 0=Data as such not published (default). 1=The data of some unit processes or subsystems are published. 2=Data has been published entirely in 'referenceToPublishedSource'.</rdfs:comment>
+					<owl:oneOf rdf:parseType="Collection">
+
+						<o0>Data as such not published elsewhere
+							</o0>
+						<o1>The data of some unit processes or subsystems are published
+						</o1>
+						<o2>Data has been published entirely 
+						</o2>
+					</owl:oneOf>
+
+				</dataPublishedIn>
+				<owl:Property rdf:ID="publishedSource">
+					<rdfs:label xml:lang="en-gb">publishedSource</rdfs:label>
+									  	<linked_type>oslca:publishedSource</linked_type>
+					<datatype>xsd:uri</datatype>
+					<multiple>no</multiple>
+					<required>no</required>
+				</publishedSource>
+				<owl:Property rdf:ID="publishedSourceMetaData">
+					<rdfs:label xml:lang="en-gb">publishedSourceMetaData</rdfs:label>
+									  	<linked_type>oslca:publishedSourceMetaData</linked_type>
+					<datatype>bibo:citation</datatype>
+					<multiple>no</multiple>
+					<required>no</required>
+				</publishedSourceMetaData>
+				<owl:Property rdf:ID="isCopyrightProtected">
+					<rdfs:label xml:lang="en-gb">isCopyrightProtected</rdfs:label>
+									  	<linked_type>oslca:isCopyrightProtected</linked_type>
+					<datatype>xsd:boolean</datatype>
+					<multiple>no</multiple>
+					<required>yes</required>
+				</isCopyrightProtected>
+				<owl:Property rdf:ID="pageNumbers">
+					<rdfs:label xml:lang="en-gb">pageNumbers</rdfs:label>
+									  	<linked_type>oslca:pageNumbers</linked_type>
+					<datatype>TBaseString30</datatype>
+					<multiple>no</multiple>
+					<required>no</required>
+					<rdfs:comment>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</rdfs:comment>
+				</pageNumbers>
+				<owl:Property rdf:ID="accessRestrictedTo">
+					<rdfs:label xml:lang="en-gb">accessRestrictedTo</rdfs:label>
+					<value>0</value>
+									  	<linked_type>oslca:accessRestrictedTo</linked_type>
+					<datatype>TBaseString30</datatype>
+					<multiple>no</multiple>
+					<required>no</required>
+					<rdfs:comment>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</rdfs:comment>
+					<owl:oneOf rdf:parseType="Collection">
+
+						<none>No access restrictions.</none>
+						<license>Only license holders (as defined by context) have access.</license>
+						<nlicense>License holders (as defined by context) have access to LCI results but not to unit process raw data. Database administrator have full access.</nlicense>
+						<company>Only the organisation specified by 'companyCode' and the database administrator have access.</company>					
+					</owl:oneOf>
+
+				</accessRestrictedTo>
+				<owl:Property rdf:ID="companyId">
+					<rdfs:label xml:lang="en-gb">companyId</rdfs:label>
+									  	<linked_type>oslca:companyId</linked_type>
+					<datatype></datatype>
+					<multiple>yes</multiple>
+					<required>no</required>
+				</companyId>
+			</fieldset>						
+			<owl:Class rdf:ID="fileAttributes">
+					<owl:Property rdf:ID="originalFormat">
+						<rdfs:label xml:lang="en-gb">Original Format</rdfs:label>
+											  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</originalFormat>				
+					<owl:Property rdf:ID="minorRevision">
+						<rdfs:label xml:lang="en-gb">minorRevision</rdfs:label>
+											  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</minorRevision>
+					<owl:Property rdf:ID="majorRevision">
+						<rdfs:label xml:lang="en-gb">Major Revision</rdfs:label>
+											  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</majorRevision>
+					<owl:Property rdf:ID="minorRelease">
+						<rdfs:label xml:lang="en-gb">Minor Release</rdfs:label>
+											  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</minorRelease>
+					<owl:Property rdf:ID="majorRelease">
+						<rdfs:label xml:lang="en-gb">Major Release</rdfs:label>
+											  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</majorRelease>
+					<owl:Property rdf:ID="defaultLanguage">
+						<rdfs:label xml:lang="en-gb">Default Language</rdfs:label>
+											  	<linked_type>dcterms:language</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</defaultLanguage>					
+					<owl:Property rdf:ID="creationTimestamp">
+						<rdfs:label xml:lang="en-gb">Creation TimeStamp</rdfs:label>
+											  	<linked_type>dcterms:created</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</creationTimestamp>					
+					<owl:Property rdf:ID="lastEditTimestamp">
+						<rdfs:label xml:lang="en-gb">Last Edited TimeStamp</rdfs:label>
+											  	<linked_type>dcterms:created</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</lastEditTimestamp>					
+					<owl:Property rdf:ID="fileGenerator">
+						<rdfs:label xml:lang="en-gb">File Generator</rdfs:label>
+											  	<linked_type>osi:fileGenerator</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</fileGenerator>			
+			</fieldset>
+		</fieldset>
+		<owl:Class rdf:ID="flowData" text="Contains information about inputs and outputs of the given activity (exchanges with environment as well as intermediate exchanges) as well as their properties, allocations, transfer coefficients, uncertainties and parameters for the use in mathematical formulas.">	
+			<owl:Property rdf:ID="submit">
+			  <rdfs:label xml:lang="en-gb">Name</rdfs:label>
+		      		    </submit>	
+			<owl:Class rdf:ID="intermediateExchange" text="Comprises intermediate product and waste inputs and outputs for the activity.">			
+				<owl:Property rdf:ID="name">
+					<rdfs:label xml:lang="en-gb">Name</rdfs:label>
+									  	<linked_type>oslca:name</linked_type>
+					<datatype>TString120</datatype>
+					<multiple>yes</multiple>
+					<rdfs:comment>Name of the exchange.</rdfs:comment>
+				</name>
+				<owl:Property rdf:ID="unitName">
+					<rdfs:label xml:lang="en-gb">Unit Name</rdfs:label>
+									  	<linked_type>oslca:unitName</linked_type>
+					<datatype>TString40</datatype> 
+					<multiple>yes</multiple>
+					<rdfs:comment>Unit name of the amount.</rdfs:comment>
+				</unitName>
+				<owl:Property rdf:ID="comment">
+					<rdfs:label xml:lang="en-gb">Comment</rdfs:label>
+									  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<rdfs:comment>A general comment can be made about each individual exchange.</rdfs:comment>
+				</comment>
+				<owl:Property rdf:ID="uncertainty">
+				  <rdfs:label xml:lang="en-gb">Uncertainty</rdfs:label>
+				  <linked_type>oslca:uncertainty</linked_type>
+					<datatype>TUncertainty</datatype>
+ 					<required>no</required>
+					<rdfs:comment>Uncertainty information in the form of distribution functions and their parameters and/or pedigree data.</rdfs:comment>
+				</uncertainty>
+						<owl:Property rdf:ID="synonym">
+						  <rdfs:label xml:lang="en-gb">Synonym</rdfs:label>
+					      						  <linked_type>oslca:synonym</linked_type>
+							<datatype>TSynonym</datatype>
+							<required>no</required> 
+							<multiple>yes</multiple>
+							<rdfs:comment>List of synonyms for the name. Contrary to normal multi language strings, synonyms may contain more than one element with the same xml:lang attribute value.</rdfs:comment>
+						</synonym>
+						<owl:Property rdf:ID="property">
+						  <rdfs:label xml:lang="en-gb">Property</rdfs:label>
+					      						  <linked_type>oslca:uncertainty</linked_type>
+							<datatype>TProperty</datatype>
+							<required>no</required> 
+							<multiple>yes</multiple>
+							<rdfs:comment>Properties of the exchange, e.g. dry mass, water content, price, content of specific elements or substances.</rdfs:comment>
+						</property>
+						<owl:Property rdf:ID="transferCoefficient">
+						  <rdfs:label xml:lang="en-gb">Transfer Coefficient</rdfs:label>
+					      						  <linked_type>oslca:transferCoefficient</linked_type>
+							<datatype>TTransferCoefficient"</datatype>
+							<required>no</required>
+							<multiple>yes</multiple>
+							<rdfs:comment>Transfer coefficients relate specific inputs to specific outputs and record the share of this specific input that contributes to this specific output.</rdfs:comment>
+						</transferCoefficient>
+					<owl:Property rdf:ID="tag">
+						<rdfs:label xml:lang="en-gb">Tag</rdfs:label>
+					    						<linked_type>oslca:tag</linked_type>
+						<datatype>TTag</datatype>
+						<required>no</required>
+						<multiple>yes</multiple>
+						<rdfs:comment>The tag field allows an open list of keywords which describes the activity and can be used for filtering, grouping and searching. The validTags file reference provides a list of predefined tags, but the semantic validation procedure should only display an information (not an error) if a tag entry cannot be found in the validTags master file.</rdfs:comment>
+					</tag>
+					<owl:Property rdf:ID="id">
+						<rdfs:label xml:lang="en-gb">id</rdfs:label>
+					    						<linked_type>oslca:id</linked_type>
+						<datatype>TUuid</datatype>
+						<required>yes</required>
+						<rdfs:comment>Unique identifier for this exchange. The intermediateExchangeId or the elementaryExchangeId can not be used to identify an exchange because one master data entry can be referenced by more than one exchange of a dataset.</rdfs:comment>
+					</id>
+					<owl:Property rdf:ID="unitId">
+							<rdfs:label xml:lang="en-gb">unitId</rdfs:label>
+					    								<linked_type>oslca:unitId</linked_type>
+							<datatype>TUuid</datatype>
+ 							<required>yes</required>
+							<referenceToComplexType>TValidUnit</referenceToComplexType>
+							<propertyNameForReference>ValidUnit</propertyNameForReference>
+						<rdfs:comment>Reference to the unit of the amount.</rdfs:comment>
+					</unitId>
+					<owl:Property rdf:ID="unitContextId">
+						<rdfs:label xml:lang="en-gb">Unit Context Id</rdfs:label>
+					    						<linked_type>oslca:unitContextId</linked_type>
+						<datatype>TUuid</datatype>
+						<required>no</required>
+						<referenceToComplexType>TValidContext</referenceToComplexType>
+						<propertyNameForReference>ValidUnitContext</propertyNameForReference>
+						<rdfs:comment>Reference to the context of the unit.</rdfs:comment>
+					</unitContextId>
+					<owl:Property rdf:ID="variableName">
+						<rdfs:label xml:lang="en-gb">Variable Name</rdfs:label>
+					    						<linked_type>oslca:variableName</linked_type>
+						<datatype>TVariableName</datatype>
+ 						<required>no</required>
+						<rdfs:comment>The variable name is a short name for the exchange, used when refering to the exchange amount in mathematical relations (formulas). Variables may contain characters, numbers and underscores (_). Variable names must start with a character (a-z). Variable names are not case sensitive (calorific_Value equals Calorific_value).</rdfs:comment>
+					</variableName>
+					<owl:Property rdf:ID="casNumber">
+						<rdfs:label xml:lang="en-gb">CAS Number</rdfs:label>
+					    						<linked_type>oslca:casNumber</linked_type>
+						<datatype>TCasNumber</datatype>
+						<required>no</required>
+						<rdfs:comment>Indicates the number according to the Chemical Abstract Service (CAS). The Format of the CAS-number: 000000-00-0, where the first string of digits needs not to be complete (i.e. less than six digits are admitted).</rdfs:comment>
+					</casNumber>
+					<owl:Property rdf:ID="amount">
+						<rdfs:label xml:lang="en-gb">Amount</rdfs:label>
+					    						<linked_type>oslca:amount</linked_type>
+						<datatype>TFloatNumber</datatype>
+ 						<required>yes</required>
+						<rdfs:comment>Amount of an elementary or intermediate exchange.</rdfs:comment>
+					</amount>
+					<owl:Property rdf:ID="isCalculatedAmount">
+						<rdfs:label xml:lang="en-gb">Is Calculated Amount</rdfs:label>
+					    						<linked_type>oslca:isCalculatedAmount</linked_type>
+						<datatype>xsd:boolean</datatype>
+						<required>no</required>
+						<rdfs:comment>If true the value of the amount field is the calculated value of the mathematicalRelation or the transferCoefficient.</rdfs:comment>
+					</isCalculatedAmount>
+					<owl:Property rdf:ID="mathematicalRelation">
+						<rdfs:label xml:lang="en-gb">Mathematical Relation</rdfs:label>
+					    						<linked_type>oslca:mathematicalRelation</linked_type>
+							<datatype>TBaseString32000</datatype>
+ 							<required>no</required>
+							<rdfs:comment>Defines a mathematical formula with references to values of flows, parameters or properties by variable names or REF function.</rdfs:comment>
+					</mathematicalRelation>
+					<owl:Property rdf:ID="source">
+						<rdfs:label xml:lang="en-gb">Source</rdfs:label>
+					    						<lookup>sources</lookup>
+						<linked_type>bibo:citation</linked_type>
+						<required>no</required>
+					</source>
+					<owl:Property rdf:ID="pageNumbers">
+						<rdfs:label xml:lang="en-gb">Page Numbers</rdfs:label>
+					    						<linked_type>oslca:pageNumbers</linked_type>
+						<datatype>TBaseString30</datatype>
+ 						<required>no</required>
+						<rdfs:comment>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</rdfs:comment>
+					</pageNumbers>
+					<owl:Property rdf:ID="specificAllocationPropertyId">
+						<rdfs:label xml:lang="en-gb">Specific Allocation Property Id</rdfs:label>
+					    						<linked_type>oslca:specificAllocationPropertyId</linked_type>
+						<datatype>TUuid</datatype>
+ 						<required>no</required>
+						<referenceToComplexType>TValidProperty</referenceToComplexType>
+						<propertyNameForReference>SpecificAllocationProperty</propertyNameForReference>
+						<rdfs:comment>Reference to the Property used by the allocation. This overrides the dataset wide default defined by masterAllocationPropertyId.</rdfs:comment>
+					</specificAllocationPropertyId>				
+			</fieldset>
+			<owl:Class rdf:ID="elementaryExchange" text="Comprises elementary inputs and outputs (exchanges with the environment) for the activity.">
+				<owl:Property rdf:ID="inputGroup">
+					<rdfs:label xml:lang="en-gb">inputGroup</rdfs:label>
+				    					<linked_type>oslca:inputGroup</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</inputGroup>				
+				<owl:Property rdf:ID="outputGroup">
+					<rdfs:label xml:lang="en-gb">Output Group</rdfs:label>
+				    					<linked_type>oslca:outputGroup</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</outputGroup>
+				<owl:Property rdf:ID="formula">
+					<rdfs:label xml:lang="en-gb">Formula</rdfs:label>
+				    					<linked_type>oslca:formula</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</formula>		
+			</fieldset>			
+			<owl:Class rdf:ID="parameter" text="Comprises all parameters of the activity.">
+				<owl:Property rdf:ID="name">
+					<rdfs:label xml:lang="en-gb">name</rdfs:label>
+				    					<linked_type>dc:title</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</name>				
+				<owl:Property rdf:ID="unit">
+					<rdfs:label xml:lang="en-gb">unit</rdfs:label>
+				    					<linked_type>oslca:unit</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</unit>
+				<owl:Property rdf:ID="uncertainty">
+					<rdfs:label xml:lang="en-gb">uncertainty</rdfs:label>
+				    					<linked_type>oslca:uncertainty</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</uncertainty>
+				<owl:Property rdf:ID="comment">
+					<rdfs:label xml:lang="en-gb">Comment</rdfs:label>
+				    					<linked_type>comment</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</comment>
+				<owl:Property rdf:ID="variableName">
+					<rdfs:label xml:lang="en-gb">Variable Name</rdfs:label>
+				    					<linked_type>oslca:name</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</variableName>
+				<owl:Property rdf:ID="mathematicalRelation">
+					<rdfs:label xml:lang="en-gb">Mathematical Relation</rdfs:label>
+				    					<linked_type>oslca:mathematicalRelation</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</mathematicalRelation>
+				<owl:Property rdf:ID="isCalculatedAmount">
+					<rdfs:label xml:lang="en-gb">Is Calculated Amount</rdfs:label>
+				    					<linked_type>oslca:isCalculatedAmount</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</isCalculatedAmount>				
+				<owl:Property rdf:ID="amount">
+					<rdfs:label xml:lang="en-gb">Amount</rdfs:label>
+				    					<linked_type>oslca:amount</linked_type>
+					<datatype>TFloatNumber</datatype>
+					<required>yes</required>
+				</amount>
+			</fieldset>			
+		</fieldset>
+		<owl:Property rdf:ID="submit">
+		  <rdfs:label xml:lang="en-gb">Name</rdfs:label>
+	      	    </submit>		
+	</fieldset>
+</form>

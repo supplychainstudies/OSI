@@ -1,3 +1,3 @@
-Waste,253.013,http://dbpedia.org/class/yago/Kilogram113724582
+Waste,253.013,qudt:Kilogram
 Energy Use,67300,MJ
-CO2 Emissions,2800,http://dbpedia.org/class/yago/Kilogram113724582
+Carbon Dioxide Emissions,2800,qudt:Kilogram

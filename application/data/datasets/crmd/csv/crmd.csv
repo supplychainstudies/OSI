@@ -1,15 +1,15 @@
-Primary Aluminum Ingot,,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Primary Aluminum Ingot,pai
+Primary Aluminum Ingot,,,functional unit,1000,qudt:Kilogram,Primary Aluminum Ingot,pai
 Dry Lumber,,,functional unit,1000,board feet,Dry Lumber,dl
 Green Lumber,,,functional unit,1000,board feet,Green Lumber,gl
-Electric Arc Furnace Billet,,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Electric Arc Furnace Billet,eafb
-High Density Polyethylene (HDPE),,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,High Density Polyethylene (HDPE),hdpe
-High Impact Polystyrene (HIPS),,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,High Impact Polystyrene (HIPS),hips
-Hot Rolled Coil Steel,,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Hot Rolled Coil Steel,hrcs
-Low Density Polyethylene (LDPE),,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Low Density Polyethylene (LDPE),ldpe
-Linear Low Density Polyethylene (LLDPE),,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Linear Low Density Polyethylene (LLDPE),lldpe
-Molten Amber Glass,,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Molten Amber Glass,mag
-Molten Emerald Glass,,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Molten Emerald Glass,meg
-Molten Flint Glass,,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Molten Flint Glass,mf
-Polyethylene Terephthalate (PET),,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Polyethylene Terephthalate (PET),pet
-1000 kg Polypropylene (PP) ,,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,1000 kg Polypropylene (PP) ,pp
-Polyvinyl Chloride (PVC),,,functional unit,1000,http://dbpedia.org/class/yago/Kilogram113724582,Polyvinyl Chloride (PVC),pvc
+Electric Arc Furnace Billet,,,functional unit,1000,qudt:Kilogram,Electric Arc Furnace Billet,eafb
+High Density Polyethylene (HDPE),,,functional unit,1000,qudt:Kilogram,High Density Polyethylene (HDPE),hdpe
+High Impact Polystyrene (HIPS),,,functional unit,1000,qudt:Kilogram,High Impact Polystyrene (HIPS),hips
+Hot Rolled Coil Steel,,,functional unit,1000,qudt:Kilogram,Hot Rolled Coil Steel,hrcs
+Low Density Polyethylene (LDPE),,,functional unit,1000,qudt:Kilogram,Low Density Polyethylene (LDPE),ldpe
+Linear Low Density Polyethylene (LLDPE),,,functional unit,1000,qudt:Kilogram,Linear Low Density Polyethylene (LLDPE),lldpe
+Molten Amber Glass,,,functional unit,1000,qudt:Kilogram,Molten Amber Glass,mag
+Molten Emerald Glass,,,functional unit,1000,qudt:Kilogram,Molten Emerald Glass,meg
+Molten Flint Glass,,,functional unit,1000,qudt:Kilogram,Molten Flint Glass,mf
+Polyethylene Terephthalate (PET),,,functional unit,1000,qudt:Kilogram,Polyethylene Terephthalate (PET),pet
+1000 kg Polypropylene (PP) ,,,functional unit,1000,qudt:Kilogram,1000 kg Polypropylene (PP) ,pp
+Polyvinyl Chloride (PVC),,,functional unit,1000,qudt:Kilogram,Polyvinyl Chloride (PVC),pvc

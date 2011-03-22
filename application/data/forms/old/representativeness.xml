@@ -1,0 +1,24 @@
+<form action="/lca/create/representativeness" name="Representativeness">
+  <fieldset name="Representativeness" linked_type="oslca:representativeness">
+		<systemModelName rules="trim">
+			<label>System Model Name</label>
+			<type>text</type>
+		  	<linked_type>oslca:systemModelName</linked_type>
+		</systemModelName>
+		<samplingProcedure rules="trim">
+			<label>Sampling Procedure</label>
+			<type>textarea</type>
+		  	<linked_type>oslca:samplingProcedure</linked_type>
+		</samplingProcedure>	
+		<extrapolations rules="trim">
+			<label>Extrapolations</label>
+			<type>textarea</type>
+		  	<linked_type>oslca:extrapolations</linked_type>
+		</extrapolations>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

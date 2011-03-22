@@ -1,0 +1,19 @@
+<form action="/lca/create/macroeconomicScenario" name="Macroeconomic Scenario">
+  <fieldset name="Macroeconomic Scenario" linked_type="oslca:macroeconomicScenario">
+		<name rules="trim">
+			<label>Name</label>
+			<type>text</type>
+		  	<linked_type>rdf:label</linked_type>
+		</name>
+		<description rules="trim">
+			<label>Description</label>
+			<type>text</type>
+		  	<linked_type>rdf:description</linked_type>
+		</description>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

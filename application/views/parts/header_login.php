@@ -1,14 +1,14 @@
 <? ?>
 
 
-<div>
-	<form method="post" action="/users/login">
+<div style="width: 250px; float: right;">
+	<form method="post" action="/users/">
 		<h1 class="level0">Login</h1><div class="level0">
 			<? if ($this->session->userdata('loginfail') == true) { echo "Your login failed. Try Again?"; } ?>
 			<ul class="layout">
-				<div class="toggle">
 					<li>
-					<div class="toggler"> Use an Open ID login &rsaquo; &rsaquo; </div>
+					<div class="toggler"> <a class="rpxnow" onclick="return false;"
+					href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Fosi%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </div>
 					<li>
 						<label>User Name </label>
 						<input id="user_name" name="user_name" type="text" /> 
@@ -18,17 +18,7 @@
 						<label>Password</label>
 						<input id="password" name="password" type="password" />
 					</li>
-				</div>
-				<br/>
-				<div class="toggle" style="display: none">
-					<li>
-						<div class="toggler"> Use your OSI login &rsaquo; &rsaquo; </div>
-					</li>					
-					<li>
-						<label>Open ID </label>
-						<input id="open_id" name="open_id" type="text" /> 
-					</li>	
-				</div>				
+				<br/>			
 				<li>
 					<input type="submit" />
 				</li>						
@@ -36,20 +26,7 @@
 		</div>
 	</form>
 </div>
-<script>
 
-
-$('.toggler').click(function() {
-
-	$('.toggle').slideToggle('slow', function() {
-
-	// Animation complete.
-
-	});
-
-});
-
-</script>
 
 
 <? ?>

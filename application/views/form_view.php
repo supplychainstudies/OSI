@@ -14,8 +14,14 @@
 	
 	
 	<div id="columnleft">
-	<h1 class="title">Create</h1>		
-		<? echo $form_string; ?>
+		<?		
+			if (isset($pass_data) == true) {
+				foreach ($pass_data as $key => $value) {
+					echo "<input type=\"hidden\" name=\"pre_" . $key . "\" value=\"" . $value . "\" />";
+				}
+			}	
+ 			
+			echo $form_string; ?>
 	</div>	
 
 	<?=$footerDisplay;?>

@@ -1,0 +1,37 @@
+input,raw material,technosphere,Process Chemicals,30,qudt:Kilogram,Includes additives. catalysts. chemicals. etc.
+input,energy,,Coal,2640,MJ,Includes additives. catalysts. chemicals. etc.
+input,energy,,Crude Oil,8160,MJ
+input,energy,,Natural Gas,24900,MJ
+input,energy,,Hydro,221,MJ
+input,energy,,Nuclear,991,MJ
+input,energy,,Other,0.517,MJ
+input,energy,,Crude Oil (Feedstock),20800,MJ,Feedstock values are the theoretical energy that could be recovered via combustion
+input,energy,,Natural Gas (Feedstock),25700,MJ,Feedstock values are the theoretical energy that could be recovered via combustion
+input,emission,air,Carbon dioxide,1900,qudt:Kilogram
+input,emission,air,Carbon monoxide,0.93,qudt:Kilogram
+input,emission,air,Sulphur oxides (reported as SO2),4.4,qudt:Kilogram
+input,emission,air,Nitrogen oxides (reported as NO2),5.7,qudt:Kilogram
+input,emission,air,Methane,27,qudt:Kilogram
+input,emission,air,Dust & particles (includes metals),1.41,qudt:Kilogram,Total of Metals and metal compounds and PM10
+input,emission,air,Acid gases,0.085,qudt:Kilogram
+output,emission,air,VOC,7.5,qudt:Kilogram,VOCs may or may not include compounds already listed under 'hydrocarbons' or 'other organic compounds'
+output,emission,air,Hydrocarbons (unspecified),1.5,qudt:Kilogram
+output,emission,air,Nitrogen,70,qudt:Kilogram
+output,emission,air,Other organic compounds,0.046,qudt:Kilogram,Includes oxygenated hydrocarbons. halogenated hydrocarbons. nitrogen-containing hydrocarbons. etc.
+output,emission,air,Other,0.024,qudt:Kilogram,Includes compounds not containing both carbon and hydrogen
+output,emission,water,Phosphates and ammonia,0.005,qudt:Kilogram
+output,emission,water,Oils and greases,0.11,qudt:Kilogram
+output,emission,water,Suspended solids,3,qudt:Kilogram
+output,emission,water,Other organics,0.098,qudt:Kilogram
+output,emission,water,Other,1.3,qudt:Kilogram,Includes compounds not containing both carbon and hydrogen
+output,emission,water,Hydrocarbons,0.17,qudt:Kilogram
+output,emission,water,Metals,0.26,qudt:Kilogram
+output,emission,water,Acids,0.1,qudt:Kilogram
+output,emission,water,BOD,0.072,qudt:Kilogram
+output,emission,water,COD,0.6,qudt:Kilogram
+output,emission,water,Salinity,3.6,qudt:Kilogram
+output,emission,water,Dissolved solids,17,qudt:Kilogram
+output,emission,land,RCRA D (EPA-regulated non-hazardous waste),52,qudt:Kilogram
+output,emission,land,RCRA C (EPA-regulated hazardous waste),2.2,qudt:Kilogram
+output,emission,deepwell,RCRA D (EPA-regulated non-hazardous waste),9.2,qudt:Kilogram
+output,emission,deepwell,RCRA C (EPA-regulated hazardous waste),0.011,qudt:Kilogram

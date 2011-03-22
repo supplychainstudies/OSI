@@ -16,16 +16,17 @@ class Xml {
   private $document;
   private $filename;
 
-  public function load ($file) {
+  public function load ($file, $format = "xml") {
     /***
      * @public
      * Load an file for parsing
      */
     $bad  = array('|//+|', '|\.\./|');
     $good = array('/', '');
-    $file = APPPATH.preg_replace ($bad, $good, $file).'.xml';
-
+    $file = APPPATH.preg_replace ($bad, $good, $file).'.' . $format;
+	//
     if (! file_exists ($file)) {
+	var_dump($file);
       return false;
     }
 

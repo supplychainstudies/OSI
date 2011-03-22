@@ -132,63 +132,6 @@ label {
 	clear: both;
 }
 
-.level0, .level1, .level2, .level3, .level4 {	
-	font-size: 12px;
-}
-
-h1 {
-	font-size: 15px;
-	padding: 0 6 6 6;	
-	margin-bottom: 0px;
-}
-
-.level0 {
-	border-left: #fdd44a;
-	border-bottom: #fdd44a;		
-	background: #fff5d5;
-}
-
-h1.level0  {
-	background: #fdd44a;	
-}
-
-.level1 {
-	border-left: #fd8559;	
-	border-bottom: #fd8559;
-	background: #ffd1c0;
-}
-
-h1.level1 {
-	background: #fd8559;	
-}
-
-.level2 {
-	border-left: #9d5bfc;	
-	border-bottom: #9d5bfc;	
-	background: #d8bdff;
-}
-
-h1.level2  {
-	background: #9d5bfc;	
-}
-
-.level3 {
-	border-left: #67a7fd;	
-	background: #cae1ff;
-}
-
-h1.level3 {
-	background: #67a7fd;	
-}
-
-.level4 {
-	border-left: #9affbe;	
-	background: #eafff1;
-}
-
-h1.level4 {
-	background: #9affbe;	
-}
 
 /* Footer */
 

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecoSpold xmlns="http://www.EcoInvent.org/EcoSpold02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold02 ../Schemas/EcoSpold02.xsd">
+  <activityDataset>
+    <activityDescription>
+      <activity id="a24a8bb0-ae27-4ff2-bce4-b6bd69816577" activityNameId="5c4cfe6f-1192-4f80-bfad-7789b0826a39" type="1" specialActivityType="0" energyValues="0">
+        <activityName xml:lang="en">miscanthus-bales, at field</activityName>
+        <includedActivitiesEnd xml:lang="en">The inventory includes the processes of soil cultivation, sowing, weed control, fertilisation, pest and pathogen control, harvest and balling. Machine infrastructure and a shed for machine sheltering is included. Inputs of fertilisers, pesticides and planting stocks as well as their transports to the farm are considered. The direct emissions on the field are also included. The system boundary is the field.</includedActivitiesEnd>
+        <generalComment>
+          <text xml:lang="en" index="0">Inventory refers to the production of 1 kg dry matter miscanthus-bales.</text>
+        </generalComment>
+      </activity>
+      <classification classificationId="5d8c60ab-17f8-4ba6-99ca-a72b75f66cf3">
+        <classificationSystem xml:lang="en">EcoSpold01Categories</classificationSystem>
+        <classificationValue xml:lang="en">agricultural production/plant production</classificationValue>
+      </classification>
+      <geography geographyId="121e91b0-bcf6-468a-a14e-903683453036">
+        <shortname xml:lang="en">RER</shortname>
+        <comment>
+          <text xml:lang="en" index="0">Refers to an average production in Europe. Calculation based on inventory data for SE, PL, DE and GR. Production shares based on expert guess.</text>
+        </comment>
+      </geography>
+      <technology technologyLevel="3">
+        <comment>
+          <text xml:lang="en" index="0">Average production of today</text>
+        </comment>
+      </technology>
+      <timePeriod isDataValidForEntirePeriod="true" startDate="2000-01-01" endDate="2000-01-01">
+        <comment>
+          <text xml:lang="en" index="0">Starting point scenario for average agricultural and harvesting technology in the year 2004.</text>
+        </comment>
+      </timePeriod>
+      <macroEconomicScenario macroEconomicScenarioId="D9F57F0A-A01F-42eb-A57B-8F18D6635801">
+        <name xml:lang="en">Business-as-Usual</name>
+      </macroEconomicScenario>
+    </activityDescription>
+    <flowData>
+      <intermediateExchange amount="1.0" id="d5d24ef5-2477-4ee8-a4a2-8ca72ea68d4b" intermediateExchangeId="53cda50c-35a4-4118-959e-a3507dabbe1b">
+        <name xml:lang="en">miscanthus-bales, at field</name>
+        <unitName xml:lang="en">kg</unitName>
+        <outputGroup>0</outputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.0019246" id="0ad6f0b3-2c1a-412f-9335-aaba72e688fb" intermediateExchangeId="87b76090-5d8d-49b2-9cde-affb773d915e">
+        <name xml:lang="en">ammonium nitrate, as N, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0019246" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="1.4805E-4" id="26c8fb6c-dca1-4959-b939-41450310aa90" intermediateExchangeId="b296f698-4996-45c9-9784-aff775a3dd4a">
+        <name xml:lang="en">ammonium sulphate, as N, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="1.4805E-4" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="9.6232E-4" id="ada484f5-72ab-42f5-b117-f301f11acb03" intermediateExchangeId="e25fd901-6a06-411a-898b-5eade6975856">
+        <name xml:lang="en">calcium ammonium nitrate, as N, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="9.6232E-4" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="3.3747E-4" id="5094c56a-9cca-4f8d-8aa7-aab723150536" intermediateExchangeId="ba272bf7-9ca7-4a4e-bff9-0c4289947ab4">
+        <name xml:lang="en">diammonium phosphate, as N, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="3.3747E-4" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="6.6622E-4" id="a3385cd5-9042-4378-9777-c9e27fd5807e" intermediateExchangeId="5f1118c3-4e58-4655-abc5-ab4df1d3c07b">
+        <name xml:lang="en">urea, as N, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="6.6622E-4" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.0047692" id="dc58d031-dff9-4395-bf52-9256e6fe81bd" intermediateExchangeId="8a22e97d-5276-404a-a818-a0982500ea64">
+        <name xml:lang="en">potassium chloride, as K2O, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0047692" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="3.0442E-4" id="44d42205-31f3-4187-8300-d36b79fad4b5" intermediateExchangeId="eff85032-13b2-4e6a-8524-4da48db6b9c9">
+        <name xml:lang="en">potassium sulphate, as K2O, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="3.0442E-4" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.0035607" id="cc2da111-fb92-40bd-90c3-be1af35712ee" intermediateExchangeId="d2f5434d-bd91-4515-981a-847f68326b94">
+        <name xml:lang="en">lime, from carbonation, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0035607" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="8.6241E-4" id="38a807cf-6cac-41e8-a12d-3892fa3ba3a8" intermediateExchangeId="d63f4f1d-18c7-46c3-aa9a-197eb22f2918">
+        <name xml:lang="en">diammonium phosphate, as P2O5, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="8.6241E-4" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="6.1601E-5" id="54d52058-5219-4163-8701-ead8748d0ecc" intermediateExchangeId="36fa1564-7179-4e85-b2c3-67ad156b6a47">
+        <name xml:lang="en">single superphosphate, as P2O5, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="6.1601E-5" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="1.54E-4" id="9452b8d3-4024-4945-8eee-18761608e76d" intermediateExchangeId="bc3a6628-fbd7-41fc-acf1-a64445dd7541">
+        <name xml:lang="en">thomas meal, as P2O5, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="1.54E-4" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.0012628" id="5f95b094-5699-476b-8530-8525dfa86fc0" intermediateExchangeId="c460837e-8838-44b3-9547-5c7b65cb8387">
+        <name xml:lang="en">triple superphosphate, as P2O5, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0012628" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="7.3921E-4" id="52c6c9f5-2b5a-4794-9869-89132492fbb7" intermediateExchangeId="af65d3df-448f-4b4b-ab66-2b4d7476033d">
+        <name xml:lang="en">phosphate rock, as P2O5, beneficiated, dry, at plant</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); application of fertilizer and average consumption</comment>
+        <uncertainty>
+          <lognormal meanValue="7.3921E-4" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.034563" id="2aeb08b8-72e1-4b22-a6a0-71246598f26c" intermediateExchangeId="bf34a3d9-e18e-40da-88e6-e6d3bfb39367">
+        <name xml:lang="en">planting stocks, miscanthus, at field</name>
+        <unitName xml:lang="en">unit</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); establishment of the plantation</comment>
+        <uncertainty>
+          <lognormal meanValue="0.034563" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="3.5015E-7" id="b182c0c9-a5ef-4231-9617-dd7c0aafbcfd" intermediateExchangeId="206e4c01-b79c-48fc-9681-5e390dbe0366">
+        <name xml:lang="en">benzimidazole-compounds, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); pesticide use</comment>
+        <uncertainty>
+          <lognormal meanValue="3.5015E-7" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="1.3131E-6" id="7338e17c-e1d4-467a-ac4d-dcdcea4f1c55" intermediateExchangeId="47e58ab3-8bc0-430c-9174-92f8839337a4">
+        <name xml:lang="en">cyclic N-compounds, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); pesticide use</comment>
+        <uncertainty>
+          <lognormal meanValue="1.3131E-6" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="4.5222E-5" id="232e3223-7a75-4864-8c6c-45c5de7d6617" intermediateExchangeId="c463a183-5a3a-4e4d-8984-2ad16895c9ed">
+        <name xml:lang="en">triazine-compounds, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); pesticide use, Atrazine</comment>
+        <uncertainty>
+          <lognormal meanValue="4.5222E-5" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="3.2392E-5" id="0d5e6657-a1eb-495c-9e73-26a66fad3971" intermediateExchangeId="4518c400-55f8-49d3-8e75-f9002f43a678">
+        <name xml:lang="en">organophosphorus-compounds, at regional storehouse</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); pesticide use</comment>
+        <uncertainty>
+          <lognormal meanValue="3.2392E-5" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.0042836" id="6fff7c57-1ddd-46a0-9bda-6bc9e4ee79e2" intermediateExchangeId="42acf65b-2785-4bb1-b9ee-d02fee58d0e3">
+        <name xml:lang="en">diesel, used by tractor</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); machinery use</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0042836" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.0032227" id="c78d0b6b-5c8d-4e4a-b0b9-75551ab7e02a" intermediateExchangeId="9caab246-2658-4679-9e44-51ff9e7dd512">
+        <name xml:lang="en">transport, lorry 32t</name>
+        <unitName xml:lang="en">tkm</unitName>
+        <comment xml:lang="en">(4,5,na,na,na,na); standard distances for transport of materials</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0032227" standardDeviation95="2.095" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="9.8053E-6" id="e4f5c484-603e-442f-9d9d-e7d2bf804da7" intermediateExchangeId="f9d81410-ac49-4072-b59e-441349e17f2d">
+        <name xml:lang="en">transport, van &lt;3.5t</name>
+        <unitName xml:lang="en">tkm</unitName>
+        <comment xml:lang="en">(4,5,na,na,na,na); standard distances for transport of materials</comment>
+        <uncertainty>
+          <lognormal meanValue="9.8053E-6" standardDeviation95="2.095" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.017992" id="d8130b4d-1c30-4b76-8631-85be3fdcc91c" intermediateExchangeId="9bd3cfac-c27e-4ef1-a26c-6bc4bf2a00b0">
+        <name xml:lang="en">transport, barge</name>
+        <unitName xml:lang="en">tkm</unitName>
+        <comment xml:lang="en">(4,5,na,na,na,na); standard distances for transport of materials</comment>
+        <uncertainty>
+          <lognormal meanValue="0.017992" standardDeviation95="2.095" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <intermediateExchange amount="0.0041158" id="82ba9fab-f001-4077-9e1b-bc60ba1d262f" intermediateExchangeId="8fad082d-b436-423d-a8a3-a5b10ff90ac1">
+        <name xml:lang="en">transport, freight, rail</name>
+        <unitName xml:lang="en">tkm</unitName>
+        <comment xml:lang="en">(4,5,na,na,na,na); standard distances for transport of materials</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0041158" standardDeviation95="2.095" />
+        </uncertainty>
+        <inputGroup>5</inputGroup>
+      </intermediateExchange>
+      <elementaryExchange amount="1.7248" elementaryExchangeId="52add774-6158-4162-a6dd-a6d6104b09c6" id="b7d016ba-2280-46fb-84cd-be62e16e7c6b">
+        <name xml:lang="en">Carbon dioxide, in air</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(3,4,1,1,1,5); carbon uptake of plants</comment>
+        <uncertainty>
+          <lognormal meanValue="1.7248" standardDeviation95="1.261" />
+        </uncertainty>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="18.4" elementaryExchangeId="c657e949-b0a0-48e0-949a-713c04545f15" id="27b09ba9-d6f6-431e-99e0-fdd30707853e">
+        <name xml:lang="en">Energy, gross calorific value, in biomass</name>
+        <unitName xml:lang="en">MJ</unitName>
+        <comment xml:lang="en">(3,4,1,1,1,5); energy content of harvested product</comment>
+        <uncertainty>
+          <lognormal meanValue="18.4" standardDeviation95="1.261" />
+        </uncertainty>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="0.49212" elementaryExchangeId="08dfb0e5-04ad-438e-a82c-3ad5f7d02331" id="548ad766-882b-4fc7-92ba-4ff7532f07e9">
+        <name xml:lang="en">Water, rain</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">(3,4,1,1,1,5); average rainfall in the region during the plantation</comment>
+        <uncertainty>
+          <lognormal meanValue="0.49212" standardDeviation95="1.261" />
+        </uncertainty>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="0.13567" elementaryExchangeId="8303c864-0613-4c5d-8ee1-e97d5a150091" id="9c2384af-1bb6-4778-a16b-940b46b3ae4f">
+        <name xml:lang="en">Water, river</name>
+        <unitName xml:lang="en">m3</unitName>
+        <comment xml:lang="en">(4,4,1,1,1,5); water used for irrigation</comment>
+        <uncertainty>
+          <lognormal meanValue="0.13567" standardDeviation95="1.3221" />
+        </uncertainty>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="0.66801" elementaryExchangeId="349797fe-a4bb-4b0f-b53c-7a2c5d0ed4e4" id="4368837c-92f8-4f35-b383-e433c15f07b7">
+        <name xml:lang="en">Occupation, arable</name>
+        <unitName xml:lang="en">m2a</unitName>
+        <comment xml:lang="en">(3,4,1,1,1,5); land occupation</comment>
+        <uncertainty>
+          <lognormal meanValue="0.66801" standardDeviation95="1.2788" />
+        </uncertainty>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="0.0334" elementaryExchangeId="5c2dc6bb-14be-4748-9934-b9a844979903" id="283c142c-e806-4b8d-ac61-fac6cf5fa263">
+        <name xml:lang="en">Transformation, from pasture and meadow, extensive</name>
+        <unitName xml:lang="en">m2</unitName>
+        <comment xml:lang="en">(3,4,1,1,1,5); transformation of set aside land</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0334" standardDeviation95="1.3377" />
+        </uncertainty>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="0.0334" elementaryExchangeId="acf2c98f-69d3-4086-9358-994415cd9d8f" id="63d2b0a2-24ff-4c0b-9036-5908c4f3603b">
+        <name xml:lang="en">Transformation, to arable</name>
+        <unitName xml:lang="en">m2</unitName>
+        <comment xml:lang="en">(3,4,1,1,1,5); transformation to energy crops</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0334" standardDeviation95="1.3377" />
+        </uncertainty>
+        <inputGroup>4</inputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="2.2223E-4" elementaryExchangeId="6b43370a-0a3a-48c3-bfe5-1590c7951fa7" id="86ced630-5b5f-4533-a4ee-081e2cd6474a">
+        <name xml:lang="en">Ammonia</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); model calculation for emissions based on fertilizer application</comment>
+        <uncertainty>
+          <lognormal meanValue="2.2223E-4" standardDeviation95="1.4751" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="1.6702E-4" elementaryExchangeId="ea095fb3-65a9-4863-a52c-07abb5a343f1" id="591694fc-331d-4251-b48e-2417b113af2e">
+        <name xml:lang="en">Dinitrogen monoxide</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); model calculation for emissions based on fertilizer application</comment>
+        <uncertainty>
+          <lognormal meanValue="1.6702E-4" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="0.0014456" elementaryExchangeId="87c67dd6-a9bf-4f89-996b-879d9f03c72c" id="a3dd579a-2a80-41a2-a14d-927153618e06">
+        <name xml:lang="en">Isoprene</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(5,na,na,3,3,3); model calculation for biogenic emissions based on literature</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0014456" standardDeviation95="5.315" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="7.2295E-5" elementaryExchangeId="d1df497e-cfb4-4451-9794-d728d6d0e40e" id="2aa2dc49-ad5a-4dfd-b38e-e839a6973657">
+        <name xml:lang="en">Terpenes</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(5,na,na,3,3,3); model calculation for biogenic emissions based on literature</comment>
+        <uncertainty>
+          <lognormal meanValue="7.2295E-5" standardDeviation95="5.315" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="3.5075E-5" elementaryExchangeId="ae00e50e-c67e-4f36-ad9a-3ba0cb6aa716" id="4fa888d7-f384-42bf-b4c4-972a600ea00e">
+        <name xml:lang="en">Nitrogen oxides</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); model calculation for emissions based on fertilizer application</comment>
+        <uncertainty>
+          <lognormal meanValue="3.5075E-5" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="8.2164E-8" elementaryExchangeId="3ac57174-0d37-4226-91d5-3e5d42d6cf74" id="d0f71db8-f417-4452-ab62-5bfdf63f4121">
+        <name xml:lang="en">Cadmium</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer</comment>
+        <uncertainty>
+          <lognormal meanValue="8.2164E-8" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="2.6237E-6" elementaryExchangeId="d3c85b6e-704d-4402-93b0-493cc9fc658c" id="50525c53-3e82-413a-889f-af0846abde7b">
+        <name xml:lang="en">Chromium</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer</comment>
+        <uncertainty>
+          <lognormal meanValue="2.6237E-6" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="-4.523E-6" elementaryExchangeId="094431a8-d3f6-425f-8b6f-624b0ad48f9c" id="e581f7eb-cf66-48f6-8522-8ed98c456606">
+        <name xml:lang="en">Copper</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer</comment>
+        <uncertainty>
+          <lognormal meanValue="-4.523E-6" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="-8.0846E-7" elementaryExchangeId="6d0ec719-fa5f-4e19-a065-fae310913f8f" id="bd097250-d9fc-4e97-95cc-a1c22f4a4d24">
+        <name xml:lang="en">Lead</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer</comment>
+        <uncertainty>
+          <lognormal meanValue="-8.0846E-7" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="-9.5071E-9" elementaryExchangeId="575e28f4-1e5f-4545-a8b5-732f14e5c930" id="fdff791b-000f-4ad7-aef2-63244429a9fe">
+        <name xml:lang="en">Mercury</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer</comment>
+        <uncertainty>
+          <lognormal meanValue="-9.5071E-9" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="-1.5767E-6" elementaryExchangeId="410ce71f-abe6-4474-b6e5-1b9ec4300c1b" id="c03f46c9-b994-46fa-a17e-58f620b39332">
+        <name xml:lang="en">Nickel</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer</comment>
+        <uncertainty>
+          <lognormal meanValue="-1.5767E-6" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="-2.0789E-5" elementaryExchangeId="8224b44b-ea43-4bc0-8c26-4d183ab81b7c" id="ef9a52a5-bb1b-4b3c-81a4-d3b94c1e8f68">
+        <name xml:lang="en">Zinc</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer</comment>
+        <uncertainty>
+          <lognormal meanValue="-2.0789E-5" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="4.5222E-5" elementaryExchangeId="396566d5-941e-43b8-92f0-51f4c22961ff" id="9361ebc1-e283-4ab7-ae87-2e4dbf033732">
+        <name xml:lang="en">Atrazine</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); pesticide application, 500g/l</comment>
+        <uncertainty>
+          <lognormal meanValue="4.5222E-5" standardDeviation95="1.4751" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="3.5015E-7" elementaryExchangeId="52316767-c0e0-4349-ad24-c41f3ec2604e" id="92478c36-14a6-487f-a359-b160db7a2423">
+        <name xml:lang="en">Carbendazim</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC</comment>
+        <uncertainty>
+          <lognormal meanValue="3.5015E-7" standardDeviation95="1.4751" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="3.2392E-5" elementaryExchangeId="a7933d01-5c1f-491f-9d64-6dd893d115a6" id="c69bb202-a3f1-4ced-969c-20e7d65e1df3">
+        <name xml:lang="en">Glyphosate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); Roundup 360 SL, 360g/l</comment>
+        <uncertainty>
+          <lognormal meanValue="3.2392E-5" standardDeviation95="1.4751" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="1.3131E-6" elementaryExchangeId="aa8ea381-9ffa-40fb-801f-665361d99253" id="2b646d78-fb47-4950-99fe-3468eaa7af24">
+        <name xml:lang="en">Prochloraz</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC</comment>
+        <uncertainty>
+          <lognormal meanValue="1.3131E-6" standardDeviation95="1.4751" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="0.0094013" elementaryExchangeId="930b8df7-7b51-4b91-a138-b07e69fc509a" id="4a53a9bb-02f1-44c2-8ce3-a31fd9ec5f9e">
+        <name xml:lang="en">Nitrate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); model calculation for emissions based on fertilizer application</comment>
+        <uncertainty>
+          <lognormal meanValue="0.0094013" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="1.2283E-5" elementaryExchangeId="66d288a1-4c2f-412a-aa2d-09b7b94b9ac3" id="34cd7183-e03c-4152-98b2-f7cb1d1e372c">
+        <name xml:lang="en">Phosphate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); model calculation for emissions based on fertilizer application</comment>
+        <uncertainty>
+          <lognormal meanValue="1.2283E-5" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="3.9954E-5" elementaryExchangeId="415853d1-d6c7-4e52-9792-e69603dfa07d" id="ae722537-b1e8-41de-9ec7-d9776af9acb4">
+        <name xml:lang="en">Phosphate</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); model calculation for emissions based on fertilizer application</comment>
+        <uncertainty>
+          <lognormal meanValue="3.9954E-5" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+      <elementaryExchange amount="3.0788E-7" elementaryExchangeId="767c36f3-9a77-45cb-806b-c71950742b30" id="80dfde2d-b622-4419-83c8-0d348011a709">
+        <name xml:lang="en">Phosphorus</name>
+        <unitName xml:lang="en">kg</unitName>
+        <comment xml:lang="en">(4,4,1,5,3,5); emission due to erosion</comment>
+        <uncertainty>
+          <lognormal meanValue="3.0788E-7" standardDeviation95="1.7012" />
+        </uncertainty>
+        <outputGroup>4</outputGroup>
+      </elementaryExchange>
+    </flowData>
+    <modellingAndValidation>
+      <representativeness systemModelId="8B738EA0-F89E-4627-8679-433616064E82">
+        <systemModelName xml:lang="en">undefined</systemModelName>
+        <samplingProcedure xml:lang="en">Data were compiled by experts from Poland, Greece, Germany and Sweden from statistics, pilot network, fertilising recommendations, documents from extension services, information provided by retailers, literature and expert knowledge. The production data were verified and adjusted by the project team.</samplingProcedure>
+        <extrapolations xml:lang="en">none</extrapolations>
+      </representativeness>
+      <review reviewDate="2007-07-03T13:30:33" reviewedMajorRelease="1" reviewedMajorRevision="0" reviewedMinorRelease="0" reviewedMinorRevision="0" reviewerEmail="jungbluth@esu-services.ch" reviewerId="05f95e3b-bb5f-48e7-8abf-012168696404" reviewerName="Niels Jungbluth">
+        <details>
+          <text xml:lang="en" index="0">automatic validation</text>
+        </details>
+        <otherDetails xml:lang="en" xsi:type="TString32000">otherDetails</otherDetails>
+      </review>
+    </modellingAndValidation>
+    <administrativeInformation>
+      <dataEntryBy personEmail="jungbluth@esu-services.ch" personId="081dfd55-556c-4a7d-9a6f-db59b20ff9dc" personName="Niels Jungbluth" />
+      <dataGeneratorAndPublication accessRestrictedTo="0" dataPublishedIn="2" isCopyrightProtected="true" pageNumbers="Biomass production" personEmail="jungbluth@esu-services.ch" personId="6ad306d1-aa03-4257-9428-7baa9c175aa6" personName="Niels Jungbluth" publishedSourceFirstAuthor="Jungbluth N." publishedSourceId="ec1c5c38-07ac-41ec-92f7-f7d30d6602d4" publishedSourceYear="2007" />
+      <fileAttributes contextId="DE659012-50C4-4e96-B54A-FC781BF987AB" creationTimestamp="2011-02-15T14:36:36.674-05:00" defaultLanguage="en" fileGenerator="openLCA - data converter" fileTimestamp="2011-02-15T14:36:36.692-05:00" internalSchemaVersion="2.0.8" lastEditTimestamp="2011-02-15T14:36:36.692-05:00" majorRelease="1" minorRelease="0">
+        <contextName xml:lang="en">ecoinvent</contextName>
+      </fileAttributes>
+    </administrativeInformation>
+  </activityDataset>
+</ecoSpold>
+

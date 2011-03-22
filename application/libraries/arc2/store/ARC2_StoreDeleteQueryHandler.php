@@ -6,24 +6,20 @@
  * @license http://arc.semsol.org/license
  * @homepage <http://arc.semsol.org/>
  * @package ARC2
- * @version 2010-04-11
+ * @version 2010-11-16
 */
 
 ARC2::inc('StoreQueryHandler');
 
 class ARC2_StoreDeleteQueryHandler extends ARC2_StoreQueryHandler {
 
-  function __construct($a = '', &$caller) {/* caller has to be a store */
+  function __construct($a, &$caller) {/* caller has to be a store */
     parent::__construct($a, $caller);
   }
   
-  function ARC2_StoreDeleteQueryHandler($a = '', &$caller) {
-    $this->__construct($a, $caller);
-  }
-
   function __init() {/* db_con */
     parent::__init();
-    $this->store =& $this->caller;
+    $this->store = $this->caller;
     $this->handler_type = 'delete';
   }
 
@@ -50,7 +46,7 @@ class ARC2_StoreDeleteQueryHandler extends ARC2_StoreQueryHandler {
     $t2 = ARC2::mtime();
     /* clean up */
     if ($tc && ($this->refs_deleted || (rand(1, 100) == 1))) $this->cleanTableReferences();
-    if ($tc && (rand(1, 50) == 1)) $this->store->optimizeTables();
+    if ($tc && (rand(1, 100) == 1)) $this->store->optimizeTables();
     if ($tc && (rand(1, 500) == 1)) $this->cleanValueTables();
     $t3 = ARC2::mtime();
     $index_dur = round($t3 - $t2, 4);
@@ -144,7 +140,7 @@ class ARC2_StoreDeleteQueryHandler extends ARC2_StoreQueryHandler {
   
   function deleteConstructedGraph() {
     ARC2::inc('StoreConstructQueryHandler');
-    $h =& new ARC2_StoreConstructQueryHandler($this->a, $this->store);
+    $h = new ARC2_StoreConstructQueryHandler($this->a, $this->store);
     $sub_r = $h->runQuery($this->infos);
     $triples = ARC2::getTriplesFromIndex($sub_r);
     $tgs = $this->infos['query']['target_graphs'];

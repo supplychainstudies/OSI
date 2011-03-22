@@ -1,0 +1,164 @@
+
+
+<owl:Property rdf:ID="noAccessRestrictions">
+	<rdfs:label>No Access Restrictions</rdfs:label>
+	<rdfs:description>No access restrictions.</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="accessRestrictedtoLicenseHolders">
+	<rdfs:label>Access Restricted to License Holders</rdfs:label>
+	<rdfs:description>Only license holders (as defined by context) have access.</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="accessRestrictedtoLicenseHoldersforResults">
+	<rdfs:label>Access Restricted to License Holders for Results</rdfs:label>
+	<rdfs:description>License holders (as defined by context) have access to LCI results but not to unit process raw data. Database administrator have full access.</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="accessRestrictedtoCompany">
+	<rdfs:label>Access Restricted to Company</rdfs:label>
+	<rdfs:description>Only the organisation specified by 'companyCode' and the database administrator have access.</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+		
+<owl:Property rdf:ID="new">
+	<rdfs:label>New</rdfs:label>
+	<rdfs:description>For a technology assumed to be on some aspects technically superior to modern technology, but not yet the most commonly installed when investment is based on purely economic considerations.</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="modern">
+	<rdfs:label>Modern</rdfs:label>
+	<rdfs:description>For a technology currently used when installing new capacity, when investment is based on purely economic considerations (most competitive technology).</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="current">
+	<rdfs:label>Current</rdfs:label>
+	<rdfs:description>For a technology in between modern and old.</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="old">
+	<rdfs:label>Out</rdfs:label>
+	<rdfs:description>For a technology that is currently taken out of use, when decommissioning is based on purely economic considerations (least competitive technology).</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="outdated">
+	<rdfs:label>Outdated</rdfs:label>
+	<rdfs:description>For a technology no longer in use.</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="unitProcess">
+	<rdfs:label>Unit Process</rdfs:label>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="systemTerminated">
+	<rdfs:label>System Terminated (Aggregated)</rdfs:label>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+					<owl:Property rdf:ID="transformingActivity">
+	<rdfs:label>"Ordinary" Transforming Activity</rdfs:label>
+	<rdfs:description>
+		  Transforming activities are human activities that transform inputs, so that the output of the activity is different from the inputs, e.g. a hard coal mine that transforms hard coal in ground to the marketable product hard coal. Transforming activities are here understood in the widest possible sense, including extraction, production, transport, consumption and waste treatment activities, i.e. any human activity where the intermediate output is different from the intermediate input. The concept “transforming activities” is introduced here simply to distinguish – in the further modelling and linking of activities – these “ordinary” activities from the market activities, production and supply mixes, import and export activities, and correction datasets.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="marketActivity">
+	<rdfs:label>Market Activity</rdfs:label>
+	<rdfs:description>
+		 Market activities do not transform their inputs, but simply transfer the intermediate output from a transforming activity to the transforming activities that consume this intermediate output as an input, e.g. from hard coal at the supplier to hard coal at the consumer. Market activities typically mix similar intermediate outputs from different transforming activities. Market activities therefore supply consumption mixes of the intermediate outputs.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="ioActivity">
+	<rdfs:label>IO Activity</rdfs:label>
+	<rdfs:description>
+		 An IO activity represents an activity dataset from a national supply-use table, i.e. typically the supply and use of one specific industry.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+					 
+<owl:Property rdf:ID="residualActivity">
+	<rdfs:label>Residual Activity</rdfs:label>
+	<rdfs:description>
+		 A residual activity is the resulting activity when subtracting all available unit processes within an activity class from the supply-use data (IO activity) of the same activity class, for the same year and geo-graphical area.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="productionMix">
+	<rdfs:label>Production Mix</rdfs:label>
+	<rdfs:description>
+		 A production mix represents the production-volume-weighted average of the suppliers of a specific product within a geographical area.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>		
+
+<owl:Property rdf:ID="importActivity">
+	<rdfs:label>Import Activity</rdfs:label>
+	<rdfs:description>
+		 An import activity represents the import of a specified product to a specified geographical area, solely for use in national balancing (not contributing to any auto-generated consumption mixes). Imports to administratively constrained markets and from partly isolated markets are modelled as ordinary transforming activities in order to be included in the relevant market activities (consumption mixes)
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>		
+			
+<owl:Property rdf:ID="supplyMix">
+	<rdfs:label>Supply Mix</rdfs:label>
+	<rdfs:description>
+		 A supply mix is a production mix with the addition of the import of a specified product to a specified geographical area.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="exportActivity">
+	<rdfs:label>Export Activity</rdfs:label>
+	<rdfs:description>
+		An export activity represents the export volume of a national production mix that has the national area as its geographical location and does not contribute to any auto-generated consumption mixes. To give the correct value of the export, the same activities and data that are included with the market activities are added directly to the export activity. This includes transport activities, production losses, wholesaler and retailer activities, and product taxes and subsidies.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+
+<owl:Property rdf:ID="reexportActivity">
+	<rdfs:label>Re-export Activity</rdfs:label>
+	<rdfs:description>
+		A re-export activity represents the re-export volume of a geographical area and does not contribute to any auto-generated consumption mixes.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>
+					
+<owl:Property rdf:ID="correctionActivity">
+	<rdfs:label>correction activity</rdfs:label>
+	<rdfs:description>
+		A correction activity is an activity that is added twice to a product system, one with a positive and once with a negative flow, in order to move one or more exchanges from one part of the system to another, e.g. to correct for downstream effects of an upstream activity, or to correct a bias in the mass-balance introduced by an allocation. More details on this is provided in the Chapters on "Downstream changes caused by differences in product quality" and "Allocation corrections" in the ecoinvent Data Quality Guidelines.
+	</rdfs:description>
+	<rdfs:subClassOf rdf:resource="concept" />
+</owl:Property>					
+
+<owl:Property rdf:ID="Undefined" />
+					
+<owl:Property rdf:ID="netHeatingValue">
+	<rdfs:subClassOf rdf:resource="concept" />
+	<rdf:sameAs rdf:resource="#lowerHeatingValue" />
+</owl:Property>
+<owl:Property rdf:ID="lowerHeatingValue">
+	<rdfs:subClassOf rdf:resource="concept" />
+	<rdf:sameAs rdf:resource="#netHeatingValue" />
+</owl:Property>	
+<owl:Property rdf:ID="grossHeatingValue">
+	<rdfs:subClassOf rdf:resource="concept" />
+	<rdf:sameAs rdf:resource="#higherHeatingValue" />
+</owl:Property>
+<owl:Property rdf:ID="higherHeatingValue">
+	<rdfs:subClassOf rdf:resource="concept" />
+	<rdf:sameAs rdf:resource="#grossHeatingValue" />
+</owl:Property>

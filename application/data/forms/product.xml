@@ -1,0 +1,28 @@
+<form action="/lca/create/product" name="Product">
+  <fieldset name="Product" linked_type="eco:Product">
+		<name rules="trim">
+			<label>Name</label>
+			<type>text</type>
+		  	<linked_type>rdfs:label</linked_type>
+		</name>		
+		<UUID rules="trim">
+			<label>UUID</label>
+			<type>hidden</type>
+		  	<linked_type>eco:hasUUID</linked_type>
+		</UUID>	
+		<classification rules="trim">
+			<label>Classification</label>
+			<type>text</type>
+		  	<linked_type>esc:classificationID</linked_type>
+		</classification>
+		<category rules="trim">
+			<label>Category</label>
+			<type>text</type>
+		  	<linked_type>eco:hasCategory</linked_type>
+		</category>
+</fieldset>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+	    </submit>
+</form>

@@ -1,6 +1,6 @@
-input,raw material,technosphere,Process Chemicals,http://dbpedia.org/class/yago/Kilogram113724582,18,Includes additives. catalysts. chemicals. etc.
-input,raw material,technosphere,Sodium Chloride,http://dbpedia.org/class/yago/Kilogram113724582,510
-input,raw material,technosphere,Other,http://dbpedia.org/class/yago/Kilogram113724582,0.6,Includes other feedstocks. such as sulfur. SO2 from recovery operations. etc.
+input,raw material,technosphere,Process Chemicals,qudt:Kilogram,18,Includes additives. catalysts. chemicals. etc.
+input,raw material,technosphere,Sodium Chloride,qudt:Kilogram,510
+input,raw material,technosphere,Other,qudt:Kilogram,0.6,Includes other feedstocks. such as sulfur. SO2 from recovery operations. etc.
 input,energy,,Coal,MJ,5200
 input,energy,,Crude Oil,MJ,4860
 input,energy,,Natural Gas,MJ,28400
@@ -9,31 +9,31 @@ input,energy,,Nuclear,MJ,1890
 input,energy,,Other,MJ,0.228
 input,energy,,Crude Oil (Feedstock),MJ,8340,Feedstock values are the theoretical energy that could be recovered via combustion
 input,energy,,Natural Gas (Feedstock),MJ,10700,Feedstock values are the theoretical energy that could be recovered via combustion
-input,emission,air,Carbon dioxide,http://dbpedia.org/class/yago/Kilogram113724582,2000
-input,emission,air,Carbon monoxide,http://dbpedia.org/class/yago/Kilogram113724582,0.84
-input,emission,air,Sulphur oxides (reported as SO2),http://dbpedia.org/class/yago/Kilogram113724582,5.3
-input,emission,air,Nitrogen oxides (reported as NO2),http://dbpedia.org/class/yago/Kilogram113724582,6.3
-input,emission,air,Methane,http://dbpedia.org/class/yago/Kilogram113724582,22
-output,emission,air,Dust & particles (includes metals),http://dbpedia.org/class/yago/Kilogram113724582,1.41,Total of Metals and metal compounds and PM10
-output,emission,air,Acid gases,http://dbpedia.org/class/yago/Kilogram113724582,0.16
-output,emission,air,VOC,http://dbpedia.org/class/yago/Kilogram113724582,5.8,VOCs may or may not include compounds already listed under 'hydrocarbons' or 'other organic compounds'
-output,emission,air,Hydrocarbons (unspecified),http://dbpedia.org/class/yago/Kilogram113724582,0.54
-output,emission,air,Nitrogen,http://dbpedia.org/class/yago/Kilogram113724582,1.7
-output,emission,air,Other organic compounds,http://dbpedia.org/class/yago/Kilogram113724582,3.42.50E-01,Includes oxygenated hydrocarbons. halogenated hydrocarbons. nitrogen-containing hydrocarbons. etc.
-output,emission,air,Other,http://dbpedia.org/class/yago/Kilogram113724582,0.624,Includes compounds not containing both carbon and hydrogen
-output,emission,water,Phosphates and ammonia,http://dbpedia.org/class/yago/Kilogram113724582,0.008
-output,emission,water,Oils and greases,http://dbpedia.org/class/yago/Kilogram113724582,0.2
-output,emission,water,Suspended solids,http://dbpedia.org/class/yago/Kilogram113724582,3.3
-output,emission,water,Other organics,http://dbpedia.org/class/yago/Kilogram113724582,0.058
-output,emission,water,Other,http://dbpedia.org/class/yago/Kilogram113724582,0.74,Includes compounds not containing both carbon and hydrogen
-output,emission,water,Hydrocarbons,http://dbpedia.org/class/yago/Kilogram113724582,0.074
-output,emission,water,Metals,http://dbpedia.org/class/yago/Kilogram113724582,0.17
-output,emission,water,Acids,http://dbpedia.org/class/yago/Kilogram113724582,0.49
-output,emission,water,BOD,http://dbpedia.org/class/yago/Kilogram113724582,0.29
-output,emission,water,COD,http://dbpedia.org/class/yago/Kilogram113724582,0.67
-output,emission,water,Salinity,http://dbpedia.org/class/yago/Kilogram113724582,12
-output,emission,water,Dissolved solids,http://dbpedia.org/class/yago/Kilogram113724582,25
-output,emission,land,RCRA D (EPA-regulated non-hazardous waste),http://dbpedia.org/class/yago/Kilogram113724582,110
-output,emission,land,RCRA C (EPA-regulated hazardous waste),http://dbpedia.org/class/yago/Kilogram113724582,3.6
-output,emission,deepwell,RCRA D (EPA-regulated non-hazardous waste),http://dbpedia.org/class/yago/Kilogram113724582,5.9
-output,emission,deepwell,RCRA C (EPA-regulated hazardous waste),http://dbpedia.org/class/yago/Kilogram113724582,0.005
+input,emission,air,Carbon dioxide,qudt:Kilogram,2000
+input,emission,air,Carbon monoxide,qudt:Kilogram,0.84
+input,emission,air,Sulphur oxides (reported as SO2),qudt:Kilogram,5.3
+input,emission,air,Nitrogen oxides (reported as NO2),qudt:Kilogram,6.3
+input,emission,air,Methane,qudt:Kilogram,22
+output,emission,air,Dust & particles (includes metals),qudt:Kilogram,1.41,Total of Metals and metal compounds and PM10
+output,emission,air,Acid gases,qudt:Kilogram,0.16
+output,emission,air,VOC,qudt:Kilogram,5.8,VOCs may or may not include compounds already listed under 'hydrocarbons' or 'other organic compounds'
+output,emission,air,Hydrocarbons (unspecified),qudt:Kilogram,0.54
+output,emission,air,Nitrogen,qudt:Kilogram,1.7
+output,emission,air,Other organic compounds,qudt:Kilogram,3.42.50E-01,Includes oxygenated hydrocarbons. halogenated hydrocarbons. nitrogen-containing hydrocarbons. etc.
+output,emission,air,Other,qudt:Kilogram,0.624,Includes compounds not containing both carbon and hydrogen
+output,emission,water,Phosphates and ammonia,qudt:Kilogram,0.008
+output,emission,water,Oils and greases,qudt:Kilogram,0.2
+output,emission,water,Suspended solids,qudt:Kilogram,3.3
+output,emission,water,Other organics,qudt:Kilogram,0.058
+output,emission,water,Other,qudt:Kilogram,0.74,Includes compounds not containing both carbon and hydrogen
+output,emission,water,Hydrocarbons,qudt:Kilogram,0.074
+output,emission,water,Metals,qudt:Kilogram,0.17
+output,emission,water,Acids,qudt:Kilogram,0.49
+output,emission,water,BOD,qudt:Kilogram,0.29
+output,emission,water,COD,qudt:Kilogram,0.67
+output,emission,water,Salinity,qudt:Kilogram,12
+output,emission,water,Dissolved solids,qudt:Kilogram,25
+output,emission,land,RCRA D (EPA-regulated non-hazardous waste),qudt:Kilogram,110
+output,emission,land,RCRA C (EPA-regulated hazardous waste),qudt:Kilogram,3.6
+output,emission,deepwell,RCRA D (EPA-regulated non-hazardous waste),qudt:Kilogram,5.9
+output,emission,deepwell,RCRA C (EPA-regulated hazardous waste),qudt:Kilogram,0.005

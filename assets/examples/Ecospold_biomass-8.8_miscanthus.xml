@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../transforms/EcoSpold01toEcoSpold02.xsl"?>
+<ecoSpold xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold01 ..\..\..\..\..\..\..\Programme\ecoinvent\EcoSpold\EcoSpold01Dataset.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.EcoInvent.org/EcoSpold01">
+	<dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml" validCategories="Categories.xml" validUnits="Units.xml" number="1" generator="EcoInvent Excel2EcoSpold 1.9.8" timestamp="2007-07-03T13:30:33" internalSchemaVersion="1.0">
+		<metaInformation>
+			<processInformation>
+				<referenceFunction datasetRelatesToProduct="true" name="miscanthus-bales, at field" localName="Miscanthus-Ballen, ab Feld" infrastructureProcess="false" amount="1" unit="kg" category="agricultural production" subCategory="plant production" localCategory="Landwirtschaftliche Produktion" localSubCategory="Pflanzenbau" includedProcesses="The inventory includes the processes of soil cultivation, sowing, weed control, fertilisation, pest and pathogen control, harvest and balling. Machine infrastructure and a shed for machine sheltering is included. Inputs of fertilisers, pesticides and planting stocks as well as their transports to the farm are considered. The direct emissions on the field are also included. The system boundary is the field." generalComment="Inventory refers to the production of 1 kg dry matter miscanthus-bales." infrastructureIncluded="true"></referenceFunction>
+				<geography location="RER" text="Refers to an average production in Europe. Calculation based on inventory data for SE, PL, DE and GR. Production shares based on expert guess."></geography>
+				<technology text="Average production of today"></technology>
+				<timePeriod dataValidForEntirePeriod="true" text="Starting point scenario for average agricultural and harvesting technology in the year 2004.">
+					<startYear>2000</startYear>
+					<endYear>2000</endYear>
+				</timePeriod>
+				<dataSetInformation timestamp="2007-07-03T13:30:33" type="1" impactAssessmentResult="false" version="1" internalVersion="1.0" energyValues="0" languageCode="en" localLanguageCode="de"></dataSetInformation>
+			</processInformation>
+			<modellingAndValidation>
+				<representativeness percent="10.0" productionVolume="So far only limited experiences." samplingProcedure="Data were compiled by experts from Poland, Greece, Germany and Sweden from statistics, pilot network, fertilising recommendations, documents from extension services, information provided by retailers, literature and expert knowledge. The production data were verified and adjusted by the project team." extrapolations="none" uncertaintyAdjustments="none"></representativeness>
+				<source number="97" sourceType="3" firstAuthor="Jungbluth N." additionalAuthors="Faist Emmenegger M., Frischknecht R., Tuchschmid M." year="2007" title="LCA of BTL-fuel production: Inventory Analysis" titleOfAnthology="RENEW project report Del. 5.2.7" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="98" sourceType="3" firstAuthor="Nikolaou A" year="2006" title="Regional inventory data for biomass production: Southern Europe" titleOfAnthology="RENEW project report Del. 5.2.6" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="99" sourceType="3" firstAuthor="Lantz M" year="2006" title="Regional inventory data for biomass production: Northern Europe" titleOfAnthology="RENEW project report Del. 5.2.4" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="100" sourceType="3" firstAuthor="Ganko E" year="2006" title="Regional inventory data for biomass: Central-Eastern Europe" titleOfAnthology="RENEW project report Del. 5.2.5" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<validation proofReadingDetails="automatic validation" proofReadingValidator="41" otherDetails="none"></validation>
+			</modellingAndValidation>
+			<administrativeInformation>
+				<dataEntryBy person="41" qualityNetwork="1"></dataEntryBy>
+				<dataGeneratorAndPublication person="41" dataPublishedIn="2" referenceToPublishedSource="97" copyright="true" accessRestrictedTo="0" pageNumbers="Biomass production"></dataGeneratorAndPublication>
+				<person number="41" name="Niels Jungbluth" address="ESU-services Ltd., Kanzleistrasse 4, 8610 Uster" telephone="0041 44 940 61 32" telefax="0041 44 940 61 94" email="jungbluth@esu-services.ch" companyCode="ESU" countryCode="CH"></person>
+			</administrativeInformation>
+		</metaInformation>
+		<flowData>
+			<exchange number="1" infrastructureProcess="false" name="miscanthus-bales, at field" location="RER" unit="kg" meanValue="1">
+				<outputGroup>0</outputGroup>
+			</exchange>
+			<exchange number="2" infrastructureProcess="false" name="ammonium nitrate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.0019246" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="3" infrastructureProcess="false" name="ammonium sulphate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00014805" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="4" infrastructureProcess="false" name="calcium ammonium nitrate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00096232" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="5" infrastructureProcess="false" name="diammonium phosphate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00033747" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="6" infrastructureProcess="false" name="urea, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00066622" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="7" infrastructureProcess="false" name="potassium chloride, as K2O, at regional storehouse" location="RER" unit="kg" meanValue="0.0047692" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="8" infrastructureProcess="false" name="potassium sulphate, as K2O, at regional storehouse" location="RER" unit="kg" meanValue="0.00030442" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="9" infrastructureProcess="false" name="lime, from carbonation, at regional storehouse" location="CH" unit="kg" meanValue="0.0035607" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="10" infrastructureProcess="false" name="diammonium phosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.00086241" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="11" infrastructureProcess="false" name="single superphosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="6.1601E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="12" infrastructureProcess="false" name="thomas meal, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.000154" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="13" infrastructureProcess="false" name="triple superphosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.0012628" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="14" infrastructureProcess="false" name="phosphate rock, as P2O5, beneficiated, dry, at plant" location="MA" unit="kg" meanValue="0.00073921" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="15" infrastructureProcess="false" name="planting stocks, miscanthus, at field" location="RER" unit="unit" meanValue="0.034563" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); establishment of the plantation">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="16" infrastructureProcess="false" name="benzimidazole-compounds, at regional storehouse" location="RER" unit="kg" meanValue="3.5015E-7" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="17" infrastructureProcess="false" name="cyclic N-compounds, at regional storehouse" location="CH" unit="kg" meanValue="1.3131E-6" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="18" infrastructureProcess="false" name="triazine-compounds, at regional storehouse" location="RER" unit="kg" meanValue="4.5222E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use, Atrazine">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="19" infrastructureProcess="false" name="organophosphorus-compounds, at regional storehouse" location="RER" unit="kg" meanValue="3.2392E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="20" infrastructureProcess="false" name="diesel, used by tractor" location="RER" unit="kg" meanValue="0.0042836" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); machinery use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="21" infrastructureProcess="false" name="transport, lorry 32t" location="RER" unit="tkm" meanValue="0.0032227" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="22" infrastructureProcess="false" name="transport, van &lt;3.5t" location="RER" unit="tkm" meanValue="9.8053E-6" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="23" infrastructureProcess="false" name="transport, barge" location="RER" unit="tkm" meanValue="0.017992" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="24" infrastructureProcess="false" name="transport, freight, rail" location="RER" unit="tkm" meanValue="0.0041158" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="25" category="resource" subCategory="in air" name="Carbon dioxide, in air" unit="kg" meanValue="1.7248" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); carbon uptake of plants">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="26" category="resource" subCategory="biotic" name="Energy, gross calorific value, in biomass" unit="MJ" meanValue="18.4" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); energy content of harvested product">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="27" category="resource" subCategory="in water" name="Water, rain" unit="m3" meanValue="0.49212" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); average rainfall in the region during the plantation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="28" category="resource" subCategory="in water" name="Water, river" unit="m3" meanValue="0.13567" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); water used for irrigation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="29" category="resource" subCategory="land" name="Occupation, arable" unit="m2a" meanValue="0.66801" uncertaintyType="1" standardDeviation95="1.2788" generalComment="(3,4,1,1,1,5); land occupation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="30" category="resource" subCategory="land" name="Transformation, from pasture and meadow, extensive" unit="m2" meanValue="0.0334" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); transformation of set aside land">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="31" category="resource" subCategory="land" name="Transformation, to arable" unit="m2" meanValue="0.0334" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); transformation to energy crops">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="32" category="air" subCategory="low population density" name="Ammonia" unit="kg" meanValue="0.00022223" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="33" category="air" subCategory="low population density" name="Dinitrogen monoxide" unit="kg" meanValue="0.00016702" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="34" category="air" subCategory="low population density" name="Isoprene" unit="kg" meanValue="0.0014456" uncertaintyType="1" standardDeviation95="5.315" generalComment="(5,na,na,3,3,3); model calculation for biogenic emissions based on literature">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="35" category="air" subCategory="low population density" name="Terpenes" unit="kg" meanValue="7.2295E-5" uncertaintyType="1" standardDeviation95="5.315" generalComment="(5,na,na,3,3,3); model calculation for biogenic emissions based on literature">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="36" category="air" subCategory="low population density" name="Nitrogen oxides" unit="kg" meanValue="3.5075E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="37" category="soil" subCategory="agricultural" name="Cadmium" unit="kg" meanValue="8.2164E-8" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="38" category="soil" subCategory="agricultural" name="Chromium" unit="kg" meanValue="2.6237E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="39" category="soil" subCategory="agricultural" name="Copper" unit="kg" meanValue="-4.523E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="40" category="soil" subCategory="agricultural" name="Lead" unit="kg" meanValue="-8.0846E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="41" category="soil" subCategory="agricultural" name="Mercury" unit="kg" meanValue="-9.5071E-9" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="42" category="soil" subCategory="agricultural" name="Nickel" unit="kg" meanValue="-1.5767E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="43" category="soil" subCategory="agricultural" name="Zinc" unit="kg" meanValue="-2.0789E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="44" category="soil" subCategory="agricultural" name="Atrazine" unit="kg" meanValue="4.5222E-5" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, 500g/l">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="45" category="soil" subCategory="agricultural" name="Carbendazim" unit="kg" meanValue="3.5015E-7" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="46" category="soil" subCategory="agricultural" name="Glyphosate" unit="kg" meanValue="3.2392E-5" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); Roundup 360 SL, 360g/l">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="47" category="soil" subCategory="agricultural" name="Prochloraz" unit="kg" meanValue="1.3131E-6" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="48" category="water" subCategory="ground-" name="Nitrate" unit="kg" meanValue="0.0094013" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="49" category="water" subCategory="ground-" name="Phosphate" unit="kg" meanValue="1.2283E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="50" category="water" subCategory="river" name="Phosphate" unit="kg" meanValue="3.9954E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="51" category="water" subCategory="river" name="Phosphorus" unit="kg" meanValue="3.0788E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); emission due to erosion">
+				<outputGroup>4</outputGroup>
+			</exchange>
+		</flowData>
+	</dataset>
+	<dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml" validCategories="Categories.xml" validUnits="Units.xml" number="2" generator="EcoInvent Excel2EcoSpold 1.9.8" timestamp="2007-07-03T13:30:33" internalSchemaVersion="1.0">
+		<metaInformation>
+			<processInformation>
+				<referenceFunction datasetRelatesToProduct="true" name="miscanthus-bales, scenario 1, at field" localName="Miscanthus-Ballen, Szenario 1, ab Feld" infrastructureProcess="false" amount="1" unit="kg" category="agricultural production" subCategory="plant production" localCategory="Landwirtschaftliche Produktion" localSubCategory="Pflanzenbau" includedProcesses="The inventory includes the processes of soil cultivation, sowing, weed control, fertilisation, pest and pathogen control, harvest and balling. Machine infrastructure and a shed for machine sheltering is included. Inputs of fertilisers, pesticides and planting stocks as well as their transports to the farm are considered. The direct emissions on the field are also included. The system boundary is the field." generalComment="Inventory refers to the production of 1 kg dry matter miscanthus-bales." infrastructureIncluded="true"></referenceFunction>
+				<geography location="RER" text="Refers to an average production in Europe. Calculation based on inventory data for SE, PL, DE and GR. Production shares based on expert guess."></geography>
+				<technology text="Expert guess data for agricultural and harvesting technology in 2020"></technology>
+				<timePeriod dataValidForEntirePeriod="true" text="Scenario 1 for maximized biofuel production in the year 2020">
+					<startYear>2000</startYear>
+					<endYear>2020</endYear>
+				</timePeriod>
+				<dataSetInformation timestamp="2007-07-03T13:30:33" type="1" impactAssessmentResult="false" version="1" internalVersion="1.0" energyValues="0" languageCode="en" localLanguageCode="de"></dataSetInformation>
+			</processInformation>
+			<modellingAndValidation>
+				<representativeness percent="0.0" productionVolume="So far only limited experiences." samplingProcedure="Data were compiled by experts from Poland, Greece, Germany and Sweden from statistics, pilot network, fertilising recommendations, documents from extension services, information provided by retailers, literature and expert knowledge. The production data were verified and adjusted by the project team." extrapolations="based on scenario definitions" uncertaintyAdjustments="none"></representativeness>
+				<source number="97" sourceType="3" firstAuthor="Jungbluth N." additionalAuthors="Faist Emmenegger M., Frischknecht R., Tuchschmid M." year="2007" title="LCA of BTL-fuel production: Inventory Analysis" titleOfAnthology="RENEW project report Del. 5.2.7" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="98" sourceType="3" firstAuthor="Nikolaou A" year="2006" title="Regional inventory data for biomass production: Southern Europe" titleOfAnthology="RENEW project report Del. 5.2.6" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="99" sourceType="3" firstAuthor="Lantz M" year="2006" title="Regional inventory data for biomass production: Northern Europe" titleOfAnthology="RENEW project report Del. 5.2.4" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="100" sourceType="3" firstAuthor="Ganko E" year="2006" title="Regional inventory data for biomass: Central-Eastern Europe" titleOfAnthology="RENEW project report Del. 5.2.5" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<validation proofReadingDetails="automatic validation" proofReadingValidator="41" otherDetails="none"></validation>
+			</modellingAndValidation>
+			<administrativeInformation>
+				<dataEntryBy person="41" qualityNetwork="1"></dataEntryBy>
+				<dataGeneratorAndPublication person="41" dataPublishedIn="2" referenceToPublishedSource="97" copyright="true" accessRestrictedTo="0" pageNumbers="Biomass production"></dataGeneratorAndPublication>
+				<person number="41" name="Niels Jungbluth" address="ESU-services Ltd., Kanzleistrasse 4, 8610 Uster" telephone="0041 44 940 61 32" telefax="0041 44 940 61 94" email="jungbluth@esu-services.ch" companyCode="ESU" countryCode="CH"></person>
+			</administrativeInformation>
+		</metaInformation>
+		<flowData>
+			<exchange number="1" infrastructureProcess="false" name="miscanthus-bales, scenario 1, at field" location="RER" unit="kg" meanValue="1">
+				<outputGroup>0</outputGroup>
+			</exchange>
+			<exchange number="2" infrastructureProcess="false" name="ammonium nitrate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.0019833" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="3" infrastructureProcess="false" name="ammonium sulphate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00015256" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="4" infrastructureProcess="false" name="calcium ammonium nitrate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00099167" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="5" infrastructureProcess="false" name="diammonium phosphate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.0003055" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="6" infrastructureProcess="false" name="urea, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00068654" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="7" infrastructureProcess="false" name="potassium chloride, as K2O, at regional storehouse" location="RER" unit="kg" meanValue="0.0039985" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="8" infrastructureProcess="false" name="potassium sulphate, as K2O, at regional storehouse" location="RER" unit="kg" meanValue="0.00025523" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="9" infrastructureProcess="false" name="lime, from carbonation, at regional storehouse" location="CH" unit="kg" meanValue="0.0023988" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="10" infrastructureProcess="false" name="diammonium phosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.00078071" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="11" infrastructureProcess="false" name="single superphosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="5.5765E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="12" infrastructureProcess="false" name="thomas meal, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.00013941" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="13" infrastructureProcess="false" name="triple superphosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.0011432" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="14" infrastructureProcess="false" name="phosphate rock, as P2O5, beneficiated, dry, at plant" location="MA" unit="kg" meanValue="0.00066918" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="15" infrastructureProcess="false" name="planting stocks, miscanthus, at field" location="RER" unit="unit" meanValue="0.025138" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); establishment of the plantation">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="16" infrastructureProcess="false" name="benzimidazole-compounds, at regional storehouse" location="RER" unit="kg" meanValue="2.4004E-7" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="17" infrastructureProcess="false" name="cyclic N-compounds, at regional storehouse" location="CH" unit="kg" meanValue="9.0016E-7" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="18" infrastructureProcess="false" name="triazine-compounds, at regional storehouse" location="RER" unit="kg" meanValue="4.0325E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use, Atrazine">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="19" infrastructureProcess="false" name="organophosphorus-compounds, at regional storehouse" location="RER" unit="kg" meanValue="2.6924E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="20" infrastructureProcess="false" name="diesel, used by tractor" location="RER" unit="kg" meanValue="0.0033496" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); machinery use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="21" infrastructureProcess="false" name="transport, lorry 32t, Euro 5, diesel" location="RER" unit="tkm" meanValue="0.0034688" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="22" infrastructureProcess="false" name="transport, van &lt;3.5t" location="RER" unit="tkm" meanValue="7.4534E-6" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="23" infrastructureProcess="false" name="transport, barge" location="RER" unit="tkm" meanValue="0.021702" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="24" infrastructureProcess="false" name="transport, freight, rail" location="RER" unit="tkm" meanValue="0.0042565" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="25" category="resource" subCategory="in air" name="Carbon dioxide, in air" unit="kg" meanValue="1.7248" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); carbon uptake of plants">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="26" category="resource" subCategory="biotic" name="Energy, gross calorific value, in biomass" unit="MJ" meanValue="18.4" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); energy content of harvested product">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="27" category="resource" subCategory="in water" name="Water, rain" unit="m3" meanValue="0.34382" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); average rainfall in the region during the plantation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="28" category="resource" subCategory="in water" name="Water, river" unit="m3" meanValue="0.12097" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); water used for irrigation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="29" category="resource" subCategory="land" name="Occupation, arable" unit="m2a" meanValue="0.4877" uncertaintyType="1" standardDeviation95="1.2788" generalComment="(3,4,1,1,1,5); land occupation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="30" category="resource" subCategory="land" name="Transformation, from pasture and meadow, extensive" unit="m2" meanValue="0.024385" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); transformation of set aside land">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="31" category="resource" subCategory="land" name="Transformation, to arable" unit="m2" meanValue="0.024385" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); transformation to energy crops">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="32" category="air" subCategory="low population density" name="Ammonia" unit="kg" meanValue="0.00022696" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="33" category="air" subCategory="low population density" name="Dinitrogen monoxide" unit="kg" meanValue="0.00016786" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="34" category="air" subCategory="low population density" name="Isoprene" unit="kg" meanValue="0.0015656" uncertaintyType="1" standardDeviation95="5.315" generalComment="(5,na,na,3,3,3); model calculation for biogenic emissions based on literature">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="35" category="air" subCategory="low population density" name="Terpenes" unit="kg" meanValue="5.2782E-5" uncertaintyType="1" standardDeviation95="5.315" generalComment="(5,na,na,3,3,3); model calculation for biogenic emissions based on literature">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="36" category="air" subCategory="low population density" name="Nitrogen oxides" unit="kg" meanValue="3.525E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="37" category="soil" subCategory="agricultural" name="Cadmium" unit="kg" meanValue="5.538E-8" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="38" category="soil" subCategory="agricultural" name="Chromium" unit="kg" meanValue="2.2804E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="39" category="soil" subCategory="agricultural" name="Copper" unit="kg" meanValue="-4.5689E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="40" category="soil" subCategory="agricultural" name="Lead" unit="kg" meanValue="-8.3705E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="41" category="soil" subCategory="agricultural" name="Mercury" unit="kg" meanValue="-9.5404E-9" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="42" category="soil" subCategory="agricultural" name="Nickel" unit="kg" meanValue="-1.6075E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="43" category="soil" subCategory="agricultural" name="Zinc" unit="kg" meanValue="-2.1406E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="44" category="soil" subCategory="agricultural" name="Atrazine" unit="kg" meanValue="4.0325E-5" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, 500g/l">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="45" category="soil" subCategory="agricultural" name="Carbendazim" unit="kg" meanValue="2.4004E-7" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="46" category="soil" subCategory="agricultural" name="Glyphosate" unit="kg" meanValue="2.6924E-5" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); Roundup 360 SL, 360g/l">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="47" category="soil" subCategory="agricultural" name="Prochloraz" unit="kg" meanValue="9.0016E-7" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="48" category="water" subCategory="ground-" name="Nitrate" unit="kg" meanValue="0.0094703" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="49" category="water" subCategory="ground-" name="Phosphate" unit="kg" meanValue="8.9675E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="50" category="water" subCategory="river" name="Phosphate" unit="kg" meanValue="2.9893E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="51" category="water" subCategory="river" name="Phosphorus" unit="kg" meanValue="2.2478E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); emission due to erosion">
+				<outputGroup>4</outputGroup>
+			</exchange>
+		</flowData>
+	</dataset>
+	<dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml" validCategories="Categories.xml" validUnits="Units.xml" number="3" generator="EcoInvent Excel2EcoSpold 1.9.8" timestamp="2007-07-03T13:30:34" internalSchemaVersion="1.0">
+		<metaInformation>
+			<processInformation>
+				<referenceFunction datasetRelatesToProduct="true" name="miscanthus-bales, scenario 2, at field" localName="Miscanthus-Ballen, Szenario 2, ab Feld" infrastructureProcess="false" amount="1" unit="kg" category="agricultural production" subCategory="plant production" localCategory="Landwirtschaftliche Produktion" localSubCategory="Pflanzenbau" includedProcesses="The inventory includes the processes of soil cultivation, sowing, weed control, fertilisation, pest and pathogen control, harvest and balling. Machine infrastructure and a shed for machine sheltering is included. Inputs of fertilisers, pesticides and planting stocks as well as their transports to the farm are considered. The direct emissions on the field are also included. The system boundary is the field." generalComment="Inventory refers to the production of 1 kg dry matter miscanthus-bales." infrastructureIncluded="true"></referenceFunction>
+				<geography location="RER" text="Refers to an average production in Europe. Calculation based on inventory data for SE, PL, DE and GR. Production shares based on expert guess."></geography>
+				<technology text="Expert guess data for agricultural and harvesting technology in 2020. Use of bioenergy in tractors."></technology>
+				<timePeriod dataValidForEntirePeriod="true" text="Scenario 2 for self sufficient biofuel production in the year 2020.">
+					<startYear>2000</startYear>
+					<endYear>2020</endYear>
+				</timePeriod>
+				<dataSetInformation timestamp="2007-07-03T13:30:34" type="1" impactAssessmentResult="false" version="1" internalVersion="1.0" energyValues="0" languageCode="en" localLanguageCode="de"></dataSetInformation>
+			</processInformation>
+			<modellingAndValidation>
+				<representativeness percent="0.0" productionVolume="So far only limited experiences." samplingProcedure="Data were compiled by experts from Poland, Greece, Germany and Sweden from statistics, pilot network, fertilising recommendations, documents from extension services, information provided by retailers, literature and expert knowledge. The production data were verified and adjusted by the project team." extrapolations="based on scenario definitions" uncertaintyAdjustments="none"></representativeness>
+				<source number="97" sourceType="3" firstAuthor="Jungbluth N." additionalAuthors="Faist Emmenegger M., Frischknecht R., Tuchschmid M." year="2007" title="LCA of BTL-fuel production: Inventory Analysis" titleOfAnthology="RENEW project report Del. 5.2.7" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="98" sourceType="3" firstAuthor="Nikolaou A" year="2006" title="Regional inventory data for biomass production: Southern Europe" titleOfAnthology="RENEW project report Del. 5.2.6" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="99" sourceType="3" firstAuthor="Lantz M" year="2006" title="Regional inventory data for biomass production: Northern Europe" titleOfAnthology="RENEW project report Del. 5.2.4" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="100" sourceType="3" firstAuthor="Ganko E" year="2006" title="Regional inventory data for biomass: Central-Eastern Europe" titleOfAnthology="RENEW project report Del. 5.2.5" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<validation proofReadingDetails="automatic validation" proofReadingValidator="41" otherDetails="none"></validation>
+			</modellingAndValidation>
+			<administrativeInformation>
+				<dataEntryBy person="41" qualityNetwork="1"></dataEntryBy>
+				<dataGeneratorAndPublication person="41" dataPublishedIn="2" referenceToPublishedSource="97" copyright="true" accessRestrictedTo="0" pageNumbers="Biomass production"></dataGeneratorAndPublication>
+				<person number="41" name="Niels Jungbluth" address="ESU-services Ltd., Kanzleistrasse 4, 8610 Uster" telephone="0041 44 940 61 32" telefax="0041 44 940 61 94" email="jungbluth@esu-services.ch" companyCode="ESU" countryCode="CH"></person>
+			</administrativeInformation>
+		</metaInformation>
+		<flowData>
+			<exchange number="1" infrastructureProcess="false" name="miscanthus-bales, scenario 2, at field" location="RER" unit="kg" meanValue="1">
+				<outputGroup>0</outputGroup>
+			</exchange>
+			<exchange number="2" infrastructureProcess="false" name="ammonium nitrate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.0022155" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="3" infrastructureProcess="false" name="ammonium sulphate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00017042" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="4" infrastructureProcess="false" name="calcium ammonium nitrate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.0011077" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="5" infrastructureProcess="false" name="diammonium phosphate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00032555" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="6" infrastructureProcess="false" name="urea, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00076689" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="7" infrastructureProcess="false" name="potassium chloride, as K2O, at regional storehouse" location="RER" unit="kg" meanValue="0.0048359" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="8" infrastructureProcess="false" name="potassium sulphate, as K2O, at regional storehouse" location="RER" unit="kg" meanValue="0.00030867" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="9" infrastructureProcess="false" name="lime, from carbonation, at regional storehouse" location="CH" unit="kg" meanValue="0.0032414" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="10" infrastructureProcess="false" name="diammonium phosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.00083196" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="11" infrastructureProcess="false" name="single superphosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="5.9426E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="12" infrastructureProcess="false" name="thomas meal, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.00014856" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="13" infrastructureProcess="false" name="triple superphosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="0.0012182" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="14" infrastructureProcess="false" name="phosphate rock, as P2O5, beneficiated, dry, at plant" location="MA" unit="kg" meanValue="0.00071311" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="15" infrastructureProcess="false" name="planting stocks, miscanthus, at field" location="RER" unit="unit" meanValue="0.040734" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); establishment of the plantation">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="16" infrastructureProcess="false" name="benzimidazole-compounds, at regional storehouse" location="RER" unit="kg" meanValue="3.8897E-7" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="17" infrastructureProcess="false" name="cyclic N-compounds, at regional storehouse" location="CH" unit="kg" meanValue="1.4586E-6" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="18" infrastructureProcess="false" name="triazine-compounds, at regional storehouse" location="RER" unit="kg" meanValue="6.5343E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use, Atrazine">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="19" infrastructureProcess="false" name="organophosphorus-compounds, at regional storehouse" location="RER" unit="kg" meanValue="4.0128E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="20" infrastructureProcess="false" name="BTL-fuel, used by tractor" location="RER" unit="kg" meanValue="0.0050445" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); machinery use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="21" infrastructureProcess="false" name="transport, lorry 32t, Euro 5, BTL-fuel" location="RER" unit="tkm" meanValue="0.0033629" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="22" infrastructureProcess="false" name="transport, van &lt;3.5t" location="RER" unit="tkm" meanValue="1.1973E-5" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="23" infrastructureProcess="false" name="transport, barge" location="RER" unit="tkm" meanValue="0.019309" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="24" infrastructureProcess="false" name="transport, freight, rail" location="RER" unit="tkm" meanValue="0.0027521" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="25" category="resource" subCategory="in air" name="Carbon dioxide, in air" unit="kg" meanValue="1.7248" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); carbon uptake of plants">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="26" category="resource" subCategory="biotic" name="Energy, gross calorific value, in biomass" unit="MJ" meanValue="18.4" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); energy content of harvested product">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="27" category="resource" subCategory="in water" name="Water, rain" unit="m3" meanValue="0.55713" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); average rainfall in the region during the plantation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="28" category="resource" subCategory="in water" name="Water, river" unit="m3" meanValue="0.19603" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); water used for irrigation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="29" category="resource" subCategory="land" name="Occupation, arable" unit="m2a" meanValue="0.79029" uncertaintyType="1" standardDeviation95="1.2788" generalComment="(3,4,1,1,1,5); land occupation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="30" category="resource" subCategory="land" name="Transformation, from arable" unit="m2" meanValue="0.20663" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); 80% of total transformation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="31" category="resource" subCategory="land" name="Transformation, from pasture and meadow, extensive" unit="m2" meanValue="0.078257" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); transformation of set aside land">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="32" category="resource" subCategory="land" name="Transformation, to arable" unit="m2" meanValue="0.28488" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); transformation to energy crops">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="33" category="air" subCategory="low population density" name="Ammonia" unit="kg" meanValue="0.00025276" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="34" category="air" subCategory="low population density" name="Dinitrogen monoxide" unit="kg" meanValue="0.00018273" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="35" category="air" subCategory="low population density" name="Isoprene" unit="kg" meanValue="0.0015558" uncertaintyType="1" standardDeviation95="5.315" generalComment="(5,na,na,3,3,3); model calculation for biogenic emissions based on literature">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="36" category="air" subCategory="low population density" name="Terpenes" unit="kg" meanValue="8.5529E-5" uncertaintyType="1" standardDeviation95="5.315" generalComment="(5,na,na,3,3,3); model calculation for biogenic emissions based on literature">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="37" category="air" subCategory="low population density" name="Nitrogen oxides" unit="kg" meanValue="3.8374E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="38" category="soil" subCategory="agricultural" name="Cadmium" unit="kg" meanValue="7.2322E-8" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="39" category="soil" subCategory="agricultural" name="Chromium" unit="kg" meanValue="2.5024E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="40" category="soil" subCategory="agricultural" name="Copper" unit="kg" meanValue="-4.5266E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="41" category="soil" subCategory="agricultural" name="Lead" unit="kg" meanValue="-8.1134E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="42" category="soil" subCategory="agricultural" name="Mercury" unit="kg" meanValue="-9.4774E-9" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="43" category="soil" subCategory="agricultural" name="Nickel" unit="kg" meanValue="-1.5715E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="44" category="soil" subCategory="agricultural" name="Zinc" unit="kg" meanValue="-2.0881E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="45" category="soil" subCategory="agricultural" name="Atrazine" unit="kg" meanValue="6.5343E-5" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, 500g/l">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="46" category="soil" subCategory="agricultural" name="Carbendazim" unit="kg" meanValue="3.8897E-7" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="47" category="soil" subCategory="agricultural" name="Glyphosate" unit="kg" meanValue="4.0128E-5" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); Roundup 360 SL, 360g/l">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="48" category="soil" subCategory="agricultural" name="Prochloraz" unit="kg" meanValue="1.4586E-6" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="49" category="water" subCategory="ground-" name="Nitrate" unit="kg" meanValue="0.009868" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="50" category="water" subCategory="ground-" name="Phosphate" unit="kg" meanValue="0.00010476" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="51" category="water" subCategory="river" name="Phosphate" unit="kg" meanValue="0.0003227" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="52" category="water" subCategory="river" name="Phosphorus" unit="kg" meanValue="3.6424E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); emission due to erosion">
+				<outputGroup>4</outputGroup>
+			</exchange>
+		</flowData>
+	</dataset>
+	<dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml" validCategories="Categories.xml" validUnits="Units.xml" number="4" generator="EcoInvent Excel2EcoSpold 1.9.8" timestamp="2007-07-03T13:30:34" internalSchemaVersion="1.0">
+		<metaInformation>
+			<processInformation>
+				<referenceFunction datasetRelatesToProduct="true" name="planting stocks, miscanthus, at field" localName="Stecklinge, Miscanthus, ab Feld" infrastructureProcess="false" amount="1" unit="unit" category="agricultural production" subCategory="plant production" localCategory="Landwirtschaftliche Produktion" localSubCategory="Pflanzenbau" includedProcesses="The inventory includes the processes of soil cultivation, sowing, weed control, fertilisation, pest and pathogen control, harvest and balling. Machine infrastructure and a shed for machine sheltering is included. Inputs of fertilisers, pesticides and planting stocks as well as their transports to the farm are considered. The direct emissions on the field are also included. The system boundary is the field." generalComment="Inventory refers to the production of 1 planting stock (1 unit)." infrastructureIncluded="true"></referenceFunction>
+				<geography location="RER" text="Refers to an average production in Europe. Calculation based on inventory data for SE, PL, DE and GR. Production shares based on expert guess."></geography>
+				<technology text="Integrated production"></technology>
+				<timePeriod dataValidForEntirePeriod="true" text="Starting point scenario for average agricultural and harvesting technology in the year 2004.">
+					<startYear>2000</startYear>
+					<endYear>2000</endYear>
+				</timePeriod>
+				<dataSetInformation timestamp="2007-07-03T13:30:34" type="1" impactAssessmentResult="false" version="1" internalVersion="1.0" energyValues="0" languageCode="en" localLanguageCode="de"></dataSetInformation>
+			</processInformation>
+			<modellingAndValidation>
+				<representativeness productionVolume="So far only limited experiences." samplingProcedure="Data were compiled by experts from Poland, Greece, Germany and Sweden from statistics, pilot network, fertilising recommendations, documents from extension services, information provided by retailers, literature and expert knowledge. The production data were verified and adjusted by the project team." extrapolations="Average of two literature sources." uncertaintyAdjustments="none"></representativeness>
+				<source number="97" sourceType="3" firstAuthor="Jungbluth N." additionalAuthors="Faist Emmenegger M., Frischknecht R., Tuchschmid M." year="2007" title="LCA of BTL-fuel production: Inventory Analysis" titleOfAnthology="RENEW project report Del. 5.2.7" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="98" sourceType="3" firstAuthor="Nikolaou A" year="2006" title="Regional inventory data for biomass production: Southern Europe" titleOfAnthology="RENEW project report Del. 5.2.6" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="99" sourceType="3" firstAuthor="Lantz M" year="2006" title="Regional inventory data for biomass production: Northern Europe" titleOfAnthology="RENEW project report Del. 5.2.4" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="100" sourceType="3" firstAuthor="Ganko E" year="2006" title="Regional inventory data for biomass: Central-Eastern Europe" titleOfAnthology="RENEW project report Del. 5.2.5" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<validation proofReadingDetails="automatic validation" proofReadingValidator="41" otherDetails="none"></validation>
+			</modellingAndValidation>
+			<administrativeInformation>
+				<dataEntryBy person="41" qualityNetwork="1"></dataEntryBy>
+				<dataGeneratorAndPublication person="41" dataPublishedIn="2" referenceToPublishedSource="97" copyright="true" accessRestrictedTo="0" pageNumbers="Biomass production"></dataGeneratorAndPublication>
+				<person number="41" name="Niels Jungbluth" address="ESU-services Ltd., Kanzleistrasse 4, 8610 Uster" telephone="0041 44 940 61 32" telefax="0041 44 940 61 94" email="jungbluth@esu-services.ch" companyCode="ESU" countryCode="CH"></person>
+			</administrativeInformation>
+		</metaInformation>
+		<flowData>
+			<exchange number="1" infrastructureProcess="false" name="ammonium nitrate, as N, at regional storehouse" location="RER" unit="kg" meanValue="0.00013198" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="2" infrastructureProcess="false" name="ammonium sulphate, as N, at regional storehouse" location="RER" unit="kg" meanValue="1.0153E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="3" infrastructureProcess="false" name="calcium ammonium nitrate, as N, at regional storehouse" location="RER" unit="kg" meanValue="6.5992E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="4" infrastructureProcess="false" name="diammonium phosphate, as N, at regional storehouse" location="RER" unit="kg" meanValue="1.8671E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="5" infrastructureProcess="false" name="urea, as N, at regional storehouse" location="RER" unit="kg" meanValue="4.5687E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="6" infrastructureProcess="false" name="potassium chloride, as K2O, at regional storehouse" location="RER" unit="kg" meanValue="0.00042607" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="7" infrastructureProcess="false" name="potassium sulphate, as K2O, at regional storehouse" location="RER" unit="kg" meanValue="2.7196E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="8" infrastructureProcess="false" name="lime, from carbonation, at regional storehouse" location="CH" unit="kg" meanValue="0.00035505" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="9" infrastructureProcess="false" name="diammonium phosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="4.7716E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="10" infrastructureProcess="false" name="single superphosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="3.4083E-6" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="11" infrastructureProcess="false" name="thomas meal, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="8.5207E-6" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="12" infrastructureProcess="false" name="triple superphosphate, as P2O5, at regional storehouse" location="RER" unit="kg" meanValue="6.987E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="13" infrastructureProcess="false" name="phosphate rock, as P2O5, beneficiated, dry, at plant" location="MA" unit="kg" meanValue="4.0899E-5" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); application of fertilizer and average consumption">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="14" infrastructureProcess="false" name="planting stocks, miscanthus, at field" location="RER" unit="unit" meanValue="0.0021006" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); establishment of the plantation">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="15" infrastructureProcess="false" name="benzimidazole-compounds, at regional storehouse" location="RER" unit="kg" meanValue="4.2607E-8" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="16" infrastructureProcess="false" name="cyclic N-compounds, at regional storehouse" location="CH" unit="kg" meanValue="1.5977E-7" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="17" infrastructureProcess="false" name="triazine-compounds, at regional storehouse" location="RER" unit="kg" meanValue="3.6684E-6" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use, Atrazine">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="18" infrastructureProcess="false" name="organophosphorus-compounds, at regional storehouse" location="RER" unit="kg" meanValue="2.3644E-6" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); pesticide use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="19" infrastructureProcess="false" name="diesel, used by tractor" location="RER" unit="kg" meanValue="0.00024166" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); machinery use">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="20" infrastructureProcess="false" name="transport, lorry 32t" location="RER" unit="tkm" meanValue="0.00024382" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="21" infrastructureProcess="false" name="transport, van &lt;3.5t" location="RER" unit="tkm" meanValue="1.8706E-7" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="22" infrastructureProcess="false" name="transport, barge" location="RER" unit="tkm" meanValue="0.0012467" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="23" infrastructureProcess="false" name="transport, freight, rail" location="RER" unit="tkm" meanValue="0.0003326" uncertaintyType="1" standardDeviation95="2.095" generalComment="(4,5,na,na,na,na); standard distances for transport of materials">
+				<inputGroup>5</inputGroup>
+			</exchange>
+			<exchange number="24" category="resource" subCategory="in air" name="Carbon dioxide, in air" unit="kg" meanValue="0.099815" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); carbon uptake of plants">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="25" category="resource" subCategory="biotic" name="Energy, gross calorific value, in biomass" unit="MJ" meanValue="1.0648" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); energy content of harvested product">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="26" category="resource" subCategory="in water" name="Water, rain" unit="m3" meanValue="0.024012" uncertaintyType="1" standardDeviation95="1.261" generalComment="(3,4,1,1,1,5); average rainfall in the region during the plantation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="27" category="resource" subCategory="in water" name="Water, river" unit="m3" meanValue="0.011005" uncertaintyType="1" standardDeviation95="1.3221" generalComment="(4,4,1,1,1,5); water used for irrigation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="28" category="resource" subCategory="land" name="Occupation, arable" unit="m2a" meanValue="0.040829" uncertaintyType="1" standardDeviation95="1.2788" generalComment="(3,4,1,1,1,5); land occupation">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="29" category="resource" subCategory="land" name="Transformation, from pasture and meadow, extensive" unit="m2" meanValue="0.0072384" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); transformation of set aside land">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="30" category="resource" subCategory="land" name="Transformation, to arable" unit="m2" meanValue="0.0072384" uncertaintyType="1" standardDeviation95="1.3377" generalComment="(3,4,1,1,1,5); transformation to energy crops">
+				<inputGroup>4</inputGroup>
+			</exchange>
+			<exchange number="31" category="air" subCategory="low population density" name="Ammonia" unit="kg" meanValue="1.5023E-5" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="32" category="air" subCategory="low population density" name="Dinitrogen monoxide" unit="kg" meanValue="1.1086E-5" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="33" category="air" subCategory="low population density" name="Isoprene" unit="kg" meanValue="8.992E-5" uncertaintyType="1" standardDeviation95="5.315" generalComment="(5,na,na,3,3,3); model calculation for biogenic emissions based on literature">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="34" category="air" subCategory="low population density" name="Terpenes" unit="kg" meanValue="4.4187E-6" uncertaintyType="1" standardDeviation95="5.315" generalComment="(5,na,na,3,3,3); model calculation for biogenic emissions based on literature">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="35" category="air" subCategory="low population density" name="Nitrogen oxides" unit="kg" meanValue="2.3281E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="36" category="soil" subCategory="agricultural" name="Cadmium" unit="kg" meanValue="1.5656E-8" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="37" category="soil" subCategory="agricultural" name="Chromium" unit="kg" meanValue="2.0217E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="38" category="soil" subCategory="agricultural" name="Copper" unit="kg" meanValue="2.9959E-8" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="39" category="soil" subCategory="agricultural" name="Lead" unit="kg" meanValue="1.4365E-8" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="40" category="soil" subCategory="agricultural" name="Mercury" unit="kg" meanValue="3.5606E-11" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="41" category="soil" subCategory="agricultural" name="Nickel" unit="kg" meanValue="2.5994E-8" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="42" category="soil" subCategory="agricultural" name="Zinc" unit="kg" meanValue="3.0273E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); input-output balance for seeds, products and fertilizer">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="43" category="soil" subCategory="agricultural" name="Atrazine" unit="kg" meanValue="3.6684E-6" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, 500g/l">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="44" category="soil" subCategory="agricultural" name="Carbendazim" unit="kg" meanValue="4.2607E-8" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="45" category="soil" subCategory="agricultural" name="Glyphosate" unit="kg" meanValue="2.3644E-6" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); Roundup 360 SL, 360g/l">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="46" category="soil" subCategory="agricultural" name="Prochloraz" unit="kg" meanValue="1.5977E-7" uncertaintyType="1" standardDeviation95="1.4751" generalComment="(4,4,1,5,3,5); pesticide application, sportak alpha 380 EC">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="47" category="water" subCategory="ground-" name="Nitrate" unit="kg" meanValue="0.0006173" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="48" category="water" subCategory="ground-" name="Phosphate" unit="kg" meanValue="7.5073E-7" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="49" category="water" subCategory="river" name="Phosphate" unit="kg" meanValue="2.4181E-6" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); model calculation for emissions based on fertilizer application">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="50" category="water" subCategory="river" name="Phosphorus" unit="kg" meanValue="1.8818E-8" uncertaintyType="1" standardDeviation95="1.7012" generalComment="(4,4,1,5,3,5); emission due to erosion">
+				<outputGroup>4</outputGroup>
+			</exchange>
+			<exchange number="51" infrastructureProcess="false" name="planting stocks, miscanthus, at field" location="RER" unit="unit" meanValue="1">
+				<outputGroup>0</outputGroup>
+			</exchange>
+		</flowData>
+	</dataset>
+</ecoSpold>

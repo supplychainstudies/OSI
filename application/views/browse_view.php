@@ -17,8 +17,8 @@
 				<?
 					foreach ($set as $row) {
 						// Remove the opensustainability part of the url
-						$myString = str_replace ("http://opensustainability.info/", "", $row['link']);
-						echo '<div class="resource"><p><a href="info/view/'.$myString.'">'.$row['processName'].'</a><p/></div>';
+						$myString = str_replace ("http://db.opensustainability.info/rdfspace/lca/", "", $row['link']);
+						echo '<div class="resource"><p><a href="lca/view/'.$myString.'">'.$row['name'].'</a><p/></div>';
 						/*echo '<a href="/info/showRDF/'.$row['link'].'">RDF</a>';
 						echo '<a href="/info/showJSON/'.$row['link'].'">JSON</a>';*/
 					}

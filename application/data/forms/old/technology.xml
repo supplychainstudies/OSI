@@ -1,0 +1,27 @@
+<form action="/lca/create/technology" name="Technology">
+  <fieldset name="Technology" linked_type="oslca:technology">
+		<technologyLevel rules="trim">
+			<label>Technology Level</label>
+			<type>dropdown</type>
+		  	<linked_type>oslca:technologyLevel</linked_type>
+			<options>
+				<undefined>Undefined</undefined>
+				<new>New</new>
+				<modern>Modern</modern>
+				<current>Current</current>
+				<old>Old</old>
+				<outdated>Outdated</outdated>
+			</options>
+		</technologyLevel>	
+		<description rules="trim">
+			<label>Description</label>
+			<type>textarea</type>
+		  	<linked_type>rdf:description</linked_type>
+		</description>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

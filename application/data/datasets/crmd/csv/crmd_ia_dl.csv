@@ -1,4 +1,4 @@
-Water Use,51,http://dbpedia.org/class/yago/Liter113624190
+Water Use,51,qudt:Liter
 Energy Use,2800,MJ
-Waste,20.9,http://dbpedia.org/class/yago/Kilogram113724582
-Carbon Dioxide Emissions,182,http://dbpedia.org/class/yago/Kilogram113724582
+Waste,20.9,qudt:Kilogram
+Carbon Dioxide Emissions,182,qudt:Kilogram

@@ -42,9 +42,9 @@
 $route['default_controller'] = "info";
 $route['scaffolding_trigger'] = "";
 $route['docs'] = "sitemaps/documentation";
-$route['(:num)'] = "info/view/$1";
-$route['(:num).rdf'] = "info/viewRDF/$1";
-$route['(:num).json'] = "info/viewJSON/$1";
+//$route['(:any)'] = "info/view/$1";
+$route['(:any).rdf'] = "lca/viewRDF/$1";
+$route['(:any).json'] = "lca/viewJSON/$1";
 
 // These are Freak Auth configurations
 //$route['default_controller'] = "freakauth_demo";

@@ -1,0 +1,29 @@
+<form action="/lca/create/publication" name="Publication">
+  <fieldset name="publication" linked_type="oslca:Publication">
+		<link rules="trim">
+			<label>Link to the Source</label>
+			<type>text</type>
+		  	<linked_type>dc:source</linked_type>
+		</link>
+		<dataPublishedIn rules="trim">
+			<label>Data Published In</label>
+			<type>textarea</type>
+		  	<linked_type>oslca:dataPublishedIn</linked_type>
+		</dataPublishedIn>	
+		<pageNumbers rules="trim">
+			<label>Page Numbers</label>
+			<type>text</type>
+		  	<linked_type>oslca:pageNumbers</linked_type>
+		</pageNumbers>
+		<accessRestrictedTo rules="trim">
+			<label>Access Restricted To</label>
+			<type>text</type>
+		  	<linked_type>oslca:accessRestrictedTo</linked_type>
+		</accessRestrictedTo>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

@@ -4,6 +4,11 @@ class Sandbox extends SM_Controller {
 	
 	function Sandbox() {
 		parent::SM_Controller();
+		$this->load->library(Array('formats'));
+		$this->load->model(Array('arcremotemodel'));
+	}
+	function remote() {
+		@$this->arcremotemodel->qudGetUnits();
 	}
 	
 	function index() {
@@ -49,6 +54,10 @@ class Sandbox extends SM_Controller {
 		//print out the result
 		echo "<pre>"; print_r($result); echo "</pre>";
 
+	}
+	
+	function formattest() {
+		$this->formats->getPath('quantitative_reference','ISO14048');
 	}
 }
 ?>

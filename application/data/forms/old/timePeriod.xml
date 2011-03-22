@@ -1,0 +1,26 @@
+<form action="/lca/create/timePeriod" name="Time Period">
+  <fieldset name="Time Period" linked_type="oslca:timePeriod">
+	<fieldset name="Period of Time" linked_type="dc:periodOfTime">
+		<startDate rules="trim">
+			<label>Start Date</label>
+			<type>date</type>
+		  	<linked_type>dcterms:startDate</linked_type>
+		</startDate>
+		<endDate rules="trim">
+			<label>End Date</label>
+			<type>date</type>
+		  	<linked_type>dcterms:endDate</linked_type>
+		</endDate>	
+		</fieldset>	
+		<description rules="trim">
+			<label>Description</label>
+			<type>textarea</type>
+		  	<linked_type>rdf:description</linked_type>
+		</description>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

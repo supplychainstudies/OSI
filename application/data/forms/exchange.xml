@@ -1,0 +1,9 @@
+<form action="/lca/create/exchange" name="exchange">
+	  <fieldset name="Quantity" linked_type="eco:hasQuantity">
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+	    </submit>
+	</fieldset>
+</form>
+

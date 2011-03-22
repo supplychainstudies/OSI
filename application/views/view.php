@@ -10,15 +10,18 @@
 
 <body id="home">
 	<div id ="contentwrap">	
+		<? 
+			include_once('parts/header.php'); 
+		?>
 	<?= $navigationDisplay;?>
-	
+
 	<div id="columnleft">
 		<div id="content">
 
 			<? echo $view_string; ?>
 			<?
 
-				if(isset($comments) == true) {
+				if(isset($comment) == true) {
 
 					include_once('parts/comments.php');
 

@@ -1,0 +1,32 @@
+<form action="model/create" name="Model">
+	<modelType rules="trim">
+		<label>Model Type</label>
+		<type>dropdown</type>
+		<options>
+			<FootprintModel>Footprint Model</FootprintModel>
+			<Model>Model</Model>
+		</options>
+	</modelType>
+  <fieldset name="Model" linked_type="">
+		<name rules="trim">
+			<label>Name</label>
+			<type>text</type>
+		  	<linked_type>rdfs:label</linked_type>
+		</name>		
+		<UUID rules="trim">
+			<label>UUID</label>
+			<type>hidden</type>
+		  	<linked_type>eco:hasUUID</linked_type>
+		</UUID>
+		<models rules="trim">
+			<label>Models</label>
+			<type>text</type>
+		  	<linked_type>eco:models</linked_type>
+			<multiple>yes</multiple>
+		</models>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+	    </submit>
+</fieldset>
+</form>

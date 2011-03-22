@@ -50,6 +50,13 @@ class ArcRemoteModel extends Model{
 
 		}
 		
+		public function qudGetUnits() {
+			$remote_endpoint = "http://www.qudt.org/qudt/owl/1.0.0/qudt.owl";
+			$q = "select ?uri where { ?uri <http://data.nasa.gov/qudt/owl/qudt#Unit> ?label . }";
+			$results = $this->executeQuery($remote_endpoint, $q);
+			var_dump($results);
+		}
+		
 		public function getLabel($uri) {
 			if (strpos($uri, "dbpedia") !== false) {
 				$remote_endpoint = "http://dbpedia.org/sparql";

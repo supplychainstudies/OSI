@@ -1,0 +1,131 @@
+<form action="/lca/create/exchange" name="Exchange" root="exchanges" path="">
+  <fieldset name="exchange" linked_type="oslca:exchange">
+		<exchangeType rules="trim">
+			<label>Exchange Type</label>
+			<type>dropdown</type>
+			<function />
+			<options>
+				<elementaryExchange>Elementary Exchange</elementaryExchange>
+				<intermediateExchange>Intermediate Exchange</intermediateExchange>
+			</options>
+		</exchangeType>	
+  		<fieldset name="productionVolume" linked_type="oslca:productionVolume">		
+			<description rules="trim">
+				<label>Description</label>
+				<type>textarea</type>
+			  	<linked_type>rdf:description</linked_type>
+			</description>
+			<variableName rules="trim">
+				<label>Variable Name</label>
+				<type>text</type>
+			  	<linked_type>oslca:variableName</linked_type>
+				<multiple>yes</multiple>
+			</variableName>
+			<quantity rules="trim">
+				<label>Quantity</label>
+				<type>text</type>
+			  	<linked_type>qud:Quantity</linked_type>
+			</quantity>			
+			<mathematicalRelation rules="trim">
+				<label>Mathematical Relation</label>
+				<type>text</type>
+			  	<linked_type>oslca:mathematicalRelation</linked_type>
+			</mathematicalRelation>				
+		</fieldset>
+		<name rules="trim">
+			<label>Name</label>
+			<type>text</type>
+		  	<linked_type>rdf:label</linked_type>
+		</name>
+		<description rules="trim">
+			<label>Description</label>
+			<type>textarea</type>
+		  	<linked_type>rdf:description</linked_type>
+		</description>
+		<classification rules="trim">
+			<label>Classification</label>
+			<type>text</type>
+		  	<linked_type>oslca:classification</linked_type>
+		</classification>
+		<input rules="trim">
+			<label>Input</label>
+			<type>text</type>
+		  	<linked_type>oslca:input</linked_type>
+		</input>
+		<output rules="trim">
+			<label>Output</label>
+			<type>text</type>
+		  	<linked_type>oslca:output</linked_type>
+		</output>
+		<synonym rules="trim">
+			<label>Synonym</label>
+			<type>text</type>
+		  	<linked_type>rdfs:sameAs</linked_type>
+			<multiple>yes</multiple>
+		</synonym>
+		<quantity rules="trim">
+			<label>Quantity</label>
+			<type>text</type>
+		  	<linked_type>qud:Quantity</linked_type>
+		</quantity>			
+		<unit rules="trim">
+			<label>Unit</label>
+			<type>text</type>
+		  	<linked_type>qud:Unit</linked_type>
+		</unit>
+		<uncertainty rules="trim">
+			<label>Uncertainty</label>
+			<type>text</type>
+		  	<linked_type>oslca:uncertainty</linked_type>
+		</uncertainty>
+		<tag rules="trim">
+			<label>Tag</label>
+			<type>text</type>
+		  	<linked_type>oslca:tag</linked_type>
+			<multiple>yes</multiple>
+		</tag>
+		<property rules="trim">
+			<label>Property</label>
+			<type>text</type>
+		  	<linked_type>oslca:property</linked_type>
+			<multiple>yes</multiple>
+		</property>
+		<transferCoefficient rules="trim">
+			<label>Transfer Coefficient</label>
+			<type>text</type>
+		  	<linked_type>oslca:transferCoefficient</linked_type>
+			<multiple>yes</multiple>
+		</transferCoefficient>
+		<variableName rules="trim">
+			<label>Variable Name</label>
+			<type>text</type>
+		  	<linked_type>oslca:variableName</linked_type>
+		</variableName>
+		<casNumber rules="trim">
+			<label>CAS Number</label>
+			<type>rdflist</type>
+			<rdflist>casNumber</rdflist>
+		  	<linked_type>oslca:casNumber</linked_type>
+		</casNumber>		
+		<isCalculatedAmount rules="trim">
+			<label>Is this a calculated amount?</label>
+			<type>boolean</type>
+		  	<linked_type>oslca:casNumber</linked_type>
+		</isCalculatedAmount>
+		<mathematicalRelation rules="trim">
+			<label>mathematicalRelation</label>
+			<type>text</type>
+		  	<linked_type>oslca:mathematicalRelation</linked_type>
+		</mathematicalRelation>
+		<citation rules="trim">
+			<label>Citation</label>
+			<type>text</type>
+		  	<linked_type>bibo:citation</linked_type>
+		</citation>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

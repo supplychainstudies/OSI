@@ -1,0 +1,19 @@
+<form action="/lca/create/review" name="Review">
+  <fieldset name="Review" linked_type="oslca:review">
+		<description rules="trim">
+			<label>Description</label>
+			<type>textarea</type>
+		  	<linked_type>rdf:description</linked_type>
+		</description>
+		<dateReviewed rules="trim">
+			<label>dateReviewed</label>
+			<type>text</type>
+		  	<linked_type>oslca:dateReviewed</linked_type>
+		</dateReviewed>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

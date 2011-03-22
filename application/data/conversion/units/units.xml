@@ -1,0 +1,1588 @@
+<qudt>
+<LinearVelocityUnit about="http://data.nasa.gov/qudt/owl/unit#NauticalMilePerMinute">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Nautical Mile per Minute</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">nmi/min</abbreviation>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LinearVelocity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">nmi/min</symbol>
+</LinearVelocityUnit>
+
+<LengthUnit about="http://data.nasa.gov/qudt/owl/unit#Pica">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pica</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Pm</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1360</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Length"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Pm</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</LengthUnit>
+
+<EnergyAndWorkUnit about="http://data.nasa.gov/qudt/owl/unit#KiloElectronVolt">
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">keV</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.6021765314E-16</conversionMultiplier>
+<label>Kilo Electron Volt</label>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#EnergyAndWork"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">keV</symbol>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2420</code>
+</EnergyAndWorkUnit>
+
+<LengthTemperatureUnit about="http://data.nasa.gov/qudt/owl/unit#DegreeCelsiusCentimeter">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Degree Celsius Centimeter</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">cm-degC</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2008</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LengthTemperature"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">cm-degC</symbol>
+</LengthTemperatureUnit>
+
+<ConductanceUnit about="http://data.nasa.gov/qudt/owl/unit#Statmho">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Statmho</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">statS</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1760</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ElectricConductivity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">statS</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</ConductanceUnit>
+
+<ThermalConductivityUnit about="http://data.nasa.gov/qudt/owl/unit#KilocaloriePerCentimeterSecondDegreeCelsius">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Calorie per Centimeter Second Degree Celsius</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">cal/(cm-s-degC)</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0270</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermalConductivity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">cal/(cm-s-degC)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</ThermalConductivityUnit>
+
+<NotUsedWithSIUnit about="http://data.nasa.gov/qudt/owl/unit#Dalton">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Dalton</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Da</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0485</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.66090210E-27</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#MolecularMass"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Da</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#MassUnit"/>
+</NotUsedWithSIUnit>
+
+<EventUnit about="http://data.nasa.gov/qudt/owl/unit#Breath">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Breath</label>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2000</code>
+</EventUnit>
+
+<PressureOrStressUnit about="http://data.nasa.gov/qudt/owl/unit#AtmosphereTechnical">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Technical Atmosphere</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">at</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0105</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">98066.5</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ForcePerArea"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">at</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</PressureOrStressUnit>
+
+<ElectricChargePerAmountOfSubstanceUnit about="http://data.nasa.gov/qudt/owl/unit#StatcoulombPerMole">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Statcoulomb per Mole</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">statC/mol</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">3.33564E-10</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ElectricChargePerAmountOfSubstance"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">statC/mol</symbol>
+</ElectricChargePerAmountOfSubstanceUnit>
+
+<LengthUnit about="http://data.nasa.gov/qudt/owl/unit#AstronomicalUnit">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Astronomical Unit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">au</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0095</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.4960E11</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Length"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">au</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</LengthUnit>
+
+<AngularMomentumUnit about="http://data.nasa.gov/qudt/owl/unit#ElectronVoltSecond">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Electron Volt Second</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">eV s</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.6021765314E-19</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#AngularMomentum"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">eV s</symbol>
+</AngularMomentumUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#KilocaloriePerSquareCentimeterMinute">
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Kilocalorie per Square Centimeter Minute</label>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#PowerPerArea"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">kcal/(cm^2-min)</symbol>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">kcal/(cm^2-min)</abbreviation>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#PowerPerAreaUnit"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">6.97333333E-5</conversionMultiplier>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0315</code>
+</DerivedUnit>
+
+<PressureOrStressUnit about="http://data.nasa.gov/qudt/owl/unit#InchOfMercury">
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">inHg</symbol>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ForcePerArea"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0865</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">3386.389</conversionMultiplier>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Inch of Mercury</label>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">inHg</abbreviation>
+</PressureOrStressUnit>
+
+<BinaryPrefixUnit about="http://data.nasa.gov/qudt/owl/unit#Kibi">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Kibi</label>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1024</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Dimensionless"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Ki</symbol>
+</BinaryPrefixUnit>
+
+<NotUsedWithSIUnit about="http://data.nasa.gov/qudt/owl/unit#Carat">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Carat</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Nm/ct</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0360</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0002</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Mass"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Nm/ct</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#MassUnit"/>
+</NotUsedWithSIUnit>
+
+<DataRateUnit about="http://data.nasa.gov/qudt/owl/unit#BitsPerSecond">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+<label>Bits per Second</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">bps</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2240</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#DataRate"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">bps</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</DataRateUnit>
+
+<NonSIUnit about="http://data.nasa.gov/qudt/owl/unit#KiloElectronVoltPerMicrometer">
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2370</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LinearEnergyTransfer"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.60217653E-10</conversionMultiplier>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">keV/microM</abbreviation>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<label>Kilo Electron Volt per Micrometer</label>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#LinearEnergyTransferUnit"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">keV/µm</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</NonSIUnit>
+
+<NotUsedWithSIUnit about="http://data.nasa.gov/qudt/owl/unit#MilliTorr">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ForcePerArea"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">utorr</symbol>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">MilliTorr</label>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.133322</conversionMultiplier>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">utorr</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2046</code>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#PressureOrStressUnit"/>
+</NotUsedWithSIUnit>
+
+<PressureOrStressUnit about="http://data.nasa.gov/qudt/owl/unit#Millibar">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Millibar</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">mbar</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1170</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.0E2</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ForcePerArea"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">mbar</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</PressureOrStressUnit>
+
+<SignalDetectionThresholdUnit about="http://data.nasa.gov/qudt/owl/unit#DecibelCarrier">
+<label>decibel carrier</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">dBc</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2520</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#SignalDetectionThreshold"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">dBc</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+</SignalDetectionThresholdUnit>
+
+<BinaryPrefixUnit about="http://data.nasa.gov/qudt/owl/unit#Yobi">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Yobi</label>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1208925819614629174706176</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Dimensionless"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Yi</symbol>
+</BinaryPrefixUnit>
+
+<BinaryPrefixUnit about="http://data.nasa.gov/qudt/owl/unit#Exbi">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Exbi</label>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">152921504606846976</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Dimensionless"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Ei</symbol>
+</BinaryPrefixUnit>
+
+<TimeUnit about="http://data.nasa.gov/qudt/owl/unit#Year365Day">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Year (365 Day)</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">yr</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1980</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">31536000</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Time"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">yr</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</TimeUnit>
+
+<LinearEnergyTransferUnit about="http://data.nasa.gov/qudt/owl/unit#MegaElectronVoltPerCentimeter">
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LinearEnergyTransfer"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">MeV/cm</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2371</code>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">MeV/cm</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+<label>Mega Electron Volt per Centimeter</label>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.6021765314E-11</conversionMultiplier>
+</LinearEnergyTransferUnit>
+
+<SolidAngleUnit about="http://data.nasa.gov/qudt/owl/unit#SquareDegree">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Square degree</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">deg^2</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.00030461742</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#SolidAngle"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">deg^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</SolidAngleUnit>
+
+<EnergyAndWorkUnit about="http://data.nasa.gov/qudt/owl/unit#Quad">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Quad</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">quad</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1535</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.055E18</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#EnergyAndWork"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">quad</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</EnergyAndWorkUnit>
+
+<AmountOfSubstanceTemperatureUnit about="http://data.nasa.gov/qudt/owl/unit#MoleDegreeCelsius">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#ThermodynamicsUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Mole Degree Celsius</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">mol-degC</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2004</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#TemperatureAmountOfSubstance"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">mol-degC</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</AmountOfSubstanceTemperatureUnit>
+
+<TurbidityUnit about="http://data.nasa.gov/qudt/owl/unit#NephelometricTurbidityUnit">
+<label>nephelometry turbidity unit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">NTU</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2560</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Turbidity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">NTU</symbol>
+</TurbidityUnit>
+
+<MassPerVolumeUnit about="http://data.nasa.gov/qudt/owl/unit#PoundPerCubicMeter">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound per Cubic Meter</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lb/m^3</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.45359237</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Density"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbm/m^3</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerVolumeUnit>
+
+<CountingUnit about="http://data.nasa.gov/qudt/owl/unit#NumberPerYear">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Number per Year</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">#/yr</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1255</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Frequency"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">#/yr</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</CountingUnit>
+
+<TimeUnit about="http://data.nasa.gov/qudt/owl/unit#HourSidereal">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Hour Sidereal</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">hr</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0835</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Time"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">hr</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#UsedWithSIUnit"/>
+</TimeUnit>
+
+<ElectricDipoleMomentUnit about="http://data.nasa.gov/qudt/owl/unit#Debye">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Debye</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">D</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0500</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">3.33564E-30</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ElectricDipoleMoment"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">D</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</ElectricDipoleMomentUnit>
+
+<SolidAngleUnit about="http://data.nasa.gov/qudt/owl/unit#FractionalArea">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Fractional area</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">fa</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">12.5663706</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#SolidAngle"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">fa</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</SolidAngleUnit>
+
+<SystemOfUnits about="http://data.nasa.gov/qudt/owl/unit#SystemOfUnits_USCustomary">
+
+<systemDefinedUnit>
+
+<LinearVelocityUnit about="http://data.nasa.gov/qudt/owl/unit#InchPerSecond">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Inch per Second</label>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2066</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0254e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LinearVelocity"/>
+</LinearVelocityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#LiquidCupUS">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">US Liquid Cup</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">cup</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0475</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">2.3658825E-3</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LiquidVolume"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">cup</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#CubicInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Cubic Inch</label>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Volume"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">in^3</symbol>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0440</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.6387064E-5</conversionMultiplier>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">in^3</abbreviation>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<TemperatureUnit about="http://data.nasa.gov/qudt/owl/unit#DegreeFahrenheit">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Degree Fahrenheit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">degF</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0525</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.5555555555555555556E0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">255.37037037037037037E0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermodynamicTemperature"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">degF</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</TemperatureUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<PowerUnit about="http://data.nasa.gov/qudt/owl/unit#FootPoundForcePerSecond">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot Pound Force per Second</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf/s</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0685</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.35581807</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Power"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf/s</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</PowerUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<NotUsedWithSIUnit about="http://data.nasa.gov/qudt/owl/unit#PennyWeight">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Penny Weight</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">dwt</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1340</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.00155517384</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Mass"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">dwt</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#MassUnit"/>
+</NotUsedWithSIUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerAreaUnit about="http://data.nasa.gov/qudt/owl/unit#OuncePerSquareYard">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Ounce per Square Yard</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">oz/yd^2</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1310</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0339057474748823e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#MassPerArea"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">oz/yd^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerAreaUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#BoardFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Board Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Bf</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0135</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.002360</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Volume"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Bf</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ForcePerLengthUnit about="http://data.nasa.gov/qudt/owl/unit#PoundForcePerInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound Force per Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lbf/in</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1435</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">175.12685</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ForcePerLength"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbf/in</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</ForcePerLengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LengthUnit about="http://data.nasa.gov/qudt/owl/unit#MileUSStatute">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Mile US Statute</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">miUS</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1160</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1609.347</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Length"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">mi</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</LengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ForceUnit about="http://data.nasa.gov/qudt/owl/unit#Poundal">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Poundal</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">pdl</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1390</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.138254954376</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Force"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">pdl</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</ForceUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerVolumeUnit about="http://data.nasa.gov/qudt/owl/unit#GrainPerGallon">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Grain per Gallon</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">gr/gal</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0770</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0142537675</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Density"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">gr/gal</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerVolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LinearVelocityUnit about="http://data.nasa.gov/qudt/owl/unit#FootPerSecond">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot per Second</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft/s</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0655</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.3048e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LinearVelocity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft/s</symbol>
+</LinearVelocityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerAreaUnit about="http://data.nasa.gov/qudt/owl/unit#PoundPerSquareFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound per Square Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lb/ft^2</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1525</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.88242763638305e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#MassPerArea"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lb/ft^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerAreaUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LengthUnit about="http://data.nasa.gov/qudt/owl/unit#Fathom">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Fathom</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">fath</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0610</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.8288</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Length"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">fath</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</LengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#BtuPerHourSquareFoot">
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu/(hr-ft^2)</abbreviation>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">3.15459075</conversionMultiplier>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0200</code>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#PowerPerAreaUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU per Hour Square Foot</label>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu/(hr-ft^2)</symbol>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#PowerPerArea"/>
+</DerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerVolumeUnit about="http://data.nasa.gov/qudt/owl/unit#PoundPerCubicInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound per Cubic Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lb/in^3</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1480</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">27679.904710203125e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Density"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lb/in^3</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerVolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LengthUnit about="http://data.nasa.gov/qudt/owl/unit#Rod">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Rod</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">rd</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1590</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">5.029210</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Length"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">rd</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</LengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LinearVelocityUnit about="http://data.nasa.gov/qudt/owl/unit#MilePerHour">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Mile per Hour</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">mi/hr</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1150</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.44704</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LinearVelocity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">mi/hr</symbol>
+</LinearVelocityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<EnergyAndWorkUnit about="http://data.nasa.gov/qudt/owl/unit#FootPoundal">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot Poundal</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft-pdl</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0665</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.042140124</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#EnergyAndWork"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft-pdl</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</EnergyAndWorkUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerVolumeUnit about="http://data.nasa.gov/qudt/owl/unit#OuncePerCubicInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Ounce per Cubic Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">oz/in^3</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1295</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1729.99404</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Density"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">oz/in^3</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerVolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassUnit about="http://data.nasa.gov/qudt/owl/unit#OunceTroy">
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Mass"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">oz</abbreviation>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Ounce Troy</label>
+
+<description datatype="http://www.w3.org/2001/XMLSchema#string">
+An obsolete unit of mass; the Troy Ounce is 1/12th of a Troy Pound. Based on the international definition of a Troy Pound as 5760 grains, the Troy Ounce is exactly 480 grains, or 0.0311034768 kg.
+</description>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0311034768</conversionMultiplier>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">oz</symbol>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1315</code>
+</MassUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerVolumeUnit about="http://data.nasa.gov/qudt/owl/unit#TonShortPerCubicYard">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Ton Short per Cubic Yard</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ton/yd</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1885</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1186.552842515566e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Density"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ton/yd</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerVolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#CubicYardPerMinute">
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#VolumePerUnitTime"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0470</code>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">yd^3/min</abbreviation>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">yd^3/min</symbol>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0127425809664e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Cubic Yard per Minute</label>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#VolumePerTimeUnit"/>
+</DerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<EnergyPerAreaUnit about="http://data.nasa.gov/qudt/owl/unit#FootPoundForcePerSquareFoot">
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf/ft^2</abbreviation>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot Pound per Square Foot</label>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">14.5939042</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#EnergyPerArea"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf/ft^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0690</code>
+</EnergyPerAreaUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerVolumeUnit about="http://data.nasa.gov/qudt/owl/unit#PoundPerCubicYard">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound per Cubic Yard</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lb/yd^3</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1485</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.5932764212577829e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Density"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lb/yd^3</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerVolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ThermalEnergyLengthUnit about="http://data.nasa.gov/qudt/owl/unit#BtuFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu-ft</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0160</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">321.581024</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermalEnergyLength"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu-ft</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</ThermalEnergyLengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ForceUnit about="http://data.nasa.gov/qudt/owl/unit#PoundForce">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound Force</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lbf</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1415</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.448222</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Force"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbf</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</ForceUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#AcreFoot">
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0045</code>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ac-ft</symbol>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Volume"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Acre Foot</label>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ac-ft</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1233.4818375475202e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ForceUnit about="http://data.nasa.gov/qudt/owl/unit#OunceForce">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Ounce Force</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ozf</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1280</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.278013875</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Force"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ozf</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</ForceUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<BendingMomentOrTorqueUnit about="http://data.nasa.gov/qudt/owl/unit#PoundForceInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound Force Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lbf-in</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1425</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.112984839</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Torque"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbf-in</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</BendingMomentOrTorqueUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<NotUsedWithSIUnit about="http://data.nasa.gov/qudt/owl/unit#BtuPerSecond">
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0235</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1055.05585262</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#HeatFlowRate"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu/s</symbol>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU per Second</label>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Power"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#HeatFlowRateUnit"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu/s</abbreviation>
+</NotUsedWithSIUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<NonSIUnit about="http://data.nasa.gov/qudt/owl/unit#ArcSecond">
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<label>Arc Second</label>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+
+<exactMatch>
+
+<AngleUnit about="http://data.nasa.gov/qudt/owl/unit#SecondAngle">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Second Angle</label>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#UsedWithSIUnit"/>
+</AngleUnit>
+</exactMatch>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1600</code>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#AngleUnit"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">arcSec</symbol>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">arcSec</abbreviation>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#PlaneAngle"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.84813681E-6</conversionMultiplier>
+</NonSIUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<PowerUnit about="http://data.nasa.gov/qudt/owl/unit#FootPoundForcePerMinute">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot Pound Force per Minute</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf/min</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0680</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0225969678</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Power"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf/min</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</PowerUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<TimeUnit about="http://data.nasa.gov/qudt/owl/unit#MilliSecond">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Millisecond</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ms</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1616</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.001</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Time"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ms</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</TimeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<AreaTimeTemperatureUnit about="http://data.nasa.gov/qudt/owl/unit#SquareFootHourDegreeFahrenheit">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Square Foot Hour Degree Fahrenheit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft^2-hr-degF</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0845</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#AreaTimeTemperature"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft^2-hr-degF</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</AreaTimeTemperatureUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#CubicFoot">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0425</code>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Cubic Foot</label>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Volume"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.028316846592e0</conversionMultiplier>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#VolumeUnit"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft^3</symbol>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft^3</abbreviation>
+</DerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<TimeUnit about="http://data.nasa.gov/qudt/owl/unit#SecondTime">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Second</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">s</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1615</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Time"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">s</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#SIBaseUnit"/>
+</TimeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<PressureOrStressUnit about="http://data.nasa.gov/qudt/owl/unit#PoundalPerSquareFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Poundal per Square Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">pdl/ft^2</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1395</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.48816443</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ForcePerArea"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">pdl/ft^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</PressureOrStressUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LengthUnit about="http://data.nasa.gov/qudt/owl/unit#Inch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">in</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0860</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0254</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Length"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">in</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</LengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<AngleUnit about="http://data.nasa.gov/qudt/owl/unit#DegreeAngle">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Degree Angle</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">deg</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0510</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0174532925</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#PlaneAngle"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">deg</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#UsedWithSIUnit"/>
+</AngleUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<BendingMomentOrTorqueUnit about="http://data.nasa.gov/qudt/owl/unit#PoundForceFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound Force Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lbf-ft</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1420</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.35581807</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Torque"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbf-ft</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</BendingMomentOrTorqueUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ThermalDiffusivityUnit about="http://data.nasa.gov/qudt/owl/unit#SquareFootPerHour">
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft^2/hr</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#KinematicViscosityUnit"/>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermalDiffusivity"/>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Square Foot per Hour</label>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1690</code>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">2.58064E-5</conversionMultiplier>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#KinematicViscosity"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft^2/hr</abbreviation>
+</ThermalDiffusivityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DynamicViscosityUnit about="http://data.nasa.gov/qudt/owl/unit#PoundForceSecondPerSquareFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound Force Second per Square Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lbf-s/ft^2</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1455</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">47.8802631</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#DynamicViscosity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbf-s/ft^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</DynamicViscosityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DynamicViscosityUnit about="http://data.nasa.gov/qudt/owl/unit#SlugPerFootSecond">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Slug per Foot Second</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">slug/(ft-s)</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1655</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">47.8802591863517e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#DynamicViscosity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">slug/(ft-s)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</DynamicViscosityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerLengthUnit about="http://data.nasa.gov/qudt/owl/unit#PoundPerInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound per Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lb/in</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1515</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">17.857967322834646e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#MassPerLength"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lb/in</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerLengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<CoefficientOfHeatTransferUnit about="http://data.nasa.gov/qudt/owl/unit#BtuPerSquareFootSecondDegreeFahrenheit">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU per Square Foot Second Degree Fahrenheit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu/(ft^2-s-degF)</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0245</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#CoefficientOfHeatTransfer"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu/(ft^2-s-degF)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</CoefficientOfHeatTransferUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LinearAccelerationUnit about="http://data.nasa.gov/qudt/owl/unit#InchPerSecondSquared">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">in/s^2</symbol>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LinearAcceleration"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Inch per Second Squared</label>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1111</code>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0254e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">in/s^2</abbreviation>
+</LinearAccelerationUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerLengthUnit about="http://data.nasa.gov/qudt/owl/unit#PoundPerFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound per Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lb/ft</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1490</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.4881639435695537e0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#MassPerLength"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lb/ft</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerLengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<TimeAreaUnit about="http://data.nasa.gov/qudt/owl/unit#HourSquareFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Hour Square Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">hr-ft^2</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0840</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">334.450944</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#AreaTime"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">hr-ft^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</TimeAreaUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassUnit about="http://data.nasa.gov/qudt/owl/unit#PoundMass">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound Mass</label>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Mass"/>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+
+<description datatype="http://www.w3.org/2001/XMLSchema#string">
+A pound of mass, based on the international standard definition of the pound as exactly 0.45359237 kg.
+</description>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbm</symbol>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.45359237</conversionMultiplier>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lbm</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1400</code>
+</MassUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<EnergyAndWorkUnit about="http://data.nasa.gov/qudt/owl/unit#FootPoundForce">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot Pound Force</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0670</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.35581807</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#EnergyAndWork"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</EnergyAndWorkUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#Chain">
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0380</code>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Chain</label>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#LengthUnit"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ch</abbreviation>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Length"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ch</symbol>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">20.1168</conversionMultiplier>
+</DerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<MassPerVolumeUnit about="http://data.nasa.gov/qudt/owl/unit#PoundPerGallon">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound per Gallon</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lb/gal</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1505</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">99.7763727</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Density"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lb/gal</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</MassPerVolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ThrustToMassRatioUnit about="http://data.nasa.gov/qudt/owl/unit#PoundForcePerPound">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound Force per Pound</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lbf/lb</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1440</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">9.80665085</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThrustToMassRatio"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbf/lb</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</ThrustToMassRatioUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<HeatFlowRateUnit about="http://data.nasa.gov/qudt/owl/unit#KilocaloriePerSecond">
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">kcal/s</abbreviation>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Kilocalorie per Second</label>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Power"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4184</conversionMultiplier>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">kcal/s</symbol>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0305</code>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#HeatFlowRate"/>
+</HeatFlowRateUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ThermalResistanceUnit about="http://data.nasa.gov/qudt/owl/unit#DegreeFahrenheitHourPerBtu">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Degree Fahrenheit Hour per BTU</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">degF-hr/Btu</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0535</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermalResistance"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">degF-hr/Btu</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</ThermalResistanceUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#GallonUSPerDay">
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">gal/d</abbreviation>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">US Gallon per Day</label>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.38126389E-8</conversionMultiplier>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0715</code>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">gal/d</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#VolumePerUnitTime"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#VolumePerTimeUnit"/>
+</DerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<NotUsedWithSIUnit about="http://data.nasa.gov/qudt/owl/unit#CubicFootPerMinute">
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0430</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.719474432000001E-4</conversionMultiplier>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft^3/min</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#VolumePerTimeUnit"/>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#VolumePerUnitTime"/>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Cubic Foot per Minute</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft^3/min</abbreviation>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</NotUsedWithSIUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DynamicViscosityUnit about="http://data.nasa.gov/qudt/owl/unit#PoundForceSecondPerSquareInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound Force Second per Square Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lbf-s/in^2</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1460</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">6894.75789</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#DynamicViscosity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lbf-s/in^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</DynamicViscosityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ThermalConductivityUnit about="http://data.nasa.gov/qudt/owl/unit#BtuInchPerSquareFootHourDegreeFahrenheit">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU Inch per Square Foot Hour Degree Fahrenheit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu-in/(hr-ft^2-degF)</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0175</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermalConductivity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu-in/(hr-ft^2-degF)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</ThermalConductivityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#ArcMinute">
+<label>Arc Minute</label>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.000290888209</conversionMultiplier>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">arcMin</abbreviation>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#PlaneAngle"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">arcMin</symbol>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#AngleUnit"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#UsedWithSIUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1195</code>
+
+<exactMatch>
+
+<AngleUnit about="http://data.nasa.gov/qudt/owl/unit#MinuteAngle">
+<label>Minute Angle</label>
+</AngleUnit>
+</exactMatch>
+</DerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#Cord">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Cord</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">C</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0395</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">3.62</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#DryVolume"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">C</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<TimeUnit about="http://data.nasa.gov/qudt/owl/unit#MinuteTime">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Minute Time</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">min</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1205</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">60.0</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Time"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">min</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#UsedWithSIUnit"/>
+</TimeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LengthUnit about="http://data.nasa.gov/qudt/owl/unit#Foot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0625</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.3048</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Length"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</LengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<PowerUnit about="http://data.nasa.gov/qudt/owl/unit#FootPoundForcePerHour">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot Pound Force per Hour</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf/hr</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0675</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">3.76616129E-3</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Power"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft-lbf/hr</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</PowerUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<AreaUnit about="http://data.nasa.gov/qudt/owl/unit#SquareMile">
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1730</code>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Square Mile</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">mi^2</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">2589988.11</conversionMultiplier>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Area"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">mi^2</symbol>
+</AreaUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#LiquidOunceUS">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">US Liquid Ounce</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">oz</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1320</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">2.95735296E-5</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LiquidVolume"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">oz</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LuminanceUnit about="http://data.nasa.gov/qudt/owl/unit#FootLambert">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Foot Lambert</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft-L</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0635</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">3.4262591</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Luminance"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft-L</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</LuminanceUnit>
+</systemDefinedUnit>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">US Customary</abbreviation>
+
+<systemDefinedUnit>
+
+<SIDerivedUnit about="http://data.nasa.gov/qudt/owl/unit#SecondTimeSquared">
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1620</code>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">s^2</symbol>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">1.0e0</conversionMultiplier>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Second Time Squared</label>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#TimeSquared"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#TimeSquaredUnit"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">s^2</abbreviation>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</SIDerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#LiquidPintUS">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">US Liquid Pint</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">pt</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1375</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.731765E-3</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LiquidVolume"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">pt</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#DegreePerSecondSquared">
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0174532925</conversionMultiplier>
+<label>Degree per Second Squared</label>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#AngularAcceleration"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">deg/(s^2)</abbreviation>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">deg/(s^2)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#AngularAccelerationUnit"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2170</code>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+</DerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#Teaspoon">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Teaspoon</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">tsp</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1800</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.92892187E-5</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Volume"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">tsp</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ThermalEnergyLengthUnit about="http://data.nasa.gov/qudt/owl/unit#BtuInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu-in</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0170</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">26.7984187</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermalEnergyLength"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu-in</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</ThermalEnergyLengthUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<AngularVelocityUnit about="http://data.nasa.gov/qudt/owl/unit#DegreePerSecond">
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">deg/s</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.0174532925</conversionMultiplier>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2180</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#AngularVelocity"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">deg/s</abbreviation>
+<label>Degree per Second</label>
+</AngularVelocityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<AngularVelocityUnit about="http://data.nasa.gov/qudt/owl/unit#DegreePerMinute">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Degree per Minute</label>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.000290888209</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#AngularVelocity"/>
+</AngularVelocityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<SpecificHeatCapacityUnit about="http://data.nasa.gov/qudt/owl/unit#BtuPerPoundDegreeFahrenheit">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU per Pound Degree Fahrenheit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu/(lb-degF)</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0215</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#SpecificHeatCapacity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu/(lb-degF)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</SpecificHeatCapacityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ThermalConductivityUnit about="http://data.nasa.gov/qudt/owl/unit#BtuFootPerSquareFootHourDegreeFahrenheit">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU Foot per Square Foot Hour Degree Fahrenheit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu-ft/(hr-ft^2-degF)</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0165</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermalConductivity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu-ft/(hr-ft^2-degF)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</ThermalConductivityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#Barrel">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Barrel</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">bbl</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0120</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Volume"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">bbl</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<VolumeUnit about="http://data.nasa.gov/qudt/owl/unit#Bushel">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Bushel</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">bu</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0255</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.03523907</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#DryVolume"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">bu</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</VolumeUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<CoefficientOfHeatTransferUnit about="http://data.nasa.gov/qudt/owl/unit#BtuPerSquareFootHourDegreeFahrenheit">
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">BTU per Square Foot Hour Degree Fahrenheit</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">Btu/(hr-ft^2-degF)</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0205</code>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#CoefficientOfHeatTransfer"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">Btu/(hr-ft^2-degF)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</CoefficientOfHeatTransferUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DynamicViscosityUnit about="http://data.nasa.gov/qudt/owl/unit#PoundPerFootHour">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Pound per Foot Hour</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">lb/(ft-hr)</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1495</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.133788732137649E-4</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#DynamicViscosity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">lb/(ft-hr)</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+</DynamicViscosityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<UsedWithSIUnit about="http://data.nasa.gov/qudt/owl/unit#Day">
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">86400</conversionMultiplier>
+<description datatype="http://www.w3.org/2001/XMLSchema#string">Mean solar day</description>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#Time"/>
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Day</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">d</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">0490</code>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">d</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#TimeUnit"/>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+</UsedWithSIUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<ThermalResistivityUnit about="http://data.nasa.gov/qudt/owl/unit#SquareFootPerBtuInch">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Square Foot per BTU Inch</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">ft^2/(Btu-in)</abbreviation>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#ThermalResistivity"/>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.00346673589</conversionMultiplier>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1680</code>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NotUsedWithSIUnit"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">ft^2/(Btu-in)</symbol>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+</ThermalResistivityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<LinearVelocityUnit about="http://data.nasa.gov/qudt/owl/unit#MilePerMinute">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Mile per Minute</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">mi/min</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1155</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">26.8224</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#LinearVelocity"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">mi/min</symbol>
+</LinearVelocityUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<DerivedUnit about="http://data.nasa.gov/qudt/owl/unit#DegreePerHour">
+<label>Degree per Hour</label>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">deg/h</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#AngularVelocityUnit"/>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#AngularVelocity"/>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#NonSIUnit"/>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">deg/h</abbreviation>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">4.84813681E-6</conversionMultiplier>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">2181</code>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+</DerivedUnit>
+</systemDefinedUnit>
+
+<systemDefinedUnit>
+
+<TimeAreaUnit about="http://data.nasa.gov/qudt/owl/unit#SecondSquareFoot">
+<label datatype="http://www.w3.org/2001/XMLSchema#string">Second Square Foot</label>
+<abbreviation datatype="http://www.w3.org/2001/XMLSchema#string">s-ft^2</abbreviation>
+<code datatype="http://www.w3.org/2001/XMLSchema#string">1605</code>
+<conversionMultiplier datatype="http://www.w3.org/2001/XMLSchema#double">0.09290304</conversionMultiplier>
+<conversionOffset datatype="http://www.w3.org/2001/XMLSchema#double">0.0</conversionOffset>
+<quantityKind resource="http://data.nasa.gov/qudt/owl/quantity#AreaTime"/>
+<symbol datatype="http://www.w3.org/2001/XMLSchema#string">s-ft^2</symbol>
+<type resource="http://data.nasa.gov/qudt/owl/qudt#DerivedUnit"/>
+</TimeAreaUnit>
+</systemDefinedUnit>
+
+</SystemOfUnits>
+</qudt>

@@ -1,0 +1,87 @@
+<form action="/lca/create/lca" name="LCA" root="lca">
+  <fieldset name="Activity Data Set" linked_type="oslca:activityDataSet">
+	<fieldset name="Activity Description" linked_type="oslca:activityDescription">
+		<fieldset name="Activity" linked_type="oslca:activity">
+			<name rules="trim">
+				<label>Name</label>
+				<type>text</type>
+			  	<linked_type>rdf:label</linked_type>
+			</name>
+			<description rules="trim">
+				<label>Description</label>
+				<type>textarea</type>
+			  	<linked_type>rdf:description</linked_type>
+			</description>
+			<fieldset name="Quantitative Reference" linked_type="oslca:quantitativeReference">
+				<qrname rules="trim">
+					<label>Name</label>
+					<type>text</type>
+				  	<linked_type>rdf:label</linked_type>
+				</qrname>				
+				<fieldset name="Quantity" linked_type="qud:Quantity">
+					<qrvalue rules="trim">
+						<label>Value</label>
+						<type>text</type>
+					  	<linked_type>qud:QuantityMagnitude</linked_type>
+					</qrvalue>
+					<qrunit rules="trim">
+						<label>Unit</label>
+						<type>text</type>
+					  	<linked_type>qud:QuantityKind</linked_type>
+					</qrunit>				
+				</fieldset>													
+			</fieldset>			
+		</fieldset>		
+	</fieldset>
+    <fieldset name="Administrative Information" linked_type="oslca:administrativeInformation">
+	    <fieldset name="Data Generator and Publication" linked_type="oslca:dataGeneratorAndPublication">
+		    <fieldset name="" linked_type="oslca:dataGenerator" root="person">	
+				<firstName rules="trim">
+					<label>Creator First Name</label>
+					<type>text</type>
+				  	<linked_type>foaf:firstName</linked_type>
+				</firstName>
+				<lastName rules="trim">
+					<label>Creator Last Name</label>
+					<type>text</type>
+				  	<linked_type>foaf:lastName</linked_type>
+				</lastName>
+				<email rules="trim|sha1sum">
+					<label>Email</label>
+					<type>text</type>
+				  	<linked_type>foaf:mbox_sha1sum</linked_type>
+				</email>
+			</fieldset>
+			<publicationLink rules="trim">
+				<label>Publication/Source Link</label>
+				<type>text</type>
+			  	<linked_type>dc:Source</linked_type>
+			</publicationLink>	
+		</fieldset>	
+	</fieldset>
+    <fieldset name="Impact Assessment" linked_type="oslca:impactAssessment">
+		<impactAssessmentType rules="trim">
+			<label>Type</label>
+			<type>text</type>
+		  	<linked_type>rdf:type</linked_type>
+		</impactAssessmentType>
+	    <fieldset name="Quantitative Reference" linked_type="oslca:quantitativeReference">
+			<impactAssessmentValue rules="trim">
+				<label>Value</label>
+				<type>text</type>
+			  	<linked_type>qud:QuantityMagnitude</linked_type>
+			</impactAssessmentValue>
+			<impactAssessmentUnit rules="trim">
+				<label>Unit</label>
+				<type>text</type>
+			  	<linked_type>qud:QuantityKind</linked_type>
+			</impactAssessmentUnit>			
+		</fieldset>		
+	</fieldset>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

@@ -1,39 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<form action="info/create/lca/impactassessment" name="lca">
-<fieldset name="Impact Assessment" linked_type="lca:impactAssessment">
-  <fieldset name="Classification" linked_type="lca:classification">
-    <impact_category rules="trim|xss_clean">
-	  <label>Impact Category</label>
-      <type>text</type>
-	  <linked_type>lca:impactCategory</linked_type>
-    </impact_category>
-    <value rules="trim|xss_clean">
-	  <label>Value</label>
-      <type>text</type>
-	  <linked_type>lca:impactCategoryValue</linked_type>
-    </value>
-    <unit rules="trim|xss_clean">
-	  <label>Unit</label>
-      <type>text</type>
-	  <linked_type>lca:impactCategoryUnit</linked_type>
-    </unit>
-    <model rules="trim|xss_clean">
-	  <label>Model Used</label>
-      <type>text</type>
-	  <linked_type>lca:impactCategoryModel</linked_type>
-	  <multiple>yes</multiple>
-    </model>
-    <impacts rules="trim|xss_clean">
-	  <label>Impacts</label>
-      <type>text</type>
-	  <linked_type>lca:impactCategoryImpacts</linked_type>
-	  <multiple>yes</multiple>
-    </impacts>
-  </fieldset>
-  <submit>
-    <type>submit</type>
-    <value>Submit</value>
-  </submit>
-</fieldset>
+<form action="/impactAssessment/create" name="impactAssessment">
+	<blank rules="">
+        <type>hidden</type>
+        <value>true</value>
+    </blank>
+	<fieldset name="Impact Assessment" multiple="yes" linked_type="bibo:impactAssessment">	
+		<impactCategory rules="trim">
+			<label>Impact Category</label>
+			<type>lookup</type>
+			<lookup>impact category</lookup>
+			<linked_type>eco:impactCategory</linked_type>
+		</impactCategory>
+		<impactIndicator rules="trim">
+			<label>Impact Indicator</label>
+			<type>lookup</type>
+			<lookup>impact indicator</lookup>
+			<linked_type>eco:impactIndicator</linked_type>
+		</impactIndicator>
+		<assessmentQuantity rules="trim">
+			<label>Quantity</label>
+			<type>text</type>
+			<linked_type>eco:assessmentQuantity</linked_type>
+		</assessmentQuantity>		
+		<assessmentUnit rules="trim">
+			<label>Unit</label>
+			<type>lookup</type>
+			<lookup>unit</lookup>
+			<linked_type>eco:assessmentUnit</linked_type>
+		</assessmentUnit>		
+	</fieldset>	
+	    <submit rules="">
+	        <type>submit</type>
+	        <value>Submit</value>
+	    </submit>
 </form>
-

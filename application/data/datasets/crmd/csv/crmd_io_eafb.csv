@@ -1,30 +1,30 @@
-input,raw material,technosphere,"Bentonite (Al2O3.4SiO2.H2O, in ground)",http://dbpedia.org/class/yago/Kilogram113724582,0.001
-input,raw material,technosphere,"Dolomite (CaCO3.MgCO3, in ground)",http://dbpedia.org/class/yago/Kilogram113724582,1.66
-input,raw material,technosphere,"Iron (Fe, ore)",http://dbpedia.org/class/yago/Kilogram113724582,9.9
-input,raw material,technosphere,"Limestone (CaCO3, in ground)",http://dbpedia.org/class/yago/Kilogram113724582,96
-input,raw material,technosphere,"Manganese (Mn, ore)",http://dbpedia.org/class/yago/Kilogram113724582,16.6
-input,raw material,technosphere,Sand (in ground),http://dbpedia.org/class/yago/Kilogram113724582,6.08
-input,raw material,technosphere,"Sodium Chloride (NaCl, in ground or in sea)",http://dbpedia.org/class/yago/Kilogram113724582,0.103
-input,raw material,technosphere,Steel Scrap,http://dbpedia.org/class/yago/Kilogram113724582,1100
-input,energy,,Coal,http://dbpedia.org/class/yago/Kilogram113724582,177
-output,energy,,Natural gas,http://dbpedia.org/class/yago/Kilogram113724582,20.4
-output,energy,,Oil,http://dbpedia.org/class/yago/Kilogram113724582,17.9
+input,raw material,technosphere,"Bentonite (Al2O3.4SiO2.H2O, in ground)",qudt:Kilogram,0.001
+input,raw material,technosphere,"Dolomite (CaCO3.MgCO3, in ground)",qudt:Kilogram,1.66
+input,raw material,technosphere,"Iron (Fe, ore)",qudt:Kilogram,9.9
+input,raw material,technosphere,"Limestone (CaCO3, in ground)",qudt:Kilogram,96
+input,raw material,technosphere,"Manganese (Mn, ore)",qudt:Kilogram,16.6
+input,raw material,technosphere,Sand (in ground),qudt:Kilogram,6.08
+input,raw material,technosphere,"Sodium Chloride (NaCl, in ground or in sea)",qudt:Kilogram,0.103
+input,raw material,technosphere,Steel Scrap,qudt:Kilogram,1100
+input,energy,,Coal,qudt:Kilogram,177
+output,energy,,Natural gas,qudt:Kilogram,20.4
+output,energy,,Oil,qudt:Kilogram,17.9
 output,energy,,Transportation Energy,MJ,133
-output,emission,air,water,http://dbpedia.org/class/yago/Liter113624190,8480
-output,emission,air,Carbon dioxide,http://dbpedia.org/class/yago/Kilogram113724582,595
-output,emission,air,Carbon monoxide,http://dbpedia.org/class/yago/Kilogram113724582,3.97
-output,emission,air,Sulphur oxides (reported as SO2),http://dbpedia.org/class/yago/Kilogram113724582,2.98
-output,emission,air,Nitrogen oxides (reported as NO2),http://dbpedia.org/class/yago/Kilogram113724582,1.77
-output,emission,air,Methane,http://dbpedia.org/class/yago/Kilogram113724582,1.29
-output,emission,air,Dust & particles (includes metals),http://dbpedia.org/class/yago/Kilogram113724582,7.22,Total of Lead and Particulates.
-output,emission,air,Acid gases,http://dbpedia.org/class/yago/Kilogram113724582,0.101,Total of Hydrogen Chloride and Hydrogen Fluoride.
-output,emission,air,NMHC (non-methane hydrocarbons),http://dbpedia.org/class/yago/Kilogram113724582,0.182
-output,emission,air,Hydrocarbons (unspecified),http://dbpedia.org/class/yago/Kilogram113724582,0.106
-output,emission,water,Phosphates and ammonia,http://dbpedia.org/class/yago/Kilogram113724582,0.00482
-output,emission,water,Oils and greases,http://dbpedia.org/class/yago/Kilogram113724582,0.00437
-output,emission,water,Suspended solids,http://dbpedia.org/class/yago/Kilogram113724582,0.0619
-output,emission,water,Other organics,http://dbpedia.org/class/yago/Kilogram113724582,0.000066
-output,emission,water,Metals,http://dbpedia.org/class/yago/Kilogram113724582,0.039
-output,emission,water,Heavy Metals,http://dbpedia.org/class/yago/Kilogram113724582,0.00133
-output,emission,water,Dissolved solids,http://dbpedia.org/class/yago/Kilogram113724582,0.169
-output,emission,land,Total waste,http://dbpedia.org/class/yago/Kilogram113724582,133
+output,emission,air,water,qudt:Liter,8480
+output,emission,air,Carbon dioxide,qudt:Kilogram,595
+output,emission,air,Carbon monoxide,qudt:Kilogram,3.97
+output,emission,air,Sulphur oxides (reported as SO2),qudt:Kilogram,2.98
+output,emission,air,Nitrogen oxides (reported as NO2),qudt:Kilogram,1.77
+output,emission,air,Methane,qudt:Kilogram,1.29
+output,emission,air,Dust & particles (includes metals),qudt:Kilogram,7.22,Total of Lead and Particulates.
+output,emission,air,Acid gases,qudt:Kilogram,0.101,Total of Hydrogen Chloride and Hydrogen Fluoride.
+output,emission,air,NMHC (non-methane hydrocarbons),qudt:Kilogram,0.182
+output,emission,air,Hydrocarbons (unspecified),qudt:Kilogram,0.106
+output,emission,water,Phosphates and ammonia,qudt:Kilogram,0.00482
+output,emission,water,Oils and greases,qudt:Kilogram,0.00437
+output,emission,water,Suspended solids,qudt:Kilogram,0.0619
+output,emission,water,Other organics,qudt:Kilogram,0.000066
+output,emission,water,Metals,qudt:Kilogram,0.039
+output,emission,water,Heavy Metals,qudt:Kilogram,0.00133
+output,emission,water,Dissolved solids,qudt:Kilogram,0.169
+output,emission,land,Total waste,qudt:Kilogram,133

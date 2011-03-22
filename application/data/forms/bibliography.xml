@@ -1,0 +1,77 @@
+<form action="/lca/create/bibliography" name="Bibliographic Reference">
+  <fieldset name="Bibliographic Reference" linked_type="bibo:Document">
+		<bibotype rules="">
+			<label>Reference Type</label>
+			<type>hidden</type>
+			<linked_type></linked_type>
+			<options>
+				<journal>Journal</journal>
+			</options>
+		</bibotype>
+		<title rules="trim">
+			<label>Title</label>
+			<type>text</type>
+		  	<linked_type>dc:title</linked_type>
+			<optional>no</optional>
+			<multiple>no</multiple>
+		</title>
+		<fieldset name="Authors" linked_type="bibo:authorList">
+			<author rules="trim">
+				<label>Author Name</label>
+				<type>lookup</type>
+				<lookup>foaf</lookup>
+			  	<linked_type>foaf:Person</linked_type>
+				<optional>no</optional>
+				<multiple>yes</multiple>
+			</author>
+		</fieldset>
+		<journal rules="trim">
+			<label>Journal</label>
+			<type>text</type>
+			<lookup>journal</lookup>
+		  	<linked_type>dc:isPartOf</linked_type>
+			<optional>no</optional>
+			<multiple>no</multiple>
+		</journal>		
+		<date rules="trim">
+			<label>Date</label>
+			<type>date</type>
+			<lookup>journal</lookup>
+		  	<linked_type>dc:date</linked_type>
+			<optional>no</optional>
+			<multiple>no</multiple>
+		</date>
+		<volume rules="trim">
+			<label>Volume</label>
+			<type>text</type>
+		  	<linked_type>bibo:volume</linked_type>
+			<optional>no</optional>
+			<multiple>no</multiple>
+		</volume>
+		<issue rules="trim">
+			<label>Issue</label>
+			<type>text</type>
+		  	<linked_type>bibo:issue</linked_type>
+			<optional>no</optional>
+			<multiple>no</multiple>
+		</issue>
+		<pageStart rules="trim">
+			<label>Page Start</label>
+			<type>text</type>
+		  	<linked_type>bibo:pageStart</linked_type>
+			<optional>no</optional>
+			<multiple>no</multiple>
+		</pageStart>
+		<pageEnd rules="trim">
+			<label>Page End</label>
+			<type>text</type>
+		  	<linked_type>bibo:pageEnd</linked_type>
+			<optional>no</optional>
+			<multiple>no</multiple>
+		</pageEnd>
+  </fieldset>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+	    </submit>
+</form>

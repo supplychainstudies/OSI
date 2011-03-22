@@ -1,0 +1,14 @@
+<form action="/lca/create/classification" name="Classification">
+  <fieldset name="Classification" linked_type="oslca:classification">
+		<classificationURI rules="trim">
+			<label>Classification URI</label>
+			<type>text</type>
+		  	<linked_type>oslca:classification</linked_type>
+		</classificationURI>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

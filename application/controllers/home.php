@@ -23,7 +23,7 @@ class Home extends SM_Controller {
 		$menu = "<a href=\"info/browse\">Browse &raquo; </a><br />\n" . 
 				"<a href=\"#\">Search &raquo; </a><br />\n" .
 				"<a href=\"info/create/\">Submit Environmental Data &raquo; </a><br />\n" ; 
-		$content = "Welcome to OpenSustainability.info, a website for open environmental data";
+		$content = "Welcome to OpenSustainability.info, a website for open environmental data.";
 		$this->style(Array(''));
 		$this->data('menu', $menu);		
 		$this->data('content', $content);

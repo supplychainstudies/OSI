@@ -1,4 +1,10 @@
+function toggle(idname) {
+	$('#div_' + idname).slideToggle('slow', function() {
 
+	// Animation complete.
+
+	});		
+}
 
 	$('.toggler').click(function() {
 

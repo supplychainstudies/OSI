@@ -1,0 +1,732 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [<!ENTITY xsd "xsd:">]>
+
+<rdf:RDF xmlns="http://purl.org/net/xamde/ns/os#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:log="http://www.w3.org/2000/10/swap/log#"
+    xmlns:os="http://purl.org/net/xamde/ns/os#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:s="http://www.schemaweb.info/schemas/meta/rdf/"
+    xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:bibo="http://purl.org/ontology/bibo/"
+	xmlns:muo="http://purl.oclc.org/NET/muo/muo#"
+	xmlns:ucum="http://purl.oclc.org/NET/muo/ucum/physical-quality/"
+	xmlns:qud="http://www.qudt.org/qudt/owl/1.0.0/qudt.owl"
+	xmlns:ecospoldconcepts="ecospoldconcepts.rdf"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+<owl:Ontology rdf:ID="oslca">
+      <rdf:label>Open Sustainability Life Cycle Assessment Vocabulary</rdf:label>
+      <dc:description>Based on the ISO 14048 standard. </dc:description>
+      <dc:created>2010-06-02</dc:created>
+      <dc:modified></dc:modified>
+      <owl:versionInfo>0.1</owl:versionInfo>
+      <s:contact>
+          <foaf:Person>
+              <rdfs:seeAlso rdf:resource="http://www.biancasayan.com/foaf.rdf" />
+          </foaf:Person>
+      </s:contact>
+      <s:location rdf:resource="http://opensustainability.info/life_cycle_assessment.rdfs" />
+      <s:namespace>http://opensustainability.info/life_cycle_assessment#</s:namespace>
+      <owl:imports rdf:resource="http://www.w3.org/2000/01/rdf-schema"/>
+      <owl:imports rdf:resource="http://www.w3.org/2002/07/owl"/>
+</owl:Ontology>
+
+<!-- Activity Dataset is the parent Class -->
+<owl:Class rdf:ID="activityDataset">
+	<rdfs:label>Activity Dataset</rdfs:label>
+	<rdf:domain rdf:resource="owl:Thing" />
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#activityDescription" />
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#modellingAndValidation"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#administrativeInformation"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#flowData"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#impactAssessment"/>
+       </owl:Restriction>
+     </owl:Class>
+  </rdf:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:ID="activityDescription">
+	<rdfs:label>Activity Description</rdfs:label>
+ 	<rdfs:comment>Contains content-related metainformation for the activity</rdfs:comment>
+	<rdf:domain rdf:resource="#activityDataset" />
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#activity" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#classification" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#geography" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#technology" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#timePeriod" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#macroEconomicScenario" />
+			</owl:restriction>
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+
+<owl:Class rdf:ID="activity">
+	<rdfs:label>Activity</rdfs:label>
+ 	<rdfs:comment>Comprises information which identifies and characterises one particular dataset (=unit process or system terminated).</rdfs:comment>
+	<rdf:domain rdf:resource="#activityDescription" />
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:label" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:description" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="oslca:quantitativeReference" />
+			</owl:restriction>			
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:sameAs" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="owl:equivalentTo" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#activityStart" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#activityEnd" />
+			</owl:restriction>	
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#parentActivity" />
+			</owl:restriction>	
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#subActivity" />
+			</owl:restriction>													
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:ID="quantitativeReference">
+	<rdfs:label>Quantitative Reference</rdfs:label>
+ 	<rdfs:comment>The concept of a functional unit is </rdfs:comment>
+	<skos:example>A Quantitative reference may be 1 kilogram of oranges</skos:example>
+	<rdf:domain rdf:resource="#activityDescription" />
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:label" />
+			</owl:restriction>
+ 			<owl:restriction>
+				<owl:onProperty rdf:resource="oslca:subject" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:description" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="qud:Quantity" />
+			</owl:restriction>										
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:type" />
+			</owl:restriction>			
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:ID="classification">
+	<rdfs:label>Classification</rdfs:label>
+ 	<rdfs:comment></rdfs:comment>
+	<rdf:domain rdf:resource="#activityDescription" />				
+	<owl:someValuesFrom rdf:resource="http://opensustainability.info/vocab/EcoSpold02Classifications.rdf#classification" />
+	<owl:someValuesFrom rdf:resource="http://opensustainability.info/vocab/ILCDClassifications.rdf#classification" />
+</owl:Class>
+
+<owl:Class rdf:ID="geography">
+	<rdfs:label>Geography</rdfs:label>
+ 	<rdfs:comment>Describes the geographic location for which the dataset is supposed to be valid.</rdfs:comment>
+	<rdf:domain rdf:resource="#activityDescription" />	
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:Restriction>
+					<owl:onProperty rdf:resource="rdf:description" />							
+			</owl:Restriction>
+			<owl:Restriction>					
+				<owl:oneOf>	
+						<owl:onProperty rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing" />
+						<owl:onProperty rdf:resource="http://www.geonames.org/ontology#Feature" />							
+				</owl:oneOf>
+			</owl:Restriction>
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:ID="technology">
+	<rdfs:label>Technology</rdfs:label>
+ 	<rdfs:comment>Describes the technological properties of the unit process.</rdfs:comment>
+	<rdf:domain rdf:resource="#activityDescription" />	
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:Restriction>
+					<owl:onProperty rdf:resource="rdf:description" />						
+			</owl:Restriction>					
+			<owl:Restriction>
+					<owl:onProperty rdf:resource="#technologyLevel" />						
+			</owl:Restriction>
+		</owl:Class>
+	</rdf:subClassOf>				
+</owl:Class>	
+
+<owl:Property rdf:ID="technologyLevel">
+	<rdfs:label xml:lang="en-gb">Technology Level</rdfs:label>
+	<rdfs:comment>The terms used does not necessarily reflect the age of the technologies. A modern technology can be a century old, if it is still the most competitive technology, and an old technology can be relatively young, if it is one that has quickly become superseded by other more competitive ones. The technology level is relative to the year for which the data are valid, as given under Time Period. In a time series, the same technology can move between different technology levels over time. The same technology can also be given different technology levels in different geographical locations, even in the same year.</rdfs:comment>
+	<rdf:domain rdf:resource="#technology" />
+	<owl:allValuesFrom>
+		<owl:oneOf rdf:parseType="Collection">
+			<owl:Thing rdf:about="ecospoldconcepts:undefined" />
+			<owl:Thing rdf:about="ecospoldconcepts:new" />
+			<owl:Thing rdf:about="ecospoldconcepts:modern" />
+			<owl:Thing rdf:about="ecospoldconcepts:current" />
+			<owl:Thing rdf:about="ecospoldconcepts:old" />
+			<owl:Thing rdf:about="ecospoldconcepts:outdated" />
+		</owl:oneOf>
+	</owl:allValuesFrom>
+</owl:Property>	
+			
+<owl:Class rdf:ID="timePeriod">
+	<rdfs:label>Time Period</rdfs:label>
+ 	<rdfs:comment>Characterises the temporal properties of the unit activity (or system terminated) at issue./Describes start and end date of the time period for which the dataset is valid.</rdfs:comment>
+	<rdf:domain rdf:resource="#activityDescription" />	
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:Restriction>
+					<owl:onProperty rdf:resource="rdf:description" />						
+			</owl:Restriction>					
+			<owl:Restriction>
+					<owl:onProperty rdf:resource="dc:PeriodOfTime" />						
+			</owl:Restriction>
+		</owl:Class>
+	</rdf:subClassOf>		
+</owl:Class>
+			
+<owl:Class rdf:ID="macroEconomicScenario">
+	<rdfs:label>Macroeconomic Scenario</rdfs:label>
+ 	<rdfs:comment></rdfs:comment>
+	<rdf:domain rdf:resource="#activityDescription" />	
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:Restriction>
+					<owl:onProperty rdf:resource="rdf:description" />						
+			</owl:Restriction>					
+			<owl:Restriction>
+					<owl:onProperty rdf:resource="rdf:label" />						
+			</owl:Restriction>
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>		
+			
+<owl:Class rdf:ID="modellingAndValidation">
+	<rdfs:label>Modelling and Validation</rdfs:label>
+ 	<rdfs:comment>Contains meta information about how unit processes are modelled and about the review/validation of the dataset.</rdfs:comment>	
+	<rdf:domain rdf:resource="#activityDataset" />	
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="rdf:label"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#representativeness" />
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#review"/>
+       </owl:Restriction>
+     </owl:Class>
+  </rdf:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:ID="representativeness">
+	<rdfs:label>Representativeness</rdfs:label>
+ 	<rdfs:comment>Contains information about the representativeness of the unit process data (meta information and flow data).</rdfs:comment>
+	<rdf:domain rdf:resource="#modellingAndValidation" />
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#systemModelName"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#samplingProcedure" />
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#extrapolations"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="http://purl.oclc.org/NET/muo/ucum/unit/fraction/percent"/>
+       </owl:Restriction> 
+    </owl:Class>
+  </rdf:subClassOf>
+</owl:Class>
+
+<owl:Property rdf:ID="systemModelName">
+	<rdfs:label xml:lang="en-gb">systemModelName</rdfs:label>
+</owl:Property>				
+
+<owl:Class rdf:ID="samplingProcedure">
+	<rdfs:label xml:lang="en-gb">samplingProcedure</rdfs:label>
+	<rdfs:comment></rdfs:comment>
+	<rdf:domain rdf:resource="#representativeness" />
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="rdf:description"/>
+       </owl:Restriction> 
+    </owl:Class>
+  </rdf:subClassOf>	
+</owl:Class>		
+		
+<owl:Class rdf:ID="extrapolations">
+	<rdfs:label xml:lang="en-gb">extrapolations</rdfs:label>
+	<rdfs:comment>Describes extrapolations of data from another time period, another geographical area or another technology and the way these extrapolations have been carried out. It should be reported whether different extrapolations have been done on the level of individual exchanges. If data representative for a activity operated in one country is used for another country's activity, its original representativity can be indicated here. Changes in mean values due to extrapolations may also be reported here.</rdfs:comment>
+	<rdf:domain rdf:resource="#representativeness" />	
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="rdf:description"/>
+       </owl:Restriction> 
+    </owl:Class>
+  </rdf:subClassOf>
+</owl:Class>		
+				
+<owl:Class rdf:ID="review">
+	<rdfs:label>Review</rdfs:label>
+ 	<rdfs:comment>Contains information about the reviewers' comments on the dataset content.</rdfs:comment>
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#reviewer"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="rdf:description" />
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#dateReviewed"/>
+       </owl:Restriction>
+    </owl:Class>
+  </rdf:subClassOf>
+</owl:Class>
+	
+<owl:dataTypeProperty rdf:ID="reviewer">
+	<rdfs:label>Reviewer</rdfs:label>
+	<rdfs:subClassOf rdf:resource="dc:contributor" />
+	<rdf:domain rdf:resource="#review" />
+	<rdf:range rdf:resource="foaf:Person" />
+	<owl:someValuesFrom rdf:resource="http://opensustainability.info/agents/people" />
+</owl:dataTypeProperty>
+
+<owl:dataTypeProperty rdf:ID="dateReviewed">
+	<rdfs:label>Date Reviewed</rdfs:label>
+	<rdfs:comment></rdfs:comment>
+	<rdfs:subClassOf rdf:resource="dc:date" />
+	<rdf:domain rdf:resource="#review" />
+	<rdf:range rdf:resource="xsd:date" />
+</owl:dataTypeProperty>
+
+<owl:Class rdf:ID="administrativeInformation">
+	<rdfs:label>Administrative Information</rdfs:label>
+ 	<rdfs:comment>Contains the administrative information about the dataset at issue: The persons that compiled and entered the dataset in the database and about kind of publication and the accessibility of the dataset, timestamp, version and internalVersion number as well as language and localLanguage code.</rdfs:comment>
+	<rdf:domain rdf:resource="#activityDataSet" />	
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#dataEntryBy"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#dataGeneratorAndPublication" />
+       </owl:Restriction>
+    </owl:Class>
+  </rdf:subClassOf>	
+</owl:Class>
+	
+<owl:Class rdf:ID="dataEntryBy">
+	<rdfs:label>Data Entry By</rdfs:label>
+	<rdfs:subClassOf rdf:resource="dc:contributor" />
+	<rdf:domain rdf:resource="#administrativeInformation" />
+	<rdf:range rdf:resource="foaf:Person" />
+	<owl:someValuesFrom rdf:resource="http://opensustainability.info/agents/people" />
+</owl:Class>
+												
+<owl:Class rdf:ID="dataGeneratorAndPublication">
+	<rdfs:label>Data Generator and Publication</rdfs:label>
+ 	<rdfs:comment>Contains information about who collected, compiled or published the original data. This may or may not be the same person as under 'DataEntryBy'. Furthermore contains information about kind of publication underlying the dataset and the accessibility of the dataset.</rdfs:comment>
+	<rdf:domain rdf:resource="#administrativeInformation" />
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="bibo:citation"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="dc:source" />
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#dataGenerator"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#dataPublishedIn"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#isCopyrightProtected"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#pageNumbers"/>
+       </owl:Restriction>
+       <owl:Restriction>
+          <owl:onProperty rdf:resource="#accessRestrictedTo"/>
+       </owl:Restriction>
+    </owl:Class>
+  </rdf:subClassOf>
+</owl:Class>
+			
+<owl:Class rdf:ID="dataGenerator">
+	<rdfs:label>Data Generator</rdfs:label>
+	<rdfs:subClassOf rdf:resource="dc:contributor" />
+	<rdf:domain rdf:resource="#dataGeneratorAndPublication" />
+	<rdf:range rdf:resource="foaf:Person" />
+	<owl:someValuesFrom rdf:resource="http://opensustainability.info/agents/people" />
+</owl:Class>
+				
+<owl:Property rdf:ID="dataPublishedIn">
+	<rdfs:label xml:lang="en-gb">Data Published In</rdfs:label>
+	<rdf:domain rdf:resource="#dataGeneratorAndPublication" />	
+	<rdf:datatype rdf:resource="xsd:string" />
+	<owl:allValuesFrom>
+		<owl:oneOf rdf:parseType="Collection">
+			<owl:Thing>
+				Data as such not published elsewhere
+			</owl:Thing>
+			<owl:Thing>
+				The data of some unit processes or subsystems are published
+			</owl:Thing>
+			<owl:Thing>
+				Data has been published entirely 
+			</owl:Thing>
+		</owl:oneOf>
+	</owl:allValuesFrom>
+</owl:Property>
+
+<owl:Property rdf:ID="isCopyrightProtected">
+	<rdfs:label xml:lang="en-gb">isCopyrightProtected</rdfs:label>
+	<rdf:domain rdf:resource="#dataGeneratorAndPublication" />
+	<rdfs:range rdf:resource="xsd:boolean" />
+</owl:Property>
+
+<owl:dataTypeProperty rdf:ID="pageNumbers">
+	<rdfs:label xml:lang="en-gb">Page Numbers</rdfs:label>
+	<rdfs:comment>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</rdfs:comment>
+	<rdf:domain rdf:resource="#dataGeneratorAndPublication" />
+	<rdfs:range rdf:resource="xsd:integer" />	
+</owl:dataTypeProperty>
+				
+<owl:Property rdf:ID="accessRestrictedTo">
+	<rdfs:label xml:lang="en-gb">Access Restricted To</rdfs:label>
+	<rdfs:comment>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</rdfs:comment>
+	<owl:oneOf rdf:parseType="Collection">
+		<owl:Thing about="ecospoldconcepts:noAccessRestrictions" />
+		<owl:Thing about="ecospoldconcepts:accessRestrictedtoLicenseHolders" />
+		<owl:Thing about="ecospoldconcepts:accessRestrictedtoLicenseHoldersforResults" />
+		<owl:Thing about="ecospoldconcepts:accessRestrictedtoCompany" />		
+	</owl:oneOf>
+</owl:Property>
+
+<owl:Property rdf:ID="company">
+	<rdfs:label xml:lang="en-gb">Company</rdfs:label>
+	<rdfs:domain rdf:resource="#dataGeneratorAndPublication" />
+	<rdfs:range rdf:resource="foaf:Organization" />
+</owl:Property>
+						
+<owl:Class rdf:ID="fileAttributes">			
+	<rdfs:label>File Attributes</rdfs:label>
+	<rdfs:comment></rdfs:comment>
+	<rdf:domain rdf:resource="#administrativeInformation" />
+	<rdf:subClassOf>
+	   <owl:Class>
+	     <owl:Restriction>
+	        <owl:onProperty rdf:resource="dcterms:language"/>
+	     </owl:Restriction>
+	     <owl:Restriction>
+	        <owl:onProperty rdf:resource="dcterms:created" />
+	     </owl:Restriction>
+	     <owl:Restriction>
+	        <owl:onProperty rdf:resource="dcterms:modified"/>
+	     </owl:Restriction>
+	     <owl:Restriction>
+	        <owl:onProperty rdf:resource="#fileGenerator"/>
+	     </owl:Restriction>
+	     <owl:Restriction>
+	        <owl:onProperty rdf:resource="#originalFormat"/>
+	     </owl:Restriction>
+	  </owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+<owl:Property rdf:ID="fileGenerator">
+	<rdfs:label xml:lang="en-gb">File Generator</rdfs:label>
+	<rdf:domain rdf:resource="#fileAttributes" />
+	<rdf:range rdf:resource="xsd:string" />
+</owl:Property>	
+
+<owl:Property rdf:ID="originalFormat">
+	<rdfs:label xml:lang="en-gb">Original Format</rdfs:label>
+	<rdf:domain rdf:resource="#fileAttributes" />
+	<rdf:range rdf:resource="xsd:string" />
+</owl:Property>
+
+<owl:Class rdf:ID="flowData">
+	<rdfs:label>Flow Data</rdfs:label>
+ 	<rdfs:comment>Contains information about inputs and outputs of the given activity (exchanges with environment as well as intermediate exchanges) as well as their properties, allocations, transfer coefficients, uncertainties and parameters for the use in mathematical formulas.</rdfs:comment>
+	<rdf:domain rdf:resource="#activityDataset" />
+	<rdf:subClassOf>
+     <owl:Class>
+       <owl:Restriction>			
+			<owl:oneOf>
+          		<owl:onProperty rdf:resource="#elementaryFlow"/>
+          		<owl:onProperty rdf:resource="#intermediateExchange"/>
+			</owl:oneOf>
+       </owl:Restriction>
+     </owl:Class>
+  </rdf:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:ID="exchange">
+	<rdfs:label>Exchange</rdfs:label>
+	<rdfs:comment>Comprises intermediate product and waste inputs and outputs for the activity.</rdfs:comment>	
+	<rdf:domain rdf:resource="#flowData" />
+	<rdf:subClassOf>
+		<owl:Class>
+		<owl:restriction>
+			<owl:onProperty rdf:resource="rdf:label" />
+		</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:description" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:sameAs" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#uncertainty" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#tag" />
+			</owl:restriction>						
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#property" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#transferCoefficient" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#variableName" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#casNumber" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="qud:Quantity" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#isCalculatedAmount" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#mathematicalRelation" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="bibo:citation" />
+			</owl:restriction>
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+<owl:Property rdf:ID="casNumber">
+	<rdfs:label xml:lang="en-gb">CAS Number</rdfs:label>
+	<rdfs:comment>Indicates the number according to the Chemical Abstract Service (CAS). The Format of the CAS-number: 000000-00-0, where the first string of digits needs not to be complete (i.e. less than six digits are admitted).</rdfs:comment>
+	<rdf:domain rdf:resource="#exchange" />
+	<rdf:range rdf:resource="xsd:string" />
+</owl:Property>
+
+<owl:Property rdf:ID="isCalculatedAmount">
+	<rdfs:label xml:lang="en-gb">Is Calculated Amount</rdfs:label>
+	<rdfs:comment>If true the value of the amount field is the calculated value of the mathematicalRelation or the transferCoefficient.</rdfs:comment>
+	<rdf:domain rdf:resource="#exchange" />
+	<rdf:range rdf:resource="xsd:boolean" />
+</owl:Property>
+
+<owl:Property rdf:ID="pageNumbers">
+	<rdfs:label xml:lang="en-gb">Page Numbers</rdfs:label>
+	<rdfs:comment>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</rdfs:comment>
+	<rdf:domain rdf:resource="#exchange" />
+	<rdf:range rdf:resource="xsd:integer" />						
+</owl:Property>		
+			
+<owl:Class rdf:ID="elementaryExchange">
+	<rdfs:label>Elementary Exchange</rdfs:label>
+ 	<rdfs:comment>Comprises elementary inputs and outputs (exchanges with the environment) for the activity.</rdfs:comment>
+	<rdfs:subClassOf rdf:resource="#exchange" />
+	<rdf:domain rdf:resource="#flowData" />
+	<rdf:subClassOf>
+		<owl:Class>
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+<owl:Property rdf:ID="fromFlow">
+	<rdfs:label xml:lang="en-gb">From Flow</rdfs:label>
+	<rdf:domain rdf:resource="#exchange" />
+	<rdf:range rdf:resource="xsd:string" />
+	
+</owl:Property>				
+<owl:Property rdf:ID="toFlow">
+	<rdfs:label xml:lang="en-gb">To Flow</rdfs:label>
+	<rdf:domain rdf:resource="#exchange" />
+	<rdf:range rdf:resource="xsd:string" />
+</owl:Property>
+
+<owl:Property rdf:ID="inputGroup">
+	<rdfs:label xml:lang="en-gb">Output Group</rdfs:label>
+	<rdf:domain rdf:resource="#exchange" />
+	<owl:oneOf>
+		<owl:Thing rdf="ecospoldconcepts:MaterialsFuels" />
+		<owl:Thing rdf="ecospoldconcepts:ElectricityHeat" />
+		<owl:Thing rdf="ecospoldconcepts:Services" />
+		<owl:Thing rdf="ecospoldconcepts:fromTechnosphere" />
+	</owl:oneOf>
+</owl:Property>				
+<owl:Property rdf:ID="outputGroup">
+	<rdfs:label xml:lang="en-gb">Output Group</rdfs:label>
+	<rdf:domain rdf:resource="#exchange" />
+	<owl:allValuesFrom>
+		<owl:oneOf>
+			<owl:Thing rdf="ecospoldconcepts:referenceProduct" />
+			<owl:Thing rdf="ecospoldconcepts:byproduct" />
+			<owl:Thing rdf="ecospoldconcepts:materialforTreatment" />
+			<owl:Thing rdf="ecospoldconcepts:stockAdditions" />
+		</owl:oneOf>
+	</owl:allValuesFrom>
+</owl:Property>		
+			
+<owl:Class rdf:ID="intermediateExchange">
+	<rdfs:label>Intermediate Exchange</rdfs:label>
+ 	<rdfs:comment></rdfs:comment>
+	<rdfs:domain rdf:resource="#flowData" />
+	<rdfs:subClassOf rdf:resource="#exchange" />
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#productionVolume" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#classification" />
+			</owl:restriction>
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:ID="productionVolume">
+	<rdfs:label>Production Volume</rdfs:label>
+ 	<rdfs:comment></rdfs:comment>
+	<rdfs:domain rdf:resource="#intermediateExchange" />
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:description" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="qud:Quantity" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#variableName" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#MathematicalRelation" />
+			</owl:restriction>						
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>		
+			
+<owl:Class rdf:ID="parameter">
+	<rdfs:label>Parameter</rdfs:label>
+ 	<rdfs:comment>Comprises all parameters of the activity.</rdfs:comment>
+	<rdf:subClassOf>
+		<owl:Class>
+		<owl:restriction>
+			<owl:onProperty rdf:resource="rdf:label" />
+		</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:description" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="qud:Quantity" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#uncertainty" />
+			</owl:restriction>					
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+
+<owl:Property rdf:ID="formula">
+	<rdfs:label xml:lang="en-gb">Formula</rdfs:label>
+	<rdf:range rdf:resource="xsd:string" />
+</owl:Property>
+			
+<owl:Property rdf:ID="mathematicalRelation">
+	<rdfs:label xml:lang="en-gb">Mathematical Relation</rdfs:label>
+	<rdf:range rdf:resource="xsd:integer" />
+</owl:Property>
+
+<owl:Property rdf:ID="model">
+	<rdfs:label xml:lang="en-gb">Model</rdfs:label>
+	<rdf:domain rdf:resource="#impactAssessment" />
+	<rdf:range rdf:resource="xsd:anyURI" />
+</owl:Property>
+
+<owl:Class rdf:ID="impactAssessment">
+	<rdfs:label>Activity</rdfs:label>
+ 	<rdfs:comment>Comprises information which identifies and characterises one particular dataset (=unit process or system terminated).</rdfs:comment>
+	<rdf:domain rdf:resource="#activityDataset" />
+	<rdf:subClassOf>
+		<owl:Class>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:type" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="rdf:description" />
+			</owl:restriction>
+			<owl:restriction>
+				<owl:onProperty rdf:resource="oslca:quantitativeReference" />
+			</owl:restriction>			
+			<owl:restriction>
+				<owl:onProperty rdf:resource="#oslca:model" />
+			</owl:restriction>											
+		</owl:Class>
+	</rdf:subClassOf>
+</owl:Class>
+		
+</rdf:RDF>

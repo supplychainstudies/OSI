@@ -15,17 +15,7 @@ class Info extends SM_Controller {
 	public function Info() {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
-		$this->load->library(Array('form_extended', 'name_conversion','SimpleLoginSecure'));
-		if($this->session->userdata('id')) {
-			$this->data("header", "loggedin");
-			if ($this->session->userdata('user_email') == true) {
-				$this->data("id", $this->session->userdata('user_email'));
-			} else if ($this->session->userdata('id') == true) {
-				$this->data("id", $this->session->userdata('id'));
-			}
-		} else {
-			$this->data("header", "login");
-		}
+		$this->load->library(Array('form_extended', 'name_conversion'));
 	}
 	public $URI;
 	public $data;
@@ -241,13 +231,13 @@ class Info extends SM_Controller {
 	public function view($URI = null) {	
 
 		// Get the data
-		@$data_type = $this->arcmodel->getDataType("http://opensustainability.info/".$URI);
+		@$data_type = $this->arcmodel->getDataType("http://db.opensustainability.info/".$URI);
 		$stages = $this->stages;
 		$view_string = "";
 		
 		// Loop through each stage and print all entries for that
 		foreach ($stages as $key => $_stage) {
-			@$xarray = $this->arcmodel->getStage("http://opensustainability.info/".$URI, $_stage['path'], $_stage['name']);
+			@$xarray = $this->arcmodel->getStage("http://db.opensustainability.info/".$URI, $_stage['path'], $_stage['name']);
 			if ($xarray != false) {
 				@$data = $this->form_extended->load($key);	
 				$view_string .= $this->form_extended->build_views($xarray, $data)."<br/>";
@@ -257,12 +247,12 @@ class Info extends SM_Controller {
 		<p><a href="http://db.opensustainability.info/'.$URI.'.json">Get this in JSON</a></p>';
 		$this->data("links", $links);
 		$this->data("URI", $URI);
-		$this->script(Array('comments.js'));
+		$this->script(Array('comments.js', 'janrain.js'));
 		$this->data("view_string", $view_string);
 
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
-		$comments = $this->arcmodel->getComments("http://opensustainability.info/".$URI);
+		$comments = $this->arcmodel->getComments("http://db.opensustainability.info/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
 		$this->display("View", "view");		
@@ -274,7 +264,7 @@ class Info extends SM_Controller {
     * Grabs all the triples for a particular URI and shows it in RDF
     */
 	public function viewRDF($URI = null) {
-		@$rdf = $this->arcmodel->getRDF("http://opensustainability.info/".$URI);
+		@$rdf = $this->arcmodel->getRDF("http://db.opensustainability.info/".$URI);
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
 		header('Content-type: text/plain');
 		echo $rdf;
@@ -286,7 +276,7 @@ class Info extends SM_Controller {
     * Grabs all the triples for a particular URI and shows it in JSON
     */	
 	public function viewJSON($URI = null) {
-		@$json = $this->arcmodel->getJSON("http://opensustainability.info/".$URI);
+		@$json = $this->arcmodel->getJSON("http://db.opensustainability.info/".$URI);
 		header('Content-type: application/json');
 		echo $json;
 	}
@@ -317,7 +307,7 @@ class Info extends SM_Controller {
 	public function index() {
 		
 		// Querying the database for all records		
-		@$records = $this->arcmodel->getRecords();
+		@$records = @$this->arcmodel->getRecords();
 		// Initializing array
 		$set = array();
 
@@ -328,7 +318,7 @@ class Info extends SM_Controller {
 				// if its a uri, get the label and store that instead 
 				// rewrite this into a better function later
 				if (strpos($field, "dbpedia") !== false) {
-					$set[$key][$_key] = $this->getLabel($field, 'rdfs:type');		
+					$set[$key][$_key] = @$this->getLabel($field, 'rdfs:type');		
 				} else {
 					$set[$key][$_key] = $field;
 				}

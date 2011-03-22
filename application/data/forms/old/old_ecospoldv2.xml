@@ -1,0 +1,715 @@
+<form action="ecospoldv2" name="lca">
+  <fieldset name="Activity Dataset" linked_type="oslca:activityDataset">
+		<fieldset name="Activity Description" linked_type="oslca:activityDescription" text="Contains content-related metainformation for the activity.">
+			<name rules="trim">
+			  <label>Name</label>
+			  <linked_type>dc:title</linked_type>
+		      <type>text</type>
+			  <multiple>yes</multiple>
+		    </name>
+			<fieldset name="Activity" linked_type="oslca:activity" multiple="yes" text="Comprises information which identifies and characterises one particular dataset (=unit process or system terminated).">
+				<activityName rules="trim">
+				  <label>Name</label>
+				  <linked_type>dc:title</linked_type>
+			      <type>text</type>
+				  <multiple>yes</multiple>
+			    </activityName>
+			</fieldset>
+			<fieldset name="Classification" linked_type="oslca:classification">
+				<classification rules="trim">
+				  <label>Classification</label>
+			      <type>text</type>
+				  <multiple>yes</multiple>
+			    </classification>
+			</fieldset>
+			<fieldset name="Geography" linked_type="oslca:geography" text="Describes the geographic location for which the dataset is supposed to be valid.">
+				<comment rules="trim">
+					<label>Comment</label>
+					<type>text</type>
+				  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<note>A general comment can be made about each individual exchange.</note>
+				</comment>
+			</fieldset>
+			<fieldset name="Technology" linked_type="oslca:technology" text="Describes the technological properties of the unit process.">
+				<comment rules="trim">
+					<label>Comment</label>
+					<type>text</type>
+				  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<note>A general comment can be made about each individual exchange.</note>
+				</comment>
+				<technologyLevel rules="trim">
+					<label>Technology Level</label>
+					<type>dropdown</type>
+				  	<linked_type>oslca:comment</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>yes</multiple>
+					<note>The terms used does not necessarily reflect the age of the technologies. A modern technology can be a century old, if it is still the most competitive technology, and an old technology can be relatively young, if it is one that has quickly become superseded by other more competitive ones. The technology level is relative to the year for which the data are valid, as given under Time Period. In a time series, the same technology can move between different technology levels over time. The same technology can also be given different technology levels in different geographical locations, even in the same year.</note>
+					<options>
+						<undefined>0 = undefined - For market activities that do not have a technology level.
+							</undefined>
+						<new>1 = New - For a technology assumed to be on some aspects technically superior to modern technology, but not yet the most commonly installed when investment is based on purely economic considerations.
+						</new>
+						<modern>2 = Modern - For a technology currently used when installing new capacity, when investment is based on purely economic considerations (most competitive technology).
+						</modern>
+						<current>3 = Current (default) - For a technology in between modern and old.
+						</current>
+						<old>4 = Old - For a technology that is currently taken out of use, when decommissioning is based on purely economic considerations (least competitive technology).
+						</old>
+						<outdated>5 = Outdated - For a technology no longer in use.
+						</outdated>
+					</options>
+				</technologyLevel>								
+			</fieldset>		
+			<fieldset name="Time Period" linked_type="oslca:timePeriod" text="Characterises the temporal properties of the unit activity (or system terminated) at issue./Describes start and end date of the time period for which the dataset is valid.">
+				<comment rules="trim">
+					<label>Comment</label>
+					<type>text</type>
+				  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<note>A general comment can be made about each individual exchange.</note>
+				</comment>
+				<start_date rules="trim">
+					<label>Start Date</label>
+					<type>text</type>
+				  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>no</multiple>
+					<note>Start date of the time period for which the dataset is valid, presented as a complete date (year-month-day).</note>
+				</start_date>				
+				<end_date rules="trim">
+					<label>End Date</label>
+					<type>text</type>
+				  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+					<note>End date of the time period for which the dataset is valid, presented as a complete date (year-month-day).</note>
+				</end_date>				
+				<isDataValidForEntirePeriod rules="trim">
+					<label>Is Data Valid For Entire Period</label>
+					<type>text</type>
+				  	<linked_type>oslca:isDataValidForEntirePeriod</linked_type>
+					<datatype>xsd:boolean</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+					<note>Indicates whether or not the activity data (elementary and intermediate exchanges reported under flow data) are valid for the entire time period stated. If not, explanations may be given under 'comment'.</note>
+				</isDataValidForEntirePeriod>
+			</fieldset>
+			<fieldset name="Macroeconomic Scenarios" linked_type="oslca:macroEconomicScenarios" text="Characterises the temporal properties of the unit activity (or system terminated) at issue.">
+				<fieldset name="Macroeconomic Scenario" linked_type="oslca:macroEconomicScenario" text="Characterises the temporal properties of the unit activity (or system terminated) at issue.">
+					<name rules="trim">
+						<label>Name</label>
+						<type>text</type>
+					  	<linked_type>oslca:name</linked_type>
+						<datatype>TString80</datatype>
+						<optional>no</optional>
+						<multiple>no</multiple>
+					</name>
+					<comment rules="trim">
+						<label>Comment</label>
+						<type>text</type>
+					  	<linked_type>oslca:comment</linked_type>
+						<datatype>TString32000</datatype>
+						<optional>no</optional>
+						<multiple>no</multiple>
+					</comment>
+				</fieldset>
+				<contextName rules="trim">
+					<label>Context Name</label>
+					<type>text</type>
+				  	<linked_type>oslca:contextName</linked_type>
+					<datatype>TString32000</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</contextName>				
+				<originalSource rules="trim">
+					<label>Original Source</label>
+					<type>text</type>
+				  	<linked_type>oslca:originalSource</linked_type>
+					<datatype>xsd:anyURI</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</originalSource>
+				<majorRelease rules="trim">
+					<label>Major Release</label>
+					<type>text</type>
+				  	<linked_type>oslca:majorRelease</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</majorRelease>
+				<minorRelease rules="trim">
+					<label>Minor Release</label>
+					<type>text</type>
+				  	<linked_type>oslca:minorRelease</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</minorRelease>
+				<majorRevision rules="trim">
+					<label>Major Revision</label>
+					<type>text</type>
+				  	<linked_type>oslca:majorRevision</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</majorRevision>
+				<minorRevision rules="trim">
+					<label>Minor Revision</label>
+					<type>text</type>
+				  	<linked_type>oslca:minorRevision</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</minorRevision>
+			</fieldset>
+		</fieldset>
+		<fieldset name="Modelling and Validation" linked_type="oslca:modellingAndValidation" text="Contains meta information about how unit processes are modelled and about the review/validation of the dataset.">		
+			<name rules="trim">
+			  <label>Name</label>
+			  <linked_type>dc:title</linked_type>
+		      <type>hidden</type>
+			  <multiple>yes</multiple>
+		    </name>
+			<fieldset name="Representativeness" linked_type="oslca:representativeness" text="Contains information about the representativeness of the unit process data (meta information and flow data).">
+				<systemModelName rules="trim">
+					<label>systemModelName</label>
+					<type>hidden</type>
+				  	<linked_type>oslca:systemModelName</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</systemModelName>				
+				<samplingProcedure rules="trim">
+					<label>samplingProcedure</label>
+					<type>hidden</type>
+				  	<linked_type>oslca:samplingProcedure</linked_type>
+					<datatype>TString32000</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+				</samplingProcedure>				
+				<extrapolations rules="trim">
+					<label>extrapolations</label>
+					<type>hidden</type>
+				  	<linked_type>oslca:extrapolations</linked_type>
+					<datatype>TString32000</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<note>Describes extrapolations of data from another time period, another geographical area or another technology and the way these extrapolations have been carried out. It should be reported whether different extrapolations have been done on the level of individual exchanges. If data representative for a activity operated in one country is used for another country's activity, its original representativity can be indicated here. Changes in mean values due to extrapolations may also be reported here.</note>
+				</extrapolations>
+				<percent rules="trim|max100">
+					<label>percent</label>
+					<type>hidden</type>
+				  	<linked_type>oslca:extrapolations</linked_type>
+					<datatype>TString32000</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<note>Percent of data sampled out of the total that the activity is intended to represent (as given by the fields under Geography, Technology and Time Period).</note>
+				</percent>
+				<systemModelId rules="trim|max100">
+					<label>systemModelId</label>
+					<type>hidden</type>
+				  	<linked_type>oslca:systemModelId</linked_type>
+					<datatype>xsd:uri</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<note>The system model describes how activity datasets are linked to form product systems. Some options in the ecoinvent network are 'undefined', 'attributional, average current suppliers, revenue allocation', 'consequential, small-scale, long-term decisions'.</note>
+				</systemModelId>				
+			</fieldset>				
+			<fieldset name="Review" linked_type="oslca:review" text="Contains information about the reviewers' comments on the dataset content.">
+				<submit rules="trim">
+				  <label>Name</label>
+			      <type>Submit</type>
+			    </submit>
+			</fieldset>
+		</fieldset>
+		<fieldset name="Administrative Information" linked_type="oslca:administrativeInformation" text="Contains the administrative information about the dataset at issue: The persons that compiled and entered the dataset in the database and about kind of publication and the accessibility of the dataset, timestamp, version and internalVersion number as well as language and localLanguage code.">
+			<space rules="trim">
+				<label>Space</label>
+				<type>hidden</type>
+			  	<linked_type>hidden</linked_type>
+				<optional>no</optional>
+				<multiple>no</multiple>
+			</space>			
+				<fieldset name="Data Entry By" linked_type="foaf:Person">
+				<firstName rules="trim">
+					<label>First Name</label>
+					<type>text</type>
+				  	<linked_type>foaf:firstName</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</firstName>
+				<lastName rules="trim">
+					<label>Last Name</label>
+					<type>text</type>
+				  	<linked_type>foaf:lastName</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</lastName>
+				<email rules="trim|sha1sum">
+					<label>Email Address</label>
+					<type>text</type>
+				  	<linked_type>foaf:mbox_sha1sum</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</email>
+				<search rules="trim">
+					<label>Search for a Person</label>
+					<type>lookup</type>
+				  	<linked_type>na</linked_type>
+					<lookup>foaf</lookup>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</search>
+			</fieldset>
+							
+			<fieldset name="Data Generator and Publication" linked_type="oslca:dataGeneratorAndPublication" text="Contains information about who collected, compiled or published the orginal data. This may or may not be the same person as under 'DataEntryBy'. Furthermore contains information about kind of publication underlying the dataset and the accessibility of the dataset.">
+				<fieldset name="person" linked_type="foaf:Person">
+				<firstName rules="trim">
+					<label>First Name</label>
+					<type>text</type>
+				  	<linked_type>foaf:firstName</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</firstName>
+				<lastName rules="trim">
+					<label>Last Name</label>
+					<type>text</type>
+				  	<linked_type>foaf:lastName</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</lastName>
+				<email rules="trim|sha1sum">
+					<label>Email Address</label>
+					<type>text</type>
+				  	<linked_type>foaf:mbox_sha1sum</linked_type>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</email>
+				<search rules="trim">
+					<label>Search for a Person</label>
+					<type>lookup</type>
+				  	<linked_type></linked_type>
+					<lookup>foaf</lookup>
+					<optional>no</optional>
+					<multiple>no</multiple>
+				</search>
+			</fieldset>
+				<dataPublishedIn rules="trim">
+					<label>data Published In</label>
+					<type>dropdown</type>
+				  	<linked_type>oslca:dataPublishedIn</linked_type>
+					<datatype>xsd:integer</datatype>
+					<optional>yes</optional>
+					<multiple>no</multiple>
+					<note>The codes are: 0=Data as such not published (default). 1=The data of some unit processes or subsystems are published. 2=Data has been published entirely in 'referenceToPublishedSource'.</note>
+					<options>
+						<o0>Data as such not published elsewhere
+							</o0>
+						<o1>The data of some unit processes or subsystems are published
+						</o1>
+						<o2>Data has been published entirely 
+						</o2>
+					</options>
+				</dataPublishedIn>
+				<publishedSource rules="trim">
+					<label>publishedSource</label>
+					<type>text</type>
+				  	<linked_type>oslca:publishedSource</linked_type>
+					<datatype>xsd:uri</datatype>
+					<multiple>no</multiple>
+					<required>no</required>
+				</publishedSource>
+				<publishedSourceMetaData rules="trim">
+					<label>publishedSourceMetaData</label>
+					<type>text</type>
+				  	<linked_type>oslca:publishedSourceMetaData</linked_type>
+					<datatype>bibo:citation</datatype>
+					<multiple>no</multiple>
+					<required>no</required>
+				</publishedSourceMetaData>
+				<isCopyrightProtected rules="trim">
+					<label>isCopyrightProtected</label>
+					<type>text</type>
+				  	<linked_type>oslca:isCopyrightProtected</linked_type>
+					<datatype>xsd:boolean</datatype>
+					<multiple>no</multiple>
+					<required>yes</required>
+				</isCopyrightProtected>
+				<pageNumbers rules="trim">
+					<label>pageNumbers</label>
+					<type>text</type>
+				  	<linked_type>oslca:pageNumbers</linked_type>
+					<datatype>TBaseString30</datatype>
+					<multiple>no</multiple>
+					<required>no</required>
+					<note>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</note>
+				</pageNumbers>
+				<accessRestrictedTo rules="trim">
+					<label>accessRestrictedTo</label>
+					<value>0</value>
+					<type>dropdown</type>
+				  	<linked_type>oslca:accessRestrictedTo</linked_type>
+					<datatype>TBaseString30</datatype>
+					<multiple>no</multiple>
+					<required>no</required>
+					<note>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</note>
+					<options>
+						<none>No access restrictions.</none>
+						<license>Only license holders (as defined by context) have access.</license>
+						<nlicense>License holders (as defined by context) have access to LCI results but not to unit process raw data. Database administrator have full access.</nlicense>
+						<company>Only the organisation specified by 'companyCode' and the database administrator have access.</company>					
+					</options>
+				</accessRestrictedTo>
+				<companyId rules="trim">
+					<label>companyId</label>
+					<type>text</type>
+				  	<linked_type>oslca:companyId</linked_type>
+					<datatype></datatype>
+					<multiple>yes</multiple>
+					<required>no</required>
+				</companyId>
+			</fieldset>						
+			<fieldset name="File Attributes" linked_type="oslca:fileAttributes">
+					<originalFormat rules="trim">
+						<label>Original Format</label>
+						<type>hidden</type>
+					  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</originalFormat>				
+					<minorRevision rules="trim">
+						<label>minorRevision</label>
+						<type>text</type>
+					  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</minorRevision>
+					<majorRevision rules="trim">
+						<label>Major Revision</label>
+						<type>text</type>
+					  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</majorRevision>
+					<minorRelease rules="trim">
+						<label>Minor Release</label>
+						<type>text</type>
+					  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</minorRelease>
+					<majorRelease rules="trim">
+						<label>Major Release</label>
+						<type>text</type>
+					  	<linked_type>?</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</majorRelease>
+					<defaultLanguage rules="trim">
+						<label>Default Language</label>
+						<type>text</type>
+					  	<linked_type>dcterms:language</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</defaultLanguage>					
+					<creationTimestamp rules="trim">
+						<label>Creation TimeStamp</label>
+						<type>timestamp</type>
+					  	<linked_type>dcterms:created</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</creationTimestamp>					
+					<lastEditTimestamp rules="trim">
+						<label>Last Edited TimeStamp</label>
+						<type>timestamp</type>
+					  	<linked_type>dcterms:created</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</lastEditTimestamp>					
+					<fileGenerator rules="trim">
+						<label>File Generator</label>
+						<type>hidden</type>
+					  	<linked_type>osi:fileGenerator</linked_type>
+						<datatype></datatype>
+						<multiple>no</multiple>
+						<required>no</required>
+					</fileGenerator>			
+			</fieldset>
+		</fieldset>
+		<fieldset name="Flow Data" linked_type="oslca:flowData" text="Contains information about inputs and outputs of the given activity (exchanges with environment as well as intermediate exchanges) as well as their properties, allocations, transfer coefficients, uncertainties and parameters for the use in mathematical formulas.">	
+			<submit rules="trim">
+			  <label>Name</label>
+		      <type>Submit</type>
+		    </submit>	
+			<fieldset name="Intermediate Exchange" linked_type="oslca:intermediateExchange" text="Comprises intermediate product and waste inputs and outputs for the activity.">			
+				<name rules="trim">
+					<label>Name</label>
+					<type>text</type>
+				  	<linked_type>oslca:name</linked_type>
+					<datatype>TString120</datatype>
+					<multiple>yes</multiple>
+					<note>Name of the exchange.</note>
+				</name>
+				<unitName rules="trim">
+					<label>Unit Name</label>
+					<type>text</type>
+				  	<linked_type>oslca:unitName</linked_type>
+					<datatype>TString40</datatype> 
+					<multiple>yes</multiple>
+					<note>Unit name of the amount.</note>
+				</unitName>
+				<comment rules="trim">
+					<label>Comment</label>
+					<type>text</type>
+				  	<linked_type>oslca:comment</linked_type>
+					<datatype>TString32000"</datatype>
+					<optional>yes</optional>
+					<multiple>yes</multiple>
+					<note>A general comment can be made about each individual exchange.</note>
+				</comment>
+				<uncertainty rules="trim">
+				  <label>Uncertainty</label>
+			      <type>text</type>
+				  <linked_type>oslca:uncertainty</linked_type>
+					<datatype>TUncertainty</datatype>
+ 					<required>no</required>
+					<note>Uncertainty information in the form of distribution functions and their parameters and/or pedigree data.</note>
+				</uncertainty>
+						<synonym rules="trim">
+						  <label>Synonym</label>
+					      <type>text</type>
+						  <linked_type>oslca:synonym</linked_type>
+							<datatype>TSynonym</datatype>
+							<required>no</required> 
+							<multiple>yes</multiple>
+							<note>List of synonyms for the name. Contrary to normal multi language strings, synonyms may contain more than one element with the same xml:lang attribute value.</note>
+						</synonym>
+						<property rules="trim">
+						  <label>Property</label>
+					      <type>text</type>
+						  <linked_type>oslca:uncertainty</linked_type>
+							<datatype>TProperty</datatype>
+							<required>no</required> 
+							<multiple>yes</multiple>
+							<note>Properties of the exchange, e.g. dry mass, water content, price, content of specific elements or substances.</note>
+						</property>
+						<transferCoefficient rules="trim">
+						  <label>Transfer Coefficient</label>
+					      <type>text</type>
+						  <linked_type>oslca:transferCoefficient</linked_type>
+							<datatype>TTransferCoefficient"</datatype>
+							<required>no</required>
+							<multiple>yes</multiple>
+							<note>Transfer coefficients relate specific inputs to specific outputs and record the share of this specific input that contributes to this specific output.</note>
+						</transferCoefficient>
+					<tag rules="trim">
+						<label>Tag</label>
+					    <type>text</type>
+						<linked_type>oslca:tag</linked_type>
+						<datatype>TTag</datatype>
+						<required>no</required>
+						<multiple>yes</multiple>
+						<note>The tag field allows an open list of keywords which describes the activity and can be used for filtering, grouping and searching. The validTags file reference provides a list of predefined tags, but the semantic validation procedure should only display an information (not an error) if a tag entry cannot be found in the validTags master file.</note>
+					</tag>
+					<id rules="trim">
+						<label>id</label>
+					    <type>text</type>
+						<linked_type>oslca:id</linked_type>
+						<datatype>TUuid</datatype>
+						<required>yes</required>
+						<note>Unique identifier for this exchange. The intermediateExchangeId or the elementaryExchangeId can not be used to identify an exchange because one master data entry can be referenced by more than one exchange of a dataset.</note>
+					</id>
+					<unitId rules="trim">
+							<label>unitId</label>
+					    	<type>text</type>
+							<linked_type>oslca:unitId</linked_type>
+							<datatype>TUuid</datatype>
+ 							<required>yes</required>
+							<referenceToComplexType>TValidUnit</referenceToComplexType>
+							<propertyNameForReference>ValidUnit</propertyNameForReference>
+						<note>Reference to the unit of the amount.</note>
+					</unitId>
+					<unitContextId rules="trim">
+						<label>Unit Context Id</label>
+					    <type>text</type>
+						<linked_type>oslca:unitContextId</linked_type>
+						<datatype>TUuid</datatype>
+						<required>no</required>
+						<referenceToComplexType>TValidContext</referenceToComplexType>
+						<propertyNameForReference>ValidUnitContext</propertyNameForReference>
+						<note>Reference to the context of the unit.</note>
+					</unitContextId>
+					<variableName rules="trim">
+						<label>Variable Name</label>
+					    <type>text</type>
+						<linked_type>oslca:variableName</linked_type>
+						<datatype>TVariableName</datatype>
+ 						<required>no</required>
+						<note>The variable name is a short name for the exchange, used when refering to the exchange amount in mathematical relations (formulas). Variables may contain characters, numbers and underscores (_). Variable names must start with a character (a-z). Variable names are not case sensitive (calorific_Value equals Calorific_value).</note>
+					</variableName>
+					<casNumber rules="trim">
+						<label>CAS Number</label>
+					    <type>text</type>
+						<linked_type>oslca:casNumber</linked_type>
+						<datatype>TCasNumber</datatype>
+						<required>no</required>
+						<note>Indicates the number according to the Chemical Abstract Service (CAS). The Format of the CAS-number: 000000-00-0, where the first string of digits needs not to be complete (i.e. less than six digits are admitted).</note>
+					</casNumber>
+					<amount rules="trim">
+						<label>Amount</label>
+					    <type>text</type>
+						<linked_type>oslca:amount</linked_type>
+						<datatype>TFloatNumber</datatype>
+ 						<required>yes</required>
+						<note>Amount of an elementary or intermediate exchange.</note>
+					</amount>
+					<isCalculatedAmount rules="trim">
+						<label>Is Calculated Amount</label>
+					    <type>text</type>
+						<linked_type>oslca:isCalculatedAmount</linked_type>
+						<datatype>xsd:boolean</datatype>
+						<required>no</required>
+						<note>If true the value of the amount field is the calculated value of the mathematicalRelation or the transferCoefficient.</note>
+					</isCalculatedAmount>
+					<mathematicalRelation rules="trim">
+						<label>Mathematical Relation</label>
+					    <type>text</type>
+						<linked_type>oslca:mathematicalRelation</linked_type>
+							<datatype>TBaseString32000</datatype>
+ 							<required>no</required>
+							<note>Defines a mathematical formula with references to values of flows, parameters or properties by variable names or REF function.</note>
+					</mathematicalRelation>
+					<source rules="trim">
+						<label>Source</label>
+					    <type>lookup</type>
+						<lookup>sources</lookup>
+						<linked_type>bibo:citation</linked_type>
+						<required>no</required>
+					</source>
+					<pageNumbers rules="trim">
+						<label>Page Numbers</label>
+					    <type>text</type>
+						<linked_type>oslca:pageNumbers</linked_type>
+						<datatype>TBaseString30</datatype>
+ 						<required>no</required>
+						<note>The relevant page numbers if the data are sourced on specific pages in an article or larger publication.</note>
+					</pageNumbers>
+					<specificAllocationPropertyId rules="trim">
+						<label>Specific Allocation Property Id</label>
+					    <type>hidden</type>
+						<linked_type>oslca:specificAllocationPropertyId</linked_type>
+						<datatype>TUuid</datatype>
+ 						<required>no</required>
+						<referenceToComplexType>TValidProperty</referenceToComplexType>
+						<propertyNameForReference>SpecificAllocationProperty</propertyNameForReference>
+						<note>Reference to the Property used by the allocation. This overrides the dataset wide default defined by masterAllocationPropertyId.</note>
+					</specificAllocationPropertyId>				
+			</fieldset>
+			<fieldset name="Elementary Exchange" linked_type="oslca:elementaryExchange" text="Comprises elementary inputs and outputs (exchanges with the environment) for the activity.">
+				<inputGroup rules="trim">
+					<label>inputGroup</label>
+				    <type>text</type>
+					<linked_type>oslca:inputGroup</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</inputGroup>				
+				<outputGroup rules="trim">
+					<label>Output Group</label>
+				    <type>text</type>
+					<linked_type>oslca:outputGroup</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</outputGroup>
+				<formula rules="trim">
+					<label>Formula</label>
+				    <type>text</type>
+					<linked_type>oslca:formula</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</formula>		
+			</fieldset>			
+			<fieldset name="Parameter" linked_type="oslca:parameter" text="Comprises all parameters of the activity.">
+				<name rules="trim">
+					<label>name</label>
+				    <type>text</type>
+					<linked_type>dc:title</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</name>				
+				<unit rules="trim">
+					<label>unit</label>
+				    <type>text</type>
+					<linked_type>oslca:unit</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</unit>
+				<uncertainty rules="trim">
+					<label>uncertainty</label>
+				    <type>text</type>
+					<linked_type>oslca:uncertainty</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</uncertainty>
+				<comment rules="trim">
+					<label>Comment</label>
+				    <type>textbox</type>
+					<linked_type>comment</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</comment>
+				<variableName rules="trim">
+					<label>Variable Name</label>
+				    <type>text</type>
+					<linked_type>oslca:name</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</variableName>
+				<mathematicalRelation rules="trim">
+					<label>Mathematical Relation</label>
+				    <type>text</type>
+					<linked_type>oslca:mathematicalRelation</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</mathematicalRelation>
+				<isCalculatedAmount rules="trim">
+					<label>Is Calculated Amount</label>
+				    <type>text</type>
+					<linked_type>oslca:isCalculatedAmount</linked_type>
+					<datatype>TUuid</datatype>
+					<required>no</required>
+				</isCalculatedAmount>				
+				<amount rules="trim">
+					<label>Amount</label>
+				    <type>text</type>
+					<linked_type>oslca:amount</linked_type>
+					<datatype>TFloatNumber</datatype>
+					<required>yes</required>
+				</amount>
+			</fieldset>			
+		</fieldset>
+		<submit rules="trim">
+		  <label>Name</label>
+	      <type>submit</type>
+	    </submit>		
+	</fieldset>
+</form>
+	

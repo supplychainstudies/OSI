@@ -86,13 +86,19 @@ class SIAPI extends SM_Controller {
 	}
 	
 	public function search($encode = "json") {
+<<<<<<< HEAD
 		$checked_URIs = array();
 		if ($search_terms = $_GET) {
+=======
+		if ($search_terms = $_GET) {
+			$checked_URIs = array();
+>>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 			$URIs = array();
 			$results = array();
 			foreach ($search_terms as $field=>$value) {
 				$URIs = array_merge($URIs,@$this->arcmodel->simpleSearch($field, $value));
 			}
+<<<<<<< HEAD
 		} else {
 			$URIs = @$this->arcmodel->simpleSearch();
 		}
@@ -104,6 +110,17 @@ class SIAPI extends SM_Controller {
 				'impactAssessments' => $this->convertImpactAssessments(@$this->arcmodel->getImpactAssessments($URI)),
 				'quantitativeReference' => $this->convertQR(@$this->arcmodel->getQR($URI))
 				);
+=======
+			foreach ($URIs as $URI) {
+				if (in_array($URI, $checked_URIs) == false) {
+					$checked_URIs[] = $URI;
+				$results[$URI] = array (
+					'uri' => $URI,
+					'impactAssessments' => $this->convertImpactAssessments(@$this->arcmodel->getImpactAssessments($URI)),
+					'quantitativeReference' => $this->convertQR(@$this->arcmodel->getQR($URI))
+					);
+				}
+>>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 			}
 		}
 		if ($encode == 'json') {

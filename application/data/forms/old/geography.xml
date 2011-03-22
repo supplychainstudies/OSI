@@ -1,0 +1,19 @@
+<form action="/lca/create/geography" name="Geography">
+  <fieldset name="Geography" linked_type="oslca:geography">
+		<geographyURI rules="trim">
+			<label>Geography URI</label>
+			<type>text</type>
+		  	<linked_type>?</linked_type>
+		</geographyURI>
+		<description rules="trim">
+			<label>Description</label>
+			<type>textarea</type>
+		  	<linked_type>rdf:description</linked_type>
+		</description>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>

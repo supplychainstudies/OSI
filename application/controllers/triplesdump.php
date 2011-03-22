@@ -29,14 +29,14 @@ class Triplesdump extends SM_Controller {
 public function foodprint() {
 	$handle = fopen('application/data/datasets/food_carbon_catalogue.csv', "r");
 	// Columns: Process_name,class_name,reference_to_nomenclature,quantitative_reference_type,quantitative_reference_amount,quantitative_reference_name,quantitative_reference_unit,area_name,reference_to_nomenclature_,parameter_value,symbol,direction,group,receiving_environment,name_text,geographical_location
-	$bibo_bnode = "<http://db.opensustainability.info/rdfspace/bibliography/Life-Cycle-GHG-Emissions-of-Foods" . rand(9999999, 100000000) .">";  
-	$person_bnode = "<http://db.opensustainability.info/rdfspace/people/AlexLoijos" . rand(9999999, 100000000) .">"; 
-	$organization_bnode = "<http://db.opensustainability.info/rdfspace/organizations/Foodprint" . rand(9999999, 100000000) .">"; 
+	$bibo_bnode = "http://db.opensustainability.info/rdfspace/bibliography/Life-Cycle-GHG-Emissions-of-Foods" . rand(9999999, 100000000) ."";  
+	$person_bnode = "http://db.opensustainability.info/rdfspace/people/AlexLoijos" . rand(9999999, 100000000) .""; 
+	$organization_bnode = "http://db.opensustainability.info/rdfspace/organizations/Foodprint" . rand(9999999, 100000000) .""; 
 	
 	$triples = array(
 		array(
 			"subject"=> $person_bnode,
-			"predicate"=> "rdf:type",
+			"predicate"=> "rdfs:type",
 			"object"=> "foaf:Person"			
 		),
 		array(
@@ -51,7 +51,7 @@ public function foodprint() {
 		),
 		array(
 			"subject"=> $bibo_bnode,
-			"predicate"=> "rdf:type",
+			"predicate"=> "rdfs:type",
 			"object"=> "bibo:Document"
 			),
 		array(
@@ -72,12 +72,12 @@ public function foodprint() {
 		array(
 			"subject"=> $bibo_bnode,
 			"predicate"=> "bibo:uri",
-			"object"=> "<http://www.socrata.com/dataset/Life-Cycle-GHG-Emissions-of-Foods/f66f-ewq4>"
+			"object"=> "http://www.socrata.com/dataset/Life-Cycle-GHG-Emissions-of-Foods/f66f-ewq4"
 			),
 		array(
 			"subject"=> $bibo_bnode,
 			"predicate"=> "bibo:uri",
-			"object"=> "<http://foodprint.awardspace.com/foodprintmethods.pdf>"
+			"object"=> "http://foodprint.awardspace.com/foodprintmethods.pdf"
 			),
 		array(
 			"subject"=> $bibo_bnode,
@@ -86,7 +86,7 @@ public function foodprint() {
 			),
 		array(
 			"subject"=> $organization_bnode,
-			"predicate"=> "rdf:type",
+			"predicate"=> "rdfs:type",
 			"object"=> "foaf:Organization"
 			),			
 		array(
@@ -96,16 +96,21 @@ public function foodprint() {
 			),
 	);
 	
-	$bigassarray = $triples;	
+	@$this->arcmodel->addTriples($triples);		
+
 	if ($handle) {
 		while (!feof($handle)) {
 	        $line = fgets($handle);
 	        $line_array = explode(",",$line);
-			$model_bnode = "<http://db.opensustainability.info/rdfspace/lca/" . str_replace(" ", "", strtolower($line_array[0])) . rand(9999999, 100000000) .">";
+			$model_bnode = "http://db.opensustainability.info/rdfspace/lca/" . str_replace(" ", "", strtolower($line_array[0])) . rand(9999999, 100000000) ."";
 			$process_bnode = "_:process" . rand(9999999, 100000000);
 			$exchange_bnode = "_:exchange" . rand(9999999, 100000000);
 			$effect_bnode = "_:effect" . rand(9999999, 100000000);
 			$quantity_bnode = "_:quantity" . rand(9999999, 100000000);
+			$exchange2_bnode = "_:exchange" . rand(9999999, 100000000);
+			$effect2_bnode = "_:effect" . rand(9999999, 100000000);
+			$quantity2_bnode = "_:quantity" . rand(9999999, 100000000);
+			$product_bnode = "_:product" . rand(9999999, 100000000);
 			$geography_bnode = "_:geography" . rand(9999999, 100000000);
 			$icir_bnode =  "_:icir" . rand(9999999, 100000000);
 			$iaq_bnode =  "_:quantity" . rand(9999999, 100000000);
@@ -119,6 +124,11 @@ public function foodprint() {
 					"predicate"=> "eco:models",
 					"object"=> $process_bnode
 					),
+				array(
+					"subject"=> $model_bnode,
+					"predicate"=> "eco:models",
+					"object"=> $product_bnode
+					),										
 				array(
 					"subject"=> $model_bnode,
 					"predicate"=> "rdfs:type",
@@ -200,13 +210,58 @@ public function foodprint() {
 					"object"=> $line_array[9]
 					),					
 				array(
-					"subject"=> $process_bnode,
+					"subject"=> $model_bnode,
+					"predicate"=> "eco:hasUnallocatedExchange",
+					"object"=> $exchange2_bnode
+					),	
+				array(
+					"subject"=> $exchange2_bnode,
+					"predicate"=> "rdfs:type",
+					"object"=> "eco:Exchange"
+					),									
+				array(
+					"subject"=> $exchange2_bnode,
+					"predicate"=> "eco:hasEffect",
+					"object"=> $effect2_bnode
+					),				
+				array(
+					"subject"=> $effect2_bnode,
+					"predicate"=> "eco:hasEffectAggregationCategory",
+					"object"=> $eac_bnode
+					),				
+				array(
+					"subject"=> $effect2_bnode,
+					"predicate"=> "rdfs:type",
+					"object"=> "eco:Output"
+					),
+				array(
+					"subject"=> $effect2_bnode,
+					"predicate"=> "eco:hasTransferable",
+					"object"=> $product_bnode
+					),
+				array(
+					"subject"=> $exchange2_bnode,
+					"predicate"=> "eco:hasQuantity",
+					"object"=> $quantity2_bnode
+					),
+				array(
+					"subject"=> $quantity2_bnode,
+					"predicate"=> "eco:hasUnitOfMeasure",
+					"object"=> $line_array[6]
+					),
+				array(
+					"subject"=> $quantity2_bnode,
+					"predicate"=> "eco:hasMagnitude",
+					"object"=> $line_array[4]
+					),															
+				array(
+					"subject"=> $product_bnode,
 					"predicate"=> "rdfs:type",
 					"object"=> "eco:Product"
 					),
 				array(
-					"subject"=> $process_bnode,
-					"predicate"=> "dc:subject",
+					"subject"=> $product_bnode,
+					"predicate"=> "rdfs:label",
 					"object"=> $line_array[0]
 					),	
 				array(
@@ -279,19 +334,22 @@ public function foodprint() {
 					$triples[] = array(
 						"subject"=> $process_bnode,
 						"predicate"=> "eco:hasGeoLocation",
-						"object"=> "<" . $line_array[15] . ">"
+						"object"=> $line_array[15] 
 						);
 				}
 			
-				$bigassarray = array_merge($bigassarray, $triples);	
+				//$bigassarray = array_merge($bigassarray, $triples);
+				@$this->arcmodel->addTriples($triples);	
 			
 		}
-		var_dump($bigassarray);
-		@$this->arcmodel->addTriples($bigassarray);
+	
+
+		//@$this->arcmodel->addTriples($bigassarray);
 	}
 	else {
 		echo "not working";
 	}
+			
 	fclose($handle);
 }
 
@@ -304,15 +362,15 @@ public function foodprint() {
 public function crmd() {
 	$handle = fopen('application/data/datasets/crmd/csv/crmd.csv', "r");
 	// Columns: Process_name,class_name,reference_to_nomenclature,quantitative_reference_type,quantitative_reference_amount,quantitative_reference_name,quantitative_reference_unit,area_name,reference_to_nomenclature_,parameter_value,symbol,direction,group,receiving_environment,name_text,geographical_location
-	$bibo_bnode = "<http://db.opensustainability.info/rdfspace/bibliography/Canadian-Raw-Materials-Database" . rand(9999999, 100000000) .">";  	
+	$bibo_bnode = "http://db.opensustainability.info/rdfspace/bibliography/Canadian-Raw-Materials-Database" . rand(9999999, 100000000) ."";  	
 	
-	$person_bnode = "<http://db.opensustainability.info/rdfspace/people/MurrayHaight" . rand(9999999, 100000000) .">"; 
-	$organization_bnode = "<http://db.opensustainability.info/rdfspace/organizations/UniversityofWaterloo" . rand(9999999, 100000000) .">"; 
+	$person_bnode = "http://db.opensustainability.info/rdfspace/people/MurrayHaight" . rand(9999999, 100000000) .""; 
+	$organization_bnode = "http://db.opensustainability.info/rdfspace/organizations/UniversityofWaterloo" . rand(9999999, 100000000) .""; 
 	
 	$triples = array(
 		array(
 			"subject"=> $person_bnode,
-			"predicate"=> "rdf:type",
+			"predicate"=> "rdfs:type",
 			"object"=> "foaf:Person"			
 		),
 		array(
@@ -327,7 +385,7 @@ public function crmd() {
 		),
 		array(
 			"subject"=> $bibo_bnode,
-			"predicate"=> "rdf:type",
+			"predicate"=> "rdfs:type",
 			"object"=> "bibo:Webpage"
 			),
 		array(
@@ -348,7 +406,7 @@ public function crmd() {
 		array(
 			"subject"=> $bibo_bnode,
 			"predicate"=> "bibo:uri",
-			"object"=> "<http://crmd.uwaterloo.ca>"
+			"object"=> "http://crmd.uwaterloo.ca"
 			),
 		array(
 			"subject"=> $bibo_bnode,
@@ -366,17 +424,21 @@ public function crmd() {
 			"object"=> "University of Waterloo"
 			),
 	);
-	
-	$bigassarray = $triples;	
+	$this->arcmodel->addTriples($triples);
+	//$bigassarray = $triples;	
 	if ($handle) {
 		while (!feof($handle)) {
 	        $line = fgets($handle);
 	        $line_array = explode(",",$line);
-			$model_bnode = "<http://db.opensustainability.info/rdfspace/lca/" . $line_array[0] . rand(9999999, 100000000) .">";
+			$model_bnode = "http://db.opensustainability.info/rdfspace/lca/" . str_replace(")","",str_replace("(", "", str_replace(" ", "", $line_array[0]))) . rand(9999999, 100000000) ."";
 			$process_bnode = "_:process" . rand(9999999, 100000000);
 			$exchange_bnode = "_:exchange" . rand(9999999, 100000000);
 			$effect_bnode = "_:effect" . rand(9999999, 100000000);
 			$quantity_bnode = "_:quantity" . rand(9999999, 100000000);
+			$exchange2_bnode = "_:exchange" . rand(9999999, 100000000);
+			$effect2_bnode = "_:effect" . rand(9999999, 100000000);
+			$quantity2_bnode = "_:quantity" . rand(9999999, 100000000);
+			$product_bnode = "_:product" . rand(9999999, 100000000);
 			$geography_bnode = "_:geography" . rand(9999999, 100000000);
 	
 			$triples = array (
@@ -387,7 +449,12 @@ public function crmd() {
 					),
 				array(
 					"subject"=> $model_bnode,
-					"predicate"=> "rdf:type",
+					"predicate"=> "eco:models",
+					"object"=> $product_bnode
+					),
+				array(
+					"subject"=> $model_bnode,
+					"predicate"=> "rdfs:type",
 					"object"=> "eco:FootprintModel"
 					),
 				array(
@@ -397,12 +464,12 @@ public function crmd() {
 					),									
 				array(
 					"subject"=> $process_bnode,
-					"predicate"=> "rdf:type",
+					"predicate"=> "rdfs:type",
 					"object"=> "eco:AbstractProcess"
 					),	
 				array(
 					"subject"=> $process_bnode,
-					"predicate"=> "rdf:label",
+					"predicate"=> "rdfs:label",
 					"object"=> $line_array[0]
 					),				
 				array(
@@ -413,11 +480,61 @@ public function crmd() {
 				array(
 					"subject"=> $process_bnode,
 					"predicate"=> "eco:hasGeoLocation",
-					"object"=> "<http://sws.geonames.org/6251999/about.rdf>"
+					"object"=> "http://sws.geonames.org/6251999/about.rdf"
+					),
+				array(
+					"subject"=> $model_bnode,
+					"predicate"=> "eco:hasUnallocatedExchange",
+					"object"=> $exchange2_bnode
+					),	
+				array(
+					"subject"=> $exchange2_bnode,
+					"predicate"=> "rdfs:type",
+					"object"=> "eco:Exchange"
+					),									
+				array(
+					"subject"=> $exchange2_bnode,
+					"predicate"=> "eco:hasEffect",
+					"object"=> $effect2_bnode
+					),								
+				array(
+					"subject"=> $effect2_bnode,
+					"predicate"=> "rdfs:type",
+					"object"=> "eco:Output"
+					),
+				array(
+					"subject"=> $effect2_bnode,
+					"predicate"=> "eco:hasTransferable",
+					"object"=> $product_bnode
+					),
+				array(
+					"subject"=> $exchange2_bnode,
+					"predicate"=> "eco:hasQuantity",
+					"object"=> $quantity2_bnode
+					),
+				array(
+					"subject"=> $quantity2_bnode,
+					"predicate"=> "eco:hasUnitOfMeasure",
+					"object"=> $line_array[5]
+					),
+				array(
+					"subject"=> $quantity2_bnode,
+					"predicate"=> "eco:hasMagnitude",
+					"object"=> $line_array[4]
+					),															
+				array(
+					"subject"=> $product_bnode,
+					"predicate"=> "rdfs:type",
+					"object"=> "eco:Product"
+					),
+				array(
+					"subject"=> $product_bnode,
+					"predicate"=> "rdfs:label",
+					"object"=> $line_array[0]
 					)
 				);
-	
-			$bigassarray = array_merge($bigassarray, $triples);
+			$this->arcmodel->addTriples($triples);
+			//$bigassarray = array_merge($bigassarray, $triples);
 			
 			$handle_io =  fopen('application/data/datasets/crmd/csv/crmd_io_'.trim($line_array[7]).'.csv', "r");
 			if ($handle_io) {
@@ -434,9 +551,9 @@ public function crmd() {
 						"parameter_value_" => trim($line_array_io[5])
 					);
 					//  "data_collection_" => trim($line_array_io[6])
-					if ($io["symbol_"] == "http://dbpedia.org/class/yago/Kilogram113724582") {
+					if ($io["symbol_"] == "qudt:Kilogram") {
 						$io["symbol_"] = "qudt:Kilogram";
-					} elseif ($io["symbol_"] == "http://dbpedia.org/class/yago/Liter113624190") {
+					} elseif ($io["symbol_"] == "qudt:Liter") {
 						$io["symbol_"] = "qudt:Liter";
 					}
 					
@@ -448,9 +565,15 @@ public function crmd() {
 						$tf = "eco:hasFlowable";		
 					}	
 					if ($io["receiving_environment_"] == "land") {
-						$io["receiving_environment_"]= "soil";												
+						$io["receiving_environment_"] = "soil";												
 					} 
+					if ($io["receiving_environment_"] == "soil" || $io["receiving_environment_"] == "water" || $io["receiving_environment_"] == "air") {
+						$io["receiving_environment_"] = "fasc:" . $io["receiving_environment_"];
+					}
 					
+					$exchange_bnode = "_:exchange" . rand(9999999, 100000000);
+					$effect_bnode = "_:effect" . rand(9999999, 100000000);
+					$quantity_bnode = "_:quantity" . rand(9999999, 100000000);
 					$eac_bnode = "_:eac" . rand(9999999, 100000000);
 								
 					$triples_io = array (
@@ -461,7 +584,7 @@ public function crmd() {
 							),
 						array(
 								"subject"=> $exchange_bnode,
-								"predicate"=> "rdf:type",
+								"predicate"=> "rdfs:type",
 								"object"=> $exchange_type
 							),			
 						array(
@@ -471,7 +594,7 @@ public function crmd() {
 							),
 						array(
 							"subject"=> $effect_bnode,
-							"predicate"=> "rdf:type",
+							"predicate"=> "rdfs:type",
 							"object"=> "eco:" . ucfirst(trim($io["direction_"]))
 							),
 						array(
@@ -510,11 +633,11 @@ public function crmd() {
 							$triples_io[] = array(
 								"subject"=> $eac_bnode,
 								"predicate"=> "fasc:CompartmentMedium",
-								"object"=> "fasc:".$io["receiving_environment_"]
+								"object"=> $io["receiving_environment_"]
 								);
 						}	
-							
-					$bigassarray = array_merge($bigassarray, $triples_io);
+					$this->arcmodel->addTriples($triples_io);		
+					//$bigassarray = array_merge($bigassarray, $triples_io);
 				}
 			} 	else {
 					echo "\nFailure to open crmd_io_".trim($line_array[7]);
@@ -534,12 +657,6 @@ public function crmd() {
 						"value_" => trim($line_array_ia[1]),
 						"unit_" => trim($line_array_ia[2])
 					);
-					
-					if ($ia["unit_"] == "http://dbpedia.org/class/yago/Kilogram113724582") {
-						$ia["unit_"] = "qudt:Kilogram";
-					} elseif ($ia["unit_"] == "http://dbpedia.org/class/yago/Liter113624190") {
-						$ia["unit_"] = "qudt:Liter";
-					}
 					
 					if ($ia["impact_category_"] == "Waste") {
 						$ia["impact_category_"] = "ossia:waste";
@@ -581,7 +698,7 @@ public function crmd() {
 						),		
 					array(
 						"subject"=> $icir_bnode,
-						"predicate"=> "rdf:type",
+						"predicate"=> "rdfs:type",
 						"object"=> "eco:ImpactCategoryIndicatorResult"
 						),					
 					array(
@@ -625,12 +742,16 @@ public function crmd() {
 						"object"=> $ia["value_"]
 						),				
 					);
+				$this->arcmodel->addTriples($triples_ia);	
 				}
+				
+				//$bigassarray = array_merge($bigassarray, $triples_io);
 			} else {
 				echo "\nFailure to open crmd_ia_".trim($line_array[7]);
 			}
 			
 			fclose($handle_ia);
+			
 		}
 
 	}
@@ -638,8 +759,8 @@ public function crmd() {
 		echo "not working";
 	}
 	fclose($handle);
-	var_dump($bigassarray);
-	@$this->arcmodel->addTriples($bigassarray);
+	//var_dump($bigassarray);
+	//$this->arcmodel->addTriples($bigassarray);
 }
 
 

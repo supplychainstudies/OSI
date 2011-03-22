@@ -1,11 +1,11 @@
-input,raw material,technosphere,Wood Fiber,http://dbpedia.org/class/yago/Kilogram113724582,633
-input,raw material,technosphere,Hydraulic Fluids,http://dbpedia.org/class/yago/Liter113624190,0.269
-input,raw material,technosphere,Greases,http://dbpedia.org/class/yago/Kilogram113724582,0.0478
-input,raw material,technosphere,Motor Oil,http://dbpedia.org/class/yago/Liter113624190,0.175
-input,raw material,technosphere,End Paint,http://dbpedia.org/class/yago/Liter113624190,0.0108
-input,raw material,technosphere,Polyethylene Sheet,http://dbpedia.org/class/yago/Kilogram113724582,0.000545
-input,raw material,technosphere,Lumber Wrap,http://dbpedia.org/class/yago/Kilogram113724582,0.139
-input,raw material,technosphere,Steel Strapping,http://dbpedia.org/class/yago/Kilogram113724582,0.458
+input,raw material,technosphere,Wood Fiber,qudt:Kilogram,633
+input,raw material,technosphere,Hydraulic Fluids,qudt:Liter,0.269
+input,raw material,technosphere,Greases,qudt:Kilogram,0.0478
+input,raw material,technosphere,Motor Oil,qudt:Liter,0.175
+input,raw material,technosphere,End Paint,qudt:Liter,0.0108
+input,raw material,technosphere,Polyethylene Sheet,qudt:Kilogram,0.000545
+input,raw material,technosphere,Lumber Wrap,qudt:Kilogram,0.139
+input,raw material,technosphere,Steel Strapping,qudt:Kilogram,0.458
 input,energy,,Fuel Oil,MJ,18
 input,energy,,Diesel,MJ,391
 input,energy,,Gasoline,MJ,38
@@ -14,20 +14,20 @@ input,energy,,Hogfuel,MJ,1190
 input,energy,,Propane,MJ,12
 input,energy,,Process Electric,MJ,526
 input,energy,,Transportation,MJ,96
-input,raw material,,Fuel related water,http://dbpedia.org/class/yago/Liter113624190,8
-input,raw material,,Process related water,http://dbpedia.org/class/yago/Liter113624190,43
-output,emission,air,Carbon dioxide,http://dbpedia.org/class/yago/Kilogram113724582,182
-output,emission,air,Carbon monoxide,http://dbpedia.org/class/yago/Kilogram113724582,0.627
-output,emission,air,Sulphur oxides (SO2),http://dbpedia.org/class/yago/Kilogram113724582,0.233
-output,emission,air,Nitrogen oxides (NO2),http://dbpedia.org/class/yago/Kilogram113724582,0.952
-output,emission,air,Methane,http://dbpedia.org/class/yago/Kilogram113724582,0.0431
-output,emission,air,PM & Lead,http://dbpedia.org/class/yago/Kilogram113724582,0.951
-output,emission,air,NMHC (non-methane hydrocarbons),http://dbpedia.org/class/yago/Kilogram113724582,0.257
-output,emission,water,Oils and greases,http://dbpedia.org/class/yago/Kilogram113724582,0.0000157
-output,emission,water,Suspended solids,http://dbpedia.org/class/yago/Kilogram113724582,0.00914
-output,emission,water,Other organics,http://dbpedia.org/class/yago/Kilogram113724582,0.0472
-output,emission,water,BOD,http://dbpedia.org/class/yago/Kilogram113724582,0.0031
-output,emission,water,COD,http://dbpedia.org/class/yago/Kilogram113724582,0.0000145
-output,emission,water,Dissolved solids,http://dbpedia.org/class/yago/Kilogram113724582,0.0826
-output,emission,land,Process related wastes,http://dbpedia.org/class/yago/Kilogram113724582,20.8
-output,emission,land,Municipal wastes,http://dbpedia.org/class/yago/Kilogram113724582,0.2
+input,raw material,,Fuel related water,qudt:Liter,8
+input,raw material,,Process related water,qudt:Liter,43
+output,emission,air,Carbon dioxide,qudt:Kilogram,182
+output,emission,air,Carbon monoxide,qudt:Kilogram,0.627
+output,emission,air,Sulphur oxides (SO2),qudt:Kilogram,0.233
+output,emission,air,Nitrogen oxides (NO2),qudt:Kilogram,0.952
+output,emission,air,Methane,qudt:Kilogram,0.0431
+output,emission,air,PM & Lead,qudt:Kilogram,0.951
+output,emission,air,NMHC (non-methane hydrocarbons),qudt:Kilogram,0.257
+output,emission,water,Oils and greases,qudt:Kilogram,0.0000157
+output,emission,water,Suspended solids,qudt:Kilogram,0.00914
+output,emission,water,Other organics,qudt:Kilogram,0.0472
+output,emission,water,BOD,qudt:Kilogram,0.0031
+output,emission,water,COD,qudt:Kilogram,0.0000145
+output,emission,water,Dissolved solids,qudt:Kilogram,0.0826
+output,emission,land,Process related wastes,qudt:Kilogram,20.8
+output,emission,land,Municipal wastes,qudt:Kilogram,0.2

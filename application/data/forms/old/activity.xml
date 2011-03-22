@@ -1,0 +1,43 @@
+<form action="/lca/create/activity" name="Activity">
+  <fieldset name="Activity" linked_type="oslca:activity">
+		<name rules="trim">
+			<label>Name of the Activity</label>
+			<type>text</type>
+		  	<linked_type>rdf:label</linked_type>
+		</name>
+		<description rules="trim">
+			<label>Description</label>
+			<type>textarea</type>
+		  	<linked_type>rdf:description</linked_type>
+		</description>	
+		<synonym rules="trim">
+			<label>Synonyms</label>
+			<type>text</type>
+		  	<linked_type>rdf:sameAs</linked_type>
+			<multiple>yes</multiple>
+		</synonym>
+		<activityStart rules="trim">
+			<label>Activity Start</label>
+			<type>text</type>
+		  	<linked_type>oslca:activityStart</linked_type>
+			<multiple>yes</multiple>
+		</activityStart>
+		<activityEnd rules="trim">
+			<label>Activity End</label>
+			<type>text</type>
+		  	<linked_type>oslca:activityEnd</linked_type>
+			<multiple>yes</multiple>
+		</activityEnd>
+		<parentActivity rules="trim">
+			<label>Parent Activity</label>
+			<type>text</type>
+		  	<linked_type>rdfs:isSubClassOf</linked_type>
+			<multiple>yes</multiple>
+		</parentActivity>
+	    <submit>
+	        <type>submit</type>
+	        <value>Submit</value>
+			<linked_type>null</linked_type>
+	    </submit>
+</fieldset>
+</form>
