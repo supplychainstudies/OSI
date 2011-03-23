@@ -20,10 +20,10 @@ class ArcModel extends Model{
 	// Configuration information for accessing the arc store
 	public $config = array(
 	  /* db */
-	  'db_host' => 'localhost', /* default: localhost */
-	  'db_name' => 'osi',
-	  'db_user' => 'root',
-	  'db_pwd' => 'root',
+	  'db_host' => 'opensustainability.info', /* default: localhost */
+	  'db_name' => 'opensustainability',
+	  'db_user' => 'db_osi_admin',
+	  'db_pwd' => 'rJD6wSKnE83LzYPq',
 	  /* store */
 	'store_name' => 'arc_os',
 	'ns' => array(
@@ -329,7 +329,6 @@ class ArcModel extends Model{
 	 * Retrieves and returns summary information for all existing records
 	 * @return $records Array	
 	 */
-<<<<<<< HEAD
 	public function simpleSearch($variable = null, $value = null) {
 		$URIs = array();
 		$q = "select ?uri where { " . 
@@ -338,14 +337,6 @@ class ArcModel extends Model{
 			$q .= " ?bnode '" . $this->config['ns']['rdfs'] . "label' '".$value."' . "; 				
 		} 			
 		$q .= "}";
-=======
-	public function simpleSearch($variable, $value) {
-		$URIs = array();
-		$q = "select ?uri where { " . 
-			" ?uri '" . $this->config['ns']['eco'] . "models' ?bnode . " . 	
-			" ?bnode '" . $this->config['ns']['rdfs'] . "label' '".$value."' . " . 			
-			"}";
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 		$records = $this->executeQuery($q);	
 		foreach ($records as $record) {
 			$URIs[] = $record['uri'];
@@ -354,10 +345,6 @@ class ArcModel extends Model{
 	}
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 	/**
 	 * Retrieves and returns summary information for all existing records
 	 * @return $records Array	
