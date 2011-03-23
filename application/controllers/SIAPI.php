@@ -16,16 +16,6 @@ class SIAPI extends SM_Controller {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
 		$this->load->library(Array('form_extended', 'formats', 'name_conversion','SimpleLoginSecure'));
-		if($this->session->userdata('logged_in')) {
-			$this->data("header", "loggedin");
-			if ($this->session->userdata('user_email') == true) {
-				$this->data("id", $this->session->userdata('user_email'));
-			} else if ($this->session->userdata('openid_email') == true) {
-				$this->data("id", $this->session->userdata('openid_email'));
-			}
-		} else {
-			$this->data("header", "login");
-		}
 	}
 	public $URI;
 	public $data;
@@ -86,19 +76,13 @@ class SIAPI extends SM_Controller {
 	}
 	
 	public function search($encode = "json") {
-<<<<<<< HEAD
 		$checked_URIs = array();
 		if ($search_terms = $_GET) {
-=======
-		if ($search_terms = $_GET) {
-			$checked_URIs = array();
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 			$URIs = array();
 			$results = array();
 			foreach ($search_terms as $field=>$value) {
 				$URIs = array_merge($URIs,@$this->arcmodel->simpleSearch($field, $value));
 			}
-<<<<<<< HEAD
 		} else {
 			$URIs = @$this->arcmodel->simpleSearch();
 		}
@@ -110,17 +94,6 @@ class SIAPI extends SM_Controller {
 				'impactAssessments' => $this->convertImpactAssessments(@$this->arcmodel->getImpactAssessments($URI)),
 				'quantitativeReference' => $this->convertQR(@$this->arcmodel->getQR($URI))
 				);
-=======
-			foreach ($URIs as $URI) {
-				if (in_array($URI, $checked_URIs) == false) {
-					$checked_URIs[] = $URI;
-				$results[$URI] = array (
-					'uri' => $URI,
-					'impactAssessments' => $this->convertImpactAssessments(@$this->arcmodel->getImpactAssessments($URI)),
-					'quantitativeReference' => $this->convertQR(@$this->arcmodel->getQR($URI))
-					);
-				}
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 			}
 		}
 		if ($encode == 'json') {

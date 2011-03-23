@@ -425,11 +425,7 @@ class Form {
                         break; 
  					case 'lookup':
 						$input = "";
-<<<<<<< HEAD
 						$input .= '<input type="text" '. $idname . ' onClick="lookup(\'' . $name . '\', \'' . $def['lookup'] . '\')" />';
-=======
-						$input .= '<input type="text" onClick="lookup(\'' . $name . '\', \'' . $def['lookup'] . '\')" />';
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 						break;
 					case 'search':
 						$input = "";
