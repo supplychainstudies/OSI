@@ -8,7 +8,7 @@
 			<ul class="layout">
 					<li>
 					<div class="toggler"> <a class="rpxnow" onclick="return false;"
-					href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Fosi%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </div>
+					href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Fdb.opensustainability.info%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </div>
 					<li>
 						<label>User Name </label>
 						<input id="user_name" name="user_name" type="text" /> 
