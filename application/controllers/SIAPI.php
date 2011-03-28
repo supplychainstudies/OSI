@@ -15,7 +15,7 @@ class SIAPI extends SM_Controller {
 	public function SIAPI() {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
-		$this->load->library(Array('form_extended', 'formats', 'name_conversion','SimpleLoginSecure'));
+		$this->load->library(Array('form_extended', 'formats', 'name_conversion','SimpleLoginSecure', 'Simplexml'));
 	}
 	public $URI;
 	public $data;
@@ -114,6 +114,7 @@ class SIAPI extends SM_Controller {
 	
 	private function assocArrayToXML($root_element_name,$ar)
 	{
+		$this->load->library('Simplexml');
 	    $xml = new SimpleXMLElement("<?xml version=\"1.0\"?><{$root_element_name}></{$root_element_name}>");
 	    $f = create_function('$f,$c,$a','
 	            foreach($a as $k=>$v) {

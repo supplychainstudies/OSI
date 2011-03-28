@@ -10,9 +10,7 @@
 
 <body id="home">
 	<div id ="contentwrap">	
-		<? 
-			include_once('parts/header.php'); 
-		?>
+
 	<?= $navigationDisplay;?>
 
 	<div id="columnleft">
@@ -47,19 +45,6 @@
 			?></p>
 			<p><a href="/">Browse resources</a></p>
 			<p><a href="/info/create">Create new resource</a></p>
-	<? /*
-
-		if ($header == "login") {
-
-			include_once('parts/header_login.php'); 
-
-		} else {
-
-			include_once('parts/header_loggedin.php'); 
-
-		}*/
-
-	?>
 	</div>
 			<?=$footerDisplay;?>
 		</div>

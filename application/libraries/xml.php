@@ -41,14 +41,14 @@ class Xml {
      * @public
      * Parse an XML document into an array
      */
-    $xml = $this->document;
-    if ($xml == '') {
+    $xmldoc = $this->document;
+    if ($xmldoc == '') {
       return false;
     }
 
     $doc = new DOMDocument ();
     $doc->preserveWhiteSpace = false;
-    if ($doc->loadXML ($xml)) {
+    if ($doc->loadXML($xmldoc)) {
       $array = $this->flatten_node ($doc);
       if (count ($array) > 0) {
         return $array;

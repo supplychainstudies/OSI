@@ -35,7 +35,7 @@ class Create extends SM_Controller {
     */
 		if ($post_data = $_POST) {
 			$data = $this->form_extended->load($section); 	
-			/* if (isset($data['root']) == true) {
+			/*if (isset($data['root']) == true) {
 				$name = "";
 				if ($section == "person") {
 					$name = $post_data['firstName'] . $post_data['firstName'];
