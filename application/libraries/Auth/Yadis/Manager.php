@@ -411,7 +411,7 @@ class Auth_Yadis_Discovery {
         if (!$manager || (!$manager->services)) {
             $this->destroyManager();
 
-            list($yadis_url, $services) = call_user_func($discover_cb,
+            list($yadis_url, $services) = @call_user_func($discover_cb,
                                                          $this->url,
                                                          &$fetcher);
 
