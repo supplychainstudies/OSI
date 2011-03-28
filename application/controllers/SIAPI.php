@@ -15,7 +15,7 @@ class SIAPI extends SM_Controller {
 	public function SIAPI() {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
-		$this->load->library(Array('form_extended', 'formats', 'name_conversion','SimpleLoginSecure'));
+		$this->load->library(Array('form_extended', 'name_conversion','SimpleLoginSecure'));
 	}
 	public $URI;
 	public $data;
@@ -25,7 +25,7 @@ class SIAPI extends SM_Controller {
     * @public
     * gets a list that matches your process name
     */	
-
+/*
 	public function name($keyword) {
 		// We should be able to call to xml files to return the string of parent nodes
 		$fields = array(
@@ -74,7 +74,7 @@ class SIAPI extends SM_Controller {
 			echo $URIs;			
 		}
 	}
-	
+*/	
 	public function search($encode = "json") {
 		$checked_URIs = array();
 		if ($search_terms = $_GET) {
