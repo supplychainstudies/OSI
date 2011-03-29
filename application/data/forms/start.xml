@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <form action="/lca/create" name="start">
-=======
-<form action="/lca/create" name="begin">
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 	<blank rules="">
         <type>hidden</type>
         <value>true</value>
@@ -50,11 +46,7 @@
 			<type>text</type>
 		</link>		
 	</fieldset>
-<<<<<<< HEAD
 	<fieldset name="Flow" multiple="yes">	
-=======
-	<fieldset name="Flow">	
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 		<io rules="trim">
 			<label>Input/Output</label>
 			<type>radio</type>
@@ -85,11 +77,7 @@
 			<lookup>unit</lookup>
 		</ioUnit>		
 	</fieldset>
-<<<<<<< HEAD
 	<fieldset name="Impact Assessment" multiple="yes">	
-=======
-	<fieldset name="Impact Assessment">	
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 		<impactCategory rules="trim">
 			<label>Impact Category</label>
 			<type>lookup</type>
@@ -114,10 +102,7 @@
 	    <submit rules="">
 	        <type>submit</type>
 	        <value>Submit</value>
-<<<<<<< HEAD
-=======
 			<linked_type>null</linked_type>
->>>>>>> 4a7e07c4f90004e937a76718296cc24a9508b75a
 	    </submit>
 	</fieldset>
 </form>
