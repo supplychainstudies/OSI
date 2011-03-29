@@ -401,7 +401,7 @@ class Auth_Yadis_Discovery {
         $this->session_key = $this->PREFIX . $this->session_key_suffix;
     }
 
-    /**
+    /**0
      * Return the next authentication service for the pair of
      * user_input and session. This function handles fallback.
      */
@@ -411,9 +411,13 @@ class Auth_Yadis_Discovery {
         if (!$manager || (!$manager->services)) {
             $this->destroyManager();
 
+<<<<<<< HEAD
             list($yadis_url, $services) = @call_user_func($discover_cb,
                                                          $this->url,
                                                          &$fetcher);
+=======
+            list($yadis_url, $services) = call_user_func($discover_cb,$this->url, $fetcher);
+>>>>>>> 5342beddd6e23e5368f0af486acc5894034224dc
 
             $manager = $this->createManager($services, $yadis_url);
         }

@@ -29,11 +29,10 @@
  * @link		http://codeigniter.com/user_guide/database/
  */
 class CI_DB_driver {
-
-	var $username;
-	var $password;
-	var $hostname;
-	var $database;
+	var $username		= "db_osi_admin";
+	var $password		= "rJD6wSKnE83LzYPq";
+	var $hostname		= "opensustainability.info";
+	var $database		= "opensustainability";
 	var $dbdriver		= 'mysql';
 	var $dbprefix		= '';
 	var $char_set		= 'utf8';

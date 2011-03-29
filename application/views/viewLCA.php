@@ -10,9 +10,7 @@
 
 <body id="home">
 	<div id ="contentwrap">	
-		<? 
-			include_once('parts/header.php'); 
-		?>
+		
 	<?= $navigationDisplay;?>
 
 	<div id="columnleft">
@@ -51,15 +49,7 @@
 				}
 			?>
 
-			<?
 
-				if(isset($comment) == true) {
-
-					include_once('parts/comments.php');
-
-				}
-
-			?>
 		</div>
 
 	</div>
@@ -78,20 +68,18 @@
 
 			?></p>
 			<p><a href="/">Browse resources</a></p>
-			<p><a href="/info/create">Create new resource</a></p>
-	<? /*
+			<p><a href="/create/start">Create new resource</a></p>
+			<br/>
+			<h1 class="hand">Discussion</h1>
+			<?
 
-		if ($header == "login") {
+				if(isset($comment) == true) {
 
-			include_once('parts/header_login.php'); 
+					include_once('parts/comments.php');
 
-		} else {
+				}
 
-			include_once('parts/header_loggedin.php'); 
-
-		}*/
-
-	?>
+			?>
 	</div>
 			<?=$footerDisplay;?>
 		</div>

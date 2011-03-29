@@ -114,6 +114,7 @@ class SIAPI extends SM_Controller {
 	
 	private function assocArrayToXML($root_element_name,$ar)
 	{
+		$this->load->library('Simplexml');
 	    $xml = new SimpleXMLElement("<?xml version=\"1.0\"?><{$root_element_name}></{$root_element_name}>");
 	    $f = create_function('$f,$c,$a','
 	            foreach($a as $k=>$v) {

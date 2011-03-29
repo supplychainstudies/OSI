@@ -18,7 +18,7 @@ class Formats {
      * @constructor
      */
 		$obj =& get_instance();    
- 		$obj->load->library('simpleXML');
+ 		$obj->load->library('Simplexml');
  		$this->ci =& $obj;
     } /*** END ***/
 

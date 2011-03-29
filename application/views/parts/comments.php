@@ -3,7 +3,7 @@
 function printComments($comments) {
 	foreach ($comments as $comment) {
 		echo "<div class=\"comments_container\">\n";
-		echo "<p class=\"comments_title\">" . $comment['title'] . "</p>\n";
+		echo "<p class=\"comments_title\"><b>" . $comment['title'] . "</b></p>\n";
 		echo "<p class=\"comments_subtitle\">".$comment['author'] . " - " . $comment['created'] . "</p>";
 		echo "<p>" . $comment['comment'] . "</p>\n";
 		echo "<p class=\"comments_footer\"><a href=\"#\" name=\"comment_reply" . $comment['post'] . "\">Reply</a></p>\n";		
@@ -17,8 +17,8 @@ function printComments($comments) {
 
 ?>
 <div id="comment_form" style="clear: both">
-	<input type="hidden" name="comment_uri_" value="http://opensustainability.info/<? echo $URI; ?>" />
-	<input type="hidden" name="user_id" value="<? if(isset($id) == true) { echo $id; } else { echo "Anonymous"; } ?>" />
+	<p><input type="hidden" name="comment_uri_" value="http://opensustainability.info/<? echo $URI; ?>" /></p>
+	<p><input type="hidden" name="user_id" value="<? if(isset($id) == true) { echo $id; } else { echo "Anonymous"; } ?>" /></p>
 	<? echo $comment; ?>
 </div>
 <div id="comments">

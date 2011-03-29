@@ -30,22 +30,32 @@ h1#title {
 	padding-top: 20px;
 	float:left;
 	height:100px;
-	width:100%;
+	width:auto;
 	text-align:left;
 	
 }
+
+#login {
+	padding-top: 20px;
+	float:right;
+	height:100px;
+	text-align:right;
+	
+}
+
 /* Main content dividers */
 #columnleft{
 	float:left;
 	text-align: left;
 	width:550px;
-	padding-top: 20px;
+	padding-top: 40px;
 	padding-bottom: 60px;
 }
 #columnright{
 	float:right;
+	text-align: right;
 	width: 300px;
-	padding: 20px;
+	padding-top: 40px;
 }
 
 h1.top {
