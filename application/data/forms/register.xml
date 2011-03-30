@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<form action="users/registered" name="register">
+<fieldset name="Register for OSI">
+    <user_name rules="trim|xss_clean|required">
+	  <label>User Name</label>
+      <type>text</type>
+    </user_name>
+    <password rules="trim|xss_clean|required">
+	  <label>Password</label>
+      <type>password</type>
+    </password>
+    <email rules="trim|xss_clean|required">
+	  <label>Email</label>
+      <type>text</type>
+    </email>
+    <openid rules="trim|xss_clean">
+
+      <type>text</type>
+    </openid>
+    <foaf rules="trim|xss_clean">
+	  <label>Friend of a friend URI</label>
+	<note>A friend of a friend file is a semantic document that has your biographical information and relationships. Include the URI of yours here.</note>
+      <type>text</type>
+	  <multiple>yes</multiple>
+    </foaf>
+	<recaptcha>
+	  <label>Recaptcha</label>
+		<type>recaptcha</type>
+	</recaptcha>
+  <submit>
+    <type>submit</type>
+    <value>Submit</value>
+  </submit>
+</fieldset>
+</form>
+
