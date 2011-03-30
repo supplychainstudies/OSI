@@ -536,12 +536,11 @@ class ArcModel extends Model{
 	 * @param $next_bnode string
 	 */	
 	public function latest($limit) {
-		$q = "select ?uri ?created ?processName where { " . 
+		$q = "select ?uri ?created ?name where { " . 
 			"?uri dcterms:created ?created . " . 
-			"?uri 'http://opensustainability.info/vocab#lifeCycleInventory' ?lci_bnode . " . 			
-			"?lci_bnode 'http://opensustainability.info/vocab#process' ?process_bnode . " . 
-			"?process_bnode 'http://opensustainability.info/vocab#processDescription' ?processdescription_bnode . " . 				
-			"?processdescription_bnode 'http://opensustainability.info/vocab#processName' ?processName . " .
+			"?uri 'http://ontology.earthster.org/eco/core#models' ?bnode . " .			
+			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type'  'eco:Product' . " .
+			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#label'  ?name . " .
 			"} ORDER BY DESC(?created)";	
 		$records = $this->executeQuery($q);	
 		return $records;
