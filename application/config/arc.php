@@ -26,7 +26,7 @@
 $config['arc_info'] = array(
   /* db */
   'db_host' => 'localhost', /* default: localhost */
-  'db_name' => 'osi_test',
+  'db_name' => 'osi',
   'db_user' => 'root',
   'db_pwd' => 'root',
   /* store */
