@@ -39,20 +39,21 @@ function submitComment() {
 	
 }
 
+function newComment() {
+	var node = $(this).attr('name');
+	node = node.replace("comment_reply", "");
+	var form_text = $("#comment").html();
+	form_text = "<div id=\"comment" + node + "\">" + form_text + "</div>";
+	form_text = form_text.replace("comment_submit_", "comment_submit" + node).replace("comment_title_", "comment_title" + node).replace("comment_comment_", "comment_comment" + node).replace("comment_uri_", "comment_uri" + node);
+	$(this).after(form_text);
+	$("input[name='comment_uri" + node + "']").val(node);		
+	$("input[name^='comment_submit_']").click(submitComment);
+}
+
 
 $(document).ready(function () {
 
 	$("input[name^='comment_submit_']").click(submitComment);	
 	
-	$("a[name^='comment_reply']").click( function () {
-		alert("quack");
-		//var node = $(this).attr('name');
-		//node = node.replace("comment_reply", "");
-		//var form_text = $("#comment").html();
-		//form_text = "<div id=\"comment" + node + "\">" + form_text + "</div>";
-		//form_text = form_text.replace("comment_submit_", "comment_submit" + node).replace("comment_title_", "comment_title" + node).replace("comment_comment_", "comment_comment" + node).replace("comment_uri_", "comment_uri" + node);
-		//$(this).after(form_text);
-		//$("input[name='comment_uri" + node + "']").val(node);		
-		//$("input[name^='comment_submit_']").click(submitComment);			
-	});
+	$("a[name^='comment_reply']").click(newComment);
 });

@@ -188,7 +188,7 @@ class Lca extends SM_Controller {
 
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
-		$comments = $this->arcmodel->getComments("http://db.opensustainability.info/".$URI);
+		$comments = $this->arcmodel->getComments("http://db.opensustainability.info/osi/rdfspace/lca/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
 		$this->display("View " . $parts['quantitativeReference']['amount'] . " " . $parts['quantitativeReference']['unit'] . " of " . $parts['quantitativeReference']['name'], "viewLCA");		
