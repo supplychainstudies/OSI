@@ -26,8 +26,14 @@ class Lca extends SM_Controller {
 	
 	
 	public function index() {
-		echo "boo";
+		$data = $this->form_extended->load("start"); 
+		$the_form = $this->form_extended->build();
+		$this->style(Array('style.css', 'form.css'));
+		$this->script(Array('form.js', 'toggle.js', 'lookup.js'));
+		$this->data("view_string", $the_form);
+		$this->display("Form", "view");
 	}
+
 	public function create() {
 	/***
     * @public
@@ -286,39 +292,36 @@ class Lca extends SM_Controller {
 		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
 		$eco_prefix = "http://ontology.earthster.org/eco/core#";
 		$converted_dataset = array();		
-		foreach($dataset as $key=>$record) {	
-			foreach ($record[$eco_prefix."hasImpactCategoryIndicatorResult"] as $_record) {
-				foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
-					foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
-						$converted_dataset[$key]['impactCategory'] = $___record;
-					} 
-					foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
-						$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
-					}					
-				} 	
-				foreach ($_record[$eco_prefix."hasQuantity"] as $__record) {
-					foreach($__record[$eco_prefix."hasMagnitude"] as $___record) {
-						$converted_dataset[$key]['amount'] = $___record;
-					}
-					foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
-						$converted_dataset[$key]['unit'] = str_replace("qudt:", "",$___record);
-					}		
-				}	
-				if (isset($converted_dataset[$key]['unit']) == false) {
-					$converted_dataset[$key]['unit'] = "?";
-				}									
-				if (isset($converted_dataset[$key]['amount']) == false) {
-					$converted_dataset[$key]['amount'] = "?";
+		foreach($dataset as $key=>$_record) {	
+			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
+				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
+					$converted_dataset[$key]['impactCategory'] = $___record;
+				} 
+				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
+					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
+				}					
+			} 	
+			foreach ($_record[$eco_prefix."hasQuantity"] as $__record) {
+				foreach($__record[$eco_prefix."hasMagnitude"] as $___record) {
+					$converted_dataset[$key]['amount'] = $___record;
 				}
-				if (isset($converted_dataset[$key]['impactCategory']) == false) {
-					$converted_dataset[$key]['impactCategory'] = "?";
-				}
-				if (isset($converted_dataset[$key]['impactCategoryIndicator']) == false) {
-					$converted_dataset[$key]['impactCategoryIndicator'] = "?";
-				}
+				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
+					$converted_dataset[$key]['unit'] = str_replace("qudt:", "",$___record);
+				}		
+			}	
+			if (isset($converted_dataset[$key]['unit']) == false) {
+				$converted_dataset[$key]['unit'] = "?";
+			}									
+			if (isset($converted_dataset[$key]['amount']) == false) {
+				$converted_dataset[$key]['amount'] = "?";
 			}
+			if (isset($converted_dataset[$key]['impactCategory']) == false) {
+				$converted_dataset[$key]['impactCategory'] = "?";
+			}
+			if (isset($converted_dataset[$key]['impactCategoryIndicator']) == false) {
+				$converted_dataset[$key]['impactCategoryIndicator'] = "?";
+			}
+		}
+			return $converted_dataset; 
+		}	
 	}
-		return $converted_dataset; 
-	}	
-
-}

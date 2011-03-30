@@ -46,12 +46,5 @@ $route['docs'] = "sitemaps/documentation";
 $route['(:any).rdf'] = "lca/viewRDF/$1";
 $route['(:any).json'] = "lca/viewJSON/$1";
 
-// These are Freak Auth configurations
-//$route['default_controller'] = "freakauth_demo";
-$route['scaffolding_trigger'] = "scaff";
-$route['admin'] = "admin/adminhome";
-$route['admin/users/:num'] = "admin/users";
-$route['admin/admins/:num'] = "admin/admins";
-
 
 ?>

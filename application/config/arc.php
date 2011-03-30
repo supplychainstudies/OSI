@@ -22,10 +22,11 @@
 | variable so that it is blank.
 |
 */
+
 $config['arc_info'] = array(
   /* db */
   'db_host' => 'localhost', /* default: localhost */
-  'db_name' => 'osi',
+  'db_name' => 'osi_test',
   'db_user' => 'root',
   'db_pwd' => 'root',
   /* store */
@@ -38,6 +39,7 @@ $config['arc_info'] = array(
 'sioc' => 'http://rdfs.org/sioc/ns',
 'bibo' => 'http://purl.org/ontology/bibo/',
 'eco' => 'http://ontology.earthster.org/eco/core#',
+'ecoUD' => 'http://ontology.earthster.org/eco/uncertaintydistribution#',
 'fasc' => 'http://ontology.earthster.org/eco/fasc#',
 'oselemflow' => 'http://opensustainability.info/vocab/elementaryFlows',
 'ossia' => 'http://opensustainability.info/vocab/simpleImpactAssessment',
@@ -81,3 +83,4 @@ $config['arc_lr_info'] = array(
     'load', 'insert', 'delete',               // allow update
     'dump'                                    // allow backup
   )
+);
