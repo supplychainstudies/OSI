@@ -13,33 +13,30 @@
 		
 	<?= $navigationDisplay;?>
 
-	<div id="columnleft">
-		<div id="content">
-			
-			<div id="quantitative_reference">
-				<div id="qr_amount"><?=$parts['quantitativeReference']['amount'] ?></div>
-				<div id="qr_unit"><?=$parts['quantitativeReference']['unit'] ?></div>
-				<div id="qr_name"><?=$parts['quantitativeReference']['name'] ?></div>
-			</div>			
-			<div>Description</div><div>
-				"This is a model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?>
-			</div>
-
-			<div>Flows</div>
-			<div id="flows">
+	<div id="lca_background">
+		
+		<h1><?=$parts['quantitativeReference']['name'] ?></h1>
+		<p>This is a model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p>	
+		<p>Unit: <?=$parts['quantitativeReference']['amount'] ?> <?=$parts['quantitativeReference']['unit'] ?></p>		
+				
+			<div id="lca_flows">
+			<h2>Flows</h2>
 			<? foreach ($parts['exchanges'] as $exchanges) {
 				echo $exchanges['direction'] . " - " . $exchanges['name'] . " - " . $exchanges['amount'] . " - " . $exchanges['unit'] . "<br/>\n"; 
 				
-			}?></div>			
+			}?>
+			</div>			
 			
-			<div>Impact Assessment</div>
-			<div id="impactAssessment">
+			<div id="lca_impact">
+			<h2><span>Impact Assessment</h2>	
 			<? foreach ($parts['impactAssessments'] as $impactAssessment) {
 				echo $impactAssessment['impactCategory'] . " - " . $impactAssessment['impactCategoryIndicator'] . " - " . $impactAssessment['amount'] . " - " . $impactAssessment['unit'] . "<br/>\n"; 
 				
-			}?></div>
-			
-			<div>Bibliography</div>
+			}?>
+			</div>
+
+			<div id="lca_meta">
+			<h2>Metadata</h2>
 			<?
 				foreach ($parts['bibliography'] as $record) {
 					foreach ($record['authors'] as $author) {
@@ -48,16 +45,7 @@
 					echo " ; " . $record["title"];
 				}
 			?>
-
-
-		</div>
-
-	</div>
-
-
-	<div id="columnright">
-			<h1 class="hand">We want sustainability information to be free, open and easy to use.</h1>
-			<br/><br/>
+			
 			<p><?
 
 				if(isset($links) == true) {
@@ -69,8 +57,9 @@
 			?></p>
 			<p><a href="/">Browse resources</a></p>
 			<p><a href="/create/start">Create new resource</a></p>
-			<br/>
-			<h1 class="hand">Discussion</h1>
+			</div>
+			
+			<div id="lca_comments">
 			<?
 
 				if(isset($comment) == true) {
@@ -80,6 +69,10 @@
 				}
 
 			?>
+			</div>
+			
+			
+
 	</div>
 			<?=$footerDisplay;?>
 		</div>

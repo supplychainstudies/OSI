@@ -58,6 +58,68 @@ h1#title {
 	padding-top: 40px;
 }
 
+/* Structure for LCA view */
+#lca_background{
+	float:left;
+	text-align: left;
+	width:920px;
+	padding: 30px;
+	background-color: #F4F4F4;
+	margin-bottom:30px;
+	margin-top:30px;
+}
+
+#lca_flows {
+	float:left;
+	text-align: left;
+	width:400px;
+	padding: 20px;
+	background-color: #F5FAFF;
+}
+#lca_impact {
+	float:right;
+	text-align: left;
+	width:400px;
+	padding: 20px;
+	background-color: #F5FAFF;
+	margin-right:20px;
+}
+
+#lca_comments {
+	float:right;
+	text-align: left;
+	width:400px;
+	padding: 20px;
+	background-color: #F5FAFF;
+	margin-top: 15px;
+	margin-right:20px;
+}
+#lca_meta {
+	float:right;
+	text-align: left;
+	width:400px;
+	padding: 20px;
+	background-color: #F5FAFF;
+	margin-top: 15px;
+	margin-right:20px;
+}
+
+
+/* Font styles for LCA view */
+#lca_background h1 {
+	font-size: 30px;
+	font-family: 'Lato', arial, serif; 
+	color: #333;	
+}
+#lca_background h2 {
+	font-size: 20px;
+	font-family: 'Lato', arial, serif; 
+	color: #3FA9F5;	
+	background-repeat:none;
+}
+
+
+
 h1.top {
 	font-size: 26px;
 	font-weight: bold;
