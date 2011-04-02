@@ -35,7 +35,7 @@ class Users extends SM_Controller {
 		// If not logged in, figure out whether there is post info from janrain
 		} else {
 			// If there is post info from janrain, figure out whether this person is already in the system
-			if (isset($_POST) == true) {
+			if ($_POST) {
 				if (isset($_POST['token']) == true) {
 					// if they are already in the system, log them in and send them to the dashboard
 					$auth_info = $this->janrainAuthInfo();
@@ -169,29 +169,40 @@ class Users extends SM_Controller {
 			$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
 		
 			// Step 3: If there is an openid, write to db
-			if (isset($_POST['openid_']) == true) {
-				$data = array(
-							'user_id' => $id,
-							'openid_url' => $_POST['openid_']
-						);
+			$openid_array = $_POST['openid_'];
+			if ($openid_array != "") {
+				foreach($openid_array as $openid) {
+					if ($openid != "") {
+					$data = array(
+								'user_id' => $id,
+								'openid_url' => $openid
+							);
 
-				$this->CI->db->set($data); 
+					$this->CI->db->set($data); 
 
-				if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
-					return false;
+					if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
+						return false;
+					}
+				}
 			}
 			// Step 4: If there is a foaf URI, write to db
-			if (isset($_POST['foaf_']) == true) {
-				$data = array(
-							'user_id' => $id,
-							'foaf_uri' => $_POST['foaf_']
-						);
+			$foaf_array = $_POST['foaf_'];
+			if ($foaf_array != "") {
+				foreach($foaf_array as $foaf) {
+					if ($foaf != "") {
+						$data = array(
+									'user_id' => $id,
+									'foaf_uri' => $foaf
+								);
 
-				$this->CI->db->set($data); 
+						$this->CI->db->set($data); 
 
-				if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
-					return false;			
-			}
+						if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
+							return false;
+					}		
+				}
+			}	
+		
 			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
 			    redirect('/users/dashboard/');
 			}		

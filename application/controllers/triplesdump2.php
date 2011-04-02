@@ -11,8 +11,8 @@
  */
 
 
-class Triplesdump extends SM_Controller {
-	public function triplesdump() {
+class Triplesdump2 extends SM_Controller {
+	public function triplesdump2() {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel'));	
 		$this->load->library(Array('form_extended','name_conversion'));
@@ -785,6 +785,8 @@ public function crmd() {
 	public function ICE_references() {
 		$handle = fopen('application/data/datasets/ICE_REFERENCES.csv', "r");	
 		// Ref No.	Title	Author	Year	Organisation	ISBN	Volume		page range	Journal	doi	location	book name	chapter #	misc	websites Conference
+		$references = array();
+		$references[] = "";
 		$authors = array();
 		$authors_check = array();
 		$journal_check = array();
@@ -1010,7 +1012,7 @@ public function crmd() {
 					}		
 		
 					$reference_bnode = $this->name_conversion->toURI("bibliography", $line_array[1]);
-					echo $line_array[0] . " - " . $reference_bnode. "<br />\n";
+					//echo $line_array[0] . " - " . $reference_bnode. "<br />\n";
 					$reference = array(	
 						"dc:title" => trim($line_array[1]),
 						"bibo:authorList" => $author_uris,
@@ -1057,29 +1059,154 @@ public function crmd() {
 					}						
 
 				//var_dump($triples);
-				$this->arcmodel->addTriples($triples);		
+				$this->arcmodel->addTriples($triples);	
+				$references[$line_array[0]] = $reference_bnode;	
 			// End of while (!feof($handle)) 	
 			}
 		//	End of if($handle)	
 		}
+		return $references;
 	// End of function
 	}
 
 
 
 	public function ICE() {
-		$handle = fopen('application/data/datasets/ICE.csv', "r");
+		$handle = fopen('application/data/datasets/ICE1.csv', "r");
 		// Columns: Name	unit	EE	Standard Deviation	Minimum EE	Maximum EE	CO2	Co2e	GWP	Process Description	References		
 		
-		$handle_reference = fopen('application/data/datasets/ice_references_relation.csv', "r");	
-		$references = array();
-		if ($handle_reference) {
-			while (!feof($handle_reference)) {
-		        $line = fgets($handle_reference);
-		        $line_array = explode(",",$line);
-				$references[$line_array[0]] = $line_array[1];
-			}
-		}
+		//$handle_reference = fopen('application/data/datasets/ice_references_relation.csv', "r");	
+		//$references = array();
+		//if ($handle_reference) {
+		//	while (!feof($handle_reference)) {
+	//	        $line = fgets($handle_reference);
+	//	        $line_array = explode(",",$line);
+	//			$references[trim($line_array[0])] = trim($line_array[1]);
+	//		}
+	//	}
+		$references = $this->ICE_references();
+
+		$ice_uri = $this->name_conversion->toURI("bibliography","ICE Database");
+		$hammond_uri = $this->name_conversion->toURI("person","G Hammond");
+		$jones_uri = $this->name_conversion->toURI("person","Craig Jones");
+		$lowrie_uri = $this->name_conversion->toURI("person","F Lowrie");
+		$tse_uri = $this->name_conversion->toURI("person","P Tse");
+		$sayan_uri = $this->name_conversion->toURI("person","Bianca Sayan");
+		$triples = array (
+				array(
+					"subject" => $hammond_uri,
+					"predicate" => "rdfs:type",
+					"object" => "foaf:Person"
+				),			
+				array(
+					"subject" => $hammond_uri,
+					"predicate" => "foaf:firstName",
+					"object" => "G"
+				),
+				array(
+					"subject" => $hammond_uri,
+					"predicate" => "foaf:lastName",
+					"object" => "Hammond"
+				),
+				array(
+					"subject" => $sayan_uri,
+					"predicate" => "rdfs:type",
+					"object" => "foaf:Person"
+				),			
+				array(
+					"subject" => $sayan_uri,
+					"predicate" => "foaf:firstName",
+					"object" => "Bianca"
+				),
+				array(
+					"subject" => $sayan_uri,
+					"predicate" => "foaf:lastName",
+					"object" => "Sayan"
+				),
+				array(
+					"subject" => $lowrie_uri,
+					"predicate" => "rdfs:type",
+					"object" => "foaf:Person"
+				),			
+				array(
+					"subject" => $lowrie_uri,
+					"predicate" => "foaf:firstName",
+					"object" => "F"
+				),
+				array(
+					"subject" => $lowrie_uri,
+					"predicate" => "foaf:lastName",
+					"object" => "Lowrie"
+				),
+				array(
+					"subject" => $tse_uri,
+					"predicate" => "rdfs:type",
+					"object" => "foaf:Person"
+				),			
+				array(
+					"subject" => $tse_uri,
+					"predicate" => "foaf:firstName",
+					"object" => "P"
+				),
+				array(
+					"subject" => $tse_uri,
+					"predicate" => "foaf:lastName",
+					"object" => "Tse"
+				),
+				array(
+					"subject" => $jones_uri,
+					"predicate" => "rdfs:type",
+					"object" => "foaf:Person"
+				),			
+				array(
+					"subject" => $jones_uri,
+					"predicate" => "foaf:firstName",
+					"object" => "Craig"
+				),
+				array(
+					"subject" => $jones_uri,
+					"predicate" => "foaf:lastName",
+					"object" => "Jones"
+				),
+				array(
+					"subject" => $ice_uri,
+					"predicate" => "rdfs:type",
+					"object" => "bibo:Website"
+				),
+				array(
+					"subject" => $ice_uri,
+					"predicate" => "bibo:uri",
+					"object" => "https://www.bsria.co.uk/bookshop/books/embodied-carbon-the-inventory-of-carbon-and-energy-ice/"
+				),
+				array(
+					"subject" => $ice_uri,
+					"predicate" => "dc:title",
+					"object" => "Embodied Carbon - the Inventory of Carbon and Energy (ICE)"
+				),
+				array(
+					"subject" => $ice_uri,
+					"predicate" => "bibo:authorList",
+					"object" => $hammond_uri
+				),
+				array(
+					"subject" => $ice_uri,
+					"predicate" => "bibo:authorList",
+					"object" => $jones_uri
+				),
+			array(
+				"subject" => $ice_uri,
+				"predicate" => "bibo:editor",
+				"object" => $tse_uri
+			),
+			array(
+				"subject" => $ice_uri,
+				"predicate" => "bibo:editor",
+				"object" => $lowrie_uri
+			)
+			);
+		var_dump($triples);			
+		@$this->arcmodel->addTriples($triples);
+
 
 		if ($handle) {
 			while (!feof($handle)) {
@@ -1126,7 +1253,17 @@ public function crmd() {
 						),
 					array(
 						"subject"=> $model_bnode,
-						"predicate"=> "rdfs:description",
+						"predicate"=> "dcterms:created",
+						"object"=> date('j-F-Y G:i:s T')
+						),
+					array(
+						"subject"=> $model_bnode,
+						"predicate"=> "dcterms:publisher",
+						"object"=> $sayan_uri
+						),
+					array(
+						"subject"=> $model_bnode,
+						"predicate"=> "dcterms:description",
 						"object"=> $line_array[10]
 						),
 					array(
@@ -1291,10 +1428,10 @@ public function crmd() {
 						$triples[] = array(
 						"subject"=> $model_bnode,
 						"predicate"=> "eco:hasUnallocatedExchange",
-						"object"=> $exchange2_bnode
+						"object"=> $exchange3_bnode
 						);	
 						$triples[] = array(
-						"subject"=> $exchange2_bnode,
+						"subject"=> $exchange3_bnode,
 						"predicate"=> "rdfs:type",
 						"object"=> "eco:Exchange"
 						);									
@@ -1306,7 +1443,7 @@ public function crmd() {
 						$triples[] = array(
 						"subject"=> $effect3_bnode,
 						"predicate"=> "eco:hasEffectAggregationCategory",
-						"object"=> $eac_bnode
+						"object"=> $eac3_bnode
 						);			
 						$triples[] = array(
 						"subject"=> $effect3_bnode,
@@ -1326,7 +1463,7 @@ public function crmd() {
 						$triples[] = array(
 						"subject"=> $quantity3_bnode,
 						"predicate"=> "eco:hasUnitOfMeasure",
-						"object"=> $line_array[1]
+						"object"=> "Megajoules"
 						);
 						$triples[] = array(
 						"subject"=> $quantity3_bnode,
@@ -1463,7 +1600,7 @@ public function crmd() {
 				// if Energy
 				if ($line_array[2] != "") {
 					$triples[] = array(
-					"subject"=> $ia2_bnode,
+					"subject"=> $ia_bnode,
 					"predicate"=> "eco:hasImpactCategoryIndicatorResult",
 					"object"=> $icir2_bnode
 					);		
@@ -1505,7 +1642,7 @@ public function crmd() {
 					$triples[] = array(
 					"subject"=> $iaq2_bnode,
 					"predicate"=> "eco:hasUnitOfMeasure",
-					"object"=> "qudt:Megajoules"
+					"object"=> "Megajoules"
 					);
 					$triples[] = array(
 					"subject"=> $iaq2_bnode,
@@ -1557,9 +1694,9 @@ public function crmd() {
 					// if CO2?
 					if ($line_array[6] != "") {	
 					$triples[] = array(
-							"subject"=> $ia3_bnode,
+							"subject"=> $ia_bnode,
 							"predicate"=> "eco:hasImpactCategoryIndicatorResult",
-							"object"=> $icir_bnode
+							"object"=> $icir3_bnode
 							);		
 					$triples[] = array(
 							"subject"=> $icir3_bnode,
@@ -1569,7 +1706,7 @@ public function crmd() {
 					$triples[] = array(
 							"subject"=> $icir3_bnode,
 							"predicate"=> "eco:hasImpactAssessmentMethodCategoryDescription",
-							"object"=> $iamcd_bnode
+							"object"=> $iamcd3_bnode
 							);	
 					$triples[] = array(
 							"subject"=> $iamcd3_bnode,
@@ -1607,16 +1744,23 @@ public function crmd() {
 							"object"=> $line_array[6]
 							);
 					}
+					$triples[] = array(
+						"subject"=> $model_bnode,
+						"predicate"=> "eco:hasDataSource",
+						"object"=> $ice_uri
+						);					
+					if (trim($line_array[11]) != "") {
 					$refs = explode("-", $line_array[11]);
-					foreach ($refs as $ref) {
-						$triples[] = array(
-							"subject"=> $model_bnode,
-							"predicate"=> "eco:hasDataSource",
-							"object"=> $references[$ref]
-							);						
+						foreach ($refs as $ref) {
+							$triples[] = array(
+								"subject"=> $model_bnode,
+								"predicate"=> "eco:hasDataSource",
+								"object"=> $references[trim($ref)]
+								);					
+						}
 					}
 					var_dump($triples);			
-					//@$this->arcmodel->addTriples($triples);	
+					@$this->arcmodel->addTriples($triples);	
 			}
 		}
 		else {
