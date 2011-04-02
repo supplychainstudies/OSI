@@ -31,21 +31,6 @@
 	</div>
 
 
-	<div id="columnright">
-			<h1 class="hand">We want sustainability information to be free, open and easy to use.</h1>
-			<br/><br/>
-			<p><?
-
-				if(isset($links) == true) {
-
-					echo $links;
-
-				}
-
-			?></p>
-			<p><a href="/">Browse resources</a></p>
-			<p><a href="/info/create">Create new resource</a></p>
-	</div>
 			<?=$footerDisplay;?>
 		</div>
 

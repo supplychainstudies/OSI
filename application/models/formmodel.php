@@ -23,6 +23,7 @@ class FormModel extends Model{
 				);
 			$form .= "<label name=\"".$field['name']."\">".$field['label']."</label>".form_input($attributes)."<p>".$field['notes']."</p><br />\n";
 		}
+		$form .= "</div>"
 		$form .= form_submit("submit_form", "Submit").form_close();
 		return $form; 
 	}
