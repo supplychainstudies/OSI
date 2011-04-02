@@ -14,39 +14,16 @@ class ArcModel extends Model{
 	 */
 	function ArcModel(){
 		parent::Model();
-		$this->load->library('arc2/ARC2', '', 'arc');			
+		$this->load->library('arc2/ARC2', '', 'arc');
+		//$this->config->load('arc');	
+		$CI =& get_instance();    
+	        $CI->config->load('arc');		
+		$this->arc_config = $CI->config->item("arc_info");
 	}	
 	
 	// Configuration information for accessing the arc store
-	public $config = array(
-	  /* db */
-	  'db_host' => 'opensustainability.info', /* default: localhost */
-	  'db_name' => 'opensustainability',
-	  'db_user' => 'db_osi_admin',
-	  'db_pwd' => 'rJD6wSKnE83LzYPq',
-	  /* store */
-	'store_name' => 'arc_os',
-	'ns' => array(
-	'foaf' => 'http://xmls.com/foaf/0.1/',
-    'dcterms' => 'http://purl.org/dc/terms/',
-	'dc' => 'http://purl.org/dc/',
-	'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
-	'sioc' => 'http://rdfs.org/sioc/ns',
-	'bibo' => 'http://purl.org/ontology/bibo/',
-	'eco' => 'http://ontology.earthster.org/eco/core#',
-	'fasc' => 'http://ontology.earthster.org/eco/fasc#',
-	'oselemflow' => 'http://opensustainability.info/vocab/elementaryFlows',
-	'ossia' => 'http://opensustainability.info/vocab/simpleImpactAssessment',
-	'qudt' => 'http://data.nasa.gov/qudt/owl/unit#',
-   ),		    
-	  'endpoint_features' => array(
-	    'select', 'construct', 'ask', 'describe', // allow read
-	    'load', 'insert', 'delete',               // allow update
-	    'dump'                                    // allow backup
-	  )
-
-	);
-
+	
+	
 
 	/**
 	 * This function is a generic call to the arc store.
@@ -54,7 +31,7 @@ class ArcModel extends Model{
 	 * @param $q string - query string.
 	 */
 	public function executeQuery($q) {
-		$store = $this->arc->getStore($this->config);
+		$store = $this->arc->getStore($this->arc_config);
 
 		if (!$store->isSetUp()) {
   			$store->setUp();
@@ -82,7 +59,7 @@ class ArcModel extends Model{
 	 */
 	public function endpoint() {
 		/* instantiation */
-		$ep = $this->arc->getStoreEndpoint($this->config);
+		$ep = $this->arc->getStoreEndpoint($this->arc_config);
 
 		if (!$ep->isSetUp()) {
 		  $ep->setUp(); /* create MySQL tables */
@@ -160,7 +137,7 @@ class ArcModel extends Model{
 	 * @param $uri string		
 	 */	
 	public function getRDF($URI) {
-		$ser = $this->arc->getRDFXMLSerializer($this->config);
+		$ser = $this->arc->getRDFXMLSerializer($this->arc_config);
 		$doc = $ser->getSerializedTriples($this->getArcTriples($URI));
 		return $doc;
 	}
@@ -172,7 +149,7 @@ class ArcModel extends Model{
 	 * @param $uri string		
 	 */
 	public function getJSON($URI) {
-		$ser = $this->arc->getRDFJSONSerializer($this->config);
+		$ser = $this->arc->getRDFJSONSerializer($this->arc_config);
 		$doc = $ser->getSerializedTriples($this->getArcTriples($URI));
 		return $doc;
 	}
@@ -329,20 +306,20 @@ class ArcModel extends Model{
 	 * Retrieves and returns summary information for all existing records
 	 * @return $records Array	
 	 */
-
-	public function simpleSearch($variable, $value) {
+	public function simpleSearch($variable = null, $value = null) {
 		$URIs = array();
 		$q = "select ?uri where { " . 
-			" ?uri '" . $this->config['ns']['eco'] . "models' ?bnode . " . 	
-			" ?bnode '" . $this->config['ns']['rdfs'] . "label' '".$value."' . " . 			
-			"}";
+			" ?uri '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " ;
+		if ($value != null) {
+			$q .= " ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' '".$value."' . "; 				
+		} 			
+		$q .= "}";
 		$records = $this->executeQuery($q);	
 		foreach ($records as $record) {
 			$URIs[] = $record['uri'];
 		}
 		return $URIs;
 	}
-
 
 
 	/**
@@ -352,7 +329,7 @@ class ArcModel extends Model{
 	public function oldsimpleSearch($variable, $value) {
 		$URIs = array();
 		$q = "select ?bnode where { " . 
-			" ?bnode '" . $this->config['ns']['rdfs'] . "label' '".$value."' . " . 			
+			" ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' '".$value."' . " . 			
 			"}";
 		$records = $this->executeQuery($q);	
 		var_dump($records);
@@ -400,6 +377,7 @@ class ArcModel extends Model{
 			" ?bnode4 'http://ontology.earthster.org/eco/core#hasMagnitude' ?impactCategoryValue . " .				
 			"}";				
 		$records = $this->executeQuery($q);	
+		//var_dump($records);
 		foreach ($records as &$record) {
 			$record['impactCategory'] = $this->getLabel($record['impactCategory']);
 			$record['impactCategoryIndicator'] = $this->getLabel($record['impactCategoryIndicator']);
@@ -411,14 +389,15 @@ class ArcModel extends Model{
 	
 	
 	public function getImpactAssessments($URI) {
-		$q = "select ?bnode where { " . 
+		$q = "select ?bnoder where { " . 
 			" ?bnode 'http://ontology.earthster.org/eco/core#computedFrom' <".$URI."> . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:ImpactAssessment' . " .					
+			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:ImpactAssessment' . " .
+			" ?bnode 'http://ontology.earthster.org/eco/core#hasImpactCategoryIndicatorResult' ?bnoder . " .			
 			"}";				
 		$records = $this->executeQuery($q);	
 		$full_records = array();
 		foreach($records as $record) {
-			$full_record[] = $this->getTriples($record['bnode']);
+			$full_record[] = $this->getTriples($record['bnoder']);
 		}
 		return $full_record;
 	}
@@ -557,12 +536,11 @@ class ArcModel extends Model{
 	 * @param $next_bnode string
 	 */	
 	public function latest($limit) {
-		$q = "select ?uri ?created ?processName where { " . 
+		$q = "select ?uri ?created ?name where { " . 
 			"?uri dcterms:created ?created . " . 
-			"?uri 'http://opensustainability.info/vocab#lifeCycleInventory' ?lci_bnode . " . 			
-			"?lci_bnode 'http://opensustainability.info/vocab#process' ?process_bnode . " . 
-			"?process_bnode 'http://opensustainability.info/vocab#processDescription' ?processdescription_bnode . " . 				
-			"?processdescription_bnode 'http://opensustainability.info/vocab#processName' ?processName . " .
+			"?uri 'http://ontology.earthster.org/eco/core#models' ?bnode . " .			
+			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type'  'eco:Product' . " .
+			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#label'  ?name . " .
 			"} ORDER BY DESC(?created)";	
 		$records = $this->executeQuery($q);	
 		return $records;
