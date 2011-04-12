@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title><?=$title?></title>
-	
+	<?=$scripts;?>	
 	<?=$styles;?>
 	<?=$headerDisplay;?>
 </head>
@@ -42,10 +42,12 @@
 			<div>Bibliography</div>
 			<?
 				foreach ($parts['bibliography'] as $record) {
+					echo "<a href=\"" . $record['uri'] . "\">";
 					foreach ($record['authors'] as $author) {
 						echo $author['lastName'] . ", " .$author['firstName'] . ";";
 					}
 					echo " ; " . $record["title"];
+					echo "</a>";
 				}
 			?>
 
