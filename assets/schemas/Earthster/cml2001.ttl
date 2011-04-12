@@ -1,0 +1,27 @@
+# Saved by TopBraid on Thu May 13 08:56:57 BST 2010
+# baseURI: http://ontology.earthster.org/eco/CML2001
+
+@prefix :        <http://ontology.earthster.org/eco/CML2001#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ontology.earthster.org/eco/CML2001>
+      rdf:type owl:Ontology ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:category1
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "CML top level category name."^^xsd:string ;
+      rdfs:label "category1"^^xsd:string .
+
+:category2
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "CML second level category name"^^xsd:string ;
+      rdfs:label "category2"^^xsd:string .
+
+:cmlLabel
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The label used by CML 2001 to label a concept."^^xsd:string ;
+      rdfs:label "cml label"^^xsd:string .

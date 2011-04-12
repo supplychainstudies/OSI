@@ -1,0 +1,127 @@
+<form action="/lca/create" name="start">
+	<blank rules="trim">
+		<label>blank</label>
+		<type>hidden</type>
+	</blank>
+	<fieldset name="people" multiple="yes">
+			<email rules="trim">
+				<label>Email</label>
+				<type>text</type>
+			</email>
+			<firstName rules="trim">
+				<label>First Name</label>
+				<type>text</type>
+			</firstName>
+			<lastName rules="trim">
+				<label>Last Name</label>
+				<type>text</type>
+			</lastName>
+	</fieldset>
+	<fieldset name="organization" multiple="yes">
+			<companyCode rules="trim">	
+				<label>Company</label>
+				<type>text</type>			
+			</companyCode>
+			<address rules="trim">
+				<label>Address</label>
+				<type>text</type>				
+			</address>
+	</fieldset>
+	<fieldset name="bibliography" multiple="yes">
+			<title rules="trim">
+				<label>Title</label>
+				<type>text</type>
+			</title>
+			<location rules="trim">
+				<label>Location</label>
+				<type>text</type>
+			</location>
+			<publisher rules="trim">
+				<label>Publisher</label>
+				<type>text</type>
+			</publisher>
+			<fieldset name="authors">
+				<author rules="trim">
+					<label>Author</label>
+					<type>link</type>
+				</author>
+			</fieldset>
+	</fieldset>
+	<fieldset name="processes">	
+		<name rules="trim">
+			<label>Name</label>
+			<type>text</type>
+		</name>
+		<fieldset name="geography">
+			<uri rules="trim">
+				<label>Geography</label>
+				<type>lookup</type>
+			</uri>
+			<description rules="trim">
+				<label>Description</label>
+				<type>text</type>
+			</description>
+		</fieldset>
+		<fieldset name="timePeriod">
+			<description rules="trim">
+				<label>Description</label>
+				<type>text</type>
+			</description>
+			<startYear rules="trim">
+				<label>Start Year</label>
+				<type>text</type>
+			</startYear>	
+			<endYear rules="trim">
+				<label>End Year</label>
+				<type>text</type>
+			</endYear>
+		</fieldset>
+	</fieldset>
+	<fieldset name="exchanges">
+		<name rules="trim">
+			<label>Name</label>
+			<type>text</type>
+		</name>
+		<meanValue rules="trim">
+			<label>Mean Value</label>
+			<type>text</type>
+		</meanValue>
+		<minValue rules="trim">
+			<label>Min Value</label>
+			<type>text</type>
+		</minValue>
+		<maxValue rules="trim">
+			<label>Max Value</label>
+			<type>text</type>
+		</maxValue>
+		<mostLikelyValue rules="trim">
+			<label>Most Likely Value</label>
+			<type>text</type>
+		</mostLikelyValue>
+		<standardDeviation rules="trim">
+			<label>Standard Deviation</label>
+			<type>text</type>
+		</standardDeviation>
+		<CASNumber rules="trim">
+			<label>CAS Number</label>
+			<type>text</type>
+		</CASNumber>
+		<location rules="trim">
+			<label>Location</label>
+			<type>text</type>
+		</location>
+		<comment rules="trim">
+			<label>Comment</label>
+			<type>text</type>
+		</comment>
+		<unit rules="trim">
+			<label>Unit</label>
+			<type>text</type>
+		</unit>
+		<direction rules="trim">
+			<label>Direction</label>
+			<type>text</type>
+		</direction>
+	</fieldset>
+</form>
+

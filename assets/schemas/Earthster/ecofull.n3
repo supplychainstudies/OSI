@@ -1,0 +1,37 @@
+# Saved by TopBraid on Fri May 07 10:17:48 BST 2010
+# baseURI: http://ontology.earthster.org/eco/ecofull
+# imports: http://ontology.earthster.org/eco/fasc
+# imports: http://ontology.earthster.org/eco/ecodl
+# imports: http://ontology.earthster.org/eco/fullAxioms
+
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ecofull:  <http://ontology.earthster.org/eco/ecofull#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://ontology.earthster.org/eco/ecofull>
+      a       owl:Ontology ;
+      rdfs:comment """Earthster™ OWL Full Inclusive Core Ontology
+
+This is a shell ontology the imports the Earthster Core Ontology (ECO) and a collection of common extension ontologies that extend it.  It includes the OWL FULL axioms for ECO and the extensions.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/ecofull. This work is published from United States. """^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/ecodl> , <http://ontology.earthster.org/eco/fullAxioms> , <http://ontology.earthster.org/eco/fasc> ;
+      owl:versionInfo "In early development: subject to incompatible change without notice."^^xsd:string .
+
+ecofull:ImpactAssessmentCategoryDescriptionList
+      a       rdfs:Class ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "Impact assessment category description list"^^xsd:string ;
+      rdfs:subClassOf rdf:List , owl:Class ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:allValuesFrom ecofull:ImpactAssessmentCategoryDescriptionList ;
+                owl:onProperty rdf:rest
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:allValuesFrom <http://ontology.earthster.org/eco/core#ImpactAssessmentMethodCategoryDescription> ;
+                owl:onProperty rdf:first
+              ] .

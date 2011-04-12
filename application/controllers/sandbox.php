@@ -11,6 +11,10 @@ class Sandbox extends SM_Controller {
 		@$this->arcremotemodel->qudGetUnits();
 	}
 	
+	function dump() {
+		$this->arcremotemodel->dumpAll();
+	}
+	
 	function index() {
 		if(isset($_REQUEST['submit']) == true) {
 			var_dump($_REQUEST);

@@ -1,0 +1,28 @@
+# Saved by TopBraid on Mon Mar 29 16:31:57 BST 2010
+# baseURI: http://ontology.earthster.org/eco/timeBridge
+# imports: http://www.w3.org/2006/time
+# imports: http://ontology.earthster.org/eco/core
+
+@prefix :        <http://ontology.earthster.org/eco/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix eco:     <http://ontology.earthster.org/eco/core#> .
+
+:TemporalEntity
+      owl:equivalentClass time:TemporalEntity .
+
+:TimeInterval
+      owl:equivalentClass time:ProperInterval .
+
+<http://ontology.earthster.org/eco/timeBridge>
+      a       owl:Ontology ;
+      rdfs:comment """An Earthster™ ECO bridging ontology to the SUMO upper ontology.
+
+This ontology relates terms in ECO to terms in the time ontology.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/timeBridge. This work is published from United States."""^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/core> , <http://www.w3.org/2006/time> ;
+      owl:versionInfo "In early development: subject to incompatible change without notice."^^xsd:string .

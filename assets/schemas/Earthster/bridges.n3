@@ -1,0 +1,27 @@
+# Saved by TopBraid on Mon Mar 29 16:24:18 BST 2010
+# baseURI: http://ontology.earthster.org/eco/bridges
+# imports: http://ontology.earthster.org/eco/goodRelationsBridge
+# imports: http://ontology.earthster.org/eco/timeBridge
+# imports: http://ontology.earthster.org/eco/biboBridge
+# imports: http://ontology.earthster.org/eco/foafBridge
+
+@prefix :        <http://ontology.earthster.org/eco/bridges#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foafBridge:  <http://ontology.earthster.org/eco/foafBridge#> .
+@prefix goodRelationsBridg:  <http://ontology.earthster.org/eco/goodRelationsBridge> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix biboBridge:  <http://ontology.earthster.org/eco/biboBridge#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://ontology.earthster.org/eco/bridges>
+      a       owl:Ontology ;
+      rdfs:comment """A collection of common Earthster™ ECO bridging ontologies.
+
+This ontology merely imports a collection of common ECO bridging ontologies to give a convenient way of importing them.
+
+The SUMO bridge is omitted because the SUMO ontology is represented as a very large file.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/bridges. This work is published from United States. """^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/foafBridge> , goodRelationsBridg: , <http://ontology.earthster.org/eco/timeBridge> , <http://ontology.earthster.org/eco/biboBridge> ;
+      owl:versionInfo "In interim development: subject to incompatible change without notice."^^xsd:string .

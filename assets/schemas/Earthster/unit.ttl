@@ -1,0 +1,56 @@
+# Saved by TopBraid on Sun May 09 13:22:58 BST 2010
+# baseURI: http://ontology.earthster.org/eco/unit
+# imports: http://ontology.earthster.org/eco/core
+
+@prefix :        <http://ontology.earthster.org/eco/unit#> .
+@prefix core:    <http://ontology.earthster.org/eco/core#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sumo:    <http://www.ontologyportal.org/SUMO.owl.rdf#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ontology.earthster.org/eco/unit>
+      rdf:type owl:Ontology ;
+      owl:imports <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:kg-1-4-DCBEquiv
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg 1,4-DCB-Eq"^^xsd:string .
+
+:kgAntimonyEquiv
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg antimony-Eq"^^xsd:string .
+
+:kgCFC-11Equiv
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg CFC-11-Eq"^^xsd:string .
+
+:kgCO2Equiv
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg CO2-Eq"^^xsd:string .
+
+:kgEthyleneEquiv
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg ethylene-Eq"^^xsd:string .
+
+:kgFormedOzone
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg formed ozone"^^xsd:string .
+
+:kgNOxEquiv
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg NOx-Eq"^^xsd:string .
+
+:kgPO4Equiv
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg PO4-Eq"^^xsd:string .
+
+:kgSO2Equiv
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg SO2-Eq"^^xsd:string .
+
+sumo:Kilogram
+      rdf:type core:UnitOfMeasure ;
+      rdfs:label "kg"^^xsd:string .

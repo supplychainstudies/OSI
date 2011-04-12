@@ -1,0 +1,34 @@
+# Saved by TopBraid on Mon May 10 12:00:12 BST 2010
+# baseURI: http://ontology.earthster.org/eco/ecospold
+# imports: http://ontology.earthster.org/eco/core
+# imports: http://ontology.earthster.org/eco/uncertaintyDistribution
+
+@prefix :        <http://ontology.earthster.org/eco/ecospold#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix uncertaintyDistributio:  <http://ontology.earthster.org/eco/uncertaintyDistribution> .
+@prefix core:    <http://ontology.earthster.org/eco/core#> .
+
+<http://ontology.earthster.org/eco/ecospold>
+      a       owl:Ontology ;
+      owl:imports <http://ontology.earthster.org/eco/core> , uncertaintyDistributio: ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:code
+      a       owl:AnnotationProperty ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "code"^^xsd:string .
+
+<http://ontology.earthster.org/eco/uncertaintyDistribution#LogNormalDistrubution>
+      :code   "1"^^xsd:string .
+
+<http://ontology.earthster.org/eco/uncertaintyDistribution#NormalDistribution>
+      :code   "2"^^xsd:string .
+
+<http://ontology.earthster.org/eco/uncertaintyDistribution#TriangularDistribution>
+      :code   "3"^^xsd:string .
+
+<http://ontology.earthster.org/eco/uncertaintyDistribution#UniformDistribution>
+      :code   "4"^^xsd:string .

@@ -1,0 +1,19 @@
+# Saved by TopBraid on Thu Apr 08 13:47:02 BST 2010
+# baseURI: http://ontology.epimorphics.com/politicalOntolgoy/impact2002Plus
+# imports: http://ontology.earthster.org/eco/core
+
+@prefix :        <http://ontology.epimorphics.com/politicalOntolgoy/impact2002Plus#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix core:    <http://ontology.earthster.org/eco/core#> .
+
+<http://ontology.epimorphics.com/politicalOntolgoy/impact2002Plus>
+      a       owl:Ontology ;
+      owl:imports <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:impact2002PLabel
+      a       owl:DatatypeProperty ;
+      rdfs:comment "indicates the label used to identify the entity in Impact 2002+"^^xsd:string .

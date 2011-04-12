@@ -25,10 +25,10 @@
 
 $config['arc_info'] = array(
   /* db */
-  'db_host' => 'localhost', /* default: localhost */
-  'db_name' => 'osi',
-  'db_user' => 'root',
-  'db_pwd' => 'root',
+  'db_host' => 'opensustainability.info', /* default: localhost */
+  'db_name' => 'opensustainability',
+  'db_user' => 'db_osi_admin',
+  'db_pwd' => 'rJD6wSKnE83LzYPq',
   /* store */
 'store_name' => 'arc_os',
 'ns' => array(

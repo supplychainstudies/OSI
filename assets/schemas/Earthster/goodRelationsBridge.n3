@@ -1,0 +1,22 @@
+# Saved by TopBraid on Mon Mar 29 16:29:34 BST 2010
+# baseURI: http://ontology.earthster.org/eco/goodRelationsBridge
+# imports: http://ontology.earthster.org/eco/core
+# imports: http://purl.org/goodrelations/v1#.
+
+@prefix :        <http://ontology.earthster.org/eco/goodRelationsBridge> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ecoGoodRelationsBridge:  <http://ontology.earthster.org/eco/goodRelationsBridge#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix eco:     <http://ontology.earthster.org/eco/core#> .
+
+eco:Product
+      owl:equivalentClass <http://purl.org/goodrelations/v1#ProductOrServiceModel> .
+
+:     a       owl:Ontology ;
+      rdfs:comment """An Earthster™ ECO bridging ontology to the Good Relations ontology.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/goodRelationsBridge. This work is published from United States."""^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/core> , <http://purl.org/goodrelations/v1#.> ;
+      owl:versionInfo "Under initial development: subject to incompatible change without notice."^^xsd:string .

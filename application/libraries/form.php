@@ -51,10 +51,11 @@ class Form {
      * @public
      * Load a form definition for parsing
      */
+
         if (! $this->ci->xml->load ("data/forms/$name")) {
             $this->error = "Failed to load form: $name";
             return false;
-        }
+        } 
 
         // Reset sensative vars to default value
         $this->action = '';

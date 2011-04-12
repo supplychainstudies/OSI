@@ -160,7 +160,8 @@ class SM_Controller extends Controller {
 			$scriptDisplay .='<script type="text/javascript" 
 		        src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>';
 		
-			$standard = Array('jquery/jquery-ui-1.7.2.min.js', 'utilities.js', 'jquery/jquery.template.js');
+			$standard = Array('jquery/jquery-ui-1.7.2.min.js');
+			// , 'utilities.js', 'jquery/jquery.template.js'
 			$this->_scripts = array_merge($standard, $this->_scripts);
 		}
 		if($this->config->item("deploystatus") == "local") {			

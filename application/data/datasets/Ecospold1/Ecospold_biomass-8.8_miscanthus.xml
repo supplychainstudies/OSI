@@ -1,0 +1,56 @@
+<ecoSpold xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold01 ..\..\..\..\..\..\..\Programme\ecoinvent\EcoSpold\EcoSpold01Dataset.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.EcoInvent.org/EcoSpold01">
+	<dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml" validCategories="Categories.xml" validUnits="Units.xml" number="1" generator="EcoInvent Excel2EcoSpold 1.9.8" timestamp="2007-07-03T13:30:33" internalSchemaVersion="1.0">
+		<metaInformation>
+			<processInformation>
+				<referenceFunction datasetRelatesToProduct="true" name="miscanthus-bales, at field" localName="Miscanthus-Ballen, ab Feld" infrastructureProcess="false" amount="1" unit="kg" category="agricultural production" subCategory="plant production" localCategory="Landwirtschaftliche Produktion" localSubCategory="Pflanzenbau" includedProcesses="The inventory includes the processes of soil cultivation, sowing, weed control, fertilisation, pest and pathogen control, harvest and balling. Machine infrastructure and a shed for machine sheltering is included. Inputs of fertilisers, pesticides and planting stocks as well as their transports to the farm are considered. The direct emissions on the field are also included. The system boundary is the field." generalComment="Inventory refers to the production of 1 kg dry matter miscanthus-bales." infrastructureIncluded="true"></referenceFunction>
+				<geography location="RER" text="Refers to an average production in Europe. Calculation based on inventory data for SE, PL, DE and GR. Production shares based on expert guess."></geography>
+				<technology text="Average production of today"></technology>
+				<timePeriod dataValidForEntirePeriod="true" text="Starting point scenario for average agricultural and harvesting technology in the year 2004.">
+					<startYear>2000</startYear>
+					<endYear>2000</endYear>
+				</timePeriod>
+				<dataSetInformation timestamp="2007-07-03T13:30:33" type="1" impactAssessmentResult="false" version="1" internalVersion="1.0" energyValues="0" languageCode="en" localLanguageCode="de"></dataSetInformation>
+			</processInformation>
+			<modellingAndValidation>
+				<representativeness percent="10.0" productionVolume="So far only limited experiences." samplingProcedure="Data were compiled by experts from Poland, Greece, Germany and Sweden from statistics, pilot network, fertilising recommendations, documents from extension services, information provided by retailers, literature and expert knowledge. The production data were verified and adjusted by the project team." extrapolations="none" uncertaintyAdjustments="none"></representativeness>
+				<source number="97" sourceType="3" firstAuthor="Jungbluth N." additionalAuthors="Faist Emmenegger M., Frischknecht R., Tuchschmid M." year="2007" title="LCA of BTL-fuel production: Inventory Analysis" titleOfAnthology="RENEW project report Del. 5.2.7" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="98" sourceType="3" firstAuthor="Nikolaou A" year="2006" title="Regional inventory data for biomass production: Southern Europe" titleOfAnthology="RENEW project report Del. 5.2.6" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="99" sourceType="3" firstAuthor="Lantz M" year="2006" title="Regional inventory data for biomass production: Northern Europe" titleOfAnthology="RENEW project report Del. 5.2.4" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="100" sourceType="3" firstAuthor="Ganko E" year="2006" title="Regional inventory data for biomass: Central-Eastern Europe" titleOfAnthology="RENEW project report Del. 5.2.5" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<validation proofReadingDetails="automatic validation" proofReadingValidator="41" otherDetails="none"></validation>
+			</modellingAndValidation>
+			<administrativeInformation>
+				<dataEntryBy person="41" qualityNetwork="1"></dataEntryBy>
+				<dataGeneratorAndPublication person="41" dataPublishedIn="2" referenceToPublishedSource="97" copyright="true" accessRestrictedTo="0" pageNumbers="Biomass production"></dataGeneratorAndPublication>
+				<person number="41" name="Niels Jungbluth" address="ESU-services Ltd., Kanzleistrasse 4, 8610 Uster" telephone="0041 44 940 61 32" telefax="0041 44 940 61 94" email="jungbluth@esu-services.ch" companyCode="ESU" countryCode="CH"></person>
+			</administrativeInformation>
+		</metaInformation>
+	</dataset>
+	<dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml" validCategories="Categories.xml" validUnits="Units.xml" number="1" generator="EcoInvent Excel2EcoSpold 1.9.8" timestamp="2007-07-03T13:30:33" internalSchemaVersion="1.0">
+		<metaInformation>
+			<processInformation>
+				<referenceFunction datasetRelatesToProduct="true" name="miscanthus-bales, at field" localName="Miscanthus-Ballen, ab Feld" infrastructureProcess="false" amount="1" unit="kg" category="agricultural production" subCategory="plant production" localCategory="Landwirtschaftliche Produktion" localSubCategory="Pflanzenbau" includedProcesses="The inventory includes the processes of soil cultivation, sowing, weed control, fertilisation, pest and pathogen control, harvest and balling. Machine infrastructure and a shed for machine sheltering is included. Inputs of fertilisers, pesticides and planting stocks as well as their transports to the farm are considered. The direct emissions on the field are also included. The system boundary is the field." generalComment="Inventory refers to the production of 1 kg dry matter miscanthus-bales." infrastructureIncluded="true"></referenceFunction>
+				<geography location="RER" text="Refers to an average production in Europe. Calculation based on inventory data for SE, PL, DE and GR. Production shares based on expert guess."></geography>
+				<technology text="Average production of today"></technology>
+				<timePeriod dataValidForEntirePeriod="true" text="Starting point scenario for average agricultural and harvesting technology in the year 2004.">
+					<startYear>2000</startYear>
+					<endYear>2000</endYear>
+				</timePeriod>
+				<dataSetInformation timestamp="2007-07-03T13:30:33" type="1" impactAssessmentResult="false" version="1" internalVersion="1.0" energyValues="0" languageCode="en" localLanguageCode="de"></dataSetInformation>
+			</processInformation>
+			<modellingAndValidation>
+				<representativeness percent="10.0" productionVolume="So far only limited experiences." samplingProcedure="Data were compiled by experts from Poland, Greece, Germany and Sweden from statistics, pilot network, fertilising recommendations, documents from extension services, information provided by retailers, literature and expert knowledge. The production data were verified and adjusted by the project team." extrapolations="none" uncertaintyAdjustments="none"></representativeness>
+				<source number="97" sourceType="3" firstAuthor="Jungbluth N." additionalAuthors="Faist Emmenegger M., Frischknecht R., Tuchschmid M." year="2007" title="LCA of BTL-fuel production: Inventory Analysis" titleOfAnthology="RENEW project report Del. 5.2.7" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="98" sourceType="3" firstAuthor="Nikolaou A" year="2006" title="Regional inventory data for biomass production: Southern Europe" titleOfAnthology="RENEW project report Del. 5.2.6" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="99" sourceType="3" firstAuthor="Lantz M" year="2006" title="Regional inventory data for biomass production: Northern Europe" titleOfAnthology="RENEW project report Del. 5.2.4" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<source number="100" sourceType="3" firstAuthor="Ganko E" year="2006" title="Regional inventory data for biomass: Central-Eastern Europe" titleOfAnthology="RENEW project report Del. 5.2.5" placeOfPublications="Uster, CH" publisher="ESU-services Ltd." volumeNo="0" text="0"></source>
+				<validation proofReadingDetails="automatic validation" proofReadingValidator="41" otherDetails="none"></validation>
+			</modellingAndValidation>
+			<administrativeInformation>
+				<dataEntryBy person="41" qualityNetwork="1"></dataEntryBy>
+				<dataGeneratorAndPublication person="41" dataPublishedIn="2" referenceToPublishedSource="97" copyright="true" accessRestrictedTo="0" pageNumbers="Biomass production"></dataGeneratorAndPublication>
+				<person number="41" name="Niels Jungbluth" address="ESU-services Ltd., Kanzleistrasse 4, 8610 Uster" telephone="0041 44 940 61 32" telefax="0041 44 940 61 94" email="jungbluth@esu-services.ch" companyCode="ESU" countryCode="CH"></person>
+			</administrativeInformation>
+		</metaInformation>
+	</dataset>
+</ecoSpold>

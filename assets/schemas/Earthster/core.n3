@@ -1,0 +1,1538 @@
+# Saved by TopBraid on Fri May 07 12:55:52 BST 2010
+# baseURI: http://ontology.earthster.org/eco/core
+
+@prefix :        <http://ontology.earthster.org/eco/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix eco:     <http://ontology.earthster.org/eco/core#> .
+
+<http://ontology.earthster.org/eco/core>
+      a       owl:Ontology ;
+      rdfs:comment """The Earthster™ Core Ontology ECO.
+
+This is a core domain ontology for Life Cycle Analysis.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/core. This work is published from United States. """^^xsd:string ;
+      owl:versionInfo "In early development: subject to incompatible change without notice."^^xsd:string .
+
+:AbstractProcess
+      a       owl:Class ;
+      rdfs:comment """An abstract process is an abstraction that produces abstractions of goods or services.
+
+Examples of an abstract process is the aggregregation of the processes that produce electricity in North America.
+
+No identity criteria are specified for AbstractProcess."""^^xsd:string ;
+      rdfs:label "Abstract process"^^xsd:string ;
+      rdfs:subClassOf :Process .
+
+:Agent
+      a       owl:Class ;
+      rdfs:comment """The concept of agent is not defined precisely.  It roughly corresponds to the class of entities that can have purpose, make decisions and cause things to happen.
+
+Example of agents include organizations and persons.
+
+No identity criteria are defined for agents."""^^xsd:string ;
+      rdfs:label "Agent"^^xsd:string .
+
+:Aggregate
+      a       owl:Class ;
+      rdfs:comment """An aggregate is an aggregation of other entities.
+
+Examples of aggregations include North American production.
+
+No identity criteria are defined for aggregates."""^^xsd:string ;
+      rdfs:label "Aggregate"^^xsd:string .
+
+:AggregateModel
+      a       owl:Class ;
+      rdfs:comment """An aggregate model is a model of an aggregate such as a model of North American production.
+
+No identity criteria are defined for aggregate models."""^^xsd:string ;
+      rdfs:label "Aggregate model"^^xsd:string ;
+      rdfs:subClassOf :LCAModel ;
+      owl:equivalentClass
+              [ a       owl:Restriction ;
+                owl:allValuesFrom :Aggregate ;
+                owl:onProperty :models
+              ] .
+
+:AllocatedExchange
+      a       owl:Class ;
+      rdfs:comment "An allocated exchange is an exchange that is allocated."^^xsd:string ;
+      rdfs:label "Allocated exchange"^^xsd:string ;
+      rdfs:subClassOf :AllocatedQuantifiedEffect , :Exchange ;
+      owl:disjointWith :UnallocatedExchange .
+
+:AllocatedQuantifiedEffect
+      a       owl:Class ;
+      rdfs:comment """An allocated quantified effect is a quantified effect whose amount is distrubuted across multiple outputs as defined by instances of the class Allocation.
+
+An allocated quantified effect is created when a process has multiple outputs which consume different relative amounts of the inputs or produce relatively different amounts of waste.
+
+No identity criteria are introduced for allocated quantified effects."""^^xsd:string ;
+      rdfs:label "Allocated quantified effect"^^xsd:string ;
+      rdfs:seeAlso :EffectAllocation ;
+      rdfs:subClassOf :QuantifiedEffect ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "1"^^xsd:int ;
+                owl:onProperty :allocatedFrom
+              ] ;
+      owl:disjointWith :UnallocatedQuantifiedEffect .
+
+:Allocation
+      a       owl:Class ;
+      rdfs:comment """An allocation is a collection of effect allocations.
+
+An example of an allocation is a collection of effect allocations that allocate effects in different proportions to different outputs.
+
+Subclasses of Allocation are defined to represent different allocation methods.
+
+Necessary conditions for two allocations to be identical is that they have identical effect allocations indicated by their hasEffectAllocation properties."""^^xsd:string ;
+      rdfs:label "Allocation"^^xsd:string ;
+      rdfs:seeAlso <http://ontology.earthster.org/eco/alloc> ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasEffectAllocation
+              ] .
+
+:AttributeDefinition
+      a       owl:Class ;
+      rdfs:comment """An attribute definition defines how to compute an attribute of an entity.
+
+Subclasses of attribute defintions indicate the algorithm used to compute the attribute value.  Instances of those subclasses have properties that indicate the parameters to the algorithm for a particular attribut definition.
+
+An example of an attribute definition might be the ratio of forest used to certified renewable forest used.
+
+No identity criteria are introduced for attribute definitions."""^^xsd:string ;
+      rdfs:label "Attribute definition"^^xsd:string ;
+      rdfs:seeAlso <http://ontology.earthster.org/eco/attribute> .
+
+:AttributeValue
+      a       owl:Class ;
+      rdfs:comment """An attribute value is the value of an attribute and consists of a pair, the value and an attribute definition.
+
+An example of an attribute value is the proportion of forest used that is certified renewable.
+
+Attribute values are identical if and only if they have the identical values and definitions."""^^xsd:string ;
+      rdfs:label "Attribute value"^^xsd:string ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasAttributeDefinition
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasQuantity
+              ] .
+
+:ComplianceRequirement
+      a       owl:Class ;
+      rdfs:comment """A compliance requirement is a collection of rules or other requirements.
+
+Product category rules are examples of compliance requirements.
+
+No identity criteria are defined for compliance requirements."""^^xsd:string ;
+      rdfs:label "Compliance requirement"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:ConcreteProcess
+      a       owl:Class ;
+      rdfs:comment """A concrete process is a real physical process that produces real goods or services.
+
+Examples of a concrete process include a factory the produces wellington boots or a bank that provides financial services.
+
+No identity criteria are defined for ConcreteProcess."""^^xsd:string ;
+      rdfs:label "Concrete process"^^xsd:string ;
+      rdfs:subClassOf :Process .
+
+:DataSource
+      a       owl:Class ;
+      rdfs:comment """A data source is a source of data used in a model.
+
+Examples of datasources include the EcoInvent database and the datasets it contains.
+
+No identity criteria are defined for data sources."""^^xsd:string ;
+      rdfs:label "Data source"^^xsd:string .
+
+:DemandProcess
+      a       owl:Class ;
+      rdfs:comment """A demand process transforms its inputs to its outputs in proportion to the demand for its outputs.
+
+An example of a demand process is a factory for producing shoes.
+
+No identity criteria are defined for demand processes."""^^xsd:string ;
+      rdfs:label "Demand process"^^xsd:string ;
+      rdfs:subClassOf :Process ;
+      owl:disjointWith :WasteDisposalProcess .
+
+:EcosphereExchange
+      a       owl:Class ;
+      rdfs:comment """An ecosphere exchange is an exchange to or from the ecosphere.
+
+Examples of ecosphere exchanges include quantified extraction of iron ore and emission of CO2.
+
+No additional identity criteria are defined for ecosphere exchanges."""^^xsd:string ;
+      rdfs:label "Ecosphere exchange"^^xsd:string ;
+      rdfs:subClassOf :Exchange ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:allValuesFrom :ElementaryFlow ;
+                owl:onProperty :hasEffect
+              ] ;
+      owl:disjointWith :TechnosphereExchange .
+
+:Effect
+      a       owl:Class ;
+      rdfs:comment """An effect is a quantifiable feature of an entity.
+
+Examples of effects include the amount of land used in producing a good, the wages paid in producing a good and the amount of green house gases emitted in producing a good.
+
+No identity criteria are defined for effects."""^^xsd:string ;
+      rdfs:label "Effect"^^xsd:string .
+
+:EffectAggregationCategory
+      a       owl:Class ;
+      rdfs:comment """An effect aggregation category is a category of effects which can be aggregated.
+
+Examples of effect aggregation categories include the LCA concept of a flow as a pair of a substance and a compartment.
+
+No identity criteria are defined for effect aggregation categories."""^^xsd:string ;
+      rdfs:label "Effect aggregation category"^^xsd:string ;
+      rdfs:seeAlso :hasEffectAggregationCategory , <http://ontology.earthster.org/eco/FASC> ;
+      rdfs:subClassOf owl:Thing .
+
+:EffectAllocation
+      a       owl:Class ;
+      rdfs:comment """An effect allocation specifies the amount of an effect that is allocated to an output product.
+
+An example of an effect allocation would be one that allocated CO2 emissions amongst the various products produced by a refinery.
+
+Necessary but not sufficient conditions for effect allocations to be identical is that they have the same allocatedFrom, allocatedTo and allocatedProportion property values and that they are referred to by the same allocations using the hasAllocatedEffect property."""^^xsd:string ;
+      rdfs:label "Allocation"^^xsd:string ;
+      rdfs:seeAlso :allocatedTo , :allocatedFrom , :allocatedProportion ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :allocatedTo
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "1"^^xsd:int ;
+                owl:onProperty :allocatedFrom
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :allocatedProportion
+              ] .
+
+:ElementaryFlow
+      a       owl:Class ;
+      rdfs:comment """An elementary flow is a flow of substance or energy, a flowable, directly to or from a compartment of the ecosphere.
+
+Examples of elementary flows include emission of CO2 to the urban atmosphere or consumption of bauxite ore from the land.
+
+A necessary but not sufficient condition for two elementary flows to be identical is that they have identical flowables."""^^xsd:string ;
+      rdfs:label "Elementary flow"^^xsd:string ;
+      rdfs:subClassOf :Effect ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasFlowable
+              ] .
+
+:Energy
+      a       owl:Class ;
+      rdfs:comment """Energy is the physical concept of energy.
+
+Examples of energy include waste heat and domestic electric power.
+
+No identity criteria are defined for energy."""^^xsd:string ;
+      rdfs:label "Energy"^^xsd:string ;
+      rdfs:subClassOf :Transferable , :Flowable .
+
+:ExactQuantity
+      a       owl:Class ;
+      rdfs:comment "A quantity with a zero uncertainty distribution"^^xsd:string ;
+      rdfs:label "Exact quantity"^^xsd:string ;
+      rdfs:subClassOf :Quantity .
+
+:Exchange
+      a       owl:Class ;
+      rdfs:comment """An Exchange is a quantified effect where the effect is a transfer of material or energy.
+
+Examples of exchanges include the quantified emission of CO2 to the atmosphere and production of ipods.
+
+No additional identity criteria are defined for exchanges."""^^xsd:string ;
+      rdfs:label "Exchange"^^xsd:string ;
+      rdfs:subClassOf :QuantifiedEffect ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:unionOf (:AllocatedExchange :UnallocatedExchange)
+              ] ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:unionOf (:EcosphereExchange :TechnosphereExchange)
+              ] .
+
+:ExchangeBinding
+      a       owl:Class ;
+      rdfs:comment """An exchange binding is a binding between an output from one process to an input of another.
+
+Examples of exchange bindings would be entities created by an automatic tool that found the best matching model of an input product.
+
+A necessary and sufficient condition for two exchange bindings to be identical is that hey have the same input and output exchanges."""^^xsd:string ;
+      rdfs:label "Exchange binding"^^xsd:string ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasBindingOutputExchange
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasBindingInputExchange
+              ] .
+
+:Expression
+      a       owl:Class ;
+      rdfs:comment """An expression is an algorithm for computing a quantity.
+
+Examples of expressions can be written as A +B and z/2.
+
+A necessary but not sufficient condition for two expressions to be identical is that their contexts are identical."""^^xsd:string ;
+      rdfs:label "Expression"^^xsd:string ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasExpressionContext
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasTextualRepresentation
+              ] .
+
+:ExpressionContext
+      a       owl:Class ;
+      rdfs:comment """An expression context is a context for the evaluation of expressions.
+
+A necessary but not sufficient condition for two expressions contexts to be identical is that they have the same values for their hasVariable properties."""^^xsd:string ;
+      rdfs:label "Expression context"^^xsd:string ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasVariable
+              ] .
+
+:Flowable
+      a       owl:Class ;
+      rdfs:comment """A flowable is  the entity that flows in an elementary flow.  It can be a substance or energy.
+
+Examples of flowables include CO2 and waste heat.
+
+No identity conditions are specified for flowables."""^^xsd:string ;
+      rdfs:label "Flowable"^^xsd:string ;
+      rdfs:seeAlso :ElementaryFlow .
+
+:FootprintModel
+      a       owl:Class ;
+      rdfs:comment """A  footprint model is a process model that models a supply chain as an atomic entity.
+
+Examples of a footprint model include an LCA model that treats the entire supply chain that produces a product as a single atomic process.
+
+Necessary but not sufficient conditions for footprint models to be identical is that they have the same quantified effects."""^^xsd:string ;
+      rdfs:label "footprint model"^^xsd:string ;
+      rdfs:subClassOf :LCAModel ;
+      owl:disjointWith :SystemProcessModel .
+
+:Function
+      a       owl:Class ;
+      rdfs:comment """A function is a is the effect of some process.
+
+Examples of functions include washing domestic laundry and covering office floors.
+
+No identity criteria are defined for functions."""^^xsd:string ;
+      rdfs:label "Function"^^xsd:string ;
+      rdfs:seeAlso :FunctionalUnitOfMeasure ;
+      rdfs:subClassOf owl:Thing .
+
+:FunctionalQuantity
+      a       owl:Class ;
+      rdfs:comment """A functional quantity is a physical quantity whose unit is in terms of some function.
+
+Examples of functional quantity include kilograms of standard domestic laundry cleaned.
+
+No new identity conditions for functional quantities are defined."""^^xsd:string ;
+      rdfs:label "Functional quantity"^^xsd:string ;
+      rdfs:subClassOf :PhysicalQuantity ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:allValuesFrom :FunctionalUnitOfMeasure ;
+                owl:onProperty :hasUnitOfMeasure
+              ] .
+
+:FunctionalUnitOfMeasure
+      a       owl:Class ;
+      rdfs:comment """A functional unit of measure is a unit of measure of function.
+
+A functional unit of measure consists of a function and unit quantity for measuring that function indicated by the properties hasFunction and hasUnitQuantity respectively.
+
+Examples of functional units include kilograms of standard domestic laundry laundered or area years of office floor covering.
+
+A necessary and sufficient condition for two functional units of measure to be identical is that their functions are identical and there unit quantities are identical."""^^xsd:string ;
+      rdfs:label "Functional unit of measure"^^xsd:string ;
+      rdfs:subClassOf :UnitOfMeasure ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasFunction
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasUnitQuantity
+              ] .
+
+:GeographicRegion
+      a       owl:Class ;
+      rdfs:comment """A geographic region is a region or location.
+
+Examples of Geographic regions include North America, London and Ibrox stadium.
+
+No identity criteria are defined for geographic regions."""^^xsd:string ;
+      rdfs:seeAlso :hasGeoLocation , :productionRegion , :consumptionRegion ;
+      rdfs:subClassOf owl:Thing .
+
+:HighRisk
+      a       owl:Class ;
+      rdfs:comment "HighRisk is one of a set of classes defining a value partition for Risk.  This is the class of high risk values with a canonical instance highRisk."^^xsd:string ;
+      rdfs:label "High risk"^^xsd:string ;
+      rdfs:subClassOf :Risk ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:oneOf (:highRisk)
+              ] .
+
+:ImpactAssessment
+      a       owl:Class ;
+      rdfs:comment """An impact assessment is a collection of impact results.
+
+An example of an impact assessment might be a collection of impact results representing impacts on human health.
+
+A necessary but not sufficient condition for two impact assessments to be identical is that they assess identical entities and have identical impact results."""^^xsd:string ;
+      rdfs:label "Impact assessment"^^xsd:string ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "1"^^xsd:int ;
+                owl:onProperty :computedFrom
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "1"^^xsd:int ;
+                owl:onProperty :assessmentOf
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "1"^^xsd:int ;
+                owl:onProperty :hasImpactCategoryIndicatorResult
+              ] .
+
+:ImpactAssessmentMethod
+      a       owl:Class ;
+      rdfs:comment """An impact assessment method is a method for assessing the impact of a process or other entity.
+
+Examples of impact assessment methods include impact 2002+ and Eco indicatator-99.
+
+No identity criteria are defined for impact assessment methods."""^^xsd:string ;
+      rdfs:label "Impact assessment method"^^xsd:string ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasImpactCategory
+              ] .
+
+:ImpactAssessmentMethodCategoryDescription
+      a       owl:Class ;
+      rdfs:comment """An impact assessment method category description is an n-ary relation that relates an impact category, an impact category indicator, an impact characterization factor and an impact characterization model.
+
+Impact assessment method category descriptions are used to describe impact assessment methods.
+
+Two impact assessment method category descriptions are identical only if their respective components are identical."""^^xsd:string ;
+      rdfs:label "Impact assessment category description"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:ImpactCategory
+      a       owl:Class ;
+      rdfs:comment """An impact category is an environmental issue of concern to which a score can be given for a product or process.
+
+Examples of impact categories include climate change and human health.
+
+Impact categories are often divided into two classes, endpoint or damage impact categories and midpoint impact categories.  It should be noted that there are some impact categories which are treated as end point categories by some impact assessment methods and as midpoint categories by others.  ECO therefore does define subclasses for endpoint and midpoint categories but treats that distinction as a role that impact categories play for a given impact assessment method or impact assessment."""^^xsd:string ;
+      rdfs:label "Impact category"^^xsd:string ;
+      rdfs:seeAlso :ImpactAssessmentMethod , :ImpactCategoryIndicatorResult .
+
+:ImpactCategoryIndicator
+      a       owl:Class ;
+      rdfs:comment """An impact category indicator is a measurable quantity that indicates the scale of the impact of product or process.
+
+Examples of impact category indicators include infrared radiative forcing measured in units of energy per area which is an impact category indicator for the impact category global warming / climate change.
+
+No identity criteria are defined for impact category indicators."""^^xsd:string ;
+      rdfs:label "Impact category indicator"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:ImpactCategoryIndicatorResult
+      a       owl:Class ;
+      rdfs:comment """An impact category indicator result is a measure of the impact of a process or product for a given category.
+
+Two impact category indicator results are identical only if their quantities are identical and their assessment method category descriptions are identical."""^^xsd:string ;
+      rdfs:label "Impact result"^^xsd:string .
+
+:ImpactCharacterizationFactor
+      a       owl:Class ;
+      rdfs:comment """An impact characterization factor is a measurable quantity that is used to represent an impact category indicator.
+
+Examples of impact characterization factors include the amount of emission of CO2 to air which is a characterization factor for infrared radiative forcing, an impact category indicator for global warming / climate change.
+
+No identity criteria are defined for impact characterization factors."""^^xsd:string ;
+      rdfs:label "Impact characterization factor"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:ImpactCharacterizationModel
+      a       owl:Class ;
+      rdfs:comment """An impact characterization model is an algorithm for computing the value of an impact characterization factor.
+
+Examples of impact characterization models include the IPCC models for computing the CO2 equivalent of the emission of green house gasses.
+
+No identity criteria are defined for impact characterization models."""^^xsd:string ;
+      rdfs:label "Impact characterization model"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:InfrastructureEffect
+      a       owl:Class ;
+      rdfs:comment "An infrastructure is an effect which is attributable to the production of infrastructure used to support a process rather than the operation of the process itself."^^xsd:string ;
+      rdfs:label "Infrastructure effect"^^xsd:string ;
+      rdfs:subClassOf :Effect ;
+      owl:disjointWith :OperationalEffect .
+
+:Input
+      a       owl:Class ;
+      rdfs:comment """An input is an input to a process or model.
+
+Examples of inputs are energy consumed by a process.
+
+No identity criteria are defined for inputs."""^^xsd:string ;
+      rdfs:label "Input"^^xsd:string ;
+      rdfs:subClassOf owl:Thing ;
+      owl:disjointWith :Output .
+
+:LCAModel
+      a       owl:Class ;
+      rdfs:comment """An LCA model is a model that represents a life cycle analysis of the provision of a product or service.
+
+Examples of LCA models include the LCA datasets in the EcoInvent database.
+
+No additional identity criteria are defined for LCA models."""^^xsd:string ;
+      rdfs:label "LCAProcess model"^^xsd:string ;
+      rdfs:subClassOf :Model .
+
+:LowRisk
+      a       owl:Class ;
+      rdfs:comment "This class is part of a partition of values of risk and corresponds to values that indicate low risk.  It has a canonical instance lowRisk."^^xsd:string ;
+      rdfs:label "Low risk"^^xsd:string ;
+      rdfs:subClassOf :Risk ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:oneOf (:lowRisk)
+              ] .
+
+:MediumRisk
+      a       owl:Class ;
+      rdfs:comment "This one of a collection of value partition classes of levels of risk.  This class represents the class of values corresponding to medium risk and mediumRisk is the canonical value for this class of risk."^^xsd:string ;
+      rdfs:label "Normal risk"^^xsd:string ;
+      rdfs:subClassOf :Risk ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:oneOf (:mediumRisk)
+              ] .
+
+:Model
+      a       owl:Class ;
+      rdfs:comment """A model is an entity that has some characteristics that are isomorphic with another entity.
+
+Examples of models include model aeroplanes, wind tunnel models and LCA models of supply chains.
+
+A necessary but not sufficient condition for two models to be identical is that they model identical entities."""^^xsd:string ;
+      rdfs:label "Model"^^xsd:string ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "1"^^xsd:int ;
+                owl:onProperty :models
+              ] .
+
+:NumericalQuantity
+      a       owl:Class ;
+      rdfs:comment """A number is quantity with no units, that is a pure number.
+
+Examples of numerical quantities include 1 and 1.1 and pi.
+
+A necessary and sufficient condition for two numbers to be identical is that their rdf:value properties are identical."""^^xsd:string ;
+      rdfs:label "Numerical quantity"^^xsd:string ;
+      rdfs:subClassOf :Quantity ;
+      owl:disjointWith :PhysicalQuantity .
+
+:OperationalEffect
+      a       owl:Class ;
+      rdfs:comment "An operational effect is an effect attributable to the operation of a process rather than the production of the infrastructure used  by the process."^^xsd:string ;
+      rdfs:label "Operational effect"^^xsd:string ;
+      rdfs:subClassOf :Effect ;
+      owl:disjointWith :InfrastructureEffect .
+
+:Output
+      a       owl:Class ;
+      rdfs:comment """An output is an output from a process.
+
+Examples of outputs are emissions from processes.
+
+No identity criteria are defined for outputs."""^^xsd:string ;
+      rdfs:label "Output"^^xsd:string ;
+      rdfs:subClassOf owl:Thing ;
+      owl:disjointWith :Input .
+
+:Person
+      a       owl:Class ;
+      rdfs:comment """The concept of person is not precisely defined.  It corresponds roughly to a the notion of a human being.
+
+President Obama and the UK sovereign are examples of persons.
+
+No identity criteria are defined for persons."""^^xsd:string ;
+      rdfs:label "Person"^^xsd:string ;
+      rdfs:subClassOf :Agent .
+
+:PhysicalQuantity
+      a       owl:Class ;
+      rdfs:comment """A physical quantity is a quantity of something.  Despite the name, that something can be abstract such as a quantity of currency. 
+
+Examples of physical quantities include numbers of metres, acres, chains, rods, perches, bushels, cubits, US dollars and Sesterces.
+
+A necessary and sufficient condition for two physical quantities to be identical is that they are defined to be the same quantity of the same thing with the same uncertainty distribution.  For example one metre is identical to one hundred centimetres and 100 cents is identical to 1 dollar. """^^xsd:string ;
+      rdfs:label "Physical quantity"^^xsd:string ;
+      rdfs:subClassOf :Quantity ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasMagnitude
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasUnitOfMeasure
+              ] .
+
+:Process
+      a       owl:Class ;
+      rdfs:comment """A system that produces goods or services.
+
+Examples of processes include a factory for making wellington boots and a bank that provides financial services.
+
+No identity conditions are defined for Process."""^^xsd:string ;
+      rdfs:label "Process"^^xsd:string ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasModel
+              ] .
+
+:Product
+      a       owl:Class ;
+      rdfs:comment """A product is a class of good or service.
+
+Examples of products include a particular model of mobile phone or a particular banking service.
+
+No identity criteria are defined for products."""^^xsd:string ;
+      rdfs:label "Product"^^xsd:string ;
+      rdfs:subClassOf :Transferable .
+
+:QuantifiedEffect
+      a       owl:Class ;
+      rdfs:comment """A quantified effect is a measure of a specific effect.
+
+Examples of a quantified effect include the amount of green house gasses emitted by a process for each unit of output.
+
+A necessary condition for two quantified effects to be identical is their quantities and effects are identical.  However, this is not sufficient.  Quantified effects are not values.  Two different quantified effects may have the same effect and value but have different annotations."""^^xsd:string ;
+      rdfs:label "Quantified effect"^^xsd:string ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasQuantity
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasEffect
+              ] ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:unionOf (:AllocatedQuantifiedEffect :UnallocatedQuantifiedEffect)
+              ] .
+
+:Quantity
+      a       owl:Class ;
+      rdfs:comment """A quantity is a measure of something.
+
+Example of quantities include numbers such as 1, and physical quantities such as 1 kilogram.
+
+A necessary condition for two quantities to be identical is that their uncertainty distributions are identical."""^^xsd:string ;
+      rdfs:label "Quantity"^^xsd:string ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "1"^^xsd:int ;
+                owl:onProperty :hasUncertaintyDistribution
+              ] .
+
+:Rate
+      a       owl:Class ;
+      rdfs:comment """A rate is a pair of a quantity and a duration.
+
+Examples of rates includes one million kilograms per year.
+
+Two rates are identical if they represent the same quantity per unit time."""^^xsd:string ;
+      rdfs:label "Rate"^^xsd:string ;
+      rdfs:subClassOf :Quantity ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasDuration
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasQuantity
+              ] .
+
+:RestrictionRelation
+      a       owl:Class ;
+      rdfs:comment """A restriction relation is a relation between two aggregates where one is a restriction of the other.
+
+An example of a restriction relation is one that would restrict production to North American production.
+
+A neccessary and sufficient condition for two restriction relations to be identical that that they restrict identical aggregates by identical restriction conditions to produce identical aggregates."""^^xsd:string ;
+      rdfs:label "Restriction relation"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:Risk
+      a       owl:Class ;
+      rdfs:comment "This is a class of values representing risk which is defined as a value partition."^^xsd:string ;
+      rdfs:label "Risk"^^xsd:string ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:unionOf (:LowRisk :MediumRisk :HighRisk)
+              ] .
+
+:Substance
+      a       owl:Class ;
+      rdfs:comment """A substance is a kind of physical material.
+
+Examples of substances include CO2, gold, bronze, clay, bauxite and dirty water.
+
+No identity criteria are defined for substances."""^^xsd:string ;
+      rdfs:label "Substance"^^xsd:string ;
+      rdfs:subClassOf :Transferable , :Flowable .
+
+:SystemProcessModel
+      a       owl:Class ;
+      rdfs:comment """A SystemProcessModel is a model of a supply chain that models at least some of the structure of the supply chain.
+
+Examples of a SystemProcessModel include an LCA model that models, at least partially, the structure of the supply chain that produces a product.
+
+A necessary condition for two system process models to be identical is that they have the same quantified effects."""^^xsd:string ;
+      rdfs:label "Structured process model"^^xsd:string ;
+      rdfs:subClassOf :LCAModel ;
+      owl:disjointWith :FootprintModel .
+
+:Technology
+      a       owl:Class ;
+      rdfs:comment """A technology is a class of mechanisms or techniques used to to have some effect on the world.
+
+Examples of a technology include electronic technology and nuclear technology.
+
+No identity criteria are defined for technologies."""^^xsd:string ;
+      rdfs:seeAlso :restrictedToTechnology , :usesTechnology ;
+      rdfs:subClassOf owl:Thing .
+
+:TechnosphereExchange
+      a       owl:Class ;
+      rdfs:comment """A technosphere exchange is a quantified transfer between processes.
+
+Example of technosphere transfers include product purchases and production.
+
+No further identity criteria are defined for technosphere exchanges."""^^xsd:string ;
+      rdfs:label "Technosphere exchange"^^xsd:string ;
+      rdfs:subClassOf :Exchange ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:allValuesFrom :TechnosphereTransfer ;
+                owl:onProperty :hasEffect
+              ] ;
+      owl:disjointWith :EcosphereExchange .
+
+:TechnosphereTransfer
+      a       owl:Class ;
+      rdfs:comment """A technosphere transfer is a transfer of product, substance or energy within the technosphere.
+
+Examples of technosphere transfers include products purchased as components for other products and waste products transferred to a waste disposal process.
+
+A necessary condition that two technosphere transfers are identical is that the values of their hasTransferable properties are identical."""^^xsd:string ;
+      rdfs:label "Technosphere transfer"^^xsd:string ;
+      rdfs:subClassOf :Effect .
+
+:TemporalEntity
+      a       owl:Class ;
+      rdfs:comment """A temporal entity is an instant or a time interval.
+
+Examples of temporal entities include the year 2001 GMT and the instant of midnight on 01 Apr 1900 GMT.
+
+No identity criteria are defined for temporal entities."""^^xsd:string ;
+      rdfs:seeAlso <http://www.w3.org/2006/time> ;
+      rdfs:subClassOf owl:Thing .
+
+:TimeInterval
+      a       owl:Class ;
+      rdfs:comment """A time interval is a a specific interval of time with a start time and and end time.
+
+Examples of time intervals include the year 2001 GMT.
+
+Definition of identity criteria for time intervals is left to whatever external ontology of time is used."""^^xsd:string ;
+      rdfs:label "Time interval"^^xsd:string ;
+      rdfs:subClassOf :TemporalEntity .
+
+:Transferable
+      a       owl:Class ;
+      rdfs:comment """A transferable is a kind of thing that can be transfered in an ecosphere exchange.
+
+Examples of transferables include products and waste substances that are processed before being released to the ecosphere.
+
+No identity conditions are specified for transferables."""^^xsd:string ;
+      rdfs:label "Transferable"^^xsd:string ;
+      rdfs:seeAlso :EcosphereExchange .
+
+:UnallocatedExchange
+      a       owl:Class ;
+      rdfs:comment "An unallocated exchange is an exchange which has no allocation."^^xsd:string ;
+      rdfs:label "Unallocated exchange"^^xsd:string ;
+      rdfs:subClassOf :UnallocatedQuantifiedEffect , :Exchange ;
+      owl:disjointWith :AllocatedExchange .
+
+:UnallocatedQuantifiedEffect
+      a       owl:Class ;
+      rdfs:comment """An un allocated quantified effect is a quantified effect whose amount is not distributed unevenly amongst multiple outputs.
+
+No  identity conditions are introduced for unallocated quantified effects."""^^xsd:string ;
+      rdfs:label "Unallocated quantified effect"^^xsd:string ;
+      rdfs:subClassOf :QuantifiedEffect ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "0"^^xsd:int ;
+                owl:onProperty :allocatedBy
+              ] ;
+      owl:disjointWith :AllocatedQuantifiedEffect .
+
+:UncertaintyDistribution
+      a       owl:Class ;
+      rdfs:comment """An uncertainty distribution is a statistical model of the uncertainty of a quantity or other numerical value.
+
+Examples of an uncertainty distribution include a normal distribution with a given mean and variance.
+
+No identity criteria are defined for uncertainty distributions."""^^xsd:string ;
+      rdfs:label "Uncertainty distribution"^^xsd:string ;
+      rdfs:seeAlso :hasUncertaintyDistribution , <http://ontology.earthster.org/eco/uncertaintyDistribution> .
+
+:UnitOfMeasure
+      a       owl:Class ;
+      rdfs:comment """A unit of measure is a unit by which some physical quantity is measured.  A physical quantity might include a quantity of an abstract thing such as an amount of currency.
+
+Examples of units of measure include the metre, the litre, the perch, the bushel, the rod, the chain, the US dollar and the sesterce.
+
+No identity conditions are defined for units of measure."""^^xsd:string ;
+      rdfs:label "Unit of measure"^^xsd:string ;
+      rdfs:seeAlso :PhysicalQuantity .
+
+:ValidationResult
+      a       owl:Class ;
+      rdfs:comment """A validation result is the result of a validation of model.
+
+Examples of a validation result would be a report by an auditor who validated a model.
+
+No identity criteria are defined for a validation result."""^^xsd:string ;
+      rdfs:label "Validation result"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:Variable
+      a       owl:Class ;
+      rdfs:comment """A variable is a variable quantity used for evaluating expressions.
+
+Variables are named by rdfs:label properties.
+
+A necessary condition for two variables to be identical is that their labels are identical."""^^xsd:string ;
+      rdfs:label "Variable"^^xsd:string ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasAssignment
+              ] .
+
+:WasteDisposalProcess
+      a       owl:Class ;
+      rdfs:comment """A waste disposal process is a process that inputs waste and processes it.
+
+A waste disposal process may be modelled as consuming all of its inputs and producing whatever quantity of output that results.
+
+Examples of waste disposal processes include waste incineration and landfill.
+
+No identity criteria are defined for waste disposal processes."""^^xsd:string ;
+      rdfs:label "Waste disposal process"^^xsd:string ;
+      rdfs:subClassOf :Process ;
+      owl:disjointWith :DemandProcess .
+
+:allocatedBy
+      a       owl:ObjectProperty ;
+      rdfs:comment "allocatedBy relates a quantified effect to an effect allocation that allocates it."^^xsd:string ;
+      rdfs:domain :QuantifiedEffect ;
+      rdfs:label "allocated by"^^xsd:string ;
+      rdfs:range :EffectAllocation ;
+      owl:inverseOf :allocatedFrom .
+
+:allocatedFrom
+      a       owl:ObjectProperty ;
+      rdfs:comment "allocatedFrom relates an effect allocation to a quantified effect which is allocated."^^xsd:string ;
+      rdfs:domain :EffectAllocation ;
+      rdfs:label "allocated from"^^xsd:string ;
+      rdfs:range :AllocatedQuantifiedEffect ;
+      owl:inverseOf :allocatedBy .
+
+:allocatedProportion
+      a       owl:FunctionalProperty , owl:DatatypeProperty ;
+      rdfs:comment "allocatedProportion relates an effect allocation the proportion of the allocated effect that is allocated to the output exchange.  The range of property is a number, and can be decimal, float or double."^^xsd:string ;
+      rdfs:domain :EffectAllocation ;
+      rdfs:label "allocated proportion"^^xsd:string .
+
+:allocatedTo
+      a       owl:ObjectProperty ;
+      rdfs:comment "allocatedTo relates an effect allocation to a technosphere exchange the allocation is to."^^xsd:string ;
+      rdfs:domain :EffectAllocation ;
+      rdfs:label "allocated to"^^xsd:string ;
+      rdfs:range :TechnosphereExchange .
+
+:assessmentOf
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "assessmentOf relates an impact assessment to the entity it is an assessment of."^^xsd:string ;
+      rdfs:domain :ImpactAssessment ;
+      rdfs:label "assessment of"^^xsd:string .
+
+:casNumber
+      a       owl:FunctionalProperty , owl:DatatypeProperty ;
+      rdfs:comment "casNumber is used to indicate the American Chemical Society's Chemical Abstract Service identifier for an entity."^^xsd:string ;
+      rdfs:label "cas number"^^xsd:string ;
+      rdfs:range xsd:string .
+
+:chemicalFormula
+      a       owl:DatatypeProperty ;
+      rdfs:comment "chemicalFormula relates an entity to its chemical formula."^^xsd:string ;
+      rdfs:label "chemical formula"^^xsd:string ;
+      rdfs:range xsd:string .
+
+:compliesWith
+      a       owl:ObjectProperty ;
+      rdfs:comment "compliesWith may be used to relate a model to a compliance requirement that it complies with."^^xsd:string ;
+      rdfs:label "complies with"^^xsd:string ;
+      rdfs:range :ComplianceRequirement .
+
+:computedFrom
+      a       owl:ObjectProperty ;
+      rdfs:comment "computedFrom relates an impact assessment to the LCA model from which it was computed."^^xsd:string ;
+      rdfs:domain :ImpactAssessment ;
+      rdfs:label "computed from"^^xsd:string ;
+      rdfs:range :LCAModel .
+
+:consumptionRegion
+      a       owl:ObjectProperty ;
+      rdfs:comment "consumptionRegion relates a restriction relation to a geographic region and states that the aggregate is restricted to consumption in that geographic region."^^xsd:string ;
+      rdfs:domain :RestrictionRelation ;
+      rdfs:label "consumption region" ;
+      rdfs:range :GeographicRegion ;
+      rdfs:seeAlso :hrConsumptionRegion ;
+      rdfs:subPropertyOf :restrictedBy .
+
+:currentAtTime
+      a       owl:ObjectProperty ;
+      rdfs:comment "currentAtTime indicates that a technology was current at a given time."^^xsd:string ;
+      rdfs:label "current at time" ;
+      rdfs:subPropertyOf :statusAtTime .
+
+:duringInterval
+      a       owl:ObjectProperty ;
+      rdfs:comment "duringInterval relates a restriction relation to a time interval and states that the aggregate is restricted to that time interval."^^xsd:string ;
+      rdfs:domain :RestrictionRelation ;
+      rdfs:label "during interval" ;
+      rdfs:seeAlso :hrDuringInterval ;
+      rdfs:subPropertyOf :restrictedBy .
+
+:energy
+      a       :Energy ;
+      rdfs:label "energy"^^xsd:string .
+
+:globalProduction
+      a       :Aggregate ;
+      rdfs:comment "global production is an aggregate of all production on Earth."^^xsd:string ;
+      rdfs:label "global production"^^xsd:string .
+
+:hasAggregate
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasAggregate relates a restriction relation to the aggregate that results from the restriction."^^xsd:string ;
+      rdfs:domain :RestrictionRelation ;
+      rdfs:label "has aggregate" ;
+      rdfs:range :Aggregate ;
+      owl:inverseOf :hasRestrictionRelation .
+
+:hasAllocatedQuantifiedEffect
+      a       owl:ObjectProperty ;
+      rdfs:comment "A subproperty of hasQuantifiedEffect that indicates the quantified effect is allocated."^^xsd:string ;
+      rdfs:label "has allocated quantified effect"^^xsd:string ;
+      rdfs:range :AllocatedQuantifiedEffect ;
+      rdfs:subPropertyOf :hasQuantifiedEffect .
+
+:hasAssignment
+      a       owl:ObjectProperty , owl:SymmetricProperty ;
+      rdfs:comment "hasAssignment is a symmetric property that relates a variable and its assigned quantity."^^xsd:string ;
+      rdfs:domain
+              [ a       owl:Class ;
+                owl:unionOf (:Variable :Quantity)
+              ] ;
+      rdfs:label "has assignment"^^xsd:string ;
+      rdfs:range
+              [ a       owl:Class ;
+                owl:unionOf (:Variable :Quantity)
+              ] .
+
+:hasAttributeDefinition
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasAttributeDefinition relates an attribute to its definition."^^xsd:string ;
+      rdfs:domain :AttributeValue ;
+      rdfs:label "has attribute definition"^^xsd:string ;
+      rdfs:range :AttributeDefinition .
+
+:hasAttributeValue
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasAttributeValue relates an entity to an attribute value for that entity."^^xsd:string ;
+      rdfs:label "has attribute value"^^xsd:string ;
+      rdfs:range :AttributeValue .
+
+:hasBindingInputExchange
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasBindingInputExchange relates an exchange binding to its input exchange."^^xsd:string ;
+      rdfs:domain :ExchangeBinding ;
+      rdfs:label "has binding input exchange"^^xsd:string ;
+      rdfs:range
+              [ a       owl:Class ;
+                owl:intersectionOf (:Input :TechnosphereExchange)
+              ] .
+
+:hasBindingOutputExchange
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasBindingOutputExchange relates an exchange binding to its output exchange."^^xsd:string ;
+      rdfs:domain :ExchangeBinding ;
+      rdfs:label "has binding output exchange"^^xsd:string ;
+      rdfs:range
+              [ a       owl:Class ;
+                owl:intersectionOf (:Output :TechnosphereExchange)
+              ] .
+
+:hasCategory
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasCategory relates an entity to a category of that entity."^^xsd:string ;
+      rdfs:label "has category"^^xsd:string .
+
+:hasDataSource
+      a       owl:ObjectProperty ;
+      rdfs:label "has data source"^^xsd:string ;
+      rdfs:range :DataSource .
+
+:hasDuration
+      a       owl:DatatypeProperty ;
+      rdfs:comment """hasDuration relates an entity to a duration.  It may be used to relate a rate to a duration.
+
+Note that the RDF semantics document points out that there are problems with the definition of xsd:duration, the range of this property.  The problem is that allows ambiguity in the number of days in a month.    It should only be given values which have a well defined duration measured in, say,  seconds."""^^xsd:string ;
+      rdfs:label "has duration"^^xsd:string ;
+      rdfs:range xsd:duration .
+
+:hasEffect
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasEffect may be used to indicate the effect of a quantified effect."^^xsd:string ;
+      rdfs:domain :QuantifiedEffect ;
+      rdfs:label "has effect"^^xsd:string ;
+      rdfs:range :Effect .
+
+:hasEffectAggregationCategory
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasEffectAggregationCategory relates an effect to an an aggregation category."^^xsd:string ;
+      rdfs:domain :Effect ;
+      rdfs:label "has effect aggregation category"^^xsd:string ;
+      rdfs:range :EffectAggregationCategory .
+
+:hasEffectAllocation
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasEffectAllocation relates an allocation to an effect allocation resulting from that allocation."^^xsd:string ;
+      rdfs:domain :Allocation ;
+      rdfs:label "has effect allocation"^^xsd:string ;
+      rdfs:range :EffectAllocation .
+
+:hasExpression
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasExpression may be used to relate a quantity to an expression."^^xsd:string ;
+      rdfs:domain :Quantity ;
+      rdfs:label "has expression"^^xsd:string ;
+      rdfs:range :Expression .
+
+:hasExpressionContext
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasExpressionContext may be used to relate an expression to an expression context for use in its evaluation."^^xsd:string ;
+      rdfs:domain :Expression ;
+      rdfs:label "has expression context"^^xsd:string ;
+      rdfs:range :ExpressionContext .
+
+:hasFlow
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasFlow relates an ecosphere exchange to its flow."^^xsd:string ;
+      rdfs:domain :EcosphereExchange ;
+      rdfs:label "has flow"^^xsd:string ;
+      rdfs:range :ElementaryFlow ;
+      rdfs:subPropertyOf :hasEffect .
+
+:hasFlowable
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:domain :ElementaryFlow ;
+      rdfs:label "has flowable"^^xsd:string ;
+      rdfs:range :Flowable .
+
+:hasFootprintModel
+      a       owl:ObjectProperty ;
+      rdfs:domain :LCAModel ;
+      rdfs:label "has unit process model"^^xsd:string ;
+      rdfs:range :FootprintModel .
+
+:hasFunction
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasFunction relates a functional unit of measure to the function it is used to measure."^^xsd:string ;
+      rdfs:domain :FunctionalUnitOfMeasure ;
+      rdfs:label "has function"^^xsd:string ;
+      rdfs:range :Function .
+
+:hasFunctionalQuantity
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasFunctionalQuantity relates an entity to a functional quantity and is typically used to relate an exchange to a functional quantity."^^xsd:string ;
+      rdfs:label "has functional quantity"^^xsd:string ;
+      rdfs:range :FunctionalQuantity ;
+      rdfs:subPropertyOf :hasQuantity .
+
+:hasGeoLocation
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasGeoLocation relates an entity to its geo location."^^xsd:string ;
+      rdfs:label "has geo location"^^xsd:string ;
+      rdfs:range :GeographicRegion .
+
+:hasImpactAssessmentCategoryDescriptionList
+      a       owl:ObjectProperty ;
+      rdfs:comment "may be used to relate an impact assessment method to a complete list of its impact assessment method category descriptions."^^xsd:string ;
+      rdfs:domain :ImpactAssessmentMethod ;
+      rdfs:label "has impact assessment category description list"^^xsd:string .
+
+:hasImpactAssessmentMethod
+      a       owl:ObjectProperty ;
+      rdfs:comment "relates an impact assessment to one or more impact assessment methods used to compute its results."^^xsd:string ;
+      rdfs:domain :ImpactAssessment ;
+      rdfs:label "has impact assessment method"^^xsd:string ;
+      rdfs:range :ImpactAssessmentMethod .
+
+:hasImpactAssessmentMethodCategoryDescription
+      a       owl:ObjectProperty ;
+      rdfs:comment "relates an impact category indicator result to the impact assessment method category description that describes how it was computed."^^xsd:string ;
+      rdfs:domain
+              [ a       owl:Class ;
+                owl:unionOf (:ImpactCategoryIndicatorResult :ImpactAssessmentMethod)
+              ] ;
+      rdfs:label "has impact assessment method category description"^^xsd:string ;
+      rdfs:range :ImpactAssessmentMethodCategoryDescription .
+
+:hasImpactCategory
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasImpactCategory may be used to relate an impact assessment method category description to an impact category."^^xsd:string ;
+      rdfs:domain :ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "has impact category"^^xsd:string ;
+      rdfs:range :ImpactCategory .
+
+:hasImpactCategoryIndicator
+      a       owl:ObjectProperty ;
+      rdfs:comment "relates an impact assessment method category description to an impact category indicator."^^xsd:string ;
+      rdfs:label "has impact category indicator"^^xsd:string .
+
+:hasImpactCategoryIndicatorResult
+      a       owl:ObjectProperty ;
+      rdfs:domain :ImpactAssessment ;
+      rdfs:label "has impact category indicator result"^^xsd:string ;
+      rdfs:range :ImpactCategoryIndicatorResult .
+
+:hasImpactCharacterizationFactor
+      a       owl:ObjectProperty ;
+      rdfs:comment "relates an impact assessment method category description to a impact characterization factor."^^xsd:string ;
+      rdfs:domain :ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "has impact characterization factor"^^xsd:string ;
+      rdfs:range :ImpactCharacterizationFactor .
+
+:hasImpactCharacterizationModel
+      a       owl:ObjectProperty ;
+      rdfs:comment "relates an impact assessment method category description to an impact characterization model."^^xsd:string ;
+      rdfs:domain :ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "has impact characterization model"^^xsd:string ;
+      rdfs:range :ImpactCharacterizationModel .
+
+:hasMagnitude
+      a       owl:FunctionalProperty , owl:DatatypeProperty ;
+      rdfs:comment "May be used to relate a physical quantity to the magnitude of the quantity."^^xsd:string ;
+      rdfs:domain :PhysicalQuantity ;
+      rdfs:label "has magnitude"^^xsd:string ;
+      rdfs:seeAlso :PhysicalQuantity .
+
+:hasMajorVersionNumber
+      a       owl:FunctionalProperty , owl:DatatypeProperty ;
+      rdfs:comment "hasMajorVersionNumber is used to relate an entity to its major version number."^^xsd:string ;
+      rdfs:label "major version number"^^xsd:string ;
+      rdfs:range xsd:integer .
+
+:hasMinorVersionNumber
+      a       owl:FunctionalProperty , owl:DatatypeProperty ;
+      rdfs:comment "hasMinorVersionNumber is used to relate an entity to its minor version number."^^xsd:string ;
+      rdfs:label "has minor version number"^^xsd:string ;
+      rdfs:range xsd:integer .
+
+:hasModel
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasModel relates an entity to a model of that entity."^^xsd:string ;
+      rdfs:label "has model"^^xsd:string ;
+      rdfs:range :Model ;
+      owl:inverseOf :models .
+
+:hasQuantifiedEffect
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasQuantifiedEffect relates an LCA model to a quantified effect of the entity being modelled."^^xsd:string ;
+      rdfs:domain :LCAModel ;
+      rdfs:label "has quantified effect"^^xsd:string ;
+      rdfs:range :QuantifiedEffect .
+
+:hasQuantifiedEffectList
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasQuantifiedEffect list relates an LCA model to a complete list of the quantified effects in the model.  This can be used to avoid making a closed world assumption using only the property hasQuantifiedEffect."^^xsd:string ;
+      rdfs:domain :LCAModel ;
+      rdfs:label "has quantified effect list"^^xsd:string .
+
+:hasQuantity
+      a       owl:ObjectProperty ;
+      rdfs:comment """May be used to indicate a quantity of something.
+
+May be used to indicated the quantity of a quantified effect."""^^xsd:string ;
+      rdfs:label "has quantity"^^xsd:string ;
+      rdfs:range :Quantity ;
+      rdfs:seeAlso :QuantifiedEffect .
+
+:hasRate
+      a       owl:ObjectProperty ;
+      rdfs:label "has rate"^^xsd:string ;
+      rdfs:range :Rate .
+
+:hasReferenceExchange
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasReferenceExchange is used to relate a model to its reference exchange."^^xsd:string ;
+      rdfs:domain :LCAModel ;
+      rdfs:label "reference exchange"^^xsd:string ;
+      rdfs:range :Exchange ;
+      rdfs:subPropertyOf :hasEffect .
+
+:hasRelatedVersion
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasRelated version may be used to relate a model to a different version of that model."^^xsd:string ;
+      rdfs:label "has related version"^^xsd:string .
+
+:hasReport
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasReport may be used to relate a validation result to a report."^^xsd:string ;
+      rdfs:label "has report"^^xsd:string .
+
+:hasReportPlainText
+      a       owl:DatatypeProperty ;
+      rdfs:comment "hasReportPlainText may be used to relate a validation result to a plain text representation of a report."^^xsd:string ;
+      rdfs:label "has report plain text"^^xsd:string ;
+      rdfs:subPropertyOf :hasReportText .
+
+:hasReportText
+      a       owl:DatatypeProperty ;
+      rdfs:comment "hasReportText may be used to relate a validation result to the text of a report.  The value of this property should be a plain literal."^^xsd:string ;
+      rdfs:label "has report text"^^xsd:string .
+
+:hasRestriction
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasRestriction indicates that an aggregate is restricted by its value.  It may be used as a short cut for identifying the restrictions that define an aggregate, avoiding the need to follow the restriction relation list structure.  Subproperties, whose names conventionally begin with 'hr' may be defined to indicate what aspect of entities is restricted."^^xsd:string ;
+      rdfs:domain :Aggregate ;
+      rdfs:seeAlso "RestrictionRelation"^^xsd:string .
+
+:hasRestrictionRelation
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasRestrictionRelation relates an aggregate to a relation that defines it as a restriction of another aggregate."^^xsd:string ;
+      rdfs:domain :Aggregate ;
+      rdfs:label "has restriction relation"^^xsd:string ;
+      rdfs:range :RestrictionRelation ;
+      owl:inverseOf :hasAggregate .
+
+:hasStructuredValue
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasStructuredValue may be used to relate an entity to a structured value.  For example, it may be used to related an impact result to a structured value."^^xsd:string ;
+      rdfs:label "has structured value"^^xsd:string ;
+      rdfs:seeAlso :ImpactCategoryIndicatorResult .
+
+:hasTechnosphereTransfer
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasTechnosphereTransfer relates a technosphere exchange to a technosphere transfer."^^xsd:string ;
+      rdfs:domain :TechnosphereExchange ;
+      rdfs:label "has technoshere transfer"^^xsd:string ;
+      rdfs:range :TechnosphereTransfer ;
+      rdfs:subPropertyOf :hasEffect .
+
+:hasTextualRepresentation
+      a       owl:DatatypeProperty ;
+      rdfs:comment "hasTextualRepresentation may be used to relate an expression to a textual representation of the expression."^^xsd:string ;
+      rdfs:domain :Expression ;
+      rdfs:label "has textual representation"^^xsd:string ;
+      rdfs:range xsd:string .
+
+:hasTransferable
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasTransferable relates a technosphere transfer to what is transfered."^^xsd:string ;
+      rdfs:domain :TechnosphereTransfer ;
+      rdfs:label "has transferable"^^xsd:string ;
+      rdfs:range :Transferable .
+
+:hasUUID
+      a       owl:DatatypeProperty ;
+      rdfs:comment "hasUUID relates an entity to a UUID that identifies that entity."^^xsd:string ;
+      rdfs:label "has UUID"^^xsd:string .
+
+:hasUnallocatedQuantifiedEffect
+      a       owl:ObjectProperty ;
+      rdfs:label "has unallocated quantified effect"^^xsd:string ;
+      rdfs:range :UnallocatedQuantifiedEffect ;
+      rdfs:subPropertyOf :hasQuantifiedEffect .
+
+:hasUncertaintyDistribution
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasUncertaintyDistribution can relate a quantity to an uncertainty distribution for that quantity."^^xsd:string ;
+      rdfs:domain :Quantity ;
+      rdfs:label "has uncertainty distribution"^^xsd:string ;
+      rdfs:range :UncertaintyDistribution .
+
+:hasUnitOfMeasure
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasUnitOfMeasure relates a physical quantity to its units of measure."^^xsd:string ;
+      rdfs:domain :PhysicalQuantity ;
+      rdfs:label "has unit of measure"^^xsd:string ;
+      rdfs:range :UnitOfMeasure .
+
+:hasUnitQuantity
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "hasUnitQuantity is used to relate a functional unit of measure to a unit quantity."^^xsd:string ;
+      rdfs:domain :FunctionalUnitOfMeasure ;
+      rdfs:label "has unit quantity"^^xsd:string ;
+      rdfs:range :Quantity .
+
+:hasValidationResult
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasValidationResult relates a model to a result from a process of validating that model."^^xsd:string ;
+      rdfs:domain :Model ;
+      rdfs:label "has validation result"^^xsd:string ;
+      rdfs:range :ValidationResult .
+
+:hasVariable
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasVariable relates an expression context to a variable valid in that context.  The values of the rdfs:label properties of all the variables in a context must be unique."^^xsd:string ;
+      rdfs:domain :ExpressionContext ;
+      rdfs:label "has variable"^^xsd:string ;
+      rdfs:range :Variable .
+
+:highRisk
+      a       :HighRisk ;
+      rdfs:label "high risk"^^xsd:string .
+
+:hrConsumptionRegion
+      a       owl:ObjectProperty ;
+      rdfs:comment "hrConsumptionRegion relates a production aggregate to a geographic region and states that the aggregate is restricted to production that is produced in that region."^^xsd:string ;
+      rdfs:domain :Aggregate ;
+      rdfs:range :GeographicRegion ;
+      rdfs:seeAlso "consumptionRegion"^^xsd:string ;
+      rdfs:subPropertyOf :hasRestriction .
+
+:hrDuringInterval
+      a       owl:ObjectProperty ;
+      rdfs:comment "hrDuringInterval restricts an aggregate to a time interval and states that the aggregate is restricted to that time interval."^^xsd:string ;
+      rdfs:domain :Aggregate ;
+      rdfs:seeAlso :duringInterval ;
+      rdfs:subPropertyOf :hasRestriction .
+
+:hrProductionRegion
+      a       owl:ObjectProperty ;
+      rdfs:comment "hrProductionRegion relates a production aggregate to a geographic region and states that the aggregate is restricted to production that is produced in that region."^^xsd:string ;
+      rdfs:domain :Aggregate ;
+      rdfs:range :GeographicRegion ;
+      rdfs:seeAlso "consumptionRegion"^^xsd:string ;
+      rdfs:subPropertyOf :hasRestriction .
+
+:hrRestrictedToTechnology
+      a       owl:ObjectProperty ;
+      rdfs:comment "hrRestrictedToTechnology relates an aggregate to a technology and indicates that the aggregate is restricted to that technology."^^xsd:string ;
+      rdfs:domain :Aggregate ;
+      rdfs:range :Technology ;
+      rdfs:seeAlso :restrictedToTechnology ;
+      rdfs:subPropertyOf :hasRestriction .
+
+:includesInfrastructureEffects
+      a       owl:FunctionalProperty , owl:DatatypeProperty ;
+      rdfs:comment "includesInfrastructure processes indicates whether a model includes infrastructure processes in its data values."^^xsd:string ;
+      rdfs:domain :LCAModel ;
+      rdfs:label "includes infrastructure processes"^^xsd:string ;
+      rdfs:range xsd:boolean .
+
+:isRenewable
+      a       owl:DatatypeProperty ;
+      rdfs:comment "isRenewable indicates whether a resource is renewable or not."^^xsd:string ;
+      rdfs:label "is renewable"^^xsd:string ;
+      rdfs:range xsd:boolean .
+
+:lowRisk
+      a       :LowRisk ;
+      rdfs:label "low risk"^^xsd:string .
+
+:mediumRisk
+      a       :MediumRisk ;
+      rdfs:label "medium risk"^^xsd:string .
+
+:models
+      a       owl:ObjectProperty ;
+      rdfs:comment "models relates a model to an entity it is a model of."^^xsd:string ;
+      rdfs:domain :Model ;
+      rdfs:label "models"^^xsd:string ;
+      owl:inverseOf :hasModel .
+
+:modernAtTime
+      a       owl:ObjectProperty ;
+      rdfs:comment "modernAtTime indicate that a technology was modern at a given time."^^xsd:string ;
+      rdfs:label "modern at time" ;
+      rdfs:subPropertyOf :statusAtTime .
+
+:newAtTime
+      a       owl:ObjectProperty ;
+      rdfs:comment "newAtTime indicates that technology was new at a given time."^^xsd:string ;
+      rdfs:label "new at time" ;
+      rdfs:subPropertyOf :statusAtTime .
+
+:oldAtTime
+      a       owl:ObjectProperty ;
+      rdfs:comment "oldAtTime indicates that a technology was old at a given time."^^xsd:string ;
+      rdfs:label "old at time" ;
+      rdfs:subPropertyOf :statusAtTime .
+
+:outdatedAtTime
+      a       owl:ObjectProperty ;
+      rdfs:comment "outdatedAtTime indicates that a technology was outdated at a given time."^^xsd:string ;
+      rdfs:label "outdated at time" ;
+      rdfs:subPropertyOf :statusAtTime .
+
+:productionRegion
+      a       owl:ObjectProperty ;
+      rdfs:comment "productionRegion relates a restriction relation to a geographic region and states that the aggregate is restricted to production in that region."^^xsd:string ;
+      rdfs:domain :RestrictionRelation ;
+      rdfs:range :GeographicRegion ;
+      rdfs:seeAlso :hrProductionRegion ;
+      rdfs:subPropertyOf :restrictedBy .
+
+:responsibleAgent
+      a       owl:ObjectProperty ;
+      rdfs:comment "responsibleAgent relates an entity to an agent responsible for it.  It may be used to relate a validation result to an agent."^^xsd:string ;
+      rdfs:label "responsible agent"^^xsd:string ;
+      rdfs:range :Agent .
+
+:restrictedBy
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "restrictedBy relates a restriction relation to the value that constrains the members of the restriction.  Subproperties of restrictedBy define what aspect of the restricted entities is restricted by this value."^^xsd:string ;
+      rdfs:domain :RestrictionRelation ;
+      rdfs:label "restricted by"^^xsd:string ;
+      rdfs:seeAlso :hasRestriction .
+
+:restrictedToTechnology
+      a       owl:ObjectProperty ;
+      rdfs:comment "restrictedToTechnology relates a restriction relation to a technology and states that the aggregate is restricted to that technology."^^xsd:string ;
+      rdfs:domain :RestrictionRelation ;
+      rdfs:range :Technology ;
+      rdfs:seeAlso :hrRestrictedToTechnology ;
+      rdfs:subPropertyOf :restrictedBy .
+
+:restrictionOf
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "restrictionOf relates a restriction relation to the aggregate that it restricts."^^xsd:string ;
+      rdfs:domain :RestrictionRelation ;
+      rdfs:label "restriction of"^^xsd:string ;
+      rdfs:range :Aggregate .
+
+:sourcedFrom
+      a       owl:FunctionalProperty , owl:ObjectProperty ;
+      rdfs:comment "sourceFrom is used to relate an ouput exchange to the input exchange that it is sourced from."^^xsd:string ;
+      rdfs:domain
+              [ a       owl:Class ;
+                owl:intersectionOf (:Input :TechnosphereExchange)
+              ] ;
+      rdfs:label "sourced from"^^xsd:string ;
+      rdfs:range
+              [ a       owl:Class ;
+                owl:intersectionOf (:Output :TechnosphereExchange)
+              ] .
+
+:statusAtTime
+      a       owl:ObjectProperty ;
+      rdfs:comment "statusAtTime has no meaning in itself, but is a super property that relates a collection of other properties."^^xsd:string ;
+      rdfs:domain :Technology ;
+      rdfs:range :TemporalEntity .
+
+:universalAggregate
+      a       :Aggregate ;
+      rdfs:comment "The universal aggregate is an aggregate of everything that can serve as the root of any chain of aggregate restriction relations."^^xsd:string ;
+      rdfs:label "universal aggregate"^^xsd:string .
+
+:usesTechnology
+      a       owl:ObjectProperty ;
+      rdfs:comment "usesTechnology indicates that an entity uses a technology."^^xsd:string ;
+      rdfs:label "uses technology"^^xsd:string ;
+      rdfs:range :Technology ;
+      rdfs:seeAlso :Process .
+
+:validInterval
+      a       owl:ObjectProperty ;
+      rdfs:comment "validInterval relates an entity to a time interval for which it is valid.  validInterval may be used to annotate a model."^^xsd:string ;
+      rdfs:label "valid interval"^^xsd:string ;
+      rdfs:range :TimeInterval .

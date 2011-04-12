@@ -1,0 +1,148 @@
+<ecoSpold>
+	 <xsi:schemaLocation />
+	 <xmlns:xsi />
+	 <xmlns />
+	<dataset>
+		<attributes>
+			<validCompanyCodes />
+			<validRegionalCodes />
+			<validCategories />
+			<validUnits />
+			<number />
+			<generator />
+			<timestamp />
+			<internalSchemaVersion />
+		</attributes>
+		<metaInformation>
+			<processInformation>
+				<referenceFunction>
+					<attributes> 
+						<datasetRelatesToProduct /> 
+						<name /> 
+						<localName />
+						<infrastructureProcess /> 
+						<amount /> 
+						<unit /> 
+						<category />
+						<subCategory />
+						<localCategory />
+						<localSubCategory />
+						<includedProcesses />
+						<generalComment />
+						<infrastructureIncluded />
+					</attributes>
+				</referenceFunction>
+				<geography>
+					<attributes>
+						<location />
+						<text />
+					</attributes>
+				</geography>
+				<technology>
+					<attributes>
+						<text />
+					</attributes>
+				</technology>
+				<timePeriod>
+					<attributes>
+						<dataValidForEntirePeriod /> 
+						<text />
+					</attributes>
+					<startYear />
+					<endYear />
+				</timePeriod>
+				<dataSetInformation>
+					<attributes>
+						<timestamp />
+						<type />
+						<impactAssessmentResult />
+						<version />
+						<internalVersion />
+						<energyValues />
+						<languageCode /> 
+						<localLanguageCode />
+					</attributes>
+				</dataSetInformation>
+			</processInformation>
+			<modellingAndValidation>
+				<representativeness 
+					<attributes>
+						<percent />
+						<productionVolume />
+						<samplingProcedure />
+						<extrapolations />
+						<uncertaintyAdjustments />
+					</attributes>
+				</representativeness>
+				<source>
+					<attributes>
+						<number />
+						<sourceType />
+						<firstAuthor />
+						<additionalAuthors /> 
+						<year />
+						<title />
+						<titleOfAnthology />
+						<placeOfPublications />
+						<publisher />
+						<volumeNo />
+						<text />
+					</attributes>
+				</source>
+				<validation>
+					<attributes>
+					 	<proofReadingDetails />
+						<proofReadingValidator /> 
+						<otherDetails />
+					</attributes>
+				</validation>
+			</modellingAndValidation>
+			<administrativeInformation>
+				<dataEntryBy>
+					<attributes>
+						 <person />
+						 <qualityNetwork />
+					</attributes>
+				</dataEntryBy>
+				<dataGeneratorAndPublication>
+					<attributes> 
+						<person /> 
+						<dataPublishedIn />
+						<referenceToPublishedSource />
+						<copyright />
+						<accessRestrictedTo />
+						<pageNumbers />
+					</attributes>
+				</dataGeneratorAndPublication>
+				<person root="person">
+					<attributes>
+						<number array_field="key" />
+						<name function="explodePersonName" />
+						<address  />
+						<telephone />
+						<telefax />
+						<email />
+						<companyCode />
+						<countryCode  />
+					</attributes>
+				</person>
+			</administrativeInformation>
+		</metaInformation>
+		<flowData>
+			<exchange
+				<attributes>
+					<number />
+					<infrastructureProcess />
+					<name />
+					<location />
+					<unit />
+					<meanValue />
+					<generalComment />
+					<uncertaintyType />
+					<standardDeviation95 />
+				</attributes>
+				<outputGroup />
+			</exchange>
+		</flowData>
+	</dataset>
+</ecoSpold>

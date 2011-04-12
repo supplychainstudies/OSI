@@ -1,0 +1,384 @@
+# Saved by TopBraid on Wed Jun 09 08:55:34 BST 2010
+# baseURI: http://ontology.earthster.org/eco/fasc
+# imports: http://ontology.earthster.org/eco/core
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://ontology.earthster.org/eco/ecoinvent
+
+@prefix :        <http://ontology.earthster.org/eco/fasc#> .
+@prefix eco:     <http://ontology.earthster.org/eco/core#> .
+@prefix ecoinvent:  <http://ontology.earthster.org/eco/ecoinvent#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ontology.earthster.org/eco/fasc>
+      rdf:type owl:Ontology ;
+      rdfs:comment """The Earthster™ ECO Effect Aggregation Categories ontology.
+
+This is an eco extension ontology that defines the class FlowAggregationCategory to represent the concept of a flow as a pair of substance and compartment.
+
+It is an extension point for defining other kinds of common aggregation categories.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/fasc. This work is published from United States. """^^xsd:string ;
+      owl:imports <http://www.w3.org/2004/02/skos/core> , <http://ontology.earthster.org/eco/ecoinvent> , <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "In early development: subject to incompatible change without notice."^^xsd:string .
+
+:BioticSubstanceSource
+      rdf:type owl:Class ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "Biotic substance source"^^xsd:string ;
+      rdfs:subClassOf :SubstanceSource ;
+      owl:disjointWith :FossilSubstanceSource .
+
+:Compartment
+      rdf:type owl:Class ;
+      rdfs:comment """A compartment is a classification of locations in the ecosphere.  Compartments are used to indicate the kind of source or destination of elementary flows.
+
+Examples of compartments include urban air and ground water.
+
+A necessary condition for compartments to be identical is that they have identical values for their medium and population density properties, if such values exist."""^^xsd:string ;
+      rdfs:label "Compartment"^^xsd:string ;
+      rdfs:seeAlso :FlowAggregationCategory ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+                owl:onProperty :hasLongevity
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasCompartmentPopulationDensity
+              ] ;
+      rdfs:subClassOf
+              [ rdf:type owl:Restriction ;
+                owl:minCardinality "0"^^xsd:int ;
+                owl:onProperty :hasCompartmentMedium
+              ] .
+
+:CompartmentMedium
+      rdf:type owl:Class ;
+      rdfs:comment """A compartment medium is kind of classification of a compartment.
+
+Examples of compartment media include Air and Water.
+
+No identity criteria are defined for compartment media."""^^xsd:string ;
+      rdfs:label "Compartment medium"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:CompartmentPopulationDensity
+      rdf:type owl:Class ;
+      rdfs:comment """A compartment population density is used to categorise compartments.
+
+Examples of compartment population density include Urban and Rural.
+
+No identity criteria are defined for compartment population densities."""^^xsd:string ;
+      rdfs:label "Compartment population density"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:FlowAggregationCategory
+      rdf:type owl:Class ;
+      rdfs:comment """A flow aggregation category is pair consisting of a flowable and a compartment.
+
+Examples of flow aggregation categories include carbon dioxide to urban air.
+
+A necessary and sufficient condition for two flow aggregation categories to be identical is that they have the same flowable and the same compartment."""^^xsd:string ;
+      rdfs:label "Flow aggregation category"^^xsd:string ;
+      rdfs:subClassOf eco:EffectAggregationCategory ;
+      owl:equivalentClass
+              [ rdf:type owl:Class ;
+                owl:intersectionOf ([ rdf:type owl:Restriction ;
+                            owl:cardinality "1"^^xsd:int ;
+                            owl:onProperty :hasFlowable
+                          ] [ rdf:type owl:Restriction ;
+                            owl:cardinality "1"^^xsd:int ;
+                            owl:onProperty :hasCompartment
+                          ])
+              ] .
+
+:FossilSubstanceSource
+      rdf:type owl:Class ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "Fossil substance source"^^xsd:string ;
+      rdfs:subClassOf :SubstanceSource ;
+      owl:disjointWith :BioticSubstanceSource .
+
+:LongTerm
+      rdf:type owl:Class ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "Long term"^^xsd:string ;
+      rdfs:subClassOf :Longevity ;
+      owl:equivalentClass
+              [ rdf:type owl:Class ;
+                owl:oneOf (:longTerm)
+              ] .
+
+:Longevity
+      rdf:type owl:Class ;
+      rdfs:comment """Longevity is a value class indicating the longevity of an emission.
+
+Example of longevity include long term and not long term.
+
+No identity criteria are defined for longevity."""^^xsd:string ;
+      rdfs:label "Longevity"^^xsd:string ;
+      rdfs:subClassOf owl:Thing ;
+      owl:equivalentClass
+              [ rdf:type owl:Class ;
+                owl:unionOf (:LongTerm :NotLongTerm)
+              ] .
+
+:NotLongTerm
+      rdf:type owl:Class ;
+      rdfs:comment "A class of values of longevity."^^xsd:string ;
+      rdfs:label "Not long term"^^xsd:string ;
+      rdfs:subClassOf :Longevity ;
+      owl:disjointWith :LongTerm .
+
+:SubstanceSource
+      rdf:type owl:Class ;
+      rdfs:comment """A  substance source is classification of the source of a substance.
+
+Examples of substance sources are fossil and biotic.
+
+No identity criteria are defined for substance sources."""^^xsd:string ;
+      rdfs:label "Substance source"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+:agriculturalSoil
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "agricultural soil"^^xsd:string ;
+      skos:broader :soil .
+
+:air  rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "air"^^xsd:string .
+
+:biotic
+      rdf:type :BioticSubstanceSource ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "biotic"^^xsd:string .
+
+:forestrySoil
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "forestry soil"^^xsd:string ;
+      skos:broader :nonAgriculturalSoil .
+
+:fossil
+      rdf:type :FossilSubstanceSource ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "fossil"^^xsd:string .
+
+:fossilWater
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "fossil water"^^xsd:string ;
+      skos:broader :water .
+
+:freshWater
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "fresh water"^^xsd:string ;
+      skos:broader :water .
+
+:groundWater
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "ground water"^^xsd:string ;
+      skos:broader :freshWater .
+
+:hasCompartment
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "hasCompartment indicates a compartment related to a resource.  It may be used to relate a flow aggregation category to a compartment."^^xsd:string ;
+      rdfs:label "to compartment"^^xsd:string ;
+      rdfs:range :Compartment .
+
+:hasCompartmentMedium
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "hasCompartmentMedium relates a compartment to its medium."^^xsd:string ;
+      rdfs:domain :Compartment ;
+      rdfs:label "has compartment medium"^^xsd:string ;
+      rdfs:range :CompartmentMedium .
+
+:hasCompartmentPopulationDensity
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "hasCompartmentPopulationDensity relates a compartment to its population density."^^xsd:string ;
+      rdfs:domain :Compartment ;
+      rdfs:label "has compartment population density"^^xsd:string ;
+      rdfs:range :CompartmentPopulationDensity .
+
+:hasEffect
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates an effect aggregation category to the effect it aggregates."^^xsd:string ;
+      rdfs:domain eco:EffectAggregationCategory ;
+      rdfs:label "has effect"^^xsd:string ;
+      rdfs:range eco:Effect .
+
+:hasFlowable
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "hasFlowable relates a flow aggregation category to a flowable."^^xsd:string ;
+      rdfs:domain :FlowAggregationCategory ;
+      rdfs:label "has flowable"^^xsd:string ;
+      rdfs:range eco:Flowable .
+
+:hasLongevity
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "hasLongevity indicates the longevity of a compartment"^^xsd:string ;
+      rdfs:domain :Compartment ;
+      rdfs:label "has longevity"^^xsd:string ;
+      rdfs:range :Longevity .
+
+:hasOccupationCategory
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates an EffectAggregationCategory to a land category category"^^xsd:string ;
+      rdfs:domain eco:EffectAggregationCategory ;
+      rdfs:label "has occupation category"^^xsd:string ;
+      rdfs:range ecoinvent:LandOrSeaCategory .
+
+:hasSubstanceSource
+      rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+      rdfs:comment "hasSubstanceSource indicates the source of a substance."^^xsd:string ;
+      rdfs:domain eco:Substance ;
+      rdfs:label "has substance source"^^xsd:string ;
+      rdfs:range :SubstanceSource .
+
+:hasTransformationFromCategory
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates an effect aggregation category to the land transformation category the transfromation is from."^^xsd:string ;
+      rdfs:domain eco:EffectAggregationCategory ;
+      rdfs:label "has transformation from category"^^xsd:string ;
+      rdfs:range ecoinvent:LandOrSeaCategory .
+
+:hasTransformationToCategory
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates an effect aggregation category to the land transformation category the transfromation is to."^^xsd:string ;
+      rdfs:domain eco:EffectAggregationCategory ;
+      rdfs:label "has transformation to category"^^xsd:string ;
+      rdfs:range ecoinvent:LandOrSeaCategory .
+
+:hasVolumeOccupationCategory
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates a volume occupation effect to a category of volume occupation."^^xsd:string ;
+      rdfs:label "has volume occupation category"^^xsd:string .
+
+:highAir
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "high air"^^xsd:string ;
+      skos:broader :air .
+
+:highPopulationDensity
+      rdf:type :CompartmentPopulationDensity ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "high population density"^^xsd:string .
+
+:industrySoil
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "industry soil"^^xsd:string ;
+      skos:broader :nonAgriculturalSoil .
+
+:lakeWater
+      rdf:type :CompartmentMedium ;
+      rdfs:comment "lake water is fresh water"^^xsd:string ;
+      rdfs:label "lake water"^^xsd:string ;
+      skos:broader :freshWater .
+
+:longTerm
+      rdf:type :LongTerm ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "long term"^^xsd:string .
+
+:lowAir
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "low air"^^xsd:string ;
+      skos:broader :air .
+
+:lowPopulationDensity
+      rdf:type :CompartmentPopulationDensity ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "low population density"^^xsd:string .
+
+:nonAgriculturalSoil
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "non agricultural soil"^^xsd:string ;
+      skos:broader :soil .
+
+:notLongTerm
+      rdf:type :NotLongTerm ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "not long term"^^xsd:string .
+
+:resource
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "Resource"^^xsd:string .
+
+:resourceBiotic
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "resource biotic"^^xsd:string ;
+      skos:broader :resource .
+
+:resourceInAir
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "resource in air"^^xsd:string ;
+      skos:broader :resource .
+
+:resourceInGround
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "resource in ground"^^xsd:string ;
+      skos:broader :resource .
+
+:resourceInWater
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "resource water"^^xsd:string ;
+      skos:broader :resource .
+
+:resourceLand
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "resource land"^^xsd:string ;
+      skos:broader :resource .
+
+:riverWater
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "river water"^^xsd:string ;
+      skos:broader :freshWater .
+
+:seaWater
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "sea water"^^xsd:string ;
+      skos:broader :water .
+
+:soil
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "soil"^^xsd:string .
+
+:surfaceWater
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "surface water"^^xsd:string ;
+      skos:broader :freshWater .
+
+:tropoStratoSphere
+      rdf:type :CompartmentMedium ;
+      rdfs:comment "higher toposphere or lower stratosphere"^^xsd:string ;
+      rdfs:label "tropo strato sphere"^^xsd:string ;
+      skos:broader :air .
+
+:water
+      rdf:type :CompartmentMedium ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "water"^^xsd:string .

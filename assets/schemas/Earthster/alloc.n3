@@ -1,0 +1,40 @@
+# Saved by TopBraid on Mon Mar 29 16:21:46 BST 2010
+# baseURI: http://ontology.earthster.org/eco/alloc
+# imports: http://ontology.earthster.org/eco/core
+
+@prefix :        <http://ontology.earthster.org/eco/alloc#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix eco:     <http://ontology.earthster.org/eco/core#> .
+@prefix alloc:   <http://ontology.earthster.org/eco/alloc#> .
+
+<http://ontology.earthster.org/eco/alloc>
+      a       owl:Ontology ;
+      rdfs:comment """The Earthster™ ECO Allocation Ontology
+
+This ontology is an extension to the ECO ontology.  It defines a number of allocation method.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/alloc. This work is published from United States. """^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "In early development: subject to incompatible change without notice."^^xsd:string .
+
+:AllocationMethodEconomicCausility
+      a       owl:Class ;
+      rdfs:comment """A class of allocations determined by economic causality.
+
+This class is currently a placeholder.  Its definition should define exactly what it means by economic causality."""^^xsd:string ;
+      rdfs:subClassOf eco:Allocation .
+
+:AllocationMethodPhysicalCausality
+      a       owl:Class ;
+      rdfs:comment """A class of allocations determined by a method of physical causality.
+
+This is currently a placeholder class until the method is specified more precisely."""^^xsd:string ;
+      rdfs:subClassOf eco:Allocation .
+
+:AllocationMethodUndefined
+      a       owl:Class ;
+      rdfs:comment "A class of allocations whose method is undefined."^^xsd:string ;
+      rdfs:subClassOf eco:Allocation .

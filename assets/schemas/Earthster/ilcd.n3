@@ -1,0 +1,85 @@
+# Saved by TopBraid on Sun Apr 04 12:27:38 BST 2010
+# baseURI: http://ontology.earthster.org/eco/ilcd
+# imports: http://ontology.earthster.org/eco/core
+
+@prefix ilcd:    <http://ontology.earthster.org/eco/ilcd#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix core:    <http://ontology.earthster.org/eco/core#> .
+
+<http://ontology.earthster.org/eco/ilcd>
+      a       owl:Ontology ;
+      rdfs:comment """An Earthster™ ECO extension ontology for ILCD.
+
+An ontology of concepts specific to ILCD.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/ilcd. This work is published from United States."""^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "In early development: subject to incompatible change without notice"^^xsd:string .
+
+ilcd:EME
+      a       owl:Class ;
+      rdfs:comment "A value partition of flowables into elements, materials or energy."^^xsd:string ;
+      rdfs:label "EME"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+ilcd:EMEelement
+      a       owl:Class ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "EMEelement"^^xsd:string ;
+      rdfs:subClassOf ilcd:EME ;
+      owl:disjointWith ilcd:EMEenergy , ilcd:EMEmaterial ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:oneOf (ilcd:emeElement)
+              ] .
+
+ilcd:EMEenergy
+      a       owl:Class ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "EMEenergy"^^xsd:string ;
+      rdfs:subClassOf ilcd:EME ;
+      owl:disjointWith ilcd:EMEelement , ilcd:EMEmaterial ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:oneOf (ilcd:emeEnergy)
+              ] .
+
+ilcd:EMEmaterial
+      a       owl:Class ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "EMEmaterial"^^xsd:string ;
+      rdfs:subClassOf ilcd:EME ;
+      owl:disjointWith ilcd:EMEenergy , ilcd:EMEelement ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:oneOf (ilcd:emeMaterial)
+              ] .
+
+ilcd:emeElement
+      a       ilcd:EME ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "eme element"^^xsd:string .
+
+ilcd:emeEnergy
+      a       ilcd:EME ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "eme energy"^^xsd:string .
+
+ilcd:emeMaterial
+      a       ilcd:EME ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "eme material"^^xsd:string .
+
+ilcd:hasILCDUUID
+      a       owl:DatatypeProperty ;
+      rdfs:comment "hasILCDUUID indicates a UUID allocated by ILCD."^^xsd:string ;
+      rdfs:label "has ILCDUUID"^^xsd:string ;
+      rdfs:subPropertyOf core:hasUUID .
+
+ilcd:ilcdLabel
+      a       owl:DatatypeProperty ;
+      rdfs:comment "links a resource to an ILCD specific label for that resource."^^xsd:string ;
+      rdfs:label "ilcd label"^^xsd:string .

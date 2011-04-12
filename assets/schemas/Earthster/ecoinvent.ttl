@@ -1,0 +1,550 @@
+# Saved by TopBraid on Fri May 14 12:43:54 BST 2010
+# baseURI: http://ontology.earthster.org/eco/ecoinvent
+# imports: http://ontology.earthster.org/eco/core
+# imports: http://ontology.earthster.org/eco/impact
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix :        <http://ontology.earthster.org/eco/ecoinvent#> .
+@prefix core:    <http://ontology.earthster.org/eco/core#> .
+@prefix ei:      <http://ontology.earthster.org/eco/ecoinvent#> .
+@prefix impact:  <http://ontology.earthster.org/eco/impact#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ontology.earthster.org/eco/ecoinvent>
+      rdf:type owl:Ontology ;
+      rdfs:comment """The Earthster™ ECO extension ontology for EcoInvent.
+
+This is an eco extension ontology that describes concepts in the EcoInvent database.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/ecoinvent. This work is published from United States."""^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/impact> , <http://www.w3.org/2004/02/skos/core> , <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "In early development: subject to change without notice."^^xsd:string .
+
+ei:ID
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "indicates the ei identifier for an entity"^^xsd:string ;
+      rdfs:label "flow ID"^^xsd:string .
+
+ei:LandOrSeaCategory
+      rdf:type owl:Class ;
+      rdfs:comment """A category of land or sea.
+
+Examples of categories of land or sea include arable land and forestry.
+
+No identity criteria are defined for categories of land or sea."""^^xsd:string ;
+      rdfs:label "Land category"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+ei:Occupation
+      rdf:type owl:Class ;
+      rdfs:comment """An occupation of land.
+
+Examples of occupation include occupation of arable land.
+
+A necessary condition for two occupations to be identical is that they have the same occupationCategories."""^^xsd:string ;
+      rdfs:label "Occupation"^^xsd:string ;
+      rdfs:subClassOf core:Effect .
+
+ei:Transformation
+      rdf:type owl:Class ;
+      rdfs:comment """A transformation is an effect that transforms land.
+
+Examples of transformations transform land from slag to arable.
+
+A necessary condition for two transformations to be identical is that they have the same transformation from and two land categories."""^^xsd:string ;
+      rdfs:label "Transformation"^^xsd:string ;
+      rdfs:subClassOf core:Effect .
+
+ei:VolumeOccupation
+      rdf:type owl:Class ;
+      rdfs:comment """A kind of effect.
+
+Examples of volume occupation include volumes occupied with radioactive waste.
+
+A necessary condition for two volume oxccupations to be identical is that they are occupied with the same category of thing."""^^xsd:string ;
+      rdfs:label "Volume occupied"^^xsd:string ;
+      rdfs:subClassOf core:Effect .
+
+ei:VolumeOccupationCategory
+      rdf:type owl:Class ;
+      rdfs:comment """A category for the effect VolumeOccupation.
+
+Examples of volume occupation category include occupied with radioactive waste.
+
+No identity criteria are defined for volume occupation categories."""^^xsd:string ;
+      rdfs:label "Volume occupation category"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+ei:arable
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "arable"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:arableNonIrrigated
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "arable non irrigated"^^xsd:string ;
+      skos:broader ei:arable .
+
+ei:arableNonIrrigatedDiverseIntensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "arable non irrigated diverse intensive"^^xsd:string ;
+      skos:broader ei:arable .
+
+ei:arableNonIrrigatedFallow
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "arable non irrigated fallow"^^xsd:string ;
+      skos:broader ei:arable .
+
+ei:arableNonIrrigatedMonotoneIntensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "arable non irrigated monotone intensive"^^xsd:string ;
+      skos:broader ei:arable .
+
+ei:category1Label
+      rdf:type owl:DatatypeProperty ;
+      rdfs:label "category1Label"^^xsd:string ;
+      ei:category1Label "indicate the category 1 label for a resource."^^xsd:string .
+
+ei:category2Label
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "Indicates the category 2 label used by EcoInvent."^^xsd:string ;
+      rdfs:label "category 2 label"^^xsd:string .
+
+ei:constructionSite
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "construction site"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:dumpSite
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "dump site"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:dumpSiteBenthos
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "dump site benthos"^^xsd:string ;
+      skos:broader ei:dumpSite .
+
+ei:dumpSiteInertMaterialLandfill
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "dump site inert material landfill"^^xsd:string ;
+      skos:broader ei:dumpSite .
+
+ei:dumpSiteResidualMaterialLandfill
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:label "dump site residual material landfill"^^xsd:string ;
+      skos:broader ei:dumpSite .
+
+ei:dumpSiteSanitaryLandfill
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:label "dump site sanitary landfill"^^xsd:string ;
+      skos:broader ei:dumpSite .
+
+ei:dumpSiteSlagCompartment
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:label "dump site slag compartment"^^xsd:string ;
+      skos:broader ei:dumpSite .
+
+ei:finalRepositoryLowLevelRadioactiveWaste
+      rdf:type ei:VolumeOccupationCategory ;
+      rdfs:label "final repository for low activity radioactive waste"^^xsd:string .
+
+ei:finalRepositoryRadioactiveWaste
+      rdf:type ei:VolumeOccupationCategory ;
+      rdfs:label "final repository radioactive waste"^^xsd:string .
+
+ei:forest
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "forest"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:forestExtensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "forest extensive"^^xsd:string ;
+      skos:broader ei:forest .
+
+ei:forestIntensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "forest intensive"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:forestIntensiveNormal
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "forest intensive normal"^^xsd:string ;
+      skos:broader ei:forestIntensive .
+
+ei:forestIntensiveShortCycle
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "forest intensive short cutting"^^xsd:string ;
+      skos:broader ei:forestIntensive .
+
+ei:forestIntensiveclearCutting
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "forest intensiveclear cutting"^^xsd:string ;
+      skos:broader ei:forestIntensive .
+
+ei:hasOccupationCategory
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates an occupation to a category of land that is occupied."^^xsd:string ;
+      rdfs:label "has land category"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:hasTransformationFromCategory
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates a transformation effect to the category of land that is transformed from."^^xsd:string ;
+      rdfs:domain ei:Transformation ;
+      rdfs:label "has transformation from category"^^xsd:string ;
+      rdfs:range ei:LandOrSeaCategory .
+
+ei:hasTransformationToCategory
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates a transformation effect to the land category that is transformed to."^^xsd:string ;
+      rdfs:domain ei:Transformation ;
+      rdfs:label "has transformation to category"^^xsd:string ;
+      rdfs:range ei:LandOrSeaCategory .
+
+ei:hasVolumeOccupationCategory
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "relates a volume occupation effect to the category of occupation."^^xsd:string ;
+      rdfs:domain ei:VolumeOccupation ;
+      rdfs:label "has volume occupation category"^^xsd:string ;
+      rdfs:range ei:VolumeOccupationCategory .
+
+ei:heterogeneousArgicultural
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "heterogeneous argicultural"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:industrial
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "industrial"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:industrialBenthos
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "industrial benthos"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:industrialBuiltup
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "industrial builtup"^^xsd:string ;
+      skos:broader ei:industrial .
+
+ei:industrialVegetation
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "industrial vegetation"^^xsd:string ;
+      skos:broader ei:industrial .
+
+ei:label
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "indicates the label used by EcoInvent to represent an entity."^^xsd:string ;
+      rdfs:label "ei label"^^xsd:string .
+
+ei:land
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "land"^^xsd:string ;
+      skos:broader ei:landOrSea .
+
+ei:landOrSea
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "Land or sea"^^xsd:string .
+
+ei:mineralExtraction
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "mineral extraction"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:nameLabel
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "Indicates the name given to an item in EcoInvent."^^xsd:string ;
+      rdfs:label "name label"^^xsd:string .
+
+ei:pastureAndMeadow
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "pasture and meadow"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:pastureAndMeadowExtensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "pasture and meadow extensive"^^xsd:string ;
+      skos:broader ei:pastureAndMeadow .
+
+ei:pastureAndMeadowIntensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "pasture and meadow intensive"^^xsd:string ;
+      skos:broader ei:pastureAndMeadow .
+
+ei:permanentCrop
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "permanent crop"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:permanentCropFruit
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "permanent crop fruit"^^xsd:string ;
+      skos:broader ei:permanentCrop .
+
+ei:permanentCropFruitExtensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "permanent crop fruit extensive"^^xsd:string ;
+      skos:broader ei:permanentCropFruit .
+
+ei:permanentCropFruitIntensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "permanent crop fruit intensive"^^xsd:string ;
+      skos:broader ei:permanentCropFruit .
+
+ei:permanentCropVine
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "permanent crop vine"^^xsd:string ;
+      skos:broader ei:permanentCrop .
+
+ei:permanentCropVineExtensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "permanent crop vine extensive"^^xsd:string ;
+      skos:broader ei:permanentCropVine .
+
+ei:permanentCropVineIntensive
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "permanent crop vine intensive"^^xsd:string ;
+      skos:broader ei:permanentCropVine .
+
+ei:resevoir
+      rdf:type ei:VolumeOccupationCategory ;
+      rdfs:label "resevoir"^^xsd:string .
+
+ei:seaOrOcean
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "sea or ocean"^^xsd:string ;
+      skos:broader ei:landOrSea .
+
+ei:shrubLandSclerophyllous
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "shrub land sclerophyllous"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:trafficAreaRailEmbankment
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "traffic area rail embankment"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:trafficAreaRailNetwork
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "traffic area rail network"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:trafficAreaRoadEmbankment
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "traffic area road embankment"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:trafficAreaRoadNetwork
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "traffic area road network"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:tropicalRainForest
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "tropical rain forest"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:undergroundDeposit
+      rdf:type ei:VolumeOccupationCategory ;
+      rdfs:label "underground deposit"^^xsd:string .
+
+ei:urbanContinuouslyBuilt
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "urban continuously built"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:urbanDiscontinuouslyBuilt
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "urban discontinuously built"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:waterBodyArtificial
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "water body artificial"^^xsd:string ;
+      skos:broader ei:land .
+
+ei:waterCourseArtificial
+      rdf:type ei:LandOrSeaCategory ;
+      rdfs:comment ""^^xsd:string ;
+      rdfs:label "water course artificial"^^xsd:string ;
+      skos:broader ei:land .
+
+impact:CD-CML2001-AbioticDepletion
+      ei:nameLabel "depletion of abiotic resources"^^xsd:string .
+
+impact:CD-CML2001-Acidification
+      ei:nameLabel "average European"^^xsd:string .
+
+impact:CD-CML2001-Acidification-alt1
+      ei:nameLabel "generic"^^xsd:string .
+
+impact:CD-CML2001-ClimateChange
+      ei:nameLabel "GWP 100a"^^xsd:string .
+
+impact:CD-CML2001-ClimateChange-alt1
+      ei:nameLabel "GWP 20a"^^xsd:string .
+
+impact:CD-CML2001-ClimateChange-alt2
+      ei:nameLabel "GWP 500a"^^xsd:string .
+
+impact:CD-CML2001-ClimateChange-alt3
+      ei:nameLabel "upper limit of net GWP"^^xsd:string .
+
+impact:CD-CML2001-ClimateChange-alt4
+      ei:nameLabel "lower limit of net GWP"^^xsd:string .
+
+impact:CD-CML2001-Eutrophication
+      ei:nameLabel "generic"^^xsd:string .
+
+impact:CD-CML2001-Eutrophication-alt1
+      ei:nameLabel "average European"^^xsd:string .
+
+impact:CD-CML2001-FreshwaterAquaticEcotoxicity
+      ei:nameLabel "FAETP infinite"^^xsd:string .
+
+impact:CD-CML2001-FreshwaterAquaticEcotoxicity-alt1
+      ei:nameLabel "FAETP 100a"^^xsd:string .
+
+impact:CD-CML2001-FreshwaterAquaticEcotoxicity-alt2
+      ei:nameLabel "FAETP 20a"^^xsd:string .
+
+impact:CD-CML2001-FreshwaterAquaticEcotoxicity-alt3
+      ei:nameLabel "FAETP 500a"^^xsd:string .
+
+impact:CD-CML2001-HumanToxicity
+      ei:nameLabel "HTP infinite"^^xsd:string .
+
+impact:CD-CML2001-HumanToxicity-alt1
+      ei:nameLabel "HTP 20a"^^xsd:string .
+
+impact:CD-CML2001-HumanToxicity-alt2
+      ei:nameLabel "HTP 100a"^^xsd:string .
+
+impact:CD-CML2001-HumanToxicity-alt3
+      ei:nameLabel "HTP 500a"^^xsd:string .
+
+impact:CD-CML2001-MarineAquaticEcotoxicity
+      ei:nameLabel "MAETP infinite"^^xsd:string .
+
+impact:CD-CML2001-MarineAquaticEcotoxicity-alt1
+      ei:nameLabel "MAETP 100a"^^xsd:string .
+
+impact:CD-CML2001-MarineAquaticEcotoxicity-alt2
+      ei:nameLabel "MAETP 20a"^^xsd:string .
+
+impact:CD-CML2001-MarineAquaticEcotoxicity-alt3
+      ei:nameLabel "MAETP 500a"^^xsd:string .
+
+impact:CD-CML2001-OzoneLayerDepletion
+      ei:nameLabel "ODP steady state"^^xsd:string .
+
+impact:CD-CML2001-OzoneLayerDepletion-alt1
+      ei:nameLabel "ODP 5a"^^xsd:string .
+
+impact:CD-CML2001-OzoneLayerDepletion-alt2
+      ei:nameLabel "ODP 10a"^^xsd:string .
+
+impact:CD-CML2001-OzoneLayerDepletion-alt3
+      ei:nameLabel "ODP 15a"^^xsd:string .
+
+impact:CD-CML2001-OzoneLayerDepletion-alt4
+      ei:nameLabel "ODP 20a"^^xsd:string .
+
+impact:CD-CML2001-OzoneLayerDepletion-alt5
+      ei:nameLabel "ODP 25a"^^xsd:string .
+
+impact:CD-CML2001-OzoneLayerDepletion-alt6
+      ei:nameLabel "ODP 30a"^^xsd:string .
+
+impact:CD-CML2001-OzoneLayerDepletion-alt7
+      ei:nameLabel "ODP 40a"^^xsd:string .
+
+impact:CD-CML2001-PhotoOxidantFomation
+      ei:nameLabel "high NOx POCP"^^xsd:string .
+
+impact:CD-CML2001-PhotoOxidantFomation-alt1
+      ei:nameLabel "MIR"^^xsd:string .
+
+impact:CD-CML2001-PhotoOxidantFomation-alt2
+      ei:nameLabel "MOIR"^^xsd:string .
+
+impact:CD-CML2001-PhotoOxidantFomation-alt3
+      ei:nameLabel "EBIR"^^xsd:string .
+
+impact:CD-CML2001-PhotoOxidantFomation-alt4
+      ei:nameLabel "low NOx POCP"^^xsd:string .
+
+impact:CD-CML2001-TerrestrialEcotoxicity
+      ei:nameLabel "TAETP infinite"^^xsd:string .
+
+impact:CD-CML2001-TerrestrialEcotoxicity-alt1
+      ei:nameLabel "TAETP 100a"^^xsd:string .
+
+impact:CD-CML2001-TerrestrialEcotoxicity-alt2
+      ei:nameLabel "TAETP 20a"^^xsd:string .
+
+impact:CD-CML2001-TerrestrialEcotoxicity-alt3
+      ei:nameLabel "TAETP 500a"^^xsd:string .
+
+impact:CML2001
+      ei:category1Label "CML 2001"^^xsd:string .
+
+impact:abioticDepletion
+      ei:category2Label "resources"^^xsd:string .
+
+impact:ozoneLayerDepletion
+      ei:category2Label "stratospheric ozone depletion"^^xsd:string .
+
+impact:photoOxidantFormation
+      ei:category2Label "photochemical oxidation (summer smog)"^^xsd:string .

@@ -1,0 +1,312 @@
+# Saved by TopBraid on Mon May 10 12:00:28 BST 2010
+# baseURI: http://ontology.earthster.org/eco/uncertaintyDistribution
+# imports: http://ontology.earthster.org/eco/core
+
+@prefix :        <http://ontology.earthster.org/eco/uncertaintyDistribution> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ecoUD:   <http://ontology.earthster.org/eco/uncertaintyDistribution#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix eco:     <http://ontology.earthster.org/eco/core#> .
+
+eco:ExactQuantity
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:hasValue ecoUD:zeroUncertaintyDistribution ;
+                owl:onProperty eco:hasUncertaintyDistribution
+              ] ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:intersectionOf (eco:Quantity [ a       owl:Restriction ;
+                            owl:hasValue ecoUD:zeroUncertaintyDistribution ;
+                            owl:onProperty eco:hasUncertaintyDistribution
+                          ])
+              ] .
+
+:     a       owl:Ontology ;
+      rdfs:comment """An Earthster™ ECO ontology of uncertainty distributions.
+
+An ECO extension ontology that defines a number of uncertainty distributions and their parameters.
+
+This is a placeholder file.  Some terms have been identified, but they need defining more precisely.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/uncertaintyDistribution. This work is published from United States."""^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "In early development: subject to incompatible change without notice."^^xsd:string .
+
+ecoUD:AreaWithSimilarProductionConditions
+      a       owl:Class ;
+      rdfs:label "Area with similar production conditions"^^xsd:string ;
+      rdfs:subClassOf ecoUD:GeographicCorrelationIndicator .
+
+ecoUD:AreaWithSlightlySimilarProductionConditions
+      a       owl:Class ;
+      rdfs:label "Area with slightly similar production conditions"^^xsd:string ;
+      rdfs:subClassOf ecoUD:GeographicCorrelationIndicator .
+
+ecoUD:BasedOnAssumptions
+      a       owl:Class ;
+      rdfs:label "Based on assumptions"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeReliabilityIndicator .
+
+ecoUD:BasedOnMeasurements
+      a       owl:Class ;
+      rdfs:label "Based on measurements"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeReliabilityIndicator .
+
+ecoUD:BetaDistribution
+      a       owl:Class ;
+      rdfs:label "Beta distribution"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution .
+
+ecoUD:DifferentArea
+      a       owl:Class ;
+      rdfs:label "Different area"^^xsd:string ;
+      rdfs:subClassOf ecoUD:GeographicCorrelationIndicator .
+
+ecoUD:DifferentTechnologyOrScale
+      a       owl:Class ;
+      rdfs:label "Different technology or scale"^^xsd:string ;
+      rdfs:subClassOf ecoUD:TechnologyCorrelationIndicator .
+
+ecoUD:ErlangDistribution
+      a       owl:Class ;
+      rdfs:label "Erlang distribution"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution .
+
+ecoUD:FromAreaUnderStudy
+      a       owl:Class ;
+      rdfs:label "From area under study"^^xsd:string ;
+      rdfs:subClassOf ecoUD:GeographicCorrelationIndicator .
+
+ecoUD:FromLargerArea
+      a       owl:Class ;
+      rdfs:label "From larger area"^^xsd:string ;
+      rdfs:subClassOf ecoUD:GeographicCorrelationIndicator .
+
+ecoUD:GammaDistribution
+      a       owl:Class ;
+      rdfs:label "Gamma distribution"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution .
+
+ecoUD:GeographicCorrelationIndicator
+      a       owl:Class ;
+      rdfs:label "Geographic correlation indicator"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeIndicator .
+
+ecoUD:GreaterThan15Years
+      a       owl:Class ;
+      rdfs:label "Greater than15Years"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeTemporalCorrelationIndicator .
+
+ecoUD:LogNormalDistrubution
+      a       owl:Class ;
+      rdfs:label "Log normal distrubution"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution .
+
+ecoUD:NonQualifiedEstimate
+      a       owl:Class ;
+      rdfs:label "Non qualified estimate"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeReliabilityIndicator .
+
+ecoUD:NonVerified
+      a       owl:Class ;
+      rdfs:label "Non verified"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeReliabilityIndicator .
+
+ecoUD:NormalDistribution
+      a       owl:Class ;
+      rdfs:label "Normal distribution"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution .
+
+ecoUD:NotRepresentative
+      a       owl:Class ;
+      rdfs:label "Not representative"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeCompletenessIndicator .
+
+ecoUD:PedigreeCompletenessIndicator
+      a       owl:Class ;
+      rdfs:label "Pedigree completeness indicator"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeIndicator .
+
+ecoUD:PedigreeIndicator
+      a       owl:Class ;
+      rdfs:label "Pedigree indicator"^^xsd:string ;
+      rdfs:subClassOf owl:Thing .
+
+ecoUD:PedigreeMatrix
+      a       owl:Class ;
+      rdfs:label "Pedigree matrix"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution .
+
+ecoUD:PedigreeReliabilityIndicator
+      a       owl:Class ;
+      rdfs:label "Pedigree reliability indicator"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeIndicator .
+
+ecoUD:PedigreeTemporalCorrelationIndicator
+      a       owl:Class ;
+      rdfs:label "Pedigree temporal correlation indicator"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeIndicator .
+
+ecoUD:QualifiedEstimate
+      a       owl:Class ;
+      rdfs:label "Qualified estimate"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeReliabilityIndicator .
+
+ecoUD:RelatedProcessesMaterials
+      a       owl:Class ;
+      rdfs:label "Related processes materials"^^xsd:string ;
+      rdfs:subClassOf ecoUD:TechnologyCorrelationIndicator .
+
+ecoUD:RepresentativeOfAllSites
+      a       owl:Class ;
+      rdfs:label "Representative of all sites"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeCompletenessIndicator .
+
+ecoUD:RepresentativeOfMostSites
+      a       owl:Class ;
+      rdfs:label "Representative of most sites"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeCompletenessIndicator .
+
+ecoUD:RepresentativeOfOneSite
+      a       owl:Class ;
+      rdfs:label "Representative of one site"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeCompletenessIndicator .
+
+ecoUD:RepresentativeOfSomeSites
+      a       owl:Class ;
+      rdfs:label "Representative of some sites"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeCompletenessIndicator .
+
+ecoUD:SameProcessesMaterialsDifferentTechnology
+      a       owl:Class ;
+      rdfs:label "Same processes materials different technology"^^xsd:string ;
+      rdfs:subClassOf ecoUD:TechnologyCorrelationIndicator .
+
+ecoUD:SameTechnologyDifferentEnterprises
+      a       owl:Class ;
+      rdfs:label "Same technology different enterprises"^^xsd:string ;
+      rdfs:subClassOf ecoUD:TechnologyCorrelationIndicator .
+
+ecoUD:SameTechnologyEnterprises
+      a       owl:Class ;
+      rdfs:label "Similar process materials enterprises"^^xsd:string ;
+      rdfs:subClassOf ecoUD:TechnologyCorrelationIndicator .
+
+ecoUD:TechnologyCorrelationIndicator
+      a       owl:Class ;
+      rdfs:label "Technology correlation indicator"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeIndicator .
+
+ecoUD:TriangularDistribution
+      a       owl:Class ;
+      rdfs:label "Triangular distribution"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution .
+
+ecoUD:UniformDistribution
+      a       owl:Class ;
+      rdfs:label "Uniform distribution"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution .
+
+ecoUD:Verified
+      a       owl:Class ;
+      rdfs:label "Verified"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeReliabilityIndicator .
+
+ecoUD:Within10Years
+      a       owl:Class ;
+      rdfs:label "Within10Years"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeTemporalCorrelationIndicator .
+
+ecoUD:Within15Years
+      a       owl:Class ;
+      rdfs:label "Within15Years"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeTemporalCorrelationIndicator .
+
+ecoUD:Within3Years
+      a       owl:Class ;
+      rdfs:label "Within3Years"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeTemporalCorrelationIndicator .
+
+ecoUD:Within6Years
+      a       owl:Class ;
+      rdfs:label "Within6Years"^^xsd:string ;
+      rdfs:subClassOf ecoUD:PedigreeTemporalCorrelationIndicator .
+
+ecoUD:ZeroUncertaintyDistribution
+      a       owl:Class ;
+      rdfs:comment """The class of uncertainty distributions with zero uncertainty.
+
+The only example instance of this class is ecoUD:zeroUncertaintyDistribution."""^^xsd:string ;
+      rdfs:label "Zero uncertainty distribution"^^xsd:string ;
+      rdfs:subClassOf eco:UncertaintyDistribution ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:oneOf (ecoUD:zeroUncertaintyDistribution)
+              ] .
+
+ecoUD:maxValue
+      a       owl:DatatypeProperty ;
+      rdfs:label "max value"^^xsd:string ;
+      rdfs:range xsd:float .
+
+ecoUD:meanValue
+      a       owl:DatatypeProperty ;
+      rdfs:label "mean value"^^xsd:string ;
+      rdfs:range xsd:float .
+
+ecoUD:minValue
+      a       owl:DatatypeProperty ;
+      rdfs:label "minimum value"^^xsd:string ;
+      rdfs:range xsd:float .
+
+ecoUD:mostFrequent
+      a       owl:DatatypeProperty ;
+      rdfs:label "most frequent"^^xsd:string ;
+      rdfs:range xsd:float .
+
+ecoUD:mostLikelyValue
+      a       owl:DatatypeProperty ;
+      rdfs:label "most likely value"^^xsd:string ;
+      rdfs:range xsd:float .
+
+ecoUD:order
+      a       owl:DatatypeProperty ;
+      rdfs:label "order"^^xsd:string ;
+      rdfs:range xsd:float .
+
+ecoUD:pedigreeMatrix
+      a       owl:ObjectProperty ;
+      rdfs:label "pedigree matrix"^^xsd:string .
+
+ecoUD:pedigreeTemporalCorrelationMoreThan
+      a       owl:DatatypeProperty ;
+      rdfs:label "pedigree temporal correlation more than"^^xsd:string .
+
+ecoUD:pedigreeTemporalCorrelationWithin
+      a       owl:DatatypeProperty ;
+      rdfs:label "pedigree temporal correlation within"^^xsd:string .
+
+ecoUD:scale
+      a       owl:DatatypeProperty ;
+      rdfs:label "scale"^^xsd:string .
+
+ecoUD:shape
+      a       owl:DatatypeProperty ;
+      rdfs:label "shape"^^xsd:string .
+
+ecoUD:standardDeviation95
+      a       owl:DatatypeProperty ;
+      rdfs:label "standard deviation95"^^xsd:string ;
+      rdfs:range xsd:float .
+
+ecoUD:standardDeviation95WithPedigreeUncertainty
+      a       owl:DatatypeProperty ;
+      rdfs:label "standard deviation95With pedigree uncertainty"^^xsd:string ;
+      rdfs:range xsd:float .
+
+ecoUD:zeroUncertaintyDistribution
+      a       ecoUD:ZeroUncertaintyDistribution ;
+      rdfs:label "zero uncertainty distribution"^^xsd:string .

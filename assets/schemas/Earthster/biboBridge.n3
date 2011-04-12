@@ -1,0 +1,27 @@
+# Saved by TopBraid on Mon Mar 29 16:26:13 BST 2010
+# baseURI: http://ontology.earthster.org/eco/biboBridge
+# imports: http://purl.org/dc/dcam/
+# imports: http://ontology.earthster.org/eco/core
+# imports: http://purl.org/dc/dcmitype/
+# imports: http://purl.org/ontology/bibo/
+
+@prefix :        <http://ontology.earthster.org/eco/biboBridge#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix eco:     <http://ontology.earthster.org/eco/core#> .
+
+<http://ontology.earthster.org/eco/biboBridge>
+      a       owl:Ontology ;
+      rdfs:comment """An Earthster™  ECO bridging ontology.
+
+This module bridges ECO concepts to the BIBO ontology.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/biboBridge. This work is published from United States. """^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/core> , <http://purl.org/dc/dcam/> , bibo: , <http://purl.org/dc/dcmitype/> ;
+      owl:versionInfo "Under initial development: subject to incompatible change without notice."^^xsd:string .
+
+bibo:Document
+      rdfs:subClassOf eco:DataSource .

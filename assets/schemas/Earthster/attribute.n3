@@ -1,0 +1,77 @@
+# Saved by TopBraid on Mon Mar 29 16:22:45 BST 2010
+# baseURI: http://ontology.earthster.org/eco/attribute
+# imports: http://ontology.earthster.org/eco/core
+
+@prefix :        <http://ontology.earthster.org/eco/attribute#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix attr:    <http://ontology.earthster.org/eco/attribute#> .
+@prefix eco:     <http://ontology.earthster.org/eco/core#> .
+
+<http://ontology.earthster.org/eco/attribute>
+      a       owl:Ontology ;
+      rdfs:comment """The Earthster™ ECO attribute ontology.
+
+This is an extention ontology for ECO that defines the RATIO attribute definition class.
+
+To the extent possible under law, New Earth  has waived all copyright and related or neighboring rights to http://ontology.earthster.org/eco/attribute. This work is published from United States. """^^xsd:string ;
+      owl:imports <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "In early development: subject to incompatible change without notice."^^xsd:string .
+
+:RatioAttributeDefinition
+      a       owl:Class ;
+      rdfs:comment """A class of attribute definitions that are a ratio of two quantified effects.
+
+Examples of ratio attribute definitions include the ratio of child to all labour used in producing a product."""^^xsd:string ;
+      rdfs:label "Ratio attribute"^^xsd:string ;
+      rdfs:subClassOf eco:AttributeDefinition ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^xsd:int ;
+                owl:onProperty :hasDivisorUnit
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasDivisor
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:cardinality "1"^^xsd:int ;
+                owl:onProperty :hasDividend
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^xsd:int ;
+                owl:onProperty :hasDividendUnit
+              ] .
+
+:hasDividend
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasDividend relates a ratio attribute definition to the effect whose value is the dividend of the ratio."^^xsd:string ;
+      rdfs:domain :RatioAttributeDefinition ;
+      rdfs:label "has dividend"^^xsd:string ;
+      rdfs:range eco:EffectAggregationCategory .
+
+:hasDividendUnit
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasDividendUnit relates a ratio attribute definition to the units in which its dividend are measured."^^xsd:string ;
+      rdfs:domain :RatioAttributeDefinition ;
+      rdfs:label "has dividend unit"^^xsd:string ;
+      rdfs:range eco:UnitOfMeasure .
+
+:hasDivisor
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasDivisor relates a Ratio attribute definition to the effect aggregation category that is the divisor of the ratio."^^xsd:string ;
+      rdfs:domain :RatioAttributeDefinition ;
+      rdfs:label "has divisor"^^xsd:string ;
+      rdfs:range eco:EffectAggregationCategory .
+
+:hasDivisorUnit
+      a       owl:ObjectProperty ;
+      rdfs:comment "hasDivisorUnit relates a ratio attribute definition to the units in which the divisor should be measured."^^xsd:string ;
+      rdfs:domain :RatioAttributeDefinition ;
+      rdfs:label "has divisor unit"^^xsd:string ;
+      rdfs:range eco:UnitOfMeasure .

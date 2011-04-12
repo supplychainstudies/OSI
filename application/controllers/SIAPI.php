@@ -134,8 +134,8 @@ class SIAPI extends SM_Controller {
 		$eco_prefix = "http://ontology.earthster.org/eco/core#";
 		$converted_dataset = array();		
 		foreach($dataset as $key=>$record) {	
-			foreach ($record[$eco_prefix."hasImpactCategoryIndicatorResult"] as $_record) {
-				foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
+			//foreach ($record[$eco_prefix."hasImpactCategoryIndicatorResult"] as $_record) {
+				foreach ($record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
 					foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
 						$converted_dataset[$key]['impactCategory'] = $___record;
 					} 
@@ -143,7 +143,7 @@ class SIAPI extends SM_Controller {
 						$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
 					}					
 				} 	
-				foreach ($_record[$eco_prefix."hasQuantity"] as $__record) {
+				foreach ($record[$eco_prefix."hasQuantity"] as $__record) {
 					foreach($__record[$eco_prefix."hasMagnitude"] as $___record) {
 						$converted_dataset[$key]['amount'] = $___record;
 					}
@@ -163,7 +163,7 @@ class SIAPI extends SM_Controller {
 				if (isset($converted_dataset[$key]['impactCategoryIndicator']) == false) {
 					$converted_dataset[$key]['impactCategoryIndicator'] = "?";
 				}
-			}
+			//}
 	}
 		return $converted_dataset; 
 	}
