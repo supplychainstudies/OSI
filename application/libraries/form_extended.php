@@ -197,7 +197,7 @@ class Form_extended extends Form {
 	                foreach ($val as $_group) {	
 						if (isset($_group['__attrs']['linked_type']) == true) {
 							if(isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $_group['__attrs']['linked_type'])]) == true) {
-								$html .= "<h1 class=\"level".$depth."\">" . $_group['__attrs']['name'] . "</h1><div class=\"level".$depth."\">";
+								$html .= "<div class=\"level".$depth."\"><h1 class=\"level".$depth."\">" . $_group['__attrs']['name'] . "</h1>";
 								foreach ($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $_group['__attrs']['linked_type'])] as $_xarray) {
 									$html .= "$tabs\t<li>\n". $this->build_views ($_xarray, $_group, $depth+1) ."$tabs\t</li>\n";
 								}

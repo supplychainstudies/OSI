@@ -13,7 +13,7 @@
 
 	<?= $navigationDisplay;?>
 
-	<div id="columnleft">
+	<div id="columnwide">
 		<div id="content">
 
 			<? echo $view_string; ?>

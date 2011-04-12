@@ -16,7 +16,7 @@
 	<div id="lca_background">
 		
 		<h1><?=$parts['quantitativeReference']['name'] ?></h1>
-		<p>This is a model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p>	
+		<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p>	
 		<p>Unit: <?=$parts['quantitativeReference']['amount'] ?> <?=$parts['quantitativeReference']['unit'] ?></p>		
 				
 			<div id="lca_flows">
@@ -30,7 +30,10 @@
 			<div id="lca_impact">
 			<h2><span>Impact Assessment</h2>	
 			<? foreach ($parts['impactAssessments'] as $impactAssessment) {
-				echo $impactAssessment['impactCategory'] . " - " . $impactAssessment['impactCategoryIndicator'] . " - " . $impactAssessment['amount'] . " - " . $impactAssessment['unit'] . "<br/>\n"; 
+				echo '<div class="nr"><h1 class="nr">' . $impactAssessment['amount'] . '</h1></div>';
+				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit'] .'</p><p class="category">';
+				echo  $impactAssessment['impactCategory'] . " - " . $impactAssessment['impactCategoryIndicator'];
+				echo "<p/></div>"; 
 				
 			}?>
 			</div>

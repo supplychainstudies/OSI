@@ -48,6 +48,28 @@ font-size: 9px;
 color: #3FA9F5;
 text-transform:uppercase;
 }
+#comment_form{
+	background:black;
+	height:100px;
+}
+#comment input {
+color: #333;
+background: #fff;
+border: 1px solid #ccc;
+padding:3px;
+font-size:12px;
+}
+#comment label {
+float: left;
+text-align: right;
+margin-right: 0.5em;
+padding-top: 1em;
+font-size: 9px;
+color: #3FA9F5;
+text-transform:uppercase;
+}
+
+
 
 /* Divs for create/start */
 
@@ -58,7 +80,8 @@ text-transform:uppercase;
 }
 
 #div_publication{
-	float:right;
+	float:left;
+	right:0px;
 	width: 400px;
 	padding:20px;
 }
@@ -66,7 +89,6 @@ text-transform:uppercase;
 
 .level0, .level1, .level2, .level3, .level4 {	
 	font-size: 12px;
-	float:left;
 	width: 400px;
 	padding:20px;
 }
@@ -82,7 +104,7 @@ h1 {
 }
 
 h1.level0  {
-		font-size: 18px;
+		font-size: 16px;
 		font-family: 'Lato', arial, serif; 
 		color: #333;	
 		background-repeat:none;
