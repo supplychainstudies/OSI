@@ -218,6 +218,13 @@ class Lca extends SM_Controller {
 					}						
 				}
 				$converted_dataset[$key]['authors'][] = $person_array;
+			}
+			if (isset($record[$bibo_prefix."uri"]) == true) {
+				foreach($record[$bibo_prefix."uri"] as $uri) {
+					$converted_dataset[$key]['uri'] = $uri;
+				}
+			} else {
+				$converted_dataset[$key]['uri'] = "";
 			} 						
 		}
 		return $converted_dataset;
