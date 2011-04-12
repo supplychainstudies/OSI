@@ -623,7 +623,11 @@ class ArcModel extends Model{
 			foreach($info as $name=>$field)
 			$record[$name] = $field;
 		}
-		return $records;
+		if (count($records) > 0) {
+			return $records;
+		} else {
+			return false;
+		}
 	}
 	
 }

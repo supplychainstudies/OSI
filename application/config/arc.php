@@ -63,7 +63,7 @@ $config['arc_lr_info'] = array(
   'db_user' => 'root',
   'db_pwd' => 'root',
   /* store */
-'store_name' => 'arc_os',
+'store_name' => 'remote_os',
 'ns' => array(
 'foaf' => 'http://xmls.com/foaf/0.1/',
 'dcterms' => 'http://purl.org/dc/terms/',
@@ -75,7 +75,11 @@ $config['arc_lr_info'] = array(
 'fasc' => 'http://ontology.earthster.org/eco/fasc#',
 'oselemflow' => 'http://opensustainability.info/vocab/elementaryFlows',
 'ossia' => 'http://opensustainability.info/vocab/simpleImpactAssessment',
-'qudt' => 'http://data.nasa.gov/qudt/owl/unit#',
+'qudt' => 'http://data.nasa.gov/qudt/owl/qudt#',
+'qudtu' => 'http://data.nasa.gov/qudt/owl/unit#',
+'qudtq' => 'http://data.nasa.gov/qudt/owl/quantity#',
+'qudtd' => 'http://data.nasa.gov/qudt/owl/dimension#',
+'nist' => 'http://physics.nist.gov/cuu/',
 'event' => 'http://purl.org/rss/1.0/modules/event/'
 ),		    
   'endpoint_features' => array(
