@@ -23,7 +23,7 @@ class Lca extends SM_Controller {
 	public $URI;
 	public $data;
 	public $post_data;
-	
+	public $tooltips;
 	
 	public function index() {
 		$data = $this->form_extended->load("start"); 
@@ -114,7 +114,6 @@ class Lca extends SM_Controller {
 		$triples = array();
 		foreach ($datasets as $key=>$dataset) {
 			if ($key != "submit_") {
-				var_dump($key);
 			if (isset($dataset[0]) == true) {
 				foreach ($dataset as $i=>$datasetinstance) {
 					$node_name = $key."_node";
@@ -162,6 +161,25 @@ class Lca extends SM_Controller {
 		header('Content-type: application/json');
 		echo $json;
 	}
+	
+	private function anchor($uri) {
+		if (isset($this->tooltips[$uri]) == true) {
+			return "<a class=\"lookup\" id=\"" . $uri . "\">" . $this->tooltips[$uri]['label'] . "</a>";
+		} else {
+			if (strpos($uri,":") !== false) {
+				$label = $this->arcremotemodel->getLabel($uri);
+				if ($label == false) { 
+					$uri_parts = explode(":", $uri);
+					return $uri_parts[1];
+				} else {
+					$this->tooltips[$uri] = array("label" => $label);
+					return "<a class=\"lookup\" id=\"" . $uri . "\">" . $label . "</a>";
+				}
+			} else {
+				return $uri;
+			}
+		}
+	}
 
 
 	/***
@@ -169,6 +187,7 @@ class Lca extends SM_Controller {
 	* Grabs all the triples for a particular URI and shows it in a friendly, human readable way
 	*/
 	public function view($URI = null) {	
+		$this->tooltips = array();
 		@$parts['impactAssessments'] = $this->convertImpactAssessments($this->arcmodel->getImpactAssessments("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 	
 		@$parts['bibliography'] = $this->convertBibliography($this->arcmodel->getBibliography("http://db.opensustainability.info/rdfspace/lca/" . $URI));
@@ -259,7 +278,7 @@ class Lca extends SM_Controller {
 					$converted_dataset[$key]['amount'] = $magnitude;
 				} 
 				foreach($_record[$eco_prefix."hasUnitOfMeasure"] as $unitOfMeasure) {
-					$converted_dataset[$key]['unit'] = str_replace("qudt:", "", $unitOfMeasure);
+					$converted_dataset[$key]['unit'] = $this->anchor($unitOfMeasure);
 				} 
 			}
 		}
@@ -313,7 +332,7 @@ class Lca extends SM_Controller {
 					$converted_dataset[$key]['amount'] = $___record;
 				}
 				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
-					$converted_dataset[$key]['unit'] = str_replace("qudt:", "",$___record);
+					$converted_dataset[$key]['unit'] = $this->anchor($___record);
 				}		
 			}	
 			if (isset($converted_dataset[$key]['unit']) == false) {
