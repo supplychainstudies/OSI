@@ -178,13 +178,71 @@ class Lca extends SM_Controller {
 		@$parts['modeled'] = $this->convertModeled($this->arcmodel->getModeled("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 	
 		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://db.opensustainability.info/rdfspace/lca/" . $URI));
-		 $links = '<p><a href="/'.$URI.'.rdf">Get this RDF</a></p>
+	 	
+		/* If the functional unit is mass, normalize to 1kg */
+		
+		if ($parts['quantitativeReference']['unit'] == "qudt:Kilogram") {
+			$ratio = $parts['quantitativeReference']['amount'];
+			$parts['quantitativeReference']['amount'] = 1;
+			foreach ($parts['exchanges'] as &$exchanges) {
+				$exchanges['amount'] = $exchanges['amount'] / $ratio;
+			}
+			foreach ($parts['impactAssessments'] as &$impactAssessment) {
+				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+			}
+		}
+		if ($parts['quantitativeReference']['unit'] == "qudt:Gram") {
+			$ratio = $parts['quantitativeReference']['amount'] / 1000;
+			$parts['quantitativeReference']['unit'] = "qudt:Kilogram";
+			$parts['quantitativeReference']['amount'] = 1;
+			foreach ($parts['exchanges'] as &$exchanges) {
+				$exchanges['amount'] = $exchanges['amount'] / $ratio;
+			}
+			foreach ($parts['impactAssessments'] as &$impactAssessment) {
+				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+			}
+		}
+	
+		/* Crunches the data to create the graphics and total calculations */
+		$totalinput = 0; 
+		$totaloutput = 0; 
+		$graphinput = "http://chart.apis.google.com/chart?cht=bhs&chco=3072F3&chma=10,10,10,10&chf=bg,s,333333&chd=t:";
+		$graphoutput = "http://chart.apis.google.com/chart?chs=400x750&cht=bhs&chco=3072F3&chma=10,10,10,10&chf=bg,s,333333&chd=t:";
+		$chdl = "&chm=";
+		$ii = 0;
+		$max = 0;
+		$ochdl = "&chm=";
+		$oi = 0;
+		$omax = 0;
+		foreach ($parts['exchanges'] as $exchanges) {
+			if ($exchanges['direction'] == 'Input' & $exchanges['unit'] == 'Kilogram') {
+				  $totalinput += $exchanges['amount'];
+				 $chdl .= "t" . $exchanges['name']. "+" . $exchanges['amount'] . "+" . $exchanges['unit'] . ",FFFFFF,0,". $ii.",13|";
+				 $ii += 1;
+				 $graphinput .= round($exchanges['amount']) . ",";
+				if ($exchanges['amount'] > $max) { $max = $exchanges['amount']; }
+			} elseif ($exchanges['direction'] == 'Output' & $exchanges['unit'] == 'Kilogram') {
+				 $totaloutput += $exchanges['amount']; 
+				 $ochdl .= "t".$exchanges['name']. "+" . $exchanges['amount'] . "+" . $exchanges['unit'] . ",FFFFFF,1,".$oi.",13|";
+				 $oi += 1;
+				 $graphoutput .= round($exchanges['amount']) . ",";
+				 if ($exchanges['amount'] > $omax) { $omax = $exchanges['amount']; }
+			}
+		}
+		$max *= 1.2; $omax *= 1.2;
+		$graphinput .= "0". "&chs=400x". ($ii*35) ."&chds=0,". $max . $chdl .  "tOther,FFFFFF,0,". $ii . ",13";
+		$graphoutput .= "0". "&chs=400x". ($oi*30) ."&chds=0,". $omax . $ochdl . "tOther,FFFFFF,0,". $oi . ",13";
+				
+		$links = '<p><a href="/'.$URI.'.rdf">Get this RDF</a></p>
 		<p><a href="/'.$URI.'.json">Get this in JSON</a></p>';
 		$this->data("links", $links);
 		$this->data("URI", $URI);
 		$this->data("parts", $parts);
+		$this->data("totalinput", $totalinput);
+		$this->data("totaloutput", $totaloutput);
+		$this->data("max", $max);
+		$this->data("omax", $omax);
 		$this->script(Array('comments.js', 'janrain.js'));
-		//$this->data($URI, $view_string);
 
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();

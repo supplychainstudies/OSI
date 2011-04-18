@@ -71,9 +71,27 @@ h1#title {
 	text-align: left;
 	width:920px;
 	padding: 30px;
-	background-color: #F4F4F4;
+	background-color: #666;
 	margin-bottom:30px;
 	margin-top:30px;
+}
+
+#lca_unit {
+	float:right;
+	top:15px;
+	margin-right:20px;
+	height: 70px;
+	width: 450px;
+	text-align:right;
+	font-size: 20px;
+	font-family: 'Lato', arial, serif; 
+	color: #fff;
+}
+#lca_title {
+	float:left;
+	left:5px;
+	height: 70px;
+	width: 450px;
 }
 
 #lca_flows {
@@ -82,6 +100,8 @@ h1#title {
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+	
 }
 #lca_impact {
 	float:right;
@@ -90,6 +110,7 @@ h1#title {
 	padding: 20px;
 	background-color: #F5FAFF;
 	margin-right:20px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
 #lca_comments {
@@ -100,6 +121,7 @@ h1#title {
 	background-color: #F5FAFF;
 	margin-top: 15px;
 	margin-right:20px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 #lca_meta {
 	float:right;
@@ -109,6 +131,7 @@ h1#title {
 	background-color: #F5FAFF;
 	margin-top: 15px;
 	margin-right:20px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 #lca_impact .nr {
 	float: left;
@@ -127,7 +150,7 @@ h1#title {
 #lca_background  h1 {
 	font-size: 30px;
 	font-family: 'Lato', arial, serif; 
-	color: #333;	
+	color: #fff;	
 }
 
 #lca_background h2 {
@@ -345,6 +368,14 @@ p {
 	margin-bottom: 0.2em;
 	
 }
+
+amount {
+	color: #666;
+	font-size: 1.6em;
+	font-weight: bold;
+}
+
+
 .hand {
 	font-family: 'Reenie Beanie', arial, serif;
 	font-weight: normal;
@@ -390,11 +421,10 @@ a:hover{
 
 
 
-
-
-
-
-
+/* Divs for bar graphs in View LCA */
+.bar_background {
+	width:400px; height:20px; background-color:#CCC;
+}
 
 
 

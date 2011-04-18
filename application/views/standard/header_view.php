@@ -5,7 +5,7 @@
 <? if ($mobile) {?><meta name="viewport" content="width=320"/><? } ?>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <meta http-equiv="content-language" content="en-us">
-<meta name="description" content="<?=$pagedescription;?>" />
+<meta name="description" content="Footprinted.org" />
 <meta name="keywords" content="linked data, open data, sustainability, life cycle assessment, LCA, open source" />
 <link href='http://fonts.googleapis.com/css?family=Reenie+Beanie' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css'>
