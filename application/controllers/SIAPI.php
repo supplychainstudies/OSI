@@ -77,15 +77,25 @@ class SIAPI extends SM_Controller {
 */	
 	public function search($encode = "json") {
 		$checked_URIs = array();
-		if ($search_terms = $_GET) {
-			$URIs = array();
-			$results = array();
-			foreach ($search_terms as $field=>$value) {
-				$URIs = array_merge($URIs,@$this->arcmodel->simpleSearch($field, $value));
-			}
-		} else {
-			$URIs = @$this->arcmodel->simpleSearch();
+		$search_terms = $_GET;
+		$limit = 20;
+		$offset = 0;
+		$value = null;	
+		$URIs = array();
+		$results = array();
+		if (isset($search_terms['limit']) == true) {
+			$limit = $search_terms['limit'];
 		}
+		
+		if (isset($search_terms['offset']) == true) {
+			$offset = $search_terms['offset'];
+		}
+		
+		if (isset($search_terms['product']) == true) {
+			$value = $search_terms['product'];
+		}		
+		$URIs = @$this->arcmodel->simpleSearch($value, $limit, $offset);
+
 		foreach ($URIs as $URI) {
 			if (in_array($URI, $checked_URIs) == false) {
 				$checked_URIs[] = $URI;

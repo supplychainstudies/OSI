@@ -202,20 +202,108 @@ class ArcRemoteModel extends Model{
 				$results = $this->executeLocalQuery($q);	
 			}
 		}
-		/*
-		public function qudGetUnits() {
-			$remote_endpoint = "http://www.qudt.org/qudt/owl/1.0.0/qudt.owl";
-			$q = "select ?uri where { ?uri <http://data.nasa.gov/qudt/owl/qudt#Unit> ?label . }";
-			$results = $this->executeQuery($remote_endpoint, $q);
-			var_dump($results);
+		
+		
+		
+		
+		public function dumpEco() {
+			$cached = array(
+				array(
+					'http://osi/assets/schemas/Earthster/alloc.n3',
+					'http://ontology.earthster.org/eco/alloc#'
+				),				
+				array(
+					'http://osi/assets/schemas/Earthster/attribute.n3',
+					'http://ontology.earthster.org/eco/attribute#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/biboBridge.n3',
+					'http://ontology.earthster.org/eco/biboBridge#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/bridges.n3',
+					'http://ontology.earthster.org/eco/bridges#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/cml2001.ttl',
+					'http://ontology.earthster.org/eco/cml2001#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/core.n3',
+					'http://ontology.earthster.org/eco/core#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/ecodl.n3',
+					'http://ontology.earthster.org/eco/ecodl#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/ecofull.n3',
+					'http://ontology.earthster.org/eco/ecofull#'
+				),				
+				array(
+					'http://osi/assets/schemas/Earthster/ecoinvent.ttl',
+					'http://ontology.earthster.org/eco/ecoinvent#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/ecospold.n3',
+					'http://ontology.earthster.org/eco/ecospold#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/fasc.n3',
+					'http://ontology.earthster.org/eco/fasc#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/foafBridge.n3',
+					'http://ontology.earthster.org/eco/foafBridge#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/fullAxioms.n3',
+					'http://ontology.earthster.org/eco/fullAxioms#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/goodRelationsBridge.n3',
+					'http://ontology.earthster.org/eco/goodRelationsBridge#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/ilcd.ttl',
+					'http://ontology.earthster.org/eco/ilcd#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/impact.n3',
+					'http://ontology.earthster.org/eco/impact#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/impact2002Plus.n3',
+					'http://ontology.earthster.org/eco/impact2002Plus#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/sumoBridge.n3',
+					'http://ontology.earthster.org/eco/sumoBridge#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/timeBridge.n3',
+					'http://ontology.earthster.org/eco/timeBridge#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/uncertaintyDistribution.n3',
+					'http://ontology.earthster.org/eco/uncertaintyDistribution#'
+				),
+				array(
+					'http://osi/assets/schemas/Earthster/unit.ttl',
+					'http://ontology.earthster.org/eco/unit#'
+				),
+			);
+			foreach($cached as $onto) {
+				if (count($onto) == 1) {
+					$q = "LOAD <" . $onto[0] . "> INTO <" . $onto[0] . ">";
+				} elseif (count($onto) == 2) {
+					$q = "LOAD <" . $onto[0] . "> INTO <" . $onto[1] . ">";
+				}
+				$results = $this->executeQuery($q);	
+			}
 		}
-		*/
-
-		public function qudGetUnits() {
-			$q = "select ?uri where { ?uri <http://data.nasa.gov/qudt/owl/qudt#Unit> ?label . }";
-			$results = $this->executeQuery($remote_endpoint, $q);
-			var_dump($results);
-		}		
+		
+		
 		
 		public function getLabel($uri) {
 			$xarray = explode(":", $uri);
@@ -229,6 +317,19 @@ class ArcRemoteModel extends Model{
 			}		
 		}
 		
+		public function getDescription($uri) {
+			$xarray = explode(":", $uri);
+			
+			$q = "select ?label where { " .
+				"'" . $this->arc_config['ns'][$xarray[0]] . $xarray[1] . "' '" . $this->arc_config['ns']['rdfs'] . "label'" . " ?label . " . 				
+				"}";
+			$results = $this->executeQuery($q);
+			if (count($results) != 0) {
+				return $results[0]['label'];
+			}		
+		}
+		
+		
 		public function getURIFromLabel($label) {		
 			$q = "select ?uri where { " .
 				"?uri '" . $this->arc_config['ns']['rdfs'] . "label'" . "'" . $label . "' . " . 				
@@ -237,6 +338,38 @@ class ArcRemoteModel extends Model{
 			if (count($results) != 0) {
 				return $results[0]['uri'];
 			}		
+		}
+		
+		private function isLoaded($uri) {
+			$q = "select ?c where { " .
+				"<" . $uri . "> ?c ?d . " . 				
+				"}";
+			$results = $this->executeQuery($q);
+			if (count($results) != 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		public function getPointGeonames($uri) {
+			// check if this uri is already loaded
+			if ($this->isLoaded($uri) == false) {
+				$q = "LOAD <" . $uri . "> INTO <" . $uri . ">";
+				$this->executeQuery($q);
+			}		
+				
+			$q = "select ?lat ?long where { " .
+			 	"<" . $uri . "> '" . $this->arc_config['ns']['foaf'] . "primaryTopic' ?bnode . " .  
+				"?bnode '" . $this->arc_config['ns']['wgs84_pos'] . "lat' ?lat . " . 	
+				"?bnode '" . $this->arc_config['ns']['wgs84_pos'] . "long' ?long . " . 	
+				"}";								
+			$results = $this->executeQuery($q);
+			if (count($results) != 0) {
+				return $results[0];
+			} else {
+				return false;
+			}
 		}
 		/*
 		public function getLabel($uri) {
