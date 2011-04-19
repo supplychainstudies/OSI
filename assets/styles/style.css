@@ -133,18 +133,36 @@ h1#title {
 	margin-right:20px;
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
+#map {
+	float:right;
+	text-align: left;
+	width:400px;
+	padding: 20px;
+	background-color: #F5FAFF;
+	margin-top: 15px;
+	margin-right:20px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+}
+
 #lca_impact .nr {
 	float: left;
-	height: 90px;
-		width: 150px;
-		text-align:right;
+	height: 100px;
+	width: 130px;
+	text-align:center;
 }
 #lca_impact .meta {
 	float:left;
-	height: 90px;
-	width: 200px;
+	height: 100px;
+	width: 150px;
 	padding-left:15px;
 }
+#lca_impact .circle {
+	float: left;
+	height: 100px;
+	width: 100px;
+	text-align:center;
+}
+
 
 /* Font styles for LCA view */
 #lca_background  h1 {
@@ -154,9 +172,10 @@ h1#title {
 }
 
 #lca_background h2 {
-	font-size: 20px;
+	font-size: 22px;
+	margin-bottom: 14px;
 	font-family: 'Lato', arial, serif; 
-	color: #3FA9F5;	
+	color: #333;	
 	background-repeat:none;
 }
 #lca_background  h1.level0 {
@@ -178,6 +197,16 @@ h1.top {
 	text-transform: uppercase;
 	color: #000000;
 }
+
+#lca_background a {
+	color: #666;	
+	text-decoration:none;
+}
+#lca_background a:hover {
+	color: #000;	
+	background-repeat:none;
+}
+
 
 /* Style for comments */
 #comment_form label {
@@ -425,9 +454,6 @@ a:hover{
 .bar_background {
 	width:400px; height:20px; background-color:#CCC;
 }
-
-
-
 
 
 

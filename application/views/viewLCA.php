@@ -23,7 +23,7 @@
 			<h2>Flows</h2>
 			<? if ($totalinput != 0) { ?>
 			<h3>Total input: <h1 class="nr"><?=round($totalinput,2); ?> kg</h1></h3>
-			<? if($parts['quantitativeReference']['unit'] == "qudt:Kilogram") { 
+			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
 					$ratio = ($totalinput/$parts['quantitativeReference']['amount']);
 					echo "<h3>Ration input vs production<h1 class='nr'>".round($ratio).":1</h1></h3>";
 				} ?>
@@ -31,7 +31,7 @@
 			<? foreach ($parts['exchanges'] as $exchanges) {
 				if ($exchanges['direction'] == 'Input') {
 					$width = round( (100*$exchanges['amount'])/round($totalinput));
-					if ($exchanges['unit'] == 'Kilogram'){
+					if ($exchanges['unit'] == 'qudtu:Kilogram'){
 						echo "<div class='bar_background'>";
 						echo '<div style="width:'.$width.'%; height:20px; background-color:#8CC63F; border-right:1px #FFF solid;"></div></div>';
 					}
@@ -46,7 +46,7 @@
 			<? foreach ($parts['exchanges'] as $exchanges) {
 				if ($exchanges['direction'] == 'Output') {
 					$width = round( (100*$exchanges['amount'])/round($totaloutput) );
-					if ($exchanges['unit'] == 'Kilogram'){
+					if ($exchanges['unit'] == 'qudtu:Kilogram'){
 						echo "<div class='bar_background'>";	
 						echo '<div style="width:'.round($width).'%; height:20px; background-color:#535B39; border-right:1px #FFF solid;"></div></div>';
 					}
@@ -57,9 +57,39 @@
 			<?}?>
 			</div>			
 			
+			
+			
 			<div id="lca_impact">
 			<h2><span>Impact Assessment</h2>	
 			<? foreach ($parts['impactAssessments'] as $impactAssessment) {
+				
+				
+				switch ($impactAssessment['impactCategoryIndicator']) {
+				    case 'ossia:waste':
+				        $color = "#666";
+						$max = 10;
+						break;
+				    case 'ossia:CO2e':
+				        $color = "#333";
+						$max = 10;
+						break;
+				    case "ossia:energy":
+				        $color = "#227CAF";
+						$max = 500;
+						break;
+					case "ossia:water":
+					    $color = "#45A3D8";
+						$max = 10;
+						break;
+					default:
+						$color = "#45A3D8";
+						$max = 50;
+				}
+				$size = 2* round(50*$impactAssessment['amount']/$max);
+				$margin = (100-$size)/2;
+				$margintop = (100-$size)/6;
+				
+				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
 				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit'] .'</p><p class="category">';
 				echo  $impactAssessment['impactCategory'] . " - " . $impactAssessment['impactCategoryIndicator'];
@@ -67,6 +97,17 @@
 				
 			}?>
 			</div>
+			
+			<? if (isset($parts['geography']) == true) {
+				echo '<div id="map"><h2>Geography</h2>';
+				
+				foreach ($parts['geography'] as $geo) {
+						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
+						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['name']."&zoom=12&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
+						echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
+					}
+				echo "</div>";
+			 } ?>
 
 			<div id="lca_meta">
 			<h2>Reference</h2>
