@@ -1,5 +1,5 @@
 application/config/general.php
-application/config/arc.php
+application/config/arcdb.php
 application/config/database.php
 application/models/mysqlmodel.php
 application/controllers/triplesdump.php
