@@ -7,7 +7,7 @@
 			}
 			return "<a class=\"tooltip\" id=\"" . $uri . "\">" . $tooltips[$uri][$label] . "</a>";
 		} elseif (strpos($uri, ":") !== false) {
-			$xarray = explode($uri, ":");
+			$xarray = explode(":", $uri);
 			return $xarray[1];
 		} else {
 			return $uri;
