@@ -202,7 +202,7 @@ class Lca extends SM_Controller {
 	 	
 		/* If the functional unit is mass, normalize to 1kg */
 		
-		if ($parts['quantitativeReference']['unit'] == "qudt:Kilogram") {
+		if ($parts['quantitativeReference']['unit'] == "Kilogram") {
 			$ratio = $parts['quantitativeReference']['amount'];
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
@@ -212,9 +212,9 @@ class Lca extends SM_Controller {
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
 			}
 		}
-		if ($parts['quantitativeReference']['unit'] == "qudt:Gram") {
+		if ($parts['quantitativeReference']['unit'] == "Gram") {
 			$ratio = $parts['quantitativeReference']['amount'] / 1000;
-			$parts['quantitativeReference']['unit'] = "qudt:Kilogram";
+			$parts['quantitativeReference']['unit'] = "Kilogram";
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
