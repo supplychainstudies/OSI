@@ -199,6 +199,9 @@ class Lca extends SM_Controller {
 		@$parts['modeled'] = $this->convertModeled($this->arcmodel->getModeled("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 		
 		$parts['geography'] = $this->convertGeography($this->arcmodel->getGeography("http://db.opensustainability.info/rdfspace/lca/" . $URI));
+		if ($parts['geography'] == false) {
+			unset($parts['geography']);
+		}
 	
 		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 
@@ -409,10 +412,14 @@ class Lca extends SM_Controller {
 		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
 		$eco_prefix = "http://ontology.earthster.org/eco/core#";
 		$converted_dataset = array();
-		foreach($dataset as $geo) {
-			$converted_dataset[] = $this->arcremotemodel->getPointGeonames($geo['geo_uri']);
-		}	
-		return $converted_dataset; 
+		if ($dataset != false) {
+			foreach($dataset as $geo) {
+				$converted_dataset[] = $this->arcremotemodel->getPointGeonames($geo['geo_uri']);
+			}
+			return $converted_dataset;
+		} else {
+			return false;
+		}
 	}
 
 	private function convertImpactAssessments($dataset){
