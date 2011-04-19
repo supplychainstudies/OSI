@@ -167,12 +167,20 @@ class Lca extends SM_Controller {
 			return "<a class=\"lookup\" id=\"" . $uri . "\">" . $this->tooltips[$uri]['label'] . "</a>";
 		} else {
 			if (strpos($uri,":") !== false) {
-				$label = $this->arcremotemodel->getLabel($uri);
+				$this->tooltips[$uri] = array();
+				$this->tooltips[$uri]['label'] = $this->arcremotemodel->getLabel($uri);	
+				$label = $this->tooltips[$uri]['label'];
+				if (strpos($uri, "qudt") !== false) {
+					$this->tooltips[$uri]['abbr'] = $this->arcremotemodel->getAbbr($uri);
+					$label = $this->tooltips[$uri]['abbr'];
+				} 
+				if (strpos($uri, "qudt") !== false) {
+					$this->tooltips[$uri]['quantityKind'] = $this->arcremotemodel->getQuantityKind($uri);
+				}				
 				if ($label == false) { 
 					$uri_parts = explode(":", $uri);
 					return $uri_parts[1];
-				} else {
-					$this->tooltips[$uri] = array("label" => $label);
+				} else {			
 					return "<a class=\"lookup\" id=\"" . $uri . "\">" . $label . "</a>";
 				}
 			} else {
@@ -199,6 +207,8 @@ class Lca extends SM_Controller {
 		$parts['geography'] = $this->convertGeography($this->arcmodel->getGeography("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 	
 		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://db.opensustainability.info/rdfspace/lca/" . $URI));
+		
+		@$parts['tooltips'] = $this->tooltips;
 		 $links = '<p><a href="/'.$URI.'.rdf">Get this RDF</a></p>
 		<p><a href="/'.$URI.'.json">Get this in JSON</a></p>';
 		$this->data("links", $links);

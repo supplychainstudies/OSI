@@ -303,20 +303,44 @@ class ArcRemoteModel extends Model{
 			}
 		}
 		
-		
-		
-		public function getLabel($uri) {
-			$xarray = explode(":", $uri);
+		public function getSomething($uri, $predicate) {
+			if (strpos($uri,":") !== false) {
+				$xarray = explode(":", $uri);
+				$the_uri = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
+			} elseif (strpos($uri,"http://") !== false) {
+				$the_uri = $uri;
+			}
+			if (strpos($predicate,":") !== false) {
+				$xarray = explode(":", $predicate);
+				$the_predicate = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
+			} elseif (strpos($uri,"http://") !== false) {
+				$the_predicate = $predicate;
+			}
 			
-			$q = "select ?label where { " .
-				"'" . $this->arc_config['ns'][$xarray[0]] . $xarray[1] . "' '" . $this->arc_config['ns']['rdfs'] . "label'" . " ?label . " . 				
+			$q = "select ?thing where { " .
+				"'" . $the_uri . "' '" . $the_predicate . "'" . " ?thing . " . 				
 				"}";
 			$results = $this->executeQuery($q);
 			if (count($results) != 0) {
-				return $results[0]['label'];
-			}		
+				return $results[0]['thing'];
+			} else {
+				return false;
+			}			
 		}
 		
+		public function getLabel($uri) {
+			return getSomething($uri, "rdfs:label");	
+		}
+
+		public function getAbbr($uri) {
+			return getSomething($uri, "qudt:abbreviation");	
+		}
+
+		public function getQuantityKind($uri) {
+			$kind_uri =  getSomething($uri, "qudt:quantityKind");
+			return getLabel($kind_uri);	
+		}
+						
 		public function getDescription($uri) {
 			$xarray = explode(":", $uri);
 			
