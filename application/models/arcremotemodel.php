@@ -225,9 +225,8 @@ class ArcRemoteModel extends Model{
 				"}";
 			$results = $this->executeQuery($q);
 			if (count($results) != 0) {
-				$return[0]['label'];
-			}
-			return $results;		
+				return $results[0]['label'];
+			}		
 		}
 		
 		public function getURIFromLabel($label) {		
