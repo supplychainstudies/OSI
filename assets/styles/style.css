@@ -198,12 +198,21 @@ h1.top {
 	color: #000000;
 }
 
-#lca_background a {
+#lca_background p a {
 	color: #666;	
 	text-decoration:none;
 }
-#lca_background a:hover {
+#lca_background p a:hover {
 	color: #000;	
+	background-repeat:none;
+}
+
+#lca_background h1 a {
+	color: #ffffff;	
+	text-decoration:none;
+}
+#lca_background h1 a:hover {
+	color: #ffffff;	
 	background-repeat:none;
 }
 

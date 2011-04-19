@@ -1,3 +1,4 @@
+<? $this->load->helper("linkeddata_helper"); ?>
 <!DOCTYPE html>
 <?=$metaDisplay;?>
 <html>
@@ -17,7 +18,7 @@
 		
 		<div id="lca_title"><h1><?=$parts['quantitativeReference']['name'] ?></h1></div>
 		<? /* <p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
-		<div id="lca_unit"><?=$parts['quantitativeReference']['amount'] ?> <?=$parts['quantitativeReference']['unit'] ?></p></div>	
+		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?=linkThis($parts['quantitativeReference']['unit'], $parts["tooltips"]) ?></nr></h1></div>	
 				
 			<div id="lca_flows">
 			<h2>Flows</h2>
@@ -35,7 +36,7 @@
 						echo "<div class='bar_background'>";
 						echo '<div style="width:'.$width.'%; height:20px; background-color:#8CC63F; border-right:1px #FFF solid;"></div></div>';
 					}
-					echo "<p><amount>" . $exchanges['amount'] . "</amount> " . $exchanges['unit']; 
+					echo "<p><amount>" . $exchanges['amount'] . "</amount> " . linkThis($exchanges['unit'], $parts["tooltips"]); 
 					echo "<b> ".$exchanges['name'] . "</b></p>";
 				}
 			}?>	
@@ -50,7 +51,7 @@
 						echo "<div class='bar_background'>";	
 						echo '<div style="width:'.round($width).'%; height:20px; background-color:#535B39; border-right:1px #FFF solid;"></div></div>';
 					}
-					echo "<p><amount>" . $exchanges['amount'] . "</amount> " . $exchanges['unit']; 
+					echo "<p><amount>" . $exchanges['amount'] . "</amount> " . linkThis($exchanges['unit'], $parts["tooltips"]); 
 					echo "<b> ".$exchanges['name'] . "</b></p>";
 				}
 			}?>
@@ -91,7 +92,7 @@
 				
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
-				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit'] .'</p><p class="category">';
+				echo '<div class="meta"><p class="unit">'. linkThis($impactAssessment['unit'], $parts["tooltips"], "label") .'</p><p class="category">';
 				echo  $impactAssessment['impactCategory'] . " - " . $impactAssessment['impactCategoryIndicator'];
 				echo "<p/></div>"; 
 				
@@ -103,7 +104,7 @@
 				
 				foreach ($parts['geography'] as $geo) {
 						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
-						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['name']."&zoom=12&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
+						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['name']."&zoom=4&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
 						echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
 					}
 				echo "</div>";
