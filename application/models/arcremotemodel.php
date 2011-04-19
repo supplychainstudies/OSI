@@ -329,16 +329,16 @@ class ArcRemoteModel extends Model{
 		}
 		
 		public function getLabel($uri) {
-			return getSomething($uri, "rdfs:label");	
+			return $this->getSomething($uri, "rdfs:label");	
 		}
 
 		public function getAbbr($uri) {
-			return getSomething($uri, "qudt:abbreviation");	
+			return $this->getSomething($uri, "qudt:abbreviation");	
 		}
 
 		public function getQuantityKind($uri) {
-			$kind_uri =  getSomething($uri, "qudt:quantityKind");
-			return getLabel($kind_uri);	
+			$kind_uri =  $this->getSomething($uri, "qudt:quantityKind");
+			return $this->getLabel($kind_uri);	
 		}
 						
 		public function getDescription($uri) {
@@ -383,10 +383,11 @@ class ArcRemoteModel extends Model{
 				$this->executeQuery($q);
 			}		
 				
-			$q = "select ?lat ?long where { " .
+			$q = "select ?lat ?long ?name where { " .
 			 	"<" . $uri . "> '" . $this->arc_config['ns']['foaf'] . "primaryTopic' ?bnode . " .  
 				"?bnode '" . $this->arc_config['ns']['wgs84_pos'] . "lat' ?lat . " . 	
-				"?bnode '" . $this->arc_config['ns']['wgs84_pos'] . "long' ?long . " . 	
+				"?bnode '" . $this->arc_config['ns']['wgs84_pos'] . "long' ?long . " .
+				"?bnode '" . $this->arc_config['ns']['gn'] . "name' ?name . " .
 				"}";								
 			$results = $this->executeQuery($q);
 			if (count($results) != 0) {
