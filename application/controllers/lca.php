@@ -163,29 +163,23 @@ class Lca extends SM_Controller {
 	}
 	
 	private function anchor($uri) {
-		if (isset($this->tooltips[$uri]) == true) {
-			return "<a class=\"lookup\" id=\"" . $uri . "\">" . $this->tooltips[$uri]['label'] . "</a>";
-		} else {
+		if (isset($this->tooltips[$uri]) != true) {
 			if (strpos($uri,":") !== false) {
 				$this->tooltips[$uri] = array();
 				$this->tooltips[$uri]['label'] = $this->arcremotemodel->getLabel($uri);	
-				$label = $this->tooltips[$uri]['label'];
+				$this->tooltips[$uri]['l'] = $this->tooltips[$uri]['label'];
 				if (strpos($uri, "qudt") !== false) {
 					$this->tooltips[$uri]['abbr'] = $this->arcremotemodel->getAbbr($uri);
-					$label = $this->tooltips[$uri]['abbr'];
+					$this->tooltips[$uri]['l'] = $this->tooltips[$uri]['abbr'];
 				} 
 				if (strpos($uri, "qudt") !== false) {
 					$this->tooltips[$uri]['quantityKind'] = $this->arcremotemodel->getQuantityKind($uri);
 				}				
-				if ($label == false) { 
+				if ($this->tooltips[$uri]['l'] == false) { 
 					$uri_parts = explode(":", $uri);
 					return $uri_parts[1];
-				} else {			
-					return "<a class=\"lookup\" id=\"" . $uri . "\">" . $label . "</a>";
-				}
-			} else {
-				return $uri;
-			}
+				} 
+			} 
 		}
 	}
 
@@ -212,7 +206,7 @@ class Lca extends SM_Controller {
 	 	
 		/* If the functional unit is mass, normalize to 1kg */
 		
-		if ($parts['quantitativeReference']['unit'] == "Kilogram") {
+		if ($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") {
 			$ratio = $parts['quantitativeReference']['amount'];
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
@@ -222,7 +216,7 @@ class Lca extends SM_Controller {
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
 			}
 		}
-		if ($parts['quantitativeReference']['unit'] == "Gram") {
+		if ($parts['quantitativeReference']['unit'] == "qudtu:Gram") {
 			$ratio = $parts['quantitativeReference']['amount'] / 1000;
 			$parts['quantitativeReference']['unit'] = "Kilogram";
 			$parts['quantitativeReference']['amount'] = 1;
@@ -246,13 +240,13 @@ class Lca extends SM_Controller {
 		$oi = 0;
 		$omax = 0;
 		foreach ($parts['exchanges'] as $exchanges) {
-			if ($exchanges['direction'] == 'Input' & $exchanges['unit'] == 'Kilogram') {
+			if ($exchanges['direction'] == 'Input' & $exchanges['unit'] == 'qudtu:Kilogram') {
 				  $totalinput += $exchanges['amount'];
 				 $chdl .= "t" . $exchanges['name']. "+" . $exchanges['amount'] . "+" . $exchanges['unit'] . ",FFFFFF,0,". $ii.",13|";
 				 $ii += 1;
 				 $graphinput .= round($exchanges['amount']) . ",";
 				if ($exchanges['amount'] > $max) { $max = $exchanges['amount']; }
-			} elseif ($exchanges['direction'] == 'Output' & $exchanges['unit'] == 'Kilogram') {
+			} elseif ($exchanges['direction'] == 'Output' & $exchanges['unit'] == 'qudtu:Kilogram') {
 				 $totaloutput += $exchanges['amount']; 
 				 $ochdl .= "t".$exchanges['name']. "+" . $exchanges['amount'] . "+" . $exchanges['unit'] . ",FFFFFF,1,".$oi.",13|";
 				 $oi += 1;
@@ -273,7 +267,6 @@ class Lca extends SM_Controller {
 		$this->data("max", $max);
 		$this->data("omax", $omax);
 		$this->script(Array('comments.js', 'janrain.js'));
-
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
 		$comments = $this->arcmodel->getComments("http://db.opensustainability.info/osi/rdfspace/lca/".$URI);
@@ -374,7 +367,8 @@ class Lca extends SM_Controller {
 					$converted_dataset[$key]['amount'] = $magnitude;
 				} 
 				foreach($_record[$eco_prefix."hasUnitOfMeasure"] as $unitOfMeasure) {
-					$converted_dataset[$key]['unit'] = $this->anchor($unitOfMeasure);
+					$converted_dataset[$key]['unit'] = $unitOfMeasure;
+					$this->anchor($unitOfMeasure);
 				} 
 			}
 		}
@@ -388,7 +382,8 @@ class Lca extends SM_Controller {
 		foreach($dataset as $key=>$record) {		
 			$converted_dataset['name'] = $record['name'];
 			$converted_dataset['amount'] = $record['magnitude'];
-			$converted_dataset['unit'] = $this->anchor($record['unit']);
+			$converted_dataset['unit'] = $record['unit'];
+			$this->anchor($record['unit']);
 		}		
 		return $converted_dataset; 
 	}	
@@ -401,8 +396,8 @@ class Lca extends SM_Controller {
 			if(isset($record[$rdfs_prefix."type"]) == true) {
 				foreach($record[$rdfs_prefix."type"] as $type) {
 					foreach($record[$rdfs_prefix."label"] as $label) {
-							$type = $this->anchor($type);
-							$converted_dataset[$type] = $label;
+							$this->anchor($type);
+							$converted_dataset['type'] = $type;
 					}				
 				}				
 			}
@@ -414,7 +409,9 @@ class Lca extends SM_Controller {
 		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
 		$eco_prefix = "http://ontology.earthster.org/eco/core#";
 		$converted_dataset = array();
-		$converted_dataset = $this->arcremotemodel->getPointGeonames($dataset);	
+		foreach($dataset as $geo) {
+			$converted_dataset[] = $this->arcremotemodel->getPointGeonames($geo['geo_uri']);
+		}	
 		return $converted_dataset; 
 	}
 
@@ -425,7 +422,8 @@ class Lca extends SM_Controller {
 		foreach($dataset as $key=>$_record) {	
 			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
 				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
-					$converted_dataset[$key]['impactCategory'] = $this->anchor($___record);
+					$converted_dataset[$key]['impactCategory'] = $___record;
+					$this->anchor($___record);
 				} 
 				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
 					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
@@ -436,7 +434,8 @@ class Lca extends SM_Controller {
 					$converted_dataset[$key]['amount'] = $___record;
 				}
 				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
-					$converted_dataset[$key]['unit'] = $this->anchor($___record);
+					$converted_dataset[$key]['unit'] = $___record;
+					$this->anchor($___record);
 				}		
 			}	
 			if (isset($converted_dataset[$key]['unit']) == false) {

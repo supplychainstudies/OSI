@@ -15,10 +15,10 @@ class ArcModel extends Model{
 	function ArcModel(){
 		parent::Model();
 		$this->load->library('arc2/ARC2', '', 'arc');
-		//$this->config->load('arc');	
-		$CI =& get_instance();    
-	        $CI->config->load('arc');		
-		$this->arc_config = $CI->config->item("arc_info");
+		//$this->config->load('arc');	  
+	    $this->config->load('arc');	
+		$this->config->load('arcdb');	
+		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
 	}	
 	
 	// Configuration information for accessing the arc store
@@ -439,7 +439,7 @@ class ArcModel extends Model{
 			"}";				
 		$records = $this->executeQuery($q);	
 		if (count($records) != 0) {
-			return $records[0]['geo_uri'];
+			return $records;
 		} else {
 			return false;
 		}

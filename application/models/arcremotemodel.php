@@ -15,9 +15,9 @@ class ArcRemoteModel extends Model{
 	function ArcRemoteModel(){
 		parent::Model();
 		$this->load->library('arc2/ARC2', '', 'arc');	
-		$CI =& get_instance();    
-	        $CI->config->load('arc');		
-		$this->arc_config = $CI->config->item("arc_lr_info");		
+		$this->config->load('arc');		
+		$this->config->load('arcdb');	
+		$this->arc_config = array_merge($this->config->item("arc_lr_info"), $this->config->item("db_arc_lr_info"));	
 	}	
 	
 	/**
@@ -318,7 +318,7 @@ class ArcRemoteModel extends Model{
 			}
 			
 			$q = "select ?thing where { " .
-				"'" . $the_uri . "' '" . $the_predicate . "'" . " ?thing . " . 				
+				"<" . $the_uri . "> '" . $the_predicate . "' ?thing . " . 				
 				"}";
 			$results = $this->executeQuery($q);
 			if (count($results) != 0) {
