@@ -306,14 +306,18 @@ class ArcModel extends Model{
 	 * Retrieves and returns summary information for all existing records
 	 * @return $records Array	
 	 */
-	public function simpleSearch($variable = null, $value = null) {
+	public function simpleSearch($value = null, $limit = 20, $offset = 0) {
 		$URIs = array();
 		$q = "select ?uri where { " . 
 			" ?uri '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " ;
 		if ($value != null) {
-			$q .= " ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' '".$value."' . "; 				
-		} 			
-		$q .= "}";
+			$q .= " ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 
+					"FILTER regex(?label, '" . $value . "', 'i')";
+		} 
+		$q .= "}" . 
+				"LIMIT " . $limit . " " . 
+				"OFFSET " . $offset . " ";
+
 		$records = $this->executeQuery($q);	
 		foreach ($records as $record) {
 			$URIs[] = $record['uri'];
@@ -427,6 +431,19 @@ class ArcModel extends Model{
 		}
 		return $full_record;
 	}	
+	
+	public function getGeography($URI) {
+		$q = "select ?geo_uri where { " . 
+			" <".$URI."> '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " .
+			"?bnode '" . $this->arc_config['ns']['eco'] . "hasGeoLocation' ?geo_uri . " . 			
+			"}";				
+		$records = $this->executeQuery($q);	
+		if (count($records) != 0) {
+			return $records[0]['geo_uri'];
+		} else {
+			return false;
+		}
+	}
 	
 	public function getQR($URI) {
 		$q = "select ?bnode ?name where { " . 

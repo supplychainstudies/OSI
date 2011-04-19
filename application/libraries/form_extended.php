@@ -608,7 +608,7 @@ class Form_extended extends Form {
 			            else {
 								$_val = $val;
 								if(isset($xarray[$name]) == true) {
-									var_dump($xarray);
+									//var_dump($xarray);
 									if(is_array($xarray[$name]) == false) {
 										$pass_array = array ($xarray[$name]);
 									} else {

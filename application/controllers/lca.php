@@ -195,6 +195,8 @@ class Lca extends SM_Controller {
 		@$parts['exchanges'] = $this->convertExchanges($this->arcmodel->getExchanges("http://db.opensustainability.info/rdfspace/lca/" . $URI));	
 	
 		@$parts['modeled'] = $this->convertModeled($this->arcmodel->getModeled("http://db.opensustainability.info/rdfspace/lca/" . $URI));
+		
+		$parts['geography'] = $this->convertGeography($this->arcmodel->getGeography("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 	
 		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 	 	
@@ -282,8 +284,10 @@ class Lca extends SM_Controller {
 				foreach($record[$dc_prefix."title"] as $title) {
 					$converted_dataset[$key]['title'] = $title;
 				}
+			} else {
+				$converted_dataset[$key]['title'] = "";
 			}
-			if (isset($record[$bibo_prefix."authorList"])) {
+			if (isset($record[$bibo_prefix."authorList"]) == true) {
 				$person_array = array();
 				foreach($record[$bibo_prefix."authorList"] as $author_uri) {
 					$person = $this->arcmodel->getTriples($author_uri);
@@ -295,6 +299,8 @@ class Lca extends SM_Controller {
 					}						
 				}
 				$converted_dataset[$key]['authors'][] = $person_array;
+			} else {
+				
 			}
 			if (isset($record[$bibo_prefix."uri"]) == true) {
 				foreach($record[$bibo_prefix."uri"] as $uri) {
@@ -302,7 +308,30 @@ class Lca extends SM_Controller {
 				}
 			} else {
 				$converted_dataset[$key]['uri'] = "";
-			} 						
+			} 
+			if (isset($record[$dc_prefix."date"]) == true) {
+				foreach($record[$dc_prefix."date"] as $date) {
+					$converted_dataset[$key]['date'] = $date;
+				}
+			} else {
+				$converted_dataset[$key]['date'] = "";
+			}
+			/*
+			if (isset($record[$bibo_prefix."isbn"]) == true) {
+				foreach($record[$bibo_prefix."date"] as $date) {
+					$converted_dataset[$key]['date'] = $date;
+				}
+			} else {
+				$converted_dataset[$key]['date'] = "";
+			}
+			"dc:creator" => $organization_uris,
+			"bibo:isbn" => trim($line_array[5]),
+			"bibo:volume" => trim($line_array[6]),
+			"bibo:issue" => trim($line_array[7]),
+			"bibo:doi" => trim($line_array[10]),
+			"bibo:chapter" => trim($line_array[13]),
+			"bibo:locator" => trim($line_array[14]),	
+			*/					
 		}
 		return $converted_dataset;
 	}
@@ -350,7 +379,7 @@ class Lca extends SM_Controller {
 		foreach($dataset as $key=>$record) {		
 			$converted_dataset['name'] = $record['name'];
 			$converted_dataset['amount'] = $record['magnitude'];
-			$converted_dataset['unit'] = $record['unit'];
+			$converted_dataset['unit'] = $this->anchor($record['unit']);
 		}		
 		return $converted_dataset; 
 	}	
@@ -363,12 +392,20 @@ class Lca extends SM_Controller {
 			if(isset($record[$rdfs_prefix."type"]) == true) {
 				foreach($record[$rdfs_prefix."type"] as $type) {
 					foreach($record[$rdfs_prefix."label"] as $label) {
-							$type = strtolower(str_replace("eco:","",$type));
+							$type = $this->anchor($type);
 							$converted_dataset[$type] = $label;
 					}				
 				}				
 			}
 		}		
+		return $converted_dataset; 
+	}
+	
+	private function convertGeography($dataset){
+		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
+		$eco_prefix = "http://ontology.earthster.org/eco/core#";
+		$converted_dataset = array();
+		$converted_dataset = $this->arcremotemodel->getPointGeonames($dataset);	
 		return $converted_dataset; 
 	}
 
@@ -379,7 +416,7 @@ class Lca extends SM_Controller {
 		foreach($dataset as $key=>$_record) {	
 			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
 				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
-					$converted_dataset[$key]['impactCategory'] = $___record;
+					$converted_dataset[$key]['impactCategory'] = $this->anchor($___record);
 				} 
 				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
 					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
