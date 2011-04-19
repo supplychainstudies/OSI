@@ -1,5 +1,5 @@
 <div id="header">
-	<p class="imge"><a href="/"><img src="<?=base_url()?>assets/images/logo_grey.png" alt="osi"></a></p>
+	<p class="imge"><a href="/"><img src="<?=base_url()?>assets/images/footprinted.png" alt="footprinted"></a></p>
 </div>
 <?
 
@@ -8,6 +8,5 @@ if ($this->session->userdata('id') == false) {
 } else {
 	include_once('header_loggedin.php'); 
 }
-
 
 ?>

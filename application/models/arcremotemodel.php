@@ -352,8 +352,7 @@ class ArcRemoteModel extends Model{
 				return $results[0]['label'];
 			}		
 		}
-		
-		
+	
 		public function getURIFromLabel($label) {		
 			$q = "select ?uri where { " .
 				"?uri '" . $this->arc_config['ns']['rdfs'] . "label'" . "'" . $label . "' . " . 				
@@ -382,7 +381,6 @@ class ArcRemoteModel extends Model{
 				$q = "LOAD <" . $uri . "> INTO <" . $uri . ">";
 				$this->executeQuery($q);
 			}		
-				
 			$q = "select ?lat ?long ?name where { " .
 			 	"<" . $uri . "> '" . $this->arc_config['ns']['foaf'] . "primaryTopic' ?bnode . " .  
 				"?bnode '" . $this->arc_config['ns']['wgs84_pos'] . "lat' ?lat . " . 	
