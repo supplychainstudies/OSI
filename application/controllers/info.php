@@ -300,7 +300,7 @@ class Info extends SM_Controller {
 
 	/***
     * @public
-    * Shows all data entries
+    * Shows the homepage
 	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
     */
 	// Public function for exploring the repository
@@ -323,7 +323,15 @@ class Info extends SM_Controller {
 					$set[$key][$_key] = $field;
 				}
 			}
-			/*/ Get all the Impacts 		
+			
+			$featured = $this->arcmodel->simplesearch("aluminum",1,0);
+			
+			//Load RSS for news
+			 $this->load->library('RSSParser', array('url' => 'http://twitter.com/statuses/user_timeline/footprinted.rss', 'life' => 0));
+			  //Get six items from the feed
+			  $twitter = $this->rssparser->getFeed(6);			
+			
+			// Get all the Impacts 		
 			@$impacts = $this->arcmodel->getImpacts($record['link']);
 			// For each impact
 			foreach ($impacts as $impact) {
@@ -341,13 +349,13 @@ class Info extends SM_Controller {
 						$set[$key][$impact['impactCategory']][$__key] = $_field;
 					}					
 				}
-			}	*/	
-			
-	
+			}				
 		
 		}
 		// Send data to the view
-		$this->data("set",$set);
+		$this->data("set", $set);
+		$this->data("twitter", $twitter);
+		$this->data("featured", $featured);
 		$this->display("Browse","browse_view");		
 	}
 	

@@ -22,7 +22,7 @@ h1#title {
 	color: black; 
 	text-align: center;
 	margin: 0 auto;
-	width: 960px;
+	width: 970px;
 	overflow: hidden;
 }
 
@@ -47,14 +47,14 @@ h1#title {
 #columnleft{
 	float:left;
 	text-align: left;
-	width:550px;
+	width:770px;
 	padding-top: 40px;
 	padding-bottom: 60px;
 }
 #columnright{
 	float:right;
 	text-align: right;
-	width: 300px;
+	width: 200px;
 	padding-top: 40px;
 }
 #columnwide{
@@ -333,7 +333,7 @@ div#sidebar {
 
 #layout legend {
 	font-size: 20px;
-	text-weight: bold;
+	font-weight: bold;
 }
 
 label {
@@ -430,34 +430,68 @@ a:hover{
 .imge a:hover {text-decoration: none; 
 	background:none;}
 	
-/* Divs for showing impacts*/
+/* Divs for homepage*/
 
 #allresources {
 	
 }
-.resource {
-	float: left;
-	background-color: #29ABE2;
+.small {
 	height: 80px;
 	width: 80px;
+	text-align: center;	
+}
+.wide {
+	height: 80px;
+	width: 180px;
+	text-align: center;	
+}
+.medium {
+	height: 190px;
+	width: 190px;
+	text-align: left;	
+}
+.big {
+	height: 410px;
+	width: 410px;
+	text-align: left;	
+}
+.blue {
+	background-color: #4C5A63;
+}
+.aoi {
+	background-color: #485145;
+}
+.grey {
+	background-color: #333333;
+}
+.square {
+	float: left;
 	margin: 5px;
 	padding: 10px;
-	text-align: center;	
 }
-
-.resource p{
+.square p{
 	color: #ffffff;
 	font-weight: bold;
 	text-align: center;	
 }
 
-.resource p a{
+.square p a{
 	color: #ffffff;
 	font-weight: bold;
-	text-align: center;	
 }
 
+.square h2{
+	color: #ffffff;
+	font-size: 20px;
+	font-family: 'Lato', arial, serif;
+}
 
+.square h2 a{
+	color: #ffffff;
+	font-weight: bold;
+		font-size: 20px;
+		font-family: 'Lato', arial, serif; 	
+}
 
 /* Divs for bar graphs in View LCA */
 .bar_background {

@@ -87,9 +87,10 @@
 						$max = 50;
 				}
 				$size = 2* round(50*$impactAssessment['amount']/$max);
+				if ($size > 80) { $size = 80; }
 				$margin = (100-$size)/2;
 				$margintop = (100-$size)/6;
-				
+
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
 				echo '<div class="meta"><p class="unit">'. linkThis($impactAssessment['unit'], $parts["tooltips"], "label") .'</p><p class="category">';
@@ -99,12 +100,12 @@
 			}?>
 			</div>
 			
-			<? if (isset($parts['geography']) == true) {
+			<? if (isset($parts['geography']) == true ) {
 				echo '<div id="map"><h2>Geography</h2>';
 				
 				foreach ($parts['geography'] as $geo) {
 						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
-						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['name']."&zoom=4&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
+						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['lat'].','.$geo['long']."&zoom=4&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
 						echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
 					}
 				echo "</div>";
