@@ -452,7 +452,7 @@ class ArcModel extends Model{
 			" ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' ?title . " . 		
 			"}" . 
 			"LIMIT 10 ";
-				
+
 		$records = $this->executeQuery($q);	
 
 		if (count($records) != 0) {
