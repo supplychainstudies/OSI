@@ -22,6 +22,7 @@ class Users extends SM_Controller {
 		//$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
 		$this->load->library(Array('SimpleLoginSecure'));
 		$this->lang->load('openid', 'english');
+		$this->load->model('arcmodel');
 	    $this->load->library(Array('openid','form_extended', 'form_validation'));
 	    $this->load->helper('url');
 
@@ -217,11 +218,17 @@ class Users extends SM_Controller {
 		$user_data = "";
 		if($this->session->userdata('id') == true) {
 		    $user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
+			// IF there is Foaf data, send to dashboard
+			if (isset($user_data["foaf_uri"]) == true){
+				$user_activity = $this->arcmodel->getLCAsByPublisher( $user_data["foaf_uri"]);
+				$this->data("user_activity", $user_activity);
+			}			
 		} else {
 			echo "not logged in";
 		}	
 		$this->data("user_data", $user_data);
 		$this->style(Array('style.css'));
+
 		$this->display("Dashboard", "dashboard_view");				
 	}
 	
