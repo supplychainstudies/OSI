@@ -23,10 +23,10 @@
 			<div id="lca_flows">
 			<h2>Flows</h2>
 			<? if ($totalinput != 0) { ?>
-			<h3>Total input: <h1 class="nr"><?=round($totalinput,2); ?> kg</h1></h3>
+			<h3>Total input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
 			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
 					$ratio = ($totalinput/$parts['quantitativeReference']['amount']);
-					echo "<h3>Ration input vs production<h1 class='nr'>".round($ratio).":1</h1></h3>";
+					echo "<h3>Ratio input vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
 				} ?>
 			<h3>Material inputs breakdown:</h3>
 			<? foreach ($parts['exchanges'] as $exchanges) {

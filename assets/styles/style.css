@@ -144,19 +144,19 @@ h1#title {
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
-#lca_impact .nr {
+#lca_background .nr {
 	float: left;
 	height: 100px;
 	width: 130px;
 	text-align:center;
 }
-#lca_impact .meta {
+#lca_background .meta {
 	float:left;
 	height: 100px;
 	width: 150px;
 	padding-left:15px;
 }
-#lca_impact .circle {
+#lca_background .circle {
 	float: left;
 	height: 100px;
 	width: 100px;
@@ -187,8 +187,11 @@ h1#title {
 #lca_background  h1.nr {
 	font-size: 40px;
 	font-family: 'Lato', arial, serif; 
-	color: #333;	
+	color: #333;
+	width: 100%;
+	text-align:left;
 	background-repeat:none;
+	height: 40px;
 }
 h1.top {
 	font-size: 26px;
@@ -448,18 +451,18 @@ a:hover{
 .medium {
 	height: 190px;
 	width: 190px;
-	text-align: left;	
+	text-align: center;	
 }
 .big {
-	height: 410px;
+	height: 300px;
 	width: 410px;
-	text-align: left;	
+	text-align: center;
 }
 .blue {
-	background-color: #4C5A63;
+	background-color: #45A3D8;
 }
 .aoi {
-	background-color: #485145;
+	background-color: #38617A;
 }
 .grey {
 	background-color: #333333;
@@ -492,15 +495,57 @@ a:hover{
 		font-size: 20px;
 		font-family: 'Lato', arial, serif; 	
 }
+h1.bignr {
+	font-size: 90px;
+	font-family: 'Lato', arial, serif; 
+	color: #fff;
+	width: 100%;
+	text-align:center;
+	background-repeat:none;
+}
+
+/* Impact graphs for homepage */
+#columnleft .square .impact {
+	width:95px;
+	margin-top:15px;
+	float:left;
+	text-align:center;
+}
+
+#columnleft .square .nr {
+	float: left;
+	height: 40px;
+	width: 95px;
+	text-align:center;
+	color: #fff;
+	font-size: 30px;
+}
+#columnleft .square .meta {
+	float:left;
+	height: 100px;
+	width: 90px;
+	width: 95px;
+	text-align:center;
+}
+#columnleft .square .circle {
+	float: left;
+	height: 100px;
+	width: 95px;
+	text-align:center;
+}
+
 
 /* Divs for bar graphs in View LCA */
 .bar_background {
 	width:400px; height:20px; background-color:#CCC;
 }
 
-
-
-
+/* Share buttons */
+#share-options {padding-left:30px;color:#aaa;margin-bottom:10px; font-size: 14px;}
+#facebook_share{list-style-image:url("http://sourcemap.org/assets/images/icons/social/facebook_16.png");}
+#linkedin_share{list-style-image:url("http://sourcemap.org/assets/images/icons/social/linkedin_16.png")}
+#delicious_share{list-style-image:url("http://sourcemap.org/assets/images/icons/social/delicious_16.png")}
+#twitter_share{list-style-image:url("http://sourcemap.org/assets/images/icons/social/twitter_16.png")}
 
 
 

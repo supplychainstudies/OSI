@@ -1,3 +1,4 @@
+<? $this->load->helper("linkeddata_helper"); ?>
 <!DOCTYPE html>
 <?=$metaDisplay;?>
 <html>
@@ -14,12 +15,48 @@
 	
 	<div id="columnleft">
 		<div class="big grey square"><p>
-			<?
-			foreach ($featured as $info) {
-				echo $info;
-			}
-			?>
+			<h2>Footprint of one kilogram of Aluminum</h2>
+			<? foreach ($feature_info['impactAssessments'] as $impactAssessment) {
+				
+				
+				switch ($impactAssessment['impactCategoryIndicator']) {
+				    case 'ossia:waste':
+				        $color = "#C5E9FF";
+						$max = 10;
+						break;
+				    case 'ossia:CO2e':
+				        $color = "#5AC0FF";
+						$max = 10;
+						break;
+				    case "ossia:energy":
+				        $color = "#227CAF";
+						$max = 500;
+						break;
+					case "ossia:water":
+					    $color = "#45A3D8";
+						$max = 10;
+						break;
+					default:
+						$color = "#45A3D8";
+						$max = 50;
+				}
+				$size = 2* round(50*$impactAssessment['amount']/$max);
+				if ($size > 80) { $size = 80; }
+				$margin = (100-$size)/2;
+				$margintop = (100-$size)/6;
+
+				echo '<div class="impact"><div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
+				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
+				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit'] .'</p><p class="category">';
+				echo  $impactAssessment['impactCategoryIndicator'];
+				echo "<p/></div></div>"; 
+				
+			}?>
 		</p></div>
+		<div class="medium aoi square">
+			<h1 class="bignr">456</h1>
+			<p>Footprints available</p>
+		</div>
 		<div id="all_resources">
 				<?
 					foreach ($set as $row) {

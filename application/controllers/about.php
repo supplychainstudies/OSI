@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller for static information of OSI website
+ * Controller for static information of Footprinted website
  *
  * @version 0.0.1
  * @author info@opensustainability.info
@@ -18,10 +18,17 @@ class About extends SM_Controller {
 	
 	public function index()
 	{		
-		$this->data('title', "About Open Sustainability Info");
+		$this->data('title', "About Footprinted");
 		$this->style(Array(''));
-		$this->display("Opensustainability.info", "info_view");
+		$this->display("Footprinted.org", "info_view");
 	}	
+	
+	public function team()
+	{		
+		$this->data('title', "Foorprinted.org Team");
+		$this->style(Array(''));
+		$this->display("Footprinted.org", "team_view");
+	}
 	
 }
 ?>
