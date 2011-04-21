@@ -447,9 +447,9 @@ class ArcModel extends Model{
 	
 	public function getLCAsByPublisher($foaf_uri) {
 		$q = "select ?uri ?title where { " . 
-			" ?uri " . $this->arc_config['ns']['dcterms'] . "publisher' '" . $foaf_uri . "' . " . 	
-			" ?uri " . $this->arc_config['ns']['eco'] . "models' ?bnode . " . 
-			" ?bnode " . $this->arc_config['ns']['rdfs'] . "label' ?title . " . 		
+			" ?uri '" . $this->arc_config['ns']['dcterms'] . "publisher' '" . $foaf_uri . "' . " . 	
+			" ?uri '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " . 
+			" ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' ?title . " . 		
 			"}";				
 		$records = $this->executeQuery($q);	
 		if (count($records) != 0) {
