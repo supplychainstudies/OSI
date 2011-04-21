@@ -168,11 +168,11 @@ class Lca extends SM_Controller {
 				$this->tooltips[$uri] = array();
 				$this->tooltips[$uri]['label'] = $this->arcremotemodel->getLabel($uri);	
 				$this->tooltips[$uri]['l'] = $this->tooltips[$uri]['label'];
-				if (strpos($uri, "qudt") !== false) {
+				if (strpos($uri, "qudtu") !== false) {
 					$this->tooltips[$uri]['abbr'] = $this->arcremotemodel->getAbbr($uri);
 					$this->tooltips[$uri]['l'] = $this->tooltips[$uri]['abbr'];
 				} 
-				if (strpos($uri, "qudt") !== false) {
+				if (strpos($uri, "qudtu") !== false) {
 					$this->tooltips[$uri]['quantityKind'] = $this->arcremotemodel->getQuantityKind($uri);
 				}				
 				if ($this->tooltips[$uri]['l'] == false) { 
@@ -221,7 +221,7 @@ class Lca extends SM_Controller {
 		}
 		if ($parts['quantitativeReference']['unit'] == "qudtu:Gram") {
 			$ratio = $parts['quantitativeReference']['amount'] / 1000;
-			$parts['quantitativeReference']['unit'] = "Kilogram";
+			$parts['quantitativeReference']['unit'] = "qudtu:Kilogram";
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
