@@ -19,10 +19,9 @@ class Users extends SM_Controller {
 		
 	public function Users() {
 		parent::SM_Controller();
-		//$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
-		$this->load->library(Array('SimpleLoginSecure'));
+		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
 		$this->lang->load('openid', 'english');
-	    $this->load->library(Array('openid','form_extended', 'form_validation'));
+	    $this->load->library(Array('openid','form_extended', 'form_validation', 'SimpleLoginSecure'));
 	    $this->load->helper('url');
 
 	}
@@ -30,6 +29,7 @@ class Users extends SM_Controller {
 	public function index() {
 		// Step 1: Find out if someone is already logged in
 			// If so, go to dashboard
+			//var_dump($_POST);
 		if($this->session->userdata('id') == true) {
 			redirect('users/dashboard');
 		// If not logged in, figure out whether there is post info from janrain
@@ -46,10 +46,15 @@ class Users extends SM_Controller {
 					} else {
 						$this->register($auth_info);
 					}				
-				} elseif (isset($_POST['user_name']) == true && isset($_POST['password']) == true) {
-					$this->simpleloginsecure->login($_POST['user_name'], $_POST['password']);
-					if($this->session->userdata('id') == true) {
+				} elseif ((isset($_POST['user_name']) == true && isset($_POST['password']) == true) || (isset($_POST['user_name_']) == true && isset($_POST['password_']) == true)) {
+					if (isset($_POST['user_name_']) == true) {
+						$_POST['user_name'] = $_POST['user_name_'];
+						$_POST['password'] = $_POST['password_'];
+					}
+					if ($this->simpleloginsecure->login($_POST['user_name'], $_POST['password']) == true) {
 						redirect('users/dashboard');
+					} else {
+						redirect('users/loginerror');
 					}
 				}
 			// If there is no post from Janrain, redirect them to the register page
@@ -57,6 +62,17 @@ class Users extends SM_Controller {
 				redirect('users/register');
 			}
 		} // end of not logged in
+	}
+	
+	public function loginerror() {
+		$data = $this->form_extended->load('login'); 
+		$the_form = "<div<p>Hm, your user name or password doesn't seem to be right. Want to try again?</p></div>";
+		$the_form .= $this->form_extended->build();
+		$the_form .= "<div><p> Or <a href=\"users/register\">Register</a> with us.</p></div>";
+		$this->script(Array('form.js','register.js'));
+		$this->style(Array('style.css','form.css'));
+		$this->data("form_string", $the_form);
+		$this->display("Form", "form_view");
 	}
 	
 	public function login() { 
@@ -149,9 +165,10 @@ class Users extends SM_Controller {
 			}
 		}
 		$this->data("pass_data", $pass_data);
-		$data = $this->form_extended->load('register'); 
-		$the_form = $this->form_extended->build();
-		$this->script(Array('form.js','register.js'));
+		$this->form_extended->load('register'); 
+		$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Fdb.opensustainability.info%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
+		$the_form .= $this->form_extended->build();
+		$this->script(Array('form.js','register.js','janrain.js'));
 		$this->style(Array('style.css','form.css'));
 		$this->data("form_string", $the_form);
 		$this->display("Form", "form_view");					
@@ -220,7 +237,11 @@ class Users extends SM_Controller {
 		} else {
 			echo "not logged in";
 		}	
+
+		$published = $this->arcmodel->getLCAsByPublisher($user_data['foaf_uri']);
+		
 		$this->data("user_data", $user_data);
+		$this->data("published", $published);
 		$this->style(Array('style.css'));
 		$this->display("Dashboard", "dashboard_view");				
 	}
