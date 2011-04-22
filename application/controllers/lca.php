@@ -241,33 +241,17 @@ class Lca extends SM_Controller {
 		}
 		/* Crunches the data to create the graphics and total calculations */
 		$totalinput = 0; 
-		$totaloutput = 0; 
-		$graphinput = "http://chart.apis.google.com/chart?cht=bhs&chco=3072F3&chma=10,10,10,10&chf=bg,s,333333&chd=t:";
-		$graphoutput = "http://chart.apis.google.com/chart?chs=400x750&cht=bhs&chco=3072F3&chma=10,10,10,10&chf=bg,s,333333&chd=t:";
-		$chdl = "&chm=";
-		$ii = 0;
-		$max = 0;
-		$ochdl = "&chm=";
-		$oi = 0;
-		$omax = 0;
-		foreach ($parts['exchanges'] as $exchanges) {
-			if ($exchanges['direction'] == 'Input' & $exchanges['unit'] == 'qudtu:Kilogram') {
-				  $totalinput += $exchanges['amount'];
-				 $chdl .= "t" . $exchanges['name']. "+" . $exchanges['amount'] . "+" . $exchanges['unit'] . ",FFFFFF,0,". $ii.",13|";
-				 $ii += 1;
-				 $graphinput .= round($exchanges['amount']) . ",";
-				if ($exchanges['amount'] > $max) { $max = $exchanges['amount']; }
-			} elseif ($exchanges['direction'] == 'Output' & $exchanges['unit'] == 'qudtu:Kilogram') {
-				 $totaloutput += $exchanges['amount']; 
-				 $ochdl .= "t".$exchanges['name']. "+" . $exchanges['amount'] . "+" . $exchanges['unit'] . ",FFFFFF,1,".$oi.",13|";
-				 $oi += 1;
-				 $graphoutput .= round($exchanges['amount']) . ",";
-				 if ($exchanges['amount'] > $omax) { $omax = $exchanges['amount']; }
-			}
+		foreach ($parts['Input']["Mass"] as $i) {
+			$totalinput += $i['amount'];
 		}
-		$max *= 1.2; $omax *= 1.2;
-		$graphinput .= "0". "&chs=400x". ($ii*35) ."&chds=0,". $max . $chdl .  "tOther,FFFFFF,0,". $ii . ",13";
-		$graphoutput .= "0". "&chs=400x". ($oi*30) ."&chds=0,". $omax . $ochdl . "tOther,FFFFFF,0,". $oi . ",13";
+		$totalinputliter = 0; 
+		foreach ($parts['Input']["Liquid Volume"] as $i) {
+			$totalinputliter += $i['amount'];
+		}
+		$totaloutput = 0; 
+		foreach ($parts['Output']["Mass"] as $i) {
+			$totaloutput += $i['amount'];
+		}
 				
 		$links = '<p><a href="/'.$URI.'.rdf">Get this RDF</a></p><p><a href="/'.$URI.'.json">Get this in JSON</a></p>';
 		$this->data("links", $links);
@@ -275,8 +259,7 @@ class Lca extends SM_Controller {
 		$this->data("parts", $parts);
 		$this->data("totalinput", $totalinput);
 		$this->data("totaloutput", $totaloutput);
-		$this->data("max", $max);
-		$this->data("omax", $omax);
+		$this->data("totalinputliter", $totalinputliter);
 		$this->script(Array('comments.js', 'janrain.js'));
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();

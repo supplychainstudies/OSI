@@ -103,39 +103,7 @@ h1#title {
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 	
 }
-#Inputs {
-	float:left;
-	text-align: left;
-	width:190px;
-}
-#Outputs {
-	float:left;		
-	text-align: left;
-	width:190px;
-	margin-left:10px;
-}
-.flow{
-	margin:0px;
-	float:left;
-	padding:5px;
-	width:100%;
-	/*border-top:1px solid white;*/
-	overflow:hidden;
-}
-.flow p{
-	color: #fff;
-	font-size: 11px;
-	margin-left: 10px;
-	margin-bottom: 10px;overflow:hidden;
-}
-.flow amount{
-	color: #fff;
-	font-size: 14px;
-}
-p a amount {
-	color: #fff;
-	
-}
+
 #lca_impact {
 	float:left;
 	text-align: left;
@@ -562,6 +530,10 @@ h1.bignr {
 /* Divs for bar graphs in View LCA */
 .bar_background {
 	width:400px; height:20px; background-color:#CCC;
+}
+.flow_text {
+	margin-top: -10px;
+	margin-bottom: 8px;
 }
 
 /* Share buttons */
