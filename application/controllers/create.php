@@ -14,7 +14,7 @@
 class Create extends SM_Controller {
 	public function Create() {
 		parent::SM_Controller();
-		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
+		$this->load->model(Array('unitmodel'));	
 		$this->load->library(Array('form_extended', 'name_conversion'));
 	}
 	public $URI;
@@ -62,9 +62,31 @@ class Create extends SM_Controller {
 		//$this->view($URI);
 		} else {
 			$data = $this->form_extended->load($section); 
-			$the_form = $this->form_extended->build();
+			$units = $this->unitmodel->getUnits();
+			$menu_html = '<input name="unit_field" type="hidden" />';
+			$menus = array();
+			$menus['main'] = "";
+			foreach ($units as $unit_category=>$unit_set){
+				$menus['main'] .= '<option value="' . $unit_category . '">' . $unit_category . '</option>';
+				$menus[$unit_category] = "";
+				foreach ($unit_set as $unit) {
+					$menus[$unit_category] .= '<option value="' . $unit['uri'] . '">' . $unit['label'] . '</option>';
+				}
+			}
+			foreach ($menus as $key=>$menu) {
+				$show = "";
+				if ($key == "main") {
+					$show = " show";
+				}
+				$menu_html .= '<select class="hide' . $show . '" name="unit_' . $key . '">' . $menu . '</select>';
+				if ($key == "main") {
+					$menu_html .= '<br />';
+				}
+			}
+			
+			$the_form = '<div class="dialog" id="unit_dialog">' . $menu_html . '</div>' . $this->form_extended->build();
 			$this->style(Array('style.css', 'form.css'));
-			$this->script(Array('form.js', 'toggle.js', 'lookup.js'));
+			$this->script(Array('form.js'));
 			$this->data("view_string", $the_form);
 			$this->display("Form", "view");
 		}

@@ -126,7 +126,7 @@ class SM_Controller extends Controller {
 			$styleDisplay = '<link rel="stylesheet" href="'.$minurl.$csspath.'style.css';				
 		}
 		else {
-			$standard = Array('style.css','standard.css');
+			$standard = Array('style.css','standard.css','jquery-ui-1.8.11.custom.css');
 			$this->_styles = array_merge($standard, $this->_styles);
 			 if($this->config->item("deploystatus") == "local") {
 				$csspath = base_url() . 'assets/styles/';
@@ -158,9 +158,9 @@ class SM_Controller extends Controller {
 		
 		if($included) {		
 			$scriptDisplay .='<script type="text/javascript" 
-		        src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>';
+		        src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>';
 		
-			$standard = Array('jquery/jquery-ui-1.7.2.min.js');
+			$standard = Array('jquery/jquery-ui-1.8.11.custom.min.js');
 			// , 'utilities.js', 'jquery/jquery.template.js'
 			$this->_scripts = array_merge($standard, $this->_scripts);
 		}

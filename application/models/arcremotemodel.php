@@ -328,6 +328,51 @@ class ArcRemoteModel extends Model{
 			}			
 		}
 		
+		public function getQuantityKinds($object) {
+			if (strpos($object,":") !== false) {
+				$xarray = explode(":", $object);
+				$the_object = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
+			} elseif (strpos($object,"http://") !== false) {
+				$the_object = $object;
+			} else {
+				$the_object = $object;
+			}
+			
+			$q = "select DISTINCT ?uri ?label ?type where { " .
+				"?uri '" . $this->arc_config['ns']['qudt'] . "quantityKind' '" . $the_object . "' . " . 	
+				"?uri '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 	
+				"?uri '" . $this->arc_config['ns']['rdf'] . "type' ?type . " . 
+				//"?type '" . $this->arc_config['ns']['rdfs'] . "subClassOf' ?stuf . " . 	
+				"FILTER regex(?type, '" . $this->arc_config['ns']['qudt'] . "', 'i')" . 		
+				"}";
+			$results = $this->executeQuery($q);
+			if (count($results) != 0) {
+				return $results;
+			} else {
+				return false;
+			}			
+		}
+		
+		public function getSomeThings($predicate) {
+			if (strpos($predicate,":") !== false) {
+				$xarray = explode(":", $predicate);
+				$the_predicate = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
+			} elseif (strpos($uri,"http://") !== false) {
+				$the_predicate = $predicate;
+			}
+			
+			$q = "select ?uri where { " .
+				"?uri '" . $the_predicate . "' ?thing . " . 				
+				"}";
+			var_dump($q);
+			$results = $this->executeQuery($q);
+			if (count($results) != 0) {
+				return $results;
+			} else {
+				return false;
+			}			
+		}
+		
 		public function getLabel($uri) {
 			return $this->getSomething($uri, "rdfs:label");	
 		}
@@ -378,6 +423,7 @@ class ArcRemoteModel extends Model{
 		public function getPointGeonames($uri) {
 			// check if this uri is already loaded
 			if ($this->isLoaded($uri) == false) {
+				var_dump($uri);
 				$q = "LOAD <" . $uri . "> INTO <" . $uri . ">";
 				$this->executeQuery($q);
 			}		

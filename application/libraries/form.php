@@ -279,7 +279,7 @@ class Form {
         $valid_type = array(
             'text', 'textarea', 'password', 'file',
             'dropdown', 'radio', 'checkbox',
-            'submit', 'button', 'hidden', 'open', 'recaptcha', 'lookup'
+            'submit', 'button', 'hidden', 'open', 'recaptcha', 'lookup', 'popup'
         );
         $tabs = "";
 			//repeater("\t", $depth);
@@ -377,15 +377,24 @@ class Form {
 					} 
 					$field_multiple = $multiple;
 					if ($def['type'] == 'hidden') {
+						 $_name = $name."_".$multiple;
 						 $idname = sprintf('name="%s"', $name."_".$multiple);
 					} elseif ($is_multiple == true) {
 						$field_multiple = $multiple . "[0]";
+						$_name = $name."_".$field_multiple;
 						$idname = sprintf('name="%s"', $name."_".$field_multiple);
 					} else {
+						$_name = $name."_".$multiple;
                         $idname = sprintf('tabindex="%s" name="%s"', $tabindex++, $name."_".$multiple);
 					}
 					
 					// assign classes to the input based on the rules. this is so jquery can be used for the rules instead
+					if (isset($def['lookup']) == true) {
+						$this->rules[$name] .= "|lookup";
+					}
+					if (isset($def['popup']) == true) {
+						$this->rules[$name] .= "|popup";
+					}
 					if(isset($this->rules[$name])) {
 						$idname .= " class=\"" . str_replace("|", " ", $this->rules[$name]) . "\"";
 					}
@@ -426,8 +435,12 @@ class Form {
                         break; 
  					case 'lookup':
 						$input = "";
-						$input .= '<input type="text" '. $idname . ' onClick="lookup(\'' . $name . '\', \'' . $def['lookup'] . '\')" />';
+						$input .= '<input type="text" '. $idname . ' id="' . $def['lookup'] . '" /><input type="hidden" '. $idname . ' />';
 						break;
+					case 'popup':
+						$input = "";
+						$input .= '<input type="text" ' . str_replace($_name, $_name."label_", $idname) . ' /><input type="hidden" '. $idname . ' /><input type="button" ' . str_replace($_name, $_name."button_", $idname) . ' id="' . $def['popup'] . '" value="Pick One" />';
+					break;
 					case 'search':
 						$input = "";
 						$input .= '<input type="text" onClick="lookup(\'' . $name . '\', \'' . $def['lookup'] . '\')" value="Search" />';

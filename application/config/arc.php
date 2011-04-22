@@ -29,6 +29,7 @@ $config['arc_info']['ns'] = array(
 'dcterms' => 'http://purl.org/dc/terms/',
 'dc' => 'http://purl.org/dc/',
 'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
+'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 'sioc' => 'http://rdfs.org/sioc/ns',
 'bibo' => 'http://purl.org/ontology/bibo/',
 'eco' => 'http://ontology.earthster.org/eco/core#',

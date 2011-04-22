@@ -24,8 +24,8 @@
 		</ioQuantity>		
 		<ioUnit rules="trim">
 			<label>Unit</label>
-			<type>lookup</type>
-			<lookup>unit</lookup>
+			<type>popup</type>
+			<popup>unit</popup>
 		</ioUnit>			
 	</fieldset>
 	<fieldset name="Publication">	
@@ -73,8 +73,8 @@
 		</ioQuantity>		
 		<ioUnit rules="trim">
 			<label>Unit</label>
-			<type>lookup</type>
-			<lookup>unit</lookup>
+			<type>popup</type>
+			<popup>unit</popup>
 		</ioUnit>		
 	</fieldset>
 	<fieldset name="Impact Assessment" multiple="yes">	
@@ -94,8 +94,8 @@
 		</assessmentQuantity>		
 		<assessmentUnit rules="trim">
 			<label>Unit</label>
-			<type>lookup</type>
-			<lookup>unit</lookup>
+			<type>popup</type>
+			<popup>unit</popup>
 		</assessmentUnit>		
 	</fieldset>
 	<fieldset name="Submit">	

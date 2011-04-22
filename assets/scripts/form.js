@@ -1,6 +1,37 @@
+$(".dialog").dialog({
+			autoOpen: false,
+			title: 'Basic Dialog'
+		});
+$('.hide').hide();	
+$('.show').show();	
+$(".popup").click(function() {
+	var the_id = $(this).attr("id");
+	var the_name = $(this).attr("name");
+	$("#"+the_id+"_dialog").dialog('open');
+	$("[name='" + the_id + "_field']").val(the_name);
+	// prevent the default action, e.g., following a link
+	return false;
+});	
 
-function addField(name, path) {
-	
+// Changes Unit Sub-menu 
+$("[name='unit_main']").change(function() { 
+$("[name^='unit'][class*='hide'][name!='unit_main']").hide(); 
+$("[name='unit_"+$(this).val()+"']").show();
+});
+
+$("[name^='unit'][name!='unit_main']").change(function() {
+	var the_value = $(this).val();
+	var field = $("[name='unit_field']").val();
+	alert(field);
+	var the_label_field = field.replace("_button", "_label");
+	var the_hidden_field = field.replace("_button" ,"");
+	alert(the_label_field);
+	alert(the_hidden_field);
+	$("[name='"+the_label_field+"']").val(the_value);
+	$("[name='"+the_hidden_field+"']").val(the_value);
+}); 
+
+function addField(name, path) {	
 	var array_path = "[" + path.replace(/-/g, "][") + "]";
 	var to_copy = "#div_" + name;
 	var to_paste = "#div_multiple_" + name + "_" + path;	
@@ -37,7 +68,6 @@ function toggle_delete(field) {
 		$("input[name='" + field + "']").removeAttr('disabled');
 	}
 }
-
 
 $("form").submit(function() {
 	var to_submit = true;

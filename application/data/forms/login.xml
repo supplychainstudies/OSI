@@ -1,0 +1,16 @@
+<form action="users/" name="register">
+<fieldset name="Login">
+    <user_name rules="trim|xss_clean|required">
+	  <label>User Name</label>
+      <type>text</type>
+    </user_name>
+    <password rules="trim|xss_clean|required">
+	  <label>Password</label>
+      <type>password</type>
+    </password>
+  <submit>
+    <type>submit</type>
+    <value>Submit</value>
+  </submit>
+</fieldset>
+</form>
