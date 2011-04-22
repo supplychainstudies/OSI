@@ -229,9 +229,12 @@ class Lca extends SM_Controller {
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
+				if ($exchanges['unit'] == "qudtu:Gram") { $exchanges['amount']/=1000; //$exchanges['unit'] = "qudtu:Kilogram";
+				}
 			}
 			foreach ($parts['impactAssessments'] as &$impactAssessment) {
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+				if ($impactAssessment['unit'] == "qudtu:Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit'] = "qudtu:Kilogram"; }
 			}
 		}
 		foreach ($parts['exchanges'] as $exchange) {
@@ -241,17 +244,25 @@ class Lca extends SM_Controller {
 		}
 		/* Crunches the data to create the graphics and total calculations */
 		$totalinput = 0; 
+		if (isset($parts['Input']["Mass"]) == true) { 
 		foreach ($parts['Input']["Mass"] as $i) {
 			$totalinput += $i['amount'];
-		}
+		}}
 		$totalinputliter = 0; 
+		if (isset($parts['Input']["Liquid Volume"]) == true) { 
 		foreach ($parts['Input']["Liquid Volume"] as $i) {
 			$totalinputliter += $i['amount'];
-		}
-		$totaloutput = 0; 
+		}}
+		$totalinputland = 0; 
+		if (isset($parts['Input']["Area"]) == true) { 
+		foreach ($parts['Input']["Area"] as $i) {
+			$totalinputland += $i['amount'];
+		}}
+		$totaloutput = 0;
+		if (isset($parts['Output']["Mass"]) == true) {  
 		foreach ($parts['Output']["Mass"] as $i) {
 			$totaloutput += $i['amount'];
-		}
+		}}
 				
 		$links = '<p><a href="/'.$URI.'.rdf">Get this RDF</a></p><p><a href="/'.$URI.'.json">Get this in JSON</a></p>';
 		$this->data("links", $links);
@@ -260,6 +271,7 @@ class Lca extends SM_Controller {
 		$this->data("totalinput", $totalinput);
 		$this->data("totaloutput", $totaloutput);
 		$this->data("totalinputliter", $totalinputliter);
+		$this->data("totalinputland", $totalinputland);			
 		$this->script(Array('comments.js', 'janrain.js'));
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();

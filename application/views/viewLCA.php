@@ -61,6 +61,7 @@
 			<? } ?>
 			<h3>Material inputs breakdown:</h3>
 			<? 
+			if (isset($parts['Input']["Mass"]) == true) { 
 			$color_input = array('8CC63F','85C61E','70A024','7FAA3A','8EB256','88D600','98EF00','8DEF00','8ECE20','72CC23','55CC23'); $i=0;
 			foreach ($parts['Input']["Mass"] as $mass) {
 					$width = round(100*$mass['amount']/$totalinput);
@@ -69,9 +70,10 @@
 					echo "<div class='flow_text'><p><amount>" . $mass['amount'] . "</amount> " . linkThis($mass['unit'], $parts["tooltips"]); 
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++; if ($i >10){ $i = 0;}
-			}?>
+			}}?>
 			
 			<? 
+			if (isset($parts['Input']["Liquid Volume"]) == true) { 
 			$color_liquid = array('1a6eff','1B64CE','1753AA','133E7C','2C4C7C');$i = 0;	
 			foreach ($parts['Input']["Liquid Volume"] as $volume) {
 					$width = round(100*$volume['amount']/$totalinputliter);
@@ -80,14 +82,16 @@
 					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . linkThis($volume['unit'], $parts["tooltips"]); 
 					echo "<b> ".$volume['name'] . "</b></p></div>";
 					$i++; if ($i >4){ $i = 0;}
-			}?>
-			<? foreach ($parts['Input']["Area"] as $land) {
-					$width = round($land['amount']*30);
+			}}?>
+			<? 
+			if (isset($parts['Input']["Area"]) == true) { 
+				foreach ($parts['Input']["Area"] as $land) {
+					$width = round(100*$land['amount']/$totalinputland);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#381100;"></div></div>';
 					echo "<div class='flow_text'><p><amount>" . $land['amount'] . "</amount> " . linkThis($land['unit'], $parts["tooltips"]); 
 					echo "<b> ".$land['name'] . "</b></p></div>";
-			}?>
+			}}?>
 
 			<?}?>
 			
@@ -100,7 +104,7 @@
 			<? } ?>
 			<h3>Material output breakdown:</h3>
 			
-			<? 
+			<?
 			$color_mass = array('535B39','576033','576325','5D6325','4D512A','464925','3D3F26','4A4C32','4A513A','444F2D','3E4C20','525933','3A4229');
 			$i = 0;
 			foreach ($parts['Output']["Mass"] as $mass) {
