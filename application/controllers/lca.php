@@ -195,18 +195,26 @@ class Lca extends SM_Controller {
 		@$parts['bibliography'] = $this->convertBibliography($this->arcmodel->getBibliography("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 	
 		@$parts['exchanges'] = $this->convertExchanges($this->arcmodel->getExchanges("http://db.opensustainability.info/rdfspace/lca/" . $URI));	
-	
+		
 		@$parts['modeled'] = $this->convertModeled($this->arcmodel->getModeled("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 		
 		$parts['geography'] = $this->convertGeography($this->arcmodel->getGeography("http://db.opensustainability.info/rdfspace/lca/" . $URI));
-		if ($parts['geography'] == false) {
-			unset($parts['geography']);
-		}
 	
 		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://db.opensustainability.info/rdfspace/lca/" . $URI));
 
 		@$parts['tooltips'] = $this->tooltips;
-	 	
+		
+		foreach ($parts['exchanges'] as $exchange) {
+			if (isset($parts['tooltips'][$exchange['unit']]) == true) {
+				$parts[$exchange['direction']][$parts['tooltips'][$exchange['unit']]['quantityKind']][] = $exchange;
+			}
+		}
+	 	foreach ($parts as &$part) {
+			if ($part == false || count($part) == 0) {
+				unset($part);
+			}
+		}
+	
 		/* If the functional unit is mass, normalize to 1kg */
 		
 		if ($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") {
