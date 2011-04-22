@@ -92,22 +92,24 @@ h1#title {
 	width: 450px;
 }
 
+
 #lca_flows {
-	float:left;
-	text-align: left;
-	width:400px;
-	padding: 20px;
-	background-color: #F5FAFF;
-	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
-	
-}
-#lca_impact {
 	float:right;
 	text-align: left;
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
 	margin-right:20px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+	
+}
+#lca_impact {
+	float:left;
+	text-align: left;
+	width:400px;
+	padding: 20px;
+	background-color: #F5FAFF;
+	
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
@@ -132,13 +134,12 @@ h1#title {
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 #map {
-	float:right;
+	float:left;
 	text-align: left;
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
 	margin-top: 15px;
-	margin-right:20px;
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
