@@ -234,6 +234,11 @@ class Users extends SM_Controller {
 		$user_data = "";
 		if($this->session->userdata('id') == true) {
 		    $user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
+			// IF there is Foaf data, send to dashboard
+			if (isset($user_data["foaf_uri"]) == true){
+				$user_activity = $this->arcmodel->getLCAsByPublisher( $user_data["foaf_uri"]);
+				$this->data("user_activity", $user_activity);
+			}			
 		} else {
 			echo "not logged in";
 		}	
@@ -243,6 +248,7 @@ class Users extends SM_Controller {
 		$this->data("user_data", $user_data);
 		$this->data("published", $published);
 		$this->style(Array('style.css'));
+
 		$this->display("Dashboard", "dashboard_view");				
 	}
 	
