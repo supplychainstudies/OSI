@@ -27,12 +27,12 @@ h1#title {
 }
 
 #header {
-	padding-top: 20px;
+	padding-top: 10px;
 	float:left;
 	height:100px;
 	width:auto;
 	text-align:left;
-		padding-bottom: 40px;
+	padding-bottom: 40px;
 }
 
 #login {
@@ -71,7 +71,7 @@ h1#title {
 	padding: 30px;
 	background-color: #666;
 	margin-bottom:30px;
-	margin-top:30px;
+	margin-top:10px;
 }
 
 #lca_unit {
@@ -103,13 +103,45 @@ h1#title {
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 	
 }
+#Inputs {
+	float:left;
+	text-align: left;
+	width:190px;
+}
+#Outputs {
+	float:left;		
+	text-align: left;
+	width:190px;
+	margin-left:10px;
+}
+.flow{
+	margin:0px;
+	float:left;
+	padding:5px;
+	width:100%;
+	/*border-top:1px solid white;*/
+	overflow:hidden;
+}
+.flow p{
+	color: #fff;
+	font-size: 11px;
+	margin-left: 10px;
+	margin-bottom: 10px;overflow:hidden;
+}
+.flow amount{
+	color: #fff;
+	font-size: 14px;
+}
+p a amount {
+	color: #fff;
+	
+}
 #lca_impact {
 	float:left;
 	text-align: left;
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
-	
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
@@ -270,13 +302,6 @@ font-size: 9px;
 color: #3FA9F5;
 text-transform:uppercase;
 }
-	
-/*
-	background:rgb(40,40,40);
-	background: -moz-linear-gradient(top, rgb(40,40,40), rgb(30,30,30));
-	background: -webkit-gradient(linear, 0 top, 0 bottom, from(rgb(40,40,40)), to(rgb(30,30,30)));	
-
-*/
 
 div.wrapper {	
 	margin:0 auto;

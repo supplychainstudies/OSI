@@ -47,9 +47,10 @@
 			}?>
 			</div>
 			
-			<? if(isset($parts['exchanges']  ) == true) { ?>
+			<? if(is_array($parts['exchanges']  ) == true) { ?>
 			<div id="lca_flows">
 			<h2>Flows</h2>
+			<div id="Inputs">
 			<? if ($totalinput != 0) { ?>
 			<h3>Total input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
 			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
@@ -57,39 +58,78 @@
 					echo "<h3>Ratio input vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
 				} ?>
 			<h3>Material inputs breakdown:</h3>
-			<? foreach ($parts['exchanges'] as $exchanges) {
-				if ($exchanges['direction'] == 'Input') {
-					$width = round( (100*$exchanges['amount'])/round($totalinput));
-					if ($exchanges['unit'] == 'qudtu:Kilogram'){
-						echo "<div class='bar_background'>";
-						echo '<div style="width:'.$width.'%; height:20px; background-color:#8CC63F; border-right:1px #FFF solid;"></div></div>';
-					}
-					echo "<p><amount>" . $exchanges['amount'] . "</amount> " . linkThis($exchanges['unit'], $parts["tooltips"]); 
-					echo "<b> ".$exchanges['name'] . "</b></p>";
-				}
-			}?>	
+			<? 
+			$color_input = array('8CC63F','85C61E','70A024','7FAA3A','8EB256','88D600','98EF00','8DEF00','8ECE20','72CC23','55CC23'); $i=0;
+			foreach ($parts['Input']["Mass"] as $mass) {
+					$height = round($mass['amount']*30);
+					if($height < 30) { $height = 30; }
+					echo '<div class="flow" style="height:'.$height.'px;background-color:#'.$color_input[$i].';">';
+					echo "<p><amount>" . $mass['amount'] . "</amount> " . linkThis($mass['unit'], $parts["tooltips"]); 
+					echo "<b> ".$mass['name'] . "</b></p></div>";
+					$i++; if ($i >10){ $i = 0;}
+			}?>
+			
+			<? 
+			$color_liquid = array('1a6eff','1B64CE','1753AA','133E7C','2C4C7C');$i = 0;	
+			foreach ($parts['Input']["Liquid Volume"] as $volume) {
+					$height = round($volume['amount']*30);
+					if($height < 30) { $height = 30; }
+					echo '<div class="flow" style="height:'.$height.'px;background-color:#'.$color_liquid[$i].';">';
+					echo "<p><amount>" . $volume['amount'] . "</amount> " . linkThis($volume['unit'], $parts["tooltips"]); 
+					echo "<b> ".$volume['name'] . "</b></p></div>";
+					$i++; if ($i >4){ $i = 0;}
+			}?>
+			<? foreach ($parts['Input']["Area"] as $land) {
+					$height = round($land['amount']*30);
+					if($height < 30) { $height = 30; }
+					echo '<div class="flow" style="height:'.$height.'px;background-color:#381100;">';
+					echo "<p><amount>" . $land['amount'] . "</amount> " . linkThis($land['unit'], $parts["tooltips"]); 
+					echo "<b> ".$land['name'] . "</b></p></div>";
+			}?>
+
 			<?}?>
-			<? if ($totaloutput != 0) { ?>
+			</div>
+			
+			<div id="Outputs">
+			<? if ($totaloutput != 0) { ?>	
 			<h3>Total output: <h1 class="nr"><?=round($totaloutput,2); ?> kg</h1></h3>
+			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
+					$ratio = ($totaloutput/$parts['quantitativeReference']['amount']);
+					echo "<h3>Ratio output vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
+				} ?>
+			<? } ?>
 			<h3>Material output breakdown:</h3>
-			<? foreach ($parts['exchanges'] as $exchanges) {
-				if ($exchanges['direction'] == 'Output') {
-					$width = round( (100*$exchanges['amount'])/round($totaloutput) );
-					if ($exchanges['unit'] == 'qudtu:Kilogram'){
-						echo "<div class='bar_background'>";	
-						echo '<div style="width:'.round($width).'%; height:20px; background-color:#535B39; border-right:1px #FFF solid;"></div></div>';
-					}
-					echo "<p><amount>" . $exchanges['amount'] . "</amount> " . linkThis($exchanges['unit'], $parts["tooltips"]); 
-					echo "<b> ".$exchanges['name'] . "</b></p>";
-				}
+			
+			<? 
+			$color_mass = array('535B39','576033','576325','5D6325','4D512A','464925','3D3F26','4A4C32','4A513A','444F2D','3E4C20','525933','3A4229');
+			$i = 0;
+			foreach ($parts['Output']["Mass"] as $mass) {
+					$height = round($mass['amount']*30);
+					if($height < 30) { $height = 30; }elseif($height > 400) { $height = 400; 	}
+					echo '<div class="flow" style="height:'.$height.'px;background-color:#'.$color_mass[$i].';">';
+					echo "<p><amount>" . round($mass['amount'],6) . "</amount> " . linkThis($mass['unit'], $parts["tooltips"]); 
+					echo "<b> ".$mass['name'] . "</b></p></div>";
+					$i++;
+					if ($i >12){ $i = 0;}
 			}?>
 			<?}?>
-			</div>			
-			<? } ?>
-			
-	
-			
-			<? if (isset($parts['geography']) == true ) {
+			<? 
+			if (isset($parts['Output']["Liquid Volume"]) == true) {
+				foreach ($parts['Output']["Liquid Volume"] as $volume) {
+					$height = $volume['amount']*30;
+					if ($height < 30) { 
+						$height = 30; 
+					}
+					echo '<div class="flow" style="height:'.$height.'px;background-color:#002caa;">';
+					echo "<p><amount>" . $volume['amount'] . "</amount> " . linkThis($volume['unit'], $parts["tooltips"]); 
+					echo "<b> ".$volume['name'] . "</b></p></div>";
+				}
+			} ?>
+
+			</div>
+			</div>					
+
+			<? if (is_array($parts['geography']) == true ) {
 				echo '<div id="map"><h2>Geography</h2>';
 				
 				foreach ($parts['geography'] as $geo) {

@@ -204,11 +204,7 @@ class Lca extends SM_Controller {
 
 		@$parts['tooltips'] = $this->tooltips;
 		
-		foreach ($parts['exchanges'] as $exchange) {
-			if (isset($parts['tooltips'][$exchange['unit']]) == true) {
-				$parts[$exchange['direction']][$parts['tooltips'][$exchange['unit']]['quantityKind']][] = $exchange;
-			}
-		}
+
 	 	foreach ($parts as &$part) {
 			if ($part == false || count($part) == 0) {
 				unset($part);
@@ -238,7 +234,11 @@ class Lca extends SM_Controller {
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
 			}
 		}
-	
+		foreach ($parts['exchanges'] as $exchange) {
+			if (isset($parts['tooltips'][$exchange['unit']]) == true) {
+				$parts[$exchange['direction']][$parts['tooltips'][$exchange['unit']]['quantityKind']][] = $exchange;
+			}
+		}
 		/* Crunches the data to create the graphics and total calculations */
 		$totalinput = 0; 
 		$totaloutput = 0; 
