@@ -62,6 +62,9 @@ h1#title {
 
 	padding-bottom: 60px;
 }
+#info{
+	width:500px
+}
 
 /* Structure for LCA view */
 #lca_background{
@@ -110,6 +113,7 @@ h1#title {
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
+		margin-right:20px;
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
@@ -124,8 +128,9 @@ h1#title {
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 #lca_meta {
-	float:right;
+	float:left;
 	text-align: left;
+	top:0px;
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
@@ -397,9 +402,8 @@ p {
 }
 
 .grande {
-	font-size: 3.2em;
-	margin-bottom: 0.2em;
-	
+	font-size: 3em;
+	margin-bottom: 0.2em;	
 }
 
 amount {
