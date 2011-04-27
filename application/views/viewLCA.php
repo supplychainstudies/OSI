@@ -10,6 +10,7 @@
 </head>
 
 <body id="home">
+	
 	<div id ="contentwrap">	
 		
 	<?= $navigationDisplay;?>
@@ -17,10 +18,8 @@
 	<div id="lca_background">
 		
 		<div id="lca_title"><h1><?=$parts['quantitativeReference']['name'] ?></h1></div>
-		<? /* <p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
+		<? /*<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
 		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?=linkThis($parts['quantitativeReference']['unit'], $parts["tooltips"]) ?></nr></h1></div>	
-			
-			
 			<div id="lca_impact">
 			<h2><span>Impact Assessment</h2>	
 			<? foreach ($parts['impactAssessments'] as $impactAssessment) {
@@ -107,6 +106,7 @@
 			<?
 			$color_mass = array('535B39','576033','576325','5D6325','4D512A','464925','3D3F26','4A4C32','4A513A','444F2D','3E4C20','525933','3A4229');
 			$i = 0;
+			if(isset($parts['Output']["Mass"]) == true) {
 			foreach ($parts['Output']["Mass"] as $mass) {
 					$width = round(100*$mass['amount']/$totaloutput);
 					if ($width == 0) { $width = 1; }
@@ -115,7 +115,7 @@
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++;
 					if ($i >12){ $i = 0;}
-			}?>
+			}}?>
 			<?}?>
 			<? 
 			if (isset($parts['Output']["Liquid Volume"]) == true) {
