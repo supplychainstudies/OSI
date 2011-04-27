@@ -61,7 +61,7 @@
 				<?
 					foreach ($set as $row) {
 						// Remove the opensustainability part of the url
-						$myString = str_replace ("http://db.opensustainability.info/rdfspace/lca/", "", $row['link']);
+						$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['link']);
 						echo '<div class="small blue square"><p><a href="lca/view/'.$myString.'">'.$row['name'].'</a><p/></div>';
 					}
 				?>

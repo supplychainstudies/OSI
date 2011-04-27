@@ -52,10 +52,10 @@ class Form_extended extends Form {
 				$name = str_replace(" ", "", $post_data['title_']);
 			}
 			if ($subject != "") {
-				$subject = "http://db.opensustainability.info/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);	
+				$subject = "http://footprinted.org/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);	
 				$new_subject_attrs = "_:" . str_replace("oslca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);
 			} else {
-				$new_subject_attrs = "http://db.opensustainability.info/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);
+				$new_subject_attrs = "http://footprinted.org/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);
 			}
 		} else {
 			$new_subject_attrs = "_:" . str_replace("oslca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);	

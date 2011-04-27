@@ -46,7 +46,7 @@ class Create extends SM_Controller {
 				elseif ($section == "bibliography") {
 					$name = str_replace(" ", "", $post_data['title']);
 				}
-				$previous_bnode = "http://db.opensustainability.info/" . $section . "/" . $name . rand(1000000000,10000000000);
+				$previous_bnode = "http://footprinted.org/" . $section . "/" . $name . rand(1000000000,10000000000);
 			} elseif (isset($_GET['parentBNode']) == true) {
 				$previous_bnode = $_GET['parentBNode'];
 			}	

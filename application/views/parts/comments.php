@@ -17,7 +17,7 @@ function printComments($comments) {
 
 ?>
 <div id="comment_form">
-	<p><input type="hidden" name="comment_uri_" value="http://db.opensustainability.info/osi/rdfspace/lca/<? echo $URI; ?>" /></p>
+	<p><input type="hidden" name="comment_uri_" value="http://footprinted.org/osi/rdfspace/lca/<? echo $URI; ?>" /></p>
 	<p><input type="hidden" name="user_id" value="<? if(isset($id) == true) { echo $id; } else { echo "Anonymous"; } ?>" /></p>
 	<? echo $comment; ?>
 </div>
