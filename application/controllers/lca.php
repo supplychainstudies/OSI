@@ -145,7 +145,7 @@ class Lca extends SM_Controller {
 	* Grabs all the triples for a particular URI and shows it in RDF
 	*/
 	public function viewRDF($URI = null) {
-		@$rdf = $this->arcmodel->getRDF("http://db.opensustainability.info/rdfspace/lca/".$URI);
+		@$rdf = $this->arcmodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
 		header('Content-type: text/xml');
 		echo $rdf;
@@ -157,7 +157,7 @@ class Lca extends SM_Controller {
 	* Grabs all the triples for a particular URI and shows it in JSON
 	*/	
 	public function viewJSON($URI = null) {
-		@$json = $this->arcmodel->getJSON("http://db.opensustainability.info/rdfspace/lca/".$URI);
+		@$json = $this->arcmodel->getJSON("http://footprinted.org/rdfspace/lca/".$URI);
 		header('Content-type: application/json');
 		echo $json;
 	}
@@ -190,17 +190,17 @@ class Lca extends SM_Controller {
 	*/
 	public function view($URI = null) {	
 		$this->tooltips = array();
-		@$parts['impactAssessments'] = $this->convertImpactAssessments($this->arcmodel->getImpactAssessments("http://db.opensustainability.info/rdfspace/lca/" . $URI));
+		@$parts['impactAssessments'] = $this->convertImpactAssessments($this->arcmodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
 	
-		@$parts['bibliography'] = $this->convertBibliography($this->arcmodel->getBibliography("http://db.opensustainability.info/rdfspace/lca/" . $URI));
+		@$parts['bibliography'] = $this->convertBibliography($this->arcmodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
 	
-		@$parts['exchanges'] = $this->convertExchanges($this->arcmodel->getExchanges("http://db.opensustainability.info/rdfspace/lca/" . $URI));	
+		@$parts['exchanges'] = $this->convertExchanges($this->arcmodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
 		
-		@$parts['modeled'] = $this->convertModeled($this->arcmodel->getModeled("http://db.opensustainability.info/rdfspace/lca/" . $URI));
+		@$parts['modeled'] = $this->convertModeled($this->arcmodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
 		
-		$parts['geography'] = $this->convertGeography($this->arcmodel->getGeography("http://db.opensustainability.info/rdfspace/lca/" . $URI));
+		$parts['geography'] = $this->convertGeography($this->arcmodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
 	
-		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://db.opensustainability.info/rdfspace/lca/" . $URI));
+		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
 
 		@$parts['tooltips'] = $this->tooltips;
 		
@@ -275,7 +275,7 @@ class Lca extends SM_Controller {
 		$this->script(Array('comments.js', 'janrain.js'));
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
-		$comments = $this->arcmodel->getComments("http://db.opensustainability.info/osi/rdfspace/lca/".$URI);
+		$comments = $this->arcmodel->getComments("http://footprinted.org/osi/rdfspace/lca/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
 		$this->display("View " . $parts['quantitativeReference']['amount'] . " " . $parts['quantitativeReference']['unit'] . " of " . $parts['quantitativeReference']['name'], "viewLCA");		
