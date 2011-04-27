@@ -202,8 +202,8 @@ class Lca extends SM_Controller {
 		@$parts['modeled'] = $this->convertModeled($this->arcmodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
 		$parts['geography'] = $this->convertGeography($this->arcmodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
 		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
+
 		@$parts['tooltips'] = $this->tooltips;
-		
 
 	 	foreach ($parts as &$part) {
 			if ($part == false || count($part) == 0) {
