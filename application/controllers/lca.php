@@ -213,8 +213,7 @@ class Lca extends SM_Controller {
 	
 		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
 
-		@$parts['tooltips'] = $this->tooltips;
-		
+		$parts['tooltips'] = $this->tooltips;
 	 	foreach ($parts as &$part) {
 			if ($part == false || count($part) == 0) {
 				unset($part);
