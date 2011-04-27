@@ -3,7 +3,7 @@
  * Controller for environmental information structures
  * 
  * @version 0.8.0
- * @author info@opensustainability.info
+ * @author info@footprinted.org
  * @package opensustainability
  * @subpackage controllers
  * @uses 
@@ -27,11 +27,11 @@ class Endpoint extends SM_Controller {
 		  /* store */
 		'store_name' => 'arc_os',
 		'ns' => array(
-		'lca' => 'http://opensustainability.info/vocab#',
+		'lca' => 'http://footprinted.org/vocab#',
 	    'dcterms' => 'http://purl.org/dc/terms/',
 		'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 		'sioc' => 'http://rdfs.org/sioc/ns',
-		'ISO14048' => 'http://opensustainability.info/vocab#',
+		'ISO14048' => 'http://footprinted.org/vocab#',
 		'ecospold' => 'http://',
 		'earthster' => '',
 		'elcd' => ''

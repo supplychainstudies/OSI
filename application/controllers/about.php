@@ -3,7 +3,7 @@
  * Controller for static information of Footprinted website
  *
  * @version 0.0.1
- * @author info@opensustainability.info
+ * @author info@footprinted.org
  * @package opensustainabilityinfo
  * @subpackage controllers
  */

@@ -3,7 +3,7 @@
  * Controller for environmental information structures
  * 
  * @version 0.8.0
- * @author info@opensustainability.info
+ * @author info@footprinted.org
  * @package opensustainability
  * @subpackage controllers
  * @uses 
@@ -89,10 +89,10 @@ class Dataconverter extends SM_Controller {
 			<rdf:RDF
 			  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 			  xmlns:owl="http://www.w3.org/2002/07/owl#"
-			  xmlns:es1_elem_flows="http://opensustainability.info/assets/data/es1_elem_flows.rdf"
-			  xmlns:ilcd_elem_flows="http://opensustainability.info/assets/data/ilcd_elem_flows.rdf"
-			  xmlns:es1_compartments="http://opensustainability.info/assets/data/es1_compartments.rdf"
-			  xmlns:ilcd_compartments="http://opensustainability.info/assets/data/ilcd_compartments.rdf"
+			  xmlns:es1_elem_flows="http://footprinted.org/assets/data/es1_elem_flows.rdf"
+			  xmlns:ilcd_elem_flows="http://footprinted.org/assets/data/ilcd_elem_flows.rdf"
+			  xmlns:es1_compartments="http://footprinted.org/assets/data/es1_compartments.rdf"
+			  xmlns:ilcd_compartments="http://footprinted.org/assets/data/ilcd_compartments.rdf"
 			  xmlns:dc="http://purl.org/dc/elements/1.1/">
 			
 			<elementalFlows
@@ -154,10 +154,10 @@ class Dataconverter extends SM_Controller {
 			<rdf:RDF
 			  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 			  xmlns:owl="http://www.w3.org/2002/07/owl#"
-			  xmlns:es1_elem_flows="http://opensustainability.info/assets/data/es1_elem_flows.rdf"
-			  xmlns:ilcd_elem_flows="http://opensustainability.info/assets/data/ilcd_elem_flows.rdf"
-			  xmlns:es1_compartments="http://opensustainability.info/assets/data/es1_compartments.rdf"
-			  xmlns:ilcd_compartments="http://opensustainability.info/assets/data/ilcd_compartments.rdf"
+			  xmlns:es1_elem_flows="http://footprinted.org/assets/data/es1_elem_flows.rdf"
+			  xmlns:ilcd_elem_flows="http://footprinted.org/assets/data/ilcd_elem_flows.rdf"
+			  xmlns:es1_compartments="http://footprinted.org/assets/data/es1_compartments.rdf"
+			  xmlns:ilcd_compartments="http://footprinted.org/assets/data/ilcd_compartments.rdf"
 			  xmlns:dc="http://purl.org/dc/elements/1.1/">
 			
 			<units

@@ -3,7 +3,7 @@
  * Controller for environmental information structures
  * 
  * @version 0.8.0
- * @author info@opensustainability.info
+ * @author info@footprinted.org
  * @package opensustainability
  * @subpackage controllers
  * @uses 
@@ -45,7 +45,7 @@ class Sources extends SM_Controller {
     */
 		if($_POST) {
 			$data = $this->form_extended->load('bibliography'); 
-			$uri = "http://opensustainability.info/rdfspace/sources/" . trim($_POST['title_']) . rand(1000000000,10000000000);
+			$uri = "http://footprinted.org/rdfspace/sources/" . trim($_POST['title_']) . rand(1000000000,10000000000);
 			@$triples = $this->form_extended->build_triples($uri, $_POST, $data);	
 			var_dump($triples);
 			//@$this->arcmodel->addTriples($triples);

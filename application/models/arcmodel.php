@@ -75,7 +75,7 @@ class ArcModel extends Model{
 	 * @param $triples Array		
 	 */
 	public function addTriples($triples) {	
-		$q = "insert into <http://opensustainability.info/> { ";	
+		$q = "insert into <http://footprinted.org/> { ";	
 		// for each triple				
 		foreach ($triples as $triple) {
 			// for each value 
@@ -190,11 +190,11 @@ class ArcModel extends Model{
 		if ($path != "") {
 			// iterate down the heirarchy to find the blank node of the desired section
 			foreach(explode("->", $path) as $level) {
-				$q .= $next_bnode . " 'http://opensustainability.info/vocab#".$level."' ?".$level."_bnode . ";
+				$q .= $next_bnode . " 'http://footprinted.org/vocab#".$level."' ?".$level."_bnode . ";
 				$next_bnode = "?".$level."_bnode";
 			}
 		}
-		$q .= $next_bnode . " 'http://opensustainability.info/vocab#".$stage."' ?instance . " . 
+		$q .= $next_bnode . " 'http://footprinted.org/vocab#".$stage."' ?instance . " . 
 			"}";	
 		
 		$records = $this->executeQuery($q);	
@@ -204,7 +204,7 @@ class ArcModel extends Model{
 			$instance[$row['instance']] = $this->getTriples($row['instance']);
 		}
 		if (count($instance) > 0) {
-			return array('http://opensustainability.info/vocab#'.$stage => $instance);
+			return array('http://footprinted.org/vocab#'.$stage => $instance);
 		} else {
 			return false;
 		}
@@ -296,7 +296,7 @@ class ArcModel extends Model{
 		echo "----";
 		var_dump($type);
 		$q = "select ?value where { " . 
-			"'" .$bnode . "' 'http://opensustainability.info/vocab#" . $type . "' ?value . " . 			
+			"'" .$bnode . "' 'http://footprinted.org/vocab#" . $type . "' ?value . " . 			
 			"}";
 		$records = $this->executeQuery($q);	
 		return $records;	
@@ -350,11 +350,11 @@ class ArcModel extends Model{
 	 */
 	public function getImpacts($URI) {
 		$q = "select ?impactCategory ?impactCategoryValue ?impactCategoryUnit where { " . 
-			" <".$URI."> 'http://opensustainability.info/vocab#impactAssessment' ?impactAssessment . " .
-			" ?impactAssessment 'http://opensustainability.info/vocab#classification' ?classification . " .				 	
-			" ?classification 'http://opensustainability.info/vocab#impactCategory' ?impactCategory . " . 			
-			" ?classification 'http://opensustainability.info/vocab#impactCategoryValue' ?impactCategoryValue . " . 
-			" ?classification 'http://opensustainability.info/vocab#impactCategoryUnit' ?impactCategoryUnit . " .
+			" <".$URI."> 'http://footprinted.org/vocab#impactAssessment' ?impactAssessment . " .
+			" ?impactAssessment 'http://footprinted.org/vocab#classification' ?classification . " .				 	
+			" ?classification 'http://footprinted.org/vocab#impactCategory' ?impactCategory . " . 			
+			" ?classification 'http://footprinted.org/vocab#impactCategoryValue' ?impactCategoryValue . " . 
+			" ?classification 'http://footprinted.org/vocab#impactCategoryUnit' ?impactCategoryUnit . " .
 			"}";
 		$records = $this->executeQuery($q);	
 		foreach ($records as &$record) {
@@ -543,7 +543,7 @@ class ArcModel extends Model{
 	 */	
 	public function getNextBnode($previous_bnode, $next_type) {
 		$q = "select ?next_bnode where { " . 
-			" <".$previous_bnode."> 'http://opensustainability.info/vocab#".$next_type."' ?next_bnode . " . 
+			" <".$previous_bnode."> 'http://footprinted.org/vocab#".$next_type."' ?next_bnode . " . 
 			"}";	
 		$records = $this->executeQuery($q);	
 		return $records;
@@ -590,7 +590,7 @@ class ArcModel extends Model{
 		$b = 0;	
 		foreach($records as $record) {
 			$b++;
-			$q2 = "insert into <http://opensustainability.info/> { " .	
+			$q2 = "insert into <http://footprinted.org/> { " .	
 					"<".$record['uri']."> dcterms:created '".date('j F Y', mktime(0, 0, 0, 7, 1+$b, 2010))."' . " . 
 			 		"}";
 			$this->executeQuery($q2);			

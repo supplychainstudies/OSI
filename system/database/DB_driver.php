@@ -31,7 +31,7 @@
 class CI_DB_driver {
 	var $username		= "db_osi_admin";
 	var $password		= "rJD6wSKnE83LzYPq";
-	var $hostname		= "opensustainability.info";
+	var $hostname		= "footprinted.org";
 	var $database		= "opensustainability";
 	var $dbdriver		= 'mysql';
 	var $dbprefix		= '';

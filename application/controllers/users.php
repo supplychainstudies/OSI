@@ -3,7 +3,7 @@
  * Controller for environmental information structures
  * 
  * @version 0.8.0
- * @author info@opensustainability.info
+ * @author info@footprinted.org
  * @package opensustainability
  * @subpackage controllers
  * @uses 
@@ -97,7 +97,7 @@ class Users extends SM_Controller {
 		} else if (isset($_SERVER['HTTP_REFERER']) == true) {
 			$refer = $_SERVER['HTTP_REFERER'];
 		} else {
-			$refer = "http://opensustainability.info";
+			$refer = "http://footprinted.org";
 		}
 			
 		header ("Location: " . $refer);			

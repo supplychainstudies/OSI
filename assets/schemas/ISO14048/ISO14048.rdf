@@ -25,13 +25,13 @@
               <rdfs:seeAlso rdf:resource="http://www.biancasayan.com/foaf.rdf" />
           </foaf:Person>
       </s:contact>
-      <s:location rdf:resource="http://opensustainability.info/life_cycle_assessment.rdfs" />
-      <s:namespace>http://opensustainability.info/life_cycle_assessment#</s:namespace>
+      <s:location rdf:resource="http://footprinted.org/life_cycle_assessment.rdfs" />
+      <s:namespace>http://footprinted.org/life_cycle_assessment#</s:namespace>
       <owl:imports rdf:resource="http://www.w3.org/2000/01/rdf-schema"/>
       <owl:imports rdf:resource="http://www.w3.org/2002/07/owl"/>
 
 
-  <owl:Class rdf:ID="life_cycle_inventory" rdf:about="http://opensustainability.info/life_cycle_assessment#life_cycle_inventory">
+  <owl:Class rdf:ID="life_cycle_inventory" rdf:about="http://footprinted.org/life_cycle_assessment#life_cycle_inventory">
       <rdfs:comment xml:lang="en-gb">A document that details the process of measuring a product, service, or technology and summarizing.</rdfs:comment>
       <rdfs:label xml:lang="en-gb">Life Cycle Inventory</rdfs:label>
 
@@ -51,17 +51,17 @@
 
 
 
-    <owl:Class rdf:ID="data_documentation_of_process" rdf:about="http://opensustainability.info/life_cycle_assessment#data_documentation_of_process">
+    <owl:Class rdf:ID="data_documentation_of_process" rdf:about="http://footprinted.org/life_cycle_assessment#data_documentation_of_process">
         <rdfs:label xml:lang="en-gb">data documentation of process</rdfs:label>
         <rdfs:comment xml:lang="en-gb">Container for all three stages of the LCI documentation: process, modelling and validation, and administrative information</rdfs:comment>
         <rdf:domain rdf:resource="#life_cycle_inventory"/>
 
-            <owl:Class rdf:ID="process" rdf:about="http://opensustainability.info/life_cycle_assessment#process">
+            <owl:Class rdf:ID="process" rdf:about="http://footprinted.org/life_cycle_assessment#process">
                 <rdfs:label xml:lang="en-gb">process</rdfs:label>
                 <rdfs:comment xml:lang="en-gb">Container for all process information, including the process description and inputs/outputs.</rdfs:comment>   
                 <rdf:domain rdf:resource="#data_documentation_of_process"/>
 
-                <owl:Class rdf:ID="process_description" rdf:about="http://opensustainability.info/life_cycle_assessment#process_description">
+                <owl:Class rdf:ID="process_description" rdf:about="http://footprinted.org/life_cycle_assessment#process_description">
                     <rdfs:label xml:lang="en-gb">process_description</rdfs:label>
                     <rdfs:comment xml:lang="en-gb"></rdfs:comment>   
                     <rdf:domain rdf:resource="#process"/>
@@ -76,7 +76,7 @@
                         <rdfs:comment xml:lang="en-gb">The name of the process</rdfs:comment>
                     </owl:Property>
 
-                <owl:Class rdf:ID="quantitative_reference" rdf:about="http://opensustainability.info/life_cycle_assessment#quantitative_reference">
+                <owl:Class rdf:ID="quantitative_reference" rdf:about="http://footprinted.org/life_cycle_assessment#quantitative_reference">
                     <rdfs:label xml:lang="en-gb">quantitative reference</rdfs:label>
                     <rdfs:comment xml:lang="en-gb"></rdfs:comment>
                     <rdf:domain rdf:resource="#process_description"/>
@@ -103,7 +103,7 @@
                         <rdf:domain rdf:resource="#quantitative_reference"/>
                         <rdf:datatype rdf:resource="xsd:anyURI"/>
                     </owl:Property>
-                    <owl:Property rdf:ID="quantitative_reference_amount" rdf:about="http://opensustainability.info/life_cycle_assessment#quantitativeReferenceAmount">
+                    <owl:Property rdf:ID="quantitative_reference_amount" rdf:about="http://footprinted.org/life_cycle_assessment#quantitativeReferenceAmount">
                         <rdf:datatype rdf:resource="xsd:double"/>
                         <rdf:domain rdf:resource="#quantitative_reference"/>
                         <rdfs:range rdf:resource="rdf:literal"/>

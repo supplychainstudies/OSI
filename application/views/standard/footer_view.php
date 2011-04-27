@@ -11,7 +11,7 @@
 	<ul>
 	<li><p><a href="/">Home</a></p></li>
 	<li><p><a href="/about">About</a> | <a href="mailto:we@footprinted.org">Contact</a></p></li>
-	<li><p>A project of <a href="http://opensustainability.info/">Open Sustainability Info</a></p></li>
+	<li><p>A project of <a href="http://footprinted.org/">Open Sustainability Info</a></p></li>
 	
 	</ul>	
 	</div>

@@ -10494,7 +10494,7 @@ CREATE TABLE `arc_os_id2val` (
 --
 
 INSERT INTO `arc_os_id2val` (`id`, `misc`, `val`, `val_type`) VALUES
-(1, 0, 'http://opensustainability.info/', 0),
+(1, 0, 'http://footprinted.org/', 0),
 (3, 0, 'http://www.w3.org/2000/01/rdf-schema#type', 0),
 (5, 0, '', 2),
 (6, 0, 'http://xmls.com/foaf/0.1/firstName', 0),
