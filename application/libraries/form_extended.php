@@ -52,10 +52,10 @@ class Form_extended extends Form {
 				$name = str_replace(" ", "", $post_data['title_']);
 			}
 			if ($subject != "") {
-				$subject = "http://db.opensustainability.info/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);	
+				$subject = "http://footprinted.org/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);	
 				$new_subject_attrs = "_:" . str_replace("oslca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);
 			} else {
-				$new_subject_attrs = "http://db.opensustainability.info/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);
+				$new_subject_attrs = "http://footprinted.org/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);
 			}
 		} else {
 			$new_subject_attrs = "_:" . str_replace("oslca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);	
@@ -196,9 +196,9 @@ class Form_extended extends Form {
 	            elseif ($name == 'fieldset') {			
 	                foreach ($val as $_group) {	
 						if (isset($_group['__attrs']['linked_type']) == true) {
-							if(isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $_group['__attrs']['linked_type'])]) == true) {
+							if(isset($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $_group['__attrs']['linked_type'])]) == true) {
 								$html .= "<div class=\"level".$depth."\"><h1 class=\"level".$depth."\">" . $_group['__attrs']['name'] . "</h1>";
-								foreach ($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $_group['__attrs']['linked_type'])] as $_xarray) {
+								foreach ($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $_group['__attrs']['linked_type'])] as $_xarray) {
 									$html .= "$tabs\t<li>\n". $this->build_views ($_xarray, $_group, $depth+1) ."$tabs\t</li>\n";
 								}
 								$html .= "</div>";
@@ -208,8 +208,8 @@ class Form_extended extends Form {
 	            }
 	            else {
 					if (isset($val[0]['linked_type'][0]) == true) {
-						if(isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $val[0]['linked_type'][0])]) == true) {
-						foreach ($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $val[0]['linked_type'][0])] as $value) {
+						if(isset($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $val[0]['linked_type'][0])]) == true) {
+						foreach ($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $val[0]['linked_type'][0])] as $value) {
 								$html .= "$tabs\t<li>\n".$val[0]['label'][0]." - ".$value."</li>\n";
 							}
 						}
@@ -278,9 +278,9 @@ class Form_extended extends Form {
 		            elseif ($name == 'fieldset') {			
 		                foreach ($val as $_group) {	
 							if (isset($_group['__attrs']['linked_type']) == true) {
-								if(isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $_group['__attrs']['linked_type'])]) == true) {
+								if(isset($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $_group['__attrs']['linked_type'])]) == true) {
 									$html .= "<h1 class=\"level".$depth."\">" . $_group['__attrs']['name'] . "</h1><div class=\"level".$depth."\">";
-									foreach ($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $_group['__attrs']['linked_type'])] as $_xarray) {
+									foreach ($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $_group['__attrs']['linked_type'])] as $_xarray) {
 										$html .= "$tabs\t<li>\n". $this->build_edit ($_xarray, $_group, $depth+1, $multiple) ."$tabs\t</li>\n";
 									}
 									$html .= "</div>";
@@ -291,9 +291,9 @@ class Form_extended extends Form {
 		            else {
 						if (isset($val[0]['linked_type'][0]) == true) {
 							$_val = $val;
-							if(isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $val[0]['linked_type'][0])]) == true) {
+							if(isset($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $val[0]['linked_type'][0])]) == true) {
 								
-								foreach ($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $val[0]['linked_type'][0])] as $instance => $value) {
+								foreach ($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $val[0]['linked_type'][0])] as $instance => $value) {
 									
 									foreach ($val as $index => $def) {
 				                    foreach ($def as $key => $val) {
@@ -386,12 +386,12 @@ class Form_extended extends Form {
 				                    $html .= "$row";								
 								} 
 							} 
-						} // End of foreach ($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $val[0]['linked_type'][0])] as $instance => $value)
-					//} // End of if(isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $val[0]['linked_type'][0])]) == true)
+						} // End of foreach ($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $val[0]['linked_type'][0])] as $instance => $value)
+					//} // End of if(isset($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $val[0]['linked_type'][0])]) == true)
 							
 						// Add blank fields at the end	
 						if (isset($_val[0]['linked_type']) == true) {				
-						if (isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $_val[0]['linked_type'][0])]) != true || isset($_val[0]['multiple']) == true) {
+						if (isset($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $_val[0]['linked_type'][0])]) != true || isset($_val[0]['multiple']) == true) {
 		                	foreach ($_val as $index => $def) {
 		                    foreach ($def as $key => $val) {
 		                        if ($key == '__attrs') {
@@ -707,12 +707,12 @@ class Form_extended extends Form {
 					                    $html .= "$row";								
 									} 
 								} 
-							} // End of foreach ($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $val[0]['linked_type'][0])] as $instance => $value)
-						//} // End of if(isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $val[0]['linked_type'][0])]) == true)
+							} // End of foreach ($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $val[0]['linked_type'][0])] as $instance => $value)
+						//} // End of if(isset($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $val[0]['linked_type'][0])]) == true)
 
 							// Add blank fields at the end	
 							if (isset($_val[0]['linked_type']) == true) {				
-							if (isset($xarray[str_replace("lca:", "http://opensustainability.info/vocab#", $_val[0]['linked_type'][0])]) != true || isset($_val[0]['multiple']) == true) {
+							if (isset($xarray[str_replace("lca:", "http://footprinted.org/vocab#", $_val[0]['linked_type'][0])]) != true || isset($_val[0]['multiple']) == true) {
 			                	foreach ($_val as $index => $def) {
 			                    foreach ($def as $key => $val) {
 			                        if ($key == '__attrs') {

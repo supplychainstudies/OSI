@@ -3,7 +3,7 @@
  * Controller for environmental information structures
  * 
  * @version 0.8.0
- * @author info@opensustainability.info
+ * @author info@footprinted.org
  * @package opensustainability
  * @subpackage controllers
  * @uses 
@@ -26,7 +26,7 @@ class Info extends SM_Controller {
 	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
     */
 	// Public function for exploring the repository
-	public function index() {
+	public function browse() {
 		
 		
 		// Querying the database for all records		
@@ -101,4 +101,19 @@ class Info extends SM_Controller {
 		$this->display("Browse","browse_view");		
 	}
 
+	/***
+    * @home
+    * Shows the provisional homepage
+    */
+	// Homepage for private beta
+	public function index() {
+		//Load RSS for news
+		$this->load->library('RSSParser', array('url' => 'http://twitter.com/statuses/user_timeline/footprinted.rss', 'life' => 0));
+		//Get six items from the feed
+		$twitter = $this->rssparser->getFeed(6);			
+		// Send data to the view
+		$this->data("twitter", $twitter);
+		// Send data to the view
+		$this->display("Home","home_view");		
+	}
 }

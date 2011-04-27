@@ -3,7 +3,7 @@
  * Controller for environmental information structures
  * 
  * @version 0.8.0
- * @author info@opensustainability.info
+ * @author info@footprinted.org
  * @package opensustainability
  * @subpackage controllers
  * @uses 
@@ -49,7 +49,7 @@ class Foaf extends SM_Controller {
     */
 		if($_POST) {
 			$data = $this->form_extended->load('foaf'); 
-			$uri = "http://opensustainability.info/rdfspace/people/" . trim($_POST['firstName_']) . trim($_POST['lastName_']) . rand(1000000000,10000000000);
+			$uri = "http://footprinted.org/rdfspace/people/" . trim($_POST['firstName_']) . trim($_POST['lastName_']) . rand(1000000000,10000000000);
 			@$triples = $this->form_extended->build_triples($uri, $_POST, $data);	
 			var_dump($triples);
 			@$this->arcmodel->addTriples($triples);

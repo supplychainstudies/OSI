@@ -3,7 +3,6 @@
 <html>
 <head>
 	<title><?=$title?></title>
-	
 	<?=$styles;?>
 	<?=$headerDisplay;?>
 </head>
@@ -14,22 +13,17 @@
 	
 	
 	<div id="columnleft">
-		<h1 class="grande">We want sustainability information to be free, open and easy to use.</h1>
+		<div id="info">
+		<h1 class="grande">Footprinted makes sustainability information free, open and easy to use.</h1>
 		<br/><br/>
-		<h1 class="hand">Read more about <a href="/about">what are we doing</a> and <a href="/about/team">who we are</a>. If you want to know more do not hesitate to <a href="mailto:info@opensustainability.info">contact us</a></h1>
-		<br/><br/>
-		<h1 class="hand">Read more in our <a href="http://blog.opensustainability.info" target="_blank">blog</a></h1>
-		<h1 class="hand">Follow us in <a href="http://twitter.com/opensustainfo" target="_blank">twitter</a></h1>
-	</div>
+		<div class="blue small square"><p>We are currently in closed development</p></div>
+		<div class="blue small square"><p><a href="mailto:info@footprinted.org">Follow us in twitter</a></p></div>
+		<div class="blue small square"><p><a href="mailto:we@footprinted.org">Send as an email</a></p></div>
+		</div>
 	
-	<div id="columnright">
-		<h1 style="display:block;text-align:center;background:none;">News</h1>
-		<ul id="twitter_update_list"></ul>
-		<script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
-		<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/opensustainfo.json?callback=twitterCallback2&amp;count=8"></script>
+	</div>
 	
 
-	</div>
 
 	<?=$footerDisplay;?>
 	</div>

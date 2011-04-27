@@ -27,12 +27,12 @@ h1#title {
 }
 
 #header {
-	padding-top: 20px;
+	padding-top: 10px;
 	float:left;
 	height:100px;
 	width:auto;
 	text-align:left;
-		padding-bottom: 40px;
+	padding-bottom: 40px;
 }
 
 #login {
@@ -62,6 +62,9 @@ h1#title {
 
 	padding-bottom: 60px;
 }
+#info{
+	width:500px
+}
 
 /* Structure for LCA view */
 #lca_background{
@@ -71,7 +74,7 @@ h1#title {
 	padding: 30px;
 	background-color: #666;
 	margin-bottom:30px;
-	margin-top:30px;
+	margin-top:10px;
 }
 
 #lca_unit {
@@ -92,22 +95,25 @@ h1#title {
 	width: 450px;
 }
 
+
 #lca_flows {
-	float:left;
-	text-align: left;
-	width:400px;
-	padding: 20px;
-	background-color: #F5FAFF;
-	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
-	
-}
-#lca_impact {
 	float:right;
 	text-align: left;
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
 	margin-right:20px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+	
+}
+
+#lca_impact {
+	float:left;
+	text-align: left;
+	width:400px;
+	padding: 20px;
+	background-color: #F5FAFF;
+		margin-right:20px;
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
@@ -122,8 +128,9 @@ h1#title {
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 #lca_meta {
-	float:right;
+	float:left;
 	text-align: left;
+	top:0px;
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
@@ -132,13 +139,12 @@ h1#title {
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 #map {
-	float:right;
+	float:left;
 	text-align: left;
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
 	margin-top: 15px;
-	margin-right:20px;
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
@@ -269,13 +275,6 @@ font-size: 9px;
 color: #3FA9F5;
 text-transform:uppercase;
 }
-	
-/*
-	background:rgb(40,40,40);
-	background: -moz-linear-gradient(top, rgb(40,40,40), rgb(30,30,30));
-	background: -webkit-gradient(linear, 0 top, 0 bottom, from(rgb(40,40,40)), to(rgb(30,30,30)));	
-
-*/
 
 div.wrapper {	
 	margin:0 auto;
@@ -403,9 +402,8 @@ p {
 }
 
 .grande {
-	font-size: 3.2em;
-	margin-bottom: 0.2em;
-	
+	font-size: 3em;
+	margin-bottom: 0.2em;	
 }
 
 amount {
@@ -536,6 +534,10 @@ h1.bignr {
 /* Divs for bar graphs in View LCA */
 .bar_background {
 	width:400px; height:20px; background-color:#CCC;
+}
+.flow_text {
+	margin-top: -10px;
+	margin-bottom: 8px;
 }
 
 /* Share buttons */

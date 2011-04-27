@@ -3,7 +3,7 @@
  * Controller for environmental information structures
  * 
  * @version 0.8.0
- * @author info@opensustainability.info
+ * @author info@footprinted.org
  * @package opensustainability
  * @subpackage controllers
  * @uses 
@@ -97,7 +97,7 @@ class Users extends SM_Controller {
 		} else if (isset($_SERVER['HTTP_REFERER']) == true) {
 			$refer = $_SERVER['HTTP_REFERER'];
 		} else {
-			$refer = "http://opensustainability.info";
+			$refer = "http://footprinted.org";
 		}
 			
 		header ("Location: " . $refer);			
@@ -166,7 +166,7 @@ class Users extends SM_Controller {
 		}
 		$this->data("pass_data", $pass_data);
 		$this->form_extended->load('register'); 
-		$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Fdb.opensustainability.info%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
+		$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Ffootprinted.org%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
 		$the_form .= $this->form_extended->build();
 		$this->script(Array('form.js','register.js','janrain.js'));
 		$this->style(Array('style.css','form.css'));

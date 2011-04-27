@@ -19,78 +19,25 @@
 		<div id="lca_title"><h1><?=$parts['quantitativeReference']['name'] ?></h1></div>
 		<? /* <p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
 		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?=linkThis($parts['quantitativeReference']['unit'], $parts["tooltips"]) ?></nr></h1></div>	
-				
-			<div id="lca_flows">
-			<h2>Flows</h2>
-			<? if ($totalinput != 0) { ?>
-			<h3>Total input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
-			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
-					$ratio = ($totalinput/$parts['quantitativeReference']['amount']);
-					echo "<h3>Ratio input vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
-				} ?>
-			<h3>Material inputs breakdown:</h3>
-			<? foreach ($parts['exchanges'] as $exchanges) {
-				if ($exchanges['direction'] == 'Input') {
-					$width = round( (100*$exchanges['amount'])/round($totalinput));
-					if ($exchanges['unit'] == 'qudtu:Kilogram'){
-						echo "<div class='bar_background'>";
-						echo '<div style="width:'.$width.'%; height:20px; background-color:#8CC63F; border-right:1px #FFF solid;"></div></div>';
-					}
-					echo "<p><amount>" . $exchanges['amount'] . "</amount> " . linkThis($exchanges['unit'], $parts["tooltips"]); 
-					echo "<b> ".$exchanges['name'] . "</b></p>";
-				}
-			}?>	
-			<?}?>
-			<? if ($totaloutput != 0) { ?>
-			<h3>Total output: <h1 class="nr"><?=round($totaloutput,2); ?> kg</h1></h3>
-			<h3>Material output breakdown:</h3>
-			<? foreach ($parts['exchanges'] as $exchanges) {
-				if ($exchanges['direction'] == 'Output') {
-					$width = round( (100*$exchanges['amount'])/round($totaloutput) );
-					if ($exchanges['unit'] == 'qudtu:Kilogram'){
-						echo "<div class='bar_background'>";	
-						echo '<div style="width:'.round($width).'%; height:20px; background-color:#535B39; border-right:1px #FFF solid;"></div></div>';
-					}
-					echo "<p><amount>" . $exchanges['amount'] . "</amount> " . linkThis($exchanges['unit'], $parts["tooltips"]); 
-					echo "<b> ".$exchanges['name'] . "</b></p>";
-				}
-			}?>
-			<?}?>
-			</div>			
-			
 			
 			
 			<div id="lca_impact">
 			<h2><span>Impact Assessment</h2>	
 			<? foreach ($parts['impactAssessments'] as $impactAssessment) {
-				
-				
+				// Change color of the circle depending on the impact category	
 				switch ($impactAssessment['impactCategoryIndicator']) {
-				    case 'ossia:waste':
-				        $color = "#666";
-						$max = 10;
-						break;
-				    case 'ossia:CO2e':
-				        $color = "#333";
-						$max = 10;
-						break;
-				    case "ossia:energy":
-				        $color = "#227CAF";
-						$max = 500;
-						break;
-					case "ossia:water":
-					    $color = "#45A3D8";
-						$max = 10;
-						break;
-					default:
-						$color = "#45A3D8";
-						$max = 50;
+				    case 'ossia:waste': $color = "#666"; $max = 10; break;
+				    case 'ossia:CO2e': $color = "#333";	$max = 10; break;
+				    case "ossia:energy": $color = "#227CAF"; $max = 500;	break;
+					case "ossia:water":$color = "#45A3D8"; $max = 10; break;
+					default: $color = "#45A3D8"; $max = 50;
 				}
+				// Change the size depending on the relative max
 				$size = 2* round(50*$impactAssessment['amount']/$max);
 				if ($size > 80) { $size = 80; }
 				$margin = (100-$size)/2;
 				$margintop = (100-$size)/6;
-
+				// Create a circle
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
 				echo '<div class="meta"><p class="unit">'. linkThis($impactAssessment['unit'], $parts["tooltips"], "label") .'</p><p class="category">';
@@ -100,7 +47,92 @@
 			}?>
 			</div>
 			
-			<? if (isset($parts['geography']) == true ) {
+			<? if(is_array($parts['exchanges']  ) == true) { ?>
+			<div id="lca_flows">
+			<h2>Flows</h2>
+			<? if ($totalinput != 0) { ?>
+			<h3>Total material input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
+			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
+					$ratio = ($totalinput/$parts['quantitativeReference']['amount']);
+					echo "<h3>Ratio input vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
+				} ?>
+			<? if ($totalinputliter != 0) { ?>
+					<h3>Total water input:</h3> <h1 class="nr"><?=round($totalinputliter,2); ?> liters </h1>
+			<? } ?>
+			<h3>Material inputs breakdown:</h3>
+			<? 
+			if (isset($parts['Input']["Mass"]) == true) { 
+			$color_input = array('8CC63F','85C61E','70A024','7FAA3A','8EB256','88D600','98EF00','8DEF00','8ECE20','72CC23','55CC23'); $i=0;
+			foreach ($parts['Input']["Mass"] as $mass) {
+					$width = round(100*$mass['amount']/$totalinput);
+					if ($width == 0) { $width = 1; }
+					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#'.$color_input[$i].';"></div></div>';
+					echo "<div class='flow_text'><p><amount>" . $mass['amount'] . "</amount> " . linkThis($mass['unit'], $parts["tooltips"]); 
+					echo "<b> ".$mass['name'] . "</b></p></div>";
+					$i++; if ($i >10){ $i = 0;}
+			}}?>
+			
+			<? 
+			if (isset($parts['Input']["Liquid Volume"]) == true) { 
+			$color_liquid = array('1a6eff','1B64CE','1753AA','133E7C','2C4C7C');$i = 0;	
+			foreach ($parts['Input']["Liquid Volume"] as $volume) {
+					$width = round(100*$volume['amount']/$totalinputliter);
+					if ($width == 0) { $width = 1; }
+					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#'.$color_liquid[$i].';"></div></div>';
+					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . linkThis($volume['unit'], $parts["tooltips"]); 
+					echo "<b> ".$volume['name'] . "</b></p></div>";
+					$i++; if ($i >4){ $i = 0;}
+			}}?>
+			<? 
+			if (isset($parts['Input']["Area"]) == true) { 
+				foreach ($parts['Input']["Area"] as $land) {
+					$width = round(100*$land['amount']/$totalinputland);
+					if ($width == 0) { $width = 1; }
+					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#381100;"></div></div>';
+					echo "<div class='flow_text'><p><amount>" . $land['amount'] . "</amount> " . linkThis($land['unit'], $parts["tooltips"]); 
+					echo "<b> ".$land['name'] . "</b></p></div>";
+			}}?>
+
+			<?}?>
+			
+			<? if ($totaloutput != 0) { ?>	
+			<h3>Total output: <h1 class="nr"><?=round($totaloutput,2); ?> kg</h1></h3>
+			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
+					$ratio = ($totaloutput/$parts['quantitativeReference']['amount']);
+					echo "<h3>Ratio output vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
+				} ?>
+			<? } ?>
+			<h3>Material output breakdown:</h3>
+			
+			<?
+			$color_mass = array('535B39','576033','576325','5D6325','4D512A','464925','3D3F26','4A4C32','4A513A','444F2D','3E4C20','525933','3A4229');
+			$i = 0;
+			foreach ($parts['Output']["Mass"] as $mass) {
+					$width = round(100*$mass['amount']/$totaloutput);
+					if ($width == 0) { $width = 1; }
+					echo '<div class="bar_background"><div style="height:20px; width:'.$width.'%;background-color:#'.$color_mass[$i].';"></div></div>';
+					echo "<div class='flow_text'><p><amount>" . round($mass['amount'],6) . "</amount> " . linkThis($mass['unit'], $parts["tooltips"]); 
+					echo "<b> ".$mass['name'] . "</b></p></div>";
+					$i++;
+					if ($i >12){ $i = 0;}
+			}?>
+			<?}?>
+			<? 
+			if (isset($parts['Output']["Liquid Volume"]) == true) {
+				foreach ($parts['Output']["Liquid Volume"] as $volume) {
+					$height = $volume['amount']*30;
+					if ($height < 30) { 
+						$height = 30; 
+					}
+					echo '<div class="bar_background"><div style="height:'.$height.'%;background-color:#002caa;"></div></div>';
+					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . linkThis($volume['unit'], $parts["tooltips"]); 
+					echo "<b> ".$volume['name'] . "</b></p></div>";
+				}
+			} ?>
+
+			</div>					
+
+			<? if (is_array($parts['geography']) == true ) {
 				echo '<div id="map"><h2>Geography</h2>';
 				
 				foreach ($parts['geography'] as $geo) {

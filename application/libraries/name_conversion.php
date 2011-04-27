@@ -89,7 +89,7 @@ class Name_conversion {
    }
 
 	public function toURI($type, $name) {
-		return "http://db.opensustainability.info/rdfspace/" . $type . "/" . $this->slug($name) . rand(999999,10000000);
+		return "http://footprinted.org/rdfspace/" . $type . "/" . $this->slug($name) . rand(999999,10000000);
 	}
 }
 ?>
