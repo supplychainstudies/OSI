@@ -75,7 +75,7 @@ class ArcModel extends Model{
 	 * @param $triples Array		
 	 */
 	public function addTriples($triples) {	
-		$q = "insert into <http://footprinted.org/> { ";	
+		$q = "insert into <http://opensustainability.info/> { ";	
 		// for each triple				
 		foreach ($triples as $triple) {
 			// for each value 
@@ -177,38 +177,7 @@ class ArcModel extends Model{
 	}
 
 
-	/**
-	 * This function retrieves the triples for a part of a uri by using the $path var to iterate down the hierarchy to the desired section, but returns them in a format where a subject will point to an array of all its instances
-	 * @return $triples Array
-	 * @param $uri string		
-	 * @param $path string
-	 * @param $stage string
-	 */		
-	public function getStage($uri, $path, $stage) {	
-		$q = "select ?instance where { ";
-		$next_bnode = "<".$uri.">";
-		if ($path != "") {
-			// iterate down the heirarchy to find the blank node of the desired section
-			foreach(explode("->", $path) as $level) {
-				$q .= $next_bnode . " 'http://footprinted.org/vocab#".$level."' ?".$level."_bnode . ";
-				$next_bnode = "?".$level."_bnode";
-			}
-		}
-		$q .= $next_bnode . " 'http://footprinted.org/vocab#".$stage."' ?instance . " . 
-			"}";	
-		
-		$records = $this->executeQuery($q);	
-		$instance = array();
-		// Retrieve that section
-		foreach ($records as $row) {
-			$instance[$row['instance']] = $this->getTriples($row['instance']);
-		}
-		if (count($instance) > 0) {
-			return array('http://footprinted.org/vocab#'.$stage => $instance);
-		} else {
-			return false;
-		}
-	}
+
 
 
 
@@ -296,7 +265,7 @@ class ArcModel extends Model{
 		echo "----";
 		var_dump($type);
 		$q = "select ?value where { " . 
-			"'" .$bnode . "' 'http://footprinted.org/vocab#" . $type . "' ?value . " . 			
+			"'" .$bnode . "' 'http://opensustainability.info/vocab#" . $type . "' ?value . " . 			
 			"}";
 		$records = $this->executeQuery($q);	
 		return $records;	
@@ -327,34 +296,17 @@ class ArcModel extends Model{
 
 
 	/**
-	 * Retrieves and returns summary information for all existing records
-	 * @return $records Array	
-	 */
-	public function oldsimpleSearch($variable, $value) {
-		$URIs = array();
-		$q = "select ?bnode where { " . 
-			" ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' '".$value."' . " . 			
-			"}";
-		$records = $this->executeQuery($q);	
-		var_dump($records);
-		foreach($records as $record) {
-			$URIs[] = $this->backtrackToURI($record['bnode']);
-		}
-		return $URIs;
-	}
-
-	/**
 	 * Retrieves and returns all the impacts of an existing uri
 	 * @return $records Array	
 	 * @param $uri string
 	 */
 	public function getImpacts($URI) {
 		$q = "select ?impactCategory ?impactCategoryValue ?impactCategoryUnit where { " . 
-			" <".$URI."> 'http://footprinted.org/vocab#impactAssessment' ?impactAssessment . " .
-			" ?impactAssessment 'http://footprinted.org/vocab#classification' ?classification . " .				 	
-			" ?classification 'http://footprinted.org/vocab#impactCategory' ?impactCategory . " . 			
-			" ?classification 'http://footprinted.org/vocab#impactCategoryValue' ?impactCategoryValue . " . 
-			" ?classification 'http://footprinted.org/vocab#impactCategoryUnit' ?impactCategoryUnit . " .
+			" <".$URI."> 'http://opensustainability.info/vocab#impactAssessment' ?impactAssessment . " .
+			" ?impactAssessment 'http://opensustainability.info/vocab#classification' ?classification . " .				 	
+			" ?classification 'http://opensustainability.info/vocab#impactCategory' ?impactCategory . " . 			
+			" ?classification 'http://opensustainability.info/vocab#impactCategoryValue' ?impactCategoryValue . " . 
+			" ?classification 'http://opensustainability.info/vocab#impactCategoryUnit' ?impactCategoryUnit . " .
 			"}";
 		$records = $this->executeQuery($q);	
 		foreach ($records as &$record) {
@@ -543,7 +495,7 @@ class ArcModel extends Model{
 	 */	
 	public function getNextBnode($previous_bnode, $next_type) {
 		$q = "select ?next_bnode where { " . 
-			" <".$previous_bnode."> 'http://footprinted.org/vocab#".$next_type."' ?next_bnode . " . 
+			" <".$previous_bnode."> 'http://opensustainability.info/vocab#".$next_type."' ?next_bnode . " . 
 			"}";	
 		$records = $this->executeQuery($q);	
 		return $records;
@@ -590,7 +542,7 @@ class ArcModel extends Model{
 		$b = 0;	
 		foreach($records as $record) {
 			$b++;
-			$q2 = "insert into <http://footprinted.org/> { " .	
+			$q2 = "insert into <http://opensustainability.info/> { " .	
 					"<".$record['uri']."> dcterms:created '".date('j F Y', mktime(0, 0, 0, 7, 1+$b, 2010))."' . " . 
 			 		"}";
 			$this->executeQuery($q2);			
@@ -629,31 +581,32 @@ class ArcModel extends Model{
 		$vars = "";
 		$q = "";
 		if (isset($info['uri']) == true) {
-			$q .= "<" . $info['uri'] . "> 'http://xmls.com/foaf/0.1/Person' ?person . ";		
+			$q .= "<" . $info['uri'] . "> 'http://xmlns.com/foaf/0.1/Person' ?person . ";		
 		} else {
 			$vars .= "?uri ";
-			$q .= "?uri 'http://xmls.com/foaf/0.1/Person' ?person . ";
+			$q .= "?uri 'http://xmlns.com/foaf/0.1/Person' ?person . ";
 		}
 		if (isset($info['firstName']) == true) {
-			$q .= "?person 'http://xmls.com/foaf/0.1/firstName' '" . $info['firstName'] . "' . ";		
+			$q .= "?person 'http://xmlns.com/foaf/0.1/firstName' '" . $info['firstName'] . "' . ";		
 		} else {
 			$vars .= "?firstName ";
-			$q .= "?person 'http://xmls.com/foaf/0.1/firstName' ?firstName . ";	
+			$q .= "?person 'http://xmlns.com/foaf/0.1/firstName' ?firstName . ";	
 		}
 		if (isset($info['lastName']) == true) {
-			$q .= "?person 'http://xmls.com/foaf/0.1/lastName' '" . $info['lastName'] . "' . ";		
+			$q .= "?person 'http://xmlns.com/foaf/0.1/lastName' '" . $info['lastName'] . "' . ";		
 		} else {
 			$vars .= "?lastName ";
-			$q .= "?person 'http://xmls.com/foaf/0.1/lastName' ?lastName . ";	
+			$q .= "?person 'http://xmlns.com/foaf/0.1/lastName' ?lastName . ";	
 		}
 		if (isset($info['email']) == true) {
-			$q .= "?person 'http://xmls.com/foaf/0.1/mbox_sha1sum' '" . $info['email'] . "' . ";		
+			$q .= "?person 'http://xmlns.com/foaf/0.1/mbox_sha1sum' '" . $info['email'] . "' . ";		
 		} else {
 			$vars .= "?email ";
-			$q .= "?person 'http://xmls.com/foaf/0.1/mbox_sha1sum' ?email . ";	
+			$q .= "?person 'http://xmlns.com/foaf/0.1/mbox_sha1sum' ?email . ";	
 		}
 
 		$q = "select " . $vars . "where { " . $q . "}";
+
 		$records = $this->executeQuery($q);	
 		foreach ($records as &$record) {
 			foreach($info as $name=>$field)
