@@ -112,11 +112,11 @@ class ArcRemoteModel extends Model{
 				$the_object = $object;
 			}
 			
-			$q = "select DISTINCT ?uri ?label ?type ?stuf where { " .
+			$q = "select DISTINCT ?uri ?label where { " .
 				"?uri '" . $this->arc_config['ns']['qudt'] . "quantityKind' '" . $the_object . "' . " . 	
 				"?uri '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 	
 				"?uri '" . $this->arc_config['ns']['rdf'] . "type' ?type . " . 
-				"?type '" . $this->arc_config['ns']['rdfs'] . "subClassOf' ?stuf . " . 	
+				//"?type '" . $this->arc_config['ns']['rdfs'] . "subClassOf' ?stuf . " . 	
 				"FILTER regex(?type, '" . $this->arc_config['ns']['qudt'] . "', 'i')" . 		
 				"}";
 			$results = $this->executeQuery($q);
