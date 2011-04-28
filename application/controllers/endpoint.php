@@ -25,12 +25,9 @@ class Endpoint extends SM_Controller {
 		 * @return Array of triples.
 		 * @param $q string - query string.
 		 */
-		public function index($remote = "") {
-			$config = $this->arc_config;
-			if ($remote == "remote")
-				$config = $this->arc_lr_config;
+		public function index() {
 			/* instantiation */
-			@$ep = $this->arc->getStoreEndpoint($config);
+			@$ep = $this->arc->getStoreEndpoint($this->arc_config);
 
 			if (!$ep->isSetUp()) {
 			  @$ep->setUp(); /* create MySQL tables */
@@ -38,5 +35,16 @@ class Endpoint extends SM_Controller {
 
 			/* request handling */
 			@$ep->go();
+		}
+		
+		public function remote() {
+			@$ep = $this->arc->getStoreEndpoint($this->arc_lr_config);
+
+			if (!$ep->isSetUp()) {
+			  @$ep->setUp(); /* create MySQL tables */
+			}
+
+			/* request handling */
+			@$ep->go();			
 		}
 }
