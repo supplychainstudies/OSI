@@ -439,8 +439,8 @@ class Form {
 						$input .= '<input type="text" '. $idname . ' id="' . $def['lookup'] . '" /><input type="hidden" '. $idname . ' />';
 						break;
 					case 'popup':
-						$input = "";
-						$input .= '<input type="text" ' . str_replace($_name, $_name."label_", $idname) . ' /><input type="hidden" '. $idname . ' /><input type="button" ' . str_replace($_name, $_name."button_", $idname) . ' id="' . $def['popup'] . '" value="Pick One" />';
+	                     $input = '<input type="text" ' . str_replace($_name, $_name."_label", $idname) . ' /><input type="hidden" '. $idname . ' /><input type="button" ' . str_replace($_name, $_name."_button", $idname) . ' id="' . $def['popup'] . '" value="Pick One" />';
+	                    break;
 					break;
 					case 'search':
 						$input = "";

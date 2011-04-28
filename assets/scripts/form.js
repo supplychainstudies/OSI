@@ -118,7 +118,7 @@ $("[name='unit_"+$(this).val()+"']").show();
 $("[name^='unit'][name!='unit_main']").change(function() {
     var the_value = $(this).val();
     var field = $("[name='unit_field']").val();
-    var the_label_field = field.replace("_button", "_label");
+    var the_label_field = field.replace("button", "label");
     var the_hidden_field = field.replace("_button" ,"");
     var the_label = $("[value='"+the_value+"']").text();
     $("[name='"+the_label_field+"']").val(the_label);
