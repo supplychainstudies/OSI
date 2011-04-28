@@ -288,7 +288,7 @@ class Lca extends SM_Controller {
 
 	private function convertBibliography($dataset){
 		$bibo_prefix = "http://purl.org/ontology/bibo/";
-		$foaf_prefix = "http://xmls.com/foaf/0.1/";
+		$foaf_prefix = "http://xmlns.com/foaf/0.1/";
 		$dc_prefix = "http://purl.org/dc/";
 		$converted_dataset = array();
 		foreach ($dataset as $key=>$record) {
