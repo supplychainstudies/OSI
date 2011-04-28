@@ -52,13 +52,13 @@ class Form_extended extends Form {
 				$name = str_replace(" ", "", $post_data['title_']);
 			}
 			if ($subject != "") {
-				$subject = "http://footprinted.org/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);	
-				$new_subject_attrs = "_:" . str_replace("oslca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);
+				$subject = toURI($group['__attrs']['root']);
+				$new_subject_attrs = toBNode($group['__attrs']['linked_type']);
 			} else {
-				$new_subject_attrs = "http://footprinted.org/" . $group['__attrs']['root'] . "/" . $name . rand(1000000000,10000000000);
+				$new_subject_attrs = toURI($group['__attrs']['root']);
 			}
 		} else {
-			$new_subject_attrs = "_:" . str_replace("oslca:", "", $group['__attrs']['linked_type']) . rand(1000000000, 10000000000);	
+			$new_subject_attrs = toBNode($group['__attrs']['linked_type']);
 		}
 			$triples_attrs[] = array(
 				'subject' => $subject,

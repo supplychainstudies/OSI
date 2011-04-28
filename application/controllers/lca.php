@@ -15,7 +15,8 @@ class Lca extends SM_Controller {
 	public function Lca() {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
-		$this->load->library(Array('form_extended', 'name_conversion', 'xml'));
+		$this->load->library(Array('form_extended', 'xml'));
+		$this->load->helper(Array('nameformat_helper'));
 		$obj =& get_instance();    
         $obj->load->library(array('xml'));
         $this->ci =& $obj;
@@ -41,11 +42,11 @@ class Lca extends SM_Controller {
 	    */
 
 		if ($post_data = $_POST) {	
-			$model_node = $this->name_conversion->toURI("lca", $post_data['name_']); 
-			$bibliography_node = $this->name_conversion->toURI("bibliography", $post_data['title_']); 
-			$person_node = $this->name_conversion->toURI("person", $post_data['author_']); 
-			$process_node = $this->name_conversion->toBNode("process");
-			$product_node = $this->name_conversion->toBNode("product");
+			$model_node = toURI("lca", $post_data['name_']); 
+			$bibliography_node = toURI("bibliography", $post_data['title_']); 
+			$person_node = toURI("person", $post_data['author_']); 
+			$process_node = toBNode("process");
+			$product_node = toBNode("product");
 
 			// Bibliography
 				// First, look to see if they picked the first author, or if its someone new
@@ -96,7 +97,7 @@ class Lca extends SM_Controller {
 
 			$exchange_node = array();
 			for ($i = 0; $i< count($post_data['io_']); $i++) {
-				$exchange_node[] = $this->name_conversion->toBNode("exchange");
+				$exchange_node[] = toBNode("exchange");
 				$datasets['exchange'][] = array (
 						"direction_" => $post_data['io_'][$i],
 						"exchange_" => $post_data['exchangeType_'][$i],
@@ -108,7 +109,7 @@ class Lca extends SM_Controller {
 
 			$impactAssessment_node = array();
 			for ($i = 0; $i< count($post_data['impactCategory_']); $i++) {
-				$impactAssessment_node[] = $this->name_conversion->toBNode("impactassessment");
+				$impactAssessment_node[] = toBNode("impactassessment");
 				$datasets['impactAssessment'][] = array (
 						"computedFrom_" => $model_node,
 						"assessmentOf_" => $process_node,

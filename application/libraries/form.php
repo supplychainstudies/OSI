@@ -25,6 +25,7 @@ class Form {
         $obj =& get_instance();    
         $obj->load->library(array('xml','recaptcha'));
 	    $obj->lang->load('recaptcha');
+		$obj->load->helper('nameformat_helper');
         $this->ci =& $obj;  
     } /*** END ***/
     
