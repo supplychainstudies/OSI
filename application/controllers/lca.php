@@ -14,7 +14,7 @@
 class Lca extends SM_Controller {
 	public function Lca() {
 		parent::SM_Controller();
-		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
+		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper'));
 		$obj =& get_instance();    
@@ -24,7 +24,7 @@ class Lca extends SM_Controller {
 	public $URI;
 	public $data;
 	public $post_data;
-	public $tooltips;
+	public $tooltips = array();
 	
 	public function index() {
 		$data = $this->form_extended->load("start"); 
@@ -47,7 +47,11 @@ class Lca extends SM_Controller {
 			$person_node = toURI("person", $post_data['author_']); 
 			$process_node = toBNode("process");
 			$product_node = toBNode("product");
-
+			
+			var_dump($model_node);
+var_dump($bibliography_node);
+var_dump($person_node);
+var_dump($product_node);
 			// Bibliography
 			// First, look to see if they picked the first author, or if its someone new
 			if ($post_data['author_'] != "") {
@@ -69,7 +73,7 @@ class Lca extends SM_Controller {
 					$post_data['lastName_'] = $post_data['author_'];
 				}
 				if ($post_data['email_'] != "") {
-					$datasets['person'] = array (
+					$datasets['person'][] = array (
 							'firstName_' => $post_data['firstName_'],
 							'lastName_' => $post_data['lastName_'],
 							'email_' => $post_data['email_']
@@ -78,18 +82,18 @@ class Lca extends SM_Controller {
 			}
 
 			if ($post_data["title_"] != "" || $post_data["link_"] != "") {
-			$datasets['bibliography'] = array (
+			$datasets['bibliography'][] = array (
 					"title_" => $post_data["title_"],
 					"link_" => $post_data["link_"],
-					"authorList_" => $person_node
+					"author_[0]" => $person_node
 				);
 			}
 
-			$datasets['process'] = array (
+			$datasets['process'][] = array (
 					'name_' => $post_data['name_'],
 					'description_' => $post_data['description_']	
 				);
-			$datasets['product'] = array (
+			$datasets['product'][] = array (
 					'name_' => $post_data['productServiceName_']
 				);
 		
@@ -113,7 +117,7 @@ class Lca extends SM_Controller {
 						"computedFrom_" => $model_node,
 						"assessmentOf_" => $process_node,
 						"impactCategory_" => $post_data['impactCategory_'][$i],
-						"impactIndicator_" => $post_data['impactCategoryIndicator_'][$i],
+						"impactCategoryIndicator_" => $post_data['impactCategoryIndicator_'][$i],
 						"quantity_" => $post_data['assessmentQuantity_'][$i],
 						"unit_" => $post_data['assessmentUnit_'][$i]
 					);
@@ -129,7 +133,7 @@ class Lca extends SM_Controller {
 						$node = $node_name_array[$i];
 
 						$data = $this->form_extended->load($key); 						
-						$triples = array_merge($triples,$this->form_extended->build_triples($node, $datasetinstance, $data));
+						$triples = array_merge($triples,$this->form_extended->build_triples("", $datasetinstance, $data));
 					}
 			
 				} 
@@ -170,26 +174,6 @@ class Lca extends SM_Controller {
 	* @private
 	* Builds the tooltip array from linked data
 	*/
-	private function anchor($uri) {
-		if (isset($this->tooltips[$uri]) != true) {
-			if (strpos($uri,":") !== false) {
-				$this->tooltips[$uri] = array();
-				$this->tooltips[$uri]['label'] = $this->arcremotemodel->getLabel($uri);	
-				$this->tooltips[$uri]['l'] = $this->tooltips[$uri]['label'];
-				if (strpos($uri, "qudtu") !== false) {
-					$this->tooltips[$uri]['abbr'] = $this->arcremotemodel->getAbbr($uri);
-					$this->tooltips[$uri]['l'] = $this->tooltips[$uri]['abbr'];
-				} 
-				if (strpos($uri, "qudtu") !== false) {
-					$this->tooltips[$uri]['quantityKind'] = $this->arcremotemodel->getQuantityKind($uri);
-				}				
-				if ($this->tooltips[$uri]['l'] == false) { 
-					$uri_parts = explode(":", $uri);
-					return $uri_parts[1];
-				} 
-			} 
-		}
-	}
 
 
 	/***
@@ -197,16 +181,15 @@ class Lca extends SM_Controller {
 	* Grabs all the triples for a particular URI and shows it in a friendly, human readable way
 	*/
 	public function view($URI = null) {	
-		$this->tooltips = array();
-		@$parts['impactAssessments'] = $this->convertImpactAssessments($this->arcmodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
+		@$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
 	
-		@$parts['bibliography'] = $this->convertBibliography($this->arcmodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
-		@$parts['exchanges'] = $this->convertExchanges($this->arcmodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
-		@$parts['modeled'] = $this->convertModeled($this->arcmodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
-		$parts['geography'] = $this->convertGeography($this->arcmodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
-		@$parts['quantitativeReference'] = $this->convertQR($this->arcmodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
+		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
+		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);	
+		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
+		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
+		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
 
-		@$parts['tooltips'] = $this->tooltips;
+		$parts['tooltips'] = $this->tooltips;
 
 	 	foreach ($parts as &$part) {
 			if ($part == false || count($part) == 0) {
@@ -282,196 +265,21 @@ class Lca extends SM_Controller {
 		$this->script(Array('comments.js', 'janrain.js'));
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
-		$comments = $this->arcmodel->getComments("http://footprinted.org/osi/rdfspace/lca/".$URI);
+		$comments = $this->commentsmodel->getComments("http://footprinted.org/osi/rdfspace/lca/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
 		$this->display("View " . $parts['quantitativeReference']['amount'] . " " . $parts['quantitativeReference']['unit'] . " of " . $parts['quantitativeReference']['name'], "viewLCA");		
 	}
 
 
-	private function convertBibliography($dataset){
-		$bibo_prefix = "http://purl.org/ontology/bibo/";
-		$foaf_prefix = "http://xmls.com/foaf/0.1/";
-		$dc_prefix = "http://purl.org/dc/";
-		$converted_dataset = array();
-		foreach ($dataset as $key=>$record) {
-			if (isset($record[$dc_prefix."title"]) == true) {
-				foreach($record[$dc_prefix."title"] as $title) {
-					$converted_dataset[$key]['title'] = $title;
-				}
-			} else {
-				$converted_dataset[$key]['title'] = "";
-			}
-			if (isset($record[$bibo_prefix."authorList"]) == true) {
-				$person_array = array();
-				foreach($record[$bibo_prefix."authorList"] as $author_uri) {
-					$person = $this->arcmodel->getTriples($author_uri);
-					foreach ($person[$foaf_prefix.'firstName'] as $firstName) {
-						$person_array['firstName'] = $firstName;
-					} 
-					foreach ($person[$foaf_prefix.'lastName'] as $lastName) {
-						$person_array['lastName'] = $lastName;
-					}						
-				}
-				$converted_dataset[$key]['authors'][] = $person_array;
-			} else {
-				
-			}
-			if (isset($record[$bibo_prefix."uri"]) == true) {
-				foreach($record[$bibo_prefix."uri"] as $uri) {
-					$converted_dataset[$key]['uri'] = $uri;
-				}
-			} else {
-				$converted_dataset[$key]['uri'] = "";
-			} 
-			if (isset($record[$dc_prefix."date"]) == true) {
-				foreach($record[$dc_prefix."date"] as $date) {
-					$converted_dataset[$key]['date'] = $date;
-				}
-			} else {
-				$converted_dataset[$key]['date'] = "";
-			}
-			/*
-			if (isset($record[$bibo_prefix."isbn"]) == true) {
-				foreach($record[$bibo_prefix."date"] as $date) {
-					$converted_dataset[$key]['date'] = $date;
-				}
-			} else {
-				$converted_dataset[$key]['date'] = "";
-			}
-			"dc:creator" => $organization_uris,
-			"bibo:isbn" => trim($line_array[5]),
-			"bibo:volume" => trim($line_array[6]),
-			"bibo:issue" => trim($line_array[7]),
-			"bibo:doi" => trim($line_array[10]),
-			"bibo:chapter" => trim($line_array[13]),
-			"bibo:locator" => trim($line_array[14]),	
-			*/					
-		}
-		return $converted_dataset;
-	}
+	
 	
 	/***
 	* @private
 	* Does stuff
 	*/
-	private function convertExchanges($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
-		$converted_dataset = array();
-		foreach($dataset as $key=>$record) {		
-			foreach($record[$eco_prefix."hasEffect"] as $_record) {
-				foreach ($_record[$rdfs_prefix."type"] as $__record) {
-					if ($__record == "eco:Output" || $__record == "eco:Input") {
-						$converted_dataset[$key]["direction"] = str_replace("eco:", "", $__record);
-					} 
-				}
-				foreach($_record[$eco_prefix."hasTransferable"] as $transferable) {
-					if (is_array($transferable) == true) {
-						foreach($transferable[$rdfs_prefix."label"] as $label) {
-							$converted_dataset[$key]['name'] = $label;
-						}
-					} else {
-						$converted_dataset[$key]['name'] = $transferable;
-					}
-				}
-				foreach($_record[$eco_prefix."hasFlowable"] as $flowable) {
-					$converted_dataset[$key]['name'] = str_replace("eco", "", $flowable);
-				} 								
-			}
-			foreach ($record[$eco_prefix."hasQuantity"] as $_record) {
-				foreach($_record[$eco_prefix."hasMagnitude"] as $magnitude) {
-					$converted_dataset[$key]['amount'] = $magnitude;
-				} 
-				foreach($_record[$eco_prefix."hasUnitOfMeasure"] as $unitOfMeasure) {
-					$converted_dataset[$key]['unit'] = $unitOfMeasure;
-					$this->anchor($unitOfMeasure);
-				} 
-			}
-		}
-		return $converted_dataset; 
-	}
 	
-	private function convertQR($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
-		$converted_dataset = array();		
-		foreach($dataset as $key=>$record) {		
-			$converted_dataset['name'] = $record['name'];
-			$converted_dataset['amount'] = $record['magnitude'];
-			$converted_dataset['unit'] = $record['unit'];
-			$this->anchor($record['unit']);
-		}		
-		return $converted_dataset; 
-	}	
 	
-	private function convertModeled($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
-		$converted_dataset = array();
-		foreach($dataset as $key=>$record) {		
-			if(isset($record[$rdfs_prefix."type"]) == true) {
-				foreach($record[$rdfs_prefix."type"] as $type) {
-					foreach($record[$rdfs_prefix."label"] as $label) {
-							$this->anchor($type);
-							$converted_dataset['type'] = $type;
-					}				
-				}				
-			}
-		}		
-		return $converted_dataset; 
-	}
-	
-	private function convertGeography($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
-		$converted_dataset = array();
-		if ($dataset != false) {
-			foreach($dataset as $geo) {
-				$converted_dataset[] = $this->arcremotemodel->getPointGeonames($geo['geo_uri']);
-			}
-			return $converted_dataset;
-		} else {
-			return false;
-		}
-	}
 
-	private function convertImpactAssessments($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
-		$converted_dataset = array();		
-		foreach($dataset as $key=>$_record) {	
-			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
-				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
-					$converted_dataset[$key]['impactCategory'] = $___record;
-					$this->anchor($___record);
-				} 
-				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
-					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
-				}					
-			} 	
-			foreach ($_record[$eco_prefix."hasQuantity"] as $__record) {
-				foreach($__record[$eco_prefix."hasMagnitude"] as $___record) {
-					$converted_dataset[$key]['amount'] = $___record;
-				}
-				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
-					$converted_dataset[$key]['unit'] = $___record;
-					$this->anchor($___record);
-				}		
-			}	
-			if (isset($converted_dataset[$key]['unit']) == false) {
-				$converted_dataset[$key]['unit'] = "?";
-			}									
-			if (isset($converted_dataset[$key]['amount']) == false) {
-				$converted_dataset[$key]['amount'] = "?";
-			}
-			if (isset($converted_dataset[$key]['impactCategory']) == false) {
-				$converted_dataset[$key]['impactCategory'] = "?";
-			}
-			if (isset($converted_dataset[$key]['impactCategoryIndicator']) == false) {
-				$converted_dataset[$key]['impactCategoryIndicator'] = "?";
-			}
-		}
-			return $converted_dataset; 
-		}	
-	}
+
+} // End Class

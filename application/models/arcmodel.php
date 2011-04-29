@@ -19,6 +19,7 @@ class ArcModel extends Model{
 	    $this->config->load('arc');	
 		$this->config->load('arcdb');	
 		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
+		$this->arc_lr_config = array_merge($this->config->item("arc_lr_info"), $this->config->item("db_arc_lr_info"));
 	}	
 	
 	// Configuration information for accessing the arc store
@@ -30,8 +31,11 @@ class ArcModel extends Model{
 	 * @return Array of triples.
 	 * @param $q string - query string.
 	 */
-	public function executeQuery($q) {
-		$store = $this->arc->getStore($this->arc_config);
+	public function executeQuery($q,$db="local") {
+		$config = $this->arc_config;
+		if ($db == "remote") 
+			$config = $this->arc_lr_config;
+		$store = $this->arc->getStore($config);
 
 		if (!$store->isSetUp()) {
   			$store->setUp();
@@ -45,7 +49,33 @@ class ArcModel extends Model{
 		else {
 			$errors = $store->getErrors();
 			foreach ($errors as $error) {
-				var_dump($error);
+				error_log($error,0);
+			}
+		}
+
+	}
+	
+	public function executeRemoteQuery($remote_endpoint, $q) {
+		$config = array(
+		  /* remote endpoint */
+		  'remote_store_endpoint' => $remote_endpoint
+		);
+
+		$store = $this->arc->getRemoteStore($config);
+
+		if (!$store->isSetUp()) {
+  			$store->setUp();
+		}
+		
+		$rs = $store->query($q, '', '', true);
+
+		if (!$store->getErrors()) {
+			if(isset($rs['result']['rows']))
+				return $rs['result']['rows'];
+		}
+		else {
+			$errors = $store->getErrors();
+			foreach ($errors as $error) {
 				//echo $error;
 			}
 		}
@@ -75,7 +105,7 @@ class ArcModel extends Model{
 	 * @param $triples Array		
 	 */
 	public function addTriples($triples) {	
-		$q = "insert into <http://opensustainability.info/> { ";	
+		$q = "insert into <http://footprinted.org/> { ";	
 		// for each triple				
 		foreach ($triples as $triple) {
 			// for each value 
@@ -93,6 +123,48 @@ class ArcModel extends Model{
 		}
 		$q .= "}";
 		$this->executeQuery($q);
+	}
+	
+	
+	
+	
+	public function getSomething($uri, $predicate, $db="local") { 
+		if (strpos($uri,"http://") !== false) {
+			$the_uri = $uri;
+		} elseif (strpos($uri,":") !== false) {
+			$xarray = explode(":", $uri);
+			$the_uri = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
+		}
+		
+ 		if (strpos($uri,"http://") !== false) {
+			$the_predicate = $predicate;
+		} elseif (strpos($predicate,":") !== false) {
+			$xarray = explode(":", $predicate);
+			$the_predicate = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
+		}
+		
+		$q = "select ?thing where { " .
+			"<" . $the_uri . "> '" . $the_predicate . "' ?thing . " . 				
+			"}";
+		
+		$results = $this->executeQuery($q, $db);
+		if (count($results) != 0) {
+			return $results[0]['thing'];
+		} else {
+			return false;
+		}			
+	}
+	
+	public function isLoaded($uri) {
+		$q = "select ?c where { " .
+			"<" . $uri . "> ?c ?d . " . 				
+			"}";
+		$results = $this->executeQuery($q, "remote");
+		if (count($results) != 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 
@@ -176,64 +248,6 @@ class ArcModel extends Model{
 		return $xarray;
 	}
 
-
-
-
-
-
-	/**
-	 * Retrieves and returns summary information for all existing records
-	 * @return $records Array	
-	 */
-	public function getRecords() {
-		
-		$q = "select ?link where { " . 
-			" ?link 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:FootprintModel' . " . 
-			"}";
-		$footprint_records = $this->executeQuery($q);	
-		$q = "select ?link where { " . 
-			" ?link 'rdfs:type' 'eco:Model' . " . 
-			"}";
-		$model_records = $this->executeQuery($q);	
-		
-		$records = array_merge($footprint_records, $model_records);
-		foreach ($records as &$record) {
-			$q = "select ?name where { " . 
-				"<". $record['link'] ."> eco:models ?bnode . " .
-				"?bnode 'http://www.w3.org/2000/01/rdf-schema#label' ?name . " .
-				"?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:Product' . " .  
-				"}";
-			$get_product_name = $this->executeQuery($q);
-			if (count($get_product_name) > 0) {
-				$record['name'] = $get_product_name[0]['name'];			
-			// If it doesnt appear to model a product, get the name of a process	
-			} else {
-				$q = "select ?name where { " . 
-					"<". $record['link'] ."> eco:models ?bnode . " .
-					"?bnode 'http://www.w3.org/2000/01/rdf-schema#label' ?name . " .
-					"?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:Process' . " .  
-					"}";
-				$get_process_name = $this->executeQuery($q);	
-				if (count($get_product_name) > 0) {
-				$record['name'] = $get_process_name[0]['name'];					
-				} else {
-					$q = "select ?name where { " . 
-						"<". $record['link'] ."> 'http://www.w3.org/2000/01/rdf-schema#label' ?name . " .
-						"}";
-					$get_model_name = $this->executeQuery($q);
-					if (count($get_product_name) > 0) {
-						$record['name'] = $get_model_name[0]['name'];					
-					} else {
-						$record['name'] = "";
-					}
-				}
-			}
-		}
-		return $records;
-	}
-
-
-
 	/**
 	 * Takes a bnode and returns the root URI.
 	 * @return $URI 
@@ -258,217 +272,17 @@ class ArcModel extends Model{
 		return $bnode;
 	}
 
-	public function getFieldValue($URI, $path) {
-		$bnode = $this->followToBNode($URI, $path);
-		$type = end(explode("->", $path));
-		var_dump($bnode);
-		echo "----";
-		var_dump($type);
-		$q = "select ?value where { " . 
-			"'" .$bnode . "' 'http://opensustainability.info/vocab#" . $type . "' ?value . " . 			
-			"}";
-		$records = $this->executeQuery($q);	
-		return $records;	
-	}
-
-	/**
-	 * Retrieves and returns summary information for all existing records
-	 * @return $records Array	
-	 */
-	public function simpleSearch($value = null, $limit = 20, $offset = 0) {
-		$URIs = array();
-		$q = "select ?uri where { " . 
-			" ?uri '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " ;
-		if ($value != null) {
-			$q .= " ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 
-					"FILTER regex(?label, '" . $value . "', 'i')";
-		} 
-		$q .= "}" . 
-				"LIMIT " . $limit . " " . 
-				"OFFSET " . $offset . " ";
-
-		$records = $this->executeQuery($q);	
-		foreach ($records as $record) {
-			$URIs[] = $record['uri'];
-		}
-		return $URIs;
-	}
-
-
-	/**
-	 * Retrieves and returns all the impacts of an existing uri
-	 * @return $records Array	
-	 * @param $uri string
-	 */
-	public function getImpacts($URI) {
-		$q = "select ?impactCategory ?impactCategoryValue ?impactCategoryUnit where { " . 
-			" <".$URI."> 'http://opensustainability.info/vocab#impactAssessment' ?impactAssessment . " .
-			" ?impactAssessment 'http://opensustainability.info/vocab#classification' ?classification . " .				 	
-			" ?classification 'http://opensustainability.info/vocab#impactCategory' ?impactCategory . " . 			
-			" ?classification 'http://opensustainability.info/vocab#impactCategoryValue' ?impactCategoryValue . " . 
-			" ?classification 'http://opensustainability.info/vocab#impactCategoryUnit' ?impactCategoryUnit . " .
-			"}";
-		$records = $this->executeQuery($q);	
-		foreach ($records as &$record) {
-			$record['URI'] = $URI;
-		}
-		return $records;
-	}
-	
-	/**
-	 * Retrieves and returns all the impacts of an existing uri
-	 * @return $records Array	
-	 * @param $uri string
-	 */
-	public function getConvertedImpactAssessments($URI) {
-		$q = "select ?impactCategory ?impactCategoryIndicator ?impactCategoryValue ?impactCategoryUnit where { " . 
-			" ?bnode 'http://ontology.earthster.org/eco/core#computedFrom' <".$URI."> . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:ImpactAssessment' . " .	
-			" ?bnode 'http://ontology.earthster.org/eco/core#hasImpactCategoryIndicatorResult' ?bnode2 . " .
-			" ?bnode2 'http://ontology.earthster.org/eco/core#hasImpactAssessmentMethodCategoryDescription' ?bnode3 . " .			 	
-			" ?bnode3 'http://ontology.earthster.org/eco/core#hasImpactCategory' ?impactCategory . " .			
-			" ?bnode3 'http://ontology.earthster.org/eco/core#hasImpactCategoryIndicator' ?impactCategoryIndicator . " .
-			" ?bnode2 'http://ontology.earthster.org/eco/core#hasQuantity' ?bnode4 . " . 			
-			" ?bnode4 'http://ontology.earthster.org/eco/core#hasUnitOfMeasure' ?impactCategoryUnit . " . 
-			" ?bnode4 'http://ontology.earthster.org/eco/core#hasMagnitude' ?impactCategoryValue . " .				
-			"}";				
-		$records = $this->executeQuery($q);	
-		//var_dump($records);
-		foreach ($records as &$record) {
-			$record['impactCategory'] = $this->getLabel($record['impactCategory']);
-			$record['impactCategoryIndicator'] = $this->getLabel($record['impactCategoryIndicator']);
-			$record['impactCategoryUnit'] = $this->getLabel($record['impactCategoryUnit']);
-		}
-		return $records;
-	}
-	
-	
-	
-	public function getImpactAssessments($URI) {
-		$q = "select ?bnoder where { " . 
-			" ?bnode 'http://ontology.earthster.org/eco/core#computedFrom' <".$URI."> . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:ImpactAssessment' . " .
-			" ?bnode 'http://ontology.earthster.org/eco/core#hasImpactCategoryIndicatorResult' ?bnoder . " .			
-			"}";				
-		$records = $this->executeQuery($q);	
-		$full_records = array();
-		foreach($records as $record) {
-			$full_record[] = $this->getTriples($record['bnoder']);
-		}
-		return $full_record;
-	}
-		
-	public function getBibliography($URI) {
-		$q = "select ?bibouri where { " . 
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#hasDataSource' ?bibouri . " .			
-			"}";				
-		$records = $this->executeQuery($q);
-		$full_record = array();		
-		foreach ($records as $record) {
-			$link = array('link' => $record['bibouri']);
-			$full_record[$record['bibouri']] = array_merge($link, $this->getTriples($record['bibouri']));			
-		}
-		return $full_record;
-	}
-
-	public function getModeled($URI) {
-		$q = "select ?bnode where { " . 
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#models' ?bnode . " .			
-			"}";				
-		$records = $this->executeQuery($q);
-		$full_record = array();		
-		foreach ($records as $record) {
-			$link = array('link' => $record['bnode']);
-			$full_record[$record['bnode']] = array_merge($link, $this->getTriples($record['bnode']));			
-		}
-		return $full_record;
-	}	
-	
-	public function getGeography($URI) {
-		$q = "select ?geo_uri where { " . 
-			" <".$URI."> '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " .
-			"?bnode '" . $this->arc_config['ns']['eco'] . "hasGeoLocation' ?geo_uri . " . 			
-			"}";				
-		$records = $this->executeQuery($q);	
-		if (count($records) != 0) {
-			return $records;
-		} else {
-			return false;
-		}
-	}
-	
-	public function getLCAsByPublisher($foaf_uri) {
-		$q = "select ?uri ?title where { " . 
-			" ?uri '" . $this->arc_config['ns']['dcterms'] . "publisher' '" . $foaf_uri . "' . " . 	
-			" ?uri '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " . 
-			" ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' ?title . " . 		
-			"}" . 
-			"LIMIT 10 ";
-
-		$records = $this->executeQuery($q);	
-
-		if (count($records) != 0) {
-			return $records;
-		} else {
-			return false;
-		}
-	}
-	
-	
-	
-	public function getQR($URI) {
-		$q = "select ?bnode ?name where { " . 
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#models' ?bnode . " .			
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type'  'eco:Product' . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#label'  ?name . " .
-			"}";				
-		$records = $this->executeQuery($q);
-		if (count($records) > 0) {
-			$q = "select ?magnitude ?unit where { " . 
-				" ?exchange_bnode 'http://ontology.earthster.org/eco/core#hasEffect' ?effect_bnode . " .
-				" ?exchange_bnode 'http://ontology.earthster.org/eco/core#hasQuantity' ?quantity_bnode . " .
-				" ?quantity_bnode 'http://ontology.earthster.org/eco/core#hasMagnitude' ?magnitude . " .
-				" ?quantity_bnode 'http://ontology.earthster.org/eco/core#hasUnitOfMeasure' ?unit . " .
-				" ?effect_bnode 'http://ontology.earthster.org/eco/core#hasTransferable' <" . $records[0]['bnode'] . "> . " .			
-				"}";
-			$full_records = $this->executeQuery($q);
-			$full_records[0]['name'] = $records[0]['name'];
-			return $full_records;
-		} else {
-			return false;
-		}
-	}
-	
-	
-	
-	public function getExchanges($URI) {
-		$q = "select ?bnode where { " . 
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#hasUnallocatedExchange' ?bnode . " .				
-			"}";				
-		$records = $this->executeQuery($q);
-		$q2 = "select ?bnode where { " . 	
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#hasAllocatedExchange' ?bnode . " .				
-			"}";				
-		$records2 = $this->executeQuery($q2);
-		$records = array_merge($records, $records2);
-		$full_record = array();		
-		foreach ($records as $record) {
-			$link = array('link' => $record['bnode']);
-			$full_record[$record['bnode']] = array_merge($link, $this->getTriples($record['bnode']));			
-		}
-		return $full_record;
-	}
-	
-	
-	public function getLabel($URI) {
-		$q = "select ?name where { " . 
-			" <".$URI."> 'http://www.w3.org/2000/01/rdf-schema#label'  ?name . " .
-			"}";				
-		$records = $this->executeQuery($q);
-		if (count($records) > 0) {
-			return $records[0]['name'];
-		} else {
-			return $URI;
+	public function getLabel($URI, $db="local") {				
+		$record = $this->getSomething($URI, "rdfs:label", $db);
+		if ($record != "") {
+			return $record;
+		} else {				
+			$record = $this->getSomething($URI, "rdf:label", $db);
+			if ($record != "") {
+				return $record;
+			} else {
+				return $URI;
+			}
 		}
 	}	
 	
@@ -495,7 +309,7 @@ class ArcModel extends Model{
 	 */	
 	public function getNextBnode($previous_bnode, $next_type) {
 		$q = "select ?next_bnode where { " . 
-			" <".$previous_bnode."> 'http://opensustainability.info/vocab#".$next_type."' ?next_bnode . " . 
+			" <".$previous_bnode."> ?c ?next_bnode . " . 
 			"}";	
 		$records = $this->executeQuery($q);	
 		return $records;
@@ -517,23 +331,6 @@ class ArcModel extends Model{
 	}
 	
 	
-	
-	/**
-	 * Gets the Parent node of a bnode
-	 * @return $records Array	
-	 * @param $next_bnode string
-	 */	
-	public function latest($limit) {
-		$q = "select ?uri ?created ?name where { " . 
-			"?uri dcterms:created ?created . " . 
-			"?uri 'http://ontology.earthster.org/eco/core#models' ?bnode . " .			
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type'  'eco:Product' . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#label'  ?name . " .
-			"} ORDER BY DESC(?created)";	
-		$records = $this->executeQuery($q);	
-		return $records;
-	}
-	
 	public function created() {	
 		$q = "select ?uri where { " . 
 			"?uri rdfs:type ?x . " . 
@@ -548,75 +345,6 @@ class ArcModel extends Model{
 			$this->executeQuery($q2);			
 		}
 
-	}	
-	
-	
-	public function getComments($uri) {
-		$q = "select ?post ?title ?comment ?created ?author where { " . 
-			"<" . $uri . "> sioc:post ?post . " . 
-			"?post dcterms:title ?title . " . 
-			"?post dcterms:created ?created . " .
-			"?post sioc:content ?comment . " .
-			"?post sioc:hasCreator ?account . " .			
-			"?account sioc:userAccount ?author . " . 
-			"}";
-			//, ?comment, ?title, ?author, ?created	
-		$records = $this->executeQuery($q);	
-		$comments = $records;
-			if(count($records) > 0) {
-				$count = 0;
-				foreach ($records as $record) {
-					$replies = $this->getComments($record['post']);
-					if(count($replies) > 0) {
-						$comments[$count]['replies'] = $replies;
-					}
-					$count++;
-				}
-				return $comments;		
-			}
-	}
-	
-	
-	public function searchFoaf($info) {
-		$vars = "";
-		$q = "";
-		if (isset($info['uri']) == true) {
-			$q .= "<" . $info['uri'] . "> 'http://xmlns.com/foaf/0.1/Person' ?person . ";		
-		} else {
-			$vars .= "?uri ";
-			$q .= "?uri 'http://xmlns.com/foaf/0.1/Person' ?person . ";
-		}
-		if (isset($info['firstName']) == true) {
-			$q .= "?person 'http://xmlns.com/foaf/0.1/firstName' '" . $info['firstName'] . "' . ";		
-		} else {
-			$vars .= "?firstName ";
-			$q .= "?person 'http://xmlns.com/foaf/0.1/firstName' ?firstName . ";	
-		}
-		if (isset($info['lastName']) == true) {
-			$q .= "?person 'http://xmlns.com/foaf/0.1/lastName' '" . $info['lastName'] . "' . ";		
-		} else {
-			$vars .= "?lastName ";
-			$q .= "?person 'http://xmlns.com/foaf/0.1/lastName' ?lastName . ";	
-		}
-		if (isset($info['email']) == true) {
-			$q .= "?person 'http://xmlns.com/foaf/0.1/mbox_sha1sum' '" . $info['email'] . "' . ";		
-		} else {
-			$vars .= "?email ";
-			$q .= "?person 'http://xmlns.com/foaf/0.1/mbox_sha1sum' ?email . ";	
-		}
-
-		$q = "select " . $vars . "where { " . $q . "}";
-
-		$records = $this->executeQuery($q);	
-		foreach ($records as &$record) {
-			foreach($info as $name=>$field)
-			$record[$name] = $field;
-		}
-		if (count($records) > 0) {
-			return $records;
-		} else {
-			return false;
-		}
 	}
 	
 }

@@ -1,32 +1,31 @@
 <form action="/impactAssessment/create" name="impactAssessment">
-	<blank rules="">
-        <type>hidden</type>
-        <value>true</value>
-    </blank>
-	<fieldset name="Impact Assessment" multiple="yes" linked_type="bibo:impactAssessment">	
-		<impactCategory rules="trim">
-			<label>Impact Category</label>
-			<type>lookup</type>
-			<lookup>impact category</lookup>
-			<linked_type>eco:impactCategory</linked_type>
-		</impactCategory>
-		<impactIndicator rules="trim">
-			<label>Impact Indicator</label>
-			<type>lookup</type>
-			<lookup>impact indicator</lookup>
-			<linked_type>eco:impactIndicator</linked_type>
-		</impactIndicator>
-		<assessmentQuantity rules="trim">
-			<label>Quantity</label>
-			<type>text</type>
-			<linked_type>eco:assessmentQuantity</linked_type>
-		</assessmentQuantity>		
-		<assessmentUnit rules="trim">
-			<label>Unit</label>
-			<type>lookup</type>
-			<lookup>unit</lookup>
-			<linked_type>eco:assessmentUnit</linked_type>
-		</assessmentUnit>		
+	<computedFrom rules="trim">
+		<label>Computed From</label>
+		<type>hidden</type>
+		<linked_type>eco:computedFrom</linked_type>
+	</computedFrom>
+	<fieldset name="Impact Assessment" linked_type="eco:impactAssessment">	
+		<fieldset name="Impact Category Indicator Result" linked_type="eco:hasImpactCategoryIndicatorResult">
+			<fieldset Name="Impact Assessment Method Category Description" linked_type="eco:hasImpactAssessmentMethodCategoryDescription">
+				<impactCategory rules="trim">
+					<label>Impact Category</label>
+					<type>popup</type>
+					<lookup>impact</lookup>
+					<linked_type>eco:hasImpactCategory</linked_type>
+				</impactCategory>
+				<impactCategoryIndicator rules="trim">
+					<label>Impact Indicator</label>
+					<type>popup</type>
+					<lookup>impact</lookup>
+					<linked_type>eco:hasImpactCategoryIndicator</linked_type>
+				</impactCategoryIndicator>
+			</fieldset>
+			<fieldset name="Quantity" root="quantity" linked_type="eco:hasQuantity">
+				<blank rules="">
+					<type>blank</type>
+				</blank>
+			</fieldset>
+		</fieldset>
 	</fieldset>	
 	    <submit rules="">
 	        <type>submit</type>
