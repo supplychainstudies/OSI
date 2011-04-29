@@ -1,9 +1,50 @@
-<form action="/lca/create/exchange" name="exchange">
-	  <fieldset name="Quantity" linked_type="eco:hasQuantity">
-	    <submit>
-	        <type>submit</type>
-	        <value>Submit</value>
-	    </submit>
+<form action="/lca/create/exchange" name="Exchange">
+	<blank rules="">
+		<type>hidden</type>
+	</blank>
+	<fieldset name="Exchange" linked_type="eco:hasExchange">
+		<blank rules="">
+			<type>hidden</type>
+		</blank>
+		<fieldset name="Effect" linked_type="eco:hasEffect">
+			<direction rules="trim">
+		        <label>Input/Output</label>
+		        <type>radio</type>
+		        <options>
+		            <Input>Input</Input>
+		            <Output>Output</Output>
+		        </options>
+				<linked_type>rdfs:type</linked_type>
+		    </direction>
+		    <exchange rules="trim">
+		        <label>Transfer/Flow</label>
+		        <type>radio</type>
+		        <options>
+		            <exchange>Exchange between the process and the environment</exchange>
+		            <transfer>Exchange between processes</transfer>
+		        </options>
+				<linked_type>rdfs:type</linked_type>
+		    </exchange>
+			<fieldset name="Flowable" linked_type="eco:hasFlowable">
+				<blank rules="">
+					<type>hidden</type>
+				</blank>
+			</fieldset>
+			<fieldset name="Transferable" linked_type="eco:hasTransferable">
+				<blank rules="">
+					<type>hidden</type>
+				</blank>
+			</fieldset>			
+		</fieldset>
+	  	<fieldset name="Quantity" linked_type="eco:hasQuantity" root="quantity">
+			<blank rules="">
+				<type>hidden</type>
+			</blank>
+ 		</fieldset>
 	</fieldset>
+    <submit>
+        <type>submit</type>
+        <value>Submit</value>
+    </submit>
 </form>
 

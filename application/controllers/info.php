@@ -12,14 +12,14 @@
 class Info extends SM_Controller {
 	public function Info() {
 		parent::SM_Controller();
-		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
+		$this->load->model(Array('lcamodel','unitmodel'));	
 		$this->load->library(Array('form_extended', 'name_conversion'));
-		$this->load->helper(Array('lcaformat_helper'));
+		//$this->load->helper(Array('lcaformat_helper'));
 	}
 	public $URI;
 	public $data;
 	public $post_data;
-
+	public $tooltips = array();
 	/***
     * @public
     * Shows the homepage
@@ -30,7 +30,7 @@ class Info extends SM_Controller {
 		
 		
 		// Querying the database for all records		
-		@$records = @$this->arcmodel->getRecords();
+		$records = $this->lcamodel->getRecords();
 		// Initializing array
 		$set = array();
 		// Add tooltips
@@ -42,11 +42,7 @@ class Info extends SM_Controller {
 			foreach ($record as $_key => $field) {
 				// if its a uri, get the label and store that instead 
 				// rewrite this into a better function later
-				if (strpos($field, "dbpedia") !== false) {
-					$set[$key][$_key] = @$this->getLabel($field, 'rdfs:type');		
-				} else {
 					$set[$key][$_key] = $field;
-				}
 			}
 			
 			
@@ -71,12 +67,12 @@ class Info extends SM_Controller {
 			}*/				
 		
 		}
-		$featured = $this->arcmodel->simplesearch("aluminum",1,0);
+		$featured = $this->lcamodel->simplesearch("aluminum",1,0);
 		foreach ($featured as $feature_uri) {
 	    	$feature_info = array (
 	              'uri' => $feature_uri,
-	               'impactAssessments' => convertImpactAssessments(@$this->arcmodel->getImpactAssessments($feature_uri)),
-	               'quantitativeReference' => convertQR(@$this->arcmodel->getQR($feature_uri))
+	               'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($feature_uri, &$this->tooltips),&$this->tooltips),
+	               'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($feature_uri),&$this->tooltips)
 	               );
 	    }
 		if ($feature_info['quantitativeReference']['unit'] == "qudtu:Kilogram") {
@@ -116,4 +112,6 @@ class Info extends SM_Controller {
 		// Send data to the view
 		$this->display("Home","home_view");		
 	}
+	
+	
 }

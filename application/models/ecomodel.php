@@ -1,5 +1,5 @@
 <?php
-include_once('arcremotemodel.php');
+include_once('arcmodel.php');
 /**
  * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
  * 
@@ -7,13 +7,13 @@ include_once('arcremotemodel.php');
  * @subpackage models
  */
  
-class Ecomodel extends ArcRemoteModel{
+class Ecomodel extends ArcModel{
      
     /**
      * @ignore
      */
     function Ecomodel(){
-        parent::arcremotemodel();
+        parent::arcmodel();
  
     }
      
@@ -55,7 +55,7 @@ class Ecomodel extends ArcRemoteModel{
             "?uri '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 
             "}";
              
-        $results = $this->executeQuery($q);
+        $results = $this->executeQuery($q, "remote");
         if (count($results) != 0) {
             return $results;
         } else {
@@ -70,12 +70,21 @@ class Ecomodel extends ArcRemoteModel{
             "?uri '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 
             "}";
  
-        $results = $this->executeQuery($q);
+        $results = $this->executeQuery($q, "remote");
         if (count($results) != 0) {
             return $results;
         } else {
             return false;
         }
     }
+
+	public function makeToolTip($uri, $tooltips) {
+		if (isset($tooltips[$uri]) != true) {
+			if (strpos($uri,":") !== false) {
+				$tooltips[$uri]['label'] = $this->getLabel($uri,"remote");	
+				$tooltips[$uri]['l'] = $this->tooltips[$uri]['label'];
+			} 
+		}
+	}
      
 }

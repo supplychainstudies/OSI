@@ -52,7 +52,7 @@ class Form_extended extends Form {
 				$name = str_replace(" ", "", $post_data['title_']);
 			}
 			if ($subject != "") {
-				$subject = toURI($group['__attrs']['root']);
+				$subject = toURI($group['__attrs']['root'],$name);
 				$new_subject_attrs = toBNode($group['__attrs']['linked_type']);
 			} else {
 				$new_subject_attrs = toURI($group['__attrs']['root']);
@@ -74,7 +74,7 @@ class Form_extended extends Form {
                 foreach ($val as $_group) {	
 					$count = 0;
 					if (isset($_group['__attrs']['root']) == true) {
-						
+						$_group = $this->load($_group['__attrs']['root']);
 					}
 					if (isset($_group['__attrs']['multiple']) == true) {
 						

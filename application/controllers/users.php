@@ -19,7 +19,7 @@ class Users extends SM_Controller {
 		
 	public function Users() {
 		parent::SM_Controller();
-		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
+		$this->load->model(Array('arcmodel', 'mysqlmodel'));	
 		$this->lang->load('openid', 'english');
 	    $this->load->library(Array('openid','form_extended', 'form_validation', 'SimpleLoginSecure'));
 	    $this->load->helper('url');
