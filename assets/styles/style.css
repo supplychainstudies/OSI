@@ -447,7 +447,8 @@ a:hover{
 .medium {
 	height: 190px;
 	width: 190px;
-	text-align: center;	
+	text-align: center;
+
 }
 .big {
 	height: 300px;
@@ -464,7 +465,7 @@ a:hover{
 	background-color: #333333;
 }
 .square {
-	float: left;
+	float:left;
 	margin: 5px;
 	padding: 10px;
 }
