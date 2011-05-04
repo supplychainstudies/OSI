@@ -11,7 +11,7 @@
 class JsonModel extends Model{
 
 	function JsonModel(){
-		parent::Model();
+		parent::__construct();
 	}
 	function getJSONasArray($name) 
 	{

@@ -11,9 +11,9 @@
 
 
 
-class SIAPI extends SM_Controller {
+class SIAPI extends FT_Controller {
 	public function SIAPI() {
-		parent::SM_Controller();
+		parent::__construct();
 		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
 		$this->load->library(Array('form_extended', 'name_conversion','SimpleLoginSecure'));
 	}

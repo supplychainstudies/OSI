@@ -16,7 +16,7 @@ class UsersModel extends Model{
 	 * @ignore
 	 */
 	function UsersModel(){
-		parent::Model();
+		parent::__construct();
 
 	}
 

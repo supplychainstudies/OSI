@@ -11,7 +11,7 @@
 
 
 
-class Comments extends SM_Controller {
+class Comments extends FT_Controller {
 	public function Comments() {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel'));

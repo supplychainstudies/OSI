@@ -31,12 +31,12 @@
 				$(this).removeClass("blue");
                 $(this).addClass("big");
 				$(this).addClass("grey");
+
+				$(this).load('/lca/getImpacts/'+$(this).attr('id'));
+				
 				$(this).parent().masonry({	  
 					  singleMode: true, 
 					  itemSelector: '.square'});
-				}
-				$(this).load('/lca/getImpacts/'+$(this).attr('id'));
-
 				$('#columnleft').masonry();
 				return false;	
 		

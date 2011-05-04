@@ -1,5 +1,4 @@
 <?php
-include_once('arcmodel.php');
 /**
  * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
  * 
@@ -7,13 +6,13 @@ include_once('arcmodel.php');
  * @subpackage models
  */
 
-class Unitmodel extends ArcModel{
+class Unitmodel extends FT_Model{
 	
 	/**
 	 * @ignore
 	 */
 	function Unitmodel(){
-		parent::arcmodel();
+		parent::__construct();
 
 	}
 	
@@ -23,9 +22,9 @@ class Unitmodel extends ArcModel{
 				$tooltips[$uri] = array();
 				$tooltips[$uri]['label'] = $this->getLabel($uri,"remote");	
 				$tooltips[$uri]['abbr'] = $this->getAbbr($uri);
-				$tooltips[$uri]['l'] = $this->tooltips[$uri]['abbr'];
+				$tooltips[$uri]['l'] = $tooltips[$uri]['abbr'];
 				$tooltips[$uri]['quantityKind'] = $this->getQuantityKind($uri);				
-				if ($this->tooltips[$uri]['l'] == false) { 
+				if ($tooltips[$uri]['l'] == false) { 
 					$uri_parts = explode(":", $uri);
 					return $uri_parts[1];
 				} 

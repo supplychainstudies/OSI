@@ -7,13 +7,13 @@
  * @subpackage models
  */
 
-class ArcModel extends CI_Model{
+class FT_Model extends CI_Model{
 	
 	/**
 	 * @ignore
 	 */
-	function ArcModel(){
-		parent::__Construct();
+	function FT_Model(){
+		parent::__construct();
 		$this->load->library('arc2/ARC2', '', 'arc');
 		//$this->config->load('arc');	  
 	    $this->config->load('arc');	
@@ -129,6 +129,10 @@ class ArcModel extends CI_Model{
 	
 	
 	public function getSomething($uri, $predicate, $db="local") { 
+		//var_dump($uri);
+		//var_dump(strpos($uri,"http://"));
+		//var_dump(strpos($uri,":"));
+		
 		if (strpos($uri,"http://") !== false) {
 			$the_uri = $uri;
 		} elseif (strpos($uri,":") !== false) {

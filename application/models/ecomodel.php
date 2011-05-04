@@ -1,5 +1,4 @@
 <?php
-include_once('arcmodel.php');
 /**
  * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
  * 
@@ -7,13 +6,13 @@ include_once('arcmodel.php');
  * @subpackage models
  */
  
-class Ecomodel extends ArcModel{
+class Ecomodel extends FT_Model{
      
     /**
      * @ignore
      */
     function Ecomodel(){
-        parent::arcmodel();
+        parent::__construct();
  
     }
      
@@ -82,7 +81,7 @@ class Ecomodel extends ArcModel{
 		if (isset($tooltips[$uri]) != true) {
 			if (strpos($uri,":") !== false) {
 				$tooltips[$uri]['label'] = $this->getLabel($uri,"remote");	
-				$tooltips[$uri]['l'] = $this->tooltips[$uri]['label'];
+				$tooltips[$uri]['l'] = $tooltips[$uri]['label'];
 			} 
 		}
 	}

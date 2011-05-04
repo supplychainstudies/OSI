@@ -1,6 +1,6 @@
 <?php  
 
-class MY_Controller extends CI_Controller {
+class FT_Controller extends CI_Controller {
 
 	private $_title = "";
 	private $_baseview = "";

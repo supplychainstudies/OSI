@@ -9,11 +9,11 @@
  * @uses 
  */
 
-class Info extends MY_Controller {
+class Info extends FT_Controller {
 	
 	public function __construct() {
 		parent::__construct();
-		//$this->load->model(Array('lcamodel'));
+		$this->load->model(Array('lcamodel'));
 		$this->load->model(Array('unitmodel'));	
 		$this->load->library(Array('form_extended', 'name_conversion'));
 		//$this->load->helper(Array('lcaformat_helper'));
@@ -28,7 +28,7 @@ class Info extends MY_Controller {
 	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
     */
 	// Public function for exploring the repository
-	/*public function browse() {
+	public function browse() {
 			
 		// Querying the database for all records		
 		$records = $this->lcamodel->getRecords();

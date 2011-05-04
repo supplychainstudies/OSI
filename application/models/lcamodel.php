@@ -5,14 +5,13 @@
  * @package opensustainability
  * @subpackage models
  */
- 
-class Lcamodel extends ArcModel{
+ class Lcamodel extends FT_Model{
      
     /**
      * @ignore
      */
     public function Lcamodel(){
-        parent::arcmodel();
+        parent::__construct();
 		$this->load->model(Array('unitmodel','geographymodel','ecomodel'));
     }
 
@@ -39,7 +38,7 @@ class Lcamodel extends ArcModel{
 			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
 				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
 					$converted_dataset[$key]['impactCategory'] = $___record;
-					$this->ecomodel->makeToolTip($___record, &$tooltips);
+					$this->ecomodel->makeToolTip($___record, $tooltips);
 				} 
 				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
 					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
@@ -51,7 +50,7 @@ class Lcamodel extends ArcModel{
 				}
 				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
 					$converted_dataset[$key]['unit'] = $___record;
-					$this->unitmodel->makeToolTip($___record, &$tooltips);
+					$this->unitmodel->makeToolTip($___record, $tooltips);
 				}		
 			}	
 			if (isset($converted_dataset[$key]['unit']) == false) {
@@ -101,7 +100,7 @@ class Lcamodel extends ArcModel{
 					} 
 					foreach($_record[$eco_prefix."hasUnitOfMeasure"] as $unitOfMeasure) {
 						$converted_dataset[$key]['unit'] = $unitOfMeasure;
-						$this->unitmodel->makeToolTip($unitOfMeasure, &$this->tooltips);
+						$this->unitmodel->makeToolTip($unitOfMeasure, $tooltips);
 					} 
 				}
 			}
@@ -129,7 +128,7 @@ class Lcamodel extends ArcModel{
 			if(isset($record[$rdfs_prefix."type"]) == true) {
 				foreach($record[$rdfs_prefix."type"] as $type) {
 					foreach($record[$rdfs_prefix."label"] as $label) {
-							$this->ecomodel->makeToolTip($type, &$tooltips);
+							$this->ecomodel->makeToolTip($type, $tooltips);
 							$converted_dataset['type'] = $type;
 					}				
 				}				

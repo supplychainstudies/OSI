@@ -9,7 +9,7 @@
  * @uses 
  */
 
-class Lca extends MY_Controller {
+class Lca extends FT_Controller {
 	public function Lca() {
 		parent::__construct();
 		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel'));	
@@ -275,7 +275,6 @@ var_dump($product_node);
 			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
 				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
 					$converted_dataset[$key]['impactCategory'] = $___record;
-					$this->anchor($___record);
 				} 
 				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
 					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
@@ -287,7 +286,6 @@ var_dump($product_node);
 				}
 				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
 					$converted_dataset[$key]['unit'] = $___record;
-					$this->anchor($___record);
 				}		
 			}	
 			if (isset($converted_dataset[$key]['unit']) == false) {
@@ -307,11 +305,16 @@ var_dump($product_node);
 	}
 		
 	public function getImpacts($URI = null) {
-			error_reporting(E_PARSE);     
+			$this->tooltips["qudtu:Kilogram"]["label"] = "Kilogram";
+			$this->tooltips["qudtu:Kilogram"]["abbr"] = "Kg";
+			$this->tooltips["qudtu:Kilogram"]["l"]= "Kg";
+			$this->tooltips["qudtu:Kilogram"]["quantityKind"] = "Mass";
+
+
 			$feature_info = array (
 		            'uri' => $URI,
-		            'impactAssessments' => $this->convertImpactAssessments(@$this->arcmodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI)),
-		    		'quantitativeReference' => $this->convertQR(@$this->arcmodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI))
+		            'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips),
+		    		'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
 		    );
 			if ($feature_info['quantitativeReference']['unit'] == "qudtu:Kilogram") {
 				$ratio = $feature_info['quantitativeReference']['amount'];
@@ -355,11 +358,12 @@ var_dump($product_node);
 				$margin = (100-$size)/2;
 				$margintop = (100-$size)/6;
 
+
 				// Create the HTML text to give back
 				$text .= '<div class="impact"><div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				$text .= '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
-				$text .= '<div class="meta"><p class="unit">'.  linkThis($parts['quantitativeReference']['unit'], $parts["tooltips"]) .'</p><p class="category">';
-				$text .=  linkThis($parts['quantitativeReference']['unit'], $parts["tooltips"]);
+				$text .= '<div class="meta"><p class="unit">'.  linkThis($impactAssessment['unit'], $parts["tooltips"]) .'</p><p class="category">';
+				$text .=  linkThis($impactAssessment['unit'], $parts["tooltips"]);
 				$text .= "<p/></div></div>"; 
 
 			}

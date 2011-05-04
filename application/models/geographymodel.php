@@ -1,5 +1,4 @@
 <?php
-include_once('arcmodel.php');
 /**
  * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
  * 
@@ -7,13 +6,13 @@ include_once('arcmodel.php');
  * @subpackage models
  */
  
-class Geographymodel extends ArcModel{
+class Geographymodel extends FT_Model{
      
     /**
      * @ignore
      */
     function Geographymodel(){
-        parent::arcmodel();
+        parent::__construct();
  
     }
 
