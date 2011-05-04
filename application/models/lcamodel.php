@@ -1,5 +1,4 @@
 <?php
-include_once('arcmodel.php');
 /**
  * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
  * 

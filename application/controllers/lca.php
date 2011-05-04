@@ -9,11 +9,9 @@
  * @uses 
  */
 
-
-
-class Lca extends SM_Controller {
+class Lca extends MY_Controller {
 	public function Lca() {
-		parent::SM_Controller();
+		parent::__construct();
 		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper'));
@@ -147,7 +145,6 @@ var_dump($product_node);
 	}
 
 
-
 	/***
 	* @public
 	* Grabs all the triples for a particular URI and shows it in RDF
@@ -159,7 +156,6 @@ var_dump($product_node);
 		echo $rdf;
 	}	
 
-
 	/***
 	* @public
 	* Grabs all the triples for a particular URI and shows it in JSON
@@ -169,8 +165,7 @@ var_dump($product_node);
 		header('Content-type: application/json');
 		echo $json;
 	}
-	
-	
+		
 	/***
 	* @private
 	* Builds the tooltip array from linked data
@@ -182,13 +177,13 @@ var_dump($product_node);
 	* Grabs all the triples for a particular URI and shows it in a friendly, human readable way
 	*/
 	public function view($URI = null) {	
-		@$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
+		@$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI), $this->tooltips);
 	
-		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
-		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);	
-		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
-		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
-		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
+		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI), $this->tooltips);
+		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI), $this->tooltips);	
+		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI), $this->tooltips);
+		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI), $this->tooltips);
+		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI), $this->tooltips);
 
 		$parts['tooltips'] = $this->tooltips;
 
@@ -308,11 +303,10 @@ var_dump($product_node);
 				$converted_dataset[$key]['impactCategoryIndicator'] = "?";
 			}
 		}
-			return $converted_dataset; 
-		}
+		return $converted_dataset; 
+	}
 		
-		
-		public function getImpacts($URI = null) {
+	public function getImpacts($URI = null) {
 			error_reporting(E_PARSE);     
 			$feature_info = array (
 		            'uri' => $URI,
@@ -372,7 +366,7 @@ var_dump($product_node);
 			echo $text;
 		}
 		
-		public function getName($URI = null) {
+	public function getName($URI = null) {
 			error_reporting(E_PARSE);     
 			$feature_info = array (
 		            'uri' => $URI,
@@ -381,14 +375,5 @@ var_dump($product_node);
 			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
 			echo $text;
 		}	
-		
-		
-		
-		
-		
-		
-			
-	}
-	
-
+				
 } // End Class

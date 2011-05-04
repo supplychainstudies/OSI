@@ -9,10 +9,12 @@
  * @uses 
  */
 
-class Info extends SM_Controller {
-	public function Info() {
-		parent::SM_Controller();
-		$this->load->model(Array('lcamodel','unitmodel'));	
+class Info extends MY_Controller {
+	
+	public function __construct() {
+		parent::__construct();
+		//$this->load->model(Array('lcamodel'));
+		$this->load->model(Array('unitmodel'));	
 		$this->load->library(Array('form_extended', 'name_conversion'));
 		//$this->load->helper(Array('lcaformat_helper'));
 	}
@@ -26,9 +28,8 @@ class Info extends SM_Controller {
 	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
     */
 	// Public function for exploring the repository
-	public function browse() {
-		
-		
+	/*public function browse() {
+			
 		// Querying the database for all records		
 		$records = $this->lcamodel->getRecords();
 		// Initializing array
@@ -44,56 +45,16 @@ class Info extends SM_Controller {
 				// rewrite this into a better function later
 					$set[$key][$_key] = $field;
 			}
-			
-			
-			/*/ Get all the Impacts 		
-			@$impacts = $this->arcmodel->getImpacts($record['link']);
-			// For each impact
-			foreach ($impacts as $impact) {
-				// Create a list of all the distinct impact categories
-				if (in_array($impact['impactCategory'], $impact_categories) == false) {
-					$impact_categories[] = $impact['impactCategory'];
-				}		
-				// append impacts to the correct record in the set variable
-				foreach ($impact as $__key => $_field) {
-					// if its a uri, get the label and store that instead
-					// rewrite this into a better function later
-					if (strpos($_field, "dbpedia") !== false) {
-						@$set[$key][$impact['impactCategory']][$__key] = $this->getLabel($_field, 'rdfs:type');
-					} else {
-						$set[$key][$impact['impactCategory']][$__key] = $_field;
-					}					
-				}
-			}*/				
-		
 		}
-		$featured = $this->lcamodel->simplesearch("aluminum",1,0);
-		foreach ($featured as $feature_uri) {
-	    	$feature_info = array (
-	              'uri' => $feature_uri,
-	               'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($feature_uri, &$this->tooltips),&$this->tooltips),
-	               'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($feature_uri),&$this->tooltips)
-	               );
-	    }
-		if ($feature_info['quantitativeReference']['unit'] == "qudtu:Kilogram") {
-			$ratio = $feature_info['quantitativeReference']['amount'];
-			$feature_info['quantitativeReference']['amount'] = 1;
-			foreach ($feature_info['impactAssessments'] as &$impactAssessment) {
-				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-			}
-		}
-	
-		@$feature_uri['tooltips'] = $this->tooltips;
-			//Load RSS for news
-			 $this->load->library('RSSParser', array('url' => 'http://twitter.com/statuses/user_timeline/footprinted.rss', 'life' => 0));
-			  //Get six items from the feed
-			  $twitter = $this->rssparser->getFeed(6);			
+		//Load RSS for news
+		$this->load->library('RSSParser', array('url' => 'http://twitter.com/statuses/user_timeline/footprinted.rss', 'life' => 0));
+		//Get six items from the feed
+		$twitter = $this->rssparser->getFeed(6);			
 		
 		
 		// Send data to the view
 		$this->data("set", $set);
 		$this->data("twitter", $twitter);
-		$this->data("feature_info", $feature_info);
 		$this->display("Browse","browse_view");		
 	}
 

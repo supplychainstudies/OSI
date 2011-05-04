@@ -1,6 +1,6 @@
 <?php  
 
-class SM_Controller extends Controller {
+class MY_Controller extends CI_Controller {
 
 	private $_title = "";
 	private $_baseview = "";
@@ -17,10 +17,10 @@ class SM_Controller extends Controller {
 	private $_externalscripts = Array();
 	private $_scriptvars = Array();
 	
-	private $_defaultdescription = 'Sourcemachine App.';
+	private $_defaultdescription = 'Footprinted';
 	
-	public function SM_controller() {
-		parent::Controller();
+	public function __construct(){
+		parent::__construct();
 		$this->init();
 	}
 
@@ -165,9 +165,6 @@ class SM_Controller extends Controller {
 			$this->_scripts = array_merge($standard, $this->_scripts);
 		}
 		if($this->config->item("deploystatus") == "local") {			
-			// Include Google Analytics
-			$scriptDisplay .= "<script type=\"text/javascript\">var gaJsHost = ((\"https:\" == document.location.protocol) ? \"https://ssl.\" : \"http://www.\"); document.write(unescape(\"%3Cscript src='\" + gaJsHost + \"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));</script>";
-			
 			$jspath = base_url() . 'assets/scripts/';
 			if($included) {
 				$scriptDisplay .= '<script type="text/javascript" src="'.$jspath.'main.js"></script>';
@@ -181,10 +178,7 @@ class SM_Controller extends Controller {
 		}
 		else {
 			$jspath = 'assets/scripts/';
-			
-			// Include Google Analytics
-			$scriptDisplay .= "<script type=\"text/javascript\">var gaJsHost = ((\"https:\" == document.location.protocol) ? \"https://ssl.\" : \"http://www.\"); document.write(unescape(\"%3Cscript src='\" + gaJsHost + \"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));</script>";
-			
+				
 			if($included) {	$scriptDisplay .= '<script type="text/javascript" src="'.$minurl.$jspath.'main.js';}
 			else { $scriptDisplay .= '<script type="text/javascript" src="'.$minurl.$jspath.array_shift($this->_scripts); }			
 			

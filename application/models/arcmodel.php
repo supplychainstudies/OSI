@@ -7,13 +7,13 @@
  * @subpackage models
  */
 
-class ArcModel extends Model{
+class ArcModel extends CI_Model{
 	
 	/**
 	 * @ignore
 	 */
 	function ArcModel(){
-		parent::Model();
+		parent::__Construct();
 		$this->load->library('arc2/ARC2', '', 'arc');
 		//$this->config->load('arc');	  
 	    $this->config->load('arc');	
