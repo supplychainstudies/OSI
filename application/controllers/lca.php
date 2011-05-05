@@ -303,8 +303,14 @@ var_dump($product_node);
 		}
 		return $converted_dataset; 
 	}
-		
+	
+	/*
+	Function that given a URI for a resource provides an html for the environmental impacts. 
+	Function used for the homepage presentation.
+	*/	
 	public function getImpacts($URI = null) {
+			error_reporting(E_PARSE);  
+			
 			$this->tooltips["qudtu:Kilogram"]["label"] = "Kilogram";
 			$this->tooltips["qudtu:Kilogram"]["abbr"] = "Kg";
 			$this->tooltips["qudtu:Kilogram"]["l"]= "Kg";
@@ -323,58 +329,47 @@ var_dump($product_node);
 					$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
 				}
 			}
-
+			
 			@$parts['tooltips'] = $this->tooltips;
-			$text = '<h2>Footprint of one kilogram of '.$feature_info['quantitativeReference']['name'].'</h2>';
-
-			// Crunch the different impacts
+			
+			$text = '<p>Footprint of one kilogram of '.$feature_info['quantitativeReference']['name'].'</p>';
+			$text .= '<div id="tabs"><ul>';
+			
 			foreach ($feature_info['impactAssessments'] as $impactAssessment) {
-
-				// Select color and size of the bubbles
 				switch ($impactAssessment['impactCategoryIndicator']) {
-				    case 'ossia:waste':
-				        $color = "#C5E9FF";
-						$max = 10;
-						break;
-				    case 'ossia:CO2e':
-				        $color = "#5AC0FF";
-						$max = 10;
-						break;
-				    case "ossia:energy":
-				        $color = "#227CAF";
-						$max = 500;
-						break;
-					case "ossia:water":
-					    $color = "#45A3D8";
-						$max = 10;
-						break;
-					default:
-						$color = "#45A3D8";
-						$max = 50;
+				    case 'ossia:waste': $sign = "W"; break;
+				    case 'ossia:CO2e': $sign = "CO2";	break;
+					case 'ossia:C02e': $sign = "CO2";	break;
+				    case "ossia:energy": $sign = "E"; break;
+					case "ossia:water":$sign = "H20"; break;
 				}
 				
-				$size = 2* round(50*$impactAssessment['amount']/$max);
-				if ($size > 80) { $size = 80; }
-				$margin = (100-$size)/2;
-				$margintop = (100-$size)/6;
-
-
-				// Create the HTML text to give back
-				$text .= '<div class="impact"><div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
-				$text .= '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
-				$text .= '<div class="meta"><p class="unit">'.  linkThis($impactAssessment['unit'], $parts["tooltips"]) .'</p><p class="category">';
-				$text .=  linkThis($impactAssessment['unit'], $parts["tooltips"]);
-				$text .= "<p/></div></div>"; 
-
+				$text .= '<li><a href="#'.$impactAssessment['impactCategoryIndicator'].'">'.$sign.'</a></li>';
 			}
+			
+			$text .= '</ul>';
+			
+			foreach ($feature_info['impactAssessments'] as $impactAssessment) {
+				if($impactAssessment['impactCategoryIndicator'] != ""){
+				$text .= '<div class="tabinside" id="'.$impactAssessment['impactCategoryIndicator'].'"><div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div><div class="meta"><p class="unit">'. linkThis($impactAssessment['unit'], $parts["tooltips"], "label") .'</p></div></div>';
+				}
+			}
+			
+			$text .= '</div>';	
+			$text .= "<br/><a href='/lca/view/".$URI."'>More info >> </a>";
+			$text .= '<script>	$(function() { $( "#tabs" ).tabs({ event: "mouseover"	});	});</script>';
 			echo $text;
 		}
 		
-	public function getName($URI = null) {
-			error_reporting(E_PARSE);     
+		/*
+		Function that given a URI for a resource provides its human readable name. 
+		Used for the homepage presentation.
+		*/	
+		public function getName($URI = null) {
+ 			error_reporting(E_PARSE);    
 			$feature_info = array (
 		            'uri' => $URI,
-		    		'quantitativeReference' => $this->convertQR(@$this->arcmodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI))
+		    		'quantitativeReference' => $this->lcamodel->convertQR(@$this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
 		    );
 			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
 			echo $text;
