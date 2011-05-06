@@ -336,27 +336,22 @@ var_dump($product_node);
 			$text .= '<div id="tabs"><ul>';
 			
 			foreach ($feature_info['impactAssessments'] as $impactAssessment) {
-				switch ($impactAssessment['impactCategoryIndicator']) {
-				    case 'ossia:waste': $sign = "W"; break;
-				    case 'ossia:CO2e': $sign = "CO2";	break;
-					case 'ossia:C02e': $sign = "CO2";	break;
-				    case "ossia:energy": $sign = "E"; break;
-					case "ossia:water":$sign = "H20"; break;
-				}
-				
-				$text .= '<li><a href="#'.$impactAssessment['impactCategoryIndicator'].'">'.$sign.'</a></li>';
+				$text .= '<li><a href="#'.$impactAssessment['impactCategoryIndicator'].'"><div style="width:8px; height:8px;margin-left:10px;margin-top: 0px; background:#fff; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></a></li>';
 			}
 			
 			$text .= '</ul>';
 			
 			foreach ($feature_info['impactAssessments'] as $impactAssessment) {
 				if($impactAssessment['impactCategoryIndicator'] != ""){
-				$text .= '<div class="tabinside" id="'.$impactAssessment['impactCategoryIndicator'].'"><div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div><div class="meta"><p class="unit">'. linkThis($impactAssessment['unit'], $parts["tooltips"], "label") .'</p></div></div>';
+					
+				$text .= '<div class="tabinside" id="'.$impactAssessment['impactCategoryIndicator'].'">';
+							
+				$text .= '<div class="tab_nr"><h1><nrwhite>' . round($impactAssessment['amount'],2) ."</nrwhite> ". linkThis($impactAssessment['unit'], $parts["tooltips"], "l"). '</h1></div><div class="tab_meta"><p class="unit">'.$impactAssessment['impactCategoryIndicator'].'</p></div></div>';
 				}
 			}
 			
 			$text .= '</div>';	
-			$text .= "<br/><a href='/lca/view/".$URI."'>More info >> </a>";
+			$text .= "<div class='plus'><a href='/lca/view/".$URI."'><img src='/assets/images/plus.png' height='15px'/></a></div>";
 			$text .= '<script>	$(function() { $( "#tabs" ).tabs({ event: "mouseover"	});	});</script>';
 			echo $text;
 		}
@@ -373,6 +368,15 @@ var_dump($product_node);
 		    );
 			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
 			echo $text;
-		}	
+		}
+		public function getCO2($URI = null) {
+ 			error_reporting(E_PARSE);    
+			$feature_info = array (
+		            'uri' => $URI,
+		    		'quantitativeReference' => $this->lcamodel->convertQR(@$this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
+		    );
+			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
+			echo $text;
+		}
 				
 } // End Class

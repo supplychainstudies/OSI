@@ -22,7 +22,7 @@ h1#title {
 	color: black; 
 	text-align: center;
 	margin: 0 auto;
-	width: 970px;
+	width: 990px;
 	overflow: hidden;
 }
 
@@ -52,8 +52,9 @@ h1#title {
 }
 #columnright{
 	float:right;
-	text-align: right;
+	text-align: left;
 	width: 200px;
+	margin-left: 15px;
 }
 #columnwide{
 	float:left;
@@ -493,45 +494,66 @@ a:hover{
 		font-family: 'Lato', arial, serif; 	
 }
 h1.bignr {
-	font-size: 90px;
+	font-size: 22px;
 	font-family: 'Lato', arial, serif; 
-	color: #fff;
+	color: #333;
 	width: 100%;
-	text-align:center;
 	background-repeat:none;
 }
 
 /* Impact graphs for homepage */
-#columnleft .square .impact {
-	width:95px;
-	margin-top:15px;
-	float:left;
-	text-align:center;
+
+.plus {
+	float:right;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
-#columnleft .square .nr {
-	float: left;
-	height: 40px;
-	width: 95px;
+#tabs{
 	text-align:center;
-	color: #fff;
+}
+.tabinside{
+	height: 80px;
+	text-align:left;
+	margin-top: 20px;
+}
+.tab_circle {
+	float: left;
+	height:50px;
+	width:180px;
+	left:0px;
+	bottom: 10px;
+	text-align:center;
+	margin-left: 10px;	
+}
+.tab_nr {
+	float: left;
+	height: 45px;
+	width: 180px;
+	text-align:center;
 	font-size: 30px;
+	margin-left: 10px;
 }
-#columnleft .square .meta {
+nrwhite {
+	color: #fff;
+	font-size:42px;
+	font-family: 'Lato', arial, serif; 
+}
+#tabs h1 {
+	color: #fff;
+	font-size:14px;
+}
+#tabs h1 a {
+	color: #fff;
+	font-size:14px;
+	text-decoration:none;
+}
+.tab_meta {
 	float:left;
-	height: 100px;
-	width: 90px;
-	width: 95px;
+	height: 30px;
+	width: 180px;
 	text-align:center;
 }
-#columnleft .square .circle {
-	float: left;
-	height: 100px;
-	width: 95px;
-	text-align:center;
-}
-
-
 /* Divs for bar graphs in View LCA */
 .bar_background {
 	width:400px; height:20px; background-color:#CCC;

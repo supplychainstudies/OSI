@@ -29,21 +29,18 @@
 
 
 <div id="columnright">
-	<div class="wide aoi square"><p>We work for sustainability information to be free, open and easy to use.</p></div>
-	<div class="medium grey square">
-		<h1 class="bignr">456</h1>
-		<p>Footprints available</p>
-	</div>
-	<div class="wide aoi square"><h2><a href="/about">About Footprinted.org</a></h2></div>
-	<div class="wide aoi square"><h2><a href="/create/start">Create new data</a></h2></div>
-	<div class="wide aoi square"><h2>Latest news:</h2></div>
+	<p>We work for sustainability information to be free, open and easy to use.</p><p> <a href="/about">Read more about Footprinted.</a></p>
+	<h1 class="bignr">456 Footprints available</h1>
+	<p></p>
+	<h2><a href="/create/start">Create new data</a></h2>
+	<h2>Latest news:</h2>
 	 <? foreach ($twitter as $tweet) {
-		echo '<div class="wide aoi square"><p>';
+		echo '<p>';
 		echo $tweet['title'];
-		echo '</p></div>';
+		echo '</p>';
 	  }
 	?>
-	<div class="wide aoi square"><p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p></div>
+	<p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p>
 </div>
 	<?=$footerDisplay;?>
 </div>
@@ -76,7 +73,22 @@
 		
 	});	
 
+	$(function() {
 
+	    //Get Divs
+	    $('#leftcolumn > [square]').each(function(i) {
+			// Get CO2
+			co2 = ('/lca/getCO2/'+opensquare.attr('id'));
+			// Scale
+			side = Math.sqrt(co2*2500);
+			$(this).width(side);
+			$(this).height(side);
+	    });
+	// Do Masonry
+	$('#columnleft').masonry({	  
+		  itemSelector: '.square', columnWidth:10, });
+	});
+	
 	</script>
 </body>
 </html>
