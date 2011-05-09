@@ -23,7 +23,7 @@
 |
 */
 $config['arc_info'] = array();
-$config['arc_info']['store_name'] = 'arc_os';
+$config['arc_info']['store_name'] = 'footprinted';
 $config['arc_info']['ns'] = array(
 'foaf' => 'http://xmlns.com/foaf/0.1/',
 'dcterms' => 'http://purl.org/dc/terms/',
@@ -69,8 +69,3 @@ $config['arc_info']['endpoint_features'] = array(
     'dump'                                    // allow backup
   );
 
-
-$config['arc_lr_info'] = array();
-$config['arc_lr_info']['store_name'] = 'remote_os';
-$config['arc_lr_info']['ns'] = $config['arc_info']['ns'];
-$config['arc_lr_info']['endpoint_features'] = $config['arc_info']['endpoint_features'];

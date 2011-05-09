@@ -1,12 +1,21 @@
 <form action="/lca/create/bibliography" name="Bibliographic Reference">
-  <fieldset name="Bibliographic Reference" linked_type="bibo:Document">
 		<bibotype rules="">
 			<label>Reference Type</label>
 			<type>hidden</type>
 			<linked_type></linked_type>
-			<options>
-				<journal>Journal</journal>
+			<options>				
+				<bibo_AcademicArticle>Academic Article</bibo_AcademicArticle>
+				<bibo_Article>Article</bibo_Article>
+				<bibo_Book>Book</bibo_Book>
+				<bibo_Brief>Brief</bibo_Brief>
+				<bibo_Document>Document (General)</bibo_Document>
+				<bibo_Interview>Interview</bibo_Interview>
+				<bibo_Proceedings>Proceedings</bibo_Proceedings>
+				<bibo_Report>Report</bibo_Report>
+				<bibo_Thesis>Thesis</bibo_Thesis>
+				<bibo_Thesis>Webpage</bibo_Thesis>
 			</options>
+			<selected>bibo_Document</selected>
 		</bibotype>
 		<title rules="trim">
 			<label>Title</label>
@@ -15,16 +24,14 @@
 			<optional>no</optional>
 			<multiple>no</multiple>
 		</title>
-		<fieldset name="Authors" linked_type="bibo:authorList">
-			<author rules="trim">
-				<label>Author Name</label>
-				<type>lookup</type>
-				<lookup>foaf</lookup>
-			  	<linked_type>foaf:Person</linked_type>
-				<optional>no</optional>
-				<multiple>yes</multiple>
-			</author>
-		</fieldset>
+		<author rules="trim">
+			<label>Author Name</label>
+			<type>lookup</type>
+			<lookup>people</lookup>
+		  	<linked_type>dcterms:creator</linked_type>
+			<optional>no</optional>
+			<multiple>yes</multiple>
+		</author>
 		<journal rules="trim">
 			<label>Journal</label>
 			<type>text</type>
@@ -69,8 +76,14 @@
 			<optional>no</optional>
 			<multiple>no</multiple>
 		</pageEnd>
-  </fieldset>
-	    <submit>
+ 		<uri rules="trim">
+			<label>Link to Source Material</label>
+			<type>text</type>
+		  	<linked_type>bibo:uri</linked_type>
+			<optional>no</optional>
+			<multiple>no</multiple>
+		</uri>
+	    <submit rules="trim">
 	        <type>submit</type>
 	        <value>Submit</value>
 	    </submit>

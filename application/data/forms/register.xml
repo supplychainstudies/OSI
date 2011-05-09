@@ -14,8 +14,9 @@
       <type>text</type>
     </email>
     <openid rules="trim|xss_clean">
-
       <type>text</type>
+	<label>Friend of a friend URI</label>
+	<multiple>yes</multiple>
     </openid>
     <foaf rules="trim|xss_clean">
 	  <label>Friend of a friend URI</label>

@@ -23,7 +23,7 @@ class Form_extended extends Form {
 	
 
 
-    private function build_group_triples ($subject, $post_data, $group, $path = "", $depth = 0) {  
+    public function build_group_triples ($subject, $post_data, $group, $path = "", $depth = 0, $change_predicates = null) {  
     /***
      * @private
      * Build a fieldset
@@ -39,32 +39,25 @@ class Form_extended extends Form {
         }
 		
 		$triples = array();				
-		
-		if (isset($group['__attrs']['root']) == true) {
-			$name = "";
-			if ($group['__attrs']['root'] == "person") {
-				$name = $post_data['firstName_'] . $post_data['lastName_'];
-			}
-			elseif ($group['__attrs']['root'] == "classification") {
-				$name = "";
-			}
-			elseif ($group['__attrs']['root'] == "bibliography") {
-				$name = str_replace(" ", "", $post_data['title_']);
-			}
-			if ($subject != "") {
-				$subject = toURI($group['__attrs']['root'],$name);
-				$new_subject_attrs = toBNode($group['__attrs']['linked_type']);
-			} else {
-				$new_subject_attrs = toURI($group['__attrs']['root']);
-			}
-		} else {
-			$new_subject_attrs = toBNode($group['__attrs']['linked_type']);
+
+		if ($subject == NULL) {
+			$subject = toBNode("");
 		}
+		if (isset($group['__attrs']['linked_type']) == true) {
+			if (isset($change_predicates) == true) {
+				if (isset($change_predicates[$group['__attrs']['name']]) == true) {
+					$group['__attrs']['linked_type'] = $change_predicates[$group['__attrs']['name']];
+				}
+			}
+			$new_subject_attrs = toBNode($group['__attrs']['name']);
 			$triples_attrs[] = array(
 				'subject' => $subject,
 				'predicate' => $group['__attrs']['linked_type'],
 				'object' => $new_subject_attrs 
 			);
+		} else {
+			$new_subject_attrs = $subject;
+		}
 		
         foreach ($group as $name => $val) {
             if ($name == '__attrs') {
@@ -87,10 +80,13 @@ class Form_extended extends Form {
 							$count = $post_data[$count_var];
 						}				
 					}
+					
+					
 					for ($i = 0 ; $i<= $count ; $i++) {
-						$new_path = "";
+						//$new_path = "";
+						$new_path = $path;
 						if (isset($_group['__attrs']['multiple']) == true) {
-							$new_path = $path;
+							//$new_path = $path;
 							if ($new_path == "") {
 								$new_path = array($i);
 							}
@@ -98,13 +94,14 @@ class Form_extended extends Form {
 								$new_path[] = $i;
 							}	
 						} 
+						
 						$triples_hold = $this->build_group_triples ($new_subject_attrs, $post_data, $_group, $new_path, $depth+1);
-					if (count($triples_hold) > 0 && count($triples) > 0 ) {
-						$triples = array_merge($triples, $triples_hold);
-					}
-					elseif (count($triples_hold) > 0 && count($triples) <= 0 ) {
-						$triples = $triples_hold;
-					}						
+						if (count($triples_hold) > 0 && count($triples) > 0 ) {
+							$triples = array_merge($triples, $triples_hold);
+						}
+						elseif (count($triples_hold) > 0 && count($triples) <= 0 ) {
+							$triples = $triples_hold;
+						}						
 					}
 
                 }				
@@ -119,55 +116,49 @@ class Form_extended extends Form {
 					} else {
 						$values = $post_data[$name];
 					}
-					var_dump($values);
-					if (isset($val[0]['linked_type']) == true) {		
-						if(is_array($values) == true) {				
-								foreach ($values as $value) {				
-									if ($value != "") {
-										$triples[] = array(
-											'subject' => $new_subject_attrs,
-											'predicate' => $val[0]['linked_type'][0],
-											'object' => $value
-										);
-									}									
+					if (is_array($values) == false && $values != "") {
+						$values = array($values);
+					}
+				} elseif (isset($val[0]['value']) == true && isset($val[0]['linked_type']) == true ) {
+					$values = array($val[0]['value'][0]);			
+				}
+				if (isset($val[0]['linked_type']) == true && is_array($values) == true) {		
+					foreach ($values as $value){
+						if ($value != "") {
+							foreach (explode("|", $val[0]['__attrs']['rules']) as $dothis) {
+								if ($dothis == "trim") {
+									$value = trim($value);
 								}
+								if ($dothis == "uriparse") {
+									$value = str_replace("_", ":", $value);
+								}
+								if ($dothis == "sha1") {
+									$value = sha1($value);
+								}							
+							}
+							$triples[] = array(
+								'subject' => $new_subject_attrs,
+								'predicate' => $val[0]['linked_type'][0],
+								'object' => $value
+							);
 						}
-						else {
-							if ($values != "") {
-								$triples[] = array(
-									'subject' => $new_subject_attrs,
-									'predicate' => $val[0]['linked_type'][0],
-									'object' => $values
-								);
-							}						
-						}
-	                }
+					}
 				}
             }             
         }  
-		if(isset($triples) == true) {
-			if (count($triples) > 0) {
+		if(isset($triples) == true && isset($triples_attrs) == true) {
+			if (count($triples) > 0 ) {
 				return array_merge($triples_attrs, $triples);
 			}			
+		} elseif(isset($triples) == true && isset($triples_attrs) != true) {
+			if (count($triples) > 0 ) {
+				return $triples;
+			}			
+		} elseif(isset($triples) != true && isset($triples_attrs) == true) {
+				return $triples_attrs;		
 		}
     } /* END build_group */
 
-
-    public function build_triples ($new_URI, $post_data, $data) {
-    /***
-     * @public
-     * Convert a form definition into an XHTML form
-     */
-		$triples = array();
-
-        foreach ($data['fieldset'] as $group) {
-			$triples_down = $this->build_group_triples($new_URI, $post_data, $group, "");
-			if(count($triples_down) > 0) {
-            	$triples = array_merge($triples, $triples_down);
-			}
-        }
-        return $triples;   
-    } /*** END build ***/
 
 
 

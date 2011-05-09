@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * Controller for environmental information structures
  * 
@@ -30,6 +30,9 @@ class Create extends SM_Controller {
 	
 	
 	public function index($section) {
+		if (!isset($this->session->userdata('id'))) {
+			redirect('users');
+		}
 	    /***
 	    * @public
 	    * Generates a form, or, in the case where post data is passed, submits the data to the DB

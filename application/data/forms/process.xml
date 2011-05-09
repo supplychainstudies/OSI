@@ -1,10 +1,16 @@
 <form action="/lca/create/Process" name="Process">
-  <fieldset name="Process" linked_type="eco:Process">
+  <fieldset name="Process" linked_type="eco:models">
 		<name rules="trim">
 			<label>Name</label>
 			<type>text</type>
 		  	<linked_type>rdfs:label</linked_type>
-		</name>		
+		</name>	
+		<datatype rules="trim">
+			<label>Type</label>
+			<type>hidden</type>
+		  	<linked_type>rdfs:type</linked_type>
+			<value>eco:Process</value>
+		</datatype>	
 		<UUID rules="trim">
 			<label>UUID</label>
 			<type>hidden</type>

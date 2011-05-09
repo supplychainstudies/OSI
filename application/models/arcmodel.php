@@ -19,7 +19,6 @@ class ArcModel extends Model{
 	    $this->config->load('arc');	
 		$this->config->load('arcdb');	
 		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
-		$this->arc_lr_config = array_merge($this->config->item("arc_lr_info"), $this->config->item("db_arc_lr_info"));
 	}	
 	
 	// Configuration information for accessing the arc store
@@ -31,10 +30,8 @@ class ArcModel extends Model{
 	 * @return Array of triples.
 	 * @param $q string - query string.
 	 */
-	public function executeQuery($q,$db="local") {
+	public function executeQuery($q) {
 		$config = $this->arc_config;
-		if ($db == "remote") 
-			$config = $this->arc_lr_config;
 		$store = $this->arc->getStore($config);
 
 		if (!$store->isSetUp()) {
@@ -128,26 +125,11 @@ class ArcModel extends Model{
 	
 	
 	
-	public function getSomething($uri, $predicate, $db="local") { 
-		if (strpos($uri,"http://") !== false) {
-			$the_uri = $uri;
-		} elseif (strpos($uri,":") !== false) {
-			$xarray = explode(":", $uri);
-			$the_uri = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
-		}
-		
- 		if (strpos($uri,"http://") !== false) {
-			$the_predicate = $predicate;
-		} elseif (strpos($predicate,":") !== false) {
-			$xarray = explode(":", $predicate);
-			$the_predicate = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
-		}
-		
+	public function getSomething($uri, $predicate) { 
 		$q = "select ?thing where { " .
-			"<" . $the_uri . "> '" . $the_predicate . "' ?thing . " . 				
+			"<" . $uri . "> " . $predicate . " ?thing . " . 				
 			"}";
-		
-		$results = $this->executeQuery($q, $db);
+		$results = $this->executeQuery($q);
 		if (count($results) != 0) {
 			return $results[0]['thing'];
 		} else {
@@ -345,6 +327,78 @@ class ArcModel extends Model{
 			$this->executeQuery($q2);			
 		}
 
+	}
+	
+	public function getGeonames ($uri) {
+		$this->arc_config['store_name'] = 'geonames';
+		$this->arc_config['db_name'] = 'geonames';
+		if ($this->isLoaded($uri) == false) {
+			$q = "LOAD <" . $uri . "> INTO <" . $uri . ">";
+			$this->executeQuery($q);
+		}
+		$contains_uri = str_replace("about","contains",$uri);
+		if ($this->isLoaded($contains_uri) == false) {
+			$q = "LOAD <" . $contains_uri . "> INTO <" . $contains_uri . ">";
+			$this->executeQuery($q);
+		}
+		$parentfeature_uri = str_replace("about.rdf","",$uri);
+		$q = "select ?uris where { " .
+		 	"?uris '" . $this->arc_config['ns']['gn'] . "parentFeature' '".$parentfeature_uri."' . " .  
+			"}";
+		$results = $this->executeQuery($q);	
+		foreach($results as $result) {
+			$this->getGeonames($result['uris']."about.rdf");
+		}
+	}
+	
+	public function fixfoaf() {
+		$q = "select ?uri ?bnode where { " . 
+			"?uri '" . $this->arc_config['ns']['rdfs'] . "type' '" . $this->arc_config['ns']['foaf'] . "Person' . " . 
+			" } "; 
+		var_dump($q);
+		$results = $this->executeQuery($q);			
+		var_dump($results);
+			/*
+			$q = "INSERT INTO <http://footprinted.org> CONSTRUCT { " . 
+			  "?s <rdfs:type> <foaf:Person> . " . 
+				" } " . 
+				" WHERE { " . 
+				"?s 'foaf:Person' ?x . " . 
+				"}";
+			$results = $this->executeQuery($q);			
+			*/
+	}
+	
+	public function test() {
+		$this->arc_config['store_name'] = 'test';
+		$this->arc_config['db_name'] = 'osi_test';		
+			$q = "insert into <http://footprinted.org/> { " . 
+				"<http://test.com> rdfs:type eco:Output . " . 
+				"}";
+			$this->executeQuery($q);
+	}
+	
+	public function fixMJ() {
+		$this->arc_config['store_name'] = 'footprinted';
+		$this->arc_config['db_name'] = 'footprinted';		
+		$q = "SELECT ?bnode ?m WHERE {" . 
+			"?bnode eco:hasUnitOfMeasure 'MJ' . " . 
+			"?bnode eco:hasMagnitude ?m . " . 
+			"}";
+		$results = $this->executeQuery($q);	
+		foreach	($results as $result) {
+			$new_val = $result['m']*1000000;
+			$q = "DELETE FROM <http://www.footprinted.org> {" . 
+				"<" . $result['bnode'] . "> eco:hasUnitOfMeasure 'MJ' . " . 
+				"<" . $result['bnode'] . "> eco:hasMagnitude '".$result['m']."' . " . 
+				"} ";
+			$this->executeQuery($q);
+			$q = "INSERT into <http://www.footprinted.org> {" . 
+				"<" . $result['bnode'] . "> eco:hasUnitOfMeasure qudtu:Joule . " . 
+				"<" . $result['bnode'] . "> eco:hasMagnitude '".$new_val."' . " . 
+				"}";
+			$this->executeQuery($q);		
+		}		
 	}
 	
 }

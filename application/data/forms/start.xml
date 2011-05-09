@@ -4,7 +4,7 @@
         <value>true</value>
     </blank>  
   <fieldset name="Process/Product/Service">
-        <name rules="trim">
+        <name rules="trim|required">
             <label>Name</label>
             <type>text</type>
             <linked_type>rdfs:label</linked_type>
@@ -14,19 +14,19 @@
             <type>textarea</type>
             <linked_type>rdfs:description</linked_type>
         </description>            
-        <productServiceName rules="trim">
+        <productServiceName rules="trim|required">
             <label>Product/Service</label>
             <type>text</type>
         </productServiceName>
-        <ioQuantity rules="trim">
+        <qrQuantity rules="trim|required">
             <label>Quantity</label>
             <type>text</type>
-        </ioQuantity>     
-        <ioUnit rules="trim">
+        </qrQuantity>     
+        <qrUnit rules="trim|required">
             <label>Unit</label>
             <type>popup</type>
             <popup>unit</popup>
-        </ioUnit>         
+        </qrUnit>         
     </fieldset>
     <fieldset name="Publication"> 
         <author rules="trim">
@@ -52,16 +52,16 @@
             <label>Input/Output</label>
             <type>radio</type>
             <options>
-                <Input>Input</Input>
-                <Output>Output</Output>
+                <eco_Input>Input</eco_Input>
+                <eco_Output>Output</eco_Output>
             </options>
         </io>
         <exchangeType rules="trim">
             <label>Transfer/Flow</label>
             <type>radio</type>
             <options>
-                <exchange>Exchange between the process and the environment</exchange>
-                <transfer>Exchange between processes</transfer>
+                <eco_Exchange>Exchange between the process and the environment</eco_Exchange>
+                <eco_Transfer>Exchange between processes</eco_Transfer>
             </options>
         </exchangeType>
         <substanceName rules="trim">

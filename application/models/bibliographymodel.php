@@ -18,26 +18,23 @@ class Bibliographymodel extends ArcModel{
     }
 
 	public function convertBibliography($dataset){
-		$bibo_prefix = "http://purl.org/ontology/bibo/";
-		$foaf_prefix = "http://xmlns.com/foaf/0.1/";
-		$dc_prefix = "http://purl.org/dc/";
 		$converted_dataset = array();
 		foreach ($dataset as $key=>$record) {
-			if (isset($record[$dc_prefix."title"]) == true) {
-				foreach($record[$dc_prefix."title"] as $title) {
+			if (isset($record[$this->arc_config['ns']['dc']."title"]) == true) {
+				foreach($record[$this->arc_config['ns']['dc']."title"] as $title) {
 					$converted_dataset[$key]['title'] = $title;
 				}
 			} else {
 				$converted_dataset[$key]['title'] = "";
 			}
-			if (isset($record[$bibo_prefix."authorList"]) == true) {
+			if (isset($record[$this->arc_config['ns']['bibo']."authorList"]) == true) {
 				$person_array = array();
-				foreach($record[$bibo_prefix."authorList"] as $author_uri) {
+				foreach($record[$this->arc_config['ns']['bibo']."authorList"] as $author_uri) {
 					$person = $this->getTriples($author_uri);
-					foreach ($person[$foaf_prefix.'firstName'] as $firstName) {
+					foreach ($person[$this->arc_config['ns']['foaf'].'firstName'] as $firstName) {
 						$person_array['firstName'] = $firstName;
 					} 
-					foreach ($person[$foaf_prefix.'lastName'] as $lastName) {
+					foreach ($person[$this->arc_config['ns']['foaf'].'lastName'] as $lastName) {
 						$person_array['lastName'] = $lastName;
 					}						
 				}
@@ -45,23 +42,23 @@ class Bibliographymodel extends ArcModel{
 			} else {
 				
 			}
-			if (isset($record[$bibo_prefix."uri"]) == true) {
-				foreach($record[$bibo_prefix."uri"] as $uri) {
+			if (isset($record[$this->arc_config['ns']['bibo']."uri"]) == true) {
+				foreach($record[$this->arc_config['ns']['bibo']."uri"] as $uri) {
 					$converted_dataset[$key]['uri'] = $uri;
 				}
 			} else {
 				$converted_dataset[$key]['uri'] = "";
 			} 
-			if (isset($record[$dc_prefix."date"]) == true) {
-				foreach($record[$dc_prefix."date"] as $date) {
+			if (isset($record[$this->arc_config['ns']['dc']."date"]) == true) {
+				foreach($record[$this->arc_config['ns']['dc']."date"] as $date) {
 					$converted_dataset[$key]['date'] = $date;
 				}
 			} else {
 				$converted_dataset[$key]['date'] = "";
 			}
 			/*
-			if (isset($record[$bibo_prefix."isbn"]) == true) {
-				foreach($record[$bibo_prefix."date"] as $date) {
+			if (isset($record[$this->arc_config['ns']['bibo']."isbn"]) == true) {
+				foreach($record[$this->arc_config['ns']['bibo']."date"] as $date) {
 					$converted_dataset[$key]['date'] = $date;
 				}
 			} else {

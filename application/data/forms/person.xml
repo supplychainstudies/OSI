@@ -1,5 +1,11 @@
 <form action="/lca/create/person" name="Person Description">
-  <fieldset name="Person" linked_type="foaf:Person">
+		<dataType rules="trim">
+			<label>Data Type</label>
+			<type>hidden</type>
+		  	<linked_type>rdfs:type</linked_type>
+			<value>foaf:Person</value>
+			<multiple>no</multiple>
+		</dataType>		
 		<firstName rules="trim">
 			<label>First Name</label>
 			<type>text</type>
@@ -14,7 +20,7 @@
 			<optional>no</optional>
 			<multiple>no</multiple>
 		</lastName>
-		<email rules="trim|sha1sum">
+		<email rules="trim|sha1">
 			<label>Email Address</label>
 			<type>text</type>
 		  	<linked_type>foaf:mbox_sha1sum</linked_type>
@@ -25,5 +31,4 @@
 	        <type>submit</type>
 	        <value>Submit</value>
 	    </submit>
-  </fieldset>
 </form>

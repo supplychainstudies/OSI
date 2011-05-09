@@ -14,12 +14,7 @@ class Ecomodel extends ArcModel{
      */
     function Ecomodel(){
         parent::arcmodel();
- 
-    }
-     
-    public function getAllImpactCategories() {
-        return $this->arc_getAllImpactCategories();
-         
+		$this->arc_config['store_name'] = "eco";
     }
      
     public function getImpactCategoryMenu() {
@@ -82,7 +77,7 @@ class Ecomodel extends ArcModel{
 		if (isset($tooltips[$uri]) != true) {
 			if (strpos($uri,":") !== false) {
 				$tooltips[$uri]['label'] = $this->getLabel($uri,"remote");	
-				$tooltips[$uri]['l'] = $this->tooltips[$uri]['label'];
+				$tooltips[$uri]['l'] = $tooltips[$uri]['label'];
 			} 
 		}
 	}

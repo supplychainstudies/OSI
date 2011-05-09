@@ -1,17 +1,22 @@
 <form action="/lca/create/quantity" name="Quantity">
   <fieldset name="Quantity" linked_type="eco:hasQuantity">
+		<dataType rules="trim">
+			<label>Data Type</label>
+			<type>hidden</type>
+			<linked_type>eco:Quantity</linked_type>
+		</dataType>
 		<quantity rules="trim">
 			<label>Quantity</label>
 			<type>text</type>
-		  	<linked_type>eco:hasUnitOfMeasure</linked_type>
+		  	<linked_type>eco:hasMagnitude</linked_type>
 		</quantity>		
 		<unit rules="trim">
 			<label>Unit</label>
 			<type>popup</type>
 			<popup>unit</popup>
-		  	<linked_type>eco:hasMagnitude</linked_type>
+		  	<linked_type>eco:hasUnitOfMeasure</linked_type>
 		</unit>	
-	    <submit>
+	    <submit rules="trim">
 	        <type>submit</type>
 	        <value>Submit</value>
 	    </submit>

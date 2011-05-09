@@ -1,22 +1,36 @@
 <form action="/impactAssessment/create" name="impactAssessment">
+	<datatype rules="trim">
+		<label>Type</label>
+		<type>hidden</type>
+		<linked_type>rdfs:type</linked_type>
+		<value>eco:ImpactAssessment</value>
+	</datatype>	
 	<computedFrom rules="trim">
 		<label>Computed From</label>
 		<type>hidden</type>
 		<linked_type>eco:computedFrom</linked_type>
 	</computedFrom>
-	<fieldset name="Impact Assessment" linked_type="eco:impactAssessment">	
-		<fieldset name="Impact Category Indicator Result" linked_type="eco:hasImpactCategoryIndicatorResult">
-			<fieldset Name="Impact Assessment Method Category Description" linked_type="eco:hasImpactAssessmentMethodCategoryDescription">
+	<assessmentOf rules="trim">
+		<label>Assessment Of</label>
+		<type>hidden</type>
+		<linked_type>eco:assessmentOf</linked_type>
+	</assessmentOf>
+		<fieldset name="Impact Category Indicator Result" linked_type="eco:hasImpactCategoryIndicatorResult" multiple="yes">
+			<blank rules="trim">
+				<label></label>
+				<type>hidden</type>
+			</blank>			
+			<fieldset name="Impact Assessment Method Category Description" linked_type="eco:hasImpactAssessmentMethodCategoryDescription">
 				<impactCategory rules="trim">
 					<label>Impact Category</label>
 					<type>popup</type>
-					<lookup>impact</lookup>
+					<popup>impact</popup>
 					<linked_type>eco:hasImpactCategory</linked_type>
 				</impactCategory>
 				<impactCategoryIndicator rules="trim">
 					<label>Impact Indicator</label>
 					<type>popup</type>
-					<lookup>impact</lookup>
+					<popup>impact</popup>
 					<linked_type>eco:hasImpactCategoryIndicator</linked_type>
 				</impactCategoryIndicator>
 			</fieldset>
@@ -26,7 +40,6 @@
 				</blank>
 			</fieldset>
 		</fieldset>
-	</fieldset>	
 	    <submit rules="">
 	        <type>submit</type>
 	        <value>Submit</value>

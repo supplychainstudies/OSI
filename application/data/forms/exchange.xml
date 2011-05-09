@@ -1,40 +1,44 @@
 <form action="/lca/create/exchange" name="Exchange">
-	<blank rules="">
-		<type>hidden</type>
-	</blank>
-	<fieldset name="Exchange" linked_type="eco:hasExchange">
-		<blank rules="">
+	<fieldset name="Exchange" linked_type="eco:hasUnallocatedExchange">
+		<dataType rules="trim">
+			<label>Data Type</label>
 			<type>hidden</type>
-		</blank>
+			<linked_type>eco:Exchange</linked_type>
+		</dataType>
 		<fieldset name="Effect" linked_type="eco:hasEffect">
-			<direction rules="trim">
+			<eDataType rules="trim">
+				<label>Data Type</label>
+				<type>hidden</type>
+				<linked_type>eco:Effect</linked_type>
+			</eDataType>
+			<direction rules="trim|uriparse">
 		        <label>Input/Output</label>
 		        <type>radio</type>
 		        <options>
-		            <Input>Input</Input>
-		            <Output>Output</Output>
+		            <eco_Input>Input</eco_Input>
+		            <eco_Output>Output</eco_Output>
 		        </options>
 				<linked_type>rdfs:type</linked_type>
 		    </direction>
-		    <exchange rules="trim">
+		    <exchange rules="trim|uriparse">
 		        <label>Transfer/Flow</label>
 		        <type>radio</type>
 		        <options>
-		            <exchange>Exchange between the process and the environment</exchange>
-		            <transfer>Exchange between processes</transfer>
+		            <eco_Exchange>Exchange between the process and the environment</eco_Exchange>
+		            <eco_Transfer>Exchange between processes</eco_Transfer>
 		        </options>
 				<linked_type>rdfs:type</linked_type>
 		    </exchange>
-			<fieldset name="Flowable" linked_type="eco:hasFlowable">
-				<blank rules="">
-					<type>hidden</type>
-				</blank>
-			</fieldset>
-			<fieldset name="Transferable" linked_type="eco:hasTransferable">
-				<blank rules="">
-					<type>hidden</type>
-				</blank>
-			</fieldset>			
+			<transferable rules="trim">
+				<label>Transferable</label>
+				<type>text</type>
+			  	<linked_type>eco:hasTransferable</linked_type>
+			</transferable>
+			<flowable rules="trim">
+				<label>Elemental Flow</label>
+				<type>text</type>
+			  	<linked_type>eco:hasFlowable</linked_type>
+			</flowable>		
 		</fieldset>
 	  	<fieldset name="Quantity" linked_type="eco:hasQuantity" root="quantity">
 			<blank rules="">

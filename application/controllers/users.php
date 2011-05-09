@@ -19,7 +19,7 @@ class Users extends SM_Controller {
 		
 	public function Users() {
 		parent::SM_Controller();
-		$this->load->model(Array('arcmodel', 'mysqlmodel'));	
+		$this->load->model(Array('lcamodel'));	
 		$this->lang->load('openid', 'english');
 	    $this->load->library(Array('openid','form_extended', 'form_validation', 'SimpleLoginSecure'));
 	    $this->load->helper('url');
@@ -204,20 +204,21 @@ class Users extends SM_Controller {
 			}
 			// Step 4: If there is a foaf URI, write to db
 			$foaf_array = $_POST['foaf_'];
-			if ($foaf_array != "") {
-				foreach($foaf_array as $foaf) {
-					if ($foaf != "") {
-						$data = array(
-									'user_id' => $id,
-									'foaf_uri' => $foaf
-								);
+			if ($foaf_array == "") {
+				$foaf_array = array(toURI("people",$_POST['user_name_']));				
+			}
+			foreach($foaf_array as $foaf) {
+				if ($foaf != "") {
+					$data = array(
+								'user_id' => $id,
+								'foaf_uri' => $foaf
+							);
 
-						$this->CI->db->set($data); 
+					$this->CI->db->set($data); 
 
-						if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
-							return false;
-					}		
-				}
+					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
+						return false;
+				}		
 			}	
 		
 			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
@@ -232,18 +233,19 @@ class Users extends SM_Controller {
 	
 	public function dashboard() {
 		$user_data = "";
+		$published = "";
 		if($this->session->userdata('id') == true) {
 		    $user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
 			// IF there is Foaf data, send to dashboard
 			if (isset($user_data["foaf_uri"]) == true){
-				$user_activity = $this->arcmodel->getLCAsByPublisher( $user_data["foaf_uri"]);
+				$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
 				$this->data("user_activity", $user_activity);
 			}			
 		} else {
-			echo "not logged in";
+			$this->index();
 		}	
 
-		$published = $this->arcmodel->getLCAsByPublisher($user_data['foaf_uri']);
+		$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
 		
 		$this->data("user_data", $user_data);
 		$this->data("published", $published);

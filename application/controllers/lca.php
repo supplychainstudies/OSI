@@ -14,7 +14,7 @@
 class Lca extends SM_Controller {
 	public function Lca() {
 		parent::SM_Controller();
-		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel'));	
+		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','arcmodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper'));
 		$obj =& get_instance();    
@@ -43,26 +43,24 @@ class Lca extends SM_Controller {
 
 		if ($post_data = $_POST) {	
 			$model_node = toURI("lca", $post_data['name_']); 
+			$exchange_node = $model_node;
 			$bibliography_node = toURI("bibliography", $post_data['title_']); 
 			$person_node = toURI("person", $post_data['author_']); 
-			$process_node = toBNode("process");
-			$product_node = toBNode("product");
+			$process_node = $model_node;
+			$product_node = $model_node;
+			$impactAssessment_node = "";
 			
-			var_dump($model_node);
-var_dump($bibliography_node);
-var_dump($person_node);
-var_dump($product_node);
 			// Bibliography
 			// First, look to see if they picked the first author, or if its someone new
 			if ($post_data['author_'] != "") {
 				$person_node = $post_data['author_'];
 			} else {
 				if (strpos($post_data['author_label_'], ",") !== false) {
-					$name_array = explode (",", $post_data['author_']);
+					$name_array = explode (",", $post_data['author_label_']);
 					$post_data['firstName_'] = trim($name_array[1]);
 					$post_data['lastName_'] = trim($name_array[0]);
-				} elseif (strpos($post_data['author_'], " ") !== false) {
-					$name_array = explode(" ", $post_data['author_']);
+				} elseif (strpos($post_data['author_label_'], " ") !== false) {
+					$name_array = explode(" ", $post_data['author_label_']);
 					$post_data['firstName_'] = trim($name_array[0]);
 					$post_data['lastName_'] = trim($name_array[1]);
 				} elseif ($post_data['author_label_'] == "") {
@@ -70,7 +68,7 @@ var_dump($product_node);
 					$post_data['lastName_'] = "";
 				} else {
 					$post_data['firstName_'] = "";
-					$post_data['lastName_'] = $post_data['author_'];
+					$post_data['lastName_'] = $post_data['author_label_'];
 				}
 				if ($post_data['email_'] != "") {
 					$datasets['person'][] = array (
@@ -84,8 +82,8 @@ var_dump($product_node);
 			if ($post_data["title_"] != "" || $post_data["link_"] != "") {
 			$datasets['bibliography'][] = array (
 					"title_" => $post_data["title_"],
-					"link_" => $post_data["link_"],
-					"author_[0]" => $person_node
+					"uri_" => $post_data["link_"],
+					"author_" => array($person_node)
 				);
 			}
 
@@ -97,49 +95,96 @@ var_dump($product_node);
 					'name_' => $post_data['productServiceName_']
 				);
 		
-
-				$exchange_node = array();
+			$datasets['exchange'][] = array (
+					"direction_" => 'eco_Output',
+					"exchange_" => 'eco_Transfer',
+					"transferable_" => $post_data['productServiceName_'],
+					"quantity_" => $post_data['qrQuantity_'],
+					"unit_" => $post_data['qrUnit_']
+				);
+			$change_p['exchange'][] = array('Exchange'=>'eco:hasReferenceExchange');
 			for ($i = 0; $i< count($post_data['io_']); $i++) {
-				$exchange_node[] = toBNode("exchange");
 				$datasets['exchange'][] = array (
 						"direction_" => $post_data['io_'][$i],
 						"exchange_" => $post_data['exchangeType_'][$i],
-						"name_" => $post_data['substanceName_'][$i],
+						"transferable_" => $post_data['substanceName_'][$i],
 						"quantity_" => $post_data['ioQuantity_'][$i],
 						"unit_" => $post_data['ioUnit_'][$i]
 					);
 			}
 
-			$impactAssessment_node = array();
-			for ($i = 0; $i< count($post_data['impactCategory_']); $i++) {
-				$impactAssessment_node[] = toBNode("impactassessment");
-				$datasets['impactAssessment'][] = array (
-						"computedFrom_" => $model_node,
-						"assessmentOf_" => $process_node,
-						"impactCategory_" => $post_data['impactCategory_'][$i],
-						"impactCategoryIndicator_" => $post_data['impactCategoryIndicator_'][$i],
-						"quantity_" => $post_data['assessmentQuantity_'][$i],
-						"unit_" => $post_data['assessmentUnit_'][$i]
-					);
-			}	
-
-			$triples = array();
+			$datasets['impactAssessment'][] = array (
+					"impact_category_indicator_result_counter_0" => $post_data['impact_assessment_counter_0'],
+					"computedFrom_" => $model_node,
+					"impactCategory_" => $post_data['impactCategory_'],
+					"impactCategoryIndicator_" => $post_data['impactCategoryIndicator_'],
+					"quantity_" => $post_data['assessmentQuantity_'],
+					"unit_" => $post_data['assessmentUnit_']
+				);
+			$triples = array(
+				array(
+					'subject' => $model_node,
+					'predicate' => 'dcterms:creator',
+					'object' => $this->session->userdata('foaf')
+				),
+				array(
+					'subject' => $model_node,
+					'predicate' => 'dcterms:created',
+					'object' => date('h:i:s-m:d:Y')
+				),
+				array(
+					'subject' => $model_node,
+					'predicate' => 'eco:hasDataSource',
+					'object' => $bibliography_node
+				),
+			);
 			foreach ($datasets as $key=>$dataset) {
 				if ($key != "submit_") {
-				//if (isset($dataset[0]) == true) {
 					foreach ($dataset as $i=>$datasetinstance) {
 						$node_name = $key."_node";
-						$node_name_array = $$node_name;
-						$node = $node_name_array[$i];
-
-						$data = $this->form_extended->load($key); 						
-						$triples = array_merge($triples,$this->form_extended->build_triples("", $datasetinstance, $data));
-					}
-			
+						$node = $$node_name;
+						$data = $this->form_extended->load($key); 	
+						if (isset($change_p[$key][$i]) == false) {
+							$change_p[$key][$i] = null;
+						}					
+						$triples = array_merge($triples,$this->form_extended->build_group_triples($node, $datasetinstance, $data,"",0, $change_p[$key][$i]));
+					}		
 				} 
-
 			}
-			var_dump($triples);
+			
+			foreach ($triples as $key=>&$triple) {
+				if ($triple['predicate'] == 'rdfs:type' && $triple['object'] == 'eco:Product') {
+					$_product_node = $triple['subject'];
+				}
+				if ($triple['predicate'] == 'rdfs:type' && $triple['object'] == 'eco:Process') {
+					$_process_node = $triple['subject'];
+				}
+				if ($triple['predicate'] == 'rdfs:type' && $triple['object'] == 'eco:ImpactAssessment') {
+					$_ia_node = $triple['subject'];
+				}
+				if ($triple['predicate'] == 'eco:hasTransferable' && $triple['object'] == $post_data['productServiceName_']) {
+					$triple['object'] = $_product_node;
+				}
+				if ($triple['predicate'] == 'eco:hasTransferable' && $triple['object'] == $post_data['productServiceName_']) {
+					$triple['object'] = $_product_node;
+				}								
+			}
+			if (isset($_product_node) == true) {
+				$triples[] = array(
+					"subject" => $_ia_node,
+					"predicate" => "eco:assessmentOf",
+					"object" => $_product_node
+				);
+			}
+			if (isset($_process_node) == true) {
+				$triples[] = array(
+					"subject" => $_ia_node,
+					"predicate" => "eco:assessmentOf",
+					"object" => $_process_node
+				);
+			}
+			$this->arcmodel->addTriples($triples);
+			$this->view(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 		}else {
 			$this->index();
 		}
@@ -196,10 +241,10 @@ var_dump($product_node);
 				unset($part);
 			}
 		}
-	
+
 		/* If the functional unit is mass, normalize to 1kg */
 		
-		if ($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") {
+		if (strpos("Kilogram", $parts['quantitativeReference']['unit']) !== false) {
 			$ratio = $parts['quantitativeReference']['amount'];
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
@@ -209,9 +254,9 @@ var_dump($product_node);
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
 			}
 		}
-		if ($parts['quantitativeReference']['unit'] == "qudtu:Gram") {
+		if (strpos("Gram", $parts['quantitativeReference']['unit']) !== false) {
 			$ratio = $parts['quantitativeReference']['amount'] / 1000;
-			$parts['quantitativeReference']['unit'] = "qudtu:Kilogram";
+			$parts['quantitativeReference']['unit'] = "Kilogram";
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
@@ -222,12 +267,16 @@ var_dump($product_node);
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
 				if ($impactAssessment['unit'] == "qudtu:Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit'] = "qudtu:Kilogram"; }
 			}
-		}
+		} 
+		/*
 		$parts['tooltips']["qudtu:Kilogram"]["label"] = "Kilogram";
 		$parts['tooltips']["qudtu:Kilogram"]["abbr"] = "Kg";
 		$parts['tooltips']["qudtu:Kilogram"]["l"]= "Kg";
 		$parts['tooltips']["qudtu:Kilogram"]["quantityKind"] = "Mass";
+		*/
+		var_dump($parts['tooltips']);
 		foreach ($parts['exchanges'] as $exchange) {
+			var_dump($exchange);
 			if (isset($parts['tooltips'][$exchange['unit']]) == true) {
 				$parts[$exchange['direction']][$parts['tooltips'][$exchange['unit']]['quantityKind']][] = $exchange;
 			}
