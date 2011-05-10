@@ -9,16 +9,14 @@
  * @uses 
  */
 
-
-
-class Users extends SM_Controller {
+class Users extends FT_Controller {
 	var $CI;
 	var $user_table = 'users';
 	var $openid_table = 'users_openids';
 	var $foaf_table = 'users_foaf';
 		
 	public function Users() {
-		parent::SM_Controller();
+		parent::__construct();
 		$this->load->model(Array('lcamodel'));	
 		$this->lang->load('openid', 'english');
 	    $this->load->library(Array('openid','form_extended', 'form_validation', 'SimpleLoginSecure'));

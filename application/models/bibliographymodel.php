@@ -1,20 +1,7 @@
 <?php
-include_once('arcmodel.php');
-/**
- * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
- * 
- * @package opensustainability
- * @subpackage models
- */
- 
-class Bibliographymodel extends ArcModel{
-     
-    /**
-     * @ignore
-     */
+class Bibliographymodel extends FT_Model{
     function Bibliographymodel(){
-        parent::arcmodel();
- 
+        parent::__construct();
     }
 
 	public function convertBibliography($dataset){
@@ -57,8 +44,13 @@ class Bibliographymodel extends ArcModel{
 				$converted_dataset[$key]['date'] = "";
 			}
 			/*
+<<<<<<< HEAD
 			if (isset($record[$this->arc_config['ns']['bibo']."isbn"]) == true) {
 				foreach($record[$this->arc_config['ns']['bibo']."date"] as $date) {
+=======
+			if (isset($record[$bibo_prefix."isbn"]) == true) {
+				foreach($record[$bibo_prefix."date"] as $date) {
+>>>>>>> 8209b23edc2a35d59bbb5d8d135f478f4848a4fc
 					$converted_dataset[$key]['date'] = $date;
 				}
 			} else {
@@ -78,7 +70,7 @@ class Bibliographymodel extends ArcModel{
 		
 	public function getBibliography($URI) {
 		$q = "select ?bibouri where { " . 
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#hasDataSource' ?bibouri . " .			
+			" <".$URI."> eco:hasDataSource ?bibouri . " .			
 			"}";				
 		$records = $this->executeQuery($q);
 		$full_record = array();		

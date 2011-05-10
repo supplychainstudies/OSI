@@ -9,14 +9,13 @@
  * @uses 
  */
 
-
-
-class Lca extends SM_Controller {
-	public function Lca() {
-		parent::SM_Controller();
-		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','arcmodel'));	
+class Lca extends FT_Controller {
+	public function __construct() {
+		parent::__construct();
+		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper'));
+		$this->load->helper(Array('linkeddata_helper'));
 		$obj =& get_instance();    
         $obj->load->library(array('xml'));
         $this->ci =& $obj;
@@ -25,7 +24,7 @@ class Lca extends SM_Controller {
 	public $data;
 	public $post_data;
 	public $tooltips = array();
-	
+
 	public function index() {
 		$data = $this->form_extended->load("start"); 
 		$the_form = $this->form_extended->build();
@@ -137,7 +136,9 @@ class Lca extends SM_Controller {
 					'predicate' => 'eco:hasDataSource',
 					'object' => $bibliography_node
 				),
-			);
+			);	
+
+			$triples = array();
 			foreach ($datasets as $key=>$dataset) {
 				if ($key != "submit_") {
 					foreach ($dataset as $i=>$datasetinstance) {
@@ -148,7 +149,7 @@ class Lca extends SM_Controller {
 							$change_p[$key][$i] = null;
 						}					
 						$triples = array_merge($triples,$this->form_extended->build_group_triples($node, $datasetinstance, $data,"",0, $change_p[$key][$i]));
-					}		
+					}
 				} 
 			}
 			
@@ -191,7 +192,6 @@ class Lca extends SM_Controller {
 	}
 
 
-
 	/***
 	* @public
 	* Grabs all the triples for a particular URI and shows it in RDF
@@ -203,7 +203,6 @@ class Lca extends SM_Controller {
 		echo $rdf;
 	}	
 
-
 	/***
 	* @public
 	* Grabs all the triples for a particular URI and shows it in JSON
@@ -213,8 +212,7 @@ class Lca extends SM_Controller {
 		header('Content-type: application/json');
 		echo $json;
 	}
-	
-	
+		
 	/***
 	* @private
 	* Builds the tooltip array from linked data
@@ -226,15 +224,17 @@ class Lca extends SM_Controller {
 	* Grabs all the triples for a particular URI and shows it in a friendly, human readable way
 	*/
 	public function view($URI = null) {	
-		@$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
+		//$tooltips = (object) array();
+		//$tooltips->
+		@$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
 	
-		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
-		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);	
-		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
-		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
-		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI), &$this->tooltips);
+		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
+		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);	
+		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
+		@$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
+		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
 
-		$parts['tooltips'] = $this->tooltips;
+		@$parts['tooltips'] = $tooltips;
 
 	 	foreach ($parts as &$part) {
 			if ($part == false || count($part) == 0) {
@@ -260,12 +260,12 @@ class Lca extends SM_Controller {
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
-				if ($exchanges['unit'] == "qudtu:Gram") { $exchanges['amount']/=1000; //$exchanges['unit'] = "qudtu:Kilogram";
+				if (strpos("Gram",$exchanges['unit']) !== false) { $exchanges['amount']/=1000; //$exchanges['unit'] = "qudtu:Kilogram";
 				}
 			}
 			foreach ($parts['impactAssessments'] as &$impactAssessment) {
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-				if ($impactAssessment['unit'] == "qudtu:Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit'] = "qudtu:Kilogram"; }
+				if (strpos("Gram", $impactAssessment['unit']) !== false) { $impactAssessment['amount']/=1000; $impactAssessment['unit'] = $this->arc_config['ns']['qudtu']."Kilogram"; }
 			}
 		} 
 		/*
@@ -274,9 +274,7 @@ class Lca extends SM_Controller {
 		$parts['tooltips']["qudtu:Kilogram"]["l"]= "Kg";
 		$parts['tooltips']["qudtu:Kilogram"]["quantityKind"] = "Mass";
 		*/
-		var_dump($parts['tooltips']);
 		foreach ($parts['exchanges'] as $exchange) {
-			var_dump($exchange);
 			if (isset($parts['tooltips'][$exchange['unit']]) == true) {
 				$parts[$exchange['direction']][$parts['tooltips'][$exchange['unit']]['quantityKind']][] = $exchange;
 			}
@@ -317,18 +315,119 @@ class Lca extends SM_Controller {
 		$comments = $this->commentsmodel->getComments("http://footprinted.org/osi/rdfspace/lca/".$URI);
 		$this->data("comments", $comments);
 		$this->data("comment", $comment);
-		$this->display("View " . $parts['quantitativeReference']['amount'] . " " . $parts['quantitativeReference']['unit'] . " of " . $parts['quantitativeReference']['name'], "viewLCA");		
+		$this->display("View " . $parts['quantitativeReference']['amount'] . " " . $parts['quantitativeReference']['unit'] . " of " .  $parts['quantitativeReference']['name'], "viewLCA");		
 	}
 
+	private function convertImpactAssessments($dataset){
+		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
+		$eco_prefix = "http://ontology.earthster.org/eco/core#";
+		$converted_dataset = array();		
+		foreach($dataset as $key=>$_record) {	
+			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
+				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
+					$converted_dataset[$key]['impactCategory'] = $___record;
+				} 
+				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
+					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
+				}					
+			} 	
+			foreach ($_record[$eco_prefix."hasQuantity"] as $__record) {
+				foreach($__record[$eco_prefix."hasMagnitude"] as $___record) {
+					$converted_dataset[$key]['amount'] = $___record;
+				}
+				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
+					$converted_dataset[$key]['unit'] = $___record;
+				}		
+			}	
+			if (isset($converted_dataset[$key]['unit']) == false) {
+				$converted_dataset[$key]['unit'] = "?";
+			}									
+			if (isset($converted_dataset[$key]['amount']) == false) {
+				$converted_dataset[$key]['amount'] = "?";
+			}
+			if (isset($converted_dataset[$key]['impactCategory']) == false) {
+				$converted_dataset[$key]['impactCategory'] = "?";
+			}
+			if (isset($converted_dataset[$key]['impactCategoryIndicator']) == false) {
+				$converted_dataset[$key]['impactCategoryIndicator'] = "?";
+			}
+		}
+		return $converted_dataset; 
+	}
+	
+	/*
+	Function that given a URI for a resource provides an html for the environmental impacts. 
+	Function used for the homepage presentation.
+	*/	
+	public function getImpacts($URI = null) {
+			error_reporting(E_PARSE);  
+			
+			$this->tooltips["qudtu:Kilogram"]["label"] = "Kilogram";
+			$this->tooltips["qudtu:Kilogram"]["abbr"] = "Kg";
+			$this->tooltips["qudtu:Kilogram"]["l"]= "Kg";
+			$this->tooltips["qudtu:Kilogram"]["quantityKind"] = "Mass";
 
-	
-	
-	/***
-	* @private
-	* Does stuff
-	*/
-	
-	
 
+			$feature_info = array (
+		            'uri' => $URI,
+		            'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips),
+		    		'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
+		    );
+			if ($feature_info['quantitativeReference']['unit'] == "qudtu:Kilogram") {
+				$ratio = $feature_info['quantitativeReference']['amount'];
+				$feature_info['quantitativeReference']['amount'] = 1;
+				foreach ($feature_info['impactAssessments'] as &$impactAssessment) {
+					$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+				}
+			}
+			
+			@$parts['tooltips'] = $this->tooltips;
+			
+			$text = '<p>Footprint of one kilogram of '.$feature_info['quantitativeReference']['name'].'</p>';
+			$text .= '<div id="tabs"><ul>';
+			
+			foreach ($feature_info['impactAssessments'] as $impactAssessment) {
+				$text .= '<li><a href="#'.$impactAssessment['impactCategoryIndicator'].'"><div style="width:8px; height:8px;margin-left:10px;margin-top: 0px; background:#fff; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></a></li>';
+			}
+			
+			$text .= '</ul>';
+			
+			foreach ($feature_info['impactAssessments'] as $impactAssessment) {
+				if($impactAssessment['impactCategoryIndicator'] != ""){
+					
+				$text .= '<div class="tabinside" id="'.$impactAssessment['impactCategoryIndicator'].'">';
+							
+				$text .= '<div class="tab_nr"><h1><nrwhite>' . round($impactAssessment['amount'],2) ."</nrwhite> ". linkThis($impactAssessment['unit'], $parts["tooltips"], "l"). '</h1></div><div class="tab_meta"><p class="unit">'.$impactAssessment['impactCategoryIndicator'].'</p></div></div>';
+				}
+			}
+			
+			$text .= '</div>';	
+			$text .= "<div class='plus'><a href='/lca/view/".$URI."'><img src='/assets/images/plus.png' height='15px'/></a></div>";
+			$text .= '<script>	$(function() { $( "#tabs" ).tabs({ event: "mouseover"	});	});</script>';
+			echo $text;
+		}
+		
+		/*
+		Function that given a URI for a resource provides its human readable name. 
+		Used for the homepage presentation.
+		*/	
+		public function getName($URI = null) {
+ 			error_reporting(E_PARSE);    
+			$feature_info = array (
+		            'uri' => $URI,
+		    		'quantitativeReference' => $this->lcamodel->convertQR(@$this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
+		    );
+			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
+			echo $text;
+		}
+		public function getCO2($URI = null) {
+ 			error_reporting(E_PARSE);    
+			$feature_info = array (
+		            'uri' => $URI,
+		    		'quantitativeReference' => $this->lcamodel->convertQR(@$this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
+		    );
+			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
+			echo $text;
+		}
 
 } // End Class

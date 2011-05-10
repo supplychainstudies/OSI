@@ -1,5 +1,5 @@
 <?php
-include_once('arcmodel.php');
+
 /**
  * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
  * 
@@ -7,16 +7,17 @@ include_once('arcmodel.php');
  * @subpackage models
  */
  
-class Ecomodel extends ArcModel{
+
+class Ecomodel extends FT_Model{
      
     /**
      * @ignore
      */
     function Ecomodel(){
-        parent::arcmodel();
-		$this->arc_config['store_name'] = "eco";
+        parent::__construct();
+ 		$this->arc_config['store_name'] = "eco";
     }
-     
+       
     public function getImpactCategoryMenu() {
         $categories = $this->arc_getAllImpactCategories();
         $menu_html = '<input name="impacts_field" type="hidden" />';
@@ -46,8 +47,8 @@ class Ecomodel extends ArcModel{
      
     private function arc_getAllImpactCategories() {
         $q = "select ?uri ?label where { " . 
-            "?uri '" . $this->arc_config['ns']['rdf'] . "type' '" . $this->arc_config['ns']['eco'] . "ImpactCategory' . " . 
-            "?uri '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 
+            "?uri rdf:type eco:ImpactCategory . " . 
+            "?uri rdfs:label ?label . " . 
             "}";
              
         $results = $this->executeQuery($q, "remote");
@@ -60,9 +61,9 @@ class Ecomodel extends ArcModel{
  
     private function arc_getImpactCategoryIndicators($uri) {
         $q = "select ?uri ?label where { " . 
-            "?uri '" . $this->arc_config['ns']['rdf'] . "type' '" . $this->arc_config['ns']['eco'] . "ImpactAssessmentMethodCategoryDescription' . " . 
-            "?uri '" . $this->arc_config['ns']['eco'] . "hasImpactCategory' '" . $uri . "' . " . 
-            "?uri '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 
+            "?uri rdf:type eco:ImpactAssessmentMethodCategoryDescription . " . 
+            "?uri eco:hasImpactCategory '" . $uri . "' . " . 
+            "?uri rdfs:label ?label . " . 
             "}";
  
         $results = $this->executeQuery($q, "remote");
@@ -76,7 +77,8 @@ class Ecomodel extends ArcModel{
 	public function makeToolTip($uri, $tooltips) {
 		if (isset($tooltips[$uri]) != true) {
 			if (strpos($uri,":") !== false) {
-				$tooltips[$uri]['label'] = $this->getLabel($uri,"remote");	
+				
+				$tooltips[$uri]['label'] = $this->getLabel($uri);
 				$tooltips[$uri]['l'] = $tooltips[$uri]['label'];
 			} 
 		}

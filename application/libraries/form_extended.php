@@ -39,7 +39,6 @@ class Form_extended extends Form {
         }
 		
 		$triples = array();				
-
 		if ($subject == NULL) {
 			$subject = toBNode("");
 		}

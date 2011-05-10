@@ -8,10 +8,10 @@
  * @subpackage controllers
  */
 
-class About extends SM_Controller {
+class About extends FT_Controller {
 	
 	public function About() {
-		parent::SM_Controller();
+		parent::__construct();
 		$this->load->model(Array());
 		$this->load->helper();
 	}

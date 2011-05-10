@@ -11,9 +11,9 @@
  
  
  
-class People extends SM_Controller {
+class People extends FT_Controller {
     public function People() {
-        parent::SM_Controller();
+        parent::__construct();
         $this->load->model(Array('peoplemodel')); 
         $this->load->library(Array('form_extended', 'name_conversion'));
     }

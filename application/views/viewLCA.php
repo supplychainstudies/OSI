@@ -203,6 +203,7 @@
 			</div>
 			
 			<div id="lca_comments">
+			<h2>Comments</h2>
 			<?
 
 				if(isset($comment) == true) {

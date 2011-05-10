@@ -1,4 +1,5 @@
 <? $this->load->helper("linkeddata_helper"); ?>
+<? $this->load->helper("impact_helper"); ?>
 <!DOCTYPE html>
 <?=$metaDisplay;?>
 <html>
@@ -7,84 +8,87 @@
 	
 	<?=$styles;?>
 	<?=$headerDisplay;?>
-</head>
 
+
+
+</head>
 <body id="home">
 	<div id ="contentwrap">	
 	<?= $navigationDisplay;?>
 	
 	<div id="columnleft">
-		<div class="big grey square"><p>
-			<h2>Footprint of one kilogram of Aluminum</h2>
-			<? foreach ($feature_info['impactAssessments'] as $impactAssessment) {
-				
-				
-				switch ($impactAssessment['impactCategoryIndicator']) {
-				    case 'ossia:waste':
-				        $color = "#C5E9FF";
-						$max = 10;
-						break;
-				    case 'ossia:CO2e':
-				        $color = "#5AC0FF";
-						$max = 10;
-						break;
-				    case "ossia:energy":
-				        $color = "#227CAF";
-						$max = 500;
-						break;
-					case "ossia:water":
-					    $color = "#45A3D8";
-						$max = 10;
-						break;
-					default:
-						$color = "#45A3D8";
-						$max = 50;
-				}
-				$size = 2* round(50*$impactAssessment['amount']/$max);
-				if ($size > 80) { $size = 80; }
-				$margin = (100-$size)/2;
-				$margintop = (100-$size)/6;
 
-				echo '<div class="impact"><div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
-				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
-				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit'] .'</p><p class="category">';
-				echo  $impactAssessment['impactCategoryIndicator'];
-				echo "<p/></div></div>"; 
-				
-			}?>
-		</p></div>
-		<div class="medium aoi square">
-			<h1 class="bignr">456</h1>
-			<p>Footprints available</p>
-		</div>
-		<div id="all_resources">
 				<?
 					foreach ($set as $row) {
 						// Remove the opensustainability part of the url
 						$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['link']);
-						echo '<div class="small blue square"><p><a href="/lca/view/'.$myString.'">'.$row['name'].'</a><p/></div>';
+						echo '<div class="small blue square" id="'.$myString.'"><p>'.$row['name'].'<p/></div>';
 					}
 				?>
-		</div>
 	</div>
 
 
 <div id="columnright">
-	<div class="wide aoi square"><p>We work for sustainability information to be free, open and easy to use.</p></div>
-	<div class="wide aoi square"><h2><a href="/about">About Footprinted.org</a></h2></div>
-	<div class="wide aoi square"><h2><a href="/create/start">Create new data</a></h2></div>
-	<div class="wide aoi square"><h2>Latest news:</h2></div>
+	<p>We work for sustainability information to be free, open and easy to use.</p><p> <a href="/about">Read more about Footprinted.</a></p>
+	<h1 class="bignr">456 Footprints available</h1>
+	<p></p>
+	<h2><a href="/create/start">Create new data</a></h2>
+	<h2>Latest news:</h2>
 	 <? foreach ($twitter as $tweet) {
-		echo '<div class="wide aoi square"><p>';
+		echo '<p>';
 		echo $tweet['title'];
-		echo '</p></div>';
+		echo '</p>';
 	  }
 	?>
-	<div class="wide aoi square"><p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p></div>
+	<p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p>
 </div>
 	<?=$footerDisplay;?>
 </div>
 
-<?=$scripts;?>	
+	<script src="http://footprinted.org/assets/scripts/jquery/jquery-1.5.1.min.js"></script>
+	<script src="http://footprinted.org/assets/scripts/jquery/jquery.masonry.min.js"></script>
+	<script src="http://footprinted.org/assets/scripts/jquery/jquery-ui-1.7.2.min.js" type="text/javascript"></script>
+	<script src="http://footprinted.org/assets/scripts/jquery/jquery-ui-1.8.11.custom.min.js" type="text/javascript"></script>
+	
+	<script>
+	
+	$(function() {
+		$( ".blue" ).click(function(){
+			if (typeof opensquare!="undefined"){
+				opensquare.load('/lca/getName/'+opensquare.attr('id'));
+				opensquare.removeClass("medium");
+				opensquare.removeClass("grey");
+                opensquare.addClass("small");
+				opensquare.addClass("blue");
+			}
+			opensquare = $(this);
+            $(this).removeClass("small");
+			$(this).removeClass("blue");
+            $(this).addClass("medium");
+			$(this).addClass("grey");
+			$('#columnleft').masonry({	  
+				  itemSelector: '.square', columnWidth:10, });
+			$(this).load('/lca/getImpacts/'+$(this).attr('id'));	
+		});
+		
+	});	
+
+	$(function() {
+
+	    //Get Divs
+	    $('#leftcolumn > [square]').each(function(i) {
+			// Get CO2
+			co2 = ('/lca/getCO2/'+opensquare.attr('id'));
+			// Scale
+			side = Math.sqrt(co2*2500);
+			$(this).width(side);
+			$(this).height(side);
+	    });
+	// Do Masonry
+	$('#columnleft').masonry({	  
+		  itemSelector: '.square', columnWidth:10, });
+	});
+	
+	</script>
 </body>
 </html>

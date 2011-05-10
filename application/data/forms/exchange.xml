@@ -1,4 +1,5 @@
 <form action="/lca/create/exchange" name="Exchange">
+<<<<<<< HEAD
 	<fieldset name="Exchange" linked_type="eco:hasUnallocatedExchange">
 		<dataType rules="trim">
 			<label>Data Type</label>

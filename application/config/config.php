@@ -11,7 +11,7 @@
 |	http://www.your-site.com/
 |
 */
-
+$config['base_url'] = "http://footprinted.org";
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -22,7 +22,7 @@
 | variable so that it is blank.
 |
 */
-$config['index_page'] = "";
+$config['index_page'] = "index.php";
 
 /*
 |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ $config['enable_hooks'] = FALSE;
 | http://www.codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'SM_';
+$config['subclass_prefix'] = 'MY_';
 
 
 /*
@@ -317,5 +317,24 @@ $config['time_reference'] = 'local';
 */
 $config['rewrite_short_tags'] = FALSE;
 
+/*
+| -------------------------------------------------------------------
+|  Native Autoload - by Phil Sturgeon.
+| -------------------------------------------------------------------
+|
+| Nothing to do with config/autoload.php, this allows PHP autoload to work
+| for base controllers and some third-party libraries.
+|
+| If using HMVC you do not need this! HMVC will autoload.
+|
+| Place this code at the bottom of your application/config/config.php file.
+*/
+function __autoload($class)
+{
+    if (strpos($class, 'CI_') !== 0)
+    {
+        @include_once(APPPATH . 'core/' . $class . EXT);
+    }
+}
 
 ?>

@@ -10,71 +10,17 @@
  */
 
 
-
-class API extends SM_Controller {
+class API extends FT_Controller {
 	public function API() {
-		parent::SM_Controller();
-		$this->load->model(Array('arcmodel','lcamodel'));	
+		parent::__construct();
+		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
 		$this->load->library(Array('form_extended', 'name_conversion','SimpleLoginSecure'));
 	}
 	public $URI;
 	public $data;
 	public $post_data;
 	public $tooltips = array();
-	/***
-    * @public
-    * gets a list that matches your process name
-    */	
-/*
-	public function name($keyword) {
-		// We should be able to call to xml files to return the string of parent nodes
-		$fields = array(
-			"Process Name", 
-			"Quantitative Reference Name",
-			"Quantitative Reference Unit",
-			"Quantitative Reference Type",
-			"Quantitative Reference Amount",
-			"Impact Category",
-			"Impact Category Amount",
-			"Impact Category Unit"
-			);
-		$impacts = array();
-		// This next line should perhaps be pointing instead to a model that 1) combines the local arc model and remote endpoint models so that we can include new remote data sets easily 2) uses ISO labels (and converter documents) to call to many different kinds of formats
-		$URIs = @$this->arcmodel->simpleSearch("processName", $keyword);
-		foreach ($URIs as &$URI) {
-			$URI_type = str_replace('lca', 'ISO14048', @$this->arcmodel->getDataType($URI));
-			$impacts[$URI] = array();
-			foreach ($fields as $field) {
-				$path = $this->formats->getPath($this->name_conversion->toFieldName($field), $URI_type);
-				$path = str_replace('data_documentation_of_process->', '', $path);
-				$new_path = "";
-				foreach (explode("->", $path) as $step) {
-					$new_path = $new_path . $this->name_conversion->toLinkedType2($step) . "->";
-				}
-				
-				$impacts[$URI][$field] = $this->arcmodel->followToBNode($URI, str_replace('lifeCycleAssessment->', '', substr($new_path, 0, -2)));
-			}
-		}
-		var_dump($impacts);	
-	}
-	
-	public function searchh($field, $keyword, $encoding = 'json') {
-		$URIs = @$this->arcmodel->simpleSearch($field, $keyword);		
-		if ($encoding == 'json') {
-			header('Content-type: application/json');
-			echo json_encode($URIs);
-		} else if ($encoding == 'rdf') {
-			header('Content-type: text/xml');
-			echo $URIs;			
-		} else if ($encoding == 'xml') {
-			header('Content-type: text/xml');
-			echo $URIs;
-		} else if ($encoding == 'html') {
-			header('Content-type: text/html');
-			echo $URIs;			
-		}
-	}
-*/	
+
 	public function search($encode = "json") {
 		$checked_URIs = array();
 		$search_terms = $_GET;

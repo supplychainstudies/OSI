@@ -1,21 +1,9 @@
 <?php
-include_once('arcmodel.php');
-/**
- * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
- * 
- * @package opensustainability
- * @subpackage models
- */
 
-class Unitmodel extends ArcModel{
-	
-	/**
-	 * @ignore
-	 */
+class Unitmodel extends FT_Model{
 	function Unitmodel(){
-		parent::arcmodel();
+		parent::__construct();
 		$this->arc_config['store_name'] = "qudt";
-
 	}
 	
 	public function makeToolTip($uri, $tooltips) {

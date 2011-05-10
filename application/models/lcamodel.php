@@ -1,19 +1,7 @@
 <?php
-include_once('arcmodel.php');
-/**
- * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
- * 
- * @package opensustainability
- * @subpackage models
- */
- 
-class Lcamodel extends ArcModel{
-     
-    /**
-     * @ignore
-     */
+class Lcamodel extends FT_Model{
     public function Lcamodel(){
-        parent::arcmodel();
+        parent::__construct();
 		$this->load->model(Array('unitmodel','geographymodel','ecomodel'));
     }
 
@@ -320,8 +308,6 @@ class Lcamodel extends ArcModel{
 		}
 	}
 	
-	
-	
 	public function getExchanges($URI) {		
 		$q = "select ?bnode where { " . 
 			" <".$URI."> eco:hasUnallocatedExchange ?bnode . " .				
@@ -364,4 +350,4 @@ class Lcamodel extends ArcModel{
 	}
 
 
-} //
+}
