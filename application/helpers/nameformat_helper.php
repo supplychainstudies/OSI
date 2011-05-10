@@ -26,6 +26,7 @@
     * converts a name to bnode. submit something like "Impact Assessment" and it will return "_:impactAssessment23409863267"
     */
 	function toBNode($name) {
+		console.log("Bleee");
 		$name = explode(":",$name);
 		if(count($name)==2)
 			$name = $name[1];

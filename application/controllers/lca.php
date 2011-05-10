@@ -233,15 +233,13 @@ class Lca extends FT_Controller {
 	*/
 	public function view($URI = null) {	
 
-		//$tooltips = (object) array();
-		//$tooltips->
-		@$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
+		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
 	
-		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
-		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);	
-		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
-		@$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
-		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI), $tooltips);
+		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
+		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
+		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
+		@$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
+		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
 		@$parts['tooltips'] = $tooltips;
 
 	 	foreach ($parts as &$part) {
@@ -252,7 +250,7 @@ class Lca extends FT_Controller {
 
 		/* If the functional unit is mass, normalize to 1kg */
 		
-		if (strpos("Kilogram", $parts['quantitativeReference']['unit']) !== false) {
+		if (strpos("Kilogram", $parts['quantitativeReference']['unit']['label']) !== false) {
 			$ratio = $parts['quantitativeReference']['amount'];
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
@@ -262,30 +260,24 @@ class Lca extends FT_Controller {
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
 			}
 		}
-		if (strpos("Gram", $parts['quantitativeReference']['unit']) !== false) {
+		if (strpos("Gram", $parts['quantitativeReference']['unit']['label']) !== false) {
 			$ratio = $parts['quantitativeReference']['amount'] / 1000;
-			$parts['quantitativeReference']['unit'] = "Kilogram";
+			// Remember to complete afterwards
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
 			$parts['quantitativeReference']['amount'] = 1;
 			foreach ($parts['exchanges'] as &$exchanges) {
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
-				if (strpos("Gram",$exchanges['unit']) !== false) { $exchanges['amount']/=1000; //$exchanges['unit'] = "qudtu:Kilogram";
+				if (strpos("Gram",$exchanges['unit']['label']) !== false) { $exchanges['amount']/=1000; //$exchanges['unit'] = "qudtu:Kilogram";
 				}
 			}
 			foreach ($parts['impactAssessments'] as &$impactAssessment) {
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-				if (strpos("Gram", $impactAssessment['unit']) !== false) { $impactAssessment['amount']/=1000; $impactAssessment['unit'] = $this->arc_config['ns']['qudtu']."Kilogram"; }
+				if (strpos("Gram", $impactAssessment['unit']['label']) !== false) { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
 			}
-		} 
-		/*
-		$parts['tooltips']["qudtu:Kilogram"]["label"] = "Kilogram";
-		$parts['tooltips']["qudtu:Kilogram"]["abbr"] = "Kg";
-		$parts['tooltips']["qudtu:Kilogram"]["l"]= "Kg";
-		$parts['tooltips']["qudtu:Kilogram"]["quantityKind"] = "Mass";
-		*/
+		}
+		// Turns exchanges into input and output array divided into categories 
 		foreach ($parts['exchanges'] as $exchange) {
-			if (isset($parts['tooltips'][$exchange['unit']]) == true) {
-				$parts[$exchange['direction']][$parts['tooltips'][$exchange['unit']]['quantityKind']][] = $exchange;
-			}
+			$parts[$exchange['direction']][$exchange['unit']['quantityKind']][] = $exchange;
 		}
 		/* Crunches the data to create the graphics and total calculations */
 		$totalinput = 0; 
@@ -370,16 +362,10 @@ class Lca extends FT_Controller {
 	public function getImpacts($URI = null) {
 			error_reporting(E_PARSE);  
 			
-			$this->tooltips["qudtu:Kilogram"]["label"] = "Kilogram";
-			$this->tooltips["qudtu:Kilogram"]["abbr"] = "Kg";
-			$this->tooltips["qudtu:Kilogram"]["l"]= "Kg";
-			$this->tooltips["qudtu:Kilogram"]["quantityKind"] = "Mass";
-
-
 			$feature_info = array (
 		            'uri' => $URI,
-		            'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips),
-		    		'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
+		            'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI)),
+		    		'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI))
 		    );
 			if ($feature_info['quantitativeReference']['unit'] == "qudtu:Kilogram") {
 				$ratio = $feature_info['quantitativeReference']['amount'];
@@ -388,9 +374,7 @@ class Lca extends FT_Controller {
 					$impactAssessment['amount'] = round(($impactAssessment['amount'] / $ratio),2);
 				}
 			}
-			
-			@$parts['tooltips'] = $this->tooltips;
-			
+						
 			$text = '<p>Footprint of one kilogram of '.$feature_info['quantitativeReference']['name'].'</p>';
 			$text .= '<div id="tabs"><ul>';
 			
@@ -405,7 +389,7 @@ class Lca extends FT_Controller {
 					
 				$text .= '<div class="tabinside" id="'.$impactAssessment['impactCategoryIndicator'].'">';
 							
-				$text .= '<div class="tab_nr"><h1><nrwhite>' . round($impactAssessment['amount'],2) ."</nrwhite> ". linkThis($impactAssessment['unit'], $parts["tooltips"], "l"). '</h1></div><div class="tab_meta"><p class="unit">'.$impactAssessment['impactCategoryIndicator'].'</p></div></div>';
+				$text .= '<div class="tab_nr"><h1><nrwhite>' . round($impactAssessment['amount'],2) ."</nrwhite> ". $impactAssessment['unit']["l"] . '</h1></div><div class="tab_meta"><p class="unit">'.$impactAssessment['impactCategoryIndicator']['label'].'</p></div></div>';
 				}
 			}
 			
@@ -423,7 +407,7 @@ class Lca extends FT_Controller {
  			error_reporting(E_PARSE);    
 			$feature_info = array (
 		            'uri' => $URI,
-		    		'quantitativeReference' => $this->lcamodel->convertQR(@$this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
+		    		'quantitativeReference' => $this->lcamodel->convertQR(@$this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI))
 		    );
 			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
 			echo $text;
@@ -454,6 +438,10 @@ class Lca extends FT_Controller {
 
 				}
 				echo(json_encode($impact));
+		}
+		
+		public function fixwater(){
+			$this->lcamodel->fixWater();
 		}
 				
 } // End Class

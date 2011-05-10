@@ -18,13 +18,13 @@ class Lcamodel extends FT_Model{
 		}
 	}
 
-	public function convertImpactAssessments($dataset, $tooltips) {
+	public function convertImpactAssessments($dataset) {
 		$converted_dataset = array();		
 		foreach($dataset as $key=>$_record) {	
 			foreach ($_record[$this->arc_config['ns']['eco']."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
 				foreach($__record[$this->arc_config['ns']['eco']."hasImpactCategory"] as $___record) {
-					$converted_dataset[$key]['impactCategory'] = $___record;
-					$this->ecomodel->makeToolTip($___record, $tooltips);
+					$converted_dataset[$key]['impactCategory'] = $this->ecomodel->makeToolTip($___record);
+					
 				} 
 				foreach($__record[$this->arc_config['ns']['eco']."hasImpactCategoryIndicator"] as $___record) {
 					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
@@ -35,8 +35,7 @@ class Lcamodel extends FT_Model{
 					$converted_dataset[$key]['amount'] = $___record;
 				}
 				foreach($__record[$this->arc_config['ns']['eco']."hasUnitOfMeasure"] as $___record) {
-					$converted_dataset[$key]['unit'] = $___record;
-					$this->unitmodel->makeToolTip($___record, $tooltips);
+					$converted_dataset[$key]['unit'] = $this->unitmodel->makeToolTip($___record);
 				}		
 			}	
 			if (isset($converted_dataset[$key]['unit']) == false) {
@@ -56,7 +55,7 @@ class Lcamodel extends FT_Model{
 	}	
 	
 
-	public function convertExchanges($dataset, $tooltips){
+	public function convertExchanges($dataset){
 			$converted_dataset = array();
 			foreach($dataset as $key=>$record) {		
 				foreach($record[$this->arc_config['ns']['eco']."hasEffect"] as $_record) {
@@ -83,33 +82,30 @@ class Lcamodel extends FT_Model{
 						$converted_dataset[$key]['amount'] = $magnitude;
 					} 
 					foreach($_record[$this->arc_config['ns']['eco']."hasUnitOfMeasure"] as $unitOfMeasure) {
-						$converted_dataset[$key]['unit'] = $unitOfMeasure;
-						$this->unitmodel->makeToolTip($unitOfMeasure, $this->tooltips);
+						$converted_dataset[$key]['unit'] = $this->unitmodel->makeToolTip($unitOfMeasure);
 					} 
 				}
 			}
 			return $converted_dataset; 
 		}
 	
-	public function convertQR($dataset, $tooltips){
+	public function convertQR($dataset){
 		$converted_dataset = array();		
 		foreach($dataset as $key=>$record) {		
 			$converted_dataset['name'] = $record['name'];
 			$converted_dataset['amount'] = $record['magnitude'];
-			$converted_dataset['unit'] = $record['unit'];
-			$this->unitmodel->makeToolTip($record['unit'], $tooltips);
+			$converted_dataset['unit'] = $this->unitmodel->makeToolTip($record['unit']);
 		}		
 		return $converted_dataset; 
 	}	
 	
-	public function convertModeled($dataset, $tooltips){
+	public function convertModeled($dataset){
 		$converted_dataset = array();
 		foreach($dataset as $key=>$record) {		
 			if(isset($record[$this->arc_config['ns']['rdfs']."type"]) == true) {
 				foreach($record[$this->arc_config['ns']['rdfs']."type"] as $type) {
 					foreach($record[$this->arc_config['ns']['rdfs']."label"] as $label) {
-							$this->ecomodel->makeToolTip($type, $tooltips);
-							$converted_dataset['type'] = $type;
+							$converted_dataset['type'] =$this->ecomodel->makeToolTip($type);
 					}				
 				}				
 			}

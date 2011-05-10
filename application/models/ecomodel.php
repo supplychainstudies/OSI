@@ -65,14 +65,24 @@ class Ecomodel extends FT_Model{
             return false;
         }
     }
-
-	public function makeToolTip($uri, $tooltips) {
-		if (isset($tooltips[$uri]) != true) {
-			if (strpos($uri,":") !== false) {
-				$tooltips[$uri]['label'] = $this->getLabel($uri);
-				$tooltips[$uri]['l'] = $tooltips[$uri]['label'];
-			} 
-		}
+	
+	// Adds the human readable label to the impact URI
+	public function makeToolTip($uri) {
+		$this->arc_config['store_name'] = "eco";
+		if (strpos($uri,":") !== false) {
+			$tooltips = array(
+				'uri' => $uri, 
+				'label' => $this->getLabel($uri),
+				'l' => $this->getLabel($uri)
+				);
+		}else{
+			$tooltips = array(
+				'uri' => $uri, 
+				'label' => $uri,
+				'l' => $uri
+				);
+		} 
+	return $tooltips;
 	}
      
 }

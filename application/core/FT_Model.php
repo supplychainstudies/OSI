@@ -14,8 +14,7 @@ class FT_Model extends CI_Model{
 	 */
 	function FT_Model(){
 		parent::__construct();
-		$this->load->library('arc2/ARC2', '', 'arc');
-		//$this->config->load('arc');	  
+		$this->load->library('arc2/ARC2', '', 'arc');	  
 	    $this->config->load('arc');	
 		$this->config->load('arcdb');	
 		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
@@ -123,14 +122,10 @@ class FT_Model extends CI_Model{
 	}
 	
 	
-	
-	
-
 	public function getSomething($uri, $predicate) { 
 		$q = "select ?thing where { " .
 			"<" . $uri . "> " . $predicate . " ?thing . " . 				
 			"}";
-		
 		$results = $this->executeQuery($q);
 		if (count($results) != 0) {
 			return $results[0]['thing'];
@@ -259,6 +254,7 @@ class FT_Model extends CI_Model{
 
 	public function getLabel($URI) {				
 		$record = $this->getSomething($URI, "rdfs:label");
+
 		if ($record != "") {
 			return $record;
 		} else {				
@@ -314,5 +310,34 @@ class FT_Model extends CI_Model{
 		$records = $this->executeQuery($q);	
 		return $records[0]['previous_bnode'];
 	}
+	
+	public function fixWater(){
+		$q = "select ?o where { ?s eco:hasImpactCategoryIndicatorResult ?o . ?o eco:hasQuantity ?x . ?x eco:hasUnitOfMeasure qudtu:Liter . }";
+		$records = $this->executeQuery($q);
+		foreach($records as $record){
+			$node = "_:" . 'iamcd' . rand(1000000000, 10000000000);
+			$triples = array (
+				array(
+					's' => $record['o'],
+					'p' => 'eco:hasImpactAssessmentMethodCategoryDescription',
+					'o' => $node
+					),
+				array(
+					's' => $node,
+					'p' => 'eco:hasImpactCategory',
+					'o' => 'Resource Consumption'
+					),
+				array(
+					's' => $node,
+					'p' => 'eco:hasImpactCategoryIndicator',
+					'o' => 'Water'
+					)
+				);
+			//	var_dump($triples);
+			$this->addTriples($triples);
+		}
+	}
+	
+	
 }
 ?>
