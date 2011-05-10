@@ -41,7 +41,6 @@
 	  }
 	?>
 	<p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p>
-	<div class="square wide aoi changeco2"><p><a>Resize by CO2</a></p></div>
 </div>
 	<?=$footerDisplay;?>
 </div>
@@ -54,7 +53,7 @@
 	<script>
 	
 	$(function() {
-		$( ".aaa" ).click(function(){
+		$( ".blue" ).click(function(){
 			if (typeof opensquare!="undefined"){
 				opensquare.load('/lca/getName/'+opensquare.attr('id'));
 				opensquare.removeClass("medium");
@@ -75,7 +74,7 @@
 	});	
 
 	$(function() {
-	$( ".blue" ).click(function(){
+	$( ".aaa" ).click(function(){
 			thisone = $(this);
 			$.getJSON('/lca/getCO2/'+$(this).attr('id'), function(data) {;
 				side = Math.sqrt(data.CO2*2500);
