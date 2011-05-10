@@ -326,7 +326,7 @@ var_dump($product_node);
 				$ratio = $feature_info['quantitativeReference']['amount'];
 				$feature_info['quantitativeReference']['amount'] = 1;
 				foreach ($feature_info['impactAssessments'] as &$impactAssessment) {
-					$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+					$impactAssessment['amount'] = round(($impactAssessment['amount'] / $ratio),2);
 				}
 			}
 			
@@ -369,14 +369,32 @@ var_dump($product_node);
 			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
 			echo $text;
 		}
+		
 		public function getCO2($URI = null) {
- 			error_reporting(E_PARSE);    
-			$feature_info = array (
-		            'uri' => $URI,
-		    		'quantitativeReference' => $this->lcamodel->convertQR(@$this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
-		    );
-			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
-			echo $text;
+ 			error_reporting(E_PARSE);
+			$this->tooltips["qudtu:Kilogram"]["label"] = "Kilogram";
+			$this->tooltips["qudtu:Kilogram"]["abbr"] = "Kg";
+			$this->tooltips["qudtu:Kilogram"]["l"]= "Kg";
+			$this->tooltips["qudtu:Kilogram"]["quantityKind"] = "Mass";
+
+			$resource = array (
+			   	'uri' => $URI,
+				'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/".$URI),$this->tooltips),
+			    'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI),$this->tooltips)
+			);
+				$parts['tooltips'] = $this->tooltips;
+
+				foreach ($resource['impactAssessments'] as $impactAssessment) {
+					if ($impactAssessment['impactCategoryIndicator'] == "ossia:CO2e" or $impactAssessment['impactCategoryIndicator'] == "ossia:C02e") {
+						if ($resource['quantitativeReference']['unit'] == "qudtu:Kilogram") {
+						$impact["CO2"] = $impactAssessment['amount']/$resource['quantitativeReference']['amount'];
+						}else{
+						$impact["CO2"] = $impactAssessment['amount'];
+						}
+					}
+
+				}
+				echo(json_encode($impact));
 		}
 				
 } // End Class

@@ -20,7 +20,7 @@
 
 				<?
 					foreach ($set as $row) {
-						// Remove the opensustainability part of the url
+						// Remove the footprinted part of the url
 						$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['link']);
 						echo '<div class="small blue square" id="'.$myString.'"><p>'.$row['name'].'<p/></div>';
 					}
@@ -41,6 +41,7 @@
 	  }
 	?>
 	<p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p>
+	<div class="square wide aoi changeco2"><p><a>Resize by CO2</a></p></div>
 </div>
 	<?=$footerDisplay;?>
 </div>
@@ -53,7 +54,7 @@
 	<script>
 	
 	$(function() {
-		$( ".blue" ).click(function(){
+		$( ".aaa" ).click(function(){
 			if (typeof opensquare!="undefined"){
 				opensquare.load('/lca/getName/'+opensquare.attr('id'));
 				opensquare.removeClass("medium");
@@ -68,27 +69,26 @@
 			$(this).addClass("grey");
 			$('#columnleft').masonry({	  
 				  itemSelector: '.square', columnWidth:10, });
-			$(this).load('/lca/getImpacts/'+$(this).attr('id'));	
+			$(this).load('/lca/getImpacts/'+$(this).attr('id'));
 		});
 		
 	});	
 
 	$(function() {
+	$( ".blue" ).click(function(){
+			thisone = $(this);
+			$.getJSON('/lca/getCO2/'+$(this).attr('id'), function(data) {;
+				side = Math.sqrt(data.CO2*2500);
+				side = Math.round(side);
+				if(side > 400){ side = 400; }
+				thisone.width(side);
+				thisone.height(side);
 
-	    //Get Divs
-	    $('#leftcolumn > [square]').each(function(i) {
-			// Get CO2
-			co2 = ('/lca/getCO2/'+opensquare.attr('id'));
-			// Scale
-			side = Math.sqrt(co2*2500);
-			$(this).width(side);
-			$(this).height(side);
-	    });
 	// Do Masonry
 	$('#columnleft').masonry({	  
 		  itemSelector: '.square', columnWidth:10, });
-	});
-	
+		});
+	});	});
 	</script>
 </body>
 </html>
