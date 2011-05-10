@@ -148,7 +148,7 @@ class FT_Controller extends CI_Controller {
 	} 
 
 	private function generateScripts($included) {
-		$scriptDisplay = '<script type="text/javascript">if ( typeof(Sourcemap) == "undefined" ) {Sourcemap = {}; }</script>';
+		$scriptDisplay = '';
 		if($included) {		
 			foreach($this->_externalscripts as $script) {
 				$scriptDisplay .= '<script type="text/javascript" src="'.$script.'"></script>';
@@ -160,7 +160,7 @@ class FT_Controller extends CI_Controller {
 			$scriptDisplay .='<script type="text/javascript" 
 		        src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>';
 		
-			$standard = Array('jquery/jquery-ui-1.8.11.custom.min.js');
+			$standard = Array('jquery/jquery-ui-1.8.11.custom.min.js','janrain.js');
 			// , 'utilities.js', 'jquery/jquery.template.js'
 			$this->_scripts = array_merge($standard, $this->_scripts);
 		}

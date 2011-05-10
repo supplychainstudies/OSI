@@ -1,15 +1,5 @@
 <?php
-/**
- * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
- * 
- * @package opensustainability
- * @subpackage models
- */
- class Lcamodel extends FT_Model{
-     
-    /**
-     * @ignore
-     */
+class Lcamodel extends FT_Model{
     public function Lcamodel(){
         parent::__construct();
 		$this->load->model(Array('unitmodel','geographymodel','ecomodel'));
@@ -17,8 +7,6 @@
 
 
 	public function convertGeography($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
 		$converted_dataset = array();
 		if ($dataset != false) {
 			foreach($dataset as $geo) {
@@ -31,24 +19,22 @@
 	}
 
 	public function convertImpactAssessments($dataset, $tooltips) {
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
 		$converted_dataset = array();		
 		foreach($dataset as $key=>$_record) {	
-			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
-				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
+			foreach ($_record[$this->arc_config['ns']['eco']."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
+				foreach($__record[$this->arc_config['ns']['eco']."hasImpactCategory"] as $___record) {
 					$converted_dataset[$key]['impactCategory'] = $___record;
 					$this->ecomodel->makeToolTip($___record, $tooltips);
 				} 
-				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
+				foreach($__record[$this->arc_config['ns']['eco']."hasImpactCategoryIndicator"] as $___record) {
 					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
 				}					
 			} 	
-			foreach ($_record[$eco_prefix."hasQuantity"] as $__record) {
-				foreach($__record[$eco_prefix."hasMagnitude"] as $___record) {
+			foreach ($_record[$this->arc_config['ns']['eco']."hasQuantity"] as $__record) {
+				foreach($__record[$this->arc_config['ns']['eco']."hasMagnitude"] as $___record) {
 					$converted_dataset[$key]['amount'] = $___record;
 				}
-				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
+				foreach($__record[$this->arc_config['ns']['eco']."hasUnitOfMeasure"] as $___record) {
 					$converted_dataset[$key]['unit'] = $___record;
 					$this->unitmodel->makeToolTip($___record, $tooltips);
 				}		
@@ -71,36 +57,34 @@
 	
 
 	public function convertExchanges($dataset, $tooltips){
-			$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-			$eco_prefix = "http://ontology.earthster.org/eco/core#";
 			$converted_dataset = array();
 			foreach($dataset as $key=>$record) {		
-				foreach($record[$eco_prefix."hasEffect"] as $_record) {
-					foreach ($_record[$rdfs_prefix."type"] as $__record) {
-						if ($__record == "eco:Output" || $__record == "eco:Input") {
-							$converted_dataset[$key]["direction"] = str_replace("eco:", "", $__record);
+				foreach($record[$this->arc_config['ns']['eco']."hasEffect"] as $_record) {
+					foreach ($_record[$this->arc_config['ns']['rdfs']."type"] as $__record) {
+						if ($__record == $this->arc_config['ns']['eco']."Output" || $__record == $this->arc_config['ns']['eco']."Input") {
+							$converted_dataset[$key]["direction"] = str_replace($this->arc_config['ns']['eco'], "", $__record);
 						} 
 					}
-					foreach($_record[$eco_prefix."hasTransferable"] as $transferable) {
+					foreach($_record[$this->arc_config['ns']['eco']."hasTransferable"] as $transferable) {
 						if (is_array($transferable) == true) {
-							foreach($transferable[$rdfs_prefix."label"] as $label) {
+							foreach($transferable[$this->arc_config['ns']['rdfs']."label"] as $label) {
 								$converted_dataset[$key]['name'] = $label;
 							}
 						} else {
 							$converted_dataset[$key]['name'] = $transferable;
 						}
 					}
-					foreach($_record[$eco_prefix."hasFlowable"] as $flowable) {
+					foreach($_record[$this->arc_config['ns']['eco']."hasFlowable"] as $flowable) {
 						$converted_dataset[$key]['name'] = str_replace("eco", "", $flowable);
 					} 								
 				}
-				foreach ($record[$eco_prefix."hasQuantity"] as $_record) {
-					foreach($_record[$eco_prefix."hasMagnitude"] as $magnitude) {
+				foreach ($record[$this->arc_config['ns']['eco']."hasQuantity"] as $_record) {
+					foreach($_record[$this->arc_config['ns']['eco']."hasMagnitude"] as $magnitude) {
 						$converted_dataset[$key]['amount'] = $magnitude;
 					} 
-					foreach($_record[$eco_prefix."hasUnitOfMeasure"] as $unitOfMeasure) {
+					foreach($_record[$this->arc_config['ns']['eco']."hasUnitOfMeasure"] as $unitOfMeasure) {
 						$converted_dataset[$key]['unit'] = $unitOfMeasure;
-						$this->unitmodel->makeToolTip($unitOfMeasure, $tooltips);
+						$this->unitmodel->makeToolTip($unitOfMeasure, $this->tooltips);
 					} 
 				}
 			}
@@ -108,8 +92,6 @@
 		}
 	
 	public function convertQR($dataset, $tooltips){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
 		$converted_dataset = array();		
 		foreach($dataset as $key=>$record) {		
 			$converted_dataset['name'] = $record['name'];
@@ -121,13 +103,11 @@
 	}	
 	
 	public function convertModeled($dataset, $tooltips){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
 		$converted_dataset = array();
 		foreach($dataset as $key=>$record) {		
-			if(isset($record[$rdfs_prefix."type"]) == true) {
-				foreach($record[$rdfs_prefix."type"] as $type) {
-					foreach($record[$rdfs_prefix."label"] as $label) {
+			if(isset($record[$this->arc_config['ns']['rdfs']."type"]) == true) {
+				foreach($record[$this->arc_config['ns']['rdfs']."type"] as $type) {
+					foreach($record[$this->arc_config['ns']['rdfs']."label"] as $label) {
 							$this->ecomodel->makeToolTip($type, $tooltips);
 							$converted_dataset['type'] = $type;
 					}				
@@ -146,11 +126,11 @@
 	 public function getRecords() {
 	
 		$q = "select ?link where { " . 
-			" ?link 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:FootprintModel' . " . 
+			" ?link rdfs:type eco:FootprintModel . " . 
 			"}";
 		$footprint_records = $this->executeQuery($q);	
 		$q = "select ?link where { " . 
-			" ?link 'rdfs:type' 'eco:Model' . " . 
+			" ?link rdfs:type eco:Model . " . 
 			"}";
 		$model_records = $this->executeQuery($q);	
 	
@@ -158,8 +138,8 @@
 		foreach ($records as &$record) {
 			$q = "select ?name where { " . 
 				"<". $record['link'] ."> eco:models ?bnode . " .
-				"?bnode 'http://www.w3.org/2000/01/rdf-schema#label' ?name . " .
-				"?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:Product' . " .  
+				"?bnode rdfs:label ?name . " .
+				"?bnode rdfs:type eco:Product . " .  
 				"}";
 			$get_product_name = $this->executeQuery($q);
 			if (count($get_product_name) > 0) {
@@ -168,15 +148,15 @@
 			} else {
 				$q = "select ?name where { " . 
 					"<". $record['link'] ."> eco:models ?bnode . " .
-					"?bnode 'http://www.w3.org/2000/01/rdf-schema#label' ?name . " .
-					"?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:Process' . " .  
+					"?bnode rdfs:label ?name . " .
+					"?bnode rdfs:type eco:Process . " .  
 					"}";
 				$get_process_name = $this->executeQuery($q);	
 				if (count($get_product_name) > 0) {
 				$record['name'] = $get_process_name[0]['name'];					
 				} else {
 					$q = "select ?name where { " . 
-						"<". $record['link'] ."> 'http://www.w3.org/2000/01/rdf-schema#label' ?name . " .
+						"<". $record['link'] ."> rdfs:label ?name . " .
 						"}";
 					$get_model_name = $this->executeQuery($q);
 					if (count($get_product_name) > 0) {
@@ -197,9 +177,9 @@
 	 public function simpleSearch($value = null, $limit = 20, $offset = 0) {
 		$URIs = array();
 		$q = "select ?uri where { " . 
-			" ?uri '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " ;
+			" ?uri eco:models ?bnode . " ;
 		if ($value != null) {
-			$q .= " ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 
+			$q .= " ?bnode rdfs:label ?label . " . 
 					"FILTER regex(?label, '" . $value . "', 'i')";
 		} 
 		$q .= "}" . 
@@ -223,18 +203,17 @@
 	 */
 	 public function getConvertedImpactAssessments($URI) {
 		$q = "select ?impactCategory ?impactCategoryIndicator ?impactCategoryValue ?impactCategoryUnit where { " . 
-			" ?bnode 'http://ontology.earthster.org/eco/core#computedFrom' <".$URI."> . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:ImpactAssessment' . " .	
-			" ?bnode 'http://ontology.earthster.org/eco/core#hasImpactCategoryIndicatorResult' ?bnode2 . " .
-			" ?bnode2 'http://ontology.earthster.org/eco/core#hasImpactAssessmentMethodCategoryDescription' ?bnode3 . " .			 	
-			" ?bnode3 'http://ontology.earthster.org/eco/core#hasImpactCategory' ?impactCategory . " .			
-			" ?bnode3 'http://ontology.earthster.org/eco/core#hasImpactCategoryIndicator' ?impactCategoryIndicator . " .
-			" ?bnode2 'http://ontology.earthster.org/eco/core#hasQuantity' ?bnode4 . " . 			
-			" ?bnode4 'http://ontology.earthster.org/eco/core#hasUnitOfMeasure' ?impactCategoryUnit . " . 
-			" ?bnode4 'http://ontology.earthster.org/eco/core#hasMagnitude' ?impactCategoryValue . " .				
+			" ?bnode eco:computedFrom <".$URI."> . " .
+			" ?bnode rdfs:type eco:ImpactAssessment . " .	
+			" ?bnode eco:hasImpactCategoryIndicatorResult ?bnode2 . " .
+			" ?bnode2 eco:hasImpactAssessmentMethodCategoryDescription ?bnode3 . " .			 	
+			" ?bnode3 eco:hasImpactCategory ?impactCategory . " .			
+			" ?bnode3 eco:hasImpactCategoryIndicator ?impactCategoryIndicator . " .
+			" ?bnode2 eco:hasQuantity ?bnode4 . " . 			
+			" ?bnode4 eco:hasUnitOfMeasure ?impactCategoryUnit . " . 
+			" ?bnode4 eco:hasMagnitude ?impactCategoryValue . " .				
 			"}";				
 		$records = $this->executeQuery($q);	
-		//var_dump($records);
 		foreach ($records as &$record) {
 			$record['impactCategory'] = $this->getLabel($record['impactCategory']);
 			$record['impactCategoryIndicator'] = $this->getLabel($record['impactCategoryIndicator']);
@@ -247,9 +226,9 @@
 	
 	public function getImpactAssessments($URI) {
 		$q = "select ?bnoder where { " . 
-			" ?bnode 'http://ontology.earthster.org/eco/core#computedFrom' <".$URI."> . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type' 'eco:ImpactAssessment' . " .
-			" ?bnode 'http://ontology.earthster.org/eco/core#hasImpactCategoryIndicatorResult' ?bnoder . " .			
+			" ?bnode eco:computedFrom <".$URI."> . " .
+			" ?bnode rdfs:type eco:ImpactAssessment . " .
+			" ?bnode eco:hasImpactCategoryIndicatorResult ?bnoder . " .			
 			"}";				
 		$records = $this->executeQuery($q);	
 		$full_records = array();
@@ -263,7 +242,7 @@
 
 	public function getModeled($URI) {
 		$q = "select ?bnode where { " . 
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#models' ?bnode . " .			
+			" <".$URI."> eco:models ?bnode . " .			
 			"}";				
 		$records = $this->executeQuery($q);
 		$full_record = array();		
@@ -276,8 +255,8 @@
 	
 	public function getGeography($URI) {
 		$q = "select ?geo_uri where { " . 
-			" <".$URI."> '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " .
-			"?bnode '" . $this->arc_config['ns']['eco'] . "hasGeoLocation' ?geo_uri . " . 			
+			" <".$URI."> eco:models ?bnode . " .
+			"?bnode eco:hasGeoLocation ?geo_uri . " . 			
 			"}";				
 		$records = $this->executeQuery($q);	
 		if (count($records) != 0) {
@@ -289,9 +268,9 @@
 	
 	public function getLCAsByPublisher($foaf_uri) {
 		$q = "select ?uri ?title where { " . 
-			" ?uri '" . $this->arc_config['ns']['dcterms'] . "publisher' '" . $foaf_uri . "' . " . 	
-			" ?uri '" . $this->arc_config['ns']['eco'] . "models' ?bnode . " . 
-			" ?bnode '" . $this->arc_config['ns']['rdfs'] . "label' ?title . " . 		
+			" ?uri dcterms:publisher '" . $foaf_uri . "' . " . 	
+			" ?uri eco:models ?bnode . " . 
+			" ?bnode rdfs:label ?title . " . 		
 			"}" . 
 			"LIMIT 10 ";
 
@@ -308,18 +287,18 @@
 	
 	public function getQR($URI) {
 		$q = "select ?bnode ?name where { " . 
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#models' ?bnode . " .			
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type'  'eco:Product' . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#label'  ?name . " .
+			" <".$URI."> eco:models ?bnode . " .			
+			" ?bnode rdfs:type  eco:Product . " .
+			" ?bnode rdfs:label  ?name . " .
 			"}";				
 		$records = $this->executeQuery($q);
 		if (count($records) > 0) {
 			$q = "select ?magnitude ?unit where { " . 
-				" ?exchange_bnode 'http://ontology.earthster.org/eco/core#hasEffect' ?effect_bnode . " .
-				" ?exchange_bnode 'http://ontology.earthster.org/eco/core#hasQuantity' ?quantity_bnode . " .
-				" ?quantity_bnode 'http://ontology.earthster.org/eco/core#hasMagnitude' ?magnitude . " .
-				" ?quantity_bnode 'http://ontology.earthster.org/eco/core#hasUnitOfMeasure' ?unit . " .
-				" ?effect_bnode 'http://ontology.earthster.org/eco/core#hasTransferable' <" . $records[0]['bnode'] . "> . " .			
+				" ?exchange_bnode eco:hasEffect ?effect_bnode . " .
+				" ?exchange_bnode eco:hasQuantity ?quantity_bnode . " .
+				" ?quantity_bnode eco:hasMagnitude ?magnitude . " .
+				" ?quantity_bnode eco:hasUnitOfMeasure ?unit . " .
+				" ?effect_bnode eco:hasTransferable <" . $records[0]['bnode'] . "> . " .			
 				"}";
 			$full_records = $this->executeQuery($q);
 			$full_records[0]['name'] = $records[0]['name'];
@@ -329,18 +308,21 @@
 		}
 	}
 	
-	
-	
-	public function getExchanges($URI) {
+	public function getExchanges($URI) {		
 		$q = "select ?bnode where { " . 
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#hasUnallocatedExchange' ?bnode . " .				
+			" <".$URI."> eco:hasUnallocatedExchange ?bnode . " .				
 			"}";				
 		$records = $this->executeQuery($q);
 		$q2 = "select ?bnode where { " . 	
-			" <".$URI."> 'http://ontology.earthster.org/eco/core#hasAllocatedExchange' ?bnode . " .				
+			" <".$URI."> eco:hasAllocatedExchange ?bnode . " .				
 			"}";				
 		$records2 = $this->executeQuery($q2);
+		$q3 = "select ?bnode where { " . 	
+			" <".$URI."> eco:hasReferenceExchange ?bnode . " .				
+			"}";				
+		$records3 = $this->executeQuery($q3);		
 		$records = array_merge($records, $records2);
+		$records = array_merge($records, $records3);
 		$full_record = array();		
 		foreach ($records as $record) {
 			$link = array('link' => $record['bnode']);
@@ -359,13 +341,13 @@
 	public function latest($limit) {
 		$q = "select ?uri ?created ?name where { " . 
 			"?uri dcterms:created ?created . " . 
-			"?uri 'http://ontology.earthster.org/eco/core#models' ?bnode . " .			
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#type'  'eco:Product' . " .
-			" ?bnode 'http://www.w3.org/2000/01/rdf-schema#label'  ?name . " .
+			"?uri eco:models ?bnode . " .			
+			" ?bnode rdfs:#type  eco:Product . " .
+			" ?bnode rdfs:label  ?name . " .
 			"} ORDER BY DESC(?created)";	
 		$records = $this->executeQuery($q);	
 		return $records;
 	}
 
 
-} //
+}

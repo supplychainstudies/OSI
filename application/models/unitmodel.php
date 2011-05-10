@@ -1,19 +1,25 @@
 <?php
-/**
- * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
- * 
- * @package opensustainability
- * @subpackage models
- */
-
 class Unitmodel extends FT_Model{
-	
-	/**
-	 * @ignore
-	 */
 	function Unitmodel(){
 		parent::__construct();
-
+		$this->arc_config['store_name'] = "qudt";
+	}
+	
+	public function makeToolTip($uri, $tooltips) {
+		$this->arc_config['store_name'] = "qudt";
+		if (isset($tooltips[$uri]) != true) {
+			if (strpos($uri,":") !== false) {
+				$tooltips[$uri] = array();
+				$tooltips[$uri]['label'] = $this->getLabel($uri);	
+				$tooltips[$uri]['abbr'] = $this->getAbbr($uri);
+				$tooltips[$uri]['l'] = $tooltips[$uri]['abbr'];
+				$tooltips[$uri]['quantityKind'] = $this->getQuantityKind($uri);				
+				if ($tooltips[$uri]['l'] == false) { 
+					$uri_parts = explode(":", $uri);
+					return $uri_parts[1];
+				} 
+			} 
+		}
 	}
 	
 	public function makeToolTip($uri, $tooltips) {
@@ -82,11 +88,11 @@ class Unitmodel extends FT_Model{
 	
 	
 	public function getAbbr($uri) {
-		return $this->getSomething($uri, "qudt:abbreviation","remote");	
+		return $this->getSomething($uri, "qudt:abbreviation");	
 	}
 
 	public function getQuantityKind($uri) {
-		$kind_uri =  $this->getSomething($uri, "qudt:quantityKind","remote");
+		$kind_uri =  $this->getSomething($uri, "qudt:quantityKind");
 		return $this->getLabel($kind_uri);	
 	}	
 	

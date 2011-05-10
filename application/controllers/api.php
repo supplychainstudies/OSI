@@ -11,6 +11,7 @@
 
 
 
+
 class API extends FT_Controller {
 	public function API() {
 		parent::__construct();
@@ -22,6 +23,7 @@ class API extends FT_Controller {
 	public $data;
 	public $post_data;
 	public $tooltips = array();
+
 	
 	/***
     * @public
@@ -77,6 +79,7 @@ class API extends FT_Controller {
 		}
 	}
 */	
+
 	public function search($encode = "json") {
 		$checked_URIs = array();
 		$search_terms = $_GET;
@@ -141,56 +144,7 @@ class API extends FT_Controller {
 	    return $xml->asXML();
 	}
 	
-	private function convertImpactAssessments($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
-		$converted_dataset = array();		
-		foreach($dataset as $key=>$record) {	
-			//foreach ($record[$eco_prefix."hasImpactCategoryIndicatorResult"] as $_record) {
-				foreach ($record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
-					foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
-						$converted_dataset[$key]['impactCategory'] = $___record;
-					} 
-					foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
-						$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
-					}					
-				} 	
-				foreach ($record[$eco_prefix."hasQuantity"] as $__record) {
-					foreach($__record[$eco_prefix."hasMagnitude"] as $___record) {
-						$converted_dataset[$key]['amount'] = $___record;
-					}
-					foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
-						$converted_dataset[$key]['unit'] = str_replace("qudt:", "",$___record);
-					}		
-				}	
-				if (isset($converted_dataset[$key]['unit']) == false) {
-					$converted_dataset[$key]['unit'] = "?";
-				}									
-				if (isset($converted_dataset[$key]['amount']) == false) {
-					$converted_dataset[$key]['amount'] = "?";
-				}
-				if (isset($converted_dataset[$key]['impactCategory']) == false) {
-					$converted_dataset[$key]['impactCategory'] = "?";
-				}
-				if (isset($converted_dataset[$key]['impactCategoryIndicator']) == false) {
-					$converted_dataset[$key]['impactCategoryIndicator'] = "?";
-				}
-			//}
-	}
-		return $converted_dataset; 
-	}
-	
-	private function convertQR($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
-		$converted_dataset = array();		
-		foreach($dataset as $key=>$record) {		
-			$converted_dataset['name'] = $record['name'];
-			$converted_dataset['amount'] = $record['magnitude'];
-			$converted_dataset['unit'] = $record['unit'];
-		}		
-		return $converted_dataset; 
-	}
+
 	
 		
 }

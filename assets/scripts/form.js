@@ -14,6 +14,14 @@ $(".popup").click(function() {
     console.log(the_id);
     // prevent the default action, e.g., following a link
 }); 
+
+$("[name*='_label']").keyup(function() {
+	$(this).removeClass("linked_value");
+	var label = $(this).attr('name');
+    var hidden = label.replace("_label", "");
+    $("[name='"+hidden+"']").val("");
+    	
+}); 
  
  
 $("#people").click(function() {
@@ -73,6 +81,7 @@ $("#people").click(function() {
                     var the_hidden_field = field.replace("_button" ,"");
                     var the_label = $("[id='"+the_value+"']").text();
                     $("[name='"+the_label_field+"']").val(the_label);
+					$("[name='"+the_label_field+"']").addClass("linked_value");
                     $("[name='"+the_hidden_field+"']").val(the_value);
                 });     
               }
@@ -93,6 +102,7 @@ var the_label_field = field.replace("_button", "_label");
 var the_hidden_field = field.replace("_button" ,"");
 var the_label = $("[value='"+the_value+"']").text();
 $("[name='"+the_label_field+"']").val(the_label);
+$("[name='"+the_label_field+"']").addClass("linked_value");
 $("[name='"+the_hidden_field+"']").val(the_value);
 });
  
@@ -104,6 +114,7 @@ $("[name^='impacts'][name!='impacts_main']").change(function() {
     var the_hidden_field = field.replace("_button" ,"");
     var the_label = $("[value='"+the_value+"']").text();
     $("[name='"+the_label_field+"']").val(the_label);
+	$("[name='"+the_label_field+"']").addClass("linked_value");
     $("[name='"+the_hidden_field+"']").val(the_value);
     //alert(the_value);
 });
@@ -122,6 +133,7 @@ $("[name^='unit'][name!='unit_main']").change(function() {
     var the_hidden_field = field.replace("_button" ,"");
     var the_label = $("[value='"+the_value+"']").text();
     $("[name='"+the_label_field+"']").val(the_label);
+	$("[name='"+the_label_field+"']").addClass("linked_value");
     $("[name='"+the_hidden_field+"']").val(the_value);
     //alert(the_value);
 }); 
@@ -154,6 +166,16 @@ function addField(name, path) {
     }
     $(to_paste).append(duplicated);
     $(to_count).val(increment);
+	$(".popup").click(function() {
+	    var the_id = $(this).attr("id");
+	    var the_name = $(this).attr("name");
+	    $("#"+the_id+"_dialog").dialog('open');
+	    $("[name='" + the_id + "_field']").val(the_name);
+	    //var val = $("[name='" + the_id + "_field']").val();
+	    //console.log(val);
+	    console.log(the_id);
+	    // prevent the default action, e.g., following a link
+	});
 }
  
 function toggle_delete(field) {

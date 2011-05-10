@@ -68,7 +68,7 @@
 			$(this).addClass("grey");
 			$('#columnleft').masonry({	  
 				  itemSelector: '.square', columnWidth:10, });
-			$(this).load('/lca/getImpacts/'+$(this).attr('id'));
+			$(this).load('/lca/getImpacts/'+$(this).attr('id'));	
 		});
 		
 	});	

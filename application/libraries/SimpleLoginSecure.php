@@ -157,6 +157,7 @@ class SimpleLoginSecure
 		
 		
 		//Check against user table
+
 		$this->CI->db->where('user_name', $user_name); 
 		$query = $this->CI->db->get_where($this->user_table);
 
@@ -180,7 +181,11 @@ class SimpleLoginSecure
 
 			//Set session data
 			unset($user_data['user_pass']);
-			$user_data['id'] = $user_data['user_name']; // modification by Bianca Sayan to tie neatly with OpenID		
+			$user_data['id'] = $user_data['user_name']; // modification by Bianca Sayan to tie neatly with OpenID
+			$user_info = $this->userInfo($user_name);
+			if (isset($user_info['foaf_uri']) == true) {
+				$user_data['foaf'] = $user_info['foaf_uri']; // modification by Bianca Sayan to tie in with linked db	
+			}
 			unset($user_data['user_name']);
 			//$user_data['user'] = $user_data['user_email']; // for compatibility with Simplelogin
 			//$user_data['logged_in'] = true;

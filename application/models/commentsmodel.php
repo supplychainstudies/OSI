@@ -1,19 +1,7 @@
 <?php
-/**
- * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
- * 
- * @package opensustainability
- * @subpackage models
- */
- 
 class Commentsmodel extends FT_Model{
-     
-    /**
-     * @ignore
-     */
     function Commentsmodel(){
         parent::__construct();
- 
     }
 
 	public function getComments($uri) {

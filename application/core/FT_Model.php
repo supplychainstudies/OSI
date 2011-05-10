@@ -19,7 +19,6 @@ class FT_Model extends CI_Model{
 	    $this->config->load('arc');	
 		$this->config->load('arcdb');	
 		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
-		$this->arc_lr_config = array_merge($this->config->item("arc_lr_info"), $this->config->item("db_arc_lr_info"));
 	}	
 	
 	// Configuration information for accessing the arc store
@@ -33,8 +32,6 @@ class FT_Model extends CI_Model{
 	 */
 	public function executeQuery($q,$db="local") {
 		$config = $this->arc_config;
-		if ($db == "remote") 
-			$config = $this->arc_lr_config;
 		$store = $this->arc->getStore($config);
 
 		if (!$store->isSetUp()) {
@@ -128,30 +125,13 @@ class FT_Model extends CI_Model{
 	
 	
 	
-	public function getSomething($uri, $predicate, $db="local") { 
-		//var_dump($uri);
-		//var_dump(strpos($uri,"http://"));
-		//var_dump(strpos($uri,":"));
-		
-		if (strpos($uri,"http://") !== false) {
-			$the_uri = $uri;
-		} elseif (strpos($uri,":") !== false) {
-			$xarray = explode(":", $uri);
-			$the_uri = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
-		}
-		
- 		if (strpos($uri,"http://") !== false) {
-			$the_predicate = $predicate;
-		} elseif (strpos($predicate,":") !== false) {
-			$xarray = explode(":", $predicate);
-			$the_predicate = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
-		}
-		
+
+	public function getSomething($uri, $predicate) { 
 		$q = "select ?thing where { " .
-			"<" . $the_uri . "> '" . $the_predicate . "' ?thing . " . 				
+			"<" . $uri . "> " . $predicate . " ?thing . " . 				
 			"}";
 		
-		$results = $this->executeQuery($q, $db);
+		$results = $this->executeQuery($q);
 		if (count($results) != 0) {
 			return $results[0]['thing'];
 		} else {
@@ -276,12 +256,13 @@ class FT_Model extends CI_Model{
 		return $bnode;
 	}
 
-	public function getLabel($URI, $db="local") {				
-		$record = $this->getSomething($URI, "rdfs:label", $db);
+
+	public function getLabel($URI) {				
+		$record = $this->getSomething($URI, "rdfs:label");
 		if ($record != "") {
 			return $record;
 		} else {				
-			$record = $this->getSomething($URI, "rdf:label", $db);
+			$record = $this->getSomething($URI, "rdf:label");
 			if ($record != "") {
 				return $record;
 			} else {
@@ -298,7 +279,7 @@ class FT_Model extends CI_Model{
 	 */		
 	public function getDataType($URI) {
 		$q = "select ?data_type where { " . 
-			" <".$URI."> 'http://www.w3.org/2000/01/rdf-schema#type' ?data_type . " . 
+			" <".$URI."> rdfs:type ?data_type . " . 
 			"}";
 		$records = $this->executeQuery($q);	
 		return $records[0]['data_type'];
@@ -333,23 +314,5 @@ class FT_Model extends CI_Model{
 		$records = $this->executeQuery($q);	
 		return $records[0]['previous_bnode'];
 	}
-	
-	
-	public function created() {	
-		$q = "select ?uri where { " . 
-			"?uri rdfs:type ?x . " . 
-			"}";	
-		$records = $this->executeQuery($q);	
-		$b = 0;	
-		foreach($records as $record) {
-			$b++;
-			$q2 = "insert into <http://opensustainability.info/> { " .	
-					"<".$record['uri']."> dcterms:created '".date('j F Y', mktime(0, 0, 0, 7, 1+$b, 2010))."' . " . 
-			 		"}";
-			$this->executeQuery($q2);			
-		}
-
-	}
-	
 }
 ?>

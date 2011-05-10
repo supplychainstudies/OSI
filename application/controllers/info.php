@@ -10,12 +10,11 @@
  */
 
 class Info extends FT_Controller {
-	
+
 	public function __construct() {
 		parent::__construct();
-		$this->load->model(Array('lcamodel'));
-		$this->load->model(Array('unitmodel'));	
-		$this->load->library(Array('form_extended', 'name_conversion'));
+		$this->load->model(Array('lcamodel','unitmodel'));
+		$this->load->library(Array('form_extended'));
 		//$this->load->helper(Array('lcaformat_helper'));
 	}
 	public $URI;
@@ -46,11 +45,11 @@ class Info extends FT_Controller {
 					$set[$key][$_key] = $field;
 			}
 		}
+
 		//Load RSS for news
 		$this->load->library('RSSParser', array('url' => 'http://twitter.com/statuses/user_timeline/footprinted.rss', 'life' => 0));
 		//Get six items from the feed
 		$twitter = $this->rssparser->getFeed(6);			
-		
 		
 		// Send data to the view
 		$this->data("set", $set);

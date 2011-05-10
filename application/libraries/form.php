@@ -302,20 +302,16 @@ class Form {
             $first_run = false;
         }
 		// Fix this later
-		$is_multiple = false;
-		if (isset($def['multiple']) == true) {
-				if ($def['multiple'] == "yes") {
-					$is_multiple = true;
-				}
-		}
 		
         $html .= "$tabs\t".'<ul class="layout">'."\n";
-
+		$is_multiple = false;
 		if (isset($group['__attrs']['multiple']) == true) {
 			if ($group['__attrs']['multiple'] == "yes") {
 			$multiple = $multiple."[0]";
+			$is_multiple = true;
 			}						
 		}
+
         foreach ($group as $name => $val) {	
             if ($name == '__attrs') {
                 continue;
@@ -370,17 +366,17 @@ class Form {
                         ? sprintf('tabindex="%s" name="%s"', $tabindex++, $name)
                         : sprintf('name="%s"', $name);
 */
-					$is_multiple = false;
+					$_is_multiple = false;
 					if (isset($def['multiple']) == true) {
 							if ($def['multiple'] == "yes") {
-								$is_multiple = true;
+								$_is_multiple = true;
 							}
 					} 
 					$field_multiple = $multiple;
 					if ($def['type'] == 'hidden') {
 						 $_name = $name."_".$multiple;
 						 $idname = sprintf('name="%s"', $name."_".$multiple);
-					} elseif ($is_multiple == true) {
+					} elseif ($_is_multiple == true) {
 						$field_multiple = $multiple . "[0]";
 						$_name = $name."_".$field_multiple;
 						$idname = sprintf('name="%s"', $name."_".$field_multiple);
@@ -439,7 +435,7 @@ class Form {
 						$input .= '<input type="text" '. $idname . ' id="' . $def['lookup'] . '" /><input type="hidden" '. $idname . ' />';
 						break;
 					case 'popup':
-	                     $input = '<input type="text" ' . str_replace($_name, $_name."_label", $idname) . ' /><input type="hidden" '. $idname . ' /><input type="button" ' . str_replace($_name, $_name."_button", $idname) . ' id="' . $def['popup'] . '" value="Pick One" />';
+	                     $input = '<input type="text" ' . str_replace($name, $name."_label", $idname) . ' /><input type="hidden" '. $idname . ' /><input type="button" ' . str_replace($name, $name."_button", $idname) . ' id="' . $def['popup'] . '" value="Pick One" />';
 	                    break;
 					break;
 					case 'search':
@@ -525,9 +521,9 @@ class Form {
                         ? ''
                         : "$tabs\t</li>\n";
 
-					if ($is_multiple == true) {
+					if ($_is_multiple == true) {
 							$multiple_string = str_replace("]", "",str_replace("[", "", str_replace("][", "-", $field_multiple)));
-							$row =  "<div id=\"div_".$name."\">".$row."</div>$tabs\t\t<div id=\"div_multiple_".$name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/button".$depth.".gif\"  value=\"Another &gt;&gt;\" onClick=\"addField('".$name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$name."_counter_".$multiple_string."\" name=\"".$name."_counter_".$multiple_string."\" value=\"0\">\n";
+							$row =  "<div id=\"div_".$name."\">".$row."</div>$tabs\t\t<div id=\"div_multiple_".$name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/add.gif\"  value=\"Another &gt;&gt;\" onClick=\"addField('".$name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$name."_counter_".$multiple_string."\" name=\"".$name."_counter_".$multiple_string."\" value=\"0\">\n";
 					}
                     $html .= "$row";
                 }
@@ -537,7 +533,7 @@ class Form {
         $html .= "$tabs\t".'</ul>'."\n";
 		if ($is_multiple == true) {
 			$multiple_string = str_replace("]", "",str_replace("[", "", str_replace("][", "-", $multiple)));
-			$html .= "$tabs".'</div>'."<div id=\"div_multiple_".$fieldset_name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/tab".$depth.".gif\" value=\"Another &gt;&gt;\" class=\"more\" onClick=\"addField('".$fieldset_name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$fieldset_name."_counter_".$multiple_string."\"  name=\"".$fieldset_name."_counter_".$multiple_string."\" value=\"0\">\n";			
+			$html .= "$tabs".'</div>'."<div id=\"div_multiple_".$fieldset_name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/add.gif\" value=\"Another &gt;&gt;\" class=\"more\" onClick=\"addField('".$fieldset_name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$fieldset_name."_counter_".$multiple_string."\"  name=\"".$fieldset_name."_counter_".$multiple_string."\" value=\"0\">\n";			
 		} else {
         	$html .= "$tabs".'</div>'."\n";			
 		}
@@ -571,10 +567,13 @@ class Form {
             strtolower(preg_replace('|\W|', '_', $this->data['__attrs']['name'])),
             $form_type
         );
-
+/*
         foreach ($this->data['fieldset'] as $group) {
             $out .= $this->build_group($group);
         }
+
+*/
+    	$out .= $this->build_group($this->data);
 
         $out .= "</form>\n";
 
