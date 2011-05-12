@@ -155,33 +155,21 @@ class FT_Model extends CI_Model{
    }
 	
 	// This function checks if the triples from the URI are loaded, and if not it tries to load it
-	public function isLoaded($address, $address2) {
-		//if($uri2==null){$uri2 = $uri;}
-		$a = $address;
-		$q = "select ?c where { " .	"<" . $address2 . "> ?c ?d . " . "}";
-		$results = $this->executeQuery($q);
+	public function isLoaded($uri, $uri2=null) {
+		if($uri2==null){$uri2 = $uri;}
+		$q = "select ?c where { " .
+			"<" . $uri2 . "> ?c ?d . " . 				
+			"}";
+		$results = $this->executeQuery($q, "remote");
 		if (count($results) != 0) {
 			return true;
-		} else {		
-			$q = "LOAD <";
-			$q .= $a;
-			$q .= "> INTO <";
-			$q .= (string)$address;
-			$q .= ">";
-			echo $q;
-			$results = $this->executeQuery($q);
+		} else {
+			
+			$q = "LOAD <" . $uri . "> INTO <" . $uri2 . ">";
+			$this->executeQuery($q);
 		}
-		var_dump($results);
 	}
-	public function isLoadedtest() {
-		
-			$q = "LOAD <http://dbpedia.org/data/Aluminium.ntriples> INTO <http://dbpedia.org/data/Aluminium>";
-			echo $q;
-			$results = $this->executeQuery($q);
-		}
-		var_dump($results);
-	}
-	
+
 
 	/**
 	 * This function retrieves the triples for a uri
