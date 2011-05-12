@@ -1,5 +1,4 @@
 <?php
-include_once('arcmodel.php');
 /**
  * This model uses the Arc2 library to insert, edit, and retrieve rdf data from the arc store 
  * 
@@ -7,13 +6,13 @@ include_once('arcmodel.php');
  * @subpackage models
  */
 
-class Loadmodel extends ArcModel{
+class Loadmodel extends FT_Model{
 	
 	/**
 	 * @ignore
 	 */
 	function Loadmodel(){
-		parent::arcmodel();
+		parent::__construct();
 		
 
 	}
@@ -232,6 +231,10 @@ class Loadmodel extends ArcModel{
 			$results = $this->executeQuery($q);	
 		}
 	}
-	
-	
+	public function dumpCyc() {
+		$this->arc_config['store_name'] = 'openCyc';
+		$q = "LOAD <" . "http://footprinted.org/assets/data/opencyc-latest.owl" . "> INTO <" . "http://sw.opencyc.org/concept/" . ">";
+		$results = $this->executeQuery($q);
+		var_dump($results);
+	}
 }

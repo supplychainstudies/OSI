@@ -122,30 +122,66 @@ class FT_Model extends CI_Model{
 	}
 	
 	
-	public function getSomething($uri, $predicate) { 
-		$q = "select ?thing where { " .
-			"<" . $uri . "> " . $predicate . " ?thing . " . 				
-			"}";
+   public function getSomething($uri, $predicate, $lang = null) { 
+       $q = "select ?thing where { " .
+           "<" . $uri . "> " . $predicate . " ?thing . ";
+
+           if ($lang != null) {
+               $q .= "FILTER ( lang(?thing) = '".$lang."' )";
+           }                
+           $q .= "}";
+       $results = $this->executeQuery($q);
+       if (count($results) != 0) {
+           return $results[0]['thing'];
+       } else {
+           return false;
+       }            
+   }
+	public function getSomethings($uri, $predicate) { 
+       $q = "select ?thing where { " .
+           "<" . $uri . "> " . $predicate . " ?thing . " .                
+           "}";
+
+       $results = $this->executeQuery($q);
+       $return_results = array();
+       if (count($results) != 0) {
+           foreach($results as $result) {
+               $return_results[] = $result['thing'];
+           }
+           return $return_results;
+       } else {
+           return false;
+       }            
+   }
+	
+	// This function checks if the triples from the URI are loaded, and if not it tries to load it
+	public function isLoaded($address, $address2) {
+		//if($uri2==null){$uri2 = $uri;}
+		$a = $address;
+		$q = "select ?c where { " .	"<" . $address2 . "> ?c ?d . " . "}";
 		$results = $this->executeQuery($q);
 		if (count($results) != 0) {
-			return $results[0]['thing'];
-		} else {
-			return false;
-		}			
+			return true;
+		} else {		
+			$q = "LOAD <";
+			$q .= $a;
+			$q .= "> INTO <";
+			$q .= (string)$address;
+			$q .= ">";
+			echo $q;
+			$results = $this->executeQuery($q);
+		}
+		var_dump($results);
+	}
+	public function isLoadedtest() {
+		
+			$q = "LOAD <http://dbpedia.org/data/Aluminium.ntriples> INTO <http://dbpedia.org/data/Aluminium>";
+			echo $q;
+			$results = $this->executeQuery($q);
+		}
+		var_dump($results);
 	}
 	
-	public function isLoaded($uri) {
-		$q = "select ?c where { " .
-			"<" . $uri . "> ?c ?d . " . 				
-			"}";
-		$results = $this->executeQuery($q, "remote");
-		if (count($results) != 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 
 	/**
 	 * This function retrieves the triples for a uri
@@ -267,6 +303,16 @@ class FT_Model extends CI_Model{
 		}
 	}	
 	
+	//From an element it gets the same as nodes
+	public function getAll($previous_bnode) {
+		$q = "select ?object ?c where { " . 
+			" <".$previous_bnode."> ?c ?object . " . 
+			"}";	
+		$records = $this->executeQuery($q);
+		return $records;
+		
+	}
+	
 
 	/**
 	 * Retrieves and returns all the impacts of an existing uri
@@ -296,7 +342,7 @@ class FT_Model extends CI_Model{
 		return $records;
 	}	
 	
-	
+	 
 	
 	/**
 	 * Gets the Parent node of a bnode

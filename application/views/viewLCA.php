@@ -26,7 +26,7 @@
 				// Change color of the circle depending on the impact category	
 				switch ($impactAssessment['impactCategoryIndicator']) {
 				    case 'Waste': $color = "#666"; $max = 10; break;
-				    case 'Carbon dioxide Equivalent': $color = "#333";	$max = 10; break;
+				    case 'Carbon Dioxide Equivalent': $color = "#333";	$max = 10; break;
 				    case "Energy": $color = "#227CAF"; $max = 500;	break;
 					case "Water":$color = "#45A3D8"; $max = 10; break;
 					default: $color = "#45A3D8"; $max = 50;
@@ -133,7 +133,6 @@
 			</div>					
 
 			<? if (is_array($parts['geography']) == true ) {
-				var_dump($parts['geography']);
 				echo '<div id="map"><h2>Geography</h2>';
 				
 				foreach ($parts['geography'] as $geo) {
@@ -157,6 +156,17 @@
 				}
 			?>
 			<br/><br/>
+			<h2>More Information about</h2>
+			<?
+				foreach ($parts['semanticlinks'] as $record) {
+
+					echo '<p>'.$record['description'].'</p>';
+					echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
+					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
+					echo "Same as: ". $record['title'];
+					echo "</a></p>";
+				}
+			?>
 			<h2>Export</h2>
 			<p><?
 

@@ -2,7 +2,7 @@
 class Lcamodel extends FT_Model{
     public function Lcamodel(){
         parent::__construct();
-		$this->load->model(Array('unitmodel','geographymodel','ecomodel'));
+		$this->load->model(Array('unitmodel','geographymodel','ecomodel','opencycmodel','dbpediamodel'));
     }
 
 
@@ -279,7 +279,47 @@ class Lcamodel extends FT_Model{
 		}
 	}
 	
-	
+	// Get external links for a resource (DBPedia...)
+	public function getLinks($URI){
+		$q = "select ?uri where { " . 
+			" <".$URI."> eco:models ?bnode . " .			
+			" ?bnode rdfs:type  eco:Product . " .
+			" ?bnode owl:sameAs  ?uri . " .
+			"}";
+		$records = $this->executeQuery($q);
+		return $records;
+	}
+	// Convert 
+	public function convertLinks($dataset){
+		$converted_dataset = array();		
+		foreach($dataset as $key=>$record) {		
+			$converted_dataset[$record['uri']]['uri'] = $record['uri'];
+		//	if (strpos($converted_dataset['uri'],"opencyc") !== false ){
+				$results = $this->opencycmodel->getAll($record['uri']);
+				foreach($results as $r){
+					switch ($r['c']) {
+					    case 'http://www.w3.org/2000/01/rdf-schema#label':
+							$converted_dataset[$record['uri']]['title'] =  $r['object'];
+							break;	
+					    case 'http://www.w3.org/2002/07/owl#sameAs': 			
+							if (strpos( $r['object'],"dbpedia")==true){
+								$converted_dataset[$record['uri']]['dbpedia'] =  $r['object'];
+								// Change the address to get the triples instead
+								$address = str_replace("resource","data",$r['object']);
+								$this->dbpediamodel->loadDBpediaEntry($address);	
+								$converted_dataset[$record['uri']]['description'] = $this->dbpediamodel->getDBpediaDescription($uri);
+							}
+							break;
+					    case 'http://www.w3.org/2000/01/rdf-schema#comment': 
+							$converted_dataset[$record['uri']]['info'] =  $r['object']; 
+							break;
+					}
+				}
+		//	}
+		}		
+		return $converted_dataset;
+		
+	}
 	
 	public function getQR($URI) {
 		$q = "select ?bnode ?name where { " . 
@@ -344,6 +384,31 @@ class Lcamodel extends FT_Model{
 		$records = $this->executeQuery($q);	
 		return $records;
 	}
+   public function addSameAs() {
 
+       $uris = array(
+           "PrimaryAluminumIngot84706627" => "Mx4rvVi2O5wpEbGdrcN5Y29ycA",
+           "apples44062692" => "Mx8Ngh4rvVipdpwpEbGdrcN5Y29ycB4rvVjBnZwpEbGdrcN5Y29ycA",
+           "1000kgPolypropylenePP62280870" => "Mx4rvViI8pwpEbGdrcN5Y29ycA",
+           "HotRolledCoilSteel37900884" => "Mx4rvVjLAZwpEbGdrcN5Y29ycA"
+       );
+       $triples = array();
+       foreach ($uris as $ft=>$cyc) {
+           $q = "select ?bnode where { " . 
+               " <http://footprinted.org/rdfspace/lca/".$ft."> eco:models ?bnode . " .            
+               " ?bnode rdfs:type  eco:Product . " .
+               "}";
+           var_dump($q);                
+           $records = $this->executeQuery($q);
+           var_dump($records);
+           $triples[] = array(
+               's' => $records[0]['bnode'],
+               'p' => 'owl:sameAs',
+               'o' => 'http://sw.opencyc.org/concept/' . $cyc
+           ); 
+       }
+       var_dump($triples);
+       $this->addTriples($triples);
+   }
 
 }
