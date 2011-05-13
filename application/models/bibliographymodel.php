@@ -50,6 +50,7 @@ class Bibliographymodel extends FT_Model{
 			} else {
 				$converted_dataset[$key]['date'] = "";
 			}
+			/*
 			"dc:creator" => $organization_uris,
 			"bibo:isbn" => trim($line_array[5]),
 			"bibo:volume" => trim($line_array[6]),
