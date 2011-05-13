@@ -1,11 +1,11 @@
 <?php
 
-class Sandbox extends SM_Controller {
+class Sandbox extends FT_Controller {
 	
 	function Sandbox() {
-		parent::SM_Controller();
+		parent::__construct();
 		$this->load->library(Array('formats'));
-		$this->load->model(Array('arcmodel','loadmodel'));
+		$this->load->model(Array('lcamodel','loadmodel'));
 	}
 	
 	
@@ -27,6 +27,10 @@ class Sandbox extends SM_Controller {
 	
 	function fixMJ() {
 		$this->arcmodel->fixMJ();
+	}
+	
+	function addSameAs () {
+		$this->lcamodel->addSameAs();
 	}
 }
 ?>

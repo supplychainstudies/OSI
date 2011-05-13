@@ -160,13 +160,13 @@ class FT_Model extends CI_Model{
 	public function isLoaded($uri, $uri2=null) {
 		if($uri2==null){$uri2 = $uri;}
 		$q = "select ?c where { " .
-			"<" . $uri2 . "> ?c ?d . " . 				
+			"<" . $uri . "> ?c ?d . " . 				
 			"}";
-		$results = $this->executeQuery($q, "remote");
+		$results = $this->executeQuery($q);
 		if (count($results) != 0) {
 			return true;
 		} else {			
-			$q = "LOAD <" . $uri . "> INTO <" . $uri2 . ">";
+			$q = "LOAD <" . $uri2 . "> INTO <" . $uri . ">";
 			$this->executeQuery($q);
 		}
 	}

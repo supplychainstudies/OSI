@@ -306,7 +306,8 @@ class Lcamodel extends FT_Model{
 								// Change the address to get the triples instead
 								$address = str_replace("resource","data",$r['object']);
 								$this->dbpediamodel->loadDBpediaEntry($address);	
-								$converted_dataset[$record['uri']]['description'] = $this->dbpediamodel->getDBpediaDescription($uri);
+								$converted_dataset[$record['uri']]['description'] = $this->dbpediamodel->getDBpediaDescription($r['object']);
+								$converted_dataset[$record['uri']]['img'] = $this->dbpediamodel->getImageURL($r['object']);
 							}
 							break;
 					    case 'http://www.w3.org/2000/01/rdf-schema#comment': 

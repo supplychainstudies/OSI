@@ -159,7 +159,10 @@
 			<h2>More Information about</h2>
 			<?
 				foreach ($parts['semanticlinks'] as $record) {
-
+					
+					if (isset($record['img']) == true) {
+						echo '<p><img src="'.$record['img'].'" style="width:200 px" /></p>';
+					}
 					echo '<p>'.$record['description'].'</p>';
 					echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
 					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";

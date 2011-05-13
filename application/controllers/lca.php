@@ -236,7 +236,6 @@ class Lca extends FT_Controller {
 				unset($part);
 			}
 		}
-
 		/* If the functional unit is mass, normalize to 1kg */
 		
 		if (strpos("Kilogram", $parts['quantitativeReference']['unit']['label']) !== false) {

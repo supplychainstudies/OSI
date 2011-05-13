@@ -19,7 +19,6 @@ class dbpediamodel extends FT_Model{
 	public function getDBpediaDescription($uri) {
 		$this->arc_config['store_name'] = "dbpedia";
 		$results = $this->getSomething($uri, "rdfs:comment" , 'en');
-		var_dump($results);
 		return $results; 
 	}
 	
