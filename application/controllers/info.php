@@ -64,6 +64,7 @@ class Info extends FT_Controller {
 			//Load RSS for news
 		$this->load->library('RSSParser', array('url' => 'http://twitter.com/statuses/user_timeline/footprinted.rss', 'life' => 0));
 			  //Get six items from the feed
+
 		$twitter = $this->rssparser->getFeed(6);			
 		
 		// Send data to the view

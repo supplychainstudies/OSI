@@ -43,14 +43,8 @@ class Bibliographymodel extends FT_Model{
 			} else {
 				$converted_dataset[$key]['date'] = "";
 			}
-			/*
-<<<<<<< HEAD
 			if (isset($record[$this->arc_config['ns']['bibo']."isbn"]) == true) {
 				foreach($record[$this->arc_config['ns']['bibo']."date"] as $date) {
-=======
-			if (isset($record[$bibo_prefix."isbn"]) == true) {
-				foreach($record[$bibo_prefix."date"] as $date) {
->>>>>>> 8209b23edc2a35d59bbb5d8d135f478f4848a4fc
 					$converted_dataset[$key]['date'] = $date;
 				}
 			} else {

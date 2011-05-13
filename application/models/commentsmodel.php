@@ -1,5 +1,4 @@
 <?php
-
 class Commentsmodel extends FT_Model{
     function Commentsmodel(){
         parent::__construct();

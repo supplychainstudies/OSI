@@ -14,8 +14,7 @@ class FT_Model extends CI_Model{
 	 */
 	function FT_Model(){
 		parent::__construct();
-		$this->load->library('arc2/ARC2', '', 'arc');
-		//$this->config->load('arc');	  
+		$this->load->library('arc2/ARC2', '', 'arc');	  
 	    $this->config->load('arc');	
 		$this->config->load('arcdb');	
 		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
@@ -123,30 +122,52 @@ class FT_Model extends CI_Model{
 	}
 	
 	
+
+   public function getSomething($uri, $predicate, $lang = null) { 
+       $q = "select ?thing where { " .
+           "<" . $uri . "> " . $predicate . " ?thing . ";
+
+           if ($lang != null) {
+               $q .= "FILTER ( lang(?thing) = '".$lang."' )";
+           }                
+           $q .= "}";
+       $results = $this->executeQuery($q);
+       if (count($results) != 0) {
+           return $results[0]['thing'];
+       } else {
+           return false;
+       }            
+   }
+
+	public function getSomethings($uri, $predicate) { 
+       $q = "select ?thing where { " .
+           "<" . $uri . "> " . $predicate . " ?thing . " .                
+           "}";
+
+       $results = $this->executeQuery($q);
+       $return_results = array();
+       if (count($results) != 0) {
+           foreach($results as $result) {
+               $return_results[] = $result['thing'];
+           }
+           return $return_results;
+       } else {
+           return false;
+       }            
+   }
 	
-	
-	public function getSomething($uri, $predicate) { 
-		$q = "select ?thing where { " .
-			"<" . $uri . "> " . $predicate . " ?thing . " . 				
-			"}";
-		
-		$results = $this->executeQuery($q);
-		if (count($results) != 0) {
-			return $results[0]['thing'];
-		} else {
-			return false;
-		}			
-	}
-	
-	public function isLoaded($uri) {
+	// This function checks if the triples from the URI are loaded, and if not it tries to load it
+	public function isLoaded($uri, $uri2=null) {
+		if($uri2==null){$uri2 = $uri;}
 		$q = "select ?c where { " .
-			"<" . $uri . "> ?c ?d . " . 				
+			"<" . $uri2 . "> ?c ?d . " . 				
 			"}";
 		$results = $this->executeQuery($q, "remote");
 		if (count($results) != 0) {
 			return true;
-		} else {
-			return false;
+		} else {			
+			$q = "LOAD <" . $uri . "> INTO <" . $uri2 . ">";
+			$this->executeQuery($q);
 		}
 	}
 
@@ -269,6 +290,16 @@ class FT_Model extends CI_Model{
 		}
 	}	
 	
+	//From an element it gets the same as nodes
+	public function getAll($previous_bnode) {
+		$q = "select ?object ?c where { " . 
+			" <".$previous_bnode."> ?c ?object . " . 
+			"}";	
+		$records = $this->executeQuery($q);
+		return $records;
+		
+	}
+	
 
 	/**
 	 * Retrieves and returns all the impacts of an existing uri
@@ -299,7 +330,6 @@ class FT_Model extends CI_Model{
 	}	
 	
 	
-	
 	/**
 	 * Gets the Parent node of a bnode
 	 * @return $records Array	
@@ -313,5 +343,32 @@ class FT_Model extends CI_Model{
 		return $records[0]['previous_bnode'];
 	}
 	
+	public function fixWater(){
+		$q = "select ?o where { ?s eco:hasImpactCategoryIndicatorResult ?o . ?o eco:hasQuantity ?x . ?x eco:hasUnitOfMeasure qudtu:Liter . }";
+		$records = $this->executeQuery($q);
+		foreach($records as $record){
+			$node = "_:" . 'iamcd' . rand(1000000000, 10000000000);
+			$triples = array (
+				array(
+					's' => $record['o'],
+					'p' => 'eco:hasImpactAssessmentMethodCategoryDescription',
+					'o' => $node
+					),
+				array(
+					's' => $node,
+					'p' => 'eco:hasImpactCategory',
+					'o' => 'Resource Consumption'
+					),
+				array(
+					's' => $node,
+					'p' => 'eco:hasImpactCategoryIndicator',
+					'o' => 'Water'
+					)
+				);
+			//	var_dump($triples);
+			$this->addTriples($triples);
+		}
+	}
+
 }
 ?>

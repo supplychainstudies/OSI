@@ -19,16 +19,16 @@
 		
 		<div id="lca_title"><h1><?=$parts['quantitativeReference']['name'] ?></h1></div>
 		<? /*<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
-		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?=linkThis($parts['quantitativeReference']['unit'], $parts["tooltips"]) ?></nr></h1></div>	
+		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["l"] ?></nr></h1></div>	
 			<div id="lca_impact">
 			<h2><span>Impact Assessment</h2>	
 			<? foreach ($parts['impactAssessments'] as $impactAssessment) {
 				// Change color of the circle depending on the impact category	
 				switch ($impactAssessment['impactCategoryIndicator']) {
-				    case 'ossia:waste': $color = "#666"; $max = 10; break;
-				    case 'ossia:CO2e': $color = "#333";	$max = 10; break;
-				    case "ossia:energy": $color = "#227CAF"; $max = 500;	break;
-					case "ossia:water":$color = "#45A3D8"; $max = 10; break;
+				    case 'Waste': $color = "#666"; $max = 10; break;
+				    case 'Carbon Dioxide Equivalent': $color = "#333";	$max = 10; break;
+				    case "Energy": $color = "#227CAF"; $max = 500;	break;
+					case "Water":$color = "#45A3D8"; $max = 10; break;
 					default: $color = "#45A3D8"; $max = 50;
 				}
 				// Change the size depending on the relative max
@@ -39,8 +39,8 @@
 				// Create a circle
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
-				echo '<div class="meta"><p class="unit">'. linkThis($impactAssessment['unit'], $parts["tooltips"], "label") .'</p><p class="category">';
-				echo linkThis($impactAssessment['impactCategory'], $parts['tooltips']) . " - " . $impactAssessment['impactCategoryIndicator'];
+				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit']["label"] .'</p><p class="category">';
+				echo $impactAssessment['impactCategory']['label'] . " - " . $impactAssessment['impactCategoryIndicator'];
 				echo "<p/></div>"; 
 				
 			}?>
@@ -51,7 +51,7 @@
 			<h2>Flows</h2>
 			<? if ($totalinput != 0) { ?>
 			<h3>Total material input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
-			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
+			<? if($parts['quantitativeReference']['unit']['label'] == "Kilogram") { 
 					$ratio = ($totalinput/$parts['quantitativeReference']['amount']);
 					echo "<h3>Ratio input vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
 				} ?>
@@ -66,7 +66,7 @@
 					$width = round(100*$mass['amount']/$totalinput);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#'.$color_input[$i].';"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . $mass['amount'] . "</amount> " . linkThis($mass['unit'], $parts["tooltips"]); 
+					echo "<div class='flow_text'><p><amount>" . $mass['amount'] . "</amount> " . $mass['unit']["label"]; 
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++; if ($i >10){ $i = 0;}
 			}}?>
@@ -78,7 +78,7 @@
 					$width = round(100*$volume['amount']/$totalinputliter);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#'.$color_liquid[$i].';"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . linkThis($volume['unit'], $parts["tooltips"]); 
+					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . $volume['unit']["label"]; 
 					echo "<b> ".$volume['name'] . "</b></p></div>";
 					$i++; if ($i >4){ $i = 0;}
 			}}?>
@@ -88,7 +88,7 @@
 					$width = round(100*$land['amount']/$totalinputland);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#381100;"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . $land['amount'] . "</amount> " . linkThis($land['unit'], $parts["tooltips"]); 
+					echo "<div class='flow_text'><p><amount>" . $land['amount'] . "</amount> " . $land['unit']["label"]; 
 					echo "<b> ".$land['name'] . "</b></p></div>";
 			}}?>
 
@@ -96,7 +96,7 @@
 			
 			<? if ($totaloutput != 0) { ?>	
 			<h3>Total output: <h1 class="nr"><?=round($totaloutput,2); ?> kg</h1></h3>
-			<? if($parts['quantitativeReference']['unit'] == "qudtu:Kilogram") { 
+			<? if($parts['quantitativeReference']['unit']['label'] == "Kilogram") { 
 					$ratio = ($totaloutput/$parts['quantitativeReference']['amount']);
 					echo "<h3>Ratio output vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
 				} ?>
@@ -111,7 +111,7 @@
 					$width = round(100*$mass['amount']/$totaloutput);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px; width:'.$width.'%;background-color:#'.$color_mass[$i].';"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . round($mass['amount'],6) . "</amount> " . linkThis($mass['unit'], $parts["tooltips"]); 
+					echo "<div class='flow_text'><p><amount>" . round($mass['amount'],6) . "</amount> " . $mass['unit']["label"]; 
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++;
 					if ($i >12){ $i = 0;}
@@ -125,7 +125,7 @@
 						$height = 30; 
 					}
 					echo '<div class="bar_background"><div style="height:'.$height.'%;background-color:#002caa;"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . linkThis($volume['unit'], $parts["tooltips"]); 
+					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . $volume['unit']["label"]; 
 					echo "<b> ".$volume['name'] . "</b></p></div>";
 				}
 			} ?>
@@ -156,6 +156,17 @@
 				}
 			?>
 			<br/><br/>
+			<h2>More Information about</h2>
+			<?
+				foreach ($parts['semanticlinks'] as $record) {
+
+					echo '<p>'.$record['description'].'</p>';
+					echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
+					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
+					echo "Same as: ". $record['title'];
+					echo "</a></p>";
+				}
+			?>
 			<h2>Export</h2>
 			<p><?
 

@@ -11,22 +11,22 @@
 
 
 
-class Endpoint extends SM_Controller {
+class Endpoint extends FT_Controller {
 	public function Endpoint() {
-		parent::SM_Controller();
+		parent::__construct();
 			$this->load->library('arc2/ARC2', '', 'arc');	
 			$this->config->load('arc');	
 			$this->config->load('arcdb');	
 			$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));	
-			$this->arc_lr_config = array_merge($this->config->item("arc_lr_info"), $this->config->item("db_arc_lr_info"));		
-		}	
+			}	
 		/**
 		 * This function is a generic call to the arc store.
 		 * @return Array of triples.
 		 * @param $q string - query string.
 		 */
-		public function index() {
+		public function i($store="footprinted") {
 			/* instantiation */
+			$this->arc_config['store_name']=$store;
 			@$ep = $this->arc->getStoreEndpoint($this->arc_config);
 
 			if (!$ep->isSetUp()) {
@@ -37,14 +37,4 @@ class Endpoint extends SM_Controller {
 			@$ep->go();
 		}
 		
-		public function remote() {
-			@$ep = $this->arc->getStoreEndpoint($this->arc_lr_config);
-
-			if (!$ep->isSetUp()) {
-			  @$ep->setUp(); /* create MySQL tables */
-			}
-
-			/* request handling */
-			@$ep->go();			
-		}
 }

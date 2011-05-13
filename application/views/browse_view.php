@@ -20,7 +20,7 @@
 
 				<?
 					foreach ($set as $row) {
-						// Remove the opensustainability part of the url
+						// Remove the footprinted part of the url
 						$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['link']);
 						echo '<div class="small blue square" id="'.$myString.'"><p>'.$row['name'].'<p/></div>';
 					}
@@ -74,21 +74,34 @@
 	});	
 
 	$(function() {
-
 	    //Get Divs
-	    $('#leftcolumn > [square]').each(function(i) {
+	    //$('#leftcolumn > [square]').each(function(i) {
 			// Get CO2
-			co2 = ('/lca/getCO2/'+opensquare.attr('id'));
+	//		co2 = ('/lca/getCO2/'+opensquare.attr('id'));
 			// Scale
-			side = Math.sqrt(co2*2500);
-			$(this).width(side);
-			$(this).height(side);
-	    });
+	//		side = Math.sqrt(co2*2500);
+	//		$(this).width(side);
+	//		$(this).height(side);
+	//    });
+	// Do Masonry
+//	$('#columnleft').masonry({	  
+		  itemSelector: '.square', columnWidth:10, });
+//	});
+	
+	$( ".aaa" ).click(function(){
+			thisone = $(this);
+			$.getJSON('/lca/getCO2/'+$(this).attr('id'), function(data) {;
+				side = Math.sqrt(data.CO2*2500);
+				side = Math.round(side);
+				if(side > 400){ side = 400; }
+				thisone.width(side);
+				thisone.height(side);
+
 	// Do Masonry
 	$('#columnleft').masonry({	  
 		  itemSelector: '.square', columnWidth:10, });
-	});
-	
+		});
+	});	});
 	</script>
 </body>
 </html>

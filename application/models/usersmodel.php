@@ -4,13 +4,13 @@
  * Representation of users as model, handles transactions for
  * users so they can be listed or queried. 
  * 
- * @author Matthew Hockenberry
- * @package sourcemap
+ * @author Open Sustainability Info
+ * @package footprinted
  * @subpackage models
  */
 
 
-class UsersModel extends Model{
+class UsersModel extends CI_Model{
 	
 	/**
 	 * @ignore

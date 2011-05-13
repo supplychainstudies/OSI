@@ -60,7 +60,8 @@ $config['arc_info']['ns'] = array(
 'ecoud' =>'http://ontology.earthster.org/eco/uncertaintyDistribution#',
 'ecounit' =>'http://ontology.earthster.org/eco/unit#',
 'wgs84_pos'=>'http://www.w3.org/2003/01/geo/wgs84_pos#',
-'gn'=>'http://www.geonames.org/ontology#'
+'gn'=>'http://www.geonames.org/ontology#',
+'owl' => 'http://www.w3.org/2002/07/owl#'
 
 );		    
 $config['arc_info']['endpoint_features'] = array(

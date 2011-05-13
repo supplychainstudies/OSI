@@ -13,13 +13,15 @@
 class API extends FT_Controller {
 	public function API() {
 		parent::__construct();
-		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
+		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel'));		
 		$this->load->library(Array('form_extended', 'name_conversion','SimpleLoginSecure'));
+		$this->load->helper(Array('linkeddata_helper'));
 	}
 	public $URI;
 	public $data;
 	public $post_data;
 	public $tooltips = array();
+
 
 	public function search($encode = "json") {
 		$checked_URIs = array();
@@ -41,14 +43,13 @@ class API extends FT_Controller {
 			$value = $search_terms['product'];
 		}		
 		$URIs = $this->lcamodel->simpleSearch($value, $limit, $offset);
-		
 		foreach ($URIs as $URI) {
 			if (in_array($URI, $checked_URIs) == false) {
 				$checked_URIs[] = $URI;
 			$results[$URI] = array (
 				'uri' => $URI,
-				'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($URI), $this->tooltips),
-				'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($URI), $this->tooltips)
+				'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($URI)),
+				'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($URI))
 				);
 			}
 		}

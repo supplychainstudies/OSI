@@ -9,6 +9,7 @@
  * @uses 
  */
 
+
 class Users extends FT_Controller {
 	var $CI;
 	var $user_table = 'users';
@@ -17,7 +18,7 @@ class Users extends FT_Controller {
 		
 	public function Users() {
 		parent::__construct();
-		$this->load->model(Array('lcamodel'));	
+		$this->load->model(Array('usersmodel','lcamodel'));	
 		$this->lang->load('openid', 'english');
 	    $this->load->library(Array('openid','form_extended', 'form_validation', 'SimpleLoginSecure'));
 	    $this->load->helper('url');
@@ -29,7 +30,7 @@ class Users extends FT_Controller {
 			// If so, go to dashboard
 			//var_dump($_POST);
 		if($this->session->userdata('id') == true) {
-			redirect('users/dashboard');
+			redirect('/users/dashboard');
 		// If not logged in, figure out whether there is post info from janrain
 		} else {
 			// If there is post info from janrain, figure out whether this person is already in the system
@@ -39,7 +40,7 @@ class Users extends FT_Controller {
 					$auth_info = $this->janrainAuthInfo();
 					if ($this->simpleloginsecure->openID($auth_info['profile']['identifier']) != false) {
 						$this->session->set_userdata('id', $this->simpleloginsecure->openID($auth_info['profile']['identifier']));
-						redirect('users/dashboard');
+						redirect('/users/dashboard');
 					// If they are not in the system yet, pass them to the register form
 					} else {
 						$this->register($auth_info);
@@ -50,9 +51,9 @@ class Users extends FT_Controller {
 						$_POST['password'] = $_POST['password_'];
 					}
 					if ($this->simpleloginsecure->login($_POST['user_name'], $_POST['password']) == true) {
-						redirect('users/dashboard');
+						redirect('/users/dashboard');
 					} else {
-						redirect('users/loginerror');
+						redirect('/users/loginerror');
 					}
 				}
 			// If there is no post from Janrain, redirect them to the register page

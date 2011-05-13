@@ -5,22 +5,31 @@ class Unitmodel extends FT_Model{
 		parent::__construct();
 		$this->arc_config['store_name'] = "qudt";
 	}
-	
-	public function makeToolTip($uri, $tooltips) {
+	// Adds human legible labels to units
+	public function makeToolTip($uri) {
 		$this->arc_config['store_name'] = "qudt";
-		if (isset($tooltips[$uri]) != true) {
+		if ($uri == "http://data.nasa.gov/qudt/owl/unit#Kilogram"){
+			$tooltips = array();
+			$tooltips['label'] = "Kilogram";	
+			$tooltips['abbr'] = "kg";
+			$tooltips['l'] = "Kilogram";
+			$tooltips['quantityKind'] = "Mass";
+		}else{
 			if (strpos($uri,":") !== false) {
-				$tooltips[$uri] = array();
-				$tooltips[$uri]['label'] = $this->getLabel($uri);	
-				$tooltips[$uri]['abbr'] = $this->getAbbr($uri);
-				$tooltips[$uri]['l'] = $tooltips[$uri]['abbr'];
-				$tooltips[$uri]['quantityKind'] = $this->getQuantityKind($uri);				
-				if ($tooltips[$uri]['l'] == false) { 
-					$uri_parts = explode(":", $uri);
-					return $uri_parts[1];
-				} 
-			} 
+				$tooltips = array();
+				$tooltips['label'] = $this->getLabel($uri);	
+				$tooltips['abbr'] = $this->getAbbr($uri);
+				$tooltips['l'] = $tooltips['abbr'];
+				$tooltips['quantityKind'] = $this->getQuantityKind($uri);
+			}else{
+				$tooltips = array();
+				$tooltips['label'] = $uri;	
+				$tooltips['abbr'] = $uri;
+				$tooltips['l'] = $uri;
+				$tooltips['quantityKind'] = "";
+			}
 		}
+		return $tooltips;
 	}
 	
 	public function getUnits() {
