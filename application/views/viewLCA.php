@@ -170,6 +170,15 @@
 					echo "</a></p>";
 				}
 			?>
+			
+			<h2>Suggested Similar Concepts</h2>
+			<?
+				foreach ($parts['suggestions'] as $suggestion) {
+					echo '<a href="/lca/addSameAs?ft_id='.$parts['uri'].'&opencyc_id='.str_replace("http://sw.opencyc.org/concept/", "", $suggestion['uri']) . '">'.$suggestion['label'].'</a><br />';
+				}
+			
+			?>
+			
 			<h2>Export</h2>
 			<p><?
 

@@ -29,7 +29,7 @@ class FT_Model extends CI_Model{
 	 * @return Array of triples.
 	 * @param $q string - query string.
 	 */
-	public function executeQuery($q,$db="local") {
+	public function executeQuery($q) {
 		$config = $this->arc_config;
 		$store = $this->arc->getStore($config);
 
@@ -120,8 +120,30 @@ class FT_Model extends CI_Model{
 		$q .= "}";
 		$this->executeQuery($q);
 	}
-	
-	
+
+	public function getURIbyLabel($string) {
+		
+       $q = "select ?uri ?label where { " .
+           "?uri rdf:label ?label . " .
+           "FILTER regex(?label, '".$string."', 'i' )" .              
+           "}";
+       $results = $this->executeQuery($q);
+		if (count($results) > 0) {
+			return $results;
+		} else {
+	       $q = "select ?uri ?label where { " .
+	           "?uri rdfs:label ?label . " .
+	           "FILTER regex(?label, '".$string."', 'i' )" .              
+	           "}";
+	       $results = $this->executeQuery($q);
+			if (count($results) > 0) {
+				return $results;
+			} else {		
+				return false;	
+			}
+		}
+	}
+		
 
    public function getSomething($uri, $predicate, $lang = null) { 
        $q = "select ?thing where { " .

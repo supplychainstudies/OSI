@@ -385,31 +385,47 @@ class Lcamodel extends FT_Model{
 		return $records;
 	}
 
-   public function addSameAs() {
-
-       $uris = array(
-           "PrimaryAluminumIngot84706627" => "Mx4rvVi2O5wpEbGdrcN5Y29ycA",
-           "apples44062692" => "Mx8Ngh4rvVipdpwpEbGdrcN5Y29ycB4rvVjBnZwpEbGdrcN5Y29ycA",
-           "1000kgPolypropylenePP62280870" => "Mx4rvViI8pwpEbGdrcN5Y29ycA",
-           "HotRolledCoilSteel37900884" => "Mx4rvVjLAZwpEbGdrcN5Y29ycA"
-       );
-       $triples = array();
-       foreach ($uris as $ft=>$cyc) {
-           $q = "select ?bnode where { " . 
-               " <http://footprinted.org/rdfspace/lca/".$ft."> eco:models ?bnode . " .            
-               " ?bnode rdfs:type  eco:Product . " .
-               "}";
-           var_dump($q);                
-           $records = $this->executeQuery($q);
-           var_dump($records);
-           $triples[] = array(
-               's' => $records[0]['bnode'],
-               'p' => 'owl:sameAs',
-               'o' => 'http://sw.opencyc.org/concept/' . $cyc
-           ); 
-       }
-       var_dump($triples);
-       $this->addTriples($triples);
+   public function addSameAs($ft,$oc) {
+		$triples = array();
+       $q = "select ?bnode where { " . 
+           " <http://footprinted.org/rdfspace/lca/".$ft."> eco:models ?bnode . " .            
+           " ?bnode rdfs:type  eco:Product . " .
+           "}";              
+       $records = $this->executeQuery($q);
+/*
+       $triples[] = array(
+           's' => $records[0]['bnode'],
+           'p' => 'owl:sameAs',
+           'o' => 'http://sw.opencyc.org/concept/' . $oc
+       ); 
+*/
+		$q = "insert into <http://footprinted.org/> { " . 
+		"<".$records[0]['bnode']."> owl:sameAs <"."http://sw.opencyc.org/concept/". $oc.">" . 
+		"}";
+		$this->executeQuery($q);
+	   //$this->addTriples($triples);
    }
+
+	
+	public function getOpenCycSuggestions($uri) {
+		$q = "select ?label where { " . 
+            " <".$uri."> eco:models ?bnode . " .            
+            " ?bnode rdfs:type  eco:Product . " .
+			" ?bnode rdfs:label  ?label . " .
+            "}";              
+        $records = $this->executeQuery($q);
+		$q = "select ?label where { " . 
+            " <".$uri."> eco:models ?bnode . " .            
+            " ?bnode rdfs:type  eco:Process . " .
+			" ?bnode rdfs:label  ?label . " .
+            "}";              
+        $records = array_merge($records,$this->executeQuery($q));
+		$suggestions = array();
+		foreach ($records as $record) {
+			$send_array = array($record['label']);
+			$suggestions = array_merge($suggestions, $this->opencycmodel->getSuggestedPages($send_array));
+		}
+		return $suggestions;
+	}	
 
 }

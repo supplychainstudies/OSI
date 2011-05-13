@@ -224,6 +224,7 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in a friendly, human readable way
 	*/
 	public function view($URI = null) {	
+		$parts['uri'] = $URI;
 		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
 		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
 		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
@@ -231,6 +232,9 @@ class Lca extends FT_Controller {
 		@$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
 		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
 		$parts['semanticlinks'] = $this->lcamodel->convertLinks($this->lcamodel->getLinks("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['suggestions'] = $this->lcamodel->getOpenCycSuggestions("http://footprinted.org/rdfspace/lca/" . $URI);
+		
+		
 	 	foreach ($parts as &$part) {
 			if ($part == false || count($part) == 0) {
 				unset($part);
@@ -409,6 +413,13 @@ class Lca extends FT_Controller {
 		    );
 			$text = '<p>'.$feature_info['quantitativeReference']['name'].'</p>';
 			echo $text;
+		}
+		
+		public function addSameAs() {
+			parse_str($_SERVER['QUERY_STRING'],$_GET); 
+			$ids = $_GET;
+			$this->lcamodel->addSameAs($ids['ft_id'],$ids['opencyc_id']);
+			
 		}
 
 
