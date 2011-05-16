@@ -45,11 +45,11 @@ class Info extends FT_Controller {
 			}
 		}
 		$featured = $this->lcamodel->simplesearch("aluminum",1,0);
-		foreach ($featured as $feature_uri) {
+		foreach ($featured as $feature) {
 	    	$feature_info = array (
-	              'uri' => $feature_uri,
-	               'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($feature_uri)),
-	               'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($feature_uri))
+	              'uri' => $feature['uri'],
+	               'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($feature['uri'])),
+	               'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($feature['uri']))
 	               );
 	    }
 		if ($feature_info['quantitativeReference']['unit'] == "qudtu:Kilogram") {
