@@ -512,7 +512,7 @@ class Form {
 							$multiple_string = str_replace("]", "",str_replace("[", "", str_replace("][", "-", $field_multiple)));
 							$row =  '</div>'."<div id=\"div_multiple_".$fieldset_name."_".$multiple_string."\" class='addmore'><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/add.gif\" value=\"Another &gt;&gt;\" class=\"more\" onClick=\"addField('".$fieldset_name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$fieldset_name."_counter_".$multiple_string."\"  name=\"".$fieldset_name."_counter_".$multiple_string."\" value=\"0\">\n</div>";	
 					}
-                    $html .= "<div id='form_".$nam."'>".$row."</div>";
+                    $html .= "<div id='form_".$name."'>".$row."</div>";
                 }
             }             
         }  

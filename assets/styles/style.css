@@ -82,6 +82,14 @@ h1#title {
 }
 
 /* Structure for LCA view */
+#lca_header{
+	float:left;
+	text-align: left;
+	width:920px;
+	padding: 30px;
+	background-color: #666;
+	margin-top:10px;
+}
 #lca_background{
 	float:left;
 	text-align: left;
@@ -89,9 +97,18 @@ h1#title {
 	padding: 30px;
 	background-color: #666;
 	margin-bottom:30px;
-	margin-top:10px;
+	padding-top:0px;
 }
-
+.lca {
+	float:left;
+	text-align: left;
+	width:400px;
+	padding: 20px;
+	background-color: #F5FAFF;
+	margin-right:20px;
+	margin-bottom:20px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+}
 #lca_unit {
 	float:right;
 	top:15px;
@@ -112,55 +129,16 @@ h1#title {
 
 
 #lca_flows {
-	float:right;
-	text-align: left;
-	width:400px;
-	padding: 20px;
-	background-color: #F5FAFF;
-	margin-right:20px;
-	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
-	
 }
 
 #lca_impact {
-	float:left;
-	text-align: left;
-	width:400px;
-	padding: 20px;
-	background-color: #F5FAFF;
-		margin-right:20px;
-	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
 #lca_comments {
-	float:right;
-	text-align: left;
-	width:400px;
-	padding: 20px;
-	background-color: #F5FAFF;
-	margin-top: 15px;
-	margin-right:20px;
-	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 #lca_meta {
-	float:left;
-	text-align: left;
-	top:0px;
-	width:400px;
-	padding: 20px;
-	background-color: #F5FAFF;
-	margin-top: 15px;
-	margin-right:20px;
-	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 #map {
-	float:left;
-	text-align: left;
-	width:400px;
-	padding: 20px;
-	background-color: #F5FAFF;
-	margin-top: 15px;
-	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
 
 #lca_background .nr {
@@ -211,6 +189,20 @@ h1#title {
 	text-align:left;
 	background-repeat:none;
 	height: 40px;
+}
+#lca_header  h1.nr {
+	font-size: 40px;
+	font-family: 'Lato', arial, serif; 
+	color: #333;
+	width: 100%;
+	text-align:left;
+	background-repeat:none;
+	height: 40px;
+}
+#lca_header h1 {
+	font-size: 30px;
+	font-family: 'Lato', arial, serif; 
+	color: #fff;	
 }
 h1.top {
 	font-size: 26px;
