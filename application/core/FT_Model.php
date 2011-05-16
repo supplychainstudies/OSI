@@ -162,10 +162,25 @@ class FT_Model extends CI_Model{
    }
 
 	public function getSomethings($uri, $predicate) { 
-       $q = "select ?thing where { " .
+       $q = "select DISTINCT ?thing where { " .
            "<" . $uri . "> " . $predicate . " ?thing . " .                
            "}";
+       $results = $this->executeQuery($q);
+       $return_results = array();
+       if (count($results) != 0) {
+           foreach($results as $result) {
+               $return_results[] = $result['thing'];
+           }
+           return $return_results;
+       } else {
+           return false;
+       }            
+   }
 
+	public function getSomeURIs($uri, $predicate) { 
+       $q = "select DISTINCT ?thing where { " .
+           "?thing " . $predicate . " <" . $uri . "> . " .                
+           "}";
        $results = $this->executeQuery($q);
        $return_results = array();
        if (count($results) != 0) {

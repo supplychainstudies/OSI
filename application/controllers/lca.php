@@ -231,8 +231,10 @@ class Lca extends FT_Controller {
 		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
 		@$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
 		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
-		$parts['semanticlinks'] = $this->lcamodel->convertLinks($this->lcamodel->getLinks("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
 		$parts['suggestions'] = $this->lcamodel->getOpenCycSuggestions("http://footprinted.org/rdfspace/lca/" . $URI);
+
 		
 		
 	 	foreach ($parts as &$part) {
@@ -419,6 +421,13 @@ class Lca extends FT_Controller {
 			parse_str($_SERVER['QUERY_STRING'],$_GET); 
 			$ids = $_GET;
 			$this->lcamodel->addSameAs($ids['ft_id'],$ids['opencyc_id']);
+			
+		}
+		
+		public function addCategory() {
+			parse_str($_SERVER['QUERY_STRING'],$_GET); 
+			$ids = $_GET;
+			$this->lcamodel->addCategory($ids['ft_id'],$ids['opencyc_id']);
 			
 		}
 

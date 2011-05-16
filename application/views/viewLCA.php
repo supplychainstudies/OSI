@@ -158,7 +158,7 @@
 			<br/><br/>
 			<h2>More Information about</h2>
 			<?
-				foreach ($parts['semanticlinks'] as $record) {
+				foreach ($parts['sameAs'] as $record) {
 					
 					if (isset($record['img']) == true) {
 						echo '<p><img src="'.$record['img'].'" style="width:200 px" /></p>';
@@ -167,6 +167,11 @@
 					echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
 					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
 					echo "Same as: ". $record['title'];
+					echo "</a></p>";
+				}
+				foreach ($parts['categoryOf'] as $record) {
+					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
+					echo "Belongs to Category: ". $record['label'];
 					echo "</a></p>";
 				}
 			?>
