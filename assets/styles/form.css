@@ -14,6 +14,7 @@ margin-left: 4.5em;
 }
 
 input {
+display:block;
 color: #333;
 background: #fff;
 border: 1px solid #ccc; 
@@ -72,80 +73,74 @@ text-transform:uppercase;
 
 
 /* Divs for create/start */
-
-#div_process/product/service {
-	float:left;
-	width: 400px;
-	padding:20px;
-}
-
-#div_publication{
-	float:left;
-	right:0px;
-	width: 400px;
-	padding:20px;
-}
-
-
-.level0, .level1, .level2, .level3, .level4 {	
+.create_form{
 	font-size: 12px;
-	width: 400px;
+	padding:15px;
+	
+}
+.form_title {
+	font-size: 20px;
+	font-weight: none;
+	text-transform:uppercase;
+}
+.addmore{
+	float:left;
+	width:980px;
+}
+#div_start{
+	width:980px;
+}
+#div_description{
+	float:left;
+	width: 460px;
+	background:#eee;
+}
+#div_publication{
+	float:right;
+	right:0px;
+	width: 460px;
 	padding:20px;
 }
-
-h1 {
-	font-size: 15px;
-	padding: 0 6 6 6;	
-	margin-bottom: 0px;
+#div_flow{
+	float:left;
+	margin-top:10px;
+	padding-top:15px;
+	border-top: 1px solid #ccc;
+	width:980px;
+	background:#eee;
 }
-
-.level0 {
-
-}
-
-h1.level0  {
-		font-size: 16px;
-		font-family: 'Lato', arial, serif; 
-		color: #333;	
-		background-repeat:none;
-		text-transform: uppercase;
-}
-
-.level1 {
-}
-
-h1.level1 {	
-}
-
-.level2 {
-
-}
-
-h1.level2  {
+#form_io{
 	
 }
-
-.level3 {
-
+#div_impact_assessment
+{
+	float:left;
+	margin-top:10px;
+	padding-top:15px;
+	border-top: 1px solid #ccc;
+	width:980px;
+	background:#eee;
 }
-
-h1.level3 {
-
+#div_submit{
+	float:left;
+	margin-top:10px;
+	padding-top:15px;
+	border-top: 1px solid #ccc;
+	width:980px;
+	background:#eee;
 }
-
-.level4 {
-
-}
-
-h1.level4 {
-	
-}
-
-
 .require {
 	border: solid 2px #FFFF00;
 }
 
 .require_ok {
 	border: 0px;
+}
+
+#div_flow label {
+color: #3366CC;
+display:block;
+}
+#div_impact_assessment label {
+color: #000099;
 }

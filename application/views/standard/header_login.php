@@ -1,4 +1,6 @@
-<? ?>
+<a href="/login">Login</a>
+
+<? /*
 
 
 <div id="login">
@@ -26,8 +28,6 @@
 			</ul>
 		</div>
 	</form>
-</div>
+</div> */
 
-
-
-<? ?>
+?>

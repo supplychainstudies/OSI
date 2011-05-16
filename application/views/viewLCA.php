@@ -15,12 +15,13 @@
 		
 	<?= $navigationDisplay;?>
 
-	<div id="lca_background">
-		
+	<div id="lca_header">
 		<div id="lca_title"><h1><?=$parts['quantitativeReference']['name'] ?></h1></div>
 		<? /*<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
 		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["l"] ?></nr></h1></div>	
-			<div id="lca_impact">
+	</div>
+	<div id="lca_background">	
+		<div id="lca_impact" class="lca">
 			<h2><span>Impact Assessment</h2>	
 			<? foreach ($parts['impactAssessments'] as $impactAssessment) {
 				// Change color of the circle depending on the impact category	
@@ -47,7 +48,7 @@
 			</div>
 			
 			<? if(is_array($parts['exchanges']  ) == true) { ?>
-			<div id="lca_flows">
+			<div id="lca_flows" class="lca">
 			<h2>Flows</h2>
 			<? if ($totalinput != 0) { ?>
 			<h3>Total material input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
@@ -143,7 +144,7 @@
 				echo "</div>";
 			 } ?>
 
-			<div id="lca_meta">
+			<div id="lca_meta"  class="lca">
 			<h2>Reference</h2>
 			<?
 				foreach ($parts['bibliography'] as $record) {
@@ -156,15 +157,17 @@
 				}
 			?>
 			<br/><br/>
-			<h2>More Information about</h2>
+			</div>
+			<div id="lca_same" class="lca">
+			<h2>Linked Data</h2>
 			<?
 				foreach ($parts['sameAs'] as $record) {
 					
-					if (isset($record['img']) == true) {
-						echo '<p><img src="'.$record['img'].'" style="width:200 px" /></p>';
+					if (isset($record['dbpedia']) == true) {
+						//echo '<p><img src="'.$record['img'].'" width="200 px" /></p>';
+						echo '<p>'.$record['description'].'</p>';
+						echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
 					}
-					echo '<p>'.$record['description'].'</p>';
-					echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
 					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
 					echo "Same as: ". $record['title'];
 					echo "</a></p>";
@@ -181,9 +184,10 @@
 				foreach ($parts['suggestions'] as $suggestion) {
 					echo '<a href="/lca/addSameAs?ft_id='.$parts['uri'].'&opencyc_id='.str_replace("http://sw.opencyc.org/concept/", "", $suggestion['uri']) . '">'.$suggestion['label'].'</a><br />';
 				}
-			
+
 			?>
-			
+			</div>
+			<div id="lca_export" class="lca">
 			<h2>Export</h2>
 			<p><?
 
@@ -194,6 +198,8 @@
 				}
 
 			?></p>
+			</div>
+			<div id="lca_share" class="lca">
 			<h2>Share</h2>
 			<?php
 			# Get the actual URL
@@ -217,20 +223,12 @@
 					echo $thispage;
 					echo '" target="_blank">Post this to Twitter</a>';
 					?></p></li>
-				<li id="linkedin_share"><p>
-					<?php
-					echo '<a href="http://www.linkedin.com/shareArticle?mini=true&url=';
-					echo $thispage;
-					echo "&title=";
-					echo $parts['quantitativeReference']['name'];
-					echo '" target="_blank">Post this to Linkedin</a>';
-					?></p></li>
 				<li id="delicious_share"><p><a href="http://delicious.com/save" onclick="window.open('http://delicious.com/save?v=5&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;">Post this to Delicious</a></p></li>
 			</ul>
 			
 			</div>
 			
-			<div id="lca_comments">
+			<div id="lca_comments" class="lca">
 			<h2>Comments</h2>
 			<?
 
@@ -249,6 +247,17 @@
 			<?=$footerDisplay;?>
 		</div>
 
-		<?=$scripts;?>	
+
+		<script src="http://footprinted.org/assets/scripts/jquery/jquery-1.5.1.min.js"></script>
+		<script src="http://footprinted.org/assets/scripts/jquery/jquery.masonry.min.js"></script>
+		<script>
+
+		$(function(){
+			$('#lca_background').masonry({
+				singleMode: true,
+		        itemSelector: '.lca'
+			});	
+		});
+		</script>
 		</body>
 	</html>

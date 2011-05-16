@@ -234,14 +234,12 @@ class Lca extends FT_Controller {
 		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $URI));
 		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
 		$parts['suggestions'] = $this->lcamodel->getOpenCycSuggestions("http://footprinted.org/rdfspace/lca/" . $URI);
-
-		
-		
 	 	foreach ($parts as &$part) {
 			if ($part == false || count($part) == 0) {
 				unset($part);
 			}
 		}
+		
 		/* If the functional unit is mass, normalize to 1kg */
 		
 		if (strpos("Kilogram", $parts['quantitativeReference']['unit']['label']) !== false) {

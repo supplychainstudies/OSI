@@ -12,7 +12,8 @@
 /***
 * Minor Alterations
 *
-*    author: Bianca Sayan
+*   author: Bianca Sayan, Jorge Zapico
+*	www.footprinted.org
 * 	description: changed the build function so that it can handle a new definition type "multiple"
 */
 
@@ -287,14 +288,14 @@ class Form {
 
 		$fieldset_name = str_replace(" ", "_", strtolower($group['__attrs']['name']));
 		$html ="";
-        $html  .= sprintf ("$tabs".'<h1 class="level%s">%s<img src="/assets/images/toggle.jpg" onClick="toggle(\'%s\')" /></h1>', $depth, $group['__attrs']['name'], $fieldset_name);
 
         if (isset ($group['__attrs']['text']) && $text = $group['__attrs']['text']) {
             $html .= "$tabs\t<div class=\"level".$depth."\"><p>$text</p></div>\n";
         }
-
-        $html  .= sprintf ('<div id="%s" class="level%s">'."\n", "div_".$fieldset_name, $depth);
-
+		// Create a DIV with a unique ID
+        $html  .= sprintf ('<div id="%s" class="form_div">'."\n", "div_".$fieldset_name, $depth);
+		// Add the title of the section
+		$html  .= sprintf ("$tabs".'<h1 class="form_title">%s</h1>', $group['__attrs']['name']);
 
         if ($first_run !== false) {
             $errors = '<div class="error message">'."\n\t". $this->set_error ."\n\t</div>";
@@ -302,8 +303,7 @@ class Form {
             $first_run = false;
         }
 		// Fix this later
-		
-        $html .= "$tabs\t".'<ul class="layout">'."\n";
+
 		$is_multiple = false;
 		if (isset($group['__attrs']['multiple']) == true) {
 			if ($group['__attrs']['multiple'] == "yes") {
@@ -319,7 +319,7 @@ class Form {
             elseif ($name == 'fieldset') {
 	
                 foreach ($val as $_group) {
-                   	$html .= "$tabs\t<li>\n". $this->build_group ($_group, $depth+1, $multiple) ."$tabs\t</li>\n";
+                   	$html .= $this->build_group ($_group, $depth+1, $multiple);
                 }
             }
             else {
@@ -359,13 +359,6 @@ class Form {
                          ? ucwords($def['label'])
                         : ucwords($name);
 
-/*
-					// Old code
-                    // Create the id and name attributes
-                    $idname = $def['type'] != 'hidden'
-                        ? sprintf('tabindex="%s" name="%s"', $tabindex++, $name)
-                        : sprintf('name="%s"', $name);
-*/
 					$_is_multiple = false;
 					if (isset($def['multiple']) == true) {
 							if ($def['multiple'] == "yes") {
@@ -402,9 +395,6 @@ class Form {
                         : $label;
 
                     $row  = "";
-                    $row .= $def['type'] != 'hidden'
-                        ? "$tabs\t<li>\n"
-                        : '';
 
                     $row .= $def['type'] != 'submit' && $def['type'] != 'hidden' &&  $def['type'] != 'button'
                         ? "$tabs\t\t<label>$label</label>\n" : '';
@@ -476,7 +466,7 @@ class Form {
 	                                $sel = isset ($def['selected']) && $def['selected'] == $_key
 	                                    ? ' selected="selected"' : '';
 
-	                                $input .= "$tabs\t\t\t<input type=\"radio\" value=\"$_key\" $idname $sel>$_val\n";
+	                                $input .= "<input type=\"radio\" value=\"$_key\" $idname $sel>$_val\n";
 	                            }
 	                            unset ($def['type'], $def['options'], $def['selected']);
 	                        }
@@ -491,7 +481,7 @@ class Form {
 	                        $input = "$tabs\t<input $idname %s />\n";
 	                        break;
 					case 'submit':
-                    	$input = "$tabs\t<input type=\"image\" style=\"margin-left: 300px\" src=\"/assets/images/submit.gif\" />\n";
+                    	$input = "<input type=\"image\" style=\"margin-left: 300px\" src=\"/assets/images/submit.gif\" />\n";
                     	break;					
                     default:
                         $input = "$tabs\t\t<input $idname %s />\n";
@@ -517,23 +507,19 @@ class Form {
 					if (isset($def['note']) == true) {
 						$row .= "<div class=\"note\">".$def['note']."</div>";
 					}					
-                     $row .= isset($def['type']) && $def['type'] == 'hidden'
-                        ? ''
-                        : "$tabs\t</li>\n";
 
 					if ($_is_multiple == true) {
 							$multiple_string = str_replace("]", "",str_replace("[", "", str_replace("][", "-", $field_multiple)));
-							$row =  "<div id=\"div_".$name."\">".$row."</div>$tabs\t\t<div id=\"div_multiple_".$name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/add.gif\"  value=\"Another &gt;&gt;\" onClick=\"addField('".$name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$name."_counter_".$multiple_string."\" name=\"".$name."_counter_".$multiple_string."\" value=\"0\">\n";
+							$row =  '</div>'."<div id=\"div_multiple_".$fieldset_name."_".$multiple_string."\" class='addmore'><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/add.gif\" value=\"Another &gt;&gt;\" class=\"more\" onClick=\"addField('".$fieldset_name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$fieldset_name."_counter_".$multiple_string."\"  name=\"".$fieldset_name."_counter_".$multiple_string."\" value=\"0\">\n</div>";	
 					}
-                    $html .= "$row";
+                    $html .= "<div id='form_".$name."'>".$row."</div>";
                 }
             }             
         }  
 
-        $html .= "$tabs\t".'</ul>'."\n";
 		if ($is_multiple == true) {
 			$multiple_string = str_replace("]", "",str_replace("[", "", str_replace("][", "-", $multiple)));
-			$html .= "$tabs".'</div>'."<div id=\"div_multiple_".$fieldset_name."_".$multiple_string."\" class=\"level".$depth."\"></div><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/add.gif\" value=\"Another &gt;&gt;\" class=\"more\" onClick=\"addField('".$fieldset_name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$fieldset_name."_counter_".$multiple_string."\"  name=\"".$fieldset_name."_counter_".$multiple_string."\" value=\"0\">\n";			
+			$html .= '</div>'."<div id=\"div_multiple_".$fieldset_name."_".$multiple_string."\" class='addmore'><img src=\"http://".$_SERVER['SERVER_NAME']."/assets/images/add.gif\" value=\"Another &gt;&gt;\" class=\"more\" onClick=\"addField('".$fieldset_name."', '".$multiple_string."')\" /><input type=\"hidden\" id=\"".$fieldset_name."_counter_".$multiple_string."\"  name=\"".$fieldset_name."_counter_".$multiple_string."\" value=\"0\">\n</div>";			
 		} else {
         	$html .= "$tabs".'</div>'."\n";			
 		}
