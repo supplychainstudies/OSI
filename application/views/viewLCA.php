@@ -134,7 +134,7 @@
 			</div>					
 
 			<? if (is_array($parts['geography']) == true ) {
-				echo '<div id="map"><h2>Geography</h2>';
+				echo '<div id="map" class="lca"><h2>Geography</h2>';
 				
 				foreach ($parts['geography'] as $geo) {
 						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
