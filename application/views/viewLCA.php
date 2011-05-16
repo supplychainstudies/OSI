@@ -160,15 +160,15 @@
 			<?
 				foreach ($parts['semanticlinks'] as $record) {
 					
-					if (isset($record['img']) == true) {
-						echo '<p><img src="'.$record['img'].'" style="width:200 px" /></p>';
+					if (isset($record['dbpedia']) == true) {
+						//echo '<p><img src="'.$record['img'].'" width="200 px" /></p>';
+						echo '<p>'.$record['description'].'</p>';
+						echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
 					}
-					echo '<p>'.$record['description'].'</p>';
-					echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
 					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
 					echo "Same as: ". $record['title'];
 					echo "</a></p>";
-				}
+					}
 			?>
 			
 			<h2>Suggested Similar Concepts</h2>

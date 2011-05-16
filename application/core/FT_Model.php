@@ -125,7 +125,7 @@ class FT_Model extends CI_Model{
 		
        $q = "select ?uri ?label where { " .
            "?uri rdf:label ?label . " .
-           "FILTER regex(?label, '".$string."', 'i' )" .              
+           "FILTER regex(?label, '".$string."?', 'i' )" .              
            "}";
        $results = $this->executeQuery($q);
 		if (count($results) > 0) {
@@ -133,7 +133,7 @@ class FT_Model extends CI_Model{
 		} else {
 	       $q = "select ?uri ?label where { " .
 	           "?uri rdfs:label ?label . " .
-	           "FILTER regex(?label, '".$string."', 'i' )" .              
+	           "FILTER regex(?label, '".$string."?', 'i' )" .              
 	           "}";
 	       $results = $this->executeQuery($q);
 			if (count($results) > 0) {
@@ -143,7 +143,6 @@ class FT_Model extends CI_Model{
 			}
 		}
 	}
-		
 
    public function getSomething($uri, $predicate, $lang = null) { 
        $q = "select ?thing where { " .

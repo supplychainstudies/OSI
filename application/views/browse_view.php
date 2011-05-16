@@ -16,8 +16,8 @@
 	<div id ="contentwrap">	
 	<?= $navigationDisplay;?>
 	
-	<div id="columnleft">
-
+	<div id="columnwide">
+		<div class="medium aoi square"><h2><nrwhite>456</nrwhite></h2><h2>Footprints available</h2></div>
 				<?
 					foreach ($set as $row) {
 						// Remove the footprinted part of the url
@@ -25,23 +25,14 @@
 						echo '<div class="small blue square" id="'.$myString.'"><p>'.$row['name'].'<p/></div>';
 					}
 				?>
-	</div>
-
-
-<div id="columnright">
-	<p>We work for sustainability information to be free, open and easy to use.</p><p> <a href="/about">Read more about Footprinted.</a></p>
-	<h1 class="bignr">456 Footprints available</h1>
-	<p></p>
+	<div class="medium aoi square"><p>We work for sustainability information to be free, open and easy to use.</p><p> <a href="/about">Read more about Footprinted.</a></p></div>
+	
+	
+	<div class="medium grey square">
 	<h2><a href="/create/start">Create new data</a></h2>
-	<h2>Latest news:</h2>
-	 <? foreach ($twitter as $tweet) {
-		echo '<p>';
-		echo $tweet['title'];
-		echo '</p>';
-	  }
-	?>
-	<p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p>
-</div>
+	</div>
+	<div class="small grey square"><p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p></div>
+	</div>
 	<?=$footerDisplay;?>
 </div>
 
@@ -66,14 +57,14 @@
 			$(this).removeClass("blue");
             $(this).addClass("medium");
 			$(this).addClass("grey");
-			$('#columnleft').masonry({	  
-				  itemSelector: '.square', columnWidth:10, });
+			$('#columnwide').masonry({	  
+				  itemSelector:'.square', columnWidth:10, });
 			$(this).load('/lca/getImpacts/'+$(this).attr('id'));	
 		});
 		
 	});	
 
-	$(function() {
+	/*$(function() {
 	    //Get Divs
 	    //$('#leftcolumn > [square]').each(function(i) {
 			// Get CO2
@@ -101,7 +92,7 @@
 	$('#columnleft').masonry({	  
 		  itemSelector: '.square', columnWidth:10, });
 		});
-	});	});
+	});	});*/
 	</script>
 </body>
 </html>
