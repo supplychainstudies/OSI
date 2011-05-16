@@ -119,44 +119,44 @@ class Lcamodel extends FT_Model{
 	 */
 	 public function getRecords() {
 	
-		$q = "select ?link where { " . 
-			" ?link rdfs:type eco:FootprintModel . " . 
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type eco:FootprintModel . " . 
 			"}";
 		$footprint_records = $this->executeQuery($q);	
-		$q = "select ?link where { " . 
-			" ?link rdfs:type eco:Model . " . 
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type eco:Model . " . 
 			"}";
 		$model_records = $this->executeQuery($q);	
 	
 		$records = array_merge($footprint_records, $model_records);
 		foreach ($records as &$record) {
-			$q = "select ?name where { " . 
-				"<". $record['link'] ."> eco:models ?bnode . " .
-				"?bnode rdfs:label ?name . " .
+			$q = "select ?label where { " . 
+				"<". $record['uri'] ."> eco:models ?bnode . " .
+				"?bnode rdfs:label ?label . " .
 				"?bnode rdfs:type eco:Product . " .  
 				"}";
 			$get_product_name = $this->executeQuery($q);
 			if (count($get_product_name) > 0) {
-				$record['name'] = $get_product_name[0]['name'];			
+				$record['label'] = $get_product_name[0]['label'];			
 			// If it doesnt appear to model a product, get the name of a process	
 			} else {
-				$q = "select ?name where { " . 
-					"<". $record['link'] ."> eco:models ?bnode . " .
-					"?bnode rdfs:label ?name . " .
+				$q = "select ?label where { " . 
+					"<". $record['uri'] ."> eco:models ?bnode . " .
+					"?bnode rdfs:label ?label . " .
 					"?bnode rdfs:type eco:Process . " .  
 					"}";
 				$get_process_name = $this->executeQuery($q);	
 				if (count($get_product_name) > 0) {
-				$record['name'] = $get_process_name[0]['name'];					
+				$record['label'] = $get_process_name[0]['label'];					
 				} else {
-					$q = "select ?name where { " . 
-						"<". $record['link'] ."> rdfs:label ?name . " .
+					$q = "select ?label where { " . 
+						"<". $record['uri'] ."> rdfs:label ?label . " .
 						"}";
 					$get_model_name = $this->executeQuery($q);
 					if (count($get_product_name) > 0) {
-						$record['name'] = $get_model_name[0]['name'];					
+						$record['label'] = $get_model_name[0]['label'];					
 					} else {
-						$record['name'] = "";
+						$record['label'] = "";
 					}
 				}
 			}
@@ -170,7 +170,7 @@ class Lcamodel extends FT_Model{
 	 */
 	 public function simpleSearch($value = null, $limit = 20, $offset = 0) {
 		$URIs = array();
-		$q = "select ?uri where { " . 
+		$q = "select ?uri ?label where { " . 
 			" ?uri eco:models ?bnode . " ;
 		if ($value != null) {
 			$q .= " ?bnode rdfs:label ?label . " . 
@@ -181,42 +181,8 @@ class Lcamodel extends FT_Model{
 				"OFFSET " . $offset . " ";
 
 		$records = $this->executeQuery($q);	
-		foreach ($records as $record) {
-			$URIs[] = $record['uri'];
-		}
-		return $URIs;
-	}
-
-
-
-	
-	/**
-	 * Retrieves and returns all the impacts of an existing uri
-	 * @return $records Array	
-	 * @param $uri string
-	 */
-	 public function getConvertedImpactAssessments($URI) {
-		$q = "select ?impactCategory ?impactCategoryIndicator ?impactCategoryValue ?impactCategoryUnit where { " . 
-			" ?bnode eco:computedFrom <".$URI."> . " .
-			" ?bnode rdfs:type eco:ImpactAssessment . " .	
-			" ?bnode eco:hasImpactCategoryIndicatorResult ?bnode2 . " .
-			" ?bnode2 eco:hasImpactAssessmentMethodCategoryDescription ?bnode3 . " .			 	
-			" ?bnode3 eco:hasImpactCategory ?impactCategory . " .			
-			" ?bnode3 eco:hasImpactCategoryIndicator ?impactCategoryIndicator . " .
-			" ?bnode2 eco:hasQuantity ?bnode4 . " . 			
-			" ?bnode4 eco:hasUnitOfMeasure ?impactCategoryUnit . " . 
-			" ?bnode4 eco:hasMagnitude ?impactCategoryValue . " .				
-			"}";				
-		$records = $this->executeQuery($q);	
-		foreach ($records as &$record) {
-			$record['impactCategory'] = $this->getLabel($record['impactCategory']);
-			$record['impactCategoryIndicator'] = $this->getLabel($record['impactCategoryIndicator']);
-			$record['impactCategoryUnit'] = $this->getLabel($record['impactCategoryUnit']);
-		}
 		return $records;
-	}
-	
-	
+	}	
 	
 	public function getImpactAssessments($URI) {
 		$q = "select ?bnoder where { " . 
@@ -279,7 +245,7 @@ class Lcamodel extends FT_Model{
 	
 
 	// Get external links for a resource (DBPedia...)
-	public function getLinks($URI){
+	public function getSameAs($URI){
 		$q = "select ?uri where { " . 
 			" <".$URI."> eco:models ?bnode . " .			
 			" ?bnode rdfs:type  eco:Product . " .
@@ -288,6 +254,7 @@ class Lcamodel extends FT_Model{
 		$records = $this->executeQuery($q);
 		return $records;
 	}
+	
 	// Convert 
 	public function convertLinks($dataset){
 		$converted_dataset = array();		
@@ -406,6 +373,18 @@ class Lcamodel extends FT_Model{
 	   //$this->addTriples($triples);
    }
 
+   public function addCategory($ft,$oc) {
+		$triples = array();
+       $q = "select ?bnode where { " . 
+           " <http://footprinted.org/rdfspace/lca/".$ft."> eco:models ?bnode . " .            
+           " ?bnode rdfs:type  eco:Product . " .
+           "}";              
+       $records = $this->executeQuery($q);
+		$q = "insert into <http://footprinted.org/> { " . 
+		"<".$records[0]['bnode']."> eco:hasCategory <"."http://sw.opencyc.org/concept/". $oc.">" . 
+		"}";
+		$this->executeQuery($q);
+   }
 	
 	public function getOpenCycSuggestions($uri) {
 		$q = "select ?label where { " . 
@@ -423,9 +402,83 @@ class Lcamodel extends FT_Model{
 		$suggestions = array();
 		foreach ($records as $record) {
 			$send_array = array($record['label']);
-			$suggestions = array_merge($suggestions, $this->opencycmodel->getSuggestedPages($send_array));
+			$_suggestions = $this->opencycmodel->getSuggestedPages($send_array);
+			if (count($_suggestions) > 0) {
+				$suggestions = array_merge($suggestions, $_suggestions);
+			}
 		}
 		return $suggestions;
 	}	
+/*	
+	public function getCategories($URI) {
+		$uris = $this->getLinks($URI);
+		$path = array();
+		foreach ($uris as $auri) {
+			$path[] = $this->opencycmodel->getOpenCycCategories($auri['uri']);
+		}	
+	}
+*/	
+	public function getCategories($URI){		
+		$q = "select ?uri where { " . 
+			" <".$URI."> eco:models ?bnode . " .			
+			" ?bnode rdfs:type  eco:Product . " .
+			" ?bnode eco:hasCategory  ?uri . " .
+			"}";
+		$records = $this->executeQuery($q);
+		if (count($records) > 0) {
+			$categories = array();
+			foreach ($records as $record) {
+				$categories[] = array(
+					'uri'=>$record['uri'],
+					'label'=>$this->opencycmodel->getOpenCycLabel($record['uri'])
+				);
+			}
+			return $categories;
+		} else {
+			return false;
+		}
+	}	
+
+	public function getLCAsByCategory($URI){		
+		$q = "select ?uri where { " . 
+			" ?uri eco:models ?bnode . " .			
+			" ?bnode rdfs:type  eco:Product . " .
+			" ?bnode eco:hasCategory  <" . $URI . "> . " .
+			"}";
+		$records = $this->executeQuery($q);
+		foreach ($records as &$record) {
+			$q = "select ?label where { " . 
+				"<". $record['uri'] ."> eco:models ?bnode . " .
+				"?bnode rdfs:label ?label . " .
+				"?bnode rdfs:type eco:Product . " .  
+				"}";
+			$get_product_name = $this->executeQuery($q);
+			if (count($get_product_name) > 0) {
+				$record['label'] = $get_product_name[0]['label'];			
+			// If it doesnt appear to model a product, get the name of a process	
+			} else {
+				$q = "select ?label where { " . 
+					"<". $record['uri'] ."> eco:models ?bnode . " .
+					"?bnode rdfs:label ?label . " .
+					"?bnode rdfs:type eco:Process . " .  
+					"}";
+				$get_process_name = $this->executeQuery($q);	
+				if (count($get_product_name) > 0) {
+				$record['label'] = $get_process_name[0]['label'];					
+				} else {
+					$q = "select ?label where { " . 
+						"<". $record['uri'] ."> rdfs:label ?label . " .
+						"}";
+					$get_model_name = $this->executeQuery($q);
+					if (count($get_product_name) > 0) {
+						$record['label'] = $get_model_name[0]['label'];					
+					} else {
+						$record['label'] = "";
+					}
+				}
+			}
+		}
+		return $records;
+	}
 
 }

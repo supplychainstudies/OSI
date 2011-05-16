@@ -161,7 +161,7 @@
 			<div id="lca_same" class="lca">
 			<h2>Linked Data</h2>
 			<?
-				foreach ($parts['semanticlinks'] as $record) {
+				foreach ($parts['sameAs'] as $record) {
 					
 					if (isset($record['dbpedia']) == true) {
 						//echo '<p><img src="'.$record['img'].'" width="200 px" /></p>';
@@ -171,7 +171,20 @@
 					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
 					echo "Same as: ". $record['title'];
 					echo "</a></p>";
-					}
+				}
+				foreach ($parts['categoryOf'] as $record) {
+					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
+					echo "Belongs to Category: ". $record['label'];
+					echo "</a></p>";
+				}
+			?>
+			
+			<h2>Suggested Similar Concepts</h2>
+			<?
+				foreach ($parts['suggestions'] as $suggestion) {
+					echo '<a href="/lca/addSameAs?ft_id='.$parts['uri'].'&opencyc_id='.str_replace("http://sw.opencyc.org/concept/", "", $suggestion['uri']) . '">'.$suggestion['label'].'</a><br />';
+				}
+
 			?>
 			</div>
 			<div id="lca_export" class="lca">
