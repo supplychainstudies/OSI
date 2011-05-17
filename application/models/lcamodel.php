@@ -170,16 +170,15 @@ class Lcamodel extends FT_Model{
 	 */
 	 public function simpleSearch($value = null, $limit = 20, $offset = 0) {
 		$URIs = array();
-		$q = "select ?uri ?label where { " . 
-			" ?uri eco:models ?bnode . " ;
+		$q = "select DISTINCT ?uri ?label where { " . 
+			" ?uri eco:models ?bnode . "  .
+			" ?bnode rdfs:label ?label . " ;
 		if ($value != null) {
-			$q .= " ?bnode rdfs:label ?label . " . 
-					"FILTER regex(?label, '" . $value . "', 'i')";
+			$q .= "FILTER regex(?label, '" . $value . "', 'i')";
 		} 
 		$q .= "}" . 
 				"LIMIT " . $limit . " " . 
 				"OFFSET " . $offset . " ";
-
 		$records = $this->executeQuery($q);	
 		return $records;
 	}	
@@ -439,12 +438,13 @@ class Lcamodel extends FT_Model{
 		}
 	}	
 
-	public function getLCAsByCategory($URI){		
+	public function getLCAsByCategory($URI) {		
 		$q = "select ?uri where { " . 
 			" ?uri eco:models ?bnode . " .			
 			" ?bnode rdfs:type  eco:Product . " .
 			" ?bnode eco:hasCategory  <" . $URI . "> . " .
 			"}";
+			
 		$records = $this->executeQuery($q);
 		foreach ($records as &$record) {
 			$q = "select ?label where { " . 
