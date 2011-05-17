@@ -28,9 +28,9 @@ class Admin extends FT_Controller {
 			'uri'=> $uris[$index]['uri'],
 			'label'=>$uris[$index]['label']
 		);
-		$sameAs = $this->lcamodel->getSameAs($uris[$index]['uri']);
+		//$sameAs = $this->lcamodel->getSameAs($uris[$index]['uri']);
 		$categories = $this->lcamodel->getCategories($uris[$index]['uri']);
-		$sameAsSuggestions = $this->lcamodel->getOpenCycSuggestions($uris[$index]['uri']);
+		//$sameAsSuggestions = $this->lcamodel->getOpenCycSuggestions($uris[$index]['uri']);
 		$categorySuggestions = array(
 			array(
 				"uri" => "Mx4rvUCoPtoTQdaZVdw2OtjsAg",
@@ -59,9 +59,9 @@ class Admin extends FT_Controller {
 		);
 		// Print out the selector
 		$this->data("record", $record);
-		$this->data("sameAs", $sameAs);
+		//$this->data("sameAs", $sameAs);
 		$this->data("categories", $categories);		
-		$this->data("sameAsSuggestions", $sameAsSuggestions);
+		//$this->data("sameAsSuggestions", $sameAsSuggestions);
 		$this->data("categorySuggestions", $categorySuggestions);
 		$this->data("next", $index+1);		
 		$this->display("Admin - Fix Categories and Same Concept Links", "adminCategories");

@@ -1,5 +1,3 @@
-<? $this->load->helper("linkeddata_helper"); ?>
-<? $this->load->helper("impact_helper"); ?>
 <!DOCTYPE html>
 <?=$metaDisplay;?>
 <html>
@@ -17,22 +15,31 @@
 	<?= $navigationDisplay;?>
 	
 	<div id="columnwide">
-		<div class="medium aoi square"><h2><nrwhite>456</nrwhite></h2><h2>Footprints available</h2></div>
 				<?
 					
 					foreach ($set as $row) {
 						// Remove the footprinted part of the url
 						$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
-						echo '<div class="small blue square" id="'.$myString.'"><p>'.$row['quantitativeReference']['name'].'<p/></div>';
+						switch ($row['categories'][0]['label']) {
+						    case 'chemical compound': $color = "blue"; break;
+						    case 'building material': $color = "aoi";	break;
+						    case "type of food": $color = "brown"; break;
+							default: $color = "orange";
+						}
+						echo '<div class="medium '.$color.' square resource" id="'.$myString.'" co2="'. round($row['co2']).'" water="'. round($row['water']).'"><p>One kg of '.$row['quantitativeReference']['name'].'</p>';
+						echo '<div class="number"><h1><nrwhite>' . round($row['co2'],2).'</nrwhite></h1><p>kilogram CO<sub>2</sub></p></div>';
+						echo "<div class='plus'><p><a href='/lca/view/".$myString."'>+ More</a></p></div>";
+						echo "</div>";
 					}
 				?>
-	<div class="medium aoi square"><p>We work for sustainability information to be free, open and easy to use.</p><p> <a href="/about">Read more about Footprinted.</a></p></div>
-	
-	
-	<div class="medium grey square">
-	<h2><a href="/create/start">Create new data</a></h2>
-	</div>
-	<div class="small grey square"><p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p></div>
+	<div class="small grey square"><p>456 Footprints available</p></div>
+	<div class="small grey square"><p><a href="/create/start">Create new data</a></p></div>
+	<div class="small grey square"><p><a href="http://twitter.com/footprinted">Food</a></p></div>
+	<div class="small grey square"><p><a href="http://twitter.com/footprinted">Construction materials</a></p></div>
+	<div class="small grey square"><p><a href="http://twitter.com/footprinted">Chemical compounds</a></p></div>
+	<div class="small grey square"><p><a href="http://twitter.com/footprinted">All</a></p></div>
+	<div class="small grey square water"><p><a>See water footprint</a></p></div>
+	<div class="small grey square carbon"><p><a>See carbon footprint</a></p></div>
 	</div>
 	<?=$footerDisplay;?>
 </div>
@@ -43,18 +50,20 @@
 	<script src="http://footprinted.org/assets/scripts/jquery/jquery-ui-1.8.11.custom.min.js" type="text/javascript"></script>
 	
 	<script>
+	$('#columnwide').masonry({	  
+		  itemSelector:'.square', columnWidth:10, });
 	
 	$(function() {
-		$( ".blue" ).click(function(){
+		$( ".aa" ).click(function(){
 			if (typeof opensquare!="undefined"){
 				opensquare.load('/lca/getName/'+opensquare.attr('id'));
 				opensquare.removeClass("medium");
 				opensquare.removeClass("grey");
-                opensquare.addClass("small");
+                
 				opensquare.addClass("blue");
 			}
 			opensquare = $(this);
-            $(this).removeClass("small");
+            
 			$(this).removeClass("blue");
             $(this).addClass("medium");
 			$(this).addClass("grey");
@@ -64,36 +73,45 @@
 		});
 		
 	});	
-
-	/*$(function() {
-	    //Get Divs
-	    //$('#leftcolumn > [square]').each(function(i) {
-			// Get CO2
-	//		co2 = ('/lca/getCO2/'+opensquare.attr('id'));
-			// Scale
-	//		side = Math.sqrt(co2*2500);
-	//		$(this).width(side);
-	//		$(this).height(side);
-	//    });
-	// Do Masonry
-//	$('#columnleft').masonry({	  
-		  itemSelector: '.square', columnWidth:10, });
-//	});
 	
-	$( ".aaa" ).click(function(){
-			thisone = $(this);
-			$.getJSON('/lca/getCO2/'+$(this).attr('id'), function(data) {;
-				side = Math.sqrt(data.CO2*2500);
-				side = Math.round(side);
-				if(side > 400){ side = 400; }
-				thisone.width(side);
-				thisone.height(side);
-
-	// Do Masonry
-	$('#columnleft').masonry({	  
-		  itemSelector: '.square', columnWidth:10, });
+	
+	$(function() {
+		$( ".water" ).click(function(){
+			 $('.resource').each(function() {
+				water = $(this).attr('water');
+				if (water == 0 ){
+					$(this).removeClass("medium");
+					$(this).addClass("small");
+					$(this).find(".number").html("");
+				}else{
+					$(this).find(".number").html('<h1><nrwhite>' + water + '</nrwhite></h1><p>liters of water</p>');
+					$(this).addClass("medium");
+					$(this).removeClass("small");
+				}
+				});
+			$('#columnwide').masonry({	  
+				itemSelector:'.square', columnWidth:10, });
 		});
-	});	});*/
+	});
+	$(function() {
+		$( ".carbon" ).click(function(){
+			 $('.resource').each(function() {
+				carbon = $(this).attr('co2');
+				if (carbon == 0 ){
+					$(this).removeClass("medium");
+					$(this).addClass("small");
+					$(this).find(".number").html("");
+				}else{
+					$(this).find(".number").html('<h1><nrwhite>' + carbon + '</nrwhite></h1><p>kilograms of CO2</p>');
+					$(this).addClass("medium");
+					$(this).removeClass("small");
+				}
+				});
+			$('#columnwide').masonry({	  
+				itemSelector:'.square', columnWidth:10, });
+		});
+	});
+	
 	</script>
 </body>
 </html>

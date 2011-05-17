@@ -31,16 +31,35 @@ class Info extends FT_Controller {
 			
 		// Querying the database for all featured URIs		
 		$this->db->select('uri');
+		$this->db->order_by("uri", "ASC"); 
 		$featured = $query = $this->db->get('featured');
 		// Initializing array
 		$set = array();
+
 		foreach ($featured->result() as $feature) {
 				$uri = "http://footprinted.org/rdfspace/lca/".$feature->uri;
+				$reference = $this->lcamodel->convertQR($this->lcamodel->getQR($uri));
+				$impactAssessments = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($uri));
+				$co2= 0;
+				$water = 0;
+				$ratio = $reference['amount'];
+					foreach ($impactAssessments as $impact) {
+					if($impact['impactCategoryIndicator'] == 'Carbon Dioxide Equivalent'){
+						$co2 = $impact['amount'] / $ratio;
+						if($impact['unit']=="qudtu:Gram"){ $co2 /= 1000; }
+					}
+					if($impact['impactCategoryIndicator'] == 'Water'){
+						$water = $impact['amount'] / $ratio;
+						if($impact['unit']=="qudtu:Gram"){ $water /= 1000; }
+					}
+				}
 	    		$set[$uri] = array (
 	               'uri' => $uri,
 				   'categories' => $this->lcamodel->getCategories($uri),
-	               'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($uri))
-	               );
+	               'quantitativeReference' => $reference,
+				   'co2' => $co2,
+					'water' => $water
+				);
 	    }		
 		// Send data to the view
 		$this->data("set", $set);
