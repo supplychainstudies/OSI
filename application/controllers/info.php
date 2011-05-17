@@ -20,6 +20,34 @@ class Info extends FT_Controller {
 	public $data;
 	public $post_data;
 	public $tooltips = array();
+	
+	/***
+    * @public
+    * Shows the homepage
+	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
+    */
+	// Public function for exploring the repository
+	public function featured() {
+			
+		// Querying the database for all featured URIs		
+		$this->db->select('uri');
+		$featured = $query = $this->db->get('featured');
+		// Initializing array
+		$set = array();
+		foreach ($featured->result() as $feature) {
+				$uri = "http://footprinted.org/rdfspace/lca/".$feature->uri;
+	    		$set[$uri] = array (
+	               'uri' => $uri,
+				   'categories' => $this->lcamodel->getCategories($uri),
+	               'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($uri))
+	               );
+	    }		
+		// Send data to the view
+		$this->data("set", $set);
+		//$this->data("twitter", $twitter);
+		$this->display("Browse","featured_view");		
+	}
+	
 	/***
     * @public
     * Shows the homepage

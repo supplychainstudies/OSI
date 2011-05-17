@@ -19,7 +19,7 @@
 <?
 	if (is_array($sameAs) == true) {
 		foreach ($sameAs as $s) {
-			echo $s['label'].'<br />';
+			echo $s['uri'].'<br />';
 		}
 	}
 

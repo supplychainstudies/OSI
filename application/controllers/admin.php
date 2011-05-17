@@ -20,7 +20,7 @@ class Admin extends FT_Controller {
         $this->ci =& $obj;
 	}
 	
-	
+	// Admin function to assign category and find same as for resources
 	public function assignCategory($index = 1) {
 		// find URI of something that doesnt have a category or sameas
 		$uris = $this->lcamodel->getRecords();
@@ -68,4 +68,40 @@ class Admin extends FT_Controller {
 			
 	}
 	
+	/* 
+	Get all the records and one can select if add to featured or to remove
+	*/
+	public function adminFeatured(){
+		// Querying the database for all records		
+		$records = $this->lcamodel->getRecords();
+		// Initializing array
+		$set = array();
+		// Add tooltips
+		$this->tooltips = array();
+
+		// Filling the arry with the records
+		foreach ($records as $key => $record) {	
+			// Go through each field
+			foreach ($record as $_key => $field) {
+				// if its a uri, get the label and store that instead 
+				// rewrite this into a better function later
+					$set[$key][$_key] = $field;
+			}
+		}
+		// Send data to the view
+		$this->data("set", $set);
+		$this->display("Featured","adminFeatured_view");
+	}
+	public function addAsFeatured(){
+		parse_str($_SERVER['QUERY_STRING'],$_GET); 
+		$URI = $_GET["URI"];
+		$data = array(
+		   'uri' => $URI,
+		);
+
+		$this->db->insert('featured', $data);
+	}
+	public function removeAsFeatured ($uri){
+		
+	}
 }
