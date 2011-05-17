@@ -436,7 +436,26 @@ class Lcamodel extends FT_Model{
 		} else {
 			return false;
 		}
-	}	
+	}
+	
+	public function getAllUsedCategories() {
+		$q = "select DISTINCT ?uri where { " . 
+			" ?bnode eco:hasCategory  ?uri . " .
+			"}";
+		$records = $this->executeQuery($q);
+		if (count($records) > 0) {
+			$categories = array();
+			foreach ($records as $record) {
+				$categories[] = array(
+					'uri'=>$record['uri'],
+					'label'=>$this->opencycmodel->getOpenCycLabel($record['uri'])
+				);
+			}
+			return $categories;
+		} else {
+			return false;
+		}		
+	}
 
 	public function getLCAsByCategory($URI) {		
 		$q = "select ?uri where { " . 
