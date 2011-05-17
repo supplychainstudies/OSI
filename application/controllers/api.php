@@ -94,25 +94,38 @@ class API extends FT_Controller {
 		}	
 		if (isset($search_terms['opencycref']) == true) {
 			$opencyc_uris = array('http://sw.opencyc.org/concept/'.$search_terms['opencycref']);
-		}			
-		
-		foreach ($opencyc_uris as $uri) {
-			$results = array_merge($results, $this->lcamodel->getLCAsByCategory($uri));
 		}
-		$count = 0;
-		foreach ($results as $result) {
-			if ($count > $limit+$offset) {
-				break;
+		
+		if (isset($search_terms['category']) == true || isset($search_terms['opencycref']) == true) {		
+			foreach ($opencyc_uris as $uri) {
+				$results = array_merge($results, $this->lcamodel->getLCAsByCategory($uri));
 			}
-			$tst = $limit+$offset;
-			if ($count >= $offset && $count < $limit+$offset) {
-			$rs[$result['uri']] = array (
-				'uri' => $result['uri'],
-				'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($result['uri'])),
-				'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($result['uri']))
-				);
+			$count = 0;
+			foreach ($results as $result) {
+				if ($count > $limit+$offset) {
+					break;
+				}
+				$tst = $limit+$offset;
+				if ($count >= $offset && $count < $limit+$offset) {
+				$rs[$result['uri']] = array (
+					'uri' => $result['uri'],
+					'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($result['uri'])),
+					'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($result['uri']))
+					);
+				}
+				$count++;
 			}
-			$count++;
+		} else {
+			$results = $this->lcamodel->getAllUsedCategories();
+			$rs = array();
+			foreach ($results as $result) {
+				if (strpos($result['uri'],"opencyc.org") !== false) {
+					$rs[] = array(
+						'opencycref' => str_replace("http://sw.opencyc.org/concept/","",$result['uri']),
+						'category' => $result['label']
+					);
+				}
+			}
 		}
 		if ($encode == 'json') {
 			header('Content-type: application/json');
