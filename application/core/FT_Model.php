@@ -107,9 +107,11 @@ class FT_Model extends CI_Model{
 			// for each value 
 			foreach ($triple as $val) {
 				// if the value is a uri,url,or blank node, surround it in <>
-				if (strstr($val, "http://") != false || strstr($val, "_:") != false) {
+				if (strstr($val, "http://") != false || strstr($val, "_:") != false ) {
 					$q .= "<".$val."> ";					
-				} 
+				} elseif($this->isURI($val) == true) {
+					$q .= "".$val." ";
+				}
 				// otherwise, put it in quotes
 				else {
 					$q .= "'" . $val . "' ";
@@ -119,6 +121,16 @@ class FT_Model extends CI_Model{
 		}
 		$q .= "}";
 		$this->executeQuery($q);
+	}
+	
+	public function isURI($val) {
+		foreach ($this->arc_config['ns'] as $key=>$uri) {
+			if (strpos($val, $key) == 0) {
+				return true;
+				break;
+			}
+		}
+		return false;
 	}
 
 	public function getURIbyLabel($string) {

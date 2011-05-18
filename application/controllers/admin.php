@@ -20,7 +20,108 @@ class Admin extends FT_Controller {
         $this->ci =& $obj;
 	}
 	
+	public function testGraph() {
+		$uris = $this->lcamodel->getRecords();
+		$q = "SELECT * { GRAPH <http://footprinted.org> { ?x ?y ?z } }";
+		var_dump($q);
+		$results= $this->lcamodel->executeQuery($q);
+		var_dump($results);
+	}
 	
+	public function normalize() {
+		$uris = $this->lcamodel->getRecords();
+		$parts = array();
+		$factors = array (
+				'http://data.nasa.gov/qudt/owl/unit#Gram' => '0.001',
+				'http://data.nasa.gov/qudt/owl/unit#Kilogram' => '1',
+				'http://data.nasa.gov/qudt/owl/unit#TableSpoon' => '0.0147867648',
+				'http://data.nasa.gov/qudt/owl/unit#Liter' => '1',
+				'http://data.nasa.gov/qudt/owl/unit#Ounce'=>'0.0625',
+				'http://data.nasa.gov/qudt/owl/unit#Pound'=>'1',
+			);
+		//foreach ($uris as $uri) {
+			
+			$parts['impactAssessments'] = $this->lcamodel->getImpactAssessments($uris[200]['uri']);
+			$parts['exchanges'] = $this->lcamodel->getExchanges($uris[200]['uri']);	
+			$parts['quantitativeReference'] = $this->lcamodel->getQR($uris[200]['uri']);
+			// Create the divisor
+			var_dump($parts);
+			$divisor = $parts['quantitativeReference'][0]['magnitude']/1;	
+			if ($parts['quantitativeReference'][0]['unit'] == "http://data.nasa.gov/qudt/owl/unit#Gram") {
+				$new_qr_unit = "http://data.nasa.gov/qudt/owl/unit#Kilogram";
+			}
+			if ($parts['quantitativeReference'][0]['unit'] == "http://data.nasa.gov/qudt/owl/unit#TableSpoon") {
+				$new_qr_unit = "http://data.nasa.gov/qudt/owl/unit#Liter";
+			}
+			if ($parts['quantitativeReference'][0]['unit'] == "http://data.nasa.gov/qudt/owl/unit#Ounce") {
+				$new_qr_unit = "http://data.nasa.gov/qudt/owl/unit#Pound";
+			}			
+			
+			foreach ($parts['exchanges'] as $key=>$exchange) {
+				if ($exchange["http://www.w3.org/2000/01/rdf-schema#type"][$exchange['link']] == "http://ontology.earthster.org/eco/core#Exchange") {
+					// Delete the triple
+					$q = "DELETE DATA FROM <http://footprinted.org>" . 
+					"{ <".$exchange['link']."> rdfs:type eco:Exchange }";
+					var_dump($q);
+					$query = "insert into <http://footprinted.org> { " . 
+						"<".$exchange['link']."> rdfs:type eco:UnallocatedExchange . }";					
+				}				
+				if ($exchange["http://www.w3.org/2000/01/rdf-schema#type"][$exchange['link']] == "http://ontology.earthster.org/eco/core#Exchange") {
+					// Delete the triple
+					$q = "DELETE DATA FROM <http://footprinted.org>" . 
+					"{ <".$exchange['link']."> rdfs:type eco:Exchange }";
+					var_dump($q);
+					$query = "insert into <http://footprinted.org> { " . 
+						"<".$exchange['link']."> rdfs:type eco:UnallocatedExchange . }";					
+				}
+				foreach ($exchange["http://ontology.earthster.org/eco/core#hasQuantity"] as $_key=>$q) {
+					$new_magnitude = $q["http://ontology.earthster.org/eco/core#hasMagnitude"][$_key]*$divisor;
+					$new_unit = $q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key];
+					if ($q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key] == "http://data.nasa.gov/qudt/owl/unit#Gram") {
+						$new_unit = "http://data.nasa.gov/qudt/owl/unit#Kilogram";
+						$new_magnitude = $new_magnitude*$factors[$q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key]];
+					}
+					if ($q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key] == "http://data.nasa.gov/qudt/owl/unit#TableSpoon") {
+						$new_unit = "http://data.nasa.gov/qudt/owl/unit#Liter";
+						$new_magnitude = $new_magnitude*$factors[$q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key]];
+					}
+					if ($q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key] == "http://data.nasa.gov/qudt/owl/unit#Ounce") {
+						$new_unit = "http://data.nasa.gov/qudt/owl/unit#Pound";
+						$new_magnitude = $new_magnitude*$factors[$q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key]];
+					}
+					$query = "insert into <http://footprinted.org> { " . 
+						"<".$_key."> eco:hasUnitOfMeasure <" . $new_unit . "> . " . 
+						"<".$_key."> eco:hasMagnitude '" . $new_magnitude . "' . ";
+					var_dump($query);
+					
+				}
+			} 
+			foreach ($parts['impactAssessments'] as $key=>$a) {
+				foreach ($a["http://ontology.earthster.org/eco/core#hasQuantity"] as $_key=>$q) {
+					$new_magnitude = $q["http://ontology.earthster.org/eco/core#hasMagnitude"][$_key]*$divisor;
+					$new_unit = $q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key];
+					if ($q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key] == "http://data.nasa.gov/qudt/owl/unit#Gram") {
+						$new_unit = "http://data.nasa.gov/qudt/owl/unit#Kilogram";
+						$new_magnitude = $new_magnitude*$factors[$q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key]];
+					}
+					if ($q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key] == "http://data.nasa.gov/qudt/owl/unit#TableSpoon") {
+						$new_unit = "http://data.nasa.gov/qudt/owl/unit#Liter";
+						$new_magnitude = $new_magnitude*$factors[$q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key]];
+					}
+					if ($q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key] == "http://data.nasa.gov/qudt/owl/unit#Ounce") {
+						$new_unit = "http://data.nasa.gov/qudt/owl/unit#Pound";
+						$new_magnitude = $new_magnitude*$factors[$q["http://ontology.earthster.org/eco/core#hasUnitOfMeasure"][$_key]];
+					}
+					$query = "insert into <http://footprinted.org> { " . 
+						"<".$_key."> eco:hasUnitOfMeasure <" . $new_unit . "> . " . 
+						"<".$_key."> eco:hasMagnitude '" . $new_magnitude . "' . ";
+					var_dump($query);
+					
+				}
+			}
+			
+		//}
+	}
 	public function assignCategory($index = 1) {
 		// find URI of something that doesnt have a category or sameas
 		$uris = $this->lcamodel->getRecords();

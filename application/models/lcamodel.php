@@ -295,7 +295,7 @@ class Lcamodel extends FT_Model{
 			"}";				
 		$records = $this->executeQuery($q);
 		if (count($records) > 0) {
-			$q = "select ?magnitude ?unit where { " . 
+			$q = "select ?magnitude ?unit ?exchange_bnode where { " . 
 				" ?exchange_bnode eco:hasEffect ?effect_bnode . " .
 				" ?exchange_bnode eco:hasQuantity ?quantity_bnode . " .
 				" ?quantity_bnode eco:hasMagnitude ?magnitude . " .
