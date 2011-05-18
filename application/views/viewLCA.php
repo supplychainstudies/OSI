@@ -154,6 +154,7 @@
 					}
 					echo " ; " . $record["title"];
 					echo "</a>";
+					echo "<h2>".var_dump($record)."</h2>";
 				}
 			?>
 			<br/><br/>

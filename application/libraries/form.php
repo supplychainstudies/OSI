@@ -12,7 +12,7 @@
 /***
 * Minor Alterations
 *
-*   author: Bianca Sayan, Jorge Zapico
+*   author: Bianca Sayan
 *	www.footprinted.org
 * 	description: changed the build function so that it can handle a new definition type "multiple"
 */
@@ -290,7 +290,7 @@ class Form {
 		$html ="";
 
         if (isset ($group['__attrs']['text']) && $text = $group['__attrs']['text']) {
-            $html .= "$tabs\t<div class=\"level".$depth."\"><p>$text</p></div>\n";
+            $html .= "<div class=\"level".$depth."\"><p>$text</p></div>\n";
         }
 		// Create a DIV with a unique ID
         $html  .= sprintf ('<div id="%s" class="form_div">'."\n", "div_".$fieldset_name, $depth);
@@ -481,7 +481,7 @@ class Form {
 	                        $input = "$tabs\t<input $idname %s />\n";
 	                        break;
 					case 'submit':
-                    	$input = "<input type=\"image\" style=\"margin-left: 300px\" src=\"/assets/images/submit.gif\" />\n";
+                    	$input = "<input type='submit' value='save' />\n";
                     	break;					
                     default:
                         $input = "$tabs\t\t<input $idname %s />\n";
