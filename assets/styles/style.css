@@ -10,6 +10,15 @@ h1,h2,h3,h4,h5 {
 	margin-bottom:0.4em;
 }
 
+a { 
+	color: #29ABE2; 
+	text-decoration:none;
+}
+a:hover{
+	color: #29ABE2;
+	
+}
+
 h1#title {
 	margin:0 auto;
 	padding:0.5em 2em 0.5em 2em;	
@@ -77,10 +86,52 @@ h1#title {
 	width:990px;
 	padding-bottom: 60px;
 }
-#info{
-	width:500px
+.menuabout{
+	float:right;
+	width:140px;
+	padding:10px;
+	padding-top:0px;
+	margin-bottom:20px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+	text-align: center;
 }
-
+.menuabout a{
+	font-size:20px;
+	color:#333;
+	font-family: 'PT Sans Narrow', arial, serif;
+		border-bottom: 1px dotted #45A3D8;
+}
+#about{
+	width:700px;
+	float:left;
+}
+#about-people{
+	float:left;
+	width: 305px;
+	padding-right:15px;
+	padding-left:15px;
+	padding-bottom:15px;
+	margin-right:15px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+}
+#about h1{
+	font-size:34px;
+	font-color:#333;
+	font-weight:normal;
+	
+}
+#about p{
+	font-size:24px;
+	color:#333;
+	font-family: 'PT Sans Narrow', arial, serif;
+}
+#about small{
+	font-size:12px;
+}
+#about p a{
+	color:#000;
+	border-bottom: 1px dotted #45A3D8;
+}
 /* Structure for LCA view */
 #lca_header{
 	float:left;
@@ -117,7 +168,7 @@ h1#title {
 	width: 450px;
 	text-align:right;
 	font-size: 20px;
-	font-family: 'Lato', arial, serif; 
+	font-family: 'PT Sans Narrow', arial, serif;
 	color: #fff;
 }
 #lca_title {
@@ -125,20 +176,6 @@ h1#title {
 	left:5px;
 	height: 70px;
 	width: 450px;
-}
-
-
-#lca_flows {
-}
-
-#lca_impact {
-}
-
-#lca_comments {
-}
-#lca_meta {
-}
-#map {
 }
 
 #lca_background .nr {
@@ -420,18 +457,6 @@ amount {
 }
 
 
-.hand {
-	font-family: 'Reenie Beanie', arial, serif;
-	font-weight: normal;
-	font-size: 2em;
-}
-
-
-a { color: #29ABE2; text-decoration: none; }
-a:hover{
-	color: #29ABE2;
-	background: url(../images/underline.png) repeat-x 0 80%;	
-}
 
 .imge a:hover {text-decoration: none; 
 	background:none;}

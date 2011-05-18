@@ -30,5 +30,11 @@ class About extends FT_Controller {
 		$this->display("Footprinted.org", "team_view");
 	}
 	
+	public function code()
+	{		
+		$this->data('title', "Foorprinted.org Code");
+		$this->style(Array(''));
+		$this->display("Footprinted.org", "code_view");
+	}
 }
 ?>
