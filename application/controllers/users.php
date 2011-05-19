@@ -3,7 +3,7 @@
  * Controller for environmental information structures
  * 
  * @version 0.8.0
- * @author info@footprinted.org
+ * @author info@footprinted.org 
  * @package opensustainability
  * @subpackage controllers
  * @uses 
@@ -230,26 +230,29 @@ class Users extends FT_Controller {
 		}
 	}
 	
+	
+	/*
+	Shows the dashboard control panel for the users
+	*/
 	public function dashboard() {
 		$user_data = "";
 		$published = "";
 		if($this->session->userdata('id') == true) {
 		    $user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
-			// IF there is Foaf data, send to dashboard
+			// IF there is friend of a friend data, send to dashboard
 			if (isset($user_data["foaf_uri"]) == true){
+				// Get the user activity (such as comments)
 				$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
+				// Get the LCAs that the user has published
+				$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
 				$this->data("user_activity", $user_activity);
+				$this->data("published", $published);
 			}			
 		} else {
 			$this->index();
 		}	
-
-		$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
-		
 		$this->data("user_data", $user_data);
-		$this->data("published", $published);
 		$this->style(Array('style.css'));
-
 		$this->display("Dashboard", "dashboard_view");				
 	}
 	

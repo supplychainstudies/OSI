@@ -22,7 +22,7 @@
 	</div>
 	
 	<div id="columnright">
-		<?$this->load->view('/standard/aboutmenu_view.php')?>;
+		<?$this->load->view('/standard/aboutmenu_view.php');?>
 	</div>
 	
 </p>

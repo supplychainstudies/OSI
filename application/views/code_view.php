@@ -28,7 +28,6 @@
 	</div>
 	<?=$footerDisplay;?>
 	</div>
-	
-	<?=$scripts;?>	
+
 </body>
 </html>

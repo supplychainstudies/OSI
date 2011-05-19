@@ -16,8 +16,8 @@
 	<div id="columnwide">
 		<?	if (isset($user_data) == true) { 
 				echo "<h1 class='grande'>Welcome back, ".$user_data["user_name"]."</h1>";
-				echo "<p><b>Your username: </b>".$user_data["user_name"]."</p>";
-				echo "<p><b>Your email: </b>".$user_data["user_email"]."</p>";
+				echo "<p class='piccolo'><b>Your username: </b>".$user_data["user_name"]."</p>";
+				echo "<p class='piccolo'><b>Your email: </b>".$user_data["user_email"]."</p>";
  		} 
 		?>
 		<br/>
@@ -47,22 +47,19 @@
 		</div>
 
 		<div id="columnright">
-			<div class="wide blue square"><h2><a href="/users/edit">Edit your info</a></h2></div>
-			<div class="wide blue square"><h2><a href="/create/start">Create new data</a></h2></div>
-			<div class="wide blue square"><h2><a href="/users/logout">Logout</a></h2></div>
-			<div id="share" class="grey">
-				<h1>Share footprinted:</h1>
+			<div class="menuabout"><h2><a href="/users/edit">Edit your info</a></h2></div>
+			<div class="menuabout"><h2><a href="/create/start">Create new data</a></h2></div>
+			<div class="menuabout"><h2><a href="/users/logout">Logout</a></h2></div>
+			<div class="menuabout">
+				<p class='piccolo'>Share footprinted!</p>
 				<ul id="share-options">			
 						<li id="facebook_share"><p> 
-							<a href='http://facebook.com/sharer.php?u=http://footprinted.org&t=Check+out+footprinted.org' target="_blank">Post to Facebook</a>
+							<a href='http://facebook.com/sharer.php?u=http://footprinted.org&t=Check+out+footprinted.org' target="_blank">Facebook</a>
 							</p></li>
 						<li id="twitter_share"><p>
-							<a href="http://twitter.com/home?status=Check+out+footprinted.org+at+http://footprinted.org" target="_blank">Post to Twitter</a>
+							<a href="http://twitter.com/home?status=Check+out+footprinted.org+at+http://footprinted.org" target="_blank">Twitter</a>
 							</p></li>
-						<li id="linkedin_share"><p>
-							<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://footprinted.org&title=Footprinted.org" target="_blank">Post to Linkedin</a>
-							</p></li>
-						<li id="delicious_share"><p><a href="http://delicious.com/save" onclick="window.open('http://delicious.com/save?v=5&noui&jump=close&url=http://footprinted.org'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;">Post to Delicious</a></p></li>
+						<li id="delicious_share"><p><a href="http://delicious.com/save" onclick="window.open('http://delicious.com/save?v=5&noui&jump=close&url=http://footprinted.org'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;">Delicious</a></p></li>
 					</ul>
 				</div>	
 		</div>
@@ -70,7 +67,5 @@
 
 	<?=$footerDisplay;?>
 	</div>
-	
-	<?=$scripts;?>	
 </body>
 </html>
