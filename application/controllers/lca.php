@@ -94,7 +94,9 @@ class Lca extends FT_Controller {
 			$datasets['product'][] = array (
 					'name_' => $post_data['productServiceName_']
 				);
-		
+			if ($post_data['qrunit_'] == "") 
+				$post_data['qrunit_'] = $post_data['qrunit_label_'];
+				if (strpos($post_data['author_label_']
 			$datasets['exchange'][] = array (
 					"direction_" => 'eco_Output',
 					"exchange_" => 'eco_Transfer',
@@ -104,6 +106,8 @@ class Lca extends FT_Controller {
 				);
 			$change_p['exchange'][] = array('Exchange'=>'eco:hasReferenceExchange');
 			for ($i = 0; $i< count($post_data['io_']); $i++) {
+				if ($post_data['ioUnit_'][$i] == "") 
+					$post_data['ioUnit_'][$i] = $post_data['ioUnit_label_'][$i];
 				$datasets['exchange'][] = array (
 						"direction_" => $post_data['io_'][$i],
 						"exchange_" => $post_data['exchangeType_'][$i],
@@ -112,7 +116,14 @@ class Lca extends FT_Controller {
 						"unit_" => $post_data['ioUnit_'][$i]
 					);
 			}
-
+			foreach ($post_data['assessmentUnit_'] as $i=>$aunit) {
+				if ($post_data['assessmentUnit_'][$i] == "") 
+					$post_data['assessmentUnit_'][$i] = $post_data['assessmentUnit_label_'][$i];
+				if ($post_data['impactCategory_'][$i] == "") 
+					$post_data['impactCategory_'][$i] = $post_data['impactCategory_label_'][$i];
+				if ($post_data['impactCategoryIndicator_'][$i] == "") 
+					$post_data['impactCategoryIndicator_'][$i] = $post_data['impactCategoryIndicator_label_'][$i];
+			}
 			$datasets['impactAssessment'][] = array (
 					"impact_category_indicator_result_counter_0" => $post_data['impact_assessment_counter_0'],
 					"computedFrom_" => $model_node,
