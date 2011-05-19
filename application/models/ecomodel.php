@@ -23,6 +23,7 @@ class Ecomodel extends FT_Model{
                 $menus[$category['label']] .= '<option value="' . $indicator['uri'] . '">' . $indicator['label'] . '</option>';
             }
         }
+		unset($categories);
         foreach ($menus as $key=>$menu) {
             $show = "";
             if ($key == "main") {
@@ -43,7 +44,7 @@ class Ecomodel extends FT_Model{
             "?uri rdfs:label ?label . " . 
             "}";
              
-        $results = $this->executeQuery($q, "remote");
+        $results = $this->executeQuery($q);
         if (count($results) != 0) {
             return $results;
         } else {
@@ -58,7 +59,7 @@ class Ecomodel extends FT_Model{
             "?uri rdfs:label ?label . " . 
             "}";
  
-        $results = $this->executeQuery($q, "remote");
+        $results = $this->executeQuery($q);
         if (count($results) != 0) {
             return $results;
         } else {

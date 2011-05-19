@@ -23,11 +23,21 @@ class Bibliographymodel extends FT_Model{
 					} 
 					foreach ($person[$this->arc_config['ns']['foaf'].'lastName'] as $lastName) {
 						$person_array['lastName'] = $lastName;
-					}						
+					}
+					$converted_dataset[$key]['authors'][] = $person_array;						
 				}
-				$converted_dataset[$key]['authors'][] = $person_array;
-			} else {
 				
+			} elseif (isset($record[$this->arc_config['ns']['dcterms']."creator"]) == true)  {
+				foreach($record[$this->arc_config['ns']['dcterms']."creator"] as $author_uri) {
+					$person = $this->getTriples($author_uri);
+					foreach ($person[$this->arc_config['ns']['foaf'].'firstName'] as $firstName) {
+						$person_array['firstName'] = $firstName;
+					} 
+					foreach ($person[$this->arc_config['ns']['foaf'].'lastName'] as $lastName) {
+						$person_array['lastName'] = $lastName;
+					}
+					$converted_dataset[$key]['authors'][] = $person_array;						
+				}
 			}
 			if (isset($record[$this->arc_config['ns']['bibo']."uri"]) == true) {
 				foreach($record[$this->arc_config['ns']['bibo']."uri"] as $uri) {
@@ -38,13 +48,6 @@ class Bibliographymodel extends FT_Model{
 			} 
 			if (isset($record[$this->arc_config['ns']['dc']."date"]) == true) {
 				foreach($record[$this->arc_config['ns']['dc']."date"] as $date) {
-					$converted_dataset[$key]['date'] = $date;
-				}
-			} else {
-				$converted_dataset[$key]['date'] = "";
-			}
-			if (isset($record[$this->arc_config['ns']['bibo']."isbn"]) == true) {
-				foreach($record[$this->arc_config['ns']['bibo']."date"] as $date) {
 					$converted_dataset[$key]['date'] = $date;
 				}
 			} else {

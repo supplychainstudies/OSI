@@ -26,7 +26,7 @@ class Lcamodel extends FT_Model{
 					$converted_dataset[$key]['impactCategory'] = $this->ecomodel->makeToolTip($___record);
 				} 
 				foreach($__record[$this->arc_config['ns']['eco']."hasImpactCategoryIndicator"] as $___record) {
-					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
+					$converted_dataset[$key]['impactCategoryIndicator'] =  $this->ecomodel->makeToolTip($___record);
 				}					
 			} 	
 			foreach ($_record[$this->arc_config['ns']['eco']."hasQuantity"] as $__record) {
@@ -62,18 +62,22 @@ class Lcamodel extends FT_Model{
 							$converted_dataset[$key]["direction"] = str_replace($this->arc_config['ns']['eco'], "", $__record);
 						} 
 					}
-					foreach($_record[$this->arc_config['ns']['eco']."hasTransferable"] as $transferable) {
-						if (is_array($transferable) == true) {
-							foreach($transferable[$this->arc_config['ns']['rdfs']."label"] as $label) {
-								$converted_dataset[$key]['name'] = $label;
+					if (isset($_record[$this->arc_config['ns']['eco']."hasTransferable"]) == true) {
+						foreach($_record[$this->arc_config['ns']['eco']."hasTransferable"] as $transferable) {
+							if (is_array($transferable) == true) {
+								foreach($transferable[$this->arc_config['ns']['rdfs']."label"] as $label) {
+									$converted_dataset[$key]['name'] = $label;
+								}
+							} else {
+								$converted_dataset[$key]['name'] = $transferable;
 							}
-						} else {
-							$converted_dataset[$key]['name'] = $transferable;
-						}
+						} 
 					}
-					foreach($_record[$this->arc_config['ns']['eco']."hasFlowable"] as $flowable) {
-						$converted_dataset[$key]['name'] = str_replace("eco", "", $flowable);
-					} 								
+					if (isset($_record[$this->arc_config['ns']['eco']."hasFlowable"]) == true) {
+						foreach($_record[$this->arc_config['ns']['eco']."hasFlowable"] as $flowable) {
+							$converted_dataset[$key]['name'] = str_replace("eco", "", $flowable);
+						} 	
+					}							
 				}
 				foreach ($record[$this->arc_config['ns']['eco']."hasQuantity"] as $_record) {
 					foreach($_record[$this->arc_config['ns']['eco']."hasMagnitude"] as $magnitude) {
@@ -84,7 +88,9 @@ class Lcamodel extends FT_Model{
 					} 
 				}
 			}
+					
 			return $converted_dataset; 
+
 		}
 		
 	public function convertQR($dataset){
@@ -295,7 +301,7 @@ class Lcamodel extends FT_Model{
 			"}";				
 		$records = $this->executeQuery($q);
 		if (count($records) > 0) {
-			$q = "select ?magnitude ?unit where { " . 
+			$q = "select ?magnitude ?unit ?exchange_bnode where { " . 
 				" ?exchange_bnode eco:hasEffect ?effect_bnode . " .
 				" ?exchange_bnode eco:hasQuantity ?quantity_bnode . " .
 				" ?quantity_bnode eco:hasMagnitude ?magnitude . " .

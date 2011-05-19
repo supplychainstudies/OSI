@@ -55,24 +55,14 @@ class Unitmodel extends FT_Model{
 		return $results;
 	}
 	
-	public function getQuantityKinds($object) {
-		if (strpos($object,":") !== false) {
-			$xarray = explode(":", $object);
-			$the_object = $this->arc_config['ns'][$xarray[0]] . $xarray[1];
-		} elseif (strpos($object,"http://") !== false) {
-			$the_object = $object;
-		} else {
-			$the_object = $object;
-		}
-		
+	public function getQuantityKinds($object) {	
 		$q = "select DISTINCT ?uri ?label where { " .
-			"?uri '" . $this->arc_config['ns']['qudt'] . "quantityKind' '" . $the_object . "' . " . 	
-			"?uri '" . $this->arc_config['ns']['rdfs'] . "label' ?label . " . 	
-			"?uri '" . $this->arc_config['ns']['rdf'] . "type' ?type . " . 
-			//"?type '" . $this->arc_config['ns']['rdfs'] . "subClassOf' ?stuf . " . 	
+			"?uri qudt:quantityKind ".$object." . " . 	
+			"?uri rdfs:label ?label . " . 	
+			"?uri rdf:type ?type . " . 	
 			"FILTER regex(?type, '" . $this->arc_config['ns']['qudt'] . "', 'i')" . 		
-			"}";
-		$results = $this->executeQuery($q,"remote");
+			"}";		
+		$results = $this->executeQuery($q);
 		if (count($results) != 0) {
 			return $results;
 		} else {
@@ -89,5 +79,32 @@ class Unitmodel extends FT_Model{
 		$kind_uri =  $this->getSomething($uri, "qudt:quantityKind");
 		return $this->getLabel($kind_uri);	
 	}	
+	
+	public function getUnitMenu() {
+		$units = $this->getUnits();
+        $menu_html = '<input name="unit_field" type="hidden" />';
+        $menus = array();
+        $menus['main'] = "";
+        foreach ($units as $unit_category=>$unit_set){
+            $menus['main'] .= '<option value="' . $unit_category . '">' . $unit_category . '</option>';
+            $menus[$unit_category] = "";
+            foreach ($unit_set as $unit) {
+                $menus[$unit_category] .= '<option value="' . $unit['uri'] . '">' . $unit['label'] . '</option>';
+            }
+        }
+		unset($units);
+        foreach ($menus as $key=>$menu) {
+            $show = "";
+            if ($key == "main") {
+                $show = " show";
+            }
+            $menu_html .= '<select class="hide' . $show . '" name="unit_' . $key . '">' . $menu . '</select>';
+            if ($key == "main") {
+                $menu_html .= '<br />';
+            }
+        }
+		unset($menus);
+        return '<div class="dialog" id="unit_dialog">' . $menu_html . '</div>';
+	}
 	
 } // End Class

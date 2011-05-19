@@ -549,7 +549,7 @@ class Form {
         $out =& $this->output;
         $out  = '';
         $out .= sprintf("".'<form action="%s" id="%s" method="post"%s>'."\n",
-            site_url($this->action),
+            $this->action,
             strtolower(preg_replace('|\W|', '_', $this->data['__attrs']['name'])),
             $form_type
         );
