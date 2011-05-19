@@ -126,7 +126,7 @@ class FT_Controller extends CI_Controller {
 			$styleDisplay = '<link rel="stylesheet" href="'.$minurl.$csspath.'style.css';				
 		}
 		else {
-			$standard = Array('style.css','standard.css','jquery-ui-1.8.11.custom.css');
+			$standard = Array('style.css','standard.css','form.css','jquery-ui-1.8.11.custom.css');
 			$this->_styles = array_merge($standard, $this->_styles);
 			 if($this->config->item("deploystatus") == "local") {
 				$csspath = base_url() . 'assets/styles/';
@@ -154,13 +154,15 @@ class FT_Controller extends CI_Controller {
 				$scriptDisplay .= '<script type="text/javascript" src="'.$script.'"></script>';
 			}
 		}
-		$minurl = base_url() . "server/min/?f=";
+		$minurl = base_url() . "/";
 		
 		if($included) {		
 			$scriptDisplay .='<script type="text/javascript" 
-		        src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>';
-		
+		        src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>';		
 			$standard = Array('jquery/jquery-ui-1.8.11.custom.min.js','janrain.js');
+			
+			
+			
 			// , 'utilities.js', 'jquery/jquery.template.js'
 			$this->_scripts = array_merge($standard, $this->_scripts);
 		}

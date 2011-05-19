@@ -1,7 +1,10 @@
 $(".dialog").dialog({
-            autoOpen: false,
-            title: 'Basic Dialog'
+	autoOpen: false, resizable: false, draggable: false, width: 400, height: 200, title: "Pick one", modal: true
         });
+$( "#impacts_dialog" ).dialog( "option", "title", "Select the environmental impact" );
+$( "#people_dialog" ).dialog( "option", "title", "Select a exiting author" );
+$( "#unit_dialog" ).dialog( "option", "title", "Select the unit" );
+
 $('.hide').hide();  
 $('.show').show();  
 $(".popup").click(function() {

@@ -62,14 +62,16 @@ class Lcamodel extends FT_Model{
 							$converted_dataset[$key]["direction"] = str_replace($this->arc_config['ns']['eco'], "", $__record);
 						} 
 					}
-					foreach($_record[$this->arc_config['ns']['eco']."hasTransferable"] as $transferable) {
-						if (is_array($transferable) == true) {
-							foreach($transferable[$this->arc_config['ns']['rdfs']."label"] as $label) {
-								$converted_dataset[$key]['name'] = $label;
+					if (isset($_record[$this->arc_config['ns']['eco']."hasTransferable"]) == true) {
+						foreach($_record[$this->arc_config['ns']['eco']."hasTransferable"] as $transferable) {
+							if (is_array($transferable) == true) {
+								foreach($transferable[$this->arc_config['ns']['rdfs']."label"] as $label) {
+									$converted_dataset[$key]['name'] = $label;
+								}
+							} else {
+								$converted_dataset[$key]['name'] = $transferable;
 							}
-						} else {
-							$converted_dataset[$key]['name'] = $transferable;
-						}
+						} 
 					}
 					if (isset($_record[$this->arc_config['ns']['eco']."hasFlowable"]) == true) {
 						foreach($_record[$this->arc_config['ns']['eco']."hasFlowable"] as $flowable) {
@@ -86,7 +88,9 @@ class Lcamodel extends FT_Model{
 					} 
 				}
 			}
+					
 			return $converted_dataset; 
+
 		}
 		
 	public function convertQR($dataset){
