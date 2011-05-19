@@ -7,16 +7,13 @@ font-size: 12px;
 color: #3FA9F5;
 font-size: 12px;
 text-transform:uppercase;
-}
-
-.submit input {
-margin-left: 4.5em;
+margin-top:14px;
 }
 
 input {
-display:block;
 color: #333;
 background: #fff;
+width:400px;
 border: 1px solid #ccc; 
 padding:8px;
 font-size:20px;
@@ -28,8 +25,8 @@ background: #fff;
 border: 1px solid #ccc;
 padding:8px;
 font-size:20px;
-width: 275px;
-height: 200px;
+width: 400px;
+height: 180px;
 }
 
 /* Special format for login (smaller)*/
@@ -70,8 +67,6 @@ color: #3FA9F5;
 text-transform:uppercase;
 }
 
-
-
 /* Divs for create/start */
 .create_form{
 	font-size: 12px;
@@ -83,43 +78,105 @@ text-transform:uppercase;
 	font-weight: none;
 	text-transform:uppercase;
 }
+
 .addmore{
 	float:left;
 	width:980px;
 }
-#div_start{
+#div_create_lca{
 	width:980px;
+	margin-bottom: 30px;
 }
 #div_description{
 	float:left;
-	width: 460px;
-	background:#eee;
+	width: 470px;
+	overflow:none;
+	margin-bottom:15px;
 }
 #div_publication{
-	float:right;
-	right:0px;
-	width: 460px;
-	padding:20px;
+	float:left;
+	margin-left:30px;
+	width: 470px;
+		margin-bottom:15px;
 }
 #div_flow{
 	float:left;
 	margin-top:10px;
+	margin-bottom:15px;
 	padding-top:15px;
 	border-top: 1px solid #ccc;
 	width:980px;
-	background:#eee;
 }
-#form_io{
-	
+
+
+#form_qrQuantity{
+	float:left;
+	width:125px;
+}
+
+#form_qrQuantity input, #form_qrUnit input {
+	width:125px;
+}
+#form_qrUnit{
+	float:left;
+	width:260px;
+	padding-left:15px;
+}
+#unit, #impacts, #people {
+	margin-left: 10px;
+}
+#form_author label{
+	width:400px;
+}
+#form_author input{
+	width: 195px;
+}
+#form_substanceName, #form_ioQuantity  {
+	float:left;
+	width:245px;
+}
+#form_ioUnit {
+	float:left;
+	width:490px;
+}
+#form_ioUnit label{
+	width:490px;
+}
+#form_substanceName input, #form_ioQuantity input, #form_ioUnit input {
+	width:225px;
+}
+#form_io label,#form_exchangeType label{
+	width:980px;
+}
+#form_io input{
+	width:15px;
+	text-align:left;
+}
+#form_exchangeType input{
+	width:15px;
+}
+#form_impactCategory, #form_impactCategoryIndicator, #form_assessmentUnit {
+	float: left;
+	width: 490px;
+}
+#form_assessmentQuantity, #form_assessmentQuantity label {
+	float: left;
+	width: 240px;
+}
+#form_impactCategory label, #form_impactCategoryIndicator label,  #form_assessmentUnit label {
+	width: 490px;
+}
+#form_impactCategory input, #form_impactCategoryIndicator input, #form_assessmentQuantity input, #form_assessmentUnit input {
+	width: 225px;
 }
 #div_impact_assessment
 {
 	float:left;
 	margin-top:10px;
 	padding-top:15px;
+	margin-bottom:15px;
 	border-top: 1px solid #ccc;
 	width:980px;
-	background:#eee;
 }
 #div_submit{
 	float:left;
@@ -127,8 +184,15 @@ text-transform:uppercase;
 	padding-top:15px;
 	border-top: 1px solid #ccc;
 	width:980px;
-	background:#eee;
+	text-align: left;
 }
+#div_submit h1{
+	display: none;
+}
+#form_submit input{
+	width: 100px;
+}
+
 .require {
 	border: solid 2px #FFFF00;
 }
@@ -138,9 +202,8 @@ text-transform:uppercase;
 }
 
 #div_flow label {
-color: #3366CC;
-display:block;
+	color: #3366CC;
 }
 #div_impact_assessment label {
-color: #000099;
+	color: #000099;
 }

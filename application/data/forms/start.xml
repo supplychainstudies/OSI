@@ -1,4 +1,4 @@
-<form action="/lca/create" name="start">
+<form action="/lca/create" name="Create LCA">
     <blank rules="">
         <type>hidden</type>
         <value>true</value>
@@ -29,23 +29,29 @@
         </qrUnit>         
     </fieldset>
     <fieldset name="Publication"> 
-        <author rules="trim">
-            <label>Author</label>
+        
+	        <title rules="trim">
+	            <label>Title</label>
+	            <type>text</type>
+	        </title>
+	        <link rules="trim">
+	            <label>Publication Link</label>
+	            <type>text</type>
+	        </link>
+	        <year rules="trim">
+	            <label>Publication Year</label>
+	            <type>text</type>
+	        </year>
+		<author rules="trim">
+         <label>Author</label>
             <type>popup</type>
             <popup>people</popup>
         </author>
-        <title rules="trim">
-            <label>Title</label>
-            <type>text</type>
-        </title>
         <email rules="trim">
-            <label>Email</label>
+            <label>Author's email</label>
             <type>text</type>
         </email>  
-        <link rules="trim">
-            <label>Publication Link</label>
-            <type>text</type>
-        </link>       
+
     </fieldset>
     <fieldset name="Flow" multiple="yes"> 
         <io rules="trim">

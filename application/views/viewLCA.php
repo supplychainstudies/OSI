@@ -41,7 +41,7 @@
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
 				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit']["label"] .'</p><p class="category">';
-				echo $impactAssessment['impactCategory']['label'] . " - " . $impactAssessment['impactCategoryIndicator'];
+				echo $impactAssessment['impactCategory']['label'] . " - " . $impactAssessment['impactCategoryIndicator']['label'];
 				echo "<p/></div>"; 
 				
 			}?>
@@ -134,7 +134,7 @@
 			</div>					
 
 			<? if (is_array($parts['geography']) == true ) {
-				echo '<div id="map"><h2>Geography</h2>';
+				echo '<div id="map" class="lca"><h2>Geography</h2>';
 				
 				foreach ($parts['geography'] as $geo) {
 						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
@@ -158,35 +158,33 @@
 			?>
 			<br/><br/>
 			</div>
+			<? if (isset($parts['sameAs']) == true || isset($parts['categoryOf']) == true) { ?>
 			<div id="lca_same" class="lca">
 			<h2>Linked Data</h2>
 			<?
-				foreach ($parts['sameAs'] as $record) {
+				if (isset($parts['sameAs']) == true) {
+					foreach ($parts['sameAs'] as $record) {
 					
-					if (isset($record['dbpedia']) == true) {
-						//echo '<p><img src="'.$record['img'].'" width="200 px" /></p>';
-						echo '<p>'.$record['description'].'</p>';
-						echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
+						if (isset($record['dbpedia']) == true) {
+							//echo '<p><img src="'.$record['img'].'" width="200 px" /></p>';
+							echo '<p>'.$record['description'].'</p>';
+							echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
+						}
+						echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
+						echo "Same as: ". $record['title'];
+						echo "</a></p>";
 					}
-					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
-					echo "Same as: ". $record['title'];
-					echo "</a></p>";
 				}
-				foreach ($parts['categoryOf'] as $record) {
-					echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
-					echo "Belongs to Category: ". $record['label'];
-					echo "</a></p>";
+				if (isset($parts['categoryOf']) == true) {
+					foreach ($parts['categoryOf'] as $record) {
+						echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
+						echo "Belongs to Category: ". $record['label'];
+						echo "</a></p>";
+					}
 				}
-			?>
-			
-			<h2>Suggested Similar Concepts</h2>
-			<?
-				foreach ($parts['suggestions'] as $suggestion) {
-					echo '<a href="/lca/addSameAs?ft_id='.$parts['uri'].'&opencyc_id='.str_replace("http://sw.opencyc.org/concept/", "", $suggestion['uri']) . '">'.$suggestion['label'].'</a><br />';
-				}
-
 			?>
 			</div>
+			<? } ?>
 			<div id="lca_export" class="lca">
 			<h2>Export</h2>
 			<p><?

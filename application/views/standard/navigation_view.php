@@ -4,7 +4,7 @@
 <div id="menu">
 	<p class="menu">
 	<a href="/about">About </a>| 
-	<a href="/browse">Browse </a>| 
+	<a href="/search/category/">Browse </a>| 
 <?
 
 if ($this->session->userdata('id') == false) {

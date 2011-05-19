@@ -26,7 +26,7 @@ class Lcamodel extends FT_Model{
 					$converted_dataset[$key]['impactCategory'] = $this->ecomodel->makeToolTip($___record);
 				} 
 				foreach($__record[$this->arc_config['ns']['eco']."hasImpactCategoryIndicator"] as $___record) {
-					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
+					$converted_dataset[$key]['impactCategoryIndicator'] =  $this->ecomodel->makeToolTip($___record);
 				}					
 			} 	
 			foreach ($_record[$this->arc_config['ns']['eco']."hasQuantity"] as $__record) {
@@ -71,9 +71,11 @@ class Lcamodel extends FT_Model{
 							$converted_dataset[$key]['name'] = $transferable;
 						}
 					}
-					foreach($_record[$this->arc_config['ns']['eco']."hasFlowable"] as $flowable) {
-						$converted_dataset[$key]['name'] = str_replace("eco", "", $flowable);
-					} 								
+					if (isset($_record[$this->arc_config['ns']['eco']."hasFlowable"]) == true) {
+						foreach($_record[$this->arc_config['ns']['eco']."hasFlowable"] as $flowable) {
+							$converted_dataset[$key]['name'] = str_replace("eco", "", $flowable);
+						} 	
+					}							
 				}
 				foreach ($record[$this->arc_config['ns']['eco']."hasQuantity"] as $_record) {
 					foreach($_record[$this->arc_config['ns']['eco']."hasMagnitude"] as $magnitude) {

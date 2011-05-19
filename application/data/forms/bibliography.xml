@@ -1,8 +1,8 @@
-<form action="/lca/create/bibliography" name="Bibliographic Reference">
+<form action="create/bibliography" name="Bibliographic Reference">
 		<bibotype rules="">
 			<label>Reference Type</label>
-			<type>hidden</type>
-			<linked_type></linked_type>
+			<type>dropdown</type>
+			<linked_type>rdfs:type</linked_type>
 			<options>				
 				<bibo_AcademicArticle>Academic Article</bibo_AcademicArticle>
 				<bibo_Article>Article</bibo_Article>
@@ -26,8 +26,8 @@
 		</title>
 		<author rules="trim">
 			<label>Author Name</label>
-			<type>lookup</type>
-			<lookup>people</lookup>
+			<type>popup</type>
+			<popup>people</popup>
 		  	<linked_type>dcterms:creator</linked_type>
 			<optional>no</optional>
 			<multiple>yes</multiple>

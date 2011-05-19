@@ -465,8 +465,17 @@ a:hover{
 .blue {
 	background-color: #45A3D8;
 }
+.blue {
+	background-color: #45A3D8;
+}
+.orange{
+	background-color: #444;
+}
+.brown{
+	background-color: #666;
+}
 .aoi {
-	background-color: #38617A;
+	background-color: #A1979B;
 }
 .grey {
 	background-color: #333333;
@@ -510,9 +519,9 @@ h1.bignr {
 /* Impact graphs for homepage */
 
 .plus {
-	float:right;
-	margin-right: 10px;
-	margin-bottom: 10px;
+	position:absolute;
+	right: 10px;
+	bottom: 0px;
 }
 
 #tabs{
@@ -542,7 +551,7 @@ h1.bignr {
 }
 nrwhite {
 	color: #fff;
-	font-size:42px;
+	font-size:62px;
 	font-family: 'Lato', arial, serif; 
 }
 #tabs h1 {

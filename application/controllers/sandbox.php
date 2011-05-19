@@ -17,6 +17,10 @@ class Sandbox extends FT_Controller {
 		$this->loadmodel->dumpqudt();
 	}
 	
+	function loadq() {
+		$this->loadmodel->dumpqudt();
+	}
+	
 	function fixgeo() {
 		$this->loadmodel->fixgeo();
 	}

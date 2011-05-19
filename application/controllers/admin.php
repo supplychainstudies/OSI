@@ -122,6 +122,7 @@ class Admin extends FT_Controller {
 			
 		//}
 	}
+
 	public function assignCategory($index = 1) {
 		// find URI of something that doesnt have a category or sameas
 		$uris = $this->lcamodel->getRecords();
@@ -129,9 +130,9 @@ class Admin extends FT_Controller {
 			'uri'=> $uris[$index]['uri'],
 			'label'=>$uris[$index]['label']
 		);
-		$sameAs = $this->lcamodel->getSameAs($uris[$index]['uri']);
+		//$sameAs = $this->lcamodel->getSameAs($uris[$index]['uri']);
 		$categories = $this->lcamodel->getCategories($uris[$index]['uri']);
-		$sameAsSuggestions = $this->lcamodel->getOpenCycSuggestions($uris[$index]['uri']);
+		//$sameAsSuggestions = $this->lcamodel->getOpenCycSuggestions($uris[$index]['uri']);
 		$categorySuggestions = array(
 			array(
 				"uri" => "Mx4rvUCoPtoTQdaZVdw2OtjsAg",
@@ -160,13 +161,49 @@ class Admin extends FT_Controller {
 		);
 		// Print out the selector
 		$this->data("record", $record);
-		$this->data("sameAs", $sameAs);
+		//$this->data("sameAs", $sameAs);
 		$this->data("categories", $categories);		
-		$this->data("sameAsSuggestions", $sameAsSuggestions);
+		//$this->data("sameAsSuggestions", $sameAsSuggestions);
 		$this->data("categorySuggestions", $categorySuggestions);
 		$this->data("next", $index+1);		
 		$this->display("Admin - Fix Categories and Same Concept Links", "adminCategories");
 			
 	}
 	
+	/* 
+	Get all the records and one can select if add to featured or to remove
+	*/
+	public function adminFeatured(){
+		// Querying the database for all records		
+		$records = $this->lcamodel->getRecords();
+		// Initializing array
+		$set = array();
+		// Add tooltips
+		$this->tooltips = array();
+
+		// Filling the arry with the records
+		foreach ($records as $key => $record) {	
+			// Go through each field
+			foreach ($record as $_key => $field) {
+				// if its a uri, get the label and store that instead 
+				// rewrite this into a better function later
+					$set[$key][$_key] = $field;
+			}
+		}
+		// Send data to the view
+		$this->data("set", $set);
+		$this->display("Featured","adminFeatured_view");
+	}
+	public function addAsFeatured(){
+		parse_str($_SERVER['QUERY_STRING'],$_GET); 
+		$URI = $_GET["URI"];
+		$data = array(
+		   'uri' => $URI,
+		);
+
+		$this->db->insert('featured', $data);
+	}
+	public function removeAsFeatured ($uri){
+		
+	}
 }

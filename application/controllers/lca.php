@@ -82,7 +82,8 @@ class Lca extends FT_Controller {
 			$datasets['bibliography'][] = array (
 					"title_" => $post_data["title_"],
 					"uri_" => $post_data["link_"],
-					"author_" => array($person_node)
+					"author_" => array($person_node),
+					"date_" => $post_data["year_"]
 				);
 			}
 
@@ -137,8 +138,6 @@ class Lca extends FT_Controller {
 					'object' => $bibliography_node
 				),
 			);	
-
-			$triples = array();
 			foreach ($datasets as $key=>$dataset) {
 				if ($key != "submit_") {
 					foreach ($dataset as $i=>$datasetinstance) {
@@ -184,7 +183,7 @@ class Lca extends FT_Controller {
 					"object" => $_process_node
 				);
 			}
-			$this->arcmodel->addTriples($triples);
+			$this->lcamodel->addTriples($triples);
 			$this->view(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 		}else {
 			$this->index();
@@ -197,7 +196,7 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in RDF
 	*/
 	public function viewRDF($URI = null) {
-		@$rdf = $this->arcmodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
+		$rdf = $this->lcamodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
 		header('Content-type: text/xml');
 		echo $rdf;
@@ -208,7 +207,7 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in JSON
 	*/	
 	public function viewJSON($URI = null) {
-		@$json = $this->arcmodel->getJSON("http://footprinted.org/rdfspace/lca/".$URI);
+		$json = $this->lcamodel->getJSON("http://footprinted.org/rdfspace/lca/".$URI);
 		header('Content-type: application/json');
 		echo $json;
 	}
@@ -226,20 +225,20 @@ class Lca extends FT_Controller {
 	public function view($URI = null) {	
 		$parts['uri'] = $URI;
 		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
-		@$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
-		@$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
-		@$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
-		@$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
-		@$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
+		$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
 		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $URI));
 		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
-		$parts['suggestions'] = $this->lcamodel->getOpenCycSuggestions("http://footprinted.org/rdfspace/lca/" . $URI);
-	 	foreach ($parts as &$part) {
-			if ($part == false || count($part) == 0) {
-				unset($part);
+		//$parts['suggestions'] = $this->lcamodel->getOpenCycSuggestions("http://footprinted.org/rdfspace/lca/" . $URI);
+	 	foreach ($parts as $key=>$part) {
+			if ($parts[$key] === false || $parts[$key] == false || count($parts[$key]) == 0) {
+				unset($parts[$key]);
 			}
 		}
-		
+
 		/* If the functional unit is mass, normalize to 1kg */
 		
 		if (strpos("Kilogram", $parts['quantitativeReference']['unit']['label']) !== false) {

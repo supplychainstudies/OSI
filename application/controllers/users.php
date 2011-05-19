@@ -237,17 +237,15 @@ class Users extends FT_Controller {
 		    $user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
 			// IF there is Foaf data, send to dashboard
 			if (isset($user_data["foaf_uri"]) == true){
-				$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
+				$published = $this->lcamodel->getLCAsByPublisher($user_data["foaf_uri"]);
+				$this->data("published", $published);
 				$this->data("user_activity", $user_activity);
 			}			
 		} else {
 			$this->index();
 		}	
-
-		$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
 		
 		$this->data("user_data", $user_data);
-		$this->data("published", $published);
 		$this->style(Array('style.css'));
 
 		$this->display("Dashboard", "dashboard_view");				

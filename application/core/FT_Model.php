@@ -125,7 +125,7 @@ class FT_Model extends CI_Model{
 	
 	public function isURI($val) {
 		foreach ($this->arc_config['ns'] as $key=>$uri) {
-			if (strpos($val, $key) == 0) {
+			if (strpos($val, $key) === 0) {
 				return true;
 				break;
 			}
@@ -294,7 +294,7 @@ class FT_Model extends CI_Model{
 			if (strstr($record['object'], "_:") != false) {
 				$xarray[$record['predicate']][$record['object']] = $this->getTriples($record['object']);		
 			} else {
-					$xarray[$record['predicate']][$uri] = $record['object'];
+					$xarray[$record['predicate']][] = $record['object'];
 			}								
 		}
 		return $xarray;
