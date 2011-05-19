@@ -4,7 +4,7 @@ class Sandbox extends FT_Controller {
 	
 	function Sandbox() {
 		parent::__construct();
-		$this->load->library(Array('formats'));
+		//$this->load->library(Array('formats'));
 		$this->load->model(Array('lcamodel','loadmodel'));
 	}
 	

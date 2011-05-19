@@ -16,8 +16,8 @@
 	<div id="columnleft">
 		<div id="about">
 <p>What is linked data and why are we promoting it?</p>
-<p>Linked data is</p>
-<p>1. Use unique addresses so that things can be referred to and looked up by people and agents (such as other web services).<i>For instance the LCA of aluminum has this unique permanent address: http://footprinted.org/PrimaryAluminumIngot84706627</i></p>
+<p>Linked data is a method of publishing structured data, so that it can be interlinked and become more useful, building upon standard Web technologies. The basic principles are:</p>
+<p>1. All kind of conceptual things have unique addresses so that they can be referred to and looked up by people and agents (such as other web services).<i>For instance the LCA of aluminum has this unique permanent address: http://footprinted.org/PrimaryAluminumIngot84706627</i></p>
 <p>2. Provide useful information about the thing when its URI is looked up, using standard formats such as RDF/XML.<i></i></p>
 <p>3. Include links to other, related URIs in the exposed data to improve discovery of other related information on the Web.<i></i></p>
 

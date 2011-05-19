@@ -76,7 +76,9 @@ margin-left:25px;
 	width: 60px;
 	margin-left:25px;
 }
-
+.dialog{
+	display:none;
+}
 
 #comment_form{
 	background:black;
@@ -147,12 +149,12 @@ text-transform:uppercase;
 }
 
 #form_qrQuantity input, #form_qrUnit input {
-	width:125px;
+	width:120px;
 }
 #form_qrUnit{
 	float:left;
-	width:260px;
-	padding-left:15px;
+	width:275px;
+	margin-left:25px;
 }
 #unit, #impacts, #people {
 	margin-left: 10px;
