@@ -23,7 +23,9 @@
 	<div id="lca_background">	
 		<div id="lca_impact" class="lca">
 			<h2><span>Impact Assessment</h2>	
-			<? foreach ($parts['impactAssessments'] as $impactAssessment) {
+			<?
+			if (isset($parts['impactAssessments']) == true) {
+			 foreach ($parts['impactAssessments'] as $impactAssessment) {
 				// Change color of the circle depending on the impact category	
 				switch ($impactAssessment['impactCategoryIndicator']) {
 				    case 'Waste': $color = "#666"; $max = 10; break;
@@ -44,10 +46,10 @@
 				echo $impactAssessment['impactCategory']['label'] . " - " . $impactAssessment['impactCategoryIndicator']['label'];
 				echo "<p/></div>"; 
 				
-			}?>
+			} } ?>
 			</div>
 			
-			<? if(is_array($parts['exchanges']  ) == true) { ?>
+			<? if(isset($parts['exchanges']  ) == true) { ?>
 			<div id="lca_flows" class="lca">
 			<h2>Flows</h2>
 			<? if ($totalinput != 0) { ?>
@@ -133,7 +135,7 @@
 
 			</div>					
 
-			<? if (is_array($parts['geography']) == true ) {
+			<? if (isset($parts['geography']) == true ) {
 				echo '<div id="map" class="lca"><h2>Geography</h2>';
 				
 				foreach ($parts['geography'] as $geo) {
@@ -147,13 +149,24 @@
 			<div id="lca_meta"  class="lca">
 			<h2>Reference</h2>
 			<?
-				foreach ($parts['bibliography'] as $record) {
-					echo "<a href=\"" . $record['uri'] . "\" target='_blank'>";
-					foreach ($record['authors'] as $author) {
-						echo $author['lastName'] . ", " .$author['firstName'] . ";";
+				if (isset($parts['bibliography']) == true) {
+					foreach ($parts['bibliography'] as $record) {
+						if (isset($record['uri']) == true) {
+							echo "<a href=\"" . $record['uri'] . "\" target='_blank'>";
+						}
+						if (isset($record['authors']) == true) {
+							foreach ($record['authors'] as $author) {
+								echo $author['lastName'] . ", " .$author['firstName'] . ";";
+							}
+							echo "; ";
+						}
+						if (isset($record["title"]) == true) {
+							echo $record["title"];
+						}
+						if (isset($record['uri']) == true) {
+							echo "</a>";
+						}
 					}
-					echo " ; " . $record["title"];
-					echo "</a>";
 				}
 			?>
 			<br/><br/>

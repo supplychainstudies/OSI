@@ -44,16 +44,16 @@ class Lca extends FT_Controller {
 			$model_node = toURI("lca", $post_data['name_']); 
 			$exchange_node = $model_node;
 			$bibliography_node = toURI("bibliography", $post_data['title_']); 
-			$person_node = toURI("person", $post_data['author_']); 
 			$process_node = $model_node;
 			$product_node = $model_node;
-			$impactAssessment_node = "";
+			$impactassessment_node = "";
 			
 			// Bibliography
 			// First, look to see if they picked the first author, or if its someone new
 			if ($post_data['author_'] != "") {
 				$person_node = $post_data['author_'];
-			} else {
+			} elseif ($post_data['author_label_'] != "") {
+				$person_node = toURI("person", $post_data['author_label_']); 
 				if (strpos($post_data['author_label_'], ",") !== false) {
 					$name_array = explode (",", $post_data['author_label_']);
 					$post_data['firstName_'] = trim($name_array[1]);
@@ -76,17 +76,22 @@ class Lca extends FT_Controller {
 							'email_' => $post_data['email_']
 						);	
 				}
-			}
+			} 
 
-			if ($post_data["title_"] != "" || $post_data["link_"] != "") {
-			$datasets['bibliography'][] = array (
-					"title_" => $post_data["title_"],
-					"uri_" => $post_data["link_"],
-					"author_" => array($person_node),
-					"date_" => $post_data["year_"]
-				);
+			$datasets['bibliography'] = array();		
+			if ($post_data["title_"] != "") {
+				$datasets['bibliography'][0]["title_"] = $post_data["title_"];
 			}
-
+			if ($post_data["link_"] != "") {
+				$datasets['bibliography'][0]["uri_"] = $post_data["link_"];
+			}
+			if ($post_data["year_"] != "") {
+				$datasets['bibliography'][0]["date_"] = $post_data["year_"];
+			}
+			if (isset($person_node) == true) {
+				$datasets['bibliography'][0]["author_"] = array($person_node);
+			}
+						
 			$datasets['process'][] = array (
 					'name_' => $post_data['name_'],
 					'description_' => $post_data['description_']	
@@ -173,11 +178,10 @@ class Lca extends FT_Controller {
 				}
 				if ($triple['predicate'] == 'rdfs:type' && $triple['object'] == 'eco:ImpactAssessment') {
 					$_ia_node = $triple['subject'];
-				}
-				if ($triple['predicate'] == 'eco:hasTransferable' && $triple['object'] == $post_data['productServiceName_']) {
-					$triple['object'] = $_product_node;
-				}
-				if ($triple['predicate'] == 'eco:hasTransferable' && $triple['object'] == $post_data['productServiceName_']) {
+				}								
+			}
+			foreach ($triples as $key=>&$triple) {
+				if ($triple['predicate'] == 'eco:hasTransferable' && trim($triple['object']) == trim($post_data['productServiceName_'])) {
 					$triple['object'] = $_product_node;
 				}								
 			}
