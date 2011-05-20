@@ -229,9 +229,14 @@ class FT_Model extends CI_Model{
 		$q = "select ?p ?o where { <".$uri."> ?p ?o . }";	
 		$records = $this->executeQuery($q);	
 		$records_next = array();
-		$records_all = $records;
+		$records_all = array();
+		$records_top = array();
 		foreach ($records as &$record) {
-				$record['s'] = $uri;				
+				$records_top[] = array(
+					's' => $uri,
+					'p' => $record['p'],
+					'o' => $record['o']
+				);				
 				if (strstr($record['o'], "_:") != false) {
 					$records_next = $this->getArcTriples($record['o']);				
 					if (count($records_next) > 0) {
@@ -244,11 +249,11 @@ class FT_Model extends CI_Model{
 					}
 				}				
 			}
-		if (count($records_all) > 0 && count($records) > 0) {
-			return array_merge($records, $records_all);
+		if (count($records_all) > 0 && count($records_top) > 0) {
+			return array_merge($records_top, $records_all);
 		}
-		elseif (count($records) > 0) {
-			return $records;
+		elseif (count($records_top) > 0) {
+			return $records_top;
 		} else {
 			return array(0);
 		}
