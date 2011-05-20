@@ -62,7 +62,7 @@ $config['arc_info']['ns'] = array(
 'wgs84_pos'=>'http://www.w3.org/2003/01/geo/wgs84_pos#',
 'gn'=>'http://www.geonames.org/ontology#',
 'owl' => 'http://www.w3.org/2002/07/owl#',
-'opencyc' => 'http://sw.opencyc.org/conceot/'
+'opencyc' => 'http://sw.opencyc.org/concept/'
 
 );		    
 $config['arc_info']['endpoint_features'] = array(

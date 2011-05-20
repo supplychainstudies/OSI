@@ -69,13 +69,16 @@ class Lca extends FT_Controller {
 					$post_data['firstName_'] = "";
 					$post_data['lastName_'] = $post_data['author_label_'];
 				}
-				if ($post_data['email_'] != "") {
-					$datasets['person'][] = array (
-							'firstName_' => $post_data['firstName_'],
-							'lastName_' => $post_data['lastName_'],
-							'email_' => $post_data['email_']
-						);	
+				$datasets['person'][] = array ();
+				if ($post_data["firstName_"] != "") {
+					$datasets['person'][0]["firstName_"] = $post_data["firstName_"];
 				}
+				if ($post_data["lastName_"] != "") {
+					$datasets['person'][0]["lastName_"] = $post_data["lastName_"];
+				}
+				if ($post_data["email_"] != "") {
+					$datasets['person'][0]["email_"] = $post_data["email_"];
+				}					
 			} 
 
 			$datasets['bibliography'] = array();		
@@ -129,7 +132,8 @@ class Lca extends FT_Controller {
 						);
 				}
 			}
-			foreach ($post_data['assessmentUnit_'] as $i=>$aunit) {
+			
+			foreach ($post_data['assessmentQuantity_'] as $i=>$aunit) {
 				if ($post_data['assessmentUnit_'][$i] == "") 
 					$post_data['assessmentUnit_'][$i] = $post_data['assessmentUnit_label_'][$i];
 				if ($post_data['impactCategory_'][$i] == "") 
@@ -167,6 +171,7 @@ class Lca extends FT_Controller {
 					'object' => "eco:Model"
 				),
 			);	
+
 			foreach ($datasets as $key=>$dataset) {
 				if ($key != "submit_") {
 					foreach ($dataset as $i=>$datasetinstance) {
