@@ -102,14 +102,11 @@ $("[name='impacts_main']").change(function() {
 });
  
 $('#impact_form').submit(function() {
-  	var main = $("[name='impacts_main']").val();
-	catname = "impact_"+main;
+	var main = $("option[value='"+$("[name='impacts_main']").val()+"']").text();
+	catname = "impacts_"+main;
 	var the_value = $("[name='"+catname+"']").val();
-
-    var the_value = $(this).val();
     var field = $("[name='impacts_field']").val();
     field = field.replace("impactCategory","impactCategoryIndicator");
-
     var the_label_field = field.replace("_button", "_label");
     var the_hidden_field = field.replace("_button" ,"");
     var the_label = $("[value='"+the_value+"']").text();

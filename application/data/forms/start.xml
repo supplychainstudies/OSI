@@ -25,7 +25,15 @@
         <category rules="trim">
             <label>Category</label>
             <type>dropdown</type>
-        </category>       
+			<options>
+			<opencyc_Mx4rvUCoPtoTQdaZVdw2OtjsAg>chemical compound</opencyc_Mx4rvUCoPtoTQdaZVdw2OtjsAg>
+			<opencyc_Mx4rv-6HepwpEbGdrcN5Y29ycA>transportation</opencyc_Mx4rv-6HepwpEbGdrcN5Y29ycA>
+			<opencyc_Mx4rvVibU5wpEbGdrcN5Y29ycA>textile</opencyc_Mx4rvVibU5wpEbGdrcN5Y29ycA>
+			<opencyc_Mx4rwQr0i5wpEbGdrcN5Y29ycA>building material</opencyc_Mx4rwQr0i5wpEbGdrcN5Y29ycA>
+			<opencyc_Mx4rvVi9A5wpEbGdrcN5Y29ycA>food</opencyc_Mx4rvVi9A5wpEbGdrcN5Y29ycA>
+			<opencyc_Mx4rvViSe5wpEbGdrcN5Y29ycA>commodity</opencyc_Mx4rvViSe5wpEbGdrcN5Y29ycA>
+    		</options>
+		</category>       
     </fieldset>
     <fieldset name="Publication"> 
         
