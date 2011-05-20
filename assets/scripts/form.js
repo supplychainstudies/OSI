@@ -1,8 +1,7 @@
-$(".dialog").dialog({
-	autoOpen: false, resizable: false, draggable: false, width: 400, height: 200, title: "Pick one", modal: true
-        });
+// Add the options to all the dialogs
+$(".dialog").dialog({ autoOpen: false, resizable: false, draggable: false, width: 400, height: 200, title: "Pick one", modal: true });
 $( "#impacts_dialog" ).dialog( "option", "title", "Select the environmental impact" );
-$( "#people_dialog" ).dialog( "option", "title", "Select a exiting author" );
+$( "#people_dialog" ).dialog( "option", "title", "Select an exiting author" );
 $( "#unit_dialog" ).dialog( "option", "title", "Select the unit" );
 
 $('.hide').hide();  
@@ -13,8 +12,6 @@ $(".popup").click(function() {
     $("#"+the_id+"_dialog").dialog('open');
     $("[name='" + the_id + "_field']").val(the_name);
     //var val = $("[name='" + the_id + "_field']").val();
-    //console.log(val);
-    console.log(the_id);
     // prevent the default action, e.g., following a link
 }); 
 
@@ -22,17 +19,13 @@ $("[name*='_label']").keyup(function() {
 	$(this).removeClass("linked_value");
 	var label = $(this).attr('name');
     var hidden = label.replace("_label", "");
-    $("[name='"+hidden+"']").val("");
-    	
+    $("[name='"+hidden+"']").val(""); 	
 }); 
  
  
 $("#people").click(function() {
      
     var field = $("[name='people_field']").val();
-    console.log(field);
-     
-     
     var button = $(this).attr('name');
     var label = button.replace("button", "label");
     var label_value = $("[name='"+label+"']").val();
@@ -96,21 +89,22 @@ $("#people").click(function() {
 // Changes Unit Sub-menu 
 $("[name='impacts_main']").change(function() { 
     var name = $("option[value='"+$(this).val()+"']").text();
-$("[name^='impacts'][class*='hide'][name!='impacts_main']").hide(); 
-$("[name='impacts_"+name+"']").show();
- 
-var the_value = $(this).val();
-var field = $("[name='impacts_field']").val();
-var the_label_field = field.replace("_button", "_label");
-var the_hidden_field = field.replace("_button" ,"");
-var the_label = $("[value='"+the_value+"']").text();
-$("[name='"+the_label_field+"']").val(the_label);
-$("[name='"+the_label_field+"']").addClass("linked_value");
-$("[name='"+the_hidden_field+"']").val(the_value);
+	$("[name^='impacts'][class*='hide'][name!='impacts_main']").hide(); 
+	$("[name='impacts_"+name+"']").show();
+	var the_value = $(this).val();
+	var field = $("[name='impacts_field']").val();
+	var the_label_field = field.replace("_button", "_label");
+	var the_hidden_field = field.replace("_button" ,"");
+	var the_label = $("[value='"+the_value+"']").text();
+	$("[name='"+the_label_field+"']").val(the_label);
+	$("[name='"+the_label_field+"']").addClass("linked_value");
+	$("[name='"+the_hidden_field+"']").val(the_value);
 });
  
-$("[name^='impacts'][name!='impacts_main']").change(function() {
-    var the_value = $(this).val();
+$('#impact_form').submit(function() {
+	var main = $("option[value='"+$("[name='impacts_main']").val()+"']").text();
+	catname = "impacts_"+main;
+	var the_value = $("[name='"+catname+"']").val();
     var field = $("[name='impacts_field']").val();
     field = field.replace("impactCategory","impactCategoryIndicator");
     var the_label_field = field.replace("_button", "_label");
@@ -119,18 +113,21 @@ $("[name^='impacts'][name!='impacts_main']").change(function() {
     $("[name='"+the_label_field+"']").val(the_label);
 	$("[name='"+the_label_field+"']").addClass("linked_value");
     $("[name='"+the_hidden_field+"']").val(the_value);
-    //alert(the_value);
+    $( "#impacts_dialog" ).dialog( "close" )
+  	return false;
 });
- 
  
 // Changes Unit Sub-menu 
 $("[name='unit_main']").change(function() { 
-$("[name^='unit'][class*='hide'][name!='unit_main']").hide(); 
-$("[name='unit_"+$(this).val()+"']").show();
+	$("[name^='unit'][class*='hide'][name!='unit_main']").hide(); 
+	$("[name='unit_"+$(this).val()+"']").show();
 });
  
-$("[name^='unit'][name!='unit_main']").change(function() {
-    var the_value = $(this).val();
+// Save the values and the links when submitting unit form
+$('#unit_form').submit(function() {
+  	var main = $("[name='unit_main']").val();
+	catname = "unit_"+main;
+	var the_value = $("[name='"+catname+"']").val();
     var field = $("[name='unit_field']").val();
     var the_label_field = field.replace("button", "label");
     var the_hidden_field = field.replace("_button" ,"");
@@ -138,9 +135,11 @@ $("[name^='unit'][name!='unit_main']").change(function() {
     $("[name='"+the_label_field+"']").val(the_label);
 	$("[name='"+the_label_field+"']").addClass("linked_value");
     $("[name='"+the_hidden_field+"']").val(the_value);
-    //alert(the_value);
-}); 
- 
+	$( "#unit_dialog" ).dialog( "close" )
+  	return false;
+});
+
+
 function addField(name, path) { 
     var array_path = "[" + path.replace(/-/g, "][") + "]";
     var to_copy = "#div_" + name;

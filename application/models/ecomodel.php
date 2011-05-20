@@ -12,7 +12,7 @@ class Ecomodel extends FT_Model{
        
     public function getImpactCategoryMenu() {
         $categories = $this->arc_getAllImpactCategories();
-        $menu_html = '<input name="impacts_field" type="hidden" />';
+        $menu_html = '<form id="impact_form"><input name="impacts_field" type="hidden" />';
         $menus = array();
         $menus['main'] = "";
         foreach ($categories as $category){
@@ -34,6 +34,7 @@ class Ecomodel extends FT_Model{
                 $menu_html .= '<br />';
             }
         }
+		$menu_html .= '<div style="width:360px"><input type="submit" class="button" id="unit_submit" value="save" style="margin-top:25px;width:80px;height:40px;font-size:16px;"/></div></form>';		
         return '<div class="dialog" id="impacts_dialog">' . $menu_html . '</div>';
          
     }

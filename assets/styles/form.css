@@ -159,6 +159,9 @@ text-transform:uppercase;
 #unit, #impacts, #people {
 	margin-left: 10px;
 }
+#form_category label, #form_category input{
+	width:400px;
+}
 #form_author label{
 	width:400px;
 }
@@ -191,18 +194,23 @@ text-transform:uppercase;
 }
 #form_impactCategory, #form_impactCategoryIndicator, #form_assessmentUnit {
 	float: left;
-	width: 490px;
+	width: 480px;
+	margin-bottom: 10px;
 }
 #form_assessmentQuantity, #form_assessmentQuantity label {
 	float: left;
 	width: 240px;
 }
 #form_impactCategory label, #form_impactCategoryIndicator label,  #form_assessmentUnit label {
-	width: 490px;
+	width: 460px;
 }
-#form_impactCategory input, #form_impactCategoryIndicator input, #form_assessmentQuantity input, #form_assessmentUnit input {
+#form_impactCategory input,  #form_assessmentQuantity input, #form_impactCategoryIndicator input, #form_assessmentUnit input {
 	width: 225px;
 }
+#form_impactCategoryIndicator > #impacts{
+	display:none;
+}
+
 #div_impact_assessment
 {
 	float:left;
