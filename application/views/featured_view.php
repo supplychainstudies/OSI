@@ -20,26 +20,33 @@
 					foreach ($set as $row) {
 						// Remove the footprinted part of the url
 						$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
-						switch ($row['categories'][0]['label']) {
-						    case 'chemical compound': $color = "blue"; break;
+						/*switch ($row['categories'][0]['label']) {
+						    case 'chemical compound': $color = "blu"; break;
 						    case 'building material': $color = "aoi";	break;
-						    case "type of food": $color = "brown"; break;
-							default: $color = "orange";
+						    case "type of food": $color = "azul"; break;
+							default: $color = "blue";
+						}*/
+						switch ($row['categories'][0]['label']) {
+						    case 'chemical compound': $color = "orange"; break;
+						    case 'building material': $color = "naranja";	break;
+						    case "type of food": $color = "laranja"; break;
+							default: $color = "saffron";
 						}
-						echo '<div class="medium '.$color.' square resource" id="'.$myString.'" co2="'. round($row['co2']).'" water="'. round($row['water']).'"><p>One kg of '.$row['quantitativeReference']['name'].'</p>';
+						
+						echo '<div class="medium '.$color.' square resource" id="'.$myString.'" co2="'. round($row['co2'],2).'" water="'. round($row['water']).'"><p>One kg of '.$row['quantitativeReference']['name'].'</p>';
 						echo '<div class="number"><h1><nrwhite>' . round($row['co2'],2).'</nrwhite></h1><p>kilogram CO<sub>2</sub></p></div>';
 						echo "<div class='plus'><p><a href='/lca/view/".$myString."'>+ More</a></p></div>";
 						echo "</div>";
 					}
 				?>
+	<div class="small grey square water"><p><a>See water footprint</a></p></div>
+	<div class="small grey square carbon"><p><a>See carbon footprint</a></p></div>
+	
 	<div class="small grey square"><p>456 Footprints available</p></div>
 	<div class="small grey square"><p><a href="/create/start">Create new data</a></p></div>
 	<div class="small grey square"><p><a href="http://twitter.com/footprinted">Food</a></p></div>
 	<div class="small grey square"><p><a href="http://twitter.com/footprinted">Construction materials</a></p></div>
 	<div class="small grey square"><p><a href="http://twitter.com/footprinted">Chemical compounds</a></p></div>
-	<div class="small grey square"><p><a href="http://twitter.com/footprinted">All</a></p></div>
-	<div class="small grey square water"><p><a>See water footprint</a></p></div>
-	<div class="small grey square carbon"><p><a>See carbon footprint</a></p></div>
 	</div>
 	<?=$footerDisplay;?>
 </div>

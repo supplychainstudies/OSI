@@ -30,7 +30,7 @@
 				
 			} 
 			}else{
-				 echo "<h1>You don't have any Footprint yet. <a href='create/start'>Create a new footprint entry!</a></h1>";
+				 echo "<h1>You don't have any Footprint yet. <a href='/create/start'>Create a new footprint entry!</a></h1>";
 			}
 			?>
 			<p></p>
@@ -47,8 +47,7 @@
 		</div>
 
 		<div id="columnright">
-			<div class="menuabout"><h2><a href="/users/edit">Edit your info</a></h2></div>
-			<div class="menuabout"><h2><a href="/create/start">Create new data</a></h2></div>
+			<div class="menuabout"><h2><a href="http://footprinted.org/create/start">Create new data</a></h2></div>
 			<div class="menuabout"><h2><a href="/users/logout">Logout</a></h2></div>
 			<div class="menuabout">
 				<p class='piccolo'>Share footprinted!</p>

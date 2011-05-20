@@ -52,11 +52,11 @@ h1#title {
 	
 }
 #menu {
-	padding-top: 60px;
+	padding-top: 20px;
 	float:right;
 	height:30px;
 	text-align:right;
-	padding-right: 15px;
+	padding-right: 35px;
 	width:350px;
 }
 .menu a {
@@ -467,8 +467,8 @@ amount {
 	text-align: center;	
 }
 .medium {
-	height: 190px;
-	width: 190px;
+	height: 140px;
+	width: 140px;
 	text-align: center;
 
 }
@@ -477,24 +477,21 @@ amount {
 	width: 410px;
 	text-align: center;
 }
-.blue {
-	background-color: #45A3D8;
-}
-.blue {
-	background-color: #45A3D8;
-}
-.orange{
-	background-color: #444;
-}
-.brown{
-	background-color: #666;
-}
-.aoi {
-	background-color: #A1979B;
-}
+/*http://www.colourlovers.com/palette/1583556/Bimini_Beach*/
+.blue {background-color: #45A3D8;}
+.azul{background-color: #3488B5;}
+.blu{background-color: #3278A7;}
+.aoi {background-color: #1C74A7;}
+/* http://www.colourlovers.com/palette/60647/The_Tibetan_Monk */
+.orange {background-color: #FC6B0A;}
+.naranja{background-color: #F8872E;}
+.laranja {background-color: #FFA927;}
+.saffron {background-color: #FDCA49;}
+
 .grey {
 	background-color: #333333;
 }
+
 .square {
 	float:left;
 	margin: 5px;
@@ -564,9 +561,14 @@ h1.bignr {
 	font-size: 30px;
 	margin-left: 10px;
 }
+.squaretext{
+	height:44px;
+	overflow:hidden;
+}
 nrwhite {
 	color: #fff;
-	font-size:62px;
+	font-size:40px;
+	height:43px;
 	font-family: 'Lato', arial, serif; 
 }
 #tabs h1 {
