@@ -104,6 +104,7 @@ class Unitmodel extends FT_Model{
             }
         }
 		unset($menus);
+		$menu_html .= '<div style="width:360px"><input type="submit" class="button" id="unit_submit" value="save" style="margin-top:25px;width:80px;height:40px;font-size:16px;"/></div>';		
         return '<div class="dialog" id="unit_dialog">' . $menu_html . '</div>';
 	}
 	
