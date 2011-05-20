@@ -131,7 +131,7 @@ text-transform:uppercase;
 	float:left;
 	margin-left:30px;
 	width: 470px;
-		margin-bottom:15px;
+	margin-bottom:15px;
 }
 #div_flow{
 	float:left;
@@ -141,7 +141,6 @@ text-transform:uppercase;
 	border-top: 1px solid #ccc;
 	width:980px;
 }
-
 
 #form_qrQuantity{
 	float:left;
@@ -199,7 +198,7 @@ text-transform:uppercase;
 }
 #form_assessmentQuantity, #form_assessmentQuantity label {
 	float: left;
-	width: 240px;
+	width: 400px;
 }
 #form_impactCategory label, #form_impactCategoryIndicator label,  #form_assessmentUnit label {
 	width: 460px;

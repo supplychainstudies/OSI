@@ -109,6 +109,8 @@ $('#impact_form').submit(function() {
     field = field.replace("impactCategory","impactCategoryIndicator");
     var the_label_field = field.replace("_button", "_label");
     var the_hidden_field = field.replace("_button" ,"");
+	alert(the_value);
+	alert(the_hidden_field);
     var the_label = $("[value='"+the_value+"']").text();
     $("[name='"+the_label_field+"']").val(the_label);
 	$("[name='"+the_label_field+"']").addClass("linked_value");
