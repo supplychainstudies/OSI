@@ -41,7 +41,7 @@ class Lca extends FT_Controller {
 	    */
 
 		if ($post_data = $_POST) {	
-			$model_node = toURI("lca", $post_data['name_']); 
+			$model_node = toURI("lca", $post_data['productServiceName_']); 
 			$exchange_node = $model_node;
 			$bibliography_node = toURI("bibliography", $post_data['title_']); 
 			$process_node = $model_node;
@@ -69,13 +69,16 @@ class Lca extends FT_Controller {
 					$post_data['firstName_'] = "";
 					$post_data['lastName_'] = $post_data['author_label_'];
 				}
-				if ($post_data['email_'] != "") {
-					$datasets['person'][] = array (
-							'firstName_' => $post_data['firstName_'],
-							'lastName_' => $post_data['lastName_'],
-							'email_' => $post_data['email_']
-						);	
+				$datasets['person'][] = array ();
+				if ($post_data["firstName_"] != "") {
+					$datasets['person'][0]["firstName_"] = $post_data["firstName_"];
 				}
+				if ($post_data["lastName_"] != "") {
+					$datasets['person'][0]["lastName_"] = $post_data["lastName_"];
+				}
+				if ($post_data["email_"] != "") {
+					$datasets['person'][0]["email_"] = $post_data["email_"];
+				}					
 			} 
 
 			$datasets['bibliography'] = array();		
@@ -92,13 +95,20 @@ class Lca extends FT_Controller {
 				$datasets['bibliography'][0]["author_"] = array($person_node);
 			}
 						
-			$datasets['process'][] = array (
-					'name_' => $post_data['name_'],
-					'description_' => $post_data['description_']	
-				);
-			$datasets['product'][] = array (
-					'name_' => $post_data['productServiceName_']
-				);
+			$datasets['process'] = array();
+			if ($post_data['productServiceName_'] != "") {
+				$datasets['process'][0]["name_"] = $post_data['productServiceName_'];
+			}
+			if ($post_data['description_'] != "") {
+				$datasets['process'][0]["description_"] = $post_data['description_'];
+			}
+			$datasets['product'] = array();
+			if ($post_data['productServiceName_'] != "") {
+				$datasets['product'][0]["name_"] = $post_data['productServiceName_'];
+			}
+			if ($post_data['category_'] != "") {
+				$datasets['product'][0]["category_"] = $post_data['category_'];
+			}
 			if ($post_data['qrUnit_'] == "") 
 				$post_data['qrUnit_'] = $post_data['qrUnit_label_'];
 			$datasets['exchange'][] = array (
@@ -122,7 +132,8 @@ class Lca extends FT_Controller {
 						);
 				}
 			}
-			foreach ($post_data['assessmentUnit_'] as $i=>$aunit) {
+			
+			foreach ($post_data['assessmentQuantity_'] as $i=>$aunit) {
 				if ($post_data['assessmentUnit_'][$i] == "") 
 					$post_data['assessmentUnit_'][$i] = $post_data['assessmentUnit_label_'][$i];
 				if ($post_data['impactCategory_'][$i] == "") 
@@ -154,7 +165,13 @@ class Lca extends FT_Controller {
 					'predicate' => 'eco:hasDataSource',
 					'object' => $bibliography_node
 				),
+				array(
+					'subject' => $model_node,
+					'predicate' => 'rdfs:type',
+					'object' => "eco:Model"
+				),
 			);	
+
 			foreach ($datasets as $key=>$dataset) {
 				if ($key != "submit_") {
 					foreach ($dataset as $i=>$datasetinstance) {
@@ -200,7 +217,8 @@ class Lca extends FT_Controller {
 				);
 			}
 			$this->lcamodel->addTriples($triples);
-			$this->view(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
+			redirect('/lca/view/'.str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
+			//$this->view(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 		}else {
 			$this->index();
 		}
@@ -285,7 +303,11 @@ class Lca extends FT_Controller {
 		// Turns exchanges into input and output array divided into categories 
 
 		foreach ($parts['exchanges'] as $exchange) {
-			$parts[$exchange['direction']][$exchange['unit']['quantityKind']][] = $exchange;
+			if (isset($exchange['unit']['quantityKind']) == true) {
+				$parts[$exchange['direction']][$exchange['unit']['quantityKind']][] = $exchange;				
+			} else {
+				$parts[$exchange['direction']]['misc'][] = $exchange;
+			}
 		}
 		/* Crunches the data to create the graphics and total calculations */
 		$totalinput = 0; 

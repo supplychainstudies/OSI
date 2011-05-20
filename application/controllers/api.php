@@ -14,7 +14,7 @@ class API extends FT_Controller {
 	public function API() {
 		parent::__construct();
 		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','opencycmodel'));		
-		$this->load->library(Array('form_extended', 'name_conversion','SimpleLoginSecure'));
+		$this->load->library(Array('form_extended','SimpleLoginSecure'));
 		$this->load->helper(Array('linkeddata_helper'));
 	}
 	public $URI;
