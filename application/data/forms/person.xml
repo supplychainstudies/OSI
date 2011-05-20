@@ -10,21 +10,21 @@
 			<label>First Name</label>
 			<type>text</type>
 		  	<linked_type>foaf:firstName</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</firstName>
 		<lastName rules="trim">
 			<label>Last Name</label>
 			<type>text</type>
 		  	<linked_type>foaf:lastName</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</lastName>
 		<email rules="trim|sha1">
 			<label>Email Address</label>
 			<type>text</type>
 		  	<linked_type>foaf:mbox_sha1sum</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</email>	
 	    <submit>

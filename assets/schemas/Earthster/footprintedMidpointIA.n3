@@ -1,0 +1,341 @@
+# Saved by TopBraid on Sun May 09 14:53:50 BST 2010
+# baseURI: http://ontology.earthster.org/eco/impact
+# imports: http://ontology.earthster.org/eco/core
+# imports: http://ontology.earthster.org/eco/ecoinvent
+
+@prefix :        <http://ontology.earthster.org/eco/impact#> .
+@prefix core:    <http://ontology.earthster.org/eco/core#> .
+@prefix ecoinvent:  <http://ontology.earthster.org/eco/ecoinvent#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ontology.earthster.org/eco/impact>
+      rdf:type owl:Ontology ;
+      owl:imports <http://ontology.earthster.org/eco/ecoinvent> , <http://ontology.earthster.org/eco/core> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:CD-CML2001-AbioticDepletion
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:comment "based on ultimate reserves and extraction rates"^^xsd:string ;
+      rdfs:label "abiotic resource depletion"^^xsd:string ;
+      core:hasImpactCategory
+              :abioticDepletion .
+
+:CD-CML2001-AbioticDepletion-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "abiotic resource depletion (based on economic reserves and extraction rates)"^^xsd:string ;
+      core:hasImpactCategory
+              :abioticDepletion .
+
+:CD-CML2001-AbioticDepletion-alt2
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "abiotic resource depletion (based on ultimate or economic reserves only)"^^xsd:string ;
+      core:hasImpactCategory
+              :abioticDepletion .
+
+:CD-CML2001-AbioticDepletion-alt3
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "abiotic resource depletion (based on exergy content)"^^xsd:string ;
+      core:hasImpactCategory
+              :abioticDepletion .
+
+:CD-CML2001-Acidification
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Acidification (average European acidity potential)"^^xsd:string ;
+      core:hasImpactCategory
+              :acidification .
+
+:CD-CML2001-Acidification-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Acidification (generic acidity potential)"^^xsd:string ;
+      core:hasImpactCategory
+              :acidification .
+
+:CD-CML2001-ClimateChange
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Global warming (GWP100)"^^xsd:string ;
+      core:hasImpactCategory
+              :climateChange .
+
+:CD-CML2001-ClimateChange-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Global warming (GWP20)"^^xsd:string ;
+      core:hasImpactCategory
+              :climateChange .
+
+:CD-CML2001-ClimateChange-alt2
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Global warming (GWP500)"^^xsd:string ;
+      core:hasImpactCategory
+              :climateChange .
+
+:CD-CML2001-ClimateChange-alt3
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Global warming (upper limit of net GWP)"^^xsd:string ;
+      core:hasImpactCategory
+              :climateChange .
+
+:CD-CML2001-ClimateChange-alt4
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Global warming (lower limit of net GWP)"^^xsd:string ;
+      core:hasImpactCategory
+              :climateChange .
+
+:CD-CML2001-Eutrophication
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Eutrophication (generic eutrophication potential)"^^xsd:string ;
+      core:hasImpactCategory
+              :eutrophication .
+
+:CD-CML2001-Eutrophication-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Eutrophication (average European eutrophication potential)"^^xsd:string ;
+      core:hasImpactCategory
+              :eutrophication .
+
+:CD-CML2001-FreshwaterAquaticEcotoxicity
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Freshwater aquatic ecotoxicity (FAETP[infinite, global])"^^xsd:string ;
+      core:hasImpactCategory
+              :freshWaterAquaticEcotoxicity .
+
+:CD-CML2001-FreshwaterAquaticEcotoxicity-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Freshwater aquatic ecotoxicity (FAETP[100, global])"^^xsd:string ;
+      core:hasImpactCategory
+              :freshWaterAquaticEcotoxicity .
+
+:CD-CML2001-FreshwaterAquaticEcotoxicity-alt2
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:comment "FAETP(20, global)"^^xsd:string ;
+      rdfs:label "Freshwater aquatic ecotoxicity (FAETP[20, global])"^^xsd:string ;
+      core:hasImpactCategory
+              :freshWaterAquaticEcotoxicity .
+
+:CD-CML2001-FreshwaterAquaticEcotoxicity-alt3
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Freshwater aquatic ecotoxicity (FAETP[500, global])"^^xsd:string ;
+      core:hasImpactCategory
+              :freshWaterAquaticEcotoxicity .
+
+:CD-CML2001-FreshwaterAquaticEcotoxicity-alt4
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Freshwater aquatic ecotoxicity (FAETP[infinite, continentall])"^^xsd:string ;
+      core:hasImpactCategory
+              :freshWaterAquaticEcotoxicity .
+
+:CD-CML2001-HumanToxicity
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Human toxicity (HTP[infinite,global])"^^xsd:string ;
+      core:hasImpactCategory
+              :humanToxicity .
+
+:CD-CML2001-HumanToxicity-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Human toxicity (HTP[20,global])"^^xsd:string ;
+      core:hasImpactCategory
+              :humanToxicity .
+
+:CD-CML2001-HumanToxicity-alt2
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Human toxicity (HTP[100,global])"^^xsd:string ;
+      core:hasImpactCategory
+              :humanToxicity .
+
+:CD-CML2001-HumanToxicity-alt3
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Human toxicity (HTP[500,global])"^^xsd:string ;
+      core:hasImpactCategory
+              :humanToxicity .
+
+:CD-CML2001-HumanToxicity-alt4
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Human toxicity (HTP[infinite,continental)"^^xsd:string ;
+      core:hasImpactCategory
+              :humanToxicity .
+
+:CD-CML2001-MarineAquaticEcotoxicity
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Marine aquatic ecotoxicity (MAETP[infinite,global])"^^xsd:string ;
+      core:hasImpactCategory
+              :marineAquaticEcotoxicity .
+
+:CD-CML2001-MarineAquaticEcotoxicity-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Marine aquatic ecotoxicity (MAETP[100,global])"^^xsd:string ;
+      core:hasImpactCategory
+              :marineAquaticEcotoxicity .
+
+:CD-CML2001-MarineAquaticEcotoxicity-alt2
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Marine aquatic ecotoxicity (MAETP[20,global])"^^xsd:string ;
+      core:hasImpactCategory
+              :marineAquaticEcotoxicity .
+
+:CD-CML2001-MarineAquaticEcotoxicity-alt3
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Marine aquatic ecotoxicity (MAETP[500,global])"^^xsd:string ;
+      core:hasImpactCategory
+              :marineAquaticEcotoxicity .
+
+:CD-CML2001-MarineAquaticEcotoxicity-alt4
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Marine aquatic ecotoxicity (MAETP[infinite,continental])"^^xsd:string ;
+      core:hasImpactCategory
+              :marineAquaticEcotoxicity .
+
+:CD-CML2001-OzoneLayerDepletion
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Ozone layer depletion (ODP[infinite])"^^xsd:string ;
+      core:hasImpactCategory
+              :ozoneLayerDepletion .
+
+:CD-CML2001-OzoneLayerDepletion-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Ozone layer depletion (ODP[5])"^^xsd:string ;
+      core:hasImpactCategory
+              :ozoneLayerDepletion .
+
+:CD-CML2001-OzoneLayerDepletion-alt2
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Ozone layer depletion (ODP[10])"^^xsd:string ;
+      core:hasImpactCategory
+              :ozoneLayerDepletion .
+
+:CD-CML2001-OzoneLayerDepletion-alt3
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Ozone layer depletion (ODP[15])"^^xsd:string ;
+      core:hasImpactCategory
+              :ozoneLayerDepletion .
+
+:CD-CML2001-OzoneLayerDepletion-alt4
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Ozone layer depletion (ODP[20])"^^xsd:string ;
+      core:hasImpactCategory
+              :ozoneLayerDepletion .
+
+:CD-CML2001-OzoneLayerDepletion-alt5
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Ozone layer depletion (ODP[25])"^^xsd:string ;
+      core:hasImpactCategory
+              :ozoneLayerDepletion .
+
+:CD-CML2001-OzoneLayerDepletion-alt6
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Ozone layer depletion (ODP[30])"^^xsd:string ;
+      core:hasImpactCategory
+              :ozoneLayerDepletion .
+
+:CD-CML2001-OzoneLayerDepletion-alt7
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Ozone layer depletion (ODP40])"^^xsd:string ;
+      core:hasImpactCategory
+              :ozoneLayerDepletion .
+
+:CD-CML2001-PhotoOxidantFomation
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Photochemical oxidation (high NOx POCP)"^^xsd:string ;
+      core:hasImpactCategory
+              :photoOxidantFormation .
+
+:CD-CML2001-PhotoOxidantFomation-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "CD-CML2001-Photochemical oxidation (MIR)"^^xsd:string ;
+      core:hasImpactCategory
+              :photoOxidantFormation .
+
+:CD-CML2001-PhotoOxidantFomation-alt2
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Photochemical oxidation (MOIR)"^^xsd:string ;
+      core:hasImpactCategory
+              :photoOxidantFormation .
+
+:CD-CML2001-PhotoOxidantFomation-alt3
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Photochemical oxidation (EBIR)"^^xsd:string ;
+      core:hasImpactCategory
+              :photoOxidantFormation .
+
+:CD-CML2001-PhotoOxidantFomation-alt4
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Photochemical oxidation (low NOx POCP)"^^xsd:string ;
+      core:hasImpactCategory
+              :photoOxidantFormation .
+
+:CD-CML2001-TerrestrialEcotoxicity
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Terestrial ecotoxicity (TAETP[infinite, global])"^^xsd:string ;
+      core:hasImpactCategory
+              :terrestrialEcotoxicity .
+
+:CD-CML2001-TerrestrialEcotoxicity-alt1
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Terestrial ecotoxicity (TAETP[100, global])"^^xsd:string ;
+      core:hasImpactCategory
+              :terrestrialEcotoxicity .
+
+:CD-CML2001-TerrestrialEcotoxicity-alt2
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Terestrial ecotoxicity (TAETP[20, global])"^^xsd:string ;
+      core:hasImpactCategory
+              :terrestrialEcotoxicity .
+
+:CD-CML2001-TerrestrialEcotoxicity-alt3
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Terestrial ecotoxicity (TAETP[500, global])"^^xsd:string ;
+      core:hasImpactCategory
+              :terrestrialEcotoxicity .
+
+:CD-CML2001-TerrestrialEcotoxicity-alt4
+      rdf:type core:ImpactAssessmentMethodCategoryDescription ;
+      rdfs:label "Terestrial ecotoxicity (TAETP[infinite,continental])"^^xsd:string ;
+      core:hasImpactCategory
+              :terrestrialEcotoxicity .
+
+:CML2001
+      rdf:type core:ImpactAssessmentMethod ;
+      rdfs:label "CML2001"^^xsd:string ;
+      core:hasImpactAssessmentMethodCategoryDescription
+              :CD-CML2001-FreshwaterAquaticEcotoxicity-alt4 , :CD-CML2001-FreshwaterAquaticEcotoxicity-alt2 , :CD-CML2001-PhotoOxidantFomation-alt3 , :CD-CML2001-MarineAquaticEcotoxicity-alt1 , :CD-CML2001-PhotoOxidantFomation-alt1 , :CD-CML2001-ClimateChange-alt1 , :CD-CML2001-OzoneLayerDepletion-alt4 , :CD-CML2001-PhotoOxidantFomation , :CD-CML2001-TerrestrialEcotoxicity-alt1 , :CD-CML2001-OzoneLayerDepletion-alt2 , :CD-CML2001-MarineAquaticEcotoxicity-alt4 , :CD-CML2001-MarineAquaticEcotoxicity-alt2 , :CD-CML2001-OzoneLayerDepletion-alt1 , :CD-CML2001-AbioticDepletion-alt3 , :CD-CML2001-Eutrophication-alt1 , :CD-CML2001-AbioticDepletion-alt2 , :CD-CML2001-FreshwaterAquaticEcotoxicity-alt3 , :CD-CML2001-TerrestrialEcotoxicity-alt4 , :CD-CML2001-FreshwaterAquaticEcotoxicity-alt1 , :CD-CML2001-PhotoOxidantFomation-alt2 , :CD-CML2001-HumanToxicity-alt1 , :CD-CML2001-Eutrophication , :CD-CML2001-Acidification-alt1 , :CD-CML2001-ClimateChange-alt4 , :CD-CML2001-OzoneLayerDepletion-alt7 , :CD-CML2001-MarineAquaticEcotoxicity , :CD-CML2001-HumanToxicity , :CD-CML2001-TerrestrialEcotoxicity , :CD-CML2001-AbioticDepletion-alt1 , :CD-CML2001-ClimateChange-alt3 , :CD-CML2001-TerrestrialEcotoxicity-alt2 , :CD-CML2001-OzoneLayerDepletion-alt6 , :CD-CML2001-TerrestrialEcotoxicity-alt3 , :CD-CML2001-OzoneLayerDepletion , :CD-CML2001-HumanToxicity-alt3 , :CD-CML2001-HumanToxicity-alt4 , :CD-CML2001-HumanToxicity-alt2 , :CD-CML2001-Acidification , :CD-CML2001-ClimateChange-alt2 , :CD-CML2001-OzoneLayerDepletion-alt5 , :CD-CML2001-AbioticDepletion , :CD-CML2001-OzoneLayerDepletion-alt3 , :CD-CML2001-MarineAquaticEcotoxicity-alt3 , :CD-CML2001-FreshwaterAquaticEcotoxicity , :CD-CML2001-PhotoOxidantFomation-alt4 , :CD-CML2001-ClimateChange .
+
+:abioticDepletion
+      rdf:type core:ImpactCategory ;
+      rdfs:label "abiotic depletion"^^xsd:string .
+
+:acidification
+      rdf:type core:ImpactCategory ;
+      rdfs:label "acidification potential"^^xsd:string .
+
+:climateChange
+      rdf:type core:ImpactCategory ;
+      rdfs:label "climate change"^^xsd:string .
+
+:eutrophication
+      rdf:type core:ImpactCategory ;
+      rdfs:label "eutrophication potential"^^xsd:string .
+
+:freshWaterAquaticEcotoxicity
+      rdf:type core:ImpactCategory ;
+      rdfs:label "freshwater aquatic ecotoxicity"^^xsd:string .
+
+:humanToxicity
+      rdf:type core:ImpactCategory ;
+      rdfs:label "human toxicity"^^xsd:string .
+
+:marineAquaticEcotoxicity
+      rdf:type core:ImpactCategory ;
+      rdfs:label "marine aquatic ecotoxicity"^^xsd:string .
+
+:ozoneLayerDepletion
+      rdf:type core:ImpactCategory ;
+      rdfs:label "ozone layer depletion (ODP)"^^xsd:string .
+
+:photoOxidantFormation
+      rdf:type core:ImpactCategory ;
+      rdfs:label "photo oxidant formation"^^xsd:string .
+
+:terrestrialEcotoxicity
+      rdf:type core:ImpactCategory ;
+      rdfs:label "terrestrial ecotoxicity"^^xsd:string .
