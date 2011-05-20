@@ -1,0 +1,37 @@
+<?php 
+/**
+ * Controller for environmental information structures
+ * 
+ * @version 0.8.0
+ * @author info@footprinted.org
+ * @package opensustainability
+ * @subpackage controllers
+ * @uses 
+ */
+
+
+
+class Bibliography extends FT_Controller {
+	public function Bibliography() {
+		parent::__construct();
+		$this->load->model(Array('bibliographymodel'));	
+		$this->load->library(Array('form_extended'));
+		$this->load->helper(Array('nameformat_helper'));
+	}
+
+	public function create() {
+		/*if (!isset($this->session->userdata('id'))) {
+			redirect('users');
+		}*/
+	    /***
+	    * @public
+	    * Generates a form, or, in the case where post data is passed, submits the data to the DB
+	    */        
+		    	$data = $this->form_extended->load('bibliography'); 
+	            $the_form = '<input name="people_field" type="hidden" /><div class="dialog" name="people_dialog" id="people_dialog"></div>'.$this->form_extended->build();
+	            $this->style(Array('style.css', 'form.css'));
+	            $this->script(Array('form.js'));
+	            $this->data("view_string", $the_form);
+	            $this->display("Form", "view");
+	    }
+	}
