@@ -94,9 +94,8 @@ class Lca extends FT_Controller {
 			$datasets['product'][] = array (
 					'name_' => $post_data['productServiceName_']
 				);
-			if ($post_data['qrunit_'] == "") 
-				$post_data['qrunit_'] = $post_data['qrunit_label_'];
-				if (strpos($post_data['author_label_']
+			if ($post_data['qrUnit_'] == "") 
+				$post_data['qrUnit_'] = $post_data['qrUnit_label_'];
 			$datasets['exchange'][] = array (
 					"direction_" => 'eco_Output',
 					"exchange_" => 'eco_Transfer',
@@ -105,16 +104,18 @@ class Lca extends FT_Controller {
 					"unit_" => $post_data['qrUnit_']
 				);
 			$change_p['exchange'][] = array('Exchange'=>'eco:hasReferenceExchange');
-			for ($i = 0; $i< count($post_data['io_']); $i++) {
-				if ($post_data['ioUnit_'][$i] == "") 
-					$post_data['ioUnit_'][$i] = $post_data['ioUnit_label_'][$i];
-				$datasets['exchange'][] = array (
-						"direction_" => $post_data['io_'][$i],
-						"exchange_" => $post_data['exchangeType_'][$i],
-						"transferable_" => $post_data['substanceName_'][$i],
-						"quantity_" => $post_data['ioQuantity_'][$i],
-						"unit_" => $post_data['ioUnit_'][$i]
-					);
+			if (isset($post_data['io_']) == true) {
+				for ($i = 0; $i< count($post_data['io_']); $i++) {
+					if ($post_data['ioUnit_'][$i] == "") 
+						$post_data['ioUnit_'][$i] = $post_data['ioUnit_label_'][$i];
+					$datasets['exchange'][] = array (
+							"direction_" => $post_data['io_'][$i],
+							"exchange_" => $post_data['exchangeType_'][$i],
+							"transferable_" => $post_data['substanceName_'][$i],
+							"quantity_" => $post_data['ioQuantity_'][$i],
+							"unit_" => $post_data['ioUnit_'][$i]
+						);
+				}
 			}
 			foreach ($post_data['assessmentUnit_'] as $i=>$aunit) {
 				if ($post_data['assessmentUnit_'][$i] == "") 

@@ -21,7 +21,7 @@
 			<label>Title</label>
 			<type>text</type>
 		  	<linked_type>dc:title</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</title>
 		<author rules="trim">
@@ -29,7 +29,7 @@
 			<type>popup</type>
 			<popup>people</popup>
 		  	<linked_type>dcterms:creator</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>yes</multiple>
 		</author>
 		<journal rules="trim">
@@ -37,7 +37,7 @@
 			<type>text</type>
 			<lookup>journal</lookup>
 		  	<linked_type>dc:isPartOf</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</journal>		
 		<date rules="trim">
@@ -45,42 +45,42 @@
 			<type>date</type>
 			<lookup>journal</lookup>
 		  	<linked_type>dc:date</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</date>
 		<volume rules="trim">
 			<label>Volume</label>
 			<type>text</type>
 		  	<linked_type>bibo:volume</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</volume>
 		<issue rules="trim">
 			<label>Issue</label>
 			<type>text</type>
 		  	<linked_type>bibo:issue</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</issue>
 		<pageStart rules="trim">
 			<label>Page Start</label>
 			<type>text</type>
 		  	<linked_type>bibo:pageStart</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</pageStart>
 		<pageEnd rules="trim">
 			<label>Page End</label>
 			<type>text</type>
 		  	<linked_type>bibo:pageEnd</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</pageEnd>
  		<uri rules="trim">
 			<label>Link to Source Material</label>
 			<type>text</type>
 		  	<linked_type>bibo:uri</linked_type>
-			<optional>no</optional>
+			<optional>yes</optional>
 			<multiple>no</multiple>
 		</uri>
 	    <submit rules="trim">

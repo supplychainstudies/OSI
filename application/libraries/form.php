@@ -399,6 +399,7 @@ class Form {
                     $row .= $def['type'] != 'submit' && $def['type'] != 'hidden' &&  $def['type'] != 'button'
                         ? "$tabs\t\t<label>$label</label>\n" : '';
 
+
                     // Handle non-input elements
                     switch ($def['type']) {
 					case 'recaptcha':
@@ -495,7 +496,9 @@ class Form {
                             }
                             elseif ($attr == 'checked') {
                                 continue;
-                            }
+                            } elseif ($attr == 'value' && $def['value'] == "") {
+								continue;
+							}
 
                             $attributes .= " $attr=\"$val\" ";
                         }

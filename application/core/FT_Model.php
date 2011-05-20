@@ -229,7 +229,7 @@ class FT_Model extends CI_Model{
 		$q = "select ?p ?o where { <".$uri."> ?p ?o . }";	
 		$records = $this->executeQuery($q);	
 		$records_next = array();
-		$records_all = array();
+		$records_all = $records;
 		foreach ($records as &$record) {
 				$record['s'] = $uri;				
 				if (strstr($record['o'], "_:") != false) {

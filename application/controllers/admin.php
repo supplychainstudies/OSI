@@ -122,6 +122,14 @@ class Admin extends FT_Controller {
 			
 		//}
 	}
+	
+	public function convertToNamedGraphs() {
+		$uris = $this->lcamodel->getRecords();
+		//foreach ($uris as $uri) {
+			$triples = $this->lcamodel->getArcTriples($uris[0]['uri']);
+		//}
+		var_dump($triples);
+	}
 
 	public function assignCategory($index = 1) {
 		// find URI of something that doesnt have a category or sameas
