@@ -125,7 +125,7 @@ class Lca extends FT_Controller {
 				if ($post_data['impactCategoryIndicator_'][$i] == "") 
 					$post_data['impactCategoryIndicator_'][$i] = $post_data['impactCategoryIndicator_label_'][$i];
 			}
-			$datasets['impactAssessment'][] = array (
+			$datasets['impactassessment'][] = array (
 					"impact_category_indicator_result_counter_0" => $post_data['impact_assessment_counter_0'],
 					"computedFrom_" => $model_node,
 					"impactCategory_" => $post_data['impactCategory_'],
