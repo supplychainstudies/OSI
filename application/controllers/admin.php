@@ -12,7 +12,7 @@
 class Admin extends FT_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','opencycmodel'));	
+		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','opencycmodel','testmodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper','linkeddata_helper'));
 		$obj =& get_instance();    
@@ -128,7 +128,18 @@ class Admin extends FT_Controller {
 		//foreach ($uris as $uri) {
 			$triples = $this->lcamodel->getArcTriples($uris[0]['uri']);
 		//}
+		foreach ($triples as &$triple) {
+			foreach ($triple as &$t) {
+				if ($t == $uris[0]['uri']) {
+					$t = "_:".str_replace("http://footprinted.org/rdfspace/lca/","", $t);
+				} 
+			}
+			
+		}
+		$graph_name = str_replace("http://footprinted.org/rdfspace/lca/","", $uris[0]['uri']).".rdf";
+		var_dump($graph_name);
 		var_dump($triples);
+		//$this->testmodel->addT($graph_name, $triples);
 	}
 
 	public function assignCategory($index = 1) {
