@@ -44,11 +44,11 @@ class Info extends FT_Controller {
 				$water = 0;
 				$ratio = $reference['amount'];
 					foreach ($impactAssessments as $impact) {
-					if($impact['impactCategoryIndicator'] == 'Carbon Dioxide Equivalent'){
+					if($impact['impactCategoryIndicator']['label'] == 'Carbon Dioxide Equivalent'){
 						$co2 = $impact['amount'] / $ratio;
-						if($impact['unit']=="qudtu:Gram"){ $co2 /= 1000; }
+						if($impact['unit']['label']=="qudtu:Gram"){ $co2 /= 1000; }
 					}
-					if($impact['impactCategoryIndicator'] == 'Water'){
+					if($impact['impactCategoryIndicator']['label'] == 'Water'){
 						$water = $impact['amount'] / $ratio;
 						if($impact['unit']=="qudtu:Gram"){ $water /= 1000; }
 					}
