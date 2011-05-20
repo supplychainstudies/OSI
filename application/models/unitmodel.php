@@ -82,7 +82,8 @@ class Unitmodel extends FT_Model{
 	
 	public function getUnitMenu() {
 		$units = $this->getUnits();
-        $menu_html = '<input name="unit_field" type="hidden" />';
+		$menu_html = '<form id="unit_form">';
+        $menu_html .= '<input name="unit_field" type="hidden" />';
         $menus = array();
         $menus['main'] = "";
         foreach ($units as $unit_category=>$unit_set){
@@ -104,7 +105,7 @@ class Unitmodel extends FT_Model{
             }
         }
 		unset($menus);
-		$menu_html .= '<div style="width:360px"><input type="submit" class="button" id="unit_submit" value="save" style="margin-top:25px;width:80px;height:40px;font-size:16px;"/></div>';		
+		$menu_html .= '<div style="width:360px"><input type="submit" class="button" id="unit_submit" value="save" style="margin-top:25px;width:80px;height:40px;font-size:16px;"/></div></form>';		
         return '<div class="dialog" id="unit_dialog">' . $menu_html . '</div>';
 	}
 	

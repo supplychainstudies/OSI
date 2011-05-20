@@ -4,20 +4,15 @@
         <value>true</value>
     </blank>  
   <fieldset name="Description">
-        <name rules="trim">
-            <label>Name</label>
-            <type>text</type>
-            <linked_type>rdfs:label</linked_type>
-        </name>   
+      <productServiceName rules="trim">
+          <label>Name of Product/Service</label>
+          <type>text</type>
+      </productServiceName>
         <description rules="trim">
             <label>Description</label>
             <type>textarea</type>
             <linked_type>rdfs:description</linked_type>
         </description>            
-        <productServiceName rules="trim">
-            <label>Product/Service</label>
-            <type>text</type>
-        </productServiceName>
         <qrQuantity rules="trim">
             <label>Quantity</label>
             <type>text</type>
@@ -26,7 +21,11 @@
             <label>Unit</label>
             <type>popup</type>
             <popup>unit</popup>
-        </qrUnit>         
+        </qrUnit> 
+        <category rules="trim">
+            <label>Category</label>
+            <type>dropdown</type>
+        </category>       
     </fieldset>
     <fieldset name="Publication"> 
         
