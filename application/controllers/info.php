@@ -37,34 +37,68 @@ class Info extends FT_Controller {
 		$set = array();
 
 		foreach ($featured->result() as $feature) {
-				$uri = "http://footprinted.org/rdfspace/lca/".$feature->uri;
-				$reference = $this->lcamodel->convertQR($this->lcamodel->getQR($uri));
-				$impactAssessments = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($uri));
-				$co2= 0;
-				$water = 0;
-				$ratio = $reference['amount'];
-					foreach ($impactAssessments as $impact) {
-					if($impact['impactCategoryIndicator']['label'] == 'Carbon Dioxide Equivalent'){
-						$co2 = $impact['amount'] / $ratio;
-						if($impact['unit']['label']=="qudtu:Gram"){ $co2 /= 1000; }
-					}
-					if($impact['impactCategoryIndicator']['label'] == 'Water'){
-						$water = $impact['amount'] / $ratio;
-						if($impact['unit']=="qudtu:Gram"){ $water /= 1000; }
+				$uri = $feature->uri;
+				$set[$uri]['uri'] = $uri;
+				$set[$uri]['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $uri));
+				$set[$uri]['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $uri));
+				$set[$uri]['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $uri));
+				$set[$uri]['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $uri));
+				$set[$uri]['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $uri));
+				$set[$uri]['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $uri));
+				$set[$uri]['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $uri);
+			 	foreach ($set[$uri] as $key=>$part) {
+					if ($parts[$key] === false || $parts[$key] == false || count($parts[$key]) == 0) {
+						unset($parts[$key]);
 					}
 				}
-	    		$set[$uri] = array (
-	               'uri' => $uri,
-				   'categories' => $this->lcamodel->getCategories($uri),
-	               'quantitativeReference' => $reference,
-				   'co2' => $co2,
-					'water' => $water
-				);
+
+				/* If the functional unit is mass, normalize to 1kg */
+				if (strpos("Kilogram", $set[$uri]['quantitativeReference']['unit']['label']) !== false) {
+					$ratio = $set[$uri]['quantitativeReference']['amount'];
+					$set[$uri]['quantitativeReference']['amount'] = 1;
+					foreach ($set[$uri]['impactAssessments'] as &$impactAssessment) {
+						$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+					}
+				}
+				// If grams
+				if (strpos("Gram", $set[$uri]['quantitativeReference']['unit']['label']) !== false) {
+					$ratio = $set[$uri]['quantitativeReference']['amount'] / 1000;
+					// Remember to complete afterwards
+					$set[$uri]['quantitativeReference']['unit']['label'] = "Kilogram";
+					$set[$uri]['quantitativeReference']['amount'] = 1;
+					foreach ($set[$uri]['impactAssessments'] as &$impactAssessment) {
+						$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+						if (strpos("Gram", $impactAssessment['unit']['label']) !== false) { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
+					}
+				}
+				// If ounces
+				if ($set[$uri]['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Ounce" ) {
+					$ratio = $set[$uri]['quantitativeReference']['amount'] / 0.028345;
+					// Remember to complete afterwards
+					$set[$uri]['quantitativeReference']['unit']['label'] = "Kilogram";
+					$set[$uri]['quantitativeReference']['amount'] = 1;
+					foreach ($set[$uri]['impactAssessments'] as &$impactAssessment) {
+						$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+						if ($impactAssessment['unit']['label'] == "Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
+					}
+				}
+				// If pounds
+				if ($set[$uri]['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Pound" ) {
+					$ratio = $parts['quantitativeReference']['amount'] / 0.45359237;
+					// Remember to complete afterwards
+					$set[$uri]['quantitativeReference']['unit']['label'] = "Kilogram";
+					$set[$uri]['quantitativeReference']['amount'] = 1;
+					foreach ($set[$uri]['impactAssessments'] as &$impactAssessment) {
+						$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+						if ($impactAssessment['unit']['label'] == "Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
+					}
+				}
+				
 	    }		
 		// Send data to the view
 		$this->data("set", $set);
 		//$this->data("twitter", $twitter);
-		$this->display("Browse","featured_view");		
+		$this->display("Browse","homapage_view");		
 	}
 	
 	/***

@@ -4,7 +4,7 @@
 <div id="menu">
 	<p class="menu">
 	<a href="/about">About </a>| 
-	<a href="/search/category/">Browse </a>| 
+	<a href="/">Browse </a>| 
 <?
 if ($this->session->userdata('id') == false) {
 	echo "<a id='opendialog'>Login </a>" ;

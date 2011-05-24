@@ -268,6 +268,126 @@ h1.top {
 }
 
 
+#lca_title_lite{
+	float:left;
+	text-align: left;
+	width:980px;
+	margin-top:10px;
+}
+#lca_lite{
+	float:left;
+	text-align: left;
+	width:980px;
+	height:200px;
+	background-color: #666;
+	margin-top:10px;
+	margin-bottom:20px;
+}
+#maplite {
+	float:right;
+	height:200px;
+	width:200px;
+	top:0px;
+	background-color: #333;
+}
+#lca_title_lite h1{
+	font-size:24px;
+	color:#333;
+	font-family: 'PT Sans Narrow', arial, serif;
+}
+#lca_title_lite h1	 a{
+	color:#000;
+	border-bottom: 1px dotted #45A3D8;
+}
+#maplite p{
+	margin-left:10px;color:#eee;
+}
+#lca_impact_lite{
+	float:left;
+	height:200px;
+}
+#lca_flows_lite{
+	float:right;
+	width:200px;
+	height:200px;
+}
+#lca_flows_lite p{
+	padding-left:10px;
+	text-align:center;
+	font-size: 12px;
+	color:#333;
+}
+.ref_lite{
+	float:right;
+	width:180px;
+	height:37px;
+	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+	margin-top:10px;
+	margin-right:10px;
+	text-align:center;
+	color:#fff;
+}
+.ref_lite p{
+	font-size:13px;
+	color:#333;
+	font-family: 'PT Sans Narrow', arial, serif;
+}
+
+#tabs{
+	text-align:center;
+}
+.tab_impact{
+	position:relative;
+	float:left;
+	height: 200px;
+	width:120px;
+	text-align:left;
+	margin-right: 15px;
+}
+.tab_circle {
+	position:relative;
+	width:120px;
+	height:50px;
+	left:0px;
+	top: 0px;
+	text-align:center;	
+}
+.tab_nr {
+	position:absolute;
+	top:125px;
+	height: 40px;
+	width: 120px;
+	text-align:center;
+}
+.squaretext{
+	height:44px;
+	overflow:hidden;
+}
+sub {
+	font-size:10px;
+}
+nrwhite {
+	color: #fff;
+	font-size:32px;
+	font-family: 'Lato', arial, serif; 
+}
+#tabs p {
+	color: #fff;
+	font-size:14px;
+}
+#tabs p a {
+	color: #fff;
+	font-size:14px;
+	text-decoration:none;
+}
+.tab_meta {
+	position:absolute;
+	top:100px;
+	height: 40px;
+	width: 120px;
+	text-align:center;
+}
+
 /* Style for comments */
 #comment_form label {
 float: left;
@@ -536,56 +656,7 @@ h1.bignr {
 	bottom: 0px;
 }
 
-#tabs{
-	text-align:center;
-}
-.tabinside{
-	height: 80px;
-	text-align:left;
-	margin-top: 20px;
-}
-.tab_circle {
-	float: left;
-	height:50px;
-	width:180px;
-	left:0px;
-	bottom: 10px;
-	text-align:center;
-	margin-left: 10px;	
-}
-.tab_nr {
-	float: left;
-	height: 45px;
-	width: 180px;
-	text-align:center;
-	font-size: 30px;
-	margin-left: 10px;
-}
-.squaretext{
-	height:44px;
-	overflow:hidden;
-}
-nrwhite {
-	color: #fff;
-	font-size:40px;
-	height:43px;
-	font-family: 'Lato', arial, serif; 
-}
-#tabs h1 {
-	color: #fff;
-	font-size:14px;
-}
-#tabs h1 a {
-	color: #fff;
-	font-size:14px;
-	text-decoration:none;
-}
-.tab_meta {
-	float:left;
-	height: 30px;
-	width: 180px;
-	text-align:center;
-}
+
 /* Divs for bar graphs in View LCA */
 .bar_background {
 	width:400px; height:20px; background-color:#CCC;

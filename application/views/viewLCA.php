@@ -18,7 +18,7 @@
 	<div id="lca_header">
 		<div id="lca_title"><h1><?=$parts['quantitativeReference']['name'] ?></h1></div>
 		<? /*<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
-		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["l"] ?></nr></h1></div>	
+		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["label"] ?></nr></h1></div>	
 	</div>
 	<div id="lca_background">	
 		<div id="lca_impact" class="lca">
@@ -27,18 +27,20 @@
 			if (isset($parts['impactAssessments']) == true) {
 			 foreach ($parts['impactAssessments'] as $impactAssessment) {
 				// Change color of the circle depending on the impact category	
-				switch ($impactAssessment['impactCategoryIndicator']) {
-				    case 'Waste': $color = "#666"; $max = 10; break;
-				    case 'Carbon Dioxide Equivalent': $color = "#333";	$max = 10; break;
-				    case "Energy": $color = "#227CAF"; $max = 500;	break;
-					case "Water":$color = "#45A3D8"; $max = 10; break;
-					default: $color = "#45A3D8"; $max = 50;
+				switch ($impactAssessment['impactCategoryIndicator']['label']) {
+				    case 'Waste': $color = "#6B5344"; $max = 2000; $impacttext = "Waste";break;
+				    case 'Carbon Dioxide Equivalent': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub> (eq)";break;
+					case 'Carbon Dioxide': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub>";break;
+				    case "Energy": $color = "#E8BF56"; $max = 20; $impacttext = "Energy";	break;
+					case "Water":$color = "#45A3D8"; $max = 2000; $impacttext = "Water"; break;
+					default: $color = "#45A3D8"; $max = 2000; $impacttext = $impactAssessment['impactCategoryIndicator']['label'];
 				}
 				// Change the size depending on the relative max
-				$size = 2* round(50*$impactAssessment['amount']/$max);
-				if ($size > 80) { $size = 80; }
-				$margin = (100-$size)/2;
-				$margintop = (100-$size)/6;
+				$size = round(sqrt($max*$impactAssessment['amount']/pi()));
+				if ($size > 82) { $size = 82;}
+				if ($size < 20) { $size = 20;}
+				$margin = (120-$size)/2;
+				$margintop = (120-$size)/7;
 				// Create a circle
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
