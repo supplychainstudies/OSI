@@ -42,15 +42,22 @@ class API extends FT_Controller {
 		
 		if (isset($search_terms['product']) == true) {
 			$value = $search_terms['product'];
-		}		
+		}	
+		if (isset($search_terms['encode']) == true) {
+			$encode = $search_terms['encode'];
+		}	
 		$results = $this->lcamodel->simpleSearch($value, $limit, $offset);
 		foreach ($results as $result) {
-			$rs[$result['uri']] = array (
+			$impacts = array (
 				'uri' => $result['uri'],
 				'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($result['uri'])),
 				'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($result['uri']))
 				);
+			//Normalize the results to 1 kg
+			$rs[$result['uri']] = $this->normalize($impacts);
+			
 		}
+
 		if ($encode == 'json') {
 			header('Content-type: application/json');
 			echo json_encode($rs);
@@ -62,7 +69,7 @@ class API extends FT_Controller {
 			echo $this->assocArrayToXML("results",$rs);
 		} else if ($encode == 'html') {
 			header('Content-type: text/html');
-			echo $rs;			
+			var_dump($rs);			
 		}
 		
 	}
@@ -84,7 +91,9 @@ class API extends FT_Controller {
 		if (isset($search_terms['offset']) == true) {
 			$offset = $search_terms['offset'];
 		}
-		
+		if (isset($search_terms['encode']) == true) {
+			$encode = $search_terms['encode'];
+		}
 		if (isset($search_terms['category']) == true) {
 			$value = array($search_terms['category']);
 			$opencyc = $this->opencycmodel->getSuggestedPages($value);
@@ -107,11 +116,12 @@ class API extends FT_Controller {
 				}
 				$tst = $limit+$offset;
 				if ($count >= $offset && $count < $limit+$offset) {
-				$rs[$result['uri']] = array (
+				$impacts = array (
 					'uri' => $result['uri'],
 					'impactAssessments' => $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($result['uri'])),
 					'quantitativeReference' => $this->lcamodel->convertQR($this->lcamodel->getQR($result['uri']))
 					);
+				$rs[$result['uri']] = $this->normalize($impacts);	
 				}
 				$count++;
 			}
@@ -160,7 +170,55 @@ class API extends FT_Controller {
 	    return $xml->asXML();
 	}
 	
-
-	
+	private function normalize($parts)
+	{
+		/* If the functional unit is mass, normalize to 1kg */
+		
+		if (strpos("Kilogram", $parts['quantitativeReference']['unit']['label']) !== false) {
+			$ratio = $parts['quantitativeReference']['amount'];
+			$parts['quantitativeReference']['amount'] = 1;
+			foreach ($parts['impactAssessments'] as &$impactAssessment) {
+				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+			}
+		}
+		
+		if (strpos("Gram", $parts['quantitativeReference']['unit']['label']) !== false) {
+			$ratio = $parts['quantitativeReference']['amount'] / 1000;
+			// Remember to complete afterwards
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+			$parts['quantitativeReference']['amount'] = 1;
+			foreach ($parts['impactAssessments'] as &$impactAssessment) {
+				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+				if (strpos("Gram", $impactAssessment['unit']['label']) !== false) { 
+					$impactAssessment['amount']/=1000; 
+					$impactAssessment['unit']['label'] = "Kilogram"; 
+					}
+			}
+		}
+		
+		// If ounces
+		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Ounce" ) {
+			$ratio = $parts['quantitativeReference']['amount'] / 0.028345;
+			// Remember to complete afterwards
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+			$parts['quantitativeReference']['amount'] = 1;
+			foreach ($parts['impactAssessments'] as &$impactAssessment) {
+				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+				if ($impactAssessment['unit']['label'] == "Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
+			}
+		}
+		
+		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Pound" ) {
+			$ratio = $parts['quantitativeReference']['amount'] / 0.45359237;
+			// Remember to complete afterwards
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+			$parts['quantitativeReference']['amount'] = 1;
+			foreach ($parts['impactAssessments'] as &$impactAssessment) {
+				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+				if ($impactAssessment['unit']['label'] == "Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
+			}
+		}
+		return $parts;
+	}
 		
 }

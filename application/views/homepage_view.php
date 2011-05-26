@@ -2,7 +2,7 @@
 <?=$metaDisplay;?>
 <html>
 <head>
-	<title>Footprinted.org</title>
+<title>Footprinted: Free and open LCA environmental data.</title>
 	
 	<?=$styles;?>
 	<?=$headerDisplay;?>
@@ -96,7 +96,7 @@
 								<? if (isset($parts['geography']) == true ) {
 									echo '<div id="maplite">';		
 									foreach ($parts['geography'] as $geo) {
-											$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x160&center=".$geo['lat'].','.$geo['long']."&zoom=2&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
+												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x160&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:mid%7Ccolor:blue%7C".$geo['lat'].','.$geo['long'].'"';
 												echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
 												echo '<div id="infomap"><p>From: <b>'.$geo['name'].'</b></p></div>';
 									}
