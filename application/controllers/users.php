@@ -165,8 +165,8 @@ class Users extends FT_Controller {
 		}
 		$this->data("pass_data", $pass_data);
 		$this->form_extended->load('register'); 
-		$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Ffootprinted.org%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
-		$the_form .= $this->form_extended->build();
+		//$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Ffootprinted.org%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
+		$the_form = $this->form_extended->build();
 		$this->script(Array('form.js','register.js','janrain.js'));
 		$this->style(Array('style.css','form.css'));
 		$this->data("form_string", $the_form);
@@ -177,6 +177,9 @@ class Users extends FT_Controller {
 		// Note: Most validation had already been done using jquery
 		// Step 1: Check recaptcha
 		if ($this->form_validation->run()) {
+			console.log($_POST['registration_code_']);
+			// Check for registration code (beta)
+			if ($_POST['registration_code_'] == "ISIE" ) {
 			// Recaptcha is fine!
 			$this->CI =& get_instance();
 			// Step 1: Write the user name, email, password to db
@@ -222,7 +225,9 @@ class Users extends FT_Controller {
 		
 			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
 			    redirect('/users/dashboard/');
-			}		
+			}
+			
+			}			
 		} else {
 		// Recaptcha isn't fine, reload page
 			echo "oops";

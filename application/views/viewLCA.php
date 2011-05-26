@@ -39,8 +39,8 @@
 				$size = round(sqrt($max*$impactAssessment['amount']/pi()));
 				if ($size > 82) { $size = 82;}
 				if ($size < 20) { $size = 20;}
-				$margin = (120-$size)/2;
-				$margintop = (120-$size)/7;
+				$margin = (100-$size)/2;
+				$margintop = (100-$size)/8;
 				// Create a circle
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';

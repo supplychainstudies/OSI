@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<form action="users/registered" name="register">
-<fieldset name="Register for OSI">
+<form action="users/registered" name="">
+<fieldset name="Register at Footprint.org">
+	<registratrion_code rules="trim|xss_clean|required">
+	  <label>Registration code</label>
+      <type>text</type>
+		<note>Footprinted is in closed beta version. If you want to test the site please send as an email.</note>
+    </registratrion_code>
     <user_name rules="trim|xss_clean|required">
 	  <label>User Name</label>
       <type>text</type>
@@ -16,13 +21,11 @@
     <openid rules="trim|xss_clean">
       <type>text</type>
 	<label>Friend of a friend URI</label>
-	<multiple>yes</multiple>
     </openid>
     <foaf rules="trim|xss_clean">
 	  <label>Friend of a friend URI</label>
 	<note>A friend of a friend file is a semantic document that has your biographical information and relationships. Include the URI of yours here.</note>
       <type>text</type>
-	  <multiple>yes</multiple>
     </foaf>
 	<recaptcha>
 	  <label>Recaptcha</label>
