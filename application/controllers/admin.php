@@ -12,7 +12,7 @@
 class Admin extends FT_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','opencycmodel','testmodel'));	
+		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','opencycmodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper','linkeddata_helper'));
 		$obj =& get_instance();    
@@ -142,6 +142,7 @@ class Admin extends FT_Controller {
 		//$this->testmodel->addT($graph_name, $triples);
 	}
 
+
 	public function assignCategory($index = 1) {
 		// find URI of something that doesnt have a category or sameas
 		$uris = $this->lcamodel->getRecords();
@@ -149,9 +150,9 @@ class Admin extends FT_Controller {
 			'uri'=> $uris[$index]['uri'],
 			'label'=>$uris[$index]['label']
 		);
-		//$sameAs = $this->lcamodel->getSameAs($uris[$index]['uri']);
+		$sameAs = $this->lcamodel->getSameAs($uris[$index]['uri']);
 		$categories = $this->lcamodel->getCategories($uris[$index]['uri']);
-		//$sameAsSuggestions = $this->lcamodel->getOpenCycSuggestions($uris[$index]['uri']);
+		$sameAsSuggestions = $this->lcamodel->getOpenCycSuggestions($uris[$index]['uri']);
 		$categorySuggestions = array(
 			array(
 				"uri" => "Mx4rvUCoPtoTQdaZVdw2OtjsAg",
@@ -213,6 +214,29 @@ class Admin extends FT_Controller {
 		$this->data("set", $set);
 		$this->display("Featured","adminFeatured_view");
 	}
+	
+	public function adminCategoriesBatch(){
+		// Querying the database for all records		
+		$records = $this->lcamodel->getRecords();
+		// Initializing array
+		$set = array();
+		// Add tooltips
+		$this->tooltips = array();
+
+		// Filling the arry with the records
+		foreach ($records as $key => $record) {	
+			// Go through each field
+			foreach ($record as $_key => $field) {
+				// if its a uri, get the label and store that instead 
+				// rewrite this into a better function later
+					$set[$key][$_key] = $field;
+			}
+		}
+		// Send data to the view
+		$this->data("set", $set);
+		$this->display("Featured","adminCategories_view");
+	}
+	
 	public function addAsFeatured(){
 		parse_str($_SERVER['QUERY_STRING'],$_GET); 
 		$URI = $_GET["URI"];

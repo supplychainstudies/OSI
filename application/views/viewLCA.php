@@ -178,6 +178,7 @@
 			<h2>Linked Data</h2>
 			<?
 				if (isset($parts['sameAs']) == true) {
+					var_dump($parts['sameAs']);
 					foreach ($parts['sameAs'] as $record) {
 					
 						if (isset($record['dbpedia']) == true) {

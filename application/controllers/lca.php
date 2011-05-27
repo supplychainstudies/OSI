@@ -703,6 +703,12 @@ class Lca extends FT_Controller {
 			$this->lcamodel->addSameAs($ids['ft_id'],$ids['opencyc_id']);
 			
 		}
+		public function addDbpedia() {
+			parse_str($_SERVER['QUERY_STRING'],$_GET); 
+			$ids = $_GET;
+			$this->lcamodel->addDbpedia($ids['ft_id'],$ids['db_id']);
+			
+		}
 		
 		public function addCategory() {
 			parse_str($_SERVER['QUERY_STRING'],$_GET); 

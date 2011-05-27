@@ -1,5 +1,13 @@
 <div id="header">
-	<p class="imge"><a href="/"><img src="<?=base_url()?>assets/images/footprinted.png" alt="footprinted"></a></p>
+	<?
+	if ($this->session->userdata('id') == false) {
+		echo '<p class="imge"><a href="/"><img src="/assets/images/footprinted.png" alt="footprinted"></a></p>' ;
+	} else {
+		echo '<p class="imge"><a href="/lca/featured"><img src="/assets/images/footprinted.png" alt="footprinted"></a></p>';
+	}
+
+	?>
+	
 </div>
 <div id="menu">
 	<p class="menu">
@@ -27,8 +35,7 @@ if ($this->session->userdata('id') == false) {
 						<div id="loginsubmit"><input type="submit" value="Login" /></div>				
 		</form>
 	</div>
-	<div id="openid"><p> <a class="rpxnow" onclick="return false;"
-	href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Fosi%2Fusers%2F">Use an Open ID login or Register</a>
+	<div id="openid"><p> <a href="/users/register">Register</a>
 	</p></div>
 </div>
 

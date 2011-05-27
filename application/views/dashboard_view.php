@@ -30,7 +30,7 @@
 				
 			} 
 			}else{
-				 echo "<p>You don't have any Footprint yet. <a href='/create/start'>Create a new footprint entry!</a></p>";
+				 echo "<p>You don't have any Footprint yet. <a href='/create/start'>Create a new footprint entry</a></p>";
 			}
 			?>
 

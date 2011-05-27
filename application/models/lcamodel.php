@@ -378,6 +378,29 @@ class Lcamodel extends FT_Model{
 	   //$this->addTriples($triples);
    }
 
+
+   public function addDbpedia($ft,$oc) {
+		$triples = array();
+       $q = "select ?bnode where { " . 
+           " <http://footprinted.org/rdfspace/lca/".$ft."> eco:models ?bnode . " .            
+           " ?bnode rdfs:type  eco:Product . " .
+           "}";              
+       $records = $this->executeQuery($q);
+/*
+       $triples[] = array(
+           's' => $records[0]['bnode'],
+           'p' => 'owl:sameAs',
+           'o' => 'http://sw.opencyc.org/concept/' . $oc
+       ); 
+*/
+		$q = "insert into <http://footprinted.org/> { " . 
+		"<".$records[0]['bnode']."> owl:sameAs <". $oc.">" . 
+		"}";
+		$this->executeQuery($q);
+	   //$this->addTriples($triples);
+   }
+
+
    public function addCategory($ft,$oc) {
 		$triples = array();
        $q = "select ?bnode where { " . 
