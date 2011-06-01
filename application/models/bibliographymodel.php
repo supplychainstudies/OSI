@@ -2,6 +2,8 @@
 class Bibliographymodel extends FT_Model{
     function Bibliographymodel(){
         parent::__construct();
+		$this->load->model(Array('peoplemodel'));
+$this->arc_config['store_name'] = "lca";
     }
 
 	public function convertBibliography($dataset){
@@ -17,12 +19,10 @@ class Bibliographymodel extends FT_Model{
 			if (isset($record[$this->arc_config['ns']['bibo']."authorList"]) == true) {
 				$person_array = array();
 				foreach($record[$this->arc_config['ns']['bibo']."authorList"] as $author_uri) {
-					$person = $this->getTriples($author_uri);
-					foreach ($person[$this->arc_config['ns']['foaf'].'firstName'] as $firstName) {
-						$person_array['firstName'] = $firstName;
-					} 
-					foreach ($person[$this->arc_config['ns']['foaf'].'lastName'] as $lastName) {
-						$person_array['lastName'] = $lastName;
+					$person = $this->peoplemodel->searchPeople(array('uri'=>$author_uri));
+					if (count($person) > 0) {
+						$person_array['firstName'] = $person[0]['firstName'];
+						$person_array['lastName'] = $person[0]['lastName'];
 					}
 					$converted_dataset[$key]['authors'][] = $person_array;						
 				}
@@ -67,16 +67,60 @@ class Bibliographymodel extends FT_Model{
 	}
 		
 	public function getBibliography($URI) {
-		$q = "select ?bibouri where { " . 
-			" <".$URI."> eco:hasDataSource ?bibouri . " .			
+		$q = "select ?bibouri from <".$URI."> where { " . 
+			" ?s eco:hasDataSource ?bibouri . " .			
 			"}";				
 		$records = $this->executeQuery($q);
 		$full_record = array();		
-		foreach ($records as $record) {
+		foreach ($records as $record) {	
 			$link = array('link' => $record['bibouri']);
-			$full_record[$record['bibouri']] = array_merge($link, $this->getTriples($record['bibouri']));			
+			$full_record[$record['bibouri']] = array_merge($link, $this->getTriples($record['bibouri'],$record['bibouri']));			
 		}
 		return $full_record;
+	}
+
+	public function getAll() {
+		$q = "SELECT DISTINCT ?uri WHERE {GRAPH ?uri {?s rdfs:type bibo:Document . }}";				
+		$records = $this->executeQuery($q);
+		foreach ($records as $record) {
+			$q = "select * from <".$record['uri']."> where { " . 
+				" ?s ?p ?o . " .			
+				"}";			
+			$r = $this->executeQuery($q);
+			var_dump($r);
+		}
+		var_dump($records);
+	}
+	public function getAllBibliographies() {
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type bibo:Document . " .			
+			"}";				
+		$records = $this->executeQuery($q);
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type bibo:Journal . " .			
+			"}";				
+		$records = array_merge($records,$this->executeQuery($q));		
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type bibo:Conference . " .			
+			"}";				
+		$records = array_merge($records,$this->executeQuery($q));
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type bibo:Book . " .			
+			"}";				
+		$records = array_merge($records,$this->executeQuery($q));
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type bibo:Website . " .			
+			"}";				
+		$records = array_merge($records,$this->executeQuery($q));
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type bibo:Organization . " .			
+			"}";				
+		$records = array_merge($records,$this->executeQuery($q));
+		$q = "select ?uri where { " . 
+			" ?uri rdfs:type bibo:Webpage . " .			
+			"}";				
+		$records = array_merge($records,$this->executeQuery($q));
+		return $records;
 	}
 
 } // End Class

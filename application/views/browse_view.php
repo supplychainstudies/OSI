@@ -21,7 +21,7 @@
 				<?
 					foreach ($set as $row) {
 						// Remove the footprinted part of the url
-						$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
+						$myString = str_replace (".rdf", "", $row['uri']);
 						echo '<div class="small blue square" id="'.$myString.'"><p>'.$row['label'].'<p/></div>';
 					}
 				?>

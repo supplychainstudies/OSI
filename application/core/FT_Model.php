@@ -134,10 +134,9 @@ class FT_Model extends CI_Model{
 	}
 
 	public function getURIbyLabel($string) {
-		
        $q = "select ?uri ?label where { " .
            "?uri rdf:label ?label . " .
-           "FILTER regex(?label, '".$string."?', 'i' )" .              
+           "FILTER regex(?label, '".$string."', 'i' )" .              
            "}";
        $results = $this->executeQuery($q);
 		if (count($results) > 0) {
@@ -145,7 +144,7 @@ class FT_Model extends CI_Model{
 		} else {
 	       $q = "select ?uri ?label where { " .
 	           "?uri rdfs:label ?label . " .
-	           "FILTER regex(?label, '".$string."?', 'i' )" .              
+	           "FILTER regex(?label, '".$string."', 'i' )" .              
 	           "}";
 	       $results = $this->executeQuery($q);
 			if (count($results) > 0) {
@@ -289,15 +288,18 @@ class FT_Model extends CI_Model{
 	 * @return $triples Array
 	 * @param $uri string		
 	 */	
-	public function getTriples($uri) {
-		$q = "select ?predicate ?object where { <".$uri."> ?predicate ?object . }";	
+	public function getTriples($uri, $graph = null) {
+		if ($graph == null) {
+			$q = "select ?predicate ?object from <".$graph."> where { <".$uri."> ?predicate ?object . }"; }
+		else {
+			$q = "select ?predicate ?object where { <".$uri."> ?predicate ?object . }";	}
 		$records = $this->executeQuery($q);	
 		$xarray = array();
 		$records_next = array();
 		$records_all = array();
 		foreach ($records as $record) { 			
 			if (strstr($record['object'], "_:") != false) {
-				$xarray[$record['predicate']][$record['object']] = $this->getTriples($record['object']);		
+				$xarray[$record['predicate']][$record['object']] = $this->getTriples($record['object'], $graph);		
 			} else {
 					$xarray[$record['predicate']][] = $record['object'];
 			}								
@@ -329,12 +331,12 @@ class FT_Model extends CI_Model{
 		return $bnode;
 	}
 
-	public function getLabel($URI) {				
-		$record = $this->getSomething($URI, "rdfs:label");
+	public function getLabel($URI, $graph = null) {				
+		$record = $this->getSomething($URI, "rdfs:label", $graph);
 		if ($record != "") {
 			return $record;
 		} else {				
-			$record = $this->getSomething($URI, "rdf:label");
+			$record = $this->getSomething($URI, "rdf:label", $graph);
 			if ($record != "") {
 				return $record;
 			} else {

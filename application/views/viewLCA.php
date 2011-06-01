@@ -26,8 +26,8 @@
 			<?
 			if (isset($parts['impactAssessments']) == true) {
 			 foreach ($parts['impactAssessments'] as $impactAssessment) {
-				// Change color of the circle depending on the impact category	
-				switch ($impactAssessment['impactCategoryIndicator']) {
+				// Change color of the circle depending on the impact category
+				switch ($impactAssessment['impactCategoryIndicator']['label']) {
 				    case 'Waste': $color = "#666"; $max = 10; break;
 				    case 'Carbon Dioxide Equivalent': $color = "#333";	$max = 10; break;
 				    case "Energy": $color = "#227CAF"; $max = 500;	break;
