@@ -3,7 +3,7 @@ class Bibliographymodel extends FT_Model{
     function Bibliographymodel(){
         parent::__construct();
 		$this->load->model(Array('peoplemodel'));
-$this->arc_config['store_name'] = "lca";
+$this->arc_config['store_name'] = "footprinted";
     }
 
 	public function convertBibliography($dataset){

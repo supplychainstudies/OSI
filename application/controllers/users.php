@@ -53,7 +53,7 @@ class Users extends FT_Controller {
 					if ($this->simpleloginsecure->login($_POST['user_name'], $_POST['password']) == true) {
 						redirect('/users/dashboard');
 					} else {
-						redirect('/users/loginerror');
+						redirect('/users/login');
 					}
 				}
 			// If there is no post from Janrain, redirect them to the register page
@@ -63,9 +63,9 @@ class Users extends FT_Controller {
 		} // end of not logged in
 	}
 	
-	public function loginerror() {
+	public function login() {
 		$data = $this->form_extended->load('login'); 
-		$the_form = "<div<p>Hm, your user name or password doesn't seem to be right. Want to try again?</p></div>";
+		$the_form = "<div><p>Hm, your user name or password doesn't seem to be right. Want to try again?</p></div>";
 		$the_form .= $this->form_extended->build();
 		$the_form .= "<div><p> Or <a href=\"users/register\">Register</a> with us.</p></div>";
 		$this->script(Array('form.js','register.js'));
@@ -74,10 +74,11 @@ class Users extends FT_Controller {
 		$this->display("Form", "form_view");
 	}
 	
-	public function login() { 
+	public function logthisin() { 
 		if (isset($_SERVER['HTTP_REFERER']) == true) 
 			$this->session->set_userdata(array('last_page' => $_SERVER['HTTP_REFERER']));
-		if($this->session->userdata('id')) {			
+		if($this->session->userdata('id')) {
+			redirect('/users/dashboard');			
 		} elseif (isset($_POST['user_name']) == true) {
 			if ($_POST['open_id'] != "") {
 				$this->loginopenid($_POST['open_id']);
@@ -97,8 +98,7 @@ class Users extends FT_Controller {
 			$refer = $_SERVER['HTTP_REFERER'];
 		} else {
 			$refer = "http://footprinted.org";
-		}
-			
+		}		
 		header ("Location: " . $refer);			
 	}
 	
@@ -173,17 +173,32 @@ class Users extends FT_Controller {
 		$this->display("Form", "form_view");					
 	}
 	
+	private function checkPasscode($passcode) {
+		$passcodes = array(
+			"KTH","ISIE","UWATERLOO", "MIT"
+		);
+		if (in_array($passcode, $passcodes) !== false) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public function registered() {
 		// Note: Most validation had already been done using jquery
 		// Step 1: Check recaptcha
-		if ($this->form_validation->run()) {
+		$b = $this->form_validation->run();
+		var_dump($b);
+		if ($this->form_validation->run() && $this->checkPasscode($_POST['passcode_']) == true) {
 			// Recaptcha is fine!
 			$this->CI =& get_instance();
 			// Step 1: Write the user name, email, password to db
 			// Step 2: Get the unique id	
-			
 			$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
-		
+			var_dump($id);
+			if (isset($id['error'])==true) {
+				redirect('users/login?error='.$id['error']);
+			}
 			// Step 3: If there is an openid, write to db
 			$openid_array = $_POST['openid_'];
 			if ($openid_array != "") {
@@ -196,9 +211,10 @@ class Users extends FT_Controller {
 
 					$this->CI->db->set($data); 
 
-					if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
-						return false;
+					//if(!$this->CI->db->insert($this->openid_table))  //There was a problem! 
+						//return false;
 					}
+
 				}
 			}
 			// Step 4: If there is a foaf URI, write to db
@@ -215,17 +231,16 @@ class Users extends FT_Controller {
 
 					$this->CI->db->set($data); 
 
-					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
-						return false;
+					//if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
 				}		
 			}	
 		
 			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
-			    redirect('/users/dashboard/');
+				//redirect('/users/dashboard/');
+			} else {
+				//redirect('/users/register/');
 			}		
 		} else {
-		// Recaptcha isn't fine, reload page
-			echo "oops";
 			//redirect('/users/register/');
 		}
 	}

@@ -3,7 +3,7 @@ class Lcamodel extends FT_Model{
     public function Lcamodel(){
         parent::__construct();
 		$this->load->model(Array('unitmodel','geographymodel','ecomodel','opencycmodel','dbpediamodel'));
-		$this->arc_config['store_name'] = "lca";
+		$this->arc_config['store_name'] = "footprinted";
     }
 
 	/**

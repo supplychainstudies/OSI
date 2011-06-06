@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<form action="users/registered" name="register">
-<fieldset name="Register for OSI">
+<form action="/users/registered" name="register">
+    <passcode rules="trim|xss_clean|required">
+	  <label>Passcode</label>
+      <type>text</type>
+<note>Footprinted.org is by invitation only. If you've recieved an invitation, enter your passcode here. If you'd like one, email us at info@footprinted.org.</note>
+    </passcode>	
     <user_name rules="trim|xss_clean|required">
 	  <label>User Name</label>
       <type>text</type>
@@ -15,14 +19,14 @@
     </email>
     <openid rules="trim|xss_clean">
       <type>text</type>
-	<label>Friend of a friend URI</label>
-	<multiple>yes</multiple>
+	  <label>Open ID</label>
+	  <multiple>yes</multiple>
     </openid>
     <foaf rules="trim|xss_clean">
 	  <label>Friend of a friend URI</label>
-	<note>A friend of a friend file is a semantic document that has your biographical information and relationships. Include the URI of yours here.</note>
-      <type>text</type>
 	  <multiple>yes</multiple>
+	  <note>A friend of a friend file is a semantic document that has your biographical information and relationships. Include the URI of yours here.</note>
+      <type>text</type>
     </foaf>
 	<recaptcha>
 	  <label>Recaptcha</label>
@@ -32,6 +36,5 @@
     <type>submit</type>
     <value>Submit</value>
   </submit>
-</fieldset>
 </form>
 

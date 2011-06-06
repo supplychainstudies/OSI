@@ -240,7 +240,7 @@ text-transform:uppercase;
 }
 
 .require_ok {
-	border: 0px;
+	border: 1px solid #ccc; 
 }
 
 #div_flow label {
