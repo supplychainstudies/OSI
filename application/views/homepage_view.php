@@ -16,8 +16,8 @@
 	
 	<div id="columnwide">
 				<div id="about">
-				<p>We want sustainability information to be open, free and easy to use.</p>
-				<p><a>Search</a> in the 500+ footprints available or explore some of the featured ones:</p>
+				<p>Open, free and easy to use environmental impact information. <a>Search</a> in the 500+ footprints available or explore some of the featured ones below:</p>
+				<br/>
 				</div>
 					
 				<?	foreach ($set as $parts) { ?>
@@ -29,9 +29,11 @@
 								<?	if (isset($parts['sameAs']) == true) {
 										foreach ($parts['sameAs'] as $record) {
 											if (isset($record['dbpedia']) == true) {
-												echo '<a title="'.$record['description'].'">';
+												echo '<a href="/lca/view/'.$parts['uri'].'" title="'.$record['description'].'">';
 											}
 										}
+									}	else{
+											echo '<a href="/lca/view/'.$parts['uri'].'">';
 									}
 								?>
 								<?=$parts['quantitativeReference']['name'] ?></a></h1>
@@ -96,14 +98,14 @@
 								<? if (isset($parts['geography']) == true ) {
 									echo '<div id="maplite">';		
 									foreach ($parts['geography'] as $geo) {
-												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x160&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:mid%7Ccolor:blue%7C".$geo['lat'].','.$geo['long'].'"';
+												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x160&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:big%7Ccolor:white%7C".$geo['lat'].','.$geo['long'].'"';
 												echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
-												echo '<div id="infomap"><p>From: <b>'.$geo['name'].'</b></p></div>';
+												echo '<div id="infomap"><p>Location: <b>'.$geo['name'].'</b></p></div>';
 									}
 									echo "</div>";
 								} ?>	
 								<div class="ref_lite">
-									<p>Data from: 2011<?/* $parts['bibliography']['year'] */?></p>
+									<p>Date: 2011<?/* $parts['bibliography']['year'] */?></p>
 								</div>
 								<div class="ref_lite">
 									<p>Category: 
@@ -120,7 +122,7 @@
 									*/?></p>
 								</div>
 								<div class="ref_lite">
-									<p><? echo "<a href='/lca/view/".$parts['uri']. "'>";?> >More information +</a></p>
+									<p><? echo "<a href='/lca/view/".$parts['uri']. "'>";?> More information +</a></p>
 								</div>		
 						</div>
 						

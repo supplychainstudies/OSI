@@ -20,7 +20,8 @@ class Search extends FT_Controller {
         $this->ci =& $obj;
 	}
 	
-	public function keyword($keyword = "") {
+	public function keyword() {
+		$keyword = $_POST["keyword"];
 		if ($keyword == "") {
 			echo "Form!";
 		} else {
@@ -34,8 +35,36 @@ class Search extends FT_Controller {
 						$set[$key][$_key] = $field;
 				}
 			}
-			$this->data("set", $set);			
+			$this->data("set", $set);
+			$this->data("search_term", $keyword);			
 		}
+			$categories = array(
+				array(
+					"uri" => "Mx4rvUCoPtoTQdaZVdw2OtjsAg",
+					"label" => "chemical compound"
+				),
+				array(
+					"uri"=>"Mx4rv-6HepwpEbGdrcN5Y29ycA",
+					"label"=> "transportation"
+					),
+				array(
+					"uri"=>"Mx4rvVibU5wpEbGdrcN5Y29ycA",
+					"label"=> "textile"
+					),
+				array(
+					"uri"=>"Mx4rwQr0i5wpEbGdrcN5Y29ycA",
+					"label"=> "building material"
+				),
+				array(
+					"uri"=>"Mx4rvVi9A5wpEbGdrcN5Y29ycA",	
+					"label"=> "food"
+				),
+				array(
+					"uri"=>"Mx4rvViSe5wpEbGdrcN5Y29ycA",
+					"label"=> "commodity"
+				)		
+			);
+		$this->data("menu", $categories);
 		$this->display("Search","search_view");
 	}
 	
@@ -45,6 +74,36 @@ class Search extends FT_Controller {
 	
 	public function geography($geo) {
 		
+	}
+	public function index() {
+			$categories = array(
+				array(
+					"uri" => "Mx4rvUCoPtoTQdaZVdw2OtjsAg",
+					"label" => "chemical compound"
+				),
+				array(
+					"uri"=>"Mx4rv-6HepwpEbGdrcN5Y29ycA",
+					"label"=> "transportation"
+					),
+				array(
+					"uri"=>"Mx4rvVibU5wpEbGdrcN5Y29ycA",
+					"label"=> "textile"
+					),
+				array(
+					"uri"=>"Mx4rwQr0i5wpEbGdrcN5Y29ycA",
+					"label"=> "building material"
+				),
+				array(
+					"uri"=>"Mx4rvVi9A5wpEbGdrcN5Y29ycA",	
+					"label"=> "food"
+				),
+				array(
+					"uri"=>"Mx4rvViSe5wpEbGdrcN5Y29ycA",
+					"label"=> "commodity"
+				)		
+			);
+		$this->data("menu", $categories);
+		$this->display("Search","search_view");
 	}
 	
 	public function category($uri= "") {		
@@ -78,7 +137,33 @@ class Search extends FT_Controller {
 		} else {
 			$search_term = $this->opencycmodel->getOpenCycLabel("http://sw.opencyc.org/concept/".$uri);
 			$this->data("search_term", $search_term);
-			$categories = $this->opencycmodel->getOpenCycSearchCategories("http://sw.opencyc.org/concept/".$uri);
+			//$categories = $this->opencycmodel->getOpenCycSearchCategories("http://sw.opencyc.org/concept/".$uri);
+			$categories = array(
+				array(
+					"uri" => "Mx4rvUCoPtoTQdaZVdw2OtjsAg",
+					"label" => "chemical compound"
+				),
+				array(
+					"uri"=>"Mx4rv-6HepwpEbGdrcN5Y29ycA",
+					"label"=> "transportation"
+					),
+				array(
+					"uri"=>"Mx4rvVibU5wpEbGdrcN5Y29ycA",
+					"label"=> "textile"
+					),
+				array(
+					"uri"=>"Mx4rwQr0i5wpEbGdrcN5Y29ycA",
+					"label"=> "building material"
+				),
+				array(
+					"uri"=>"Mx4rvVi9A5wpEbGdrcN5Y29ycA",	
+					"label"=> "food"
+				),
+				array(
+					"uri"=>"Mx4rvViSe5wpEbGdrcN5Y29ycA",
+					"label"=> "commodity"
+				)		
+			);
 		}
 		if ($uri != "") {
 			$records = $this->lcamodel->getLCAsByCategory("http://sw.opencyc.org/concept/".$uri);

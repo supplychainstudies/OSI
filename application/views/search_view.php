@@ -16,18 +16,39 @@
 	<div id ="contentwrap">	
 	<?= $navigationDisplay;?>
 	
-	<div id="columnleft">
+	<div id="columnwide">
+	<p>Search by keyword: </p>    
 
+	<form action="/search/keyword/" method="post">
+	<input type="text" name="keyword" />
+	<input type="submit" value="search" />
+	</form>
+		<?
+			if (isset($menu) == true) {
+				echo "<p>Or explore by categories: ";
+				foreach ($menu as $menu_item) {
+					echo '<a href="/search/category/'.$menu_item['uri'].'" />'.$menu_item['label'].'</a> / ';
+				}
+				echo "</p><br/>";
+			}
+		?>	
 				<?
 					if (isset($search_term) == true) {
-						echo "<h1>".$search_term."</h1>";
+						echo "<h1 class='about'>".$search_term;
 					}
+				if (isset($set) == true) {
+					if (count($set) > 0) {
+						echo ': '.count($set). ' footprints found.</h1>';
+					} 
+				}
+				?>
+				<?	
 					if (isset($set) == true) {
 						if (count($set) > 0) {
 						foreach ($set as $row) {
 							// Remove the footprinted part of the url
 							$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
-							echo '<div class="small blue square" id="'.$myString.'"><p>'.$row['label'].'<p/></div>';
+							echo '<div class="medium blue square" id="'.$myString.'"><p><a href="/lca/view/'.$myString .'">'.$row['label'].'</a></p></div>';
 						}
 					} else {
 						echo "No results found.";
@@ -35,28 +56,6 @@
 					}
 				?>
 	</div>
-
-
-<div id="columnright">
-	<!--<p>We work for sustainability information to be free, open and easy to use.</p><p> <a href="/about">Read more about Footprinted.</a></p>-->
-	<?
-	if (isset($set) == true) {
-		if (count($set) > 0) {
-			echo '<h1 class="bignr">'.count($set). ' Footprints</h1>';
-		} 
-	}
-	?>
-	<h2>Categories</h2>
-	<?
-		if (isset($menu) == true) {
-			echo "<ul>";
-			foreach ($menu as $menu_item) {
-				echo '<li><a href="/search/category/'.$menu_item['uri'].'" />'.$menu_item['label'].'</a></li>';
-			}
-			echo "</ul>";
-		}
-	?>
-</div>
 	<?=$footerDisplay;?>
 </div>
 

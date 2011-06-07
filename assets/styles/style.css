@@ -125,6 +125,11 @@ h1#title {
 	color:#333;
 	font-family: 'PT Sans Narrow', arial, serif;
 }
+h1.about {
+	font-size:24px;
+	color:#333;
+	font-family: 'PT Sans Narrow', arial, serif;
+}
 #about small{
 	font-size:12px;
 }
@@ -280,8 +285,8 @@ h1.top {
 	width:980px;
 	height:200px;
 	background-color: #666;
-	margin-top:10px;
-	margin-bottom:20px;
+	margin-top:5px;
+	margin-bottom:25px;
 }
 #maplite {
 	float:right;
@@ -587,8 +592,8 @@ amount {
 	text-align: center;	
 }
 .medium {
-	height: 140px;
-	width: 140px;
+	height: 130px;
+	width: 130px;
 	text-align: center;
 
 }
