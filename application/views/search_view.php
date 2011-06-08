@@ -17,21 +17,23 @@
 	<?= $navigationDisplay;?>
 	
 	<div id="columnwide">
-	<p>Search by keyword: </p>    
+   	
 
 	<form action="/search/keyword/" method="post">
-	<input type="text" name="keyword" />
-	<input type="submit" value="search" />
+	<div id="searchinput"><input type="text" name="keyword" /></div>
+	<div id="searchform"><input type="submit" value="Search by keyword" /></div>
 	</form>
-		<?
-			if (isset($menu) == true) {
-				echo "<p>Or explore by categories: ";
-				foreach ($menu as $menu_item) {
-					echo '<a href="/search/category/'.$menu_item['uri'].'" />'.$menu_item['label'].'</a> / ';
-				}
-				echo "</p><br/>";
+	<?
+		if (isset($menu) == true) {
+			echo "<p>Explore by categories: ";
+			foreach ($menu as $menu_item) {
+				echo '<a href="/search/category/'.$menu_item['uri'].'" />'.$menu_item['label'].'</a> / ';
 			}
-		?>	
+			echo "</p>";
+		}
+	?>
+	<br/>
+
 				<?
 					if (isset($search_term) == true) {
 						echo "<h1 class='about'>".$search_term;
@@ -48,7 +50,12 @@
 						foreach ($set as $row) {
 							// Remove the footprinted part of the url
 							$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
-							echo '<div class="medium blue square" id="'.$myString.'"><p><a href="/lca/view/'.$myString .'">'.$row['label'].'</a></p></div>';
+							echo '<div class="medium blue square" id="'.$myString.'">
+							<div class="squareplace"><p>'.$row['geo'].'</p></div>
+							<div class="squareyear"><p>'.$row['year'].'</p></div>
+							<div class="squaretext"><p><a href="/lca/view/'.$myString .'">'.$row['label'].'</a></p></div>
+							<div class="squareimpacts"><p>'.$row['impacts'].'</p></div>
+							</div>';
 						}
 					} else {
 						echo "No results found.";

@@ -22,9 +22,7 @@ class Search extends FT_Controller {
 	
 	public function keyword() {
 		$keyword = $_POST["keyword"];
-		if ($keyword == "") {
-			echo "Form!";
-		} else {
+		if ($keyword != "") {
 			$records = $this->lcamodel->simpleSearch($keyword, "100000", 0);
 			$set = array();
 			foreach ($records as $key => $record) {	
@@ -32,8 +30,32 @@ class Search extends FT_Controller {
 				foreach ($record as $_key => $field) {
 					// if its a uri, get the label and store that instead 
 					// rewrite this into a better function later
-						$set[$key][$_key] = $field;
+						$set[$key][$_key] = $field;					
 				}
+				
+				// Get impact assessments
+				$availableimpacts = "";
+				$impacts = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($set[$key]['uri']));
+				foreach ($impacts as $impactAssessment) {
+					switch ($impactAssessment['impactCategoryIndicator']['label']) {
+				    	case 'Waste': $availableimpacts .= " Waste"; break;
+				    	case 'Carbon Dioxide Equivalent': $availableimpacts .= " CO<sub>2</sub> (eq)";break;
+						case 'Carbon Dioxide': $availableimpacts .= " CO<sub>2</sub>";break;
+				    	case "Energy": $availableimpacts .= " Energy";	break;
+						case "Water": $availableimpacts .= " Water"; break;
+						default: $availableimpacts .= $impactAssessment['impactCategoryIndicator']['label'];
+					}
+				}
+				$set[$key]['impacts'] = $availableimpacts;
+				
+				// Get the country name
+				$geo = $this->lcamodel->convertGeography($this->lcamodel->getGeography($set[$key]['uri']));
+				if(isset($geo[0]['name']) == true){ $set[$key]['geo'] = $geo[0]['name']; } else { $set[$key]['geo'] = ""; }
+				
+				// Get the year
+				$set[$key]['year'] = "";
+				$bio = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography($set[$key]['uri']));
+				foreach ($bio as $b) { $set[$key]['year'] = substr_replace($b['date'], '', 4); }
 			}
 			$this->data("set", $set);
 			$this->data("search_term", $keyword);			
@@ -175,6 +197,29 @@ class Search extends FT_Controller {
 					// rewrite this into a better function later
 						$set[$key][$_key] = $field;
 				}
+				// Get impact assessments
+				$availableimpacts = "";
+				$impacts = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($set[$key]['uri']));
+				foreach ($impacts as $impactAssessment) {
+					switch ($impactAssessment['impactCategoryIndicator']['label']) {
+				    	case 'Waste': $availableimpacts .= " Waste"; break;
+				    	case 'Carbon Dioxide Equivalent': $availableimpacts .= " CO<sub>2</sub> (eq)";break;
+						case 'Carbon Dioxide': $availableimpacts .= " CO<sub>2</sub>";break;
+				    	case "Energy": $availableimpacts .= " Energy";	break;
+						case "Water": $availableimpacts .= " Water"; break;
+						default: $availableimpacts .= $impactAssessment['impactCategoryIndicator']['label'];
+					}
+				}	
+				$set[$key]['impacts'] = $availableimpacts;
+				
+				// Get the country name
+				$geo = $this->lcamodel->convertGeography($this->lcamodel->getGeography($set[$key]['uri']));
+				if(isset($geo[0]['name']) == true){ $set[$key]['geo'] = $geo[0]['name']; } else { $set[$key]['geo'] = ""; }
+				
+				// Get the year
+				$set[$key]['year'] = "";
+				$bio = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography($set[$key]['uri']));
+				foreach ($bio as $b) { $set[$key]['year'] = substr_replace($b['date'], '', 4); }
 			}
 			$this->data("set", $set);			
 		}
