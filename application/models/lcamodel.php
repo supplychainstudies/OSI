@@ -179,6 +179,7 @@ class Lcamodel extends FT_Model{
 	}	
 
 	public function getImpactAssessments($URI) {
+		$this->arc_config['store_name'] = "footprinted";
 		$q = "select * from <".$URI."> WHERE { ?bnode eco:computedFrom ?p . }";
 		$records = $this->executeQuery($q);	
 		$full_record = array();

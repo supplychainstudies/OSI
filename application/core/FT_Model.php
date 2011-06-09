@@ -225,7 +225,7 @@ class FT_Model extends CI_Model{
 	 * @param $uri string		
 	 */
 	public function getArcTriples($uri) {
-		$this->arc_config['store_name'] = "slow_footprinted";
+		//$this->arc_config['store_name'] = "slow_footprinted";
 		$q = "select ?p ?o where { <".$uri."> ?p ?o . }";	
 		$records = $this->executeQuery($q);	
 		$records_next = array();
@@ -290,6 +290,7 @@ class FT_Model extends CI_Model{
 	 * @param $uri string		
 	 */	
 	public function getTriples($uri = null, $graph = null) {
+		$this->arc_config['store_name'] = "footprinted";
 		if ($uri == null && $graph != null) {
 			$q = "select ?predicate ?object from <".$graph."> where { ?subject ?predicate ?object . }"; }
 		elseif ($uri != null && $graph != null) {
