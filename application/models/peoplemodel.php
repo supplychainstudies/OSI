@@ -63,7 +63,6 @@ class Peoplemodel extends FT_Model{
 	            $q . 
 	            "} }";
         }
-
         $records = $this->executeQuery($q);  
         if (count($records) > 0) {
             return $records;

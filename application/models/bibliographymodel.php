@@ -29,7 +29,7 @@ $this->arc_config['store_name'] = "footprinted";
 				
 			} elseif (isset($record[$this->arc_config['ns']['dcterms']."creator"]) == true)  {
 				foreach($record[$this->arc_config['ns']['dcterms']."creator"] as $author_uri) {
-					$person = $this->getTriples($author_uri);
+					$person = $this->getTriples(null,$author_uri);
 					foreach ($person[$this->arc_config['ns']['foaf'].'firstName'] as $firstName) {
 						$person_array['firstName'] = $firstName;
 					} 
@@ -74,7 +74,7 @@ $this->arc_config['store_name'] = "footprinted";
 		$full_record = array();		
 		foreach ($records as $record) {	
 			$link = array('link' => $record['bibouri']);
-			$full_record[$record['bibouri']] = array_merge($link, $this->getTriples($record['bibouri'],$record['bibouri']));			
+			$full_record[$record['bibouri']] = array_merge($link, $this->getTriples(null,$record['bibouri']));			
 		}
 		return $full_record;
 	}

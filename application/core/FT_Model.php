@@ -100,8 +100,8 @@ class FT_Model extends CI_Model{
 	 * @return Null
 	 * @param $triples Array		
 	 */
-	public function addTriples($triples) {	
-		$q = "insert into <http://footprinted.org/> { ";	
+	public function addTriples($triples, $graph) {	
+		$q = "insert into <".$graph."> { ";	
 		// for each triple				
 		foreach ($triples as $triple) {
 			// for each value 
@@ -225,6 +225,7 @@ class FT_Model extends CI_Model{
 	 * @param $uri string		
 	 */
 	public function getArcTriples($uri) {
+		$this->arc_config['store_name'] = "slow_footprinted";
 		$q = "select ?p ?o where { <".$uri."> ?p ?o . }";	
 		$records = $this->executeQuery($q);	
 		$records_next = array();
@@ -288,10 +289,12 @@ class FT_Model extends CI_Model{
 	 * @return $triples Array
 	 * @param $uri string		
 	 */	
-	public function getTriples($uri, $graph = null) {
-		if ($graph == null) {
-			$q = "select ?predicate ?object from <".$graph."> where { <".$uri."> ?predicate ?object . }"; }
-		else {
+	public function getTriples($uri = null, $graph = null) {
+		if ($uri == null && $graph != null) {
+			$q = "select ?predicate ?object from <".$graph."> where { ?subject ?predicate ?object . }"; }
+		elseif ($uri != null && $graph != null) {
+			$q = "select ?predicate ?object from <".$graph."> where { <".$uri."> ?predicate ?object . }"; }			
+		elseif ($uri != null && $graph == null) {
 			$q = "select ?predicate ?object where { <".$uri."> ?predicate ?object . }";	}
 		$records = $this->executeQuery($q);	
 		$xarray = array();

@@ -15,40 +15,30 @@
 	
 	<div id="columnwide">
 		<?	if (isset($user_data) == true) { 
-				echo "<h1 class='grande'>Welcome back, ".$user_data["user_name"]."</h1>";
-				echo "<p class='piccolo'><b>Your username: </b>".$user_data["user_name"]."</p>";
+				echo "<h1 class='grande'>Welcome, ".$user_data["user_name"]."</h1>";
 				echo "<p class='piccolo'><b>Your email: </b>".$user_data["user_email"]."</p>";
  		} 
 		?>
 		<br/>
-		<div class="dashboardcolumn">
-			<h1><center>Your Footprints</center></h1><br/>
+		<div id="about">
+			<p><a href='/lca/featured'>Start by exploring the existing Footprints!</a></p>
 			<? 
 			if (isset($user_activity) == true) {
+			echo "<p>Your Footprints</p>";
 			foreach ($user_activity as $fp) {
-				echo "<div class='dashboardunit'><a href='".$fp["uri"]."'/><p>".$fp["title"]."</p></a></div>";
+				echo "<a href='".$fp["uri"]."'/><p>".$fp["title"]."</p></a>>";
 				
 			} 
 			}else{
-				 echo "<h1>You don't have any Footprint yet. <a href='create/start'>Create a new footprint entry!</a></h1>";
+				 echo "<p>You don't have any Footprint yet. <a href='/create/start'>Create a new footprint entry</a></p>";
 			}
 			?>
-			<p></p>
-		</div>
-		<div class="dashboardcolumn">
-			<h1><center>Your Last Comments</center></h1><br/>
-			<h1>You have not commented any Footprint yet. <a href='/'>Explore the existing Footprints, you can post comments on them.</a></h1>
-			<p></p>
-		</div>
-		<div class="dashboardcolumn">
-			<h1><center>Your Favorites</center></h1><br/>
-			<h1>Fav feature is coming soon.</h1>
-			<p></p>
+
 		</div>
 
 		<div id="columnright">
-			<div class="menuabout"><h2><a href="/users/edit">Edit your info</a></h2></div>
-			<div class="menuabout"><h2><a href="/create/start">Create new data</a></h2></div>
+			<div class="menuabout"><h2><a href="http://footprinted.org/lca/featured">Browse the data</a></h2></div>
+			<div class="menuabout"><h2><a href="http://footprinted.org/create/start">Create new data</a></h2></div>
 			<div class="menuabout"><h2><a href="/users/logout">Logout</a></h2></div>
 			<div class="menuabout">
 				<p class='piccolo'>Share footprinted!</p>

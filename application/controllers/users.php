@@ -165,8 +165,8 @@ class Users extends FT_Controller {
 		}
 		$this->data("pass_data", $pass_data);
 		$this->form_extended->load('register'); 
-		$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Ffootprinted.org%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
-		$the_form .= $this->form_extended->build();
+		//$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Ffootprinted.org%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
+		$the_form = $this->form_extended->build();
 		$this->script(Array('form.js','register.js','janrain.js'));
 		$this->style(Array('style.css','form.css'));
 		$this->data("form_string", $the_form);
@@ -187,26 +187,23 @@ class Users extends FT_Controller {
 	public function registered() {
 		// Note: Most validation had already been done using jquery
 		// Step 1: Check recaptcha
-		$b = $this->form_validation->run();
-		var_dump($b);
 		if ($this->form_validation->run() && $this->checkPasscode($_POST['passcode_']) == true) {
 			// Recaptcha is fine!
 			$this->CI =& get_instance();
 			// Step 1: Write the user name, email, password to db
 			// Step 2: Get the unique id	
 			$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
-			var_dump($id);
 			if (isset($id['error'])==true) {
 				redirect('users/login?error='.$id['error']);
 			}
 			// Step 3: If there is an openid, write to db
-			$openid_array = $_POST['openid_'];
-			if ($openid_array != "") {
-				foreach($openid_array as $openid) {
-					if ($openid != "") {
+			//$openid_array = $_POST['openid_'];
+			//if ($openid_array != "") {
+				//foreach($openid_array as $openid) {
+					if ($_POST['openid_'] != "") {
 					$data = array(
 								'user_id' => $id,
-								'openid_url' => $openid
+								'openid_url' => $_POST['openid_']
 							);
 
 					$this->CI->db->set($data); 
@@ -215,9 +212,10 @@ class Users extends FT_Controller {
 						//return false;
 					}
 
-				}
-			}
+				//}
+			//}
 			// Step 4: If there is a foaf URI, write to db
+			/*
 			$foaf_array = $_POST['foaf_'];
 			if ($foaf_array == "") {
 				$foaf_array = array(toURI("people",$_POST['user_name_']));				
@@ -233,15 +231,37 @@ class Users extends FT_Controller {
 
 					//if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
 				}		
-			}	
+			}
+			*/
+			if (isset($_POST['foaf_']) == false) {
+				$_POST['foaf_'] = toURI("people",$_POST['user_name_']);	
+			}
+			$data = array(
+						'user_id' => $id,
+						'foaf_uri' => $_POST['foaf_']
+					);
+
+				$this->CI->db->set($data); 
+				
 		
 			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
-				//redirect('/users/dashboard/');
+				redirect('/users/dashboard/');
 			} else {
-				//redirect('/users/register/');
+				$str = '';
+				if (isset($_POST['user_name_'])) 
+					$str .= "user_name_=".$_POST['user_name_']."&";
+				if (isset($_POST['email_'])) 
+					$str .= "email_=".$_POST['email_']."&";
+				redirect('/users/register?'.$str);
 			}		
-		} else {
-			//redirect('/users/register/');
+		} else {	
+			$str = '';
+			if (isset($_POST['user_name_'])) 
+				$str .= "user_name_=".$_POST['user_name_']."&";
+			if (isset($_POST['email_'])) 
+				$str .= "email_=".$_POST['email_']."&";
+			redirect('/users/register?'.$str);
+			
 		}
 	}
 	
@@ -259,9 +279,12 @@ class Users extends FT_Controller {
 				// Get the user activity (such as comments)
 				$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
 				// Get the LCAs that the user has published
-				$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
-				$this->data("user_activity", $user_activity);
-				$this->data("published", $published);
+				//$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
+				if ($user_activity != false) {
+					$this->data("user_activity", $user_activity);
+				}
+				
+				//$this->data("published", $published);
 			}			
 		} else {
 			$this->index();

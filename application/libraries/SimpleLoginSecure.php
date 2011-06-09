@@ -49,9 +49,7 @@ class SimpleLoginSecure
 	function create($user_email = '', $user_pass = '', $user_name = '', $auto_login = true) 
 	{
 		$this->CI =& get_instance();
-		
-
-		var_dump($user_email);
+	
 		//Make sure account info was sent
 		if($user_email == '' OR $user_pass == '') {
 			return array("Error"=>"Missing Email or Password");

@@ -148,7 +148,17 @@ class Lcamodel extends FT_Model{
 		$records = array_merge($this->executeQuery($qm),$this->executeQuery($qfm));
 		return $records;
 	}
-	
+	/**
+	 * Gets all LCAs and returns the uri and name
+	 * @return $records Array	
+	 */
+	public function oldgetRecords() {
+				$this->arc_config['store_name'] = "slow_footprinted";
+		$qfm = "SELECT DISTINCT ?uri ?label WHERE { ?uri rdfs:type eco:FootprintModel . ?uri eco:models ?bnode . ?bnode rdfs:label ?label . }";
+		$qm = "SELECT DISTINCT ?uri ?label WHERE { ?uri rdfs:type eco:Model . ?uri eco:models ?bnode . ?bnode rdfs:label ?label . }";
+		$records = array_merge($this->executeQuery($qm),$this->executeQuery($qfm));
+		return $records;
+	}
 	/**
 	 * Searches arrays. Can be based on a value that is matched to the product or process label.
 	 * @return $records Array	
@@ -223,7 +233,6 @@ class Lcamodel extends FT_Model{
 			" ?bnode owl:sameAs  ?uri . " .
 			"}";
 		$records = $this->executeQuery($q);
-		var_dump($records);
 		return $records;
 	}
 	
@@ -345,6 +354,28 @@ class Lcamodel extends FT_Model{
 	 * @param $ft string
 	 * @param $oc string		
 	 */
+
+   public function addDbpedia($ft,$oc) {
+		$triples = array();
+       $q = "select ?bnode where { " . 
+           " <http://footprinted.org/rdfspace/lca/".$ft."> eco:models ?bnode . " .            
+           " ?bnode rdfs:type  eco:Product . " .
+           "}";              
+       $records = $this->executeQuery($q);
+/*
+       $triples[] = array(
+           's' => $records[0]['bnode'],
+           'p' => 'owl:sameAs',
+           'o' => 'http://sw.opencyc.org/concept/' . $oc
+       ); 
+*/
+		//$q = "insert into <http://footprinted.org/> { " . 
+		//"<".$records[0]['bnode']."> owl:sameAs <". $oc.">" . 
+		//"}";
+		$this->executeQuery($q);
+	   //$this->addTriples($triples);
+   }
+
    public function addCategory($ft,$oc) {
 		$triples = array();
        $q = "select ?bnode from <".$ft."> where { " . 

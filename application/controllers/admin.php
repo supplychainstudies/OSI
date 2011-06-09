@@ -116,17 +116,22 @@ class Admin extends FT_Controller {
 	}
 	
 	public function see() {
-		$this->lcamodel->getRecords();
+		$this->arc_config['store_name'] = "slow_footprinted";
+		$uris = $this->lcamodel->oldgetRecords();
+		var_dump($uris);
 	}
 	
 	public function convertToNamedGraphs() {
-		$this->arc_config['store_name'] = "footprinted";
 		$uris = $this->lcamodel->oldgetRecords();
+		var_dump($uris);
 		foreach ($uris as $uri) {
-			$triples = array_merge($this->lcamodel->getArcTriples($uri['uri']), $this->testmodel->getImpactAssessmentNode($uri['uri']));
+			$triples = array_merge($this->testmodel->getArcTriples($uri['uri']), $this->testmodel->getImpactAssessmentNode($uri['uri']));
 			$graph_name = str_replace("rdfspace/lca/","", $uri['uri']).".rdf";
 			$model_name = "_:".str_replace("http://footprinted.org/rdfspace/lca/","", $uri['uri']);
 			for($i=0; $i<count($triples);$i++) {
+					if (isset($triples[$i]['s']) == false || isset($triples[$i]['p']) == false || isset($triples[$i]['o']) == false) {
+						unset($triples[$i]);
+					}
 					if ($triples[$i]['s'] == $uri['uri']) {
 						$triples[$i]['s'] = $model_name;
 					} 
@@ -141,8 +146,7 @@ class Admin extends FT_Controller {
 					}
 			}
 			var_dump($triples);
-			//exit;
-			//$this->testmodel->addT($graph_name, $triples);
+			$this->testmodel->addT($graph_name, $triples);
 		}		
 	}
 	
@@ -185,6 +189,28 @@ class Admin extends FT_Controller {
 		}
 	}
 
+	public function addPeople() {
+		$uris = $this->peoplemodel->getAllPeople();
+		foreach ($uris as $uri) {
+			$triples = $this->peoplemodel->getArcTriples($uri['uri']);
+			$graph_name = str_replace("rdfspace/people/","", str_replace("rdfspace/person/","", $uri['uri'])).".rdf";
+			$graph_bnode = "_:".str_replace("http://footprinted.org/rdfspace/people/","", str_replace("http://footprinted.org/rdfspace/person/","", $uri['uri']));
+			foreach ($triples as &$triple) {
+				foreach ($triple as &$t) {
+					if ($t == $uri['uri']) {
+						$t = $graph_bnode;
+					} 	elseif (strpos($t,"rdfspace") !== false) {
+							$t = str_replace("rdfspace/organizations/","",str_replace("rdfspace/people/","",str_replace("rdfspace/person/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $t)))))))).".rdf";
+						}
+				}
+			
+			}
+			$this->testmodel->addT($graph_name, $triples);			
+		}
+		
+		
+	}
+
 	public function assignCategory($index = 1) {
 		// find URI of something that doesnt have a category or sameas
 		$uris = $this->lcamodel->getRecords();
@@ -192,7 +218,7 @@ class Admin extends FT_Controller {
 			'uri'=> $uris[$index]['uri'],
 			'label'=>$uris[$index]['label']
 		);
-		//$sameAs = $this->lcamodel->getSameAs($uris[$index]['uri']);
+		$sameAs = $this->lcamodel->getSameAs($uris[$index]['uri']);
 		$categories = $this->lcamodel->getCategories($uris[$index]['uri']);
 		$sameAsSuggestions = $this->lcamodel->getOpenCycSuggestions($uris[$index]['uri']);
 		$categorySuggestions = array(
@@ -256,6 +282,29 @@ class Admin extends FT_Controller {
 		$this->data("set", $set);
 		$this->display("Featured","adminFeatured_view");
 	}
+	
+	public function adminCategoriesBatch(){
+		// Querying the database for all records		
+		$records = $this->lcamodel->getRecords();
+		// Initializing array
+		$set = array();
+		// Add tooltips
+		$this->tooltips = array();
+
+		// Filling the arry with the records
+		foreach ($records as $key => $record) {	
+			// Go through each field
+			foreach ($record as $_key => $field) {
+				// if its a uri, get the label and store that instead 
+				// rewrite this into a better function later
+					$set[$key][$_key] = $field;
+			}
+		}
+		// Send data to the view
+		$this->data("set", $set);
+		$this->display("Featured","adminCategories_view");
+	}
+	
 	public function addAsFeatured(){
 		parse_str($_SERVER['QUERY_STRING'],$_GET); 
 		$URI = $_GET["URI"];
