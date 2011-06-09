@@ -16,18 +16,46 @@
 	<div id ="contentwrap">	
 	<?= $navigationDisplay;?>
 	
-	<div id="columnleft">
+	<div id="columnwide">
+   	
+
+	<form action="/search/keyword/" method="post">
+	<div id="searchinput"><input type="text" name="keyword" /></div>
+	<div id="searchform"><input type="submit" value="Search by keyword" /></div>
+	</form>
+	<?
+		if (isset($menu) == true) {
+			echo "<p>Explore by categories: ";
+			foreach ($menu as $menu_item) {
+				echo '<a href="/search/category/'.$menu_item['uri'].'" />'.$menu_item['label'].'</a> / ';
+			}
+			echo "</p>";
+		}
+	?>
+	<br/>
 
 				<?
 					if (isset($search_term) == true) {
-						echo "<h1>".$search_term."</h1>";
+						echo "<h1 class='about'>".$search_term;
 					}
+				if (isset($set) == true) {
+					if (count($set) > 0) {
+						echo ': '.count($set). ' footprints found.</h1>';
+					} 
+				}
+				?>
+				<?	
 					if (isset($set) == true) {
 						if (count($set) > 0) {
 						foreach ($set as $row) {
 							// Remove the footprinted part of the url
 							$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
-							echo '<div class="small blue square" id="'.$myString.'"><p>'.$row['label'].'<p/></div>';
+							echo '<div class="medium blue square" id="'.$myString.'">
+							<div class="squareplace"><p>'.$row['geo'].'</p></div>
+							<div class="squareyear"><p>'.$row['year'].'</p></div>
+							<div class="squaretext"><p><a href="/lca/view/'.$myString .'">'.$row['label'].'</a></p></div>
+							<div class="squareimpacts"><p>'.$row['impacts'].'</p></div>
+							</div>';
 						}
 					} else {
 						echo "No results found.";
@@ -35,28 +63,6 @@
 					}
 				?>
 	</div>
-
-
-<div id="columnright">
-	<!--<p>We work for sustainability information to be free, open and easy to use.</p><p> <a href="/about">Read more about Footprinted.</a></p>-->
-	<?
-	if (isset($set) == true) {
-		if (count($set) > 0) {
-			echo '<h1 class="bignr">'.count($set). ' Footprints</h1>';
-		} 
-	}
-	?>
-	<h2>Categories</h2>
-	<?
-		if (isset($menu) == true) {
-			echo "<ul>";
-			foreach ($menu as $menu_item) {
-				echo '<li><a href="/search/category/'.$menu_item['uri'].'" />'.$menu_item['label'].'</a></li>';
-			}
-			echo "</ul>";
-		}
-	?>
-</div>
 	<?=$footerDisplay;?>
 </div>
 

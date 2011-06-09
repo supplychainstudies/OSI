@@ -273,3 +273,25 @@ text-transform:uppercase;
 #div_impact_assessment label {
 	color: #000099;
 }
+/* For search */
+#searchinput{
+	float:left;
+}
+#searchform {
+	float:left;
+	margin-left:15px;
+	width:550px;
+	height:60px;
+}
+#searchform input{
+color: #333;
+text-align: left;
+background: #fff;
+border:0px;
+border-bottom: 1px dotted #45A3D8;
+width:120px;
+padding-top:14px;
+font-size:16px;
+font-size:11px;
+color:#333;
+}
