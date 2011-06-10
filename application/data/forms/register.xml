@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<form action="users/registered" name="">
+<form action="/users/registered" name="">
 <fieldset name="Register at Footprint.org">
-	<registratrion_code rules="trim|xss_clean|required">
+	<registration_code rules="trim|xss_clean|required">
 	  <label>Registration code</label>
       <type>text</type>
 		<note>Footprinted is in closed beta version. If you want to test the site please send as an email.</note>
-    </registratrion_code>
+    </registration_code>
     <user_name rules="trim|xss_clean|required">
 	  <label>User Name</label>
       <type>text</type>
@@ -20,7 +20,7 @@
     </email>
     <openid rules="trim|xss_clean">
       <type>text</type>
-	<label>Friend of a friend URI</label>
+	<label>Open ID</label>
     </openid>
     <foaf rules="trim|xss_clean">
 	  <label>Friend of a friend URI</label>

@@ -216,16 +216,29 @@ text-transform:uppercase;
 #form_exchangeType input{
 	width:15px;
 }
-#form_impactCategory, #form_impactCategoryIndicator, #form_assessmentUnit {
+#form_impactCategory{
+	float: left;
+	width: 900px;
+	margin-bottom: 10px;
+}
+#form_assessmentUnit{
 	float: left;
 	width: 480px;
 	margin-bottom: 10px;
 }
+#form_impactCategoryIndicator, #form_assessmentQuantity  {
+	float: left;
+	width: 240px;
+	margin-bottom: 10px;
+}
 #form_assessmentQuantity, #form_assessmentQuantity label {
 	float: left;
-	width: 400px;
+	width: 240px;
 }
-#form_impactCategory label, #form_impactCategoryIndicator label,  #form_assessmentUnit label {
+#form_impactCategory label{
+	width: 900px;
+}
+#form_impactCategoryIndicator label,  #form_assessmentUnit label {
 	width: 460px;
 }
 #form_impactCategory input,  #form_assessmentQuantity input, #form_impactCategoryIndicator input, #form_assessmentUnit input {

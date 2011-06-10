@@ -16,7 +16,7 @@
 	
 	<div id="columnwide">
 				<div id="about">
-				<p>Open, free and easy to use environmental impact information. <a>Search</a> in the 500+ footprints available or explore some of the featured ones below:</p>
+				<p>Open, free and easy to use environmental impact information. <a href="/search">Search</a> in the 500+ footprints available or explore some of the featured ones below:</p>
 				<br/>
 				</div>
 					
@@ -105,7 +105,7 @@
 									echo "</div>";
 								} ?>	
 								<div class="ref_lite">
-									<p>Date: 2011<?/* $parts['bibliography']['year'] */?></p>
+									<p><?= $parts['year'] ?></p>
 								</div>
 								<div class="ref_lite">
 									<p>Category: 
@@ -114,12 +114,6 @@
 											echo $parts['categoryOf'][0]['label'];
 											echo "</a>";
 									}?></p>
-								</div>
-								<div class="ref_lite">
-									<p>Same as: <?/*	if (isset($parts['sameAs']) == true) {
-													echo '<a href="'.$record['description'].'">';
-										}
-									*/?></p>
 								</div>
 								<div class="ref_lite">
 									<p><? echo "<a href='/lca/view/".$parts['uri']. "'>";?> More information +</a></p>

@@ -30,7 +30,7 @@ class Users extends FT_Controller {
 			// If so, go to dashboard
 			//var_dump($_POST);
 		if($this->session->userdata('id') == true) {
-			redirect('/users/dashboard');
+			redirect('/lca/featured');
 		// If not logged in, figure out whether there is post info from janrain
 		} else {
 			// If there is post info from janrain, figure out whether this person is already in the system
@@ -40,7 +40,7 @@ class Users extends FT_Controller {
 					$auth_info = $this->janrainAuthInfo();
 					if ($this->simpleloginsecure->openID($auth_info['profile']['identifier']) != false) {
 						$this->session->set_userdata('id', $this->simpleloginsecure->openID($auth_info['profile']['identifier']));
-						redirect('/users/dashboard');
+						redirect('/lca/featured');
 					// If they are not in the system yet, pass them to the register form
 					} else {
 						$this->register($auth_info);
@@ -51,7 +51,7 @@ class Users extends FT_Controller {
 						$_POST['password'] = $_POST['password_'];
 					}
 					if ($this->simpleloginsecure->login($_POST['user_name'], $_POST['password']) == true) {
-						redirect('/users/dashboard');
+						redirect('/lca/featured');
 					} else {
 						redirect('/users/loginerror');
 					}
@@ -96,7 +96,7 @@ class Users extends FT_Controller {
 		} else if (isset($_SERVER['HTTP_REFERER']) == true) {
 			$refer = $_SERVER['HTTP_REFERER'];
 		} else {
-			$refer = "http://footprinted.org";
+			$refer = "http://footprinted.org/";
 		}
 			
 		header ("Location: " . $refer);			
@@ -173,13 +173,21 @@ class Users extends FT_Controller {
 		$this->display("Form", "form_view");					
 	}
 	
+	private function checkPasscode($passcode) {
+		$passcodes = array(
+			"KTH","ISIE","UWATERLOO", "MIT"
+		);
+		if (in_array($passcode, $passcodes) !== false) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public function registered() {
 		// Note: Most validation had already been done using jquery
 		// Step 1: Check recaptcha
-		if ($this->form_validation->run()) {
-			console.log($_POST['registration_code_']);
-			// Check for registration code (beta)
-			if ($_POST['registration_code_'] == "ISIE" ) {
+		if ($this->form_validation->run() && $this->checkPasscode($_POST['registration_code_']) == true) {
 			// Recaptcha is fine!
 			$this->CI =& get_instance();
 			// Step 1: Write the user name, email, password to db
@@ -188,6 +196,7 @@ class Users extends FT_Controller {
 			$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
 		
 			// Step 3: If there is an openid, write to db
+			/*
 			$openid_array = $_POST['openid_'];
 			if ($openid_array != "") {
 				foreach($openid_array as $openid) {
@@ -203,8 +212,20 @@ class Users extends FT_Controller {
 						return false;
 					}
 				}
-			}
+			} */
+			if ($_POST['openid_'] != "") {
+					$data = array(
+								'user_id' => $id,
+								'openid_url' => $_POST['openid_']
+							);
+
+					$this->CI->db->set($data); 
+
+					if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
+						return false;
+			}		
 			// Step 4: If there is a foaf URI, write to db
+			/*
 			$foaf_array = $_POST['foaf_'];
 			if ($foaf_array == "") {
 				$foaf_array = array(toURI("people",$_POST['user_name_']));				
@@ -222,16 +243,26 @@ class Users extends FT_Controller {
 						return false;
 				}		
 			}	
+			*/
+			if ($_POST['foaf_'] == "") {
+				$_POST['foaf_'] = toURI("people",$_POST['user_name_']);				
+			}
+					$data = array(
+								'user_id' => $id,
+								'foaf_uri' => $_POST['foaf_']
+							);
+
+					$this->CI->db->set($data); 
+					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
+						return false;		
 		
 			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
-			    redirect('/users/dashboard/');
-			}
-			
+				redirect('/users/dashboard/');
+			} else {
+				redirect('/users/login/');
 			}			
 		} else {
-		// Recaptcha isn't fine, reload page
-			echo "oops";
-			//redirect('/users/register/');
+			redirect('/users/register?error=Recaptcha did not work. Try again.');
 		}
 	}
 	

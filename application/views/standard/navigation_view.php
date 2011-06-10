@@ -12,12 +12,14 @@
 <div id="menu">
 	<p class="menu">
 	<a href="/about">About </a>| 
-	<a href="/">Browse </a>| 
+	
 <?
 if ($this->session->userdata('id') == false) {
 	echo "<a id='opendialog'>Login </a>" ;
 } else {
-	echo $this->session->userdata('id') . " | <a href='/users/logout'>Logout</a>";
+	echo '<a href="/search">Search </a> | ';
+	echo '<a href="/lca/create">Contribute </a> | '; 
+	echo "<a href='/users/dashboard'>Your dashboard (". $this->session->userdata('id') .")</a>";
 }
 	
 ?>

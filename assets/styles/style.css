@@ -447,8 +447,8 @@ div.browse a {
 	font-size: 15px;
 	text-decoration: none;
 }
-div#content {
-	width:37em;
+#content {
+	width:980px;
 	float:left;
 	padding:2em;
 }

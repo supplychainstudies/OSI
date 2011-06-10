@@ -23,9 +23,10 @@
 		<div id="about">
 			<p><a href='/lca/featured'>Start by exploring the existing Footprints!</a></p>
 			<? 
-			if (isset($user_activity) == true) {
+			if ($user_activity == true) {
 			echo "<p>Your Footprints</p>";
 			foreach ($user_activity as $fp) {
+				
 				echo "<a href='".$fp["uri"]."'/><p>".$fp["title"]."</p></a>>";
 				
 			} 

@@ -1,4 +1,4 @@
-<form action="/lca/create" name="Create LCA">
+<form action="/lca/create" name="New LCA">
     <blank rules="">
         <type>hidden</type>
         <value>true</value>
