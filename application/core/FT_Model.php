@@ -290,7 +290,6 @@ class FT_Model extends CI_Model{
 	 * @param $uri string		
 	 */	
 	public function getTriples($uri = null, $graph = null) {
-		$this->arc_config['store_name'] = "footprinted";
 		if ($uri == null && $graph != null) {
 			$q = "select ?predicate ?object from <".$graph."> where { ?subject ?predicate ?object . }"; }
 		elseif ($uri != null && $graph != null) {

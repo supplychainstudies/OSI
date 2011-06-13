@@ -3,7 +3,7 @@ class Lcamodel extends FT_Model{
     public function Lcamodel(){
         parent::__construct();
 		$this->load->model(Array('unitmodel','geographymodel','ecomodel','opencycmodel','dbpediamodel'));
-		$this->arc_config['store_name'] = "footprinted";
+		$this->arc_config['store_name'] = "fast_footprinted";
     }
 
 	/**
@@ -179,7 +179,6 @@ class Lcamodel extends FT_Model{
 	}	
 
 	public function getImpactAssessments($URI) {
-		$this->arc_config['store_name'] = "footprinted";
 		$q = "select * from <".$URI."> WHERE { ?bnode eco:computedFrom ?p . }";
 		$records = $this->executeQuery($q);	
 		$full_record = array();

@@ -13,7 +13,7 @@ class Peoplemodel extends FT_Model{
      */
     function Peoplemodel(){
         parent::__construct();
- $this->arc_config['store_name'] = "footprinted";
+ $this->arc_config['store_name'] = "fast_footprinted";
     }
  
     public function everybody() {
