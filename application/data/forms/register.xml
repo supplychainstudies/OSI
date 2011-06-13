@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<form action="/users/registered" name="register">
-    <passcode rules="trim|xss_clean|required">
-	  <label>Registration Code</label>
+<form action="/users/registered" name="">
+<fieldset name="Register at Footprint.org">
+	<registration_code rules="trim|xss_clean|required">
+	  <label>Registration code</label>
       <type>text</type>
-<note>Footprinted is in closed beta version. If you've received an invitation, enter your passcode here. If you'd like one, email us at info@footprinted.org.</note>
-    </passcode>	
+		<note>Footprinted is in closed beta version. If you want to test the site please send as an email.</note>
+    </registration_code>
     <user_name rules="trim|xss_clean|required">
 	  <label>User Name</label>
       <type>text</type>

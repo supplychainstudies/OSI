@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <?=$metaDisplay;?>
 <html>
 <head>
@@ -16,7 +16,7 @@
 	
 	<div id="columnwide">
 				<div id="about">
-				<p>Open, free and easy to use environmental impact information. <a>Search</a> in the 500+ footprints available or explore some of the featured ones below:</p>
+				<p>Open, free and easy to use environmental impact information. <a href="/search">Search</a> in the 500+ footprints available or explore some of the featured ones below:</p>
 				<br/>
 				</div>
 					
@@ -105,25 +105,23 @@
 									echo "</div>";
 								} ?>	
 								<div class="ref_lite">
-									<p>Date: 2011<?/* $parts['bibliography']['year'] */?></p>
+									<p>Year: <?= $parts['year'] ?></p>
 								</div>
 								<div class="ref_lite">
 									<p>Category: 
 										<? if (isset($parts['categoryOf']) == true) {
-											echo "<a href='" . $parts['categoryOf'][0]['uri'] . "' target='_blank'>";
+											echo "<a href='/search/category/" . str_replace("http://sw.opencyc.org/concept/", "", $parts['categoryOf'][0]['uri']) . "'>";
 											echo $parts['categoryOf'][0]['label'];
 											echo "</a>";
 									}?></p>
 								</div>
 								<div class="ref_lite">
-									<p>Same as: <?/*	if (isset($parts['sameAs']) == true) {
-													echo '<a href="'.$record['description'].'">';
-										}
-									*/?></p>
+									<p><? echo "<a href='".$parts['uri']. ".json'>";?>Export</a></p>
 								</div>
 								<div class="ref_lite">
-									<p><? echo "<a href='/lca/view/".$parts['uri']. "'>";?> More information +</a></p>
-								</div>		
+									<p><? echo "<a href='/lca/view/".$parts['uri']. "'>";?> More information</a></p>
+								</div>
+	
 						</div>
 						
 					<? 

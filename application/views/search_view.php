@@ -4,7 +4,7 @@
 <?=$metaDisplay;?>
 <html>
 <head>
-	<title>Footprinted.org</title>
+	<title>Footprinted.org Search</title>
 	
 	<?=$styles;?>
 	<?=$headerDisplay;?>

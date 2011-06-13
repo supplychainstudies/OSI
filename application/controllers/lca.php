@@ -247,7 +247,7 @@ class Lca extends FT_Controller {
 			redirect('/lca/view/'.str_replace(".rdf","",str_replace("http://footprinted.org/","",$graph_uri)));
 			//$this->view(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 		}else {
-			$this->index();
+			redirect('/create/start');
 		}
 	}
 
@@ -649,7 +649,10 @@ class Lca extends FT_Controller {
 							unset($set[$uri][$key]);
 						}
 					}
-
+					// Get the year
+					$set[$uri]['year'] = "";
+					foreach ($set[$uri]['bibliography'] as $b) { $set[$uri]['year'] = substr_replace($b['date'], '', 4); }
+					
 					/* If the functional unit is mass, normalize to 1kg */
 					if (strpos("Kilogram", $set[$uri]['quantitativeReference']['unit']['label']) !== false) {
 						$ratio = $set[$uri]['quantitativeReference']['amount'];

@@ -175,7 +175,7 @@
 			</div>
 			<? if (isset($parts['sameAs']) == true || isset($parts['categoryOf']) == true) { ?>
 			<div id="lca_same" class="lca">
-			<h2>Linked Data</h2>
+			<h2>More info</h2>
 			<?
 				if (isset($parts['sameAs']) == true) {
 					foreach ($parts['sameAs'] as $record) {
@@ -192,7 +192,7 @@
 				}
 				if (isset($parts['categoryOf']) == true) {
 					foreach ($parts['categoryOf'] as $record) {
-						echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
+						echo "<p><a href='/search/category/" .  str_replace("http://sw.opencyc.org/concept/", "", $record['uri']) . "' target='_blank'>";
 						echo "Belongs to Category: ". $record['label'];
 						echo "</a></p>";
 					}
