@@ -257,7 +257,7 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in RDF
 	*/
 	public function viewRDF($URI = null) {
-		$rdf = $this->lcamodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
+		$rdf = $this->lcamodel->getRDF("http://footprinted.org/".$URI.".rdf");
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
 		header('Content-type: text/xml');
 		echo $rdf;
@@ -268,7 +268,7 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in JSON
 	*/	
 	public function viewJSON($URI = null) {
-		$json = $this->lcamodel->getJSON("http://footprinted.org/rdfspace/lca/".$URI);
+		$json = $this->lcamodel->getJSON("http://footprinted.org/".$URI.".rdf");
 		header('Content-type: application/json');
 		echo $json;
 	}
