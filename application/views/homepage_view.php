@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <?=$metaDisplay;?>
 <html>
 <head>
@@ -105,19 +105,23 @@
 									echo "</div>";
 								} ?>	
 								<div class="ref_lite">
-									<p><?= $parts['year'] ?></p>
+									<p>Year: <?= $parts['year'] ?></p>
 								</div>
 								<div class="ref_lite">
 									<p>Category: 
 										<? if (isset($parts['categoryOf']) == true) {
-											echo "<a href='" . $parts['categoryOf'][0]['uri'] . "' target='_blank'>";
+											echo "<a href='/search/category/" . str_replace("http://sw.opencyc.org/concept/", "", $parts['categoryOf'][0]['uri']) . "'>";
 											echo $parts['categoryOf'][0]['label'];
 											echo "</a>";
 									}?></p>
 								</div>
 								<div class="ref_lite">
-									<p><? echo "<a href='/lca/view/".$parts['uri']. "'>";?> More information +</a></p>
-								</div>		
+									<p><? echo "<a href='".$parts['uri']. ".json'>";?>Export</a></p>
+								</div>
+								<div class="ref_lite">
+									<p><? echo "<a href='/lca/view/".$parts['uri']. "'>";?> More information</a></p>
+								</div>
+	
 						</div>
 						
 					<? 

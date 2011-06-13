@@ -220,7 +220,7 @@ class Lca extends FT_Controller {
 			redirect('/lca/view/'.str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 			//$this->view(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 		}else {
-			$this->index();
+			redirect('/create/start');
 		}
 	}
 
