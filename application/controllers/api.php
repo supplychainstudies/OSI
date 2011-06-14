@@ -69,9 +69,7 @@ class API extends FT_Controller {
 		} else if ($encode == 'html') {
 			header('Content-type: text/html');
 			var_dump($rs->result());			
-		}
-		
-		
+		}	
 	}
 
 }

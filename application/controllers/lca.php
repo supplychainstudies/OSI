@@ -660,8 +660,8 @@ class Lca extends FT_Controller {
 		}		
 		public function fillCacheInfo(){
 
-			$this->db->where('unit', NULL); 
-			$rs = $this->db->get('footprints');
+			//$this->db->where('unit', NULL); 
+			$rs = $this->db->get('footprints',50,480);
 			
 			// Initializing array
 			foreach ($rs->result() as $r) {
@@ -677,12 +677,14 @@ class Lca extends FT_Controller {
 				$year= "";
 				foreach ($bibliography as $b) { 
 					$year = substr_replace($b['date'], '', 4); 
-					$ref = $b["title"] . "Authors: ";
+					$ref = "";
 					if (isset($b['authors']) == true) {
 						foreach ($b['authors'] as $author) {
-							$ref .=  $author['lastName'] . ", " .$author['firstName'] . "; ";
+							$ref .=  $author['lastName'] . ", " .$author['firstName'] . ". ";
 						}
 					}
+					$ref .= "(".$year.") ";
+					$ref .= $b["title"];
 				}
 				$category= "";
 				if($categoryOf != false){
@@ -696,6 +698,7 @@ class Lca extends FT_Controller {
 					foreach ($geography as $g) { $country = $g['name']; }
 				}					
 				/* Normalize to 1 */
+				$co2 = NULL; $water = NULL; $waste = NULL; $energy= NULL;
 				$ratio = $quantitativeReference['amount'];					
 				foreach ($impactAssessments as $impact) {
 					if($impact['impactCategoryIndicator']['label'] == "Carbon Dioxide Equivalent"){

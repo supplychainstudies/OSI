@@ -19,7 +19,6 @@
 				<p>Open, free and easy to use environmental impact information. <a href="/search">Search</a> in the 500+ footprints available or explore some of the featured ones below:</p>
 				<br/>
 				</div>
-					
 				<?	foreach ($set as $parts) { 
 					$parts = $parts[0]; ?>
 						
@@ -42,14 +41,14 @@
 								<div id="lca_impact_lite">	
 									<div id="tabs">
 									<?
-									$impacts = array();
 									$impacts = array(
 										array("value" => $parts->co2e, "color" => "#FF7C00", "unit" => "Kg", "max" => 2000, "impacttext" => "CO<sub>2</sub> (eq)"),
 										array("value"=> $parts->water, "color" => "#45A3D8", "unit" => "L", "max" => 2000, "impacttext" => "Water"),
 										array("value"=> $parts->waste, "color" => "#6B5344", "unit" => "Kg", "max" => 2000, "impacttext" => "Waste"),
 										array("value"=> $parts->energy, "color" => "#E8BF56","unit" => "MJ", "max" => 20, "impacttext" => "Energy"));
-										
-									foreach ($impacts as $impact) {
+									
+									foreach ($impacts  as $impact) {
+										if($impact['value'] != 0){
 										$size = round(sqrt($impact['max']*$impact['value']/pi()));
 										if ($size > 82) { $size = 82;}
 										if ($size < 20) { $size = 20;}
@@ -59,8 +58,13 @@
 										echo '<div class="tab_nr"><p><nrwhite>' . round($impact['value'],2) . "</nrwhite> ". $impact['unit'] . "<p/></div>";
 										echo  "<div class='tab_meta'><p>".$impact['impacttext']."</p></div>";
 										echo "</div>";
-									}							
-									
+										}else{
+											echo '<div class="tab_impact"><div class="tab_circle"><div style="width:2px; height:2px;margin-left:60px;margin-top:60px; background:'.$impact['color'].'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
+											echo '<div class="tab_nr"><p><br/>-<p/></div>';
+											echo  "<div class='tab_meta'><p>".$impact['impacttext']."</p></div>";
+											echo "</div>";
+										}							
+									}
 									?>
 									</div>
 								</div>	
@@ -94,7 +98,7 @@
 						
 					<? 
 					// End for each
-					} 
+					}
 					?>
 
 	</div>

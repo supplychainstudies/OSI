@@ -55,12 +55,17 @@
 						foreach ($set as $row) {
 							// Remove the footprinted part of the url
 							//$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
+							$impacts = "";
+							if($row->co2e){$impacts .= "CO2e";}
+							if($row->water){$impacts .= " Water";}
+							if($row->waste){$impacts .= " Waste";}
+							if($row->energy){$impacts .= " Energy";}
 							if($row->year == 0){$year="";}else{$year=$row->year;}
 							echo '<div class="medium blue square" id="'.$row->uri.'">
 							<div class="squareplace"><p>'.$row->country.'</p></div>
 							<div class="squareyear"><p>'.$year.'</p></div>
 							<div class="squaretext"><p><a href="/lca/view/'.$row->uri .'">'.$row->name.'</a></p></div>
-							<div class="squareimpacts"><p>'.$row->co2e.'</p></div>
+							<div class="squareimpacts"><p>'.$impacts.'</p></div>
 							</div>';
 						}
 					} else {
