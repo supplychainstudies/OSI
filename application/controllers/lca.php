@@ -398,67 +398,42 @@ class Lca extends FT_Controller {
 			}
 		}
 
-		/* If the functional unit is mass, normalize to 1kg */
-		
-		if (strpos("Kilogram", $parts['quantitativeReference']['unit']['label']) !== false) {
-			$ratio = $parts['quantitativeReference']['amount'];
-			$parts['quantitativeReference']['amount'] = 1;
-			foreach ($parts['exchanges'] as &$exchanges) {
-				$exchanges['amount'] = $exchanges['amount'] / $ratio;
-			}
-			foreach ($parts['impactAssessments'] as &$impactAssessment) {
-				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-			}
-		}
+		/* Normalize to 1 */
+		$oldamount = $parts['quantitativeReference']['amount'];
+		$ratio = $parts['quantitativeReference']['amount'];
+		$parts['quantitativeReference']['amount'] = 1;
+		// If grams	
 		if (strpos("Gram", $parts['quantitativeReference']['unit']['label']) !== false) {
-			$ratio = $parts['quantitativeReference']['amount'] / 1000;
-			// Remember to complete afterwards
+			$ratio = $oldamount * 1000;
 			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
-			$parts['quantitativeReference']['amount'] = 1;
-			foreach ($parts['exchanges'] as &$exchanges) {
-				$exchanges['amount'] = $exchanges['amount'] / $ratio;
-				if (strpos("Gram",$exchanges['unit']['label']) !== false) { $exchanges['amount']/=1000; //$exchanges['unit'] = "qudtu:Kilogram";
-				}
-			}
-			foreach ($parts['impactAssessments'] as &$impactAssessment) {
-				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-				if (strpos("Gram", $impactAssessment['unit']['label']) !== false) { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
-			}
-		}
-		
-		
+		}	
 		// If ounces
 		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Ounce" ) {
-			$ratio = $parts['quantitativeReference']['amount'] / 0.028345;
-			// Remember to complete afterwards
+			$ratio = $oldamount * 0.028345;
 			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
-			$parts['quantitativeReference']['amount'] = 1;
-			foreach ($parts['exchanges'] as &$exchanges) {
-				$exchanges['amount'] = $exchanges['amount'] / $ratio;
-				if ($exchanges['unit']['label'] == "Gram") { $exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";
-				}
-			}
-			foreach ($parts['impactAssessments'] as &$impactAssessment) {
-				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-				if ($impactAssessment['unit']['label'] == "Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
+		}
+		// If pounds
+		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Pound" ) {
+			$ratio = $oldamount * 0.45359237;
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+		}
+
+		foreach ($parts['exchanges'] as &$exchanges) {
+			$exchanges['amount'] = $exchanges['amount'] / $ratio;
+			if ($exchanges['unit']['label'] == "Gram") {
+				$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";
 			}
 		}
 		
-		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Pound" ) {
-			$ratio = $parts['quantitativeReference']['amount'] / 0.45359237;
-			// Remember to complete afterwards
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
-			$parts['quantitativeReference']['amount'] = 1;
-			foreach ($parts['exchanges'] as &$exchanges) {
-				$exchanges['amount'] = $exchanges['amount'] / $ratio;
-				if ($exchanges['unit']['label'] == "Gram") { $exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";
-				}
-			}
-			foreach ($parts['impactAssessments'] as &$impactAssessment) {
-				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-				if ($impactAssessment['unit']['label'] == "Gram") { $impactAssessment['amount']/=1000; $impactAssessment['unit']['label'] = "Kilogram"; }
+		foreach ($parts['impactAssessments'] as &$impactAssessment) {
+			$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+			if ($impactAssessment['unit']['label'] == "Gram") { 
+				$impactAssessment['amount']/=1000; 
+				$impactAssessment['unit']['label'] = "Kilogram"; 
 			}
 		}
+		
+		
 		// Turns exchanges into input and output array divided into categories 
 
 		foreach ($parts['exchanges'] as $exchange) {

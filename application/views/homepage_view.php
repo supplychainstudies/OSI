@@ -30,7 +30,7 @@
 								<?= $parts->name ?></a></h1>
 								<?
 									if (isset($parts->ref) == true) {
-									echo "<p>From: ".$parts->ref."</p>";
+									echo "<p>From: <a href='/search?ref=".$parts->ref."'>".$parts->ref."</a></p>";
 									}
 								?>
 

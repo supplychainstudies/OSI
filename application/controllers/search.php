@@ -31,6 +31,13 @@ class Search extends FT_Controller {
 			$rs = $this->db->get('footprints',100,0);
 			$this->data("set", $rs->result());
 		}
+		if (isset($search_terms['ref']) == true) {
+			$this->db->like('ref', $search_terms['ref']);
+			$this->data("category", $search_terms['ref']);
+			$this->db->order_by("name", "ASC"); 
+			$rs = $this->db->get('footprints');
+			$this->data("set", $rs->result());
+		}
 		if (isset($_POST["keyword"]) == true){
 			$keyword = $_POST["keyword"];
 		} else {

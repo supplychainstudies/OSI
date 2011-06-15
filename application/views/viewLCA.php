@@ -168,6 +168,7 @@
 						if (isset($record['uri']) == true) {
 							echo "</a>";
 						}
+						echo "<p>Year: ".substr_replace($record['date'],'', 4)."</p>";
 					}
 				}
 			?>
