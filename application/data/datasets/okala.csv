@@ -1,0 +1,249 @@
+Aluminium (Recycled),0.56,http://data.nasa.gov/qudt/owl/unit#PoundMass,from 100% recycled old scrap,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Aluminium (Recycled)
+Aluminium (Virgin),5.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,from bauxite,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Aluminium (Virgin)
+Aluminium ,3.6,http://data.nasa.gov/qudt/owl/unit#PoundMass,typical mix available in market,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Aluminium 
+Brass,0.9,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Brass
+Bronze,1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Bronze
+Cast Iron,0.6,http://data.nasa.gov/qudt/owl/unit#PoundMass,grey cast iron -  2.1% carbon,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Cast Iron
+Chromium,11,http://data.nasa.gov/qudt/owl/unit#PoundMass,containing Cr I -  CrIII -  and CrVI,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Chromium
+Cobalt,3.6,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Cobalt
+Copper (Recycled),0.75,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Copper (Recycled)
+Copper (Virgin),1.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Copper (Virgin)
+Gold (Virgin),6800,http://data.nasa.gov/qudt/owl/unit#PoundMass,from economic correlation,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Gold (Virgin)
+Lead,0.67,http://data.nasa.gov/qudt/owl/unit#PoundMass,human health & carcinogenicity,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Lead
+Magnesium,32,http://data.nasa.gov/qudt/owl/unit#PoundMass,often mined from the ocean floor,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Magnesium
+Manganese,1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Manganese
+Molybedenum,3.7,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Molybedenum
+Nickel,11,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Nickel
+Palladium (Recycled),310,http://data.nasa.gov/qudt/owl/unit#PoundMass,fuel cell system catalyst,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Palladium (Recycled)
+Palladium (Virgin),5900,http://data.nasa.gov/qudt/owl/unit#PoundMass,fuel cell system catalyst,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Palladium (Virgin)
+Platinum (Recycled),310,http://data.nasa.gov/qudt/owl/unit#PoundMass,fuel cell system catalyst,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Platinum (Recycled)
+Platinum (Virgin),8800,http://data.nasa.gov/qudt/owl/unit#PoundMass,fuel cell system catalyst,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Platinum (Virgin)
+Rhodium (Recycled),320,http://data.nasa.gov/qudt/owl/unit#PoundMass,fuel cell system catalyst,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Rhodium (Recycled)
+Rhodium (Virgin),19000,http://data.nasa.gov/qudt/owl/unit#PoundMass,fuel cell system catalyst,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Rhodium (Virgin)
+Silver (Virgin),4100,http://data.nasa.gov/qudt/owl/unit#PoundMass,from economic correlation,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Silver (Virgin)
+Stainless Steel (Virgin),2.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,virgin 18/8 -  superaustenitic,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Stainless Steel (Virgin)
+Steel (Recycled),0.55,http://data.nasa.gov/qudt/owl/unit#PoundMass,low alloy steel,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Steel (Recycled)
+Steel (Virgin),1.4,http://data.nasa.gov/qudt/owl/unit#PoundMass,low alloy steel,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Steel (Virgin)
+Steel (Reinforcing),0.59,http://data.nasa.gov/qudt/owl/unit#PoundMass,for reinforced concrete,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Steel (Reinforcing)
+Tin,7.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,replacement for lead in solder,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Tin
+Titanium,20,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Titanium
+Tungsten,9.6,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Tungsten
+Zinc,1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Zinc
+Acrylonitrile-butadiene-styrene (ABS) (Virgin),1.4,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Acrylonitrile-butadiene-styrene (ABS) (Virgin)
+High Impact Polystyrene (HIPS) (Virgin),1.3,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,High Impact Polystyrene (HIPS) (Virgin)
+High Impact Polystyrene (HIPS) (Recycled),1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,High Impact Polystyrene (HIPS) (Recycled)
+Nylon 6 (Polyamide),3.7,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Nylon 6 (Polyamide)
+Nylon 6 (Polyamide) (glass filled),2.9,http://data.nasa.gov/qudt/owl/unit#PoundMass,25% glass fiber,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Nylon 6 (Polyamide) (glass filled)
+Nylon 66 (Polyamide),3.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Nylon 66 (Polyamide)
+Nylon 66 (Polyamide) (glass filled) ,2.8,http://data.nasa.gov/qudt/owl/unit#PoundMass,25% glass fiber,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Nylon 66 (Polyamide) (glass filled) 
+Polycarbonate (PC) Plexiglass (Virgin),2.3,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polycarbonate (PC) Plexiglass (Virgin)
+High Density Polyethylene (HDPE) Granulate (Virgin),0.8,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,High Density Polyethylene (HDPE) Granulate (Virgin)
+High Density Polyethylene (HDPE) Granulate (Recycled),0.52,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,High Density Polyethylene (HDPE) Granulate (Recycled)
+Low Density Polyethylene (LDPE) Granulate (Virgin),0.88,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Low Density Polyethylene (LDPE) Granulate (Virgin)
+Low Density Polyethylene (LDPE) Granulate (Recycled),0.56,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Low Density Polyethylene (LDPE) Granulate (Recycled)
+PE-LLD (Polyethylene Low Linear Density Granulate),,,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,PE-LLD (Polyethylene Low Linear Density Granulate)
+ Amorphous Polyethylene terephthalate (PET) Granulate,,,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output, Amorphous Polyethylene terephthalate (PET) Granulate
+Polyethylene terephthalate (PET) (Virgin),1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polyethylene terephthalate (PET) (Virgin)
+Polyethylene terephthalate (PET) (Recycling),0.58,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polyethylene terephthalate (PET) (Recycling)
+Polymethyl methacrylate (PMMA) (Acrylic) (Virgin),2.5,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polymethyl methacrylate (PMMA) (Acrylic) (Virgin)
+Polypropylene (PP) Granulate (Virgin),0.84,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polypropylene (PP) Granulate (Virgin)
+Polypropylene (PP) Granulate (Recycled),0.56,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polypropylene (PP) Granulate (Recycled)
+Polyester (PE) (glass filled),2,http://data.nasa.gov/qudt/owl/unit#PoundMass,with 30% Fiberglass,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polyester (PE) (glass filled)
+Polyurethane (PU) Flexible Cushion Foam,1.7,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polyurethane (PU) Flexible Cushion Foam
+Polyurethane (PU) Rigid Dashboard Foam,1.8,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polyurethane (PU) Rigid Dashboard Foam
+General Purpose Polystyrene (GPS) Granulate (Virgin),1.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,General Purpose Polystyrene (GPS) Granulate (Virgin)
+General Purpose Polystyrene (GPS) Granulate (Recycled),0.61,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,General Purpose Polystyrene (GPS) Granulate (Recycled)
+Expanded Polystyrene (EPS) (Virgin),1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Expanded Polystyrene (EPS) (Virgin)
+Expanded Polystyrene (EPS) (Recycled),0.82,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Expanded Polystyrene (EPS) (Recycled)
+Rigid Polyvinylchloride (Virgin),0.89,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Rigid Polyvinylchloride (Virgin)
+Flexible Polyvinylchloride (Virgin),1.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,without lead -  phthalates and DEHP,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Flexible Polyvinylchloride (Virgin)
+Polyvinylidene chloride (PVDC) (Virgin),1.6,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polyvinylidene chloride (PVDC) (Virgin)
+Teflon (tetrafluorethylene) (TFE) (Virgin),140,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Teflon (tetrafluorethylene) (TFE) (Virgin)
+Ethylene vinyl acetate (EVA),0.82,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Ethylene vinyl acetate (EVA)
+Epoxy Resin,0.5,http://data.nasa.gov/qudt/owl/unit#PoundMass,with epichlorohydrin -  bisphenol A,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Epoxy Resin
+Glass Fiber,0.23,http://data.nasa.gov/qudt/owl/unit#PoundMass,for composites,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Glass Fiber
+Aramid Fiber,6,http://data.nasa.gov/qudt/owl/unit#PoundMass,aromatic polyamide for composites,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Aramid Fiber
+Carbon Fiber,5.7,http://data.nasa.gov/qudt/owl/unit#PoundMass,for composites,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Carbon Fiber
+Carbon Black,1.7,http://data.nasa.gov/qudt/owl/unit#PoundMass,pigment,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Carbon Black
+Natural Rubber (Certified),0.28,http://data.nasa.gov/qudt/owl/unit#PoundMass,certified sustainable -  unvulcanized,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Natural Rubber (Certified)
+Polybutadiene (PBR) elastomer,1.5,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Polybutadiene (PBR) elastomer
+Styrene butadiene (SBR) elastomer,1.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Styrene butadiene (SBR) elastomer
+Styrene acrylonitrile (SAN) elastomer,1.3,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Styrene acrylonitrile (SAN) elastomer
+Ethylene propylene diene monomer (EPDM) elastomer,1.3,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Ethylene propylene diene monomer (EPDM) elastomer
+Injection Molding,0.55,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Substances
+Blowing Molding,0.51,http://data.nasa.gov/qudt/owl/unit#PoundMass,blow molding of bottles,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Substances
+Rotation Molding,0.7,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Substances
+Extrusion,0.16,http://data.nasa.gov/qudt/owl/unit#PoundMass,extrusion of solid profiles,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Substances
+Thermoforming,0.33,http://data.nasa.gov/qudt/owl/unit#PoundMass,vacuum thermoforming,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Substances
+Deep Drawing ,0.08,http://data.nasa.gov/qudt/owl/unit#PoundMass,drawing with heat,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Substances
+Calendaring,0.16,http://data.nasa.gov/qudt/owl/unit#PoundMass,calendaring (rolling) folm or sheet,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Substances
+Film Blow Extrusion,0.02,http://data.nasa.gov/qudt/owl/unit#PoundMass,for films such as PE grocery sacks,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Substances
+Iron Casting,0.97,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Casted Iron
+Steel Profile Drawing ,0.15,http://data.nasa.gov/qudt/owl/unit#PoundMass,drawing of pipes,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel Pipe
+Steel Hot Rolling,0.11,http://data.nasa.gov/qudt/owl/unit#PoundMass,hot rolling in foundry,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel Roll
+Steel Shearing,0.0011,http://data.nasa.gov/qudt/owl/unit#SquareInch,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel
+Steel Laser Cutting,0.0003,http://data.nasa.gov/qudt/owl/unit#SquareInch,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel
+Steel Bandsawing,0.0008,http://data.nasa.gov/qudt/owl/unit#SquareInch,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel
+Steel Machining,0.036,http://data.nasa.gov/qudt/owl/unit#PoundMass,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel
+Steel Turning,0.039,http://data.nasa.gov/qudt/owl/unit#PoundMass,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel
+Steel Arc Welding,0.033,http://data.nasa.gov/qudt/owl/unit#Foot,,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel Weld
+Steel Gas Welding,0.044,http://data.nasa.gov/qudt/owl/unit#Foot,,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel Weld
+Steel MIG Welding,0.82,http://data.nasa.gov/qudt/owl/unit#Foot,electrical MIG steel welding,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel Weld
+Stainless Steel Rolling,0.24,http://data.nasa.gov/qudt/owl/unit#PoundMass,rolling of stainless steel welding,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Rolled Stainless Steel
+Aluminum Extrusion,280,http://data.nasa.gov/qudt/owl/unit#PoundMass,of profiles like window frames,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Extruded Aluminum
+Aluminum Machining,0.063,http://data.nasa.gov/qudt/owl/unit#PoundMass,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Aluminum
+Aluminum Bandsaying,0.0005,http://data.nasa.gov/qudt/owl/unit#SquareInch,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Aluminum
+Aluminum Shearing,0.098,http://data.nasa.gov/qudt/owl/unit#SquareInch,cutting with shears,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Aluminum
+Aluminum Forging,0.17,http://data.nasa.gov/qudt/owl/unit#PoundMass,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Aluminum
+Aluminum Foam Casting ,5.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,lost EPS foam casting,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Casted Aluminum
+Aluminum Mold Casting,1.3,http://data.nasa.gov/qudt/owl/unit#PoundMass,semi-permanent mold casting,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Casted Aluminum
+Aluminum Rolling,0.25,http://data.nasa.gov/qudt/owl/unit#PoundMass,rolling of aluminum sheet,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Rolled Aluminum Sheet
+Aluminum Turning,0.067,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Aluminum
+Aluminum Seam Welding,4.6,http://data.nasa.gov/qudt/owl/unit#Foot,continuous 0.06 inch x 12 inch,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Aluminum Weld
+Aluminum MIG Welding,0.056,http://data.nasa.gov/qudt/owl/unit#Foot,MIG arc welding with helium,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Aluminum Weld
+Aluminum Spot Welding,0.094,http://data.nasa.gov/qudt/owl/unit#SquareInch,0.2 inch x 0.2 inch weld,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,0.04,Output,Aluminum Weld
+Aluminum Anodizing,0.34,http://data.nasa.gov/qudt/owl/unit#SquareFoot,,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Anodized Layer
+Aluminum Powder Coating,0.32,http://data.nasa.gov/qudt/owl/unit#SquareFoot,powder coating on aluminum,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Aluminum Powdered Coating
+Steel Powder Coating,0.39,http://data.nasa.gov/qudt/owl/unit#SquareFoot,powder coating on steel,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel Powdered Coating
+Copper Drawing,0.87,http://data.nasa.gov/qudt/owl/unit#PoundMass,copper wire drawing,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Copper Wire
+Brass Casting,0.027,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Casted Brass
+Bronze Casting,0.028,http://data.nasa.gov/qudt/owl/unit#PoundMass,,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Casted Bronze
+Steel Enameling,0.72,http://data.nasa.gov/qudt/owl/unit#SquareFoot,0.12 lb porcelain enamel / ft2,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel Enameling 
+Steel Phosphating,0.11,http://data.nasa.gov/qudt/owl/unit#SquareFoot,from electrical consumption,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Steel Phosphating
+Chrome Plating,0.26,http://data.nasa.gov/qudt/owl/unit#SquareFoot,electrolytic 10 um -  two sided,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Chrome Plating
+Nickel Plating,0.35,http://data.nasa.gov/qudt/owl/unit#SquareFoot,electrolytic 6 um -  two sided,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Nickel Plating
+Zinc Galvanizing,0.23,http://data.nasa.gov/qudt/owl/unit#SquareFoot,electrolytic 3 um -  two sided,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Zinc Galvanizing
+Zinc Coating,0.47,http://data.nasa.gov/qudt/owl/unit#SquareFoot,dipping in hot zinc bath,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Zinc Coating
+Water (Renewable),0.92,http://data.nasa.gov/qudt/owl/unit#GallonUS,local source renewed annually ,Substance,,1,Output,Water (Renewable)
+Water (Imported),3.7,http://data.nasa.gov/qudt/owl/unit#GallonUS,Piped or delivered > 150 miles,Substance,,1,Output,Water (Imported)
+Liquid Detergent,1.5,http://data.nasa.gov/qudt/owl/unit#PoundMass,Liquid Detergent,Product,,1,Output,Liquid Detergent
+Window Glass,0.23,http://data.nasa.gov/qudt/owl/unit#PoundMass,Float glass -  uncoated,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Window Glass
+"""e"" Window Glass",0.29,http://data.nasa.gov/qudt/owl/unit#PoundMass,Float glass -  thermal coated,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,"""e"" Window Glass"
+Clear Glass (Virgin),0.27,http://data.nasa.gov/qudt/owl/unit#PoundMass,Clear bottle glass -  virgin,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Clear Glass (Virgin)
+Clear Glass (Recycled),0.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,Bottle glass -  100% recycled,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Clear Glass (Recycled)
+Sanitary Ceramic,1,http://data.nasa.gov/qudt/owl/unit#PoundMass,White ceramics for bathrooms,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Sanitary Ceramic
+Porcelain Ceramic,0.17,http://data.nasa.gov/qudt/owl/unit#PoundMass,Unglazed,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Porcelain Ceramic
+Clay Brick,0.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,Clay brick at factory,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Clay Brick
+Refractory Brick,0.51,http://data.nasa.gov/qudt/owl/unit#PoundMass,Fireclay brick at factory,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Refractory Brick
+Concrete,7.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,Regular -  not reinforced,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Concrete
+Portland Cement,0.37,http://data.nasa.gov/qudt/owl/unit#PoundMass,Strength class Z 42.5,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Portland Cement
+Thermal Plaster,0.39,http://data.nasa.gov/qudt/owl/unit#PoundMass,Plaster du Paris,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Thermal Plaster
+Glass Wool Insulation,0.63,http://data.nasa.gov/qudt/owl/unit#PoundMass,Fiberglass,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Glass Wool Insulation
+PS Foam Insulation,3,http://data.nasa.gov/qudt/owl/unit#PoundMass,Polystyrene bats,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,PS Foam Insulation
+PU Foam Insulation,1.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,Polyur. (urea formaldhyde),Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,PU Foam Insulation
+Sand,0.001,http://data.nasa.gov/qudt/owl/unit#PoundMass,Clean sand at mine,Substance,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Sand
+Cardboard (Virgin),0.47,http://data.nasa.gov/qudt/owl/unit#PoundMass,Corrugated -  wood -  sulphates,Product,,1,Output,Cardboard (Virgin)
+Cardboard (Recycled),0.42,http://data.nasa.gov/qudt/owl/unit#PoundMass,Corrugated -  wood -  recycled,Product,,1,Output,Cardboard (Recycled)
+Unbleached Paperboard,1.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,Grey paperboard -  virgin,Product,,1,Output,Unbleached Paperboard
+Bleached Paperboard,0.39,http://data.nasa.gov/qudt/owl/unit#PoundMass,White paperboard -  virgin,Product,,1,Output,Bleached Paperboard
+White Paper (Virgin),0.48,http://data.nasa.gov/qudt/owl/unit#PoundMass,White paper -  bleached -  virgin,Product,,1,Output,White Paper (Virgin)
+White Paper (Recycled),0.32,http://data.nasa.gov/qudt/owl/unit#PoundMass,White -  bleached -  secondary,Product,,1,Output,White Paper (Recycled)
+Newsprint (Virgin),1.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,Virgin newsprint,Product,,1,Output,Newsprint (Virgin)
+Newsprint (Recycled),0.76,http://data.nasa.gov/qudt/owl/unit#PoundMass,80% recycled newsprint,Product,,1,Output,Newsprint (Recycled)
+Brown Paper (Virgin),0.59,http://data.nasa.gov/qudt/owl/unit#PoundMass,Kraft sack -  unbleached virgin,Product,,1,Output,Brown Paper (Virgin)
+Brown Paper (Recycled),0.57,http://data.nasa.gov/qudt/owl/unit#PoundMass,Kraft sack -  unbleached rec.,Product,,1,Output,Brown Paper (Recycled)
+Offset printing,0.69,http://data.nasa.gov/qudt/owl/unit#PoundMass,Offset print per lb. paper,Process,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Offset printing
+Flexographic printing,0.22,http://data.nasa.gov/qudt/owl/unit#PoundMass,Flexographic on printing paper,Process,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Flexographic printing
+Gravure printing,0.72,http://data.nasa.gov/qudt/owl/unit#PoundMass,Gravure print per lb. paper,Process,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Output,Gravure printing
+Plywood (Indoor),13,http://data.nasa.gov/qudt/owl/unit#PoundMass,High acid rain impact,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Plywood (Indoor)
+Plywood (Outdoor),18,http://data.nasa.gov/qudt/owl/unit#PoundMass,High acid rain impact,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Plywood (Outdoor)
+Fiberboard (Soft),5.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,Low density fiberboard,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Fiberboard (Soft)
+Fiberboard (Hard),15,http://data.nasa.gov/qudt/owl/unit#PoundMass,High density -  high acid rain,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Fiberboard (Hard)
+MDF,13,http://data.nasa.gov/qudt/owl/unit#PoundMass,Medium density -  high acid rain,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,MDF
+Particle Board (Indoor),7,http://data.nasa.gov/qudt/owl/unit#PoundMass,High acid rain impact,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Particle Board (Indoor)
+Particle Board (Outdoor),8.3,http://data.nasa.gov/qudt/owl/unit#PoundMass,High acid rain impact,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Particle Board (Outdoor)
+Pitch Pine Wood,0.16,http://data.nasa.gov/qudt/owl/unit#PoundMass,Solid pitch pine wood,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Pitch Pine Wood
+Oak or Walnut Wood,0.33,http://data.nasa.gov/qudt/owl/unit#PoundMass,Solid red oak or walnut wood,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Oak or Walnut Wood
+Ash Wood,0.31,http://data.nasa.gov/qudt/owl/unit#PoundMass,Solid Ash Wood,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Ash Wood
+Red Cedar Wood,0.73,http://data.nasa.gov/qudt/owl/unit#PoundMass,Solid Western Red Cedar wood,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Red Cedar Wood
+Oil Based Paint,1.2,http://data.nasa.gov/qudt/owl/unit#PoundMass,Alkyd -  wet weight -  60% solvent,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Oil Based Paint
+Watebase Paint,1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,Alkyd -  wet weight -  60% water,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Watebase Paint
+Varnish,0.75,http://data.nasa.gov/qudt/owl/unit#PoundMass,Alkyd -  wet weight -  60% solvent,Product,http://sw.opencyc.org/concept/Mx4rwQr0i5wpEbGdrcN5Y29ycA,1,Output,Varnish
+Gasoline (Unleaded),15,http://data.nasa.gov/qudt/owl/unit#GallonUS,w/ combustion >25 HP engine,Product,http://sw.opencyc.org/concept/Mx4rvVitW5wpEbGdrcN5Y29ycA,1,Output,Gasoline (Unleaded)
+Diesel Fuel,23,http://data.nasa.gov/qudt/owl/unit#GallonUS,w/ combustion >175 HP engine,Product,http://sw.opencyc.org/concept/Mx4rvVitW5wpEbGdrcN5Y29ycA,1,Output,Diesel Fuel
+Fuel Oil,24,http://data.nasa.gov/qudt/owl/unit#GallonUS,w/ combustion in industrial boiler,Product,http://sw.opencyc.org/concept/Mx4rvVitW5wpEbGdrcN5Y29ycA,1,Output,Fuel Oil
+Coal fuel,2.6,http://data.nasa.gov/qudt/owl/unit#PoundMass,w/ combustion in industrial boiler,Product,http://sw.opencyc.org/concept/Mx4rvVitW5wpEbGdrcN5Y29ycA,1,Output,Coal fuel
+Wood chip fuel (soft),0.05,http://data.nasa.gov/qudt/owl/unit#PoundMass,Wood CO2 is biogenic,Product,http://sw.opencyc.org/concept/Mx4rvVitW5wpEbGdrcN5Y29ycA,1,Output,Wood chip fuel (soft)
+Natural Gas,0.12,http://data.nasa.gov/qudt/owl/unit#CubicFoot,w/ combustion in industrial boiler,Product,http://sw.opencyc.org/concept/Mx4rvVitW5wpEbGdrcN5Y29ycA,1,Output,Natural Gas
+Corn starch,0.37,http://data.nasa.gov/qudt/owl/unit#PoundMass,Chemical intensive cultivation,Product,http://sw.opencyc.org/concept/Mx4rvVi9A5wpEbGdrcN5Y29ycA,1,Output,Corn starch
+Potato Starch,0.26,http://data.nasa.gov/qudt/owl/unit#PoundMass,Chemical intensive cultivation,Product,http://sw.opencyc.org/concept/Mx4rvVi9A5wpEbGdrcN5Y29ycA,1,Output,Potato Starch
+Cotton Fabric,0.3,http://data.nasa.gov/qudt/owl/unit#PoundMass,Chemical intensive cultivation,Product,http://sw.opencyc.org/concept/Mx4rvVibU5wpEbGdrcN5Y29ycA,1,Output,Cotton Fabric
+Cotton Fabric (organic),0.95,http://data.nasa.gov/qudt/owl/unit#PoundMass,Insecticide free,Product,http://sw.opencyc.org/concept/Mx4rvVibU5wpEbGdrcN5Y29ycA,1,Output,Cotton Fabric (organic)
+Polyester Fabric,8.9,http://data.nasa.gov/qudt/owl/unit#PoundMass,High global warming impacts,Product,http://sw.opencyc.org/concept/Mx4rvVibU5wpEbGdrcN5Y29ycA,1,Output,Polyester Fabric
+Wool,80,http://data.nasa.gov/qudt/owl/unit#PoundMass,Climate change from methane,Product,http://sw.opencyc.org/concept/Mx4rvVibU5wpEbGdrcN5Y29ycA,1,Output,Wool
+Leather,0.27,http://data.nasa.gov/qudt/owl/unit#PoundMass,Chrome processed,Product,,1,Output,Leather
+Battery (Alkaline),0.07,piece,Per AA battery -  disposable,Product,,1,Output,Battery (Alkaline)
+Battery (Lithium-ion),0.18,piece,Per AA battery -  rechargeable,Product,,1,Output,Battery (Lithium-ion)
+Circuit board,4200,http://data.nasa.gov/qudt/owl/unit#PoundMass,Printed board w/o components,Product,,1,Output,Circuit board
+Integrated circuitry,8400,http://data.nasa.gov/qudt/owl/unit#PoundMass,IC board with mixed components,Product,,1,Output,Integrated circuitry
+Integrated circuitry RoHS,12000,http://data.nasa.gov/qudt/owl/unit#PoundMass,IC board -  RoHS compliant,Product,,1,Output,Integrated circuitry RoHS
+Electricity (average),0.82,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,120V -  US ave. -  with dist. loss,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Electricity
+Electricity (photo),0.037,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,Sloped roof -  exclude batteries,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Electricity
+Electricity (wind),0.011,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,Horizontal axis wind turbine,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Electricity
+Electricity (hydroelectric),0.0004,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Electricity
+Electricity (nuclear),0.008,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Electricity
+Heat (coal),0.44,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,Hard coal in 5 mW furnace,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Heat
+Heat (gas),0.25,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,Natural gas in 100kW boiler,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Heat
+Heat (fuel oil),0.31,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,Light fuel oil in 1 mW ind. furnace,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Heat
+Heat (geothermal),0.03,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,10 mW geothermal probe,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Heat
+Heat (wood),0.018,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,Harwood [sic?] chips in 300kW furnace,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Heat
+Heat (solar),0.0095,http://data.nasa.gov/qudt/owl/unit#Kilowatthour,Solar hot water,Energy,http://sw.opencyc.org/concept/Mx4rvVkGfJwpEbGdrcN5Y29ycA,1,Output,Heat
+Van (3.5 ton),0.19,Ton Mile,Delivery van -  half full,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by 3.5 ton van
+Truck (16 ton),0.16,Ton Mile,Truck -  half full,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by 16 ton truck
+Truck (28 ton),0.12,Ton Mile,Truck -  half full,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by 28 ton truck
+Truck (40 ton),0.11,Ton Mile,Truck -  half full,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by 40 ton truck
+Automobile (20 mpg),0.24,Ton Mile,Low efficiency vehicle,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by 20 mpg automobile
+Automobile (50 mpg),0.094,Ton Mile,High efficiency vehicle,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by 50 mpg automobile
+Tram,0.92,Ton Mile,Light rail tram -  12 riders,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Tram
+Tanker ship (Oceanic),0.61,Ton Mile,Tanker for moving liquids,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Tanker ship (Oceanic)
+Freighter (Inland),0.09,Ton Mile,For rivers and lakes,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Freighter (Inland)
+Oceanic Freight Ship ,0.015,Ton Mile,-,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Freight Ship
+Container ship,0.17,Ton Mile,Moving boxcar size containers,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Container Ship
+Train (Freight),0.02,Ton Mile,Diesel freight locomotive,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Freight Train
+Train (Regional),0.024,Per Person Per Mile,<400 miles -  diesel -  person-mile,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Regional Train
+Train (long distance),0.013,Per Person Per Mile,>400 miles -  diesel -  person-mile,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Long-Distance Train
+Helicopter,1.6,http://data.nasa.gov/qudt/owl/unit#MinuteTime,Per minute of operation,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Helicopter
+Air (Regional),0.78,Per Person Per Mile,Within one continent -  person-mile,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Air (Regional)
+Air (Long Distance),0.41,Per Person Per Mile,Intercontinental -  person-mile,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Air (Long Distance)
+Air Freight (Regional),2.8,Ton Mile,Freight within one continent,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Air Freight (Regional)
+Air Freight (Intercontinental),1.6,Ton Mile,Intercontinental freight,Transportation Process,http://sw.opencyc.org/concept/Mx4rv-6HepwpEbGdrcN5Y29ycA,1,,Transportation by Air Freight (Intercontinental)
+Incineration of Aluminum,0.016,http://data.nasa.gov/qudt/owl/unit#PoundMass,Ecotoxic,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Aluminum
+Incineration of Copper,0.033,http://data.nasa.gov/qudt/owl/unit#PoundMass,Ecotoxic,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Copper
+Incineration of Lead,0.093,http://data.nasa.gov/qudt/owl/unit#PoundMass,Carcinogen -  human toxic,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Lead
+Incineration of Steel,0.0078,http://data.nasa.gov/qudt/owl/unit#PoundMass,Ecotoxic,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Steel
+Incineration of Tin Sheet,0.0079,http://data.nasa.gov/qudt/owl/unit#PoundMass,Human toxic -  carcinogen,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Tin Sheet
+Incineration of Zinc,0.12,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Zinc
+Incineration of Glass,0.011,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Glass
+Incineration of Cardboard,0.011,http://data.nasa.gov/qudt/owl/unit#PoundMass,20% water,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Cardboard
+Incineration of Newsprint,0.0077,http://data.nasa.gov/qudt/owl/unit#PoundMass,15% water,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Newsprint
+Incineration of Paper,0.011,http://data.nasa.gov/qudt/owl/unit#PoundMass,11% water,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Paper
+Incineration of Paint,1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Paint
+Incineration of LDPE (Low Density Polyethylene),1.4,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Low Density Polyethylene (LDPE)
+Incineration of High Density Polyethylene (HDPE),1.4,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,High Density Polyethylene (HDPE)
+Incineration of General Purpose Polystyrene (GPS),1.4,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,General Purpose Polystyrene (GPS)
+Incineration of High Impact Polystyrene (HIPS) ,1.4,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,High Impact Polystyrene (HIPS) 
+Incineration of Polyethylene terephthalate (PET),0.92,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polyethylene terephthalate (PET)
+Incineration of Polypropylene (PP),1.15,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polypropylene (PP)
+Incineration of Polyvinyl chloride (PVC),1,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polyvinyl chloride (PVC)
+Incineration of Elastomers/Expanded Polystyrene (EPS),1.4,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Expanded Polystyrene (EPS)
+Incineration of Polyurethane (PU),1.1,http://data.nasa.gov/qudt/owl/unit#PoundMass,-,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polyurethane (PU)
+Incineration of Textiles,0.0065,http://data.nasa.gov/qudt/owl/unit#PoundMass,Mixed textiles -  25% water,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Textiles
+Landfilling of Concrete,0.0032,http://data.nasa.gov/qudt/owl/unit#PoundMass,Inert material landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Concrete
+Landfilling of Glass,0.0032,http://data.nasa.gov/qudt/owl/unit#PoundMass,Inert material landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Glass
+Landfilling of Steel,0.0032,http://data.nasa.gov/qudt/owl/unit#PoundMass,Inert material landfill,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Steel
+Landfilling of Cardboard (Inert Material Landfill),0.0032,http://data.nasa.gov/qudt/owl/unit#PoundMass,5% water -  inert material landfill,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Cardboard
+Landfilling of Paint,0.0032,http://data.nasa.gov/qudt/owl/unit#PoundMass,5% water -  inert material landfill,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Paint
+Landfilling of Polyurethane (PU) (Inert Material Landfill),0.0032,http://data.nasa.gov/qudt/owl/unit#PoundMass,5% water -  inert material landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polyurethane (PU)
+Landfilling of Aluminum,0.0096,http://data.nasa.gov/qudt/owl/unit#PoundMass,Sanitary landfill -  ecotoxic,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Aluminum
+Landfilling of Tin Sheet,0.006,http://data.nasa.gov/qudt/owl/unit#PoundMass,San. landfill -  human tox. -  carcin.,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Tin Sheet
+Landfilling of Cardboard (Sanitary Landfill),0.007,http://data.nasa.gov/qudt/owl/unit#PoundMass,San. landfill -  human tox. -  carcin.,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Cardboard
+Landfilling of Newspaper,0.0058,http://data.nasa.gov/qudt/owl/unit#PoundMass,15% water -  sanitary landfill,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Newpaper
+Landfilling of Paper,0.0075,http://data.nasa.gov/qudt/owl/unit#PoundMass,14% water -  sanitary landfill,Product,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Paper
+Landfilling of Polyurethane (PU),0.013,http://data.nasa.gov/qudt/owl/unit#PoundMass,15% wat. -  human toxic. carcin.,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polyurethane (PU)
+Landfilling of Polyethylene terephthalate (PET),0.012,http://data.nasa.gov/qudt/owl/unit#PoundMass,Sanitary landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polyethylene terephthalate (PET)
+Landfilling of HDPE,0.014,http://data.nasa.gov/qudt/owl/unit#PoundMass,Sanitary landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,HDPE
+Landfilling of LDPE (Low Density Polyethylene),0.014,http://data.nasa.gov/qudt/owl/unit#PoundMass,Sanitary landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,LDPE (Low Density Polyethylene)
+Landfilling of Polypropylene (PP),0.014,http://data.nasa.gov/qudt/owl/unit#PoundMass,16% water -  sanitary landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polypropylene (PP)
+Landfilling of General Purpose Polystyrene (GPS),0.016,http://data.nasa.gov/qudt/owl/unit#PoundMass,Sanitary landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,General Purpose Polystyrene (GPS)
+Landfilling of High Impact Polystyrene (HIPS) ,0.016,http://data.nasa.gov/qudt/owl/unit#PoundMass,Sanitary landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,High Impact Polystyrene (HIPS) 
+Landfilling of Polyvinyl chloride (PVC),0.011,http://data.nasa.gov/qudt/owl/unit#PoundMass,Sanitary landfill,Substance,http://sw.opencyc.org/concept/Mx4rvVibh5wpEbGdrcN5Y29ycA,1,Input,Polyvinyl chloride (PVC)
