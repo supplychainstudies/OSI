@@ -16,7 +16,7 @@
 	<?= $navigationDisplay;?>
 
 	<div id="lca_header">
-		<div id="lca_title"><h1><?=$parts['quantitativeReference']['name'] ?></h1></div>
+		<div id="lca_title"><h1><?=$parts['title'] ?></h1></div>
 		<? /*<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
 		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["label"] ?></nr></h1></div>	
 	</div>
@@ -177,6 +177,7 @@
 			<? if (isset($parts['sameAs']) == true || isset($parts['categoryOf']) == true) { ?>
 			<div id="lca_same" class="lca">
 			<h2>More info</h2>
+			<p>Reference flow: <?=$parts['quantitativeReference']['name'] ?></p>
 			<?
 				if (isset($parts['sameAs']) == true) {
 					foreach ($parts['sameAs'] as $record) {

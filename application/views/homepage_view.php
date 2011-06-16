@@ -71,7 +71,7 @@
 
 								<? if (isset($parts->country) == true ) {
 									echo '<div id="maplite">';		
-												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x160&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:big%7Ccolor:white%7C".$parts->country.'"';
+												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x160&zoom=0&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&center:0,0&markers=size:big%7Ccolor:white%7C".$parts->country.'"';
 									echo '<img src="'.$map.'" alt="'.$parts->country.'"/>';
 									echo '<div id="infomap"><p>Location: <b>'.$parts->country.'</b></p></div>';
 									echo "</div>";

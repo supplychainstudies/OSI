@@ -2,7 +2,7 @@
 class Opencycmodel extends FT_Model{
     function opencycmodel(){
         parent::__construct();
-		$this->arc_config['store_name'] = "openCyc";
+		$this->arc_config['store_name'] = "opencyc";
     }
 
 	public function getOpenCycLabel($uri){
@@ -10,6 +10,8 @@ class Opencycmodel extends FT_Model{
 		$results = $this->executeQuery($q);
 		if (count($results) != 0) {
 			return $results[0]['label'];
+		} else {
+			return false;
 		}
 	}
 	
