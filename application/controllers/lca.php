@@ -418,19 +418,21 @@ class Lca extends FT_Controller {
 			$ratio = $oldamount * 0.45359237;
 			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
 		}
-
-		foreach ($parts['exchanges'] as &$exchanges) {
-			$exchanges['amount'] = $exchanges['amount'] / $ratio;
-			if ($exchanges['unit']['label'] == "Gram") {
-				$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";
+		if (isset($parts['exchanges']) == true) {
+			foreach ($parts['exchanges'] as &$exchanges) {
+				$exchanges['amount'] = $exchanges['amount'] / $ratio;
+				if ($exchanges['unit']['label'] == "Gram") {
+					$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";
+				}
 			}
 		}
-		
-		foreach ($parts['impactAssessments'] as &$impactAssessment) {
-			$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-			if ($impactAssessment['unit']['label'] == "Gram") { 
-				$impactAssessment['amount']/=1000; 
-				$impactAssessment['unit']['label'] = "Kilogram"; 
+		if (isset($parts['impactAssessments']) == true) {
+			foreach ($parts['impactAssessments'] as &$impactAssessment) {
+				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+				if ($impactAssessment['unit']['label'] == "Gram") { 
+					$impactAssessment['amount']/=1000; 
+					$impactAssessment['unit']['label'] = "Kilogram"; 
+				}
 			}
 		}
 		
