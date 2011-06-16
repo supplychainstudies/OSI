@@ -222,7 +222,7 @@ class Users extends FT_Controller {
 					$this->CI->db->set($data); 
 
 					if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
-						return false;
+						redirect('/users/register?error=Try Registering Again.');
 			}		
 			// Step 4: If there is a foaf URI, write to db
 			/*
@@ -259,7 +259,7 @@ class Users extends FT_Controller {
 			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
 				redirect('/users/dashboard/');
 			} else {
-				redirect('/users/login/');
+				redirect('/users/login?error=Log in now please');
 			}			
 		} else {
 			redirect('/users/register?error=Recaptcha did not work. Try again.');

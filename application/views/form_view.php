@@ -14,6 +14,7 @@
 	
 	
 	<div id="columnleft">
+		<? if (isset($_GET['error']) == true) { echo "<p class='error'>".$_GET['error']."</p>"; } ?>
 		<?		
 			if (isset($pass_data) == true) {
 				foreach ($pass_data as $key => $value) {

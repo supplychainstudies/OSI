@@ -8,6 +8,10 @@ class Sandbox extends FT_Controller {
 		$this->load->model(Array('lcamodel','loadmodel'));
 	}
 	
+	function cats() {
+		$this->lcamodel->getAllUsedCategories();
+	}
+	
 	function fixlabels() {
 		$this->lcamodel->fixLabels();
 	}
