@@ -12,12 +12,20 @@
 class Admin extends FT_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','opencycmodel','testmodel'));	
+		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','opencycmodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper','linkeddata_helper'));
 		$obj =& get_instance();    
         $obj->load->library(array('xml'));
         $this->ci =& $obj;
+	}
+	
+	public function testGraph() {
+		$uris = $this->lcamodel->getRecords();
+		$q = "SELECT * { GRAPH <http://footprinted.org> { ?x ?y ?z } }";
+		var_dump($q);
+		$results= $this->lcamodel->executeQuery($q);
+		var_dump($results);
 	}
 	
 	public function normalize() {
@@ -115,101 +123,25 @@ class Admin extends FT_Controller {
 		//}
 	}
 	
-	public function see() {
-		$this->arc_config['store_name'] = "slow_footprinted";
-		$uris = $this->lcamodel->oldgetRecords();
-		var_dump($uris);
-	}
-	
 	public function convertToNamedGraphs() {
-		$uris = $this->lcamodel->oldgetRecords();
-		var_dump($uris);
-		foreach ($uris as $uri) {
-			$triples = array_merge($this->testmodel->getArcTriples($uri['uri']), $this->testmodel->getImpactAssessmentNode($uri['uri']));
-			$graph_name = str_replace("rdfspace/lca/","", $uri['uri']).".rdf";
-			$model_name = "_:".str_replace("http://footprinted.org/rdfspace/lca/","", $uri['uri']);
-			for($i=0; $i<count($triples);$i++) {
-					if (isset($triples[$i]['s']) == false || isset($triples[$i]['p']) == false || isset($triples[$i]['o']) == false) {
-						unset($triples[$i]);
-					}
-					if ($triples[$i]['s'] == $uri['uri']) {
-						$triples[$i]['s'] = $model_name;
-					} 
-					if (strpos($triples[$i]['s'],"rdfspace") !== false) {
-						$triples[$i]['s'] = str_replace("rdfspace/lca/","",str_replace("rdfspace/organizations/","",str_replace("rdfspace/people/","",str_replace("rdfspace/person/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $triples[$i]['s']))))))))).".rdf";
-					}	
-					if (strpos($triples[$i]['p'],"rdfspace") !== false) {
-						$triples[$i]['p'] = str_replace("rdfspace/lca/","",str_replace("rdfspace/organizations/","",str_replace("rdfspace/people/","",str_replace("rdfspace/person/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $triples[$i]['p']))))))))).".rdf";
-					}
-					if (strpos($triples[$i]['o'],"rdfspace") !== false) {
-						$triples[$i]['o'] = str_replace("rdfspace/lca/","",str_replace("rdfspace/organizations/","",str_replace("rdfspace/people/","",str_replace("rdfspace/person/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $triples[$i]['o']))))))))).".rdf";
-					}
+		$uris = $this->lcamodel->getRecords();
+		//foreach ($uris as $uri) {
+			$triples = $this->lcamodel->getArcTriples($uris[0]['uri']);
+		//}
+		foreach ($triples as &$triple) {
+			foreach ($triple as &$t) {
+				if ($t == $uris[0]['uri']) {
+					$t = "_:".str_replace("http://footprinted.org/rdfspace/lca/","", $t);
+				} 
 			}
-			var_dump($triples);
-			$this->testmodel->addT($graph_name, $triples);
-		}		
-	}
-	
-	public function extras() {
-		$uris = $this->bibliographymodel->getAllBibliographies();
-		foreach ($uris as $uri) {
-			$triples = $this->bibliographymodel->getArcTriples($uri['uri']);
-			$graph_name = str_replace("rdfspace/organizations/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $uri['uri'])))))).".rdf";
-			$graph_bnode = "_:".str_replace("http://footprinted.org/","",str_replace("rdfspace/organizations/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $uri['uri'])))))));
-			foreach ($triples as &$triple) {
-				foreach ($triple as &$t) {
-					if ($t == $uri['uri']) {
-						$t = $graph_bnode;
-					} elseif (strpos($t,"rdfspace") !== false) {
-						$t = str_replace("rdfspace/organizations/","",str_replace("rdfspace/people/","",str_replace("rdfspace/person/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $t)))))))).".rdf";
-					}
-				}
 			
-			}
-			var_dump($triples);
-			$this->testmodel->addT($graph_name, $triples);			
 		}
-		$uris = $this->peoplemodel->getAllPeople();
-		foreach ($uris as $uri) {
-			$triples = $this->peoplemodel->getArcTriples($uri['uri']);
-			$graph_name = str_replace("rdfspace/people/","", str_replace("rdfspace/person/","", $uri['uri'])).".rdf";
-			$graph_bnode = "_:".str_replace("http://footprinted.org/rdfspace/people/","", str_replace("http://footprinted.org/rdfspace/person/","", $uri['uri']));
-			foreach ($triples as &$triple) {
-				foreach ($triple as &$t) {
-					if ($t == $uri['uri']) {
-						$t = $graph_bnode;
-					} 	elseif (strpos($t,"rdfspace") !== false) {
-							$t = str_replace("rdfspace/organizations/","",str_replace("rdfspace/people/","",str_replace("rdfspace/person/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $t)))))))).".rdf";
-						}
-				}
-			
-			}
-			var_dump($triples);
-			$this->testmodel->addT($graph_name, $triples);			
-		}
+		$graph_name = str_replace("http://footprinted.org/rdfspace/lca/","", $uris[0]['uri']).".rdf";
+		var_dump($graph_name);
+		var_dump($triples);
+		//$this->testmodel->addT($graph_name, $triples);
 	}
 
-	public function addPeople() {
-		$uris = $this->peoplemodel->getAllPeople();
-		foreach ($uris as $uri) {
-			$triples = $this->peoplemodel->getArcTriples($uri['uri']);
-			$graph_name = str_replace("rdfspace/people/","", str_replace("rdfspace/person/","", $uri['uri'])).".rdf";
-			$graph_bnode = "_:".str_replace("http://footprinted.org/rdfspace/people/","", str_replace("http://footprinted.org/rdfspace/person/","", $uri['uri']));
-			foreach ($triples as &$triple) {
-				foreach ($triple as &$t) {
-					if ($t == $uri['uri']) {
-						$t = $graph_bnode;
-					} 	elseif (strpos($t,"rdfspace") !== false) {
-							$t = str_replace("rdfspace/organizations/","",str_replace("rdfspace/people/","",str_replace("rdfspace/person/","",str_replace("rdfspace/website/","",str_replace("rdfspace/book/","",str_replace("rdfspace/conference/","",str_replace("rdfspace/journal/", "", str_replace("rdfspace/bibliography/","", $t)))))))).".rdf";
-						}
-				}
-			
-			}
-			$this->testmodel->addT($graph_name, $triples);			
-		}
-		
-		
-	}
 
 	public function assignCategory($index = 1) {
 		// find URI of something that doesnt have a category or sameas

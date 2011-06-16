@@ -306,7 +306,6 @@ class CI_Form_validation {
 			}
 			else
 			{
-				var_dump($this->_config_rules);
 				$this->set_rules($this->_config_rules);
 			}
 

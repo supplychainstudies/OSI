@@ -87,7 +87,7 @@
    }
 
 	function toURI($type, $name) {
-		return "http://footprinted.org/" . slug($name) . rand(999999,10000000) . ".rdf";
+		return "http://footprinted.org/rdfspace/" . $type . "/" . slug($name) . rand(999999,10000000);
 	}
 
 ?>

@@ -18,6 +18,7 @@ class FT_Model extends CI_Model{
 	    $this->config->load('arc');	
 		$this->config->load('arcdb');	
 		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
+		$this->arc_config['store_name'] = "footprinted";
 	}	
 	
 	// Configuration information for accessing the arc store
@@ -100,8 +101,8 @@ class FT_Model extends CI_Model{
 	 * @return Null
 	 * @param $triples Array		
 	 */
-	public function addTriples($triples, $graph) {	
-		$q = "insert into <".$graph."> { ";	
+	public function addTriples($triples) {	
+		$q = "insert into <http://footprinted.org/> { ";	
 		// for each triple				
 		foreach ($triples as $triple) {
 			// for each value 
@@ -134,9 +135,10 @@ class FT_Model extends CI_Model{
 	}
 
 	public function getURIbyLabel($string) {
+		
        $q = "select ?uri ?label where { " .
            "?uri rdf:label ?label . " .
-           "FILTER regex(?label, '".$string."', 'i' )" .              
+           "FILTER regex(?label, '".$string."?', 'i' )" .              
            "}";
        $results = $this->executeQuery($q);
 		if (count($results) > 0) {
@@ -144,7 +146,7 @@ class FT_Model extends CI_Model{
 		} else {
 	       $q = "select ?uri ?label where { " .
 	           "?uri rdfs:label ?label . " .
-	           "FILTER regex(?label, '".$string."', 'i' )" .              
+	           "FILTER regex(?label, '".$string."?', 'i' )" .              
 	           "}";
 	       $results = $this->executeQuery($q);
 			if (count($results) > 0) {
@@ -224,8 +226,7 @@ class FT_Model extends CI_Model{
 	 * @return $triples Array
 	 * @param $uri string		
 	 */
-	public function old_getArcTriples($uri) {
-		//$this->arc_config['store_name'] = "slow_footprinted";
+	public function getArcTriples($uri) {
 		$q = "select ?p ?o where { <".$uri."> ?p ?o . }";	
 		$records = $this->executeQuery($q);	
 		$records_next = array();
@@ -260,63 +261,14 @@ class FT_Model extends CI_Model{
 	}
 	
 
-
-
-	public function getArcTriples($node = null, $graph = null) {
-		if ($node == null && $graph != null) {
-			$q = "select * from <".$graph."> where { ?s ?p ?o . }"; }
-		elseif ($node != null && $graph != null) {
-			$q = "select * from <".$graph."> where { <".$node."> ?p ?o . }"; }			
-		elseif ($node != null && $graph == null) {
-			$q = "select * where { <".$node."> ?p ?o . }";	}	
-		$records = $this->executeQuery($q);	
-		$records_next = array();
-		$records_all = array();
-		$records_top = array();
-		foreach ($records as &$record) {
-				if ($node != null) {
-					$record['s'] = $node;
-				}
-				$records_top[] = array(
-					's' => $record['s'],
-					'p' => $record['p'],
-					'o' => $record['o']
-				);				
-				if (strstr($record['o'], "_:") != false) {
-					$records_next = $this->getArcTriples($record['o'],$graph);				
-					if (count($records_next) > 0) {
-						if (count($records_all) > 0) { 
-							$records_all = array_merge($records_all, $records_next);
-						}	
-						else {
-							$records_all = $records_next;
-						}
-					}
-				}				
-			}
-		if (count($records_all) > 0 && count($records_top) > 0) {
-			return array_merge($records_top, $records_all);
-		}
-		elseif (count($records_top) > 0) {
-			return $records_top;
-		} else {
-			return array(0);
-		}
-	}
-
-
-
-
 	/**
 	 * This function returns triples in RDF form
 	 * @return $doc string
 	 * @param $uri string		
 	 */	
 	public function getRDF($URI) {
-		$config = $this->arc_config;
-		//var_dump($config);
-		$ser = $this->arc->getRDFXMLSerializer($config);
-		$doc = $ser->getSerializedTriples($this->getArcTriples(null,$URI));
+		$ser = $this->arc->getRDFXMLSerializer($this->arc_config);
+		$doc = $ser->getSerializedTriples($this->getArcTriples($URI));
 		return $doc;
 	}
 	
@@ -327,9 +279,8 @@ class FT_Model extends CI_Model{
 	 * @param $uri string		
 	 */
 	public function getJSON($URI) {
-		$config = $this->arc_config;
-		$ser = $this->arc->getRDFJSONSerializer($config);
-		$doc = $ser->getSerializedTriples($this->getArcTriples(null,$URI));
+		$ser = $this->arc->getRDFJSONSerializer($this->arc_config);
+		$doc = $ser->getSerializedTriples($this->getArcTriples($URI));
 		return $doc;
 	}
 
@@ -339,20 +290,15 @@ class FT_Model extends CI_Model{
 	 * @return $triples Array
 	 * @param $uri string		
 	 */	
-	public function getTriples($uri = null, $graph = null) {
-		if ($uri == null && $graph != null) {
-			$q = "select ?predicate ?object from <".$graph."> where { ?subject ?predicate ?object . }"; }
-		elseif ($uri != null && $graph != null) {
-			$q = "select ?predicate ?object from <".$graph."> where { <".$uri."> ?predicate ?object . }"; }			
-		elseif ($uri != null && $graph == null) {
-			$q = "select ?predicate ?object where { <".$uri."> ?predicate ?object . }";	}
+	public function getTriples($uri) {
+		$q = "select ?predicate ?object where { <".$uri."> ?predicate ?object . }";	
 		$records = $this->executeQuery($q);	
 		$xarray = array();
 		$records_next = array();
 		$records_all = array();
 		foreach ($records as $record) { 			
 			if (strstr($record['object'], "_:") != false) {
-				$xarray[$record['predicate']][$record['object']] = $this->getTriples($record['object'], $graph);		
+				$xarray[$record['predicate']][$record['object']] = $this->getTriples($record['object']);		
 			} else {
 					$xarray[$record['predicate']][] = $record['object'];
 			}								
@@ -384,12 +330,12 @@ class FT_Model extends CI_Model{
 		return $bnode;
 	}
 
-	public function getLabel($URI, $graph = null) {				
-		$record = $this->getSomething($URI, "rdfs:label", $graph);
+	public function getLabel($URI) {				
+		$record = $this->getSomething($URI, "rdfs:label");
 		if ($record != "") {
 			return $record;
 		} else {				
-			$record = $this->getSomething($URI, "rdf:label", $graph);
+			$record = $this->getSomething($URI, "rdf:label");
 			if ($record != "") {
 				return $record;
 			} else {

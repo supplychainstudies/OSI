@@ -24,17 +24,6 @@ class API extends FT_Controller {
 
 
 	public function search($encode = "json") {
-		//
-		//
-		// This gives page load times
-		$time = microtime(); 
-		$time = explode(" ", $time); 
-		$time = $time[1] + $time[0]; 
-		$start = $time; 
-		//
-		//
-		//
-		
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
 		$checked_URIs = array();
 		$search_terms = $_GET;
@@ -82,27 +71,10 @@ class API extends FT_Controller {
 			header('Content-type: text/html');
 			var_dump($rs);			
 		}
-		// Place this part at the very end of your page 
-
-		$time = microtime(); 
-		$time = explode(" ", $time); 
-		$time = $time[1] + $time[0]; 
-		$finish = $time; 
-		$totaltime = ($finish - $start); 
-		printf ("This page took %f seconds to load.", $totaltime);
+		
 	}
 	
 	public function searchByCategory($encode = "json") {
-		//
-		//
-		// This gives page load times
-		$time = microtime(); 
-		$time = explode(" ", $time); 
-		$time = $time[1] + $time[0]; 
-		$start = $time; 
-		//
-		//
-		//
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
 		$checked_URIs = array();
 		$search_terms = $_GET;
@@ -178,14 +150,7 @@ class API extends FT_Controller {
 			header('Content-type: text/html');
 			echo $rs;			
 		}
-		// Place this part at the very end of your page 
-
-		$time = microtime(); 
-		$time = explode(" ", $time); 
-		$time = $time[1] + $time[0]; 
-		$finish = $time; 
-		$totaltime = ($finish - $start); 
-		printf ("This page took %f seconds to load.", $totaltime);
+		
 	}
 	
 	private function assocArrayToXML($root_element_name,$ar)

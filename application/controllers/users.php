@@ -53,7 +53,7 @@ class Users extends FT_Controller {
 					if ($this->simpleloginsecure->login($_POST['user_name'], $_POST['password']) == true) {
 						redirect('/lca/featured');
 					} else {
-						redirect('/users/login');
+						redirect('/users/loginerror');
 					}
 				}
 			// If there is no post from Janrain, redirect them to the register page
@@ -63,9 +63,9 @@ class Users extends FT_Controller {
 		} // end of not logged in
 	}
 	
-	public function login() {
+	public function loginerror() {
 		$data = $this->form_extended->load('login'); 
-		$the_form = "<div><p>Hm, your user name or password doesn't seem to be right. Want to try again?</p></div>";
+		$the_form = "<div<p>Hm, your user name or password doesn't seem to be right. Want to try again?</p></div>";
 		$the_form .= $this->form_extended->build();
 		$the_form .= "<div><p> Or <a href=\"users/register\">Register</a> with us.</p></div>";
 		$this->script(Array('form.js','register.js'));
@@ -74,11 +74,10 @@ class Users extends FT_Controller {
 		$this->display("Form", "form_view");
 	}
 	
-	public function logthisin() { 
+	public function login() { 
 		if (isset($_SERVER['HTTP_REFERER']) == true) 
 			$this->session->set_userdata(array('last_page' => $_SERVER['HTTP_REFERER']));
-		if($this->session->userdata('id')) {
-			redirect('/users/dashboard');			
+		if($this->session->userdata('id')) {			
 		} elseif (isset($_POST['user_name']) == true) {
 			if ($_POST['open_id'] != "") {
 				$this->loginopenid($_POST['open_id']);
@@ -97,8 +96,9 @@ class Users extends FT_Controller {
 		} else if (isset($_SERVER['HTTP_REFERER']) == true) {
 			$refer = $_SERVER['HTTP_REFERER'];
 		} else {
-			$refer = $config['base_url'];
-		}		
+			$refer = "http://footprinted.org/";
+		}
+			
 		header ("Location: " . $refer);			
 	}
 	
@@ -192,10 +192,9 @@ class Users extends FT_Controller {
 			$this->CI =& get_instance();
 			// Step 1: Write the user name, email, password to db
 			// Step 2: Get the unique id	
+			
 			$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
-			if (isset($id['error'])==true) {
-				redirect('users/login?error='.$id['error']);
-			}
+		
 			// Step 3: If there is an openid, write to db
 			/*
 			$openid_array = $_POST['openid_'];
@@ -204,13 +203,13 @@ class Users extends FT_Controller {
 					if ($openid != "") {
 					$data = array(
 								'user_id' => $id,
-								'openid_url' => $_POST['openid_']
+								'openid_url' => $openid
 							);
 
 					$this->CI->db->set($data); 
 
-					//if(!$this->CI->db->insert($this->openid_table))  //There was a problem! 
-						//return false;
+					if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
+						return false;
 					}
 				}
 			} */
@@ -240,39 +239,30 @@ class Users extends FT_Controller {
 
 					$this->CI->db->set($data); 
 
-					//if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
+					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
+						return false;
 				}		
-			}
+			}	
 			*/
-			if (isset($_POST['foaf_']) == false) {
-				$_POST['foaf_'] = toURI("people",$_POST['user_name_']);	
+			if ($_POST['foaf_'] == "") {
+				$_POST['foaf_'] = toURI("people",$_POST['user_name_']);				
 			}
-			$data = array(
-						'user_id' => $id,
-						'foaf_uri' => $_POST['foaf_']
-					);
+					$data = array(
+								'user_id' => $id,
+								'foaf_uri' => $_POST['foaf_']
+							);
 
-				$this->CI->db->set($data); 
+					$this->CI->db->set($data); 
 					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
 						return false;		
 		
 			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
 				redirect('/users/dashboard/');
 			} else {
-				$str = '';
-				if (isset($_POST['user_name_'])) 
-					$str .= "user_name_=".$_POST['user_name_']."&";
-				if (isset($_POST['email_'])) 
-					$str .= "email_=".$_POST['email_']."&";
-				redirect('/users/register?'.$str);
-			}		
-		} else {	
-			$str = '';
-			if (isset($_POST['user_name_'])) 
-				$str .= "user_name_=".$_POST['user_name_']."&";
-			if (isset($_POST['email_'])) 
-				$str .= "email_=".$_POST['email_']."&";
-			redirect('/users/register?'.$str);
+				redirect('/users/login/');
+			}			
+		} else {
+			redirect('/users/register?error=Recaptcha did not work. Try again.');
 		}
 	}
 	
@@ -290,12 +280,9 @@ class Users extends FT_Controller {
 				// Get the user activity (such as comments)
 				$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
 				// Get the LCAs that the user has published
-				//$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
-				if ($user_activity != false) {
-					$this->data("user_activity", $user_activity);
-				}
-				
-				//$this->data("published", $published);
+				$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
+				$this->data("user_activity", $user_activity);
+				$this->data("published", $published);
 			}			
 		} else {
 			$this->index();

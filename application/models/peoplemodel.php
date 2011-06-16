@@ -13,68 +13,57 @@ class Peoplemodel extends FT_Model{
      */
     function Peoplemodel(){
         parent::__construct();
- $this->arc_config['store_name'] = "fast_footprinted";
+ 
     }
  
     public function everybody() {
          
         $q = "select ?firstName ?lastName where { " .   
-            "?uri foaf:firstName ?firstName . " . 
-            "?uri foaf:lastName ?lastName . " . 
+            "?uri '".$this->arc_config['ns']['foaf']."firstName' ?firstName . " . 
+            "?uri '".$this->arc_config['ns']['foaf']."lastName' ?lastName . " . 
             "}";
+        var_dump($q);
         $records = $this->executeQuery($q);  
+        var_dump($records);
         if (count($records) > 0) {
             return $records;
         } else {
             return false;
         }
     }
-   
-  
+     
     public function searchPeople($info) {
+        $filters = "";
+        $vars = "";
         $q = "";
         if (isset($info['uri']) == true) {
- 	        $q = "select ?email ?firstName ?lastName from <" . $info['uri'] . "> where { " .   
-	            " ?s foaf:firstName ?firstName . " . 
-	            " ?s foaf:lastName ?lastName . " . 
-				"OPTIONAL { ?s  foaf:mbox_sha1sum  ?email } " . 
-	            "}";               
+            $uri = "<" . $info['uri'] . ">";      
         } else {
-
-	        if (isset($info['email']) == true) {
-	            $q .= " ?s foaf:mbox_sha1sum ?email . ";  
-				$q .= "FILTER regex(?email, '" . $info['email'] . "', 'i')  ";     
-	        } else {
-	            $q .= "OPTIONAL { ?s  foaf:mbox_sha1sum  ?email } ";
-	        }
-
-	        if (isset($info['firstName']) == true) {    
-	            $q .= "FILTER regex(?firstName, '" . $info['firstName'] . "', 'i')  ";  
-	        }
-	        if (isset($info['lastName']) == true) { 
-	            $q .= "FILTER regex(?lastName, '" . $info['lastName'] . "', 'i')  ";    
-	        } 
-
-
-	        $q = "select * where { GRAPH ?uri {" . 
-	            "?s rdfs:type foaf:Person . " .    
-	            " ?s foaf:firstName ?firstName . " . 
-	            " ?s foaf:lastName ?lastName . " . 
-	            $q . 
-	            "} }";
+            $vars .= "?uri ";
+            $uri = "?uri";
         }
-        $records = $this->executeQuery($q);  
-        if (count($records) > 0) {
-            return $records;
+        /*
+        if (isset($info['email']) == true) {
+            $q .= $uri . " '".$this->arc_config['ns']['foaf']."mbox_sha1sum' '" . $info['email'] . "' . ";       
         } else {
-            return false;
+            $vars .= "?email ";
+            $q .= $uri . " '".$this->arc_config['ns']['foaf']."mbox_sha1sum' ?email . "; 
         }
-    }
-
-    public function getAllPeople() {
+        */
          
-        $q = "select ?uri where { " .   
-            "?uri rdfs:type foaf:Person . " . 
+        if (isset($info['firstName']) == true) {    
+            $q .= "FILTER regex(?firstName, '" . $info['firstName'] . "', 'i')  ";  
+        }
+        if (isset($info['lastName']) == true) { 
+            $q .= "FILTER regex(?lastName, '" . $info['lastName'] . "', 'i')  ";    
+        } 
+         
+         
+        $q = "select ".$vars."?firstName ?lastName where { " . 
+            //$uri . " '".$this->arc_config['ns']['rdfs']."type' '".$this->arc_config['ns']['foaf']."Person' . " .    
+            $uri . " '".$this->arc_config['ns']['foaf']."firstName' ?firstName . " . 
+            $uri . " '".$this->arc_config['ns']['foaf']."lastName' ?lastName . " . 
+            $q . 
             "}";
         $records = $this->executeQuery($q);  
         if (count($records) > 0) {

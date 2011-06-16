@@ -277,7 +277,7 @@ text-transform:uppercase;
 }
 
 .require_ok {
-	border: 1px solid #ccc; 
+	border: 0px;
 }
 
 #div_flow label {

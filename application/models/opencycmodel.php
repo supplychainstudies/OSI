@@ -6,20 +6,23 @@ class Opencycmodel extends FT_Model{
     }
 
 	public function getOpenCycLabel($uri){
-		$results =  $this->getLabel($uri);
-		return $results;
+		$q = "SELECT ?label from <".$uri."> WHERE { ?s rdfs:label ?label }";
+		$results = $this->executeQuery($q);
+		if (count($results) != 0) {
+			return $results[0]['label'];
+		}
 	}
 	
 	public function getOpenCycSameAs($uri) {
-		return $this->getSomeThings($uri, "owl:sameAs");
+		$q = "SELECT ?uri from <".$uri."> WHERE { ?s owl:sameAs ?uri }";
+		$results = $this->executeQuery($q);
+		if (count($results) != 0) {
+			return $results;
+		}
 	}
 	
 	public function getDbpedia($uri) {
 		return $this->getAll($uri,'');
-	}
-	
-	public function getOpenCycCategories($uri) {
-		$stuff = $this->getOpenCycType($uri);
 	}
 	
 	public function getOpenCycSearchCategories($uri) {
@@ -33,6 +36,10 @@ class Opencycmodel extends FT_Model{
 		}
 		return $rs;
 	}
+	/*
+	public function getOpenCycCategories($uri) {
+		$stuff = $this->getOpenCycType($uri);
+	}
 	
 	public function getOpenCycType($uri) {
 		$the_array = array();
@@ -40,7 +47,7 @@ class Opencycmodel extends FT_Model{
 		if (count($results) > 0) {
 			foreach ($results as $result) {
 				if (strpos($result,"opencyc") !== false) {
-					$the_array[$result]["label"] = $this->getLabel($result);
+					$the_array[$result]["label"] = $this->getOpenCycLabel($result);
 					$rs = $this->getOpenCycType($result);
 					if (count($rs) > 0) {
 						$the_array[$result]["paths"] = $rs;
@@ -56,7 +63,7 @@ class Opencycmodel extends FT_Model{
 			return null;
 		}
 	}	
-	
+	*/
 	public function getSuggestedPages($strings) {
 		$this->arc_config['store_name'] = "openCyc";
 		$results = array(); 

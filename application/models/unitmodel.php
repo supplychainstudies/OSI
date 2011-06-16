@@ -5,20 +5,16 @@ class Unitmodel extends FT_Model{
 		parent::__construct();
 		$this->arc_config['store_name'] = "qudt";
 	}
-	public $cachedtt = array();
 	// Adds human legible labels to units
 	public function makeToolTip($uri) {
 		$this->arc_config['store_name'] = "qudt";
-		if (isset($this->cachedtt[$uri]) == true) {
-			$tooltips = $this->cachedtt[$uri];
-		} elseif ($uri == "http://data.nasa.gov/qudt/owl/unit#Kilogram"){
+		if ($uri == "http://data.nasa.gov/qudt/owl/unit#Kilogram"){
 			$tooltips = array();
 			$tooltips['label'] = "Kilogram";	
 			$tooltips['abbr'] = "kg";
 			$tooltips['l'] = "Kilogram";
 			$tooltips['quantityKind'] = "Mass";
-			$this->cachedtt[$uri] = $tooltips;
-		} else{
+		}else{
 			if (strpos($uri,":") !== false) {
 				$tooltips = array();
 				$tooltips['label'] = $this->getLabel($uri);	
@@ -32,10 +28,8 @@ class Unitmodel extends FT_Model{
 				$tooltips['l'] = $uri;
 				$tooltips['quantityKind'] = "";
 			}
-			$this->cachedtt[$uri] = $tooltips;
 		}
 		return $tooltips;
-		
 	}
 	
 	public function getUnits() {

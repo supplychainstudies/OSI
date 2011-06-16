@@ -13,15 +13,12 @@ class Lca extends FT_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel'));	
-		$this->load->library(Array('form_extended', 'xml','SimpleLoginSecure'));
+		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper'));
 		$this->load->helper(Array('linkeddata_helper'));
 		$obj =& get_instance();    
         $obj->load->library(array('xml'));
         $this->ci =& $obj;
-		if ($this->session->userdata('id') != true){
-		      redirect('/users/login');
-		    }
 	}
 	public $URI;
 	public $data;
@@ -44,11 +41,9 @@ class Lca extends FT_Controller {
 	    */
 
 		if ($post_data = $_POST) {	
-			$graph_uri = toURI("lca", $post_data['productServiceName_']); 
-			$model_node = toBNode("model");
+			$model_node = toURI("lca", $post_data['productServiceName_']); 
 			$exchange_node = $model_node;
-			$bibliography_uri = toURI("bibliography", $post_data['title_']); 
-			$bibliography_node = toBNode("bibliography"); 
+			$bibliography_node = toURI("bibliography", $post_data['title_']); 
 			$process_node = $model_node;
 			$product_node = $model_node;
 			$impactassessment_node = "";
@@ -56,10 +51,9 @@ class Lca extends FT_Controller {
 			// Bibliography
 			// First, look to see if they picked the first author, or if its someone new
 			if ($post_data['author_'] != "") {
-				$person_uri = $post_data['author_'];
+				$person_node = $post_data['author_'];
 			} elseif ($post_data['author_label_'] != "") {
-				$person_bnode = toBNode("person");
-				$person_uri = toURI("person", $post_data['author_label_']); 
+				$person_node = toURI("person", $post_data['author_label_']); 
 				if (strpos($post_data['author_label_'], ",") !== false) {
 					$name_array = explode (",", $post_data['author_label_']);
 					$post_data['firstName_'] = trim($name_array[1]);
@@ -100,26 +94,6 @@ class Lca extends FT_Controller {
 			if (isset($person_node) == true) {
 				$datasets['bibliography'][0]["author_"] = array($person_node);
 			}
-			
-			foreach ($datasets as $key=>$dataset) {
-				if ($key != "submit_") {
-					foreach ($dataset as $i=>$datasetinstance) {
-						$node_name = $key."_node";
-						$node = $$node_name;
-						$uri_name = $key."_uri";
-						$uri = $$uri_name;
-						$data = $this->form_extended->load($key); 	
-						if (isset($change_p[$key][$i]) == false) {
-							$change_p[$key][$i] = null;
-						}					
-						$triples = $this->form_extended->build_group_triples($node, $datasetinstance, $data,"",0, $change_p[$key][$i]);
-						//var_dump($triples);
-						$this->lcamodel->addTriples($triples, $uri);
-					}
-				} 
-				unset($datasets[$key]);
-			}
-			$triples = array();
 						
 			$datasets['process'] = array();
 			if ($post_data['productServiceName_'] != "") {
@@ -189,7 +163,7 @@ class Lca extends FT_Controller {
 				array(
 					'subject' => $model_node,
 					'predicate' => 'eco:hasDataSource',
-					'object' => $bibliography_uri
+					'object' => $bibliography_node
 				),
 				array(
 					'subject' => $model_node,
@@ -242,9 +216,8 @@ class Lca extends FT_Controller {
 					"object" => $_process_node
 				);
 			}
-			//var_dump($triples);
-			$this->lcamodel->addTriples($triples, $graph_uri);
-			redirect('/lca/view/'.str_replace(".rdf","",str_replace("http://footprinted.org/","",$graph_uri)));
+			$this->lcamodel->addTriples($triples);
+			redirect('/lca/view/'.str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 			//$this->view(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 		}else {
 			redirect('/create/start');
@@ -257,7 +230,7 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in RDF
 	*/
 	public function viewRDF($URI = null) {
-		$rdf = $this->lcamodel->getRDF("http://footprinted.org/".$URI.".rdf");
+		$rdf = $this->lcamodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
 		header('Content-type: text/xml');
 		echo $rdf;
@@ -268,7 +241,7 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in JSON
 	*/	
 	public function viewJSON($URI = null) {
-		$json = $this->lcamodel->getJSON("http://footprinted.org/".$URI.".rdf");
+		$json = $this->lcamodel->getJSON("http://footprinted.org/rdfspace/lca/".$URI);
 		header('Content-type: application/json');
 		echo $json;
 	}
@@ -410,14 +383,15 @@ class Lca extends FT_Controller {
 	*/
 	public function view($URI = null) {	
 		$parts['uri'] = $URI;
-		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/" . $URI . ".rdf"));
-		$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/" . $URI . ".rdf"));
-		$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/" . $URI . ".rdf"));	
-		$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/" . $URI . ".rdf"));
-		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/" . $URI . ".rdf"));
-		$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/" . $URI . ".rdf"));
-		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/" . $URI . ".rdf"));
-		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/" . $URI . ".rdf");
+		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
+		$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
+		$parts['title'] = $this->lcamodel->getTitle("http://footprinted.org/rdfspace/lca/" . $URI);
 		//$parts['suggestions'] = $this->lcamodel->getOpenCycSuggestions("http://footprinted.org/rdfspace/lca/" . $URI);
 	 	foreach ($parts as $key=>$part) {
 			if ($parts[$key] === false || $parts[$key] == false || count($parts[$key]) == 0) {
@@ -487,44 +461,46 @@ class Lca extends FT_Controller {
 			}
 		}
 		// Turns exchanges into input and output array divided into categories 
-
-		foreach ($parts['exchanges'] as $exchange) {
-			if (isset($exchange['unit']['quantityKind']) == true) {
-				$parts[$exchange['direction']][$exchange['unit']['quantityKind']][] = $exchange;				
-			} else {
-				$parts[$exchange['direction']]['misc'][] = $exchange;
+		if (isset($parts['exchanges']) == true) {
+			foreach ($parts['exchanges'] as $exchange) {
+				if (isset($exchange['unit']['quantityKind']) == true) {
+					$parts[$exchange['direction']][$exchange['unit']['quantityKind']][] = $exchange;				
+				} else {
+					$parts[$exchange['direction']]['misc'][] = $exchange;
+				}
 			}
-		}
-		/* Crunches the data to create the graphics and total calculations */
-		$totalinput = 0; 
-		if (isset($parts['Input']["Mass"]) == true) { 
-		foreach ($parts['Input']["Mass"] as $i) {
-			$totalinput += $i['amount'];
-		}}
-		$totalinputliter = 0; 
-		if (isset($parts['Input']["Liquid Volume"]) == true) { 
-		foreach ($parts['Input']["Liquid Volume"] as $i) {
-			$totalinputliter += $i['amount'];
-		}}
-		$totalinputland = 0; 
-		if (isset($parts['Input']["Area"]) == true) { 
-		foreach ($parts['Input']["Area"] as $i) {
-			$totalinputland += $i['amount'];
-		}}
-		$totaloutput = 0;
-		if (isset($parts['Output']["Mass"]) == true) {  
-		foreach ($parts['Output']["Mass"] as $i) {
-			$totaloutput += $i['amount'];
-		}}
-				
+			/* Crunches the data to create the graphics and total calculations */
+			$totalinput = 0; 
+			if (isset($parts['Input']["Mass"]) == true) { 
+			foreach ($parts['Input']["Mass"] as $i) {
+				$totalinput += $i['amount'];
+			}}
+			$totalinputliter = 0; 
+			if (isset($parts['Input']["Liquid Volume"]) == true) { 
+			foreach ($parts['Input']["Liquid Volume"] as $i) {
+				$totalinputliter += $i['amount'];
+			}}
+			$totalinputland = 0; 
+			if (isset($parts['Input']["Area"]) == true) { 
+			foreach ($parts['Input']["Area"] as $i) {
+				$totalinputland += $i['amount'];
+			}}
+			$totaloutput = 0;
+			if (isset($parts['Output']["Mass"]) == true) {  
+			foreach ($parts['Output']["Mass"] as $i) {
+				$totaloutput += $i['amount'];
+			}}
+		}		
 		$links = '<p><a href="/'.$URI.'.rdf">Get this RDF</a></p><p><a href="/'.$URI.'.json">Get this in JSON</a></p>';
 		$this->data("links", $links);
 		$this->data("URI", $URI);
 		$this->data("parts", $parts);
-		$this->data("totalinput", $totalinput);
-		$this->data("totaloutput", $totaloutput);
-		$this->data("totalinputliter", $totalinputliter);
-		$this->data("totalinputland", $totalinputland);			
+		if (isset($parts['exchanges']) == true) {
+			$this->data("totalinput", $totalinput);
+			$this->data("totaloutput", $totaloutput);
+			$this->data("totalinputliter", $totalinputliter);
+			$this->data("totalinputland", $totalinputland);		
+		}	
 		$this->script(Array('comments.js', 'janrain.js'));
 		$comment_data = $this->form_extended->load('comment');
 		$comment = $this->form_extended->build();
@@ -636,14 +612,13 @@ class Lca extends FT_Controller {
 			foreach ($featured->result() as $feature) {
 					$uri = $feature->uri;
 					$set[$uri]['uri'] = $uri;
-					$full_uri = "http://footprinted.org/" . $uri . ".rdf";
-					$set[$uri]['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments($full_uri));
-					$set[$uri]['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography($full_uri));
-					$set[$uri]['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled($full_uri));
-					$set[$uri]['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography($full_uri));
-					$set[$uri]['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR($full_uri));
-					$set[$uri]['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs($full_uri));
-					$set[$uri]['categoryOf'] = $this->lcamodel->getCategories($full_uri);
+					$set[$uri]['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $uri));
+					$set[$uri]['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $uri));
+					$set[$uri]['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $uri));
+					$set[$uri]['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $uri));
+					$set[$uri]['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $uri));
+					$set[$uri]['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $uri));
+					$set[$uri]['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $uri);
 				 	foreach ($set[$uri] as $key=>$part) {
 						if ($set[$uri][$key] === false || $set[$uri][$key] == false || count($set[$uri][$key]) == 0) {
 							unset($set[$uri][$key]);
