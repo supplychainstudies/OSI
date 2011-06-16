@@ -476,9 +476,9 @@ class Lcamodel extends FT_Model{
 */	
 	public function getCategories($URI){		
 		$q = "select ?uri where { " . 
-			" <".$URI."> eco:models ?bnode . " .			
-			" ?bnode rdfs:type  eco:Product . " .
-			" ?bnode eco:hasCategory  ?uri . " .
+			" <".$URI."> eco:models ?bnode . " .
+			" ?bnode eco:hasCategory  ?uri . " .			
+			" { ?bnode rdfs:type  eco:Product . } UNION { ?bnode rdfs:type  eco:Substance . } UNION { ?bnode rdfs:type  eco:Energy . } " .
 			"}";
 		$records = $this->executeQuery($q);
 		if (count($records) > 0) {
