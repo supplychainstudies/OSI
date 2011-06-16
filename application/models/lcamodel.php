@@ -3,6 +3,7 @@ class Lcamodel extends FT_Model{
     public function Lcamodel(){
         parent::__construct();
 		$this->load->model(Array('unitmodel','geographymodel','ecomodel','opencycmodel','dbpediamodel'));
+		$this->arc_config['store_name'] = "footprinted";
     }
 
 
@@ -137,7 +138,7 @@ class Lcamodel extends FT_Model{
 		$records = $this->executeQuery($q);	
 		return $records;
 	}
-	
+/*	
 	 public function fixLabels() {
 		$q = "select ?uri where { " . 
 			"{ ?uri rdfs:type eco:FootprintModel . } UNION { ?uri rdfs:type eco:Model . } UNION { ?uri rdfs:type eco:LCAModel . }" . 
@@ -169,7 +170,7 @@ class Lcamodel extends FT_Model{
 		}
 		return $records;
 	}	
-	
+*/	
 	/**
 	 * Retrieves and returns summary information for all existing records
 	 * @return $records Array	
@@ -504,13 +505,14 @@ class Lcamodel extends FT_Model{
 			foreach ($records as $record) {
 				$categories[] = array(
 					'uri'=>$record['uri'],
-					'label'=>$this->opencycmodel->getOpenCycLabel($record['uri'])
-				);
+					'label'=> $this->opencycmodel->getOpenCycLabel($record['uri'])
+				);						
 			}
+			var_dump($categories);
 			return $categories;
 		} else {
 			return false;
-		}		
+		}	
 	}
 
 	public function getLCAsByCategory($URI) {		

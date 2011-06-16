@@ -6,13 +6,25 @@ class Opencycmodel extends FT_Model{
     }
 
 	public function getOpenCycLabel($uri){
-		$q = "SELECT ?label from <".$uri."> WHERE { ?s rdfs:label ?label }";
+		$q = "SELECT ?label from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
 		$results = $this->executeQuery($q);
-		if (count($results) != 0) {
+		if (count($results) > 0) {
 			return $results[0]['label'];
 		} else {
-			return false;
+			$this->dumpOpencycConcept($uri);
+			$q = "SELECT ?label from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
+			$results = $this->executeQuery($q);
+			if (count($results) > 0) {
+				return $results[0]['label'];
+			} else {
+				return false;
+			}
 		}
+	}
+	
+	public function dumpOpencycConcept($uri){
+		$q = "LOAD <" . $uri . "> INTO <" . $uri . ">";
+		$this->executeQuery($q);
 	}
 	
 	public function getOpenCycSameAs($uri) {
