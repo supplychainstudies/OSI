@@ -28,6 +28,7 @@ font-size:20px;
 width: 400px;
 height: 180px;
 }
+
 /* For  registering */ 
 #div_register_at_footprint.org input {
 color: #333;
@@ -105,10 +106,6 @@ margin-left:25px;
 	display:none;
 }
 
-#comment_form{
-	background:black;
-	height:100px;
-}
 #comment input {
 color: #333;
 background: #fff;
@@ -133,9 +130,10 @@ text-transform:uppercase;
 	
 }
 .form_title {
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: none;
 	text-transform:uppercase;
+	width:400px;
 }
 
 .addmore{
@@ -307,4 +305,44 @@ padding-top:14px;
 font-size:16px;
 font-size:11px;
 color:#333;
+}
+
+/* For Comments */
+#comment_form h1 {
+float: left;
+text-align: left;
+font-size: 12px;
+color: #333;
+font-size: 14px;
+text-transform:uppercase;
+margin-top:14px;
+background:none;
+}
+#comment_form label {
+float: left;
+text-align: left;
+font-size: 12px;
+color: #3FA9F5;
+font-size: 12px;
+text-transform:uppercase;
+margin-top:14px;
+}
+
+#comment_form input {
+color: #333;
+background: #fff;
+width:380px;
+border: 1px solid #ccc; 
+padding:8px;
+font-size:14px;
+}
+
+#comment_form textarea {
+color: #333;
+background: #fff;
+border: 1px solid #ccc;
+padding:8px;
+font-size:14px;
+width: 380px;
+height: 180px;
 }

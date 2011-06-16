@@ -19,43 +19,18 @@
 				<p>Open, free and easy to use environmental impact information. <a href="/search">Search</a> in the 500+ footprints available or explore some of the featured ones below:</p>
 				<br/>
 				</div>
-					
-				<?	foreach ($set as $parts) { ?>
+				<?	foreach ($set as $parts) { 
+					$parts = $parts[0]; ?>
 						
 						<div id="lca_title_lite">
 								<h1>
-								<?=$parts['quantitativeReference']['amount'] ?> 
-								<?= $parts['quantitativeReference']['unit']["label"] ?> of
-								<?	if (isset($parts['sameAs']) == true) {
-										foreach ($parts['sameAs'] as $record) {
-											if (isset($record['dbpedia']) == true) {
-												echo '<a href="/lca/view/'.$parts['uri'].'" title="'.$record['description'].'">';
-											}
-										}
-									}	else{
-											echo '<a href="/lca/view/'.$parts['uri'].'">';
-									}
-								?>
-								<?=$parts['quantitativeReference']['name'] ?></a></h1>
+								1 
+								<?= $parts->unit ?> of
+								<?	echo '<a href="/lca/view/'.$parts->uri.'">'; ?>
+								<?= $parts->name ?></a></h1>
 								<?
-									if (isset($parts['bibliography']) == true) {
-									echo "<p>From: ";
-										foreach ($parts['bibliography'] as $record) {
-											if (isset($record['uri']) == true) {
-												echo "<a href=\"" . $record['uri'] . "\" target='_blank'>";
-											}
-											if (isset($record['authors']) == true) {
-												foreach ($record['authors'] as $author) {
-													echo $author['lastName'] . ", " .$author['firstName'] . "; ";
-												}
-											}
-											if (isset($record["title"]) == true) {
-												echo $record["title"];
-											}
-											if (isset($record['uri']) == true) {
-												echo "</a></p>";
-											}
-										}
+									if (isset($parts->ref) == true) {
+									echo "<p>From: <a href='/search?ref=".$parts->ref."'>".$parts->ref."</a></p>";
 									}
 								?>
 
@@ -66,67 +41,64 @@
 								<div id="lca_impact_lite">	
 									<div id="tabs">
 									<?
-									if (isset($parts['impactAssessments']) == true) {
-									 foreach ($parts['impactAssessments'] as $impactAssessment) {
-										// Change color of the circle depending on the impact category	
-										switch ($impactAssessment['impactCategoryIndicator']['label']) {
-										    case 'Waste': $color = "#6B5344"; $max = 2000; $impacttext = "Waste";break;
-										    case 'Carbon Dioxide Equivalent': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub> (eq)";break;
-											case 'Carbon Dioxide': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub>";break;
-										    case "Energy": $color = "#E8BF56"; $max = 20; $impacttext = "Energy";	break;
-											case "Water":$color = "#45A3D8"; $max = 2000; $impacttext = "Water"; break;
-											default: $color = "#45A3D8"; $max = 2000; $impacttext = $impactAssessment['impactCategoryIndicator']['label'];
-										}
-										// Change the size depending on the relative max
-										$size = round(sqrt($max*$impactAssessment['amount']/pi()));
+									$impacts = array(
+										array("value" => $parts->co2e, "color" => "#FF7C00", "unit" => "Kg", "max" => 2000, "impacttext" => "CO<sub>2</sub> (eq)"),
+										array("value"=> $parts->water, "color" => "#45A3D8", "unit" => "L", "max" => 2000, "impacttext" => "Water"),
+										array("value"=> $parts->waste, "color" => "#6B5344", "unit" => "Kg", "max" => 2000, "impacttext" => "Waste"),
+										array("value"=> $parts->energy, "color" => "#E8BF56","unit" => "MJ", "max" => 20, "impacttext" => "Energy"));
+									
+									foreach ($impacts  as $impact) {
+										if($impact['value'] != 0){
+										$size = round(sqrt($impact['max']*$impact['value']/pi()));
 										if ($size > 82) { $size = 82;}
 										if ($size < 20) { $size = 20;}
 										$margin = (120-$size)/2;
-										$unit = $impactAssessment['unit']['l'];
-										if ($unit == "Kilogram") { $unit = "Kg";}
-										if ($unit == "Megajoules") { $unit = "MJ";}
 										// Create a circle
-										echo '<div class="tab_impact"><div class="tab_circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margin.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
-											echo '<div class="tab_nr"><p><nrwhite>' . round($impactAssessment['amount'],2) . "</nrwhite> ". $unit . "<p/></div>";
-										echo  "<div class='tab_meta'><p>".$impacttext."</p></div>";
-										echo "</div>"; 
-
-									} }?>
+										echo '<div class="tab_impact"><div class="tab_circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margin.'px; background:'.$impact['color'].'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
+										echo '<div class="tab_nr"><p><nrwhite>' . round($impact['value'],2) . "</nrwhite> ". $impact['unit'] . "<p/></div>";
+										echo  "<div class='tab_meta'><p>".$impact['impacttext']."</p></div>";
+										echo "</div>";
+										}else{
+											echo '<div class="tab_impact"><div class="tab_circle"><div style="width:2px; height:2px;margin-left:60px;margin-top:60px; background:'.$impact['color'].'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
+											echo '<div class="tab_nr"><p><br/>-<p/></div>';
+											echo  "<div class='tab_meta'><p>".$impact['impacttext']."</p></div>";
+											echo "</div>";
+										}							
+									}
+									?>
 									</div>
 								</div>	
 
-								<? if (isset($parts['geography']) == true ) {
+								<? if (isset($parts->country) == true ) {
 									echo '<div id="maplite">';		
-									foreach ($parts['geography'] as $geo) {
-												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x160&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:big%7Ccolor:white%7C".$geo['lat'].','.$geo['long'].'"';
-												echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
-												echo '<div id="infomap"><p>Location: <b>'.$geo['name'].'</b></p></div>';
-									}
+												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x160&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:big%7Ccolor:white%7C".$parts->country.'"';
+									echo '<img src="'.$map.'" alt="'.$parts->country.'"/>';
+									echo '<div id="infomap"><p>Location: <b>'.$parts->country.'</b></p></div>';
 									echo "</div>";
 								} ?>	
 								<div class="ref_lite">
-									<p>Year: <?= $parts['year'] ?></p>
+									<p>Year: <?= $parts->year ?></p>
 								</div>
 								<div class="ref_lite">
 									<p>Category: 
-										<? if (isset($parts['categoryOf']) == true) {
-											echo "<a href='/search/category/" . str_replace("http://sw.opencyc.org/concept/", "", $parts['categoryOf'][0]['uri']) . "'>";
-											echo $parts['categoryOf'][0]['label'];
+										<? if (isset($parts->category) == true) {
+											echo "<a href='/search?category=" . $parts->category . "'>";
+											echo $parts->category;
 											echo "</a>";
 									}?></p>
 								</div>
 								<div class="ref_lite">
-									<p><? echo "<a href='".$parts['uri']. ".json'>";?>Export</a></p>
+									<p><? echo "<a href='".$parts->uri. ".json'>";?>Export</a></p>
 								</div>
 								<div class="ref_lite">
-									<p><? echo "<a href='/lca/view/".$parts['uri']. "'>";?> More information</a></p>
+									<p><? echo "<a href='/lca/view/".$parts->uri. "'>";?> More information</a></p>
 								</div>
 	
 						</div>
 						
 					<? 
 					// End for each
-					} 
+					}
 					?>
 
 	</div>

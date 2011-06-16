@@ -3,10 +3,10 @@
 <?
 if (isset($comments) == true) {
 	foreach ($comments as $comment) {
-		echo "<div class=\"comments_container\">\n";
-		echo "<p class=\"comments_title\"><b>" . $comment['title'] . "</b></p>\n";
-		echo "<p class=\"comments_subtitle\">".$comment['author'] . " - " . $comment['created'] . "</p>";
-		echo "<p>" . $comment['comment'] . "</p>\n";
+		echo "<div>";
+		echo "<p><b>" . $comment['title'] . "</b></p>";
+		echo "<p>".$comment['author'] . " - " . $comment['created'] . "</p>";
+		echo "<p>" . $comment['comment'] . "</p>";
 		if ($this->session->userdata('id') == true) { 
 			echo "<p class=\"comments_footer\"><a href=\"#\" name=\"comment_reply" . $comment['post'] . "\">Reply</a></p>\n";		
 		}

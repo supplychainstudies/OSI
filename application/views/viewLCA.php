@@ -142,7 +142,7 @@
 				
 				foreach ($parts['geography'] as $geo) {
 						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
-						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['lat'].','.$geo['long']."&zoom=4&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
+						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['lat'].','.$geo['long']."&zoom=4&markers=size:big%7Ccolor:blue%7C".$geo['name']."&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
 						echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
 					}
 				echo "</div>";
@@ -168,6 +168,7 @@
 						if (isset($record['uri']) == true) {
 							echo "</a>";
 						}
+						echo "<p>Year: ".substr_replace($record['date'],'', 4)."</p>";
 					}
 				}
 			?>
@@ -192,7 +193,7 @@
 				}
 				if (isset($parts['categoryOf']) == true) {
 					foreach ($parts['categoryOf'] as $record) {
-						echo "<p><a href='/search/category/" .  str_replace("http://sw.opencyc.org/concept/", "", $record['uri']) . "' target='_blank'>";
+						echo "<p><a href='/search/?category=" .  $record['label'] . "' target='_blank'>";
 						echo "Belongs to Category: ". $record['label'];
 						echo "</a></p>";
 					}

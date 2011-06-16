@@ -19,7 +19,7 @@
 	<div id="columnwide">
    	
 
-	<form action="/search/keyword/" method="post">
+	<form action="/search/" method="post">
 	<div id="searchinput"><input type="text" name="keyword" /></div>
 	<div id="searchform"><input type="submit" value="Search by keyword" /></div>
 	</form>
@@ -27,16 +27,20 @@
 		if (isset($menu) == true) {
 			echo "<p>Explore by categories: ";
 			foreach ($menu as $menu_item) {
-				echo '<a href="/search/category/'.$menu_item['uri'].'" />'.$menu_item['label'].'</a> / ';
+				echo '<a href="/search?category='.$menu_item['uri'].'" />'.$menu_item['label'].'</a> / ';
 			}
 			echo "</p>";
 		}
 	?>
 	<br/>
 
-				<?
+				<?	
+					echo "<h1 class='about'>";
 					if (isset($search_term) == true) {
-						echo "<h1 class='about'>".$search_term;
+						echo $search_term;
+					}
+					if (isset($category) == true) {
+						echo "Category ". $category;
 					}
 				if (isset($set) == true) {
 					if (count($set) > 0) {
@@ -46,15 +50,22 @@
 				?>
 				<?	
 					if (isset($set) == true) {
+						
 						if (count($set) > 0) {
 						foreach ($set as $row) {
 							// Remove the footprinted part of the url
-							$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
-							echo '<div class="medium blue square" id="'.$myString.'">
-							<div class="squareplace"><p>'.$row['geo'].'</p></div>
-							<div class="squareyear"><p>'.$row['year'].'</p></div>
-							<div class="squaretext"><p><a href="/lca/view/'.$myString .'">'.$row['label'].'</a></p></div>
-							<div class="squareimpacts"><p>'.$row['impacts'].'</p></div>
+							//$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
+							$impacts = "";
+							if($row->co2e){$impacts .= "CO2e";}
+							if($row->water){$impacts .= " Water";}
+							if($row->waste){$impacts .= " Waste";}
+							if($row->energy){$impacts .= " Energy";}
+							if($row->year == 0){$year="";}else{$year=$row->year;}
+							echo '<div class="medium blue square" id="'.$row->uri.'">
+							<div class="squareplace"><p>'.$row->country.'</p></div>
+							<div class="squareyear"><p>'.$year.'</p></div>
+							<div class="squaretext"><p><a href="/lca/view/'.$row->uri .'">'.$row->name.'</a></p></div>
+							<div class="squareimpacts"><p>'.$impacts.'</p></div>
 							</div>';
 						}
 					} else {
