@@ -130,70 +130,45 @@ class Lcamodel extends FT_Model{
 	 * @return $records Array	
 	 */
 	 public function getRecords() {
-	
-		$q = "select ?uri where { " . 
-			" ?uri rdfs:type eco:FootprintModel . " . 
+		$q = "select ?label ?uri where { " . 
+			"?uri rdfs:label ?label . " .
+			"{ ?uri rdfs:type eco:FootprintModel . } UNION { ?uri rdfs:type eco:Model . } UNION { ?uri rdfs:type eco:LCAModel . }" . 
 			"}";
-		$footprint_records = $this->executeQuery($q);	
-		$q = "select ?uri where { " . 
-			" ?uri rdfs:type eco:Model . " . 
-			"}";
-		$model_records = $this->executeQuery($q);	
-	
-		$records = array_merge($footprint_records, $model_records);
-		foreach ($records as &$record) {
-			/*
-			$q = "select ?label where { " . 
-				"<". $record['uri'] ."> eco:models ?bnode . " .
-				"?bnode rdfs:label ?label . " .
-				"?bnode rdfs:type eco:Product . " .  
-				"}";
-			$get_product_name = $this->executeQuery($q);
-			if (count($get_product_name) > 0) {
-				$record['label'] = $get_product_name[0]['label'];			
-			// If it doesnt appear to model a product, get the name of a process	
-			} else {
-			*/
-				$q = "select ?label ?type where { " . 
-					"<". $record['uri'] ."> eco:models ?bnode . " .
-					"?bnode rdfs:label ?label . " .
-					"?bnode rdfs:type ?type . " .  
-					"}";
-				$get_names = $this->executeQuery($q);	
-				if (count($get_names) > 0) {
-					$names = array();
-					foreach ($get_names as &$gn) {
-						$names[$gn['type']] = $gn['label'];
-					}
-					if (isset($names[$this->arc_config['ns']['eco']."Process"]) == true) {
-						$record['label'] = $names[$this->arc_config['ns']['eco']."Process"];
-					}				
-					if (isset($names[$this->arc_config['ns']['eco']."Substance"]) == true) {
-						$record['label'] = $names[$this->arc_config['ns']['eco']."Substance"];
-					}
-					if (isset($names[$this->arc_config['ns']['eco']."Product"]) == true) {
-						$record['label'] = $names[$this->arc_config['ns']['eco']."Product"];
-					}
-					if (isset($names[$this->arc_config['ns']['eco']."Energy"]) == true) {
-						$record['label'] = $names[$this->arc_config['ns']['eco']."Energy"];
-					}
-				} else {
-					$q = "select ?label where { " . 
-						"<". $record['uri'] ."> rdfs:label ?label . " .
-						"}";
-					$get_model_name = $this->executeQuery($q);
-					if (count($get_product_name) > 0) {
-						$record['label'] = $get_model_name[0]['label'];					
-					} else {
-						$record['label'] = "";
-					}
-				}
-			/*	
-			}
-			*/
-		}
+		$records = $this->executeQuery($q);	
 		return $records;
 	}
+	
+	 public function fixLabels() {
+		$q = "select ?uri where { " . 
+			"{ ?uri rdfs:type eco:FootprintModel . } UNION { ?uri rdfs:type eco:Model . } UNION { ?uri rdfs:type eco:LCAModel . }" . 
+			"}";
+		$records = $this->executeQuery($q);	
+		foreach ($records as $record) {
+			$q = "select ?label where { " . 
+				"<".$record['uri']."> rdfs:label ?label . " .
+				"}";
+			$get_label = $this->executeQuery($q);
+			if (count($get_label) == 0) {
+				$q = "select ?label where { " . 
+					"<".$record['uri']."> eco:models ?node . " .
+					"?node rdfs:label ?label . " .
+					//"?node rdfs:type eco:Process . " .
+					"}";
+				$get_process_label = $this->executeQuery($q);
+				var_dump($get_process_label);
+				$triples = array(
+					array(
+						's' => $record['uri'],
+						'p' => "rdfs:label",
+						'o' => $get_process_label[0]['label']
+					)
+				);
+				var_dump($triples);	
+				$this->addTriples($triples);			
+			}
+		}
+		return $records;
+	}	
 	
 	/**
 	 * Retrieves and returns summary information for all existing records
@@ -251,18 +226,8 @@ class Lcamodel extends FT_Model{
 		if (count($records) > 0) {
 			return $records[0]['title'];
 		} else {
-			$q = "select ?title where { " . 
-				" <".$URI."> eco:models ?bnode . " .			
-				" ?bnode rdfs:label ?title . " .	
-				" ?bnode rdfs:type eco:Process . " .
-				"}";				
-			$records = $this->executeQuery($q);
-			if (count($records) > 0) {
-				return $records[0]['title'];
-			} else {
-				return false;
-			}			
-		}
+			return false;
+		}			
 	}
 	
 	public function getGeography($URI) {

@@ -8,6 +8,9 @@ class Sandbox extends FT_Controller {
 		$this->load->model(Array('lcamodel','loadmodel'));
 	}
 	
+	function fixlabels() {
+		$this->lcamodel->fixLabels();
+	}
 	
 	function geothis() {
 		$this->arcmodel->getGeonames("http://sws.geonames.org/6295630/about.rdf");
