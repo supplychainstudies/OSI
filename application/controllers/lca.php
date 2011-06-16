@@ -706,7 +706,7 @@ class Lca extends FT_Controller {
 			}
 		}
 		public function cacheCategories(){
-			$rs = $this->db->get('footprints');		
+			$rs = $this->db->get('footprints',50,500);		
 			// Initializing array
 			foreach ($rs->result() as $r) {
 				$uri = str_replace("http://footprinted.org/rdfspace/lca/", "",$r->uri); 
@@ -715,14 +715,15 @@ class Lca extends FT_Controller {
 				$category= "";
 				if($categoryOf != false){
 					foreach ($categoryOf as $c) {
-						$category .= $c['label'] . ' ; ';
+						$category .= $c['uri'] . ' ; ';
 					}
 				}
-				$data = array (
-					'category' => $category
-				);
-				$this->db->where('uri', $uri);
-				$this->db->update('footprints', $data);
+				echo "URI: ". $uri . " Cat: ". $category . "<br/>";
+				//$data = array (
+				//	'category' => $category
+				//);
+				//$this->db->where('uri', $uri);
+				//$this->db->update('footprints', $data);
 			}
 		}
 		public function cacheEverything(){ 
