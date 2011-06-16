@@ -16,7 +16,7 @@
 	<?= $navigationDisplay;?>
 
 	<div id="lca_header">
-		<div id="lca_title"><h1><?=$parts['quantitativeReference']['name'] ?></h1></div>
+		<div id="lca_title"><h1><?=$parts['title'] ?></h1></div>
 		<? /*<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
 		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["label"] ?></nr></h1></div>	
 	</div>
@@ -177,6 +177,7 @@
 			<? if (isset($parts['sameAs']) == true || isset($parts['categoryOf']) == true) { ?>
 			<div id="lca_same" class="lca">
 			<h2>More info</h2>
+			<p>Reference flow: <?=$parts['quantitativeReference']['name'] ?></p>
 			<?
 				if (isset($parts['sameAs']) == true) {
 					foreach ($parts['sameAs'] as $record) {
@@ -209,9 +210,13 @@
 
 					echo $links;
 
-				}
+				}	?>
+				</p>
+				<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
+					<img alt="Creative Commons License" style="border-width:0" src="https://creativecommons.org/images/deed/cc-logo.jpg" height='52px' />
+					<img alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/deed/by.png" height='50px' /> <img alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/deed/sa.png" height='50px'/></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
 
-			?></p>
+			
 			</div>
 			<div id="lca_share" class="lca">
 			<h2>Share</h2>

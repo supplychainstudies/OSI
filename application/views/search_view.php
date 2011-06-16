@@ -61,7 +61,7 @@
 							if($row->waste){$impacts .= " Waste";}
 							if($row->energy){$impacts .= " Energy";}
 							if($row->year == 0){$year="";}else{$year=$row->year;}
-							echo '<div class="medium blue square" id="'.$row->uri.'">
+							echo '<div class="medium grey square" id="'.$row->uri.'">
 							<div class="squareplace"><p>'.$row->country.'</p></div>
 							<div class="squareyear"><p>'.$year.'</p></div>
 							<div class="squaretext"><p><a href="/lca/view/'.$row->uri .'">'.$row->name.'</a></p></div>

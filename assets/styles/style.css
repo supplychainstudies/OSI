@@ -165,6 +165,9 @@ h1.about {
 	margin-bottom:20px;
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
+#map{
+	height:460px;
+}
 #lca_unit {
 	float:right;
 	top:15px;
@@ -614,7 +617,7 @@ amount {
 .saffron {background-color: #FDCA49;}
 
 .grey {
-	background-color: #333333;
+	background-color: #666;
 }
 
 .square {
