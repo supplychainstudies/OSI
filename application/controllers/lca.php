@@ -229,10 +229,20 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in RDF
 	*/
 	public function viewRDF($URI = null) {
-		$rdf = $this->lcamodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
+		$parts['uri'] = $URI;
+		$parts['title'] = $this->lcamodel->getTitle("http://footprinted.org/rdfspace/lca/" . $URI);
+		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
+		$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
 		header('Content-type: text/xml');
-		echo $rdf;
+		$this->normalize($parts);
+		var_dump($parts);
 	}	
 
 	/***
@@ -240,9 +250,19 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in JSON
 	*/	
 	public function viewJSON($URI = null) {
-		$json = $this->lcamodel->getJSON("http://footprinted.org/rdfspace/lca/".$URI);
+		$parts['uri'] = $URI;
+		$parts['title'] = $this->lcamodel->getTitle("http://footprinted.org/rdfspace/lca/" . $URI);
+		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
+		$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['geography'] = $this->lcamodel->convertGeography($this->lcamodel->getGeography("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
 		header('Content-type: application/json');
-		echo $json;
+		$this->normalize($parts);
+		var_dump($parts);
 	}
 		
 
@@ -268,55 +288,8 @@ class Lca extends FT_Controller {
 				unset($parts[$key]);
 			}
 		}
-		/* Normalize to 1 */
-		$oldamount = $parts['quantitativeReference']['amount'];
-		$ratio = $parts['quantitativeReference']['amount'];
-		$parts['quantitativeReference']['amount'] = 1;
-		// If grams	
-		if (strpos("Gram", $parts['quantitativeReference']['unit']['label']) !== false) {
-			$ratio = $oldamount * 1000;
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
-		}	
-		// If ounces
-		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Ounce" ) {
-			$ratio = $oldamount * 0.028345;
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
-		}
-		// If pounds
-		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Pound") {
-			$ratio = $oldamount * 0.45359237;
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
-		}
-		if ($parts['quantitativeReference']['unit']['label'] == "Pound Mass") {
-			$ratio = $oldamount * 0.45359237;
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
-		}
-		if (isset($parts['exchanges']) == true) {
-			foreach ($parts['exchanges'] as &$exchanges) {
-				$exchanges['amount'] = $exchanges['amount'] / $ratio;
-				if ($exchanges['unit']['label'] == "Gram") {
-					$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";
-				}
-				if ($exchanges['unit']['label'] == "Pound Mass") {
-					$exchanges['amount'] = $exchanges['amount'] * 0.45359237; 
-					$exchanges['unit']['label'] = "Kilogram";
-				}
-			}
-		}
-		if (isset($parts['impactAssessments']) == true) {
-			foreach ($parts['impactAssessments'] as &$impactAssessment) {
-				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
-				if ($impactAssessment['unit']['label'] == "Gram") { 
-					$impactAssessment['amount']/=1000; 
-					$impactAssessment['unit']['label'] = "Kilogram"; 
-				}
-				if ($impactAssessment['unit']['label'] == "Pound Mass") { 
-					$impactAssessment['amount']*=0.45359237; 
-					$impactAssessment['unit']['label'] = "Kilogram"; 
-				}
-			}
-		}
-		
+
+		$this->normalize($parts);
 		
 		// Turns exchanges into input and output array divided into categories 
 		if (isset($parts['exchanges']) == true) {
@@ -371,42 +344,62 @@ class Lca extends FT_Controller {
 
 
 
-	private function convertImpactAssessments($dataset){
-		$rdfs_prefix = "http://www.w3.org/2000/01/rdf-schema#";
-		$eco_prefix = "http://ontology.earthster.org/eco/core#";
-		$converted_dataset = array();		
-		foreach($dataset as $key=>$_record) {	
-			foreach ($_record[$eco_prefix."hasImpactAssessmentMethodCategoryDescription"] as $__record) {
-				foreach($__record[$eco_prefix."hasImpactCategory"] as $___record) {
-					$converted_dataset[$key]['impactCategory'] = $___record;
-				} 
-				foreach($__record[$eco_prefix."hasImpactCategoryIndicator"] as $___record) {
-					$converted_dataset[$key]['impactCategoryIndicator'] =  $___record;
-				}					
-			} 	
-			foreach ($_record[$eco_prefix."hasQuantity"] as $__record) {
-				foreach($__record[$eco_prefix."hasMagnitude"] as $___record) {
-					$converted_dataset[$key]['amount'] = $___record;
+	/*
+	Private function that normalizes to 1 functional unit and to kilograms if possible
+	*/
+	private function normalize(&$parts){
+		/* Normalize to 1 */
+		$oldamount = $parts['quantitativeReference']['amount'];
+		$ratio = $parts['quantitativeReference']['amount'];
+		$parts['quantitativeReference']['amount'] = 1;
+		// If grams	
+		if (strpos("Gram", $parts['quantitativeReference']['unit']['label']) !== false) {
+			$ratio = $oldamount * 1000;
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+		}	
+		// If ounces
+		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Ounce" ) {
+			$ratio = $oldamount * 0.028345;
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+		}
+		// If pounds
+		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Pound") {
+			$ratio = $oldamount * 0.45359237;
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+		}
+		if ($parts['quantitativeReference']['unit']['label'] == "Pound Mass") {
+			$ratio = $oldamount * 0.45359237;
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+		}
+		// Normalizes the flows
+		if (isset($parts['exchanges']) == true) {
+			foreach ($parts['exchanges'] as &$exchanges) {
+				$exchanges['amount'] = $exchanges['amount'] / $ratio;
+				if ($exchanges['unit']['label'] == "Gram") {
+					$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";
 				}
-				foreach($__record[$eco_prefix."hasUnitOfMeasure"] as $___record) {
-					$converted_dataset[$key]['unit'] = $___record;
-				}		
-			}	
-			if (isset($converted_dataset[$key]['unit']) == false) {
-				$converted_dataset[$key]['unit'] = "?";
-			}									
-			if (isset($converted_dataset[$key]['amount']) == false) {
-				$converted_dataset[$key]['amount'] = "?";
-			}
-			if (isset($converted_dataset[$key]['impactCategory']) == false) {
-				$converted_dataset[$key]['impactCategory'] = "?";
-			}
-			if (isset($converted_dataset[$key]['impactCategoryIndicator']) == false) {
-				$converted_dataset[$key]['impactCategoryIndicator'] = "?";
+				if ($exchanges['unit']['label'] == "Pound Mass") {
+					$exchanges['amount'] = $exchanges['amount'] * 0.45359237; 
+					$exchanges['unit']['label'] = "Kilogram";
+				}
 			}
 		}
-		return $converted_dataset; 
+		// Normalizes the impacts
+		if (isset($parts['impactAssessments']) == true) {
+			foreach ($parts['impactAssessments'] as &$impactAssessment) {
+				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
+				if ($impactAssessment['unit']['label'] == "Gram") { 
+					$impactAssessment['amount']/=1000; 
+					$impactAssessment['unit']['label'] = "Kilogram"; 
+				}
+				if ($impactAssessment['unit']['label'] == "Pound Mass") { 
+					$impactAssessment['amount']*=0.45359237; 
+					$impactAssessment['unit']['label'] = "Kilogram"; 
+				}
+			}
+		}
 	}
+	
 	
 		
 		/***
