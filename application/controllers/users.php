@@ -245,35 +245,39 @@ class Users extends FT_Controller {
 				// Step 1: Write the user name, email, password to db
 				// Step 2: Get the unique id				
 				$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
-				if ($_POST['openid_'] != "") {
-						$data = array(
-									'user_id' => $id,
-									'openid_url' => $_POST['openid_']
-								);
+				if (is_int($id) == true) {
+					if ($_POST['openid_'] != "") {
+							$data = array(
+										'user_id' => $id,
+										'openid_url' => $_POST['openid_']
+									);
 
-						$this->CI->db->set($data); 
+							$this->CI->db->set($data); 
 
-						if(!$this->CI->db->insert($this->openid_table)) {
-						//There was a problem! 
-							$this->error = "For some reason, we couldn't use the info you provided. Try again?";
-							$this->register();
-						}
-				}		
-				if ($_POST['foaf_'] == "") {
-					$_POST['foaf_'] = toURI("people",$_POST['user_name_']);				
-				}
-				$data = array(
-							'user_id' => $id,
-							'foaf_uri' => $_POST['foaf_']
-						);
+							if(!$this->CI->db->insert($this->openid_table)) {
+							//There was a problem! 
+								$this->error = "For some reason, we couldn't use the info you provided. Try again?";
+								$this->register();
+							}
+					}		
+					if ($_POST['foaf_'] == "") {
+						$_POST['foaf_'] = toURI("people",$_POST['user_name_']);				
+					}
+					$data = array(
+								'user_id' => $id,
+								'foaf_uri' => $_POST['foaf_']
+							);
 
-				$this->CI->db->set($data); 
-				if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
-					return false;		
-				$this->login();	
+					$this->CI->db->set($data); 
+					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
+						return false;		
+					$this->login();	
+					} else {
+						$this->error = "Recaptcha didn't work. Try again?";
+						$this->register();
+					}
 				} else {
-					$this->error = "Recaptcha didn't work. Try again?";
-					$this->register();
+					$this->error = "Something went wrong. Try again?";
 				}
 			} else {
 				$this->error = "You don't have a Registration Code! Want one? Email us.";
