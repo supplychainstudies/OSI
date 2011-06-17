@@ -542,6 +542,7 @@ class CI_Form_validation {
 		// Cycle through each rule and run it
 		foreach ($rules As $rule)
 		{
+			var_dump($rule);
 			$_in_array = FALSE;
 
 			// We set the $postdata variable with the current data in our master array so that
@@ -572,7 +573,7 @@ class CI_Form_validation {
 				$rule = substr($rule, 9);
 				$callback = TRUE;
 			}
-
+			
 			// Strip the parameter (if exists) from the rule
 			// Rules can contain a parameter: max_length[5]
 			$param = FALSE;
@@ -581,18 +582,19 @@ class CI_Form_validation {
 				$rule	= $match[1];
 				$param	= $match[2];
 			}
-
 			// Call the function that corresponds to the rule
 			if ($callback === TRUE)
 			{
 				if ( ! method_exists($this->CI, $rule))
 				{
+					echo "NO!";
 					continue;
 				}
-
+				var_dump($postdata);
+				var_dump($param);
 				// Run the function and grab the result
 				$result = $this->CI->$rule($postdata, $param);
-
+				var_dump($result);
 				// Re-assign the result to the master data array
 				if ($_in_array == TRUE)
 				{

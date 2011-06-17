@@ -20,7 +20,7 @@ class Users extends FT_Controller {
 		parent::__construct();
 		$this->load->model(Array('usersmodel','lcamodel'));	
 		$this->lang->load('openid', 'english');
-	    $this->load->library(Array('openid','form_extended', 'form_validation', 'SimpleLoginSecure'));
+	    $this->load->library(Array('openid','form_extended', 'form_validation', 'SimpleLoginSecure', 'recaptcha'));
 	    $this->load->helper('url');
 
 	}
@@ -45,16 +45,20 @@ class Users extends FT_Controller {
 					} else {
 						$this->register($auth_info);
 					}				
-				} elseif ((isset($_POST['user_name']) == true && isset($_POST['password']) == true) || (isset($_POST['user_name_']) == true && isset($_POST['password_']) == true)) {
+				} elseif ((isset($_POST['user_name']) == true) || (isset($_POST['user_name_']) == true)) {
+					$this->login();
+					/*					
 					if (isset($_POST['user_name_']) == true) {
 						$_POST['user_name'] = $_POST['user_name_'];
 						$_POST['password'] = $_POST['password_'];
 					}
+
 					if ($this->simpleloginsecure->login($_POST['user_name'], $_POST['password']) == true) {
 						redirect('/lca/featured');
 					} else {
-						redirect('/users/loginerror');
+						redirect('/users/login');
 					}
+					*/
 				}
 			// If there is no post from Janrain, redirect them to the register page
 			} else {
@@ -62,8 +66,9 @@ class Users extends FT_Controller {
 			}
 		} // end of not logged in
 	}
-	
+/*	
 	public function loginerror() {
+		var_dump($_SERVER['HTTP_REFERER']);
 		$data = $this->form_extended->load('login'); 
 		$the_form = "<div<p>Hm, your user name or password doesn't seem to be right. Want to try again?</p></div>";
 		$the_form .= $this->form_extended->build();
@@ -73,33 +78,52 @@ class Users extends FT_Controller {
 		$this->data("form_string", $the_form);
 		$this->display("Form", "form_view");
 	}
-	
-	public function login() { 
-		if (isset($_SERVER['HTTP_REFERER']) == true) 
-			$this->session->set_userdata(array('last_page' => $_SERVER['HTTP_REFERER']));
-		if($this->session->userdata('id')) {			
-		} elseif (isset($_POST['user_name']) == true) {
-			if ($_POST['open_id'] != "") {
-				$this->loginopenid($_POST['open_id']);
-			} elseif ($_POST['user_name'] != "" && $_POST['password'] != "") {
-				if($this->simpleloginsecure->login($_POST['user_name'], $_POST['password'])) {
-					$this->session->unset_userdata(array('loginfail'));  
-				}
-				else {
-					$this->session->set_userdata(array('loginfail'  => 'fail'));  
-				}				
+*/	
+	public function login() { 	
+		if (isset($_SERVER['HTTP_REFERER']) == true) { 
+			if (strpos($_SERVER['HTTP_REFERER'], base_url()."users") === false) {
+				$this->session->set_userdata(array('last_page' => $_SERVER['HTTP_REFERER']));
 			}
-		} 
+		}
 		if ($this->session->userdata('last_page')) {
 			$refer = $this->session->userdata('last_page');
-			$this->session->unset_userdata('last_page');
-		} else if (isset($_SERVER['HTTP_REFERER']) == true) {
-			$refer = $_SERVER['HTTP_REFERER'];
 		} else {
-			$refer = "http://footprinted.org/";
+			$refer = base_url()."lca/featured";
 		}
-			
-		header ("Location: " . $refer);			
+		if (isset($_POST['open_id']) == true || isset($_POST['open_id_']) == true) {
+			if (isset($_POST['open_id_']) == true) {
+				$_POST['open_id'] = $_POST['open_id_'];
+			}
+			if ($this->loginopenid($_POST['open_id'])) {
+			} else {
+				$fail = "Hm, your openid doesn't seem to be right.";
+			}
+		} elseif (isset($_POST['user_name']) == true || isset($_POST['user_name_']) == true) {	
+			if (isset($_POST['user_name_']) == true) {
+				$_POST['user_name'] = $_POST['user_name_'];
+				$_POST['password'] = $_POST['password_'];
+			}
+			if($this->simpleloginsecure->login($_POST['user_name'], $_POST['password']) == true) {
+			} else {
+				$fail = "Hm, your user name or password doesn't seem to be right. Want to try again?";
+			}
+		} 
+		if($this->session->userdata('id')) {
+			$this->session->unset_userdata('last_page');
+			redirect($refer);		
+		} else {
+			$data = $this->form_extended->load('login'); 
+			$the_form = "";
+			if (isset($fail) == true) {
+				$the_form = "<div><p>".$fail."</p></div>";
+			}
+			$the_form .= $this->form_extended->build();
+			$the_form .= "<div><p> Or <a href=\"users/register\">Register</a> with us.</p></div>";
+			$this->script(Array('form.js','register.js'));
+			$this->style(Array('style.css','form.css'));
+			$this->data("form_string", $the_form);
+			$this->display("Form", "form_view");			
+		} 	
 	}
 	
 	public function delete() {
@@ -151,22 +175,27 @@ class Users extends FT_Controller {
 	}
 	
 	public function register($auth_info = false) {
-		$pass_data = array ();
+		if (isset($this->pass_data) == false) {
+			$this->pass_data = array (); }
 		if ($auth_info != false) {
 		  if(isset($auth_info['profile']['identifier']) == true) {
-				$pass_data['openid'] = $auth_info['profile']['identifier'];
+				$this->pass_data['openid_'] = $auth_info['profile']['identifier'];
 			}
 		  if(isset($auth_info['profile']['preferredUsername']) == true) {
-				$pass_data['user_name'] = $auth_info['profile']['preferredUsername'];
+				$this->pass_data['user_name_'] = $auth_info['profile']['preferredUsername'];
 			}
 		  if(isset($auth_info['profile']['email']) == true) {
-				$pass_data['email'] = $auth_info['profile']['email'];
+				$this->pass_data['email_'] = $auth_info['profile']['email'];
 			}
 		}
-		$this->data("pass_data", $pass_data);
+		$this->data("pass_data", $this->pass_data);
 		$this->form_extended->load('register'); 
 		//$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Ffootprinted.org%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
-		$the_form = $this->form_extended->build();
+		$the_form = "";
+		if (isset($this->error) == true) {
+			$the_form = '<p class="error">'.$this->error.'</p>';
+		}
+		$the_form .= $this->form_extended->build();
 		$this->script(Array('form.js','register.js','janrain.js'));
 		$this->style(Array('style.css','form.css'));
 		$this->data("form_string", $the_form);
@@ -177,7 +206,7 @@ class Users extends FT_Controller {
 		$passcodes = array(
 			"KTH","ISIE","UWATERLOO", "MIT"
 		);
-		if (in_array($passcode, $passcodes) !== false) {
+		if (in_array(strtoupper($passcode), $passcodes) !== false) {
 			return true;
 		} else {
 			return false;
@@ -186,86 +215,88 @@ class Users extends FT_Controller {
 	
 	public function registered() {
 		// Note: Most validation had already been done using jquery
-		// Step 1: Check recaptcha
-		if ($this->form_validation->run() && $this->checkPasscode($_POST['registration_code_']) == true) {
-			// Recaptcha is fine!
-			$this->CI =& get_instance();
-			// Step 1: Write the user name, email, password to db
-			// Step 2: Get the unique id	
-			
-			$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
-		
-			// Step 3: If there is an openid, write to db
-			/*
-			$openid_array = $_POST['openid_'];
-			if ($openid_array != "") {
-				foreach($openid_array as $openid) {
-					if ($openid != "") {
-					$data = array(
-								'user_id' => $id,
-								'openid_url' => $openid
-							);
-
-					$this->CI->db->set($data); 
-
-					if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
-						return false;
-					}
-				}
-			} */
-			if ($_POST['openid_'] != "") {
-					$data = array(
-								'user_id' => $id,
-								'openid_url' => $_POST['openid_']
-							);
-
-					$this->CI->db->set($data); 
-
-					if(!$this->CI->db->insert($this->openid_table)) //There was a problem! 
-						redirect('/users/register?error=Try Registering Again.');
+		// Step 1: Check recaptcha		
+		if ($_POST) {
+			$this->pass_data = array();
+		  if(isset($_POST['openid_']) == true) {
+				if ($_POST['openid_'] != "") {
+					$this->pass_data['openid_'] = $_POST['openid_']; }
+			}
+		  if(isset($_POST['user_name_']) == true) {
+				if ($_POST['user_name_'] != "") {
+					$this->pass_data['user_name_'] = $_POST['user_name_']; }
+			}
+		  if(isset($_POST['email_']) == true) {
+				if ($_POST['email_'] != "") {
+					$this->pass_data['email_'] = $_POST['email_']; }
+			}
+			if(isset($_POST['foaf_']) == true) {
+				if ($_POST['foaf_'] != "") {
+					$this->pass_data['foaf_'] = $_POST['foaf_']; }
+			}
+			if(isset($_POST['registration_code_']) == true) {
+				if ($_POST['registration_code_'] != "") {
+					$this->pass_data['registration_code_'] = $_POST['registration_code_']; }
 			}		
-			// Step 4: If there is a foaf URI, write to db
-			/*
-			$foaf_array = $_POST['foaf_'];
-			if ($foaf_array == "") {
-				$foaf_array = array(toURI("people",$_POST['user_name_']));				
-			}
-			foreach($foaf_array as $foaf) {
-				if ($foaf != "") {
-					$data = array(
-								'user_id' => $id,
-								'foaf_uri' => $foaf
-							);
+			if ($this->checkPasscode($_POST['registration_code_']) == true) {
+				if ($this->recaptcha->check_answer($_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']) == TRUE) { 
+				// Recaptcha is fine!
+				$this->CI =& get_instance();
+				// Step 1: Write the user name, email, password to db
+				// Step 2: Get the unique id				
+				$id = $this->simpleloginsecure->create($_POST['email_'], $_POST['password_'], $_POST['user_name_'], true);
+				if ($_POST['openid_'] != "") {
+						$data = array(
+									'user_id' => $id,
+									'openid_url' => $_POST['openid_']
+								);
 
-					$this->CI->db->set($data); 
+						$this->CI->db->set($data); 
 
-					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
-						return false;
+						if(!$this->CI->db->insert($this->openid_table)) {
+						//There was a problem! 
+							$this->error = "For some reason, we couldn't use the info you provided. Try again?";
+							$this->register();
+						}
 				}		
-			}	
-			*/
-			if ($_POST['foaf_'] == "") {
-				$_POST['foaf_'] = toURI("people",$_POST['user_name_']);				
-			}
-					$data = array(
-								'user_id' => $id,
-								'foaf_uri' => $_POST['foaf_']
-							);
+				if ($_POST['foaf_'] == "") {
+					$_POST['foaf_'] = toURI("people",$_POST['user_name_']);				
+				}
+				$data = array(
+							'user_id' => $id,
+							'foaf_uri' => $_POST['foaf_']
+						);
 
-					$this->CI->db->set($data); 
-					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
-						return false;		
-		
-			if($this->simpleloginsecure->login($_POST['user_name_'], $_POST['password_'])) {
-				redirect('/users/dashboard/');
+				$this->CI->db->set($data); 
+				if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
+					return false;		
+				$this->login();	
+				} else {
+					$this->error = "Recaptcha didn't work. Try again?";
+					$this->register();
+				}
 			} else {
-				redirect('/users/login?error=Log in now please');
-			}			
+				$this->error = "You don't have a Registration Code! Want one? Email us.";
+				$this->register();
+			}
 		} else {
-			redirect('/users/register?error=Recaptcha did not work. Try again.');
+			redirect(base_url());
 		}
 	}
 	
+	public function takenEmail() {
+		if (isset($_REQUEST['email']) == true) {
+			$results = $this->simpleloginsecure->takenEmail($_REQUEST['email']);
+			if ($results == true) { echo "true"; } else { echo "false"; }	
+		}		
+	}
+	
+	public function takenName() {
+		if (isset($_REQUEST['name']) == true) {
+			$results = $this->simpleloginsecure->takenName($_REQUEST['name']);		
+			if ($results == true) { echo "true"; } else { echo "false"; }		
+		}
+	}
 	
 	/*
 	Shows the dashboard control panel for the users

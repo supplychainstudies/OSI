@@ -271,11 +271,11 @@ text-transform:uppercase;
 }
 
 .require {
-	border: solid 2px #000000;
+	border: 2px solid #3FA9F5;
 }
 
 .require_ok {
-	border: 0px;
+	border: 1px solid #ccc;
 }
 
 #div_flow label {

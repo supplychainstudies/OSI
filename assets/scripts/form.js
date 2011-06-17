@@ -109,8 +109,6 @@ $('#impact_form').submit(function() {
     field = field.replace("impactCategory","impactCategoryIndicator");
     var the_label_field = field.replace("_button", "_label");
     var the_hidden_field = field.replace("_button" ,"");
-	alert(the_value);
-	alert(the_hidden_field);
     var the_label = $("[value='"+the_value+"']").text();
     $("[name='"+the_label_field+"']").val(the_label);
 	$("[name='"+the_label_field+"']").addClass("linked_value");
@@ -189,16 +187,77 @@ function toggle_delete(field) {
         $("input[name='" + field + "']").removeAttr('disabled');
     }
 }
- 
+
 $("form").submit(function() {
+	//$(this).preventDefault();
     var to_submit = true;
   $(".required").each(function() {
         if($(this).val() == "") {
-            $(this).addClass('require');        
+            $(this).addClass('require');  
+      		$(this).removeClass('require_ok');   
             to_submit = false;
         } else {
-            $(this).addClass('require_ok');     
+            $(this).addClass('require_ok');   
+			$(this).removeClass('require');   
         }
     });
+	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;	
+  $(".email_validation").each(function() {
+        if(reg.test($(this).val()) == false) {
+            $(this).addClass('require');  
+			$(this).removeClass('require_ok');   
+			$(this).val('email@format.pls');  
+            to_submit = false;			
+        } else {
+            $(this).addClass('require_ok');   
+			$(this).removeClass('require');     
+        }
+    });
+  $(".email_taken").each(function() {
+		var answer = "false";
+		var data = "email="+$(this).val();
+		var the_field_name = $(this).attr('name');
+		$.ajax({ 
+          url: "/users/takenEmail/", 
+          type: "post",
+		  data: data,
+          success: function(data){
+				answer = data.toString();
+				if(answer == "true") {
+		            $("[name='"+the_field_name +"']").addClass('require');  
+					$("[name='"+the_field_name +"']").removeClass('require_ok');   
+					$("[name='"+the_field_name +"']").val('Already taken');  
+		            to_submit = false;			
+			    } else {
+		            $("[name='"+the_field_name +"']").addClass('require_ok');   
+					$("[name='"+the_field_name +"']").removeClass('require');     
+			    }
+            }
+     	}); 
+    
+    });
+	$(".name_taken").each(function() {
+			var data = "name="+$(this).val();
+			var the_field_name = $(this).attr('name');
+			$.ajax({ 
+	          url: "/users/takenName/", 
+	          type: "post",
+			  data: data,
+	          success: function(data){
+					answer = data.toString();
+					if(answer == "true") {
+			            $("[name='"+the_field_name +"']").addClass('require');  
+						$("[name='"+the_field_name +"']").removeClass('require_ok');   
+						$("[name='"+the_field_name +"']").val('Already taken');  
+			            to_submit = false;			
+				    } else {
+			            $("[name='"+the_field_name +"']").addClass('require_ok');   
+						$("[name='"+the_field_name +"']").removeClass('require');     
+				    }
+	            }
+	      	});
+	    });
     return to_submit;
 });
+
+

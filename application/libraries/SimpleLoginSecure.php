@@ -229,5 +229,25 @@ class SimpleLoginSecure
 		return $this->CI->db->delete($this->user_table, array('user_id' => $user_id));
 	}
 	
+	function takenEmail($email) {
+		$this->CI =& get_instance();
+		$results = $this->CI->db->query('select user_id from users WHERE user_email = "' . $email . '"');
+		if ($results->num_rows() != 0) {
+			return true;
+		} else {
+			return false;
+		}		
+	}
+	
+	function takenName($user_name) {
+		$this->CI =& get_instance();
+		$results = $this->CI->db->query('select user_id from users WHERE user_name = "' . $user_name.'"');
+		if ($results->num_rows() != 0) {
+			return true;
+		} else {
+			return false;
+		}		
+	}
+	
 }
 ?>

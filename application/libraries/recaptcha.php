@@ -101,7 +101,6 @@ class Recaptcha
     );
     log_message('debug','Recaptcha::_http_post response:'.print_r($response,TRUE));
     $answers = explode ("\n", $response[1]);
-
     if (trim($answers[0]) == 'true') 
     {
       return TRUE;

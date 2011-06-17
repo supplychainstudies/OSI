@@ -410,11 +410,11 @@ class Form {
 						  . 'lang:"' . $recaptcha_config['lang'] . '"'
 						  . '};'
 						. '</script>'
-						. '<script type="text/javascript" src="' . $recaptcha_config['server'] . '/challenge?k=<?= ' . $recaptcha_config['key'] . $recaptcha_config['errorpart'] . '"></script>'
+						. '<script type="text/javascript" src="' . $recaptcha_config['server'] . '/challenge?k=' . $recaptcha_config['key'] . $recaptcha_config['errorpart'] . '"></script>'
 						. '<noscript>'
-								. '<iframe src="' . $recaptcha_config['server'] . '/noscript?lang=' . $recaptcha_config['lang'] . '&k=<?= ' . $recaptcha_config['key'] . $recaptcha_config['errorpart'] . '" height="300" width="500" frameborder="0"></iframe><br/>\n'
+								. '<iframe src="' . $recaptcha_config['server'] . '/noscript?lang=' . $recaptcha_config['lang'] . '&k=' . $recaptcha_config['key'] . $recaptcha_config['errorpart'] . '" height="300" width="500" frameborder="0"></iframe><br/>\n'
 								. '<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>'
-								. '<input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>'
+								. '<input type="hidden" name="recaptcha_response_field" value="manual_challenge" />'
 						. '</noscript>';
 						break;
                     case 'textarea':

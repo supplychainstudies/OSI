@@ -6,7 +6,7 @@
       <type>text</type>
 		<note>Footprinted is in closed beta version. If you want to test the site please send as an email.</note>
     </registration_code>
-    <user_name rules="trim|xss_clean|required">
+    <user_name rules="trim|xss_clean|required|name_taken">
 	  <label>User Name</label>
       <type>text</type>
     </user_name>
@@ -14,7 +14,7 @@
 	  <label>Password</label>
       <type>password</type>
     </password>
-    <email rules="trim|xss_clean|required">
+    <email rules="trim|xss_clean|required|email_validation|email_taken">
 	  <label>Email</label>
       <type>text</type>
     </email>
