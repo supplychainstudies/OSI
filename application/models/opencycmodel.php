@@ -11,14 +11,14 @@ class Opencycmodel extends FT_Model{
 		if (count($results) > 0) {
 			return $results[0]['label'];
 		} else {
-			$this->dumpOpencycConcept($uri);
-			$q = "SELECT ?label from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
-			$results = $this->executeQuery($q);
-			if (count($results) > 0) {
-				return $results[0]['label'];
-			} else {
+		//	$this->dumpOpencycConcept($uri);
+		//	$q = "SELECT ?label from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
+		//	$results = $this->executeQuery($q);
+		//	if (count($results) > 0) {
+		//		return $results[0]['label'];
+		//	} else {
 				return false;
-			}
+		//	}
 		}
 	}
 	
