@@ -1,5 +1,4 @@
 <form action="users/" name="register">
-<fieldset name="Login">
     <user_name rules="trim|xss_clean|required">
 	  <label>User Name</label>
       <type>text</type>
@@ -10,7 +9,6 @@
     </password>
   <submit>
     <type>submit</type>
-    <value>Submit</value>
+    <value>Login</value>
   </submit>
-</fieldset>
 </form>

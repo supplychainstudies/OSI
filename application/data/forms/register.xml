@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <form action="/users/registered" name="">
-<fieldset name="Register at Footprint.org">
+<fieldset name="Register at Footprinted.org">
 	<registration_code rules="trim|xss_clean|required">
 	  <label>Registration code</label>
       <type>text</type>
-		<note>Footprinted is in closed beta version. If you want to test the site please send as an email.</note>
     </registration_code>
     <user_name rules="trim|xss_clean|required|name_taken">
 	  <label>User Name</label>
@@ -33,7 +32,7 @@
 	</recaptcha>
   <submit>
     <type>submit</type>
-    <value>Submit</value>
+    <value>Register</value>
   </submit>
 </fieldset>
 </form>

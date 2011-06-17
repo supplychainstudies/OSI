@@ -118,7 +118,7 @@ class Users extends FT_Controller {
 				$the_form = "<div><p>".$fail."</p></div>";
 			}
 			$the_form .= $this->form_extended->build();
-			$the_form .= "<div><p> Or <a href=\"users/register\">Register</a> with us.</p></div>";
+			$the_form .= "<div><p> Or <a href=\"/users/register\">Register</a> with us.</p></div>";
 			$this->script(Array('form.js','register.js'));
 			$this->style(Array('style.css','form.css'));
 			$this->data("form_string", $the_form);
@@ -191,7 +191,7 @@ class Users extends FT_Controller {
 		$this->data("pass_data", $this->pass_data);
 		$this->form_extended->load('register'); 
 		//$the_form = '<p> <a class="rpxnow" onclick="return false;" href="https://opensustainability.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Ffootprinted.org%2Fusers%2F">Use an Open ID login &rsaquo; &rsaquo;</a> </p>';
-		$the_form = "";
+		$the_form = "<p>Footprinted is in closed beta version. If you want to test the site please send as an email.</p>";
 		if (isset($this->error) == true) {
 			$the_form = '<p class="error">'.$this->error.'</p>';
 		}

@@ -482,7 +482,8 @@ class Form {
 	                        $input = "$tabs\t<input $idname %s />\n";
 	                        break;
 					case 'submit':
-                    	$input = "<input type='submit' value='save' />\n";
+						if ($def['value'] == "") $def['value'] = "Submit";
+                    	$input = "<input type='submit' value='".$def['value']."' />\n";
                     	break;					
                     default:
                         $input = "$tabs\t\t<input $idname %s />\n";
