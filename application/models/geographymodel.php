@@ -2,20 +2,16 @@
 class Geographymodel extends FT_Model{
     function Geographymodel(){
 		parent::__construct();
+		$this->arc_config['store_name'] = "geonames";
     }
 
 	public function getPointGeonames($uri) {
-
-		$this->arc_config['db_name'] = "footprinted";
-		$this->arc_config['store_name'] = "geonames";
-		// check if this uri is already loaded
-		
+		// check if this uri is already loaded		
 		$this->isLoaded($uri);
-		
        $q = "select ?lat ?long ?name where { " .
-           "<" . str_replace("about.rdf","",$uri) . "> wgs84_pos:lat ?lat . " .    
-           "<" . str_replace("about.rdf","",$uri) . "> wgs84_pos:long ?long . " .
-           "<" . str_replace("about.rdf","",$uri) . "> gn:name ?name . " .
+           "<" . $uri . "> wgs84_pos:lat ?lat . " .    
+           "<" . $uri . "> wgs84_pos:long ?long . " .
+           "<" . $uri . "> gn:name ?name . " .
            "}";	
 
 		$results = $this->executeQuery($q);
@@ -24,6 +20,14 @@ class Geographymodel extends FT_Model{
 		} else {
 			return false;
 		}
+	}
+	
+	public function geoEverything($uri) {
+       $q = "select * where { " .
+           "<" . $uri . "> ?p ?o . " .    
+           "}";	
+		$results = $this->executeQuery($q);
+		var_dump($results);
 	}
 	
 } // End Class
