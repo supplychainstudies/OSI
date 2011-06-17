@@ -154,7 +154,7 @@
 				if (isset($parts['bibliography']) == true) {
 					foreach ($parts['bibliography'] as $record) {
 						if (isset($record['uri']) == true) {
-							echo "<a href=\"" . $record['uri'] . "\" target='_blank'>";
+							echo "<a href='/search?ref=" . $record['title'] . "' target='_blank'>";
 						}
 						if (isset($record['authors']) == true) {
 							foreach ($record['authors'] as $author) {
@@ -195,7 +195,7 @@
 				if (isset($parts['categoryOf']) == true) {
 					foreach ($parts['categoryOf'] as $record) {
 						echo "<p><a href='/search/?category=" .  $record['label'] . "' target='_blank'>";
-						echo "Belongs to Category: ". $record['label'];
+						echo "Belongs to Category: ". $record['uri'];
 						echo "</a></p>";
 					}
 				}
