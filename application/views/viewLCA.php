@@ -121,7 +121,7 @@
 					$i++;
 					if ($i >12){ $i = 0;}
 			}}?>
-			<?}?>
+
 			<? 
 			if (isset($parts['Output']["Liquid Volume"]) == true) {
 				foreach ($parts['Output']["Liquid Volume"] as $volume) {
@@ -133,16 +133,17 @@
 					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . $volume['unit']["label"]; 
 					echo "<b> ".$volume['name'] . "</b></p></div>";
 				}
-			} ?>
-
-			</div>					
+			} 
+			?>
+			</div>
+			<?}?>				
 
 			<? if (isset($parts['geography']) == true ) {
 				echo '<div id="map" class="lca"><h2>Geography</h2>';
 				
 				foreach ($parts['geography'] as $geo) {
 						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
-						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['lat'].','.$geo['long']."&zoom=4&markers=size:big%7Ccolor:blue%7C".$geo['name']."&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
+						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['lat'].','.$geo['long']."&zoom=2&markers=size:big%7Ccolor:blue%7C".$geo['name']."&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
 						echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
 					}
 				echo "</div>";
@@ -156,19 +157,15 @@
 						if (isset($record['uri']) == true) {
 							echo "<a href='/search?ref=" . $record['title'] . "' target='_blank'>";
 						}
+						$ref = "";
 						if (isset($record['authors']) == true) {
 							foreach ($record['authors'] as $author) {
-								echo $author['lastName'] . ", " .$author['firstName'] . ";";
+								$ref .= $author['lastName'] . ", " .$author['firstName'] . ". ";
 							}
-							echo "; ";
 						}
-						if (isset($record["title"]) == true) {
-							echo $record["title"];
-						}
-						if (isset($record['uri']) == true) {
-							echo "</a>";
-						}
-						echo "<p>Year: ".substr_replace($record['date'],'', 4)."</p>";
+						if (isset($record["date"]) == true) 	{ 	$ref .= "(".substr_replace($record['date'],'', 4).") "; }
+						if (isset($record["title"]) == true) 	{	$ref .= $record["title"];	}
+						if (isset($record['uri']) == true) 		{	echo $ref."</a>"; }
 					}
 				}
 			?>
@@ -195,7 +192,7 @@
 				if (isset($parts['categoryOf']) == true) {
 					foreach ($parts['categoryOf'] as $record) {
 						echo "<p><a href='/search/?category=" .  $record['label'] . "' target='_blank'>";
-						echo "Belongs to Category: ". $record['uri'];
+						echo "Belongs to Category: ". $record['label'];
 						echo "</a></p>";
 					}
 				}
@@ -213,17 +210,20 @@
 				}	?>
 				</p>
 				<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
-					<img alt="Creative Commons License" style="border-width:0" src="https://creativecommons.org/images/deed/cc-logo.jpg" height='52px' />
-					<img alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/deed/by.png" height='50px' /> <img alt="Creative Commons License" style="border-width:0" src="http://creativecommons.org/images/deed/sa.png" height='50px'/></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
-
+					<img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/cc.svg" height='50px' />
+					<img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/by.svg" height='50px' /> <img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/sa.svg" height='50px'/></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" rel="dct:type">work</span> is licensed under:<br/><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
+					
+					<?php
+					# Get the actual URL
+						$thispage = "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI'];
+					?>
+					<p>Attribute to:<br/>
+					<?=$ref?> <i>via</i> <? echo "<a href='".$thispage."'>"; ?> <?=$thispage?></a></p>
 			
 			</div>
 			<div id="lca_share" class="lca">
 			<h2>Share</h2>
-			<?php
-			# Get the actual URL
-				$thispage = "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI'];
-			?>
+
 			<ul id="share-options">			
 				<li id="facebook_share"><p>
 					<?php 
