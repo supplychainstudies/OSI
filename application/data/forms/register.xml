@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<form action="/users/registered" name="">
-<fieldset name="Register at Footprinted.org">
+<form action="/users/registered" name="Register">
 	<registration_code rules="trim|xss_clean|required">
 	  <label>Registration code</label>
       <type>text</type>
@@ -26,14 +25,9 @@
 	<note>A friend of a friend file is a semantic document that has your biographical information and relationships. Include the URI of yours here.</note>
       <type>text</type>
     </foaf>
-	<recaptcha>
-	  <label>Recaptcha</label>
-		<type>recaptcha</type>
-	</recaptcha>
   <submit>
-    <type>submit</type>
+    <type>button</type>
     <value>Register</value>
   </submit>
-</fieldset>
 </form>
 

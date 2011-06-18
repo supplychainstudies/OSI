@@ -9,15 +9,15 @@
  * @uses 
  */
 
-class Feeds extends SM_Controller {
-	public function News() {
-		parent::SM_Controller();			
-		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
+class Feeds extends FT_Controller {
+	public function feeds() {
+		parent::__construct();
+		$this->load->model(Array('lcamodel'));	
 		$this->load->library(Array('form_extended', 'name_conversion','SimpleLoginSecure'));
 	}
 	
 	public function newmaterials() {
-		@$latest_submissions = $this->arcmodel->latest(10);
+		$latest_submissions = $this->lcamodel->latest(10);
 		echo "<?xml version=\"1.0\"?>\n" . 
 				"<rss version=\"2.0\">\n" . 
 				"<channel>\n";

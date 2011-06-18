@@ -239,8 +239,6 @@ class Users extends FT_Controller {
 					$this->pass_data['registration_code_'] = $_POST['registration_code_']; }
 			}		
 			if ($this->checkPasscode($_POST['registration_code_']) == true) {
-				if ($this->recaptcha->check_answer($_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']) == TRUE) { 
-				// Recaptcha is fine!
 				$this->CI =& get_instance();
 				// Step 1: Write the user name, email, password to db
 				// Step 2: Get the unique id				
@@ -272,10 +270,6 @@ class Users extends FT_Controller {
 					if(!$this->CI->db->insert($this->foaf_table)) //There was a problem! 
 						return false;		
 					$this->login();	
-					} else {
-						$this->error = "Recaptcha didn't work. Try again?";
-						$this->register();
-					}
 				} else {
 					$this->error = "Something went wrong. Try again?";
 				}
