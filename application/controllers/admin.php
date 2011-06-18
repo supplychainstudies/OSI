@@ -29,6 +29,22 @@ class Admin extends FT_Controller {
 		var_dump($results);
 	}
 	
+	
+	
+	public function changeunits(){
+		$rs = $this->db->get('footprints');		
+		// Initializing array
+		foreach ($rs->result() as $r) {
+			if($r->unit == "piece"){
+				$data = array (
+					'unit' => "unit"
+				);
+				$this->db->where('uri', $r->uri);
+				$this->db->update('footprints', $data);
+			}
+
+		}
+	}
 	// Working function to normalize
 	/* public function normalize() {
 		$uris = $this->lcamodel->getRecords();
