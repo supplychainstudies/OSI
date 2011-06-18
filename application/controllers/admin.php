@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller for environmental information structures
+ * Controller for administration things
  * 
  * @version 0.8.0
  * @author info@footprinted.org
@@ -18,6 +18,7 @@ class Admin extends FT_Controller {
 		$obj =& get_instance();    
         $obj->load->library(array('xml'));
         $this->ci =& $obj;
+		$this->check_if_admin();
 	}
 	
 	public function testGraph() {
@@ -28,7 +29,8 @@ class Admin extends FT_Controller {
 		var_dump($results);
 	}
 	
-	public function normalize() {
+	// Working function to normalize
+	/* public function normalize() {
 		$uris = $this->lcamodel->getRecords();
 		$parts = array();
 		$factors = array (
@@ -121,7 +123,7 @@ class Admin extends FT_Controller {
 			}
 			
 		//}
-	}
+	}*/
 	
 	public function convertToNamedGraphs() {
 		$uris = $this->lcamodel->getRecords();

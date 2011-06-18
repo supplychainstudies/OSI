@@ -50,7 +50,9 @@ class People extends FT_Controller {
     * @public
     * Generates a form, or, in the case where post data is passed, submits the data to the DB
     */
-        if($_POST) {
+	$this->check_if_logged_in();
+	
+     if($_POST) {
             $data = $this->form_extended->load('foaf'); 
             $uri = "http://opensustainability.info/rdfspace/people/" . trim($_POST['firstName_']) . trim($_POST['lastName_']) . rand(1000000000,10000000000);
             @$triples = $this->form_extended->build_triples($uri, $_POST, $data); 

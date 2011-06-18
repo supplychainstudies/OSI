@@ -10,20 +10,15 @@
 <body id="home">
 	<div id ="contentwrap">	
 	<?= $navigationDisplay;?>
-	<div id="columnleft">
-
-		<div id="info">
-		<h1 class="grande">Footprinted makes sustainability information<br/> free, open and easy to use.</h1>
-		<br/>
-		<h1 class="piccolo">We are currently in closed development.</h1>
-		<h1 class="piccolo">Release in June 2011.</h1>
-		<br/>
-		<div class="blue small square"><p><a href="http://twitter.com/footprinted">Follow us in twitter</a></p></div>
-		<div class="blue small square"><p><a href="mailto:we@footprinted.org">Send as an email</a></p></div>
-		</div>
 	
+	<div id="columnwide">
+	<div id="about">
+		<p>Footprinted makes sustainability information free, open and easy to use.</p>
+		<p>We are currently in closed development and we will release soon in June 2011.</p>
+		<p>For mor info <a href="http://twitter.com/footprinted">follow us on twitter</a> or <a href="mailto:info@footprinted.org">send us an email</a></p>
 	</div>
 	
+	</div>
 
 
 	<?=$footerDisplay;?>

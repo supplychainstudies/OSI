@@ -16,7 +16,7 @@
 	
 	<div id="columnwide">
 				<div id="about">
-				<p>Open, free and easy to use environmental impact information. <a href="/search">Search</a> in the 500+ footprints available or explore some of the featured ones below:</p>
+				<p>Free and open environmental impact information. <a href="/search">Search</a> the 500+ footprints available or explore some of the featured ones below:</p>
 				<br/>
 				</div>
 				<?	foreach ($set as $parts) { 
@@ -29,9 +29,17 @@
 								<?	echo '<a href="/lca/view/'.$parts->uri.'">'; ?>
 								<?= $parts->name ?></a></h1>
 								<?
-									if (isset($parts->ref) == true) {
-									echo "<p>From: <a href='/search?ref=".$parts->ref."'>".$parts->ref."</a></p>";
+									if (isset($parts->category) == true) {
+											$cat = explode(";",$parts->category); 
+											echo "<p>A <a href='/search?category=" . $cat[0] . "'>";
+											echo $cat[0];
+											echo "</a> ";
 									}
+									
+									if (isset($parts->ref) == true) {
+										echo " from <a href='/search?ref=".$parts->ref."'>".$parts->ref."</a></p> ";
+									}
+									
 								?>
 
 
@@ -42,19 +50,20 @@
 									<div id="tabs">
 									<?
 									$impacts = array(
-										array("value" => $parts->co2e, "color" => "#FF7C00", "unit" => "Kg", "max" => 2000, "impacttext" => "CO<sub>2</sub> (eq)"),
-										array("value"=> $parts->water, "color" => "#45A3D8", "unit" => "L", "max" => 2000, "impacttext" => "Water"),
-										array("value"=> $parts->waste, "color" => "#6B5344", "unit" => "Kg", "max" => 2000, "impacttext" => "Waste"),
-										array("value"=> $parts->energy, "color" => "#E8BF56","unit" => "MJ", "max" => 20, "impacttext" => "Energy"));
+										array("value" => $parts->co2e, "color" => "#FF7C00", "unit" => "kg", "max" => 1800, "impacttext" => "CO<sub>2</sub> (eq)"),
+										array("value"=> $parts->water, "color" => "#45A3D8", "unit" => "L", "max" => 1800, "impacttext" => "Water"),
+										array("value"=> $parts->waste, "color" => "#6B5344", "unit" => "kg", "max" => 1800, "impacttext" => "Waste"),
+										array("value"=> $parts->energy, "color" => "#E8BF56","unit" => "MJ", "max" => 180, "impacttext" => "Energy"));
 									
 									foreach ($impacts  as $impact) {
 										if($impact['value'] != 0){
 										$size = round(sqrt($impact['max']*$impact['value']/pi()));
-										if ($size > 82) { $size = 82;}
+										if ($size > 75) { $size = 75;}
 										if ($size < 20) { $size = 20;}
-										$margin = (120-$size)/2;
+										$marginright = (120-$size)/2;
+										$margintop = (100-$size)/2;
 										// Create a circle
-										echo '<div class="tab_impact"><div class="tab_circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margin.'px; background:'.$impact['color'].'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
+										echo '<div class="tab_impact"><div class="tab_circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$marginright.'px;margin-top:'.$margintop.'px; background:'.$impact['color'].'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
 										echo '<div class="tab_nr"><p><nrwhite>' . round($impact['value'],2) . "</nrwhite> ". $impact['unit'] . "<p/></div>";
 										echo  "<div class='tab_meta'><p>".$impact['impacttext']."</p></div>";
 										echo "</div>";
@@ -71,24 +80,16 @@
 
 								<? if (isset($parts->country) == true ) {
 									echo '<div id="maplite">';		
-												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x150&zoom=0&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:big%7Ccolor:blue%7C".$parts->country.'"';
+												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x155&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:big%7Ccolor:blue%7C".$parts->country.'"';
 									echo '<img src="'.$map.'" alt="'.$parts->country.'"/>';
-									echo '<div id="infomap"><p>Location: <b>'.$parts->country.'</b></p></div>';
+									echo '<div id="infomap"></div>';
 									echo "</div>";
 								} ?>	
 								<div class="ref_lite">
-									<p>Year: <?= $parts->year ?></p>
+									<p>Year: <b><?= $parts->year ?></b></p>
 								</div>
 								<div class="ref_lite">
-									<p>Category: 
-										<? if (isset($parts->category) == true) {
-											echo "<a href='/search?category=" . $parts->category . "'>";
-											echo $parts->category;
-											echo "</a>";
-									}?></p>
-								</div>
-								<div class="ref_lite">
-									<p><? echo "<a href='".$parts->uri. ".json'>";?>Export</a></p>
+									<p>Location: <b><?= $parts->country?></b></p>
 								</div>
 								<div class="ref_lite">
 									<p><? echo "<a href='/lca/view/".$parts->uri. "'>";?> More information</a></p>

@@ -12,6 +12,7 @@
 class Dump extends FT_Controller {
 	public function __construct() {
 		parent::__construct();
+		$this->check_if_logged_in();
 		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','opencycmodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper','linkeddata_helper'));

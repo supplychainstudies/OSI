@@ -14,6 +14,7 @@
 class Create extends FT_Controller {
 	public function Create() {
 		parent::__construct();
+		$this->check_if_logged_in();
 		$this->load->model(Array('unitmodel','ecomodel'));	
 		$this->load->library(Array('form_extended'));
 		$this->load->helper(Array('nameformat_helper'));

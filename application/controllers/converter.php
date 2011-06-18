@@ -14,6 +14,7 @@
 class Converter extends SM_Controller {
 	public function Converter() {
 		parent::SM_Controller();
+		$this->check_if_logged_in();
 		$this->load->library(Array('xml', 'Simplexml', 'form_extended'));
 		$this->load->model(Array('arcmodel', 'arcremotemodel'));		
 	}	

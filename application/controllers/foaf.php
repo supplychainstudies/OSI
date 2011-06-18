@@ -42,11 +42,12 @@ class Foaf extends SM_Controller {
 		echo json_encode($results);
 	}
 	
-	public function create() {
 	/***
     * @public
     * Generates a form, or, in the case where post data is passed, submits the data to the DB
     */
+	public function create() {
+		$this->check_if_logged_in();
 		if($_POST) {
 			$data = $this->form_extended->load('foaf'); 
 			$uri = "http://footprinted.org/rdfspace/people/" . trim($_POST['firstName_']) . trim($_POST['lastName_']) . rand(1000000000,10000000000);

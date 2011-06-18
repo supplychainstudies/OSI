@@ -4,8 +4,13 @@ class Sandbox extends FT_Controller {
 	
 	function Sandbox() {
 		parent::__construct();
+		$this->check_if_admin(); 
 		//$this->load->library(Array('formats'));
 		$this->load->model(Array('lcamodel','loadmodel'));
+	}
+	
+	function testprotection(){
+		echo "Hi Admin";
 	}
 	
 	function cats() {
