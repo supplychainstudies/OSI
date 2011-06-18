@@ -43,6 +43,7 @@ class Sources extends SM_Controller {
     * @public
     * Generates a form, or, in the case where post data is passed, submits the data to the DB
     */
+	$this->check_if_logged_in();
 		if($_POST) {
 			$data = $this->form_extended->load('bibliography'); 
 			$uri = "http://footprinted.org/rdfspace/sources/" . trim($_POST['title_']) . rand(1000000000,10000000000);

@@ -14,6 +14,7 @@
 class Dataconverter extends SM_Controller {
 	public function dataconverter() {
 		parent::SM_Controller();
+		$this->check_if_logged_in();
 	}
 	
 	public function index() {

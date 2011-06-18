@@ -212,7 +212,7 @@ class FT_Controller extends CI_Controller {
 		$this->config->load('general');
 		if($this->config->item('deploystatus') == "stage") {
 			$this->output->cache($time);						
-		}
+		}	
 	}
 	
 	public function clearCache($uri_segment) {
@@ -227,4 +227,17 @@ class FT_Controller extends CI_Controller {
 		@unlink($cache_path);		
 	}
 	
+	// For protecting pages
+	function check_if_logged_in() {
+     	if($this->session->userdata('id') == false) {
+       		redirect('/users/login');}
+   	}
+	// Protecting the site only for admins
+	function check_if_admin() {
+     	if($this->session->userdata('id') == false) {
+       		redirect('/users/login');
+   		}else{
+			if($this->session->userdata('id') != ("bianca.saya" || "zapico"))  {redirect('/users/login'); }
+		}
+	}
 }

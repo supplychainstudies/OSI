@@ -127,6 +127,7 @@ class Users extends FT_Controller {
 	}
 	
 	public function delete() {
+		$this->check_if_admin();
 		$this->simpleloginsecure->delete($user_id);
 	}
 

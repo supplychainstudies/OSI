@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller for environmental information structures
+ * Controller for comments (Protected only for logged in users)
  * 
  * @version 0.8.0
  * @author info@footprinted.org
@@ -16,9 +16,11 @@ class Comments extends FT_Controller {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel'));
 		$this->load->library(Array('name_conversion'));
+		
 	}
 	
 	public function post() {
+		$this->check_if_logged_in();
 		$post = $this->name_conversion->toBNode('post');
 		$account = $this->name_conversion->toBNode('account');
 		$post_date = date("H:i:s-n:j:Y");

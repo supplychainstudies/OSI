@@ -38,10 +38,10 @@ h1#title {
 #header {
 	padding-top: 10px;
 	float:left;
-	height:50px;
+	height:30px;
 	width:auto;
 	text-align:left;
-	padding-bottom: 40px;
+	padding-bottom: 25px;
 }
 
 #login {
@@ -121,7 +121,7 @@ h1#title {
 	
 }
 #about p{
-	font-size:24px;
+	font-size:22px;
 	color:#333;
 	font-family: 'PT Sans Narrow', arial, serif;
 }
@@ -275,7 +275,7 @@ h1.top {
 	background-repeat:none;
 }
 
-
+/* Styles for the Featured view*/ 
 #lca_title_lite{
 	float:left;
 	text-align: left;
@@ -286,14 +286,14 @@ h1.top {
 	float:left;
 	text-align: left;
 	width:980px;
-	height:200px;
+	height:155px;
 	background-color: #666;
 	margin-top:5px;
 	margin-bottom:25px;
 }
 #maplite {
 	float:right;
-	height:200px;
+	height:155px;
 	width:200px;
 	top:0px;
 	background-color: #333;
@@ -302,6 +302,7 @@ h1.top {
 	font-size:24px;
 	color:#333;
 	font-family: 'PT Sans Narrow', arial, serif;
+	height:26px;
 }
 #lca_title_lite h1	 a{
 	color:#000;
@@ -340,6 +341,12 @@ h1.top {
 	color:#333;
 	font-family: 'PT Sans Narrow', arial, serif;
 }
+.ref_lite a{
+	font-size:13px;
+	color:#333;
+	font-weight:bold;
+	border-bottom: 1px dotted #45A3D8;
+}
 
 #tabs{
 	text-align:center;
@@ -347,23 +354,30 @@ h1.top {
 .tab_impact{
 	position:relative;
 	float:left;
-	height: 200px;
+	height: 155px;
 	width:120px;
 	text-align:left;
 	margin-right: 15px;
 }
 .tab_circle {
 	position:relative;
-	width:120px;
-	height:50px;
+	width:100px;
+	height:80px;
 	left:0px;
 	top: 0px;
 	text-align:center;	
 }
 .tab_nr {
 	position:absolute;
-	top:125px;
-	height: 40px;
+	top:100px;
+	height: 30px;
+	width: 120px;
+	text-align:center;
+}
+.tab_meta {
+	position:absolute;
+	top:80px;
+	height: 20px;
 	width: 120px;
 	text-align:center;
 }
@@ -376,7 +390,7 @@ sub {
 }
 nrwhite {
 	color: #fff;
-	font-size:32px;
+	font-size:24px;
 	font-family: 'Lato', arial, serif; 
 }
 #tabs p {
@@ -387,13 +401,6 @@ nrwhite {
 	color: #fff;
 	font-size:14px;
 	text-decoration:none;
-}
-.tab_meta {
-	position:absolute;
-	top:100px;
-	height: 40px;
-	width: 120px;
-	text-align:center;
 }
 
 /* Style for comments */

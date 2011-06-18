@@ -27,8 +27,8 @@ class Info extends FT_Controller {
 	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
     */
 	// Public function for exploring the repository
-	public function featured() {
-			
+	public function featured() {		
+		$this->check_if_admin();
 		// Querying the database for all featured URIs		
 		$this->db->select('uri');
 		$this->db->order_by("uri", "ASC"); 
@@ -108,7 +108,7 @@ class Info extends FT_Controller {
     */
 	// Public function for exploring the repository
 	public function browse() {
-			
+		$this->check_if_admin();
 		// Querying the database for all records		
 		$records = $this->lcamodel->getRecords();
 		// Initializing array

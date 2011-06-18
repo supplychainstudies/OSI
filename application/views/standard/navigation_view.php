@@ -18,7 +18,7 @@ if ($this->session->userdata('id') == false) {
 	echo "<a id='opendialog'>Login </a>" ;
 } else {
 	echo '<a href="/search">Search </a> | ';
-	echo '<a href="/create/start">Contribute </a> | '; 
+	echo '<a href="/lca/create">Contribute </a> | '; 
 	echo "<a href='/users/dashboard'>Your dashboard (". $this->session->userdata('id') .")</a>";
 }
 	

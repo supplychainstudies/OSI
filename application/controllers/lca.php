@@ -34,11 +34,11 @@ class Lca extends FT_Controller {
 	}
 	
 	/***
-    * @public
+    * @public (For logged in users)
     * Generates a form, or, in the case where post data is passed, submits the data to the DB
     */
 	public function create() {
-
+		$this->check_if_logged_in();
 		if ($post_data = $_POST) {	
 			$model_node = toURI("lca", $post_data['productServiceName_']); 
 			$exchange_node = $model_node;
@@ -341,9 +341,6 @@ class Lca extends FT_Controller {
 		$this->display("View " . $parts['quantitativeReference']['amount'] . " " . $parts['quantitativeReference']['unit'] . " of " .  $parts['quantitativeReference']['name'], "viewLCA");		
 	}
 
-
-
-
 	/*
 	Private function that normalizes to 1 functional unit and to kilograms if possible
 	*/
@@ -399,15 +396,13 @@ class Lca extends FT_Controller {
 			}
 		}
 	}
-	
-	
 		
 		/***
 	    * @public
 	    * Shows the homepage
 		* This is not functional for non-LCA entries and does not have search or filter capabilities yet
+		* Public function for exploring the repository
 	    */
-		// Public function for exploring the repository
 		public function featured() {
 			// Querying the database for all featured URIs		
 			$this->db->select('uri');
@@ -429,19 +424,19 @@ class Lca extends FT_Controller {
 		}
 		
 				
-		public function addSameAs() {
+		private function addSameAs() {
 			parse_str($_SERVER['QUERY_STRING'],$_GET); 
 			$ids = $_GET;
 			$this->lcamodel->addSameAs($ids['ft_id'],$ids['opencyc_id']);
 			
 		}
-		public function addDbpedia() {
+		private function addDbpedia() {
 			parse_str($_SERVER['QUERY_STRING'],$_GET); 
 			$ids = $_GET;
 			$this->lcamodel->addDbpedia($ids['ft_id'],$ids['db_id']);
 			
 		}
-		public function addCategory() {
+		private function addCategory() {
 			parse_str($_SERVER['QUERY_STRING'],$_GET); 
 			$ids = $_GET;
 			$this->lcamodel->addCategory($ids['ft_id'],$ids['opencyc_id']);
@@ -454,7 +449,7 @@ class Lca extends FT_Controller {
 		*/
 		
 		// See if there is any new footprints and then save the URI and Name in the cache table
-		public function cacheNames(){
+		private function cacheNames(){
 			$records = $this->lcamodel->getRecords();
 			// Initializing array
 			foreach ($records as $r) {
@@ -475,7 +470,7 @@ class Lca extends FT_Controller {
 		}
 		
 		
-		public function cacheImpactsToMasterDB(){
+		private function cacheImpactsToMasterDB(){
 			$rs = $this->db->get('footprints');	
 			// Go through all the lcas
 			foreach ($rs->result() as $r) {
@@ -493,7 +488,7 @@ class Lca extends FT_Controller {
 		}
 		
 		
-		public function cacheImpacts(){
+		private function cacheImpacts(){
 			$rs = $this->db->get('footprints',200,599);	
 			// Go through all the lcas
 			foreach ($rs->result() as $r) {
@@ -552,7 +547,7 @@ class Lca extends FT_Controller {
 			}
 		}
 					
-		public function cacheCategories(){
+		private function cacheCategories(){
 			$rs = $this->db->get('footprints');		
 			// Initializing array
 			foreach ($rs->result() as $r) {
@@ -573,7 +568,7 @@ class Lca extends FT_Controller {
 			}
 		}
 		
-		public function cacheEverything(){ 
+		private function cacheEverything(){ 
 			// Querying the database for all records		
 			$records = $this->lcamodel->getRecords();
 			// Initializing array

@@ -222,7 +222,7 @@ $("form").submit(function() {
           type: "post",
 		  data: data,
           success: function(data){
-				answer = data.toString();
+				answer = data.toString().trim();
 				if(answer == "true") {
 		            $("[name='"+the_field_name +"']").addClass('require');  
 					$("[name='"+the_field_name +"']").removeClass('require_ok');   
@@ -244,7 +244,7 @@ $("form").submit(function() {
 	          type: "post",
 			  data: data,
 	          success: function(data){
-					answer = data.toString();
+					answer = data.toString().trim();
 					if(answer == "true") {
 			            $("[name='"+the_field_name +"']").addClass('require');  
 						$("[name='"+the_field_name +"']").removeClass('require_ok');   
