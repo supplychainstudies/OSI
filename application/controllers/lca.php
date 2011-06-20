@@ -294,10 +294,10 @@ class Lca extends FT_Controller {
 		// Turns exchanges into input and output array divided into categories 
 		if (isset($parts['exchanges']) == true) {
 			foreach ($parts['exchanges'] as $exchange) {
-				if (isset($exchange['unit']['quantityKind']) == true) {
+				if ($exchange['unit']['quantityKind'] != "") {
 					$parts[$exchange['direction']][$exchange['unit']['quantityKind']][] = $exchange;				
 				} else {
-					$parts[$exchange['direction']]['misc'][] = $exchange;
+					$parts[$exchange['direction']]['Misc'][] = $exchange;
 				}
 			}
 			/* Crunches the data to create the graphics and total calculations */
@@ -305,6 +305,11 @@ class Lca extends FT_Controller {
 			if (isset($parts['Input']["Mass"]) == true) { 
 			foreach ($parts['Input']["Mass"] as $i) {
 				$totalinput += $i['amount'];
+			}}
+			$misctotal = 0; 
+			if (isset($parts['Input']["Misc"]) == true) { 
+			foreach ($parts['Input']["Misc"] as $i) {
+				$misctotal += $i['amount'];
 			}}
 			$totalinputliter = 0; 
 			if (isset($parts['Input']["Liquid Volume"]) == true) { 
@@ -330,7 +335,8 @@ class Lca extends FT_Controller {
 			$this->data("totalinput", $totalinput);
 			$this->data("totaloutput", $totaloutput);
 			$this->data("totalinputliter", $totalinputliter);
-			$this->data("totalinputland", $totalinputland);		
+			$this->data("totalinputland", $totalinputland);
+			$this->data("misctotal", $misctotal);		
 		}	
 		$this->script(Array('comments.js', 'janrain.js'));
 		$comment_data = $this->form_extended->load('comment');
