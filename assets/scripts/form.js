@@ -191,32 +191,64 @@ function toggle_delete(field) {
 $("[name='submit_']").click(function() {
     var to_submit = true;
   $(".required").each(function() {
+		var error_field = $(this).attr('name')+"error";
         if($(this).val() == "") {
             $(this).addClass('require');  
       		$(this).removeClass('require_ok');   
+			$("[name='"+error_field+"']").html('Required!'); 
             to_submit = false;
-        } else {
+        } else if ($(this).val() != "" && $("[name='"+error_field+"']").html() == "Required!") {
             $(this).addClass('require_ok');   
-			$(this).removeClass('require');   
+			$(this).removeClass('require');  
+			$("[name='"+error_field+"']").html(''); 
         }
     });
-	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;	
-  $(".email_validation").each(function() {
+  $(".require").each(function() {
+        to_submit = false;
+    });
+	if (to_submit == true) {
+		$('#register').submit();
+	} 
+});
+
+var email_reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;	
+$(".email_validation").keyup(function() {
+	var error_field = $(this).attr('name')+"error";
 		if ($(this).val() != "") {		
-	        if(reg.test($(this).val()) == false) {
+	        if(email_reg.test($(this).val()) == false) {
 	            $(this).addClass('require');  
 				$(this).removeClass('require_ok');   
 				var error_field = $(this).attr('name')+"error";
-				$("[name='"+error_field+"']").html('email@format.pls');  
-	            to_submit = false;			
+				$("[name='"+error_field+"']").html('email@format.pls');  		
 	        } else {
 	            $(this).addClass('require_ok');   
 				$(this).removeClass('require');     
 				$("[name='"+error_field+"']").html('');
 	        }
 		}
-    });
-  $(".email_taken").each(function() {
+  });
+var url_reg = /(http):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;	
+$(".url_validation").keyup(function() {
+	var error_field = $(this).attr('name')+"error";
+		if ($(this).val() != "") {		
+	        if(url_reg.test($(this).val()) == false) {
+	            $(this).addClass('require');  
+				$(this).removeClass('require_ok');   
+				var error_field = $(this).attr('name')+"error";
+				$("[name='"+error_field+"']").html('This must be a valid URL');  			
+	        } else {
+	            $(this).addClass('require_ok');   
+				$(this).removeClass('require');     
+				$("[name='"+error_field+"']").html('');
+	        }
+		} else {
+            $(this).addClass('require_ok');   
+			$(this).removeClass('require');     
+			$("[name='"+error_field+"']").html('');			
+		}
+  });
+
+$(".email_taken").keyup(function() {
 		var e_the_field_name = $(this).attr('name');
 		if ($(this).val() != "" && $("[name='"+e_the_field_name +"error']").html() != 'email@format.pls') {
 			var e_answer = "false";
@@ -230,18 +262,21 @@ $("[name='submit_']").click(function() {
 					if(e_answer == "true") {
 			            $("[name='"+e_the_field_name +"']").addClass('require');  
 						$("[name='"+e_the_field_name +"']").removeClass('require_ok');   
-						$("[name='"+e_the_field_name +"error']").html('Already taken');  
-			            to_submit = false;			
+						$("[name='"+e_the_field_name +"error']").html('Already taken');  		
 				    } else {
 						$("[name='"+e_the_field_name +"error']").html('');
 						$("[name='"+e_the_field_name +"']").addClass('require_ok');   
 						$("[name='"+e_the_field_name +"']").removeClass('require');  
 				    }
-	            }
+	            },
+				failure: function(jqXHR, textStatus, errorThrown) {
+					var error = jqXHR + " - " + textStatus + " - " + errorThrown;
+					alert(error);
+				}
 	     	}); 
-    	}
-    });
-	$(".name_taken").each(function() {
+  	}
+  });
+	$(".name_taken").keyup(function() {
 			if ($(this).val() != "") {
 				var answer = "false";
 				var data = "name="+$(this).val();
@@ -255,20 +290,15 @@ $("[name='submit_']").click(function() {
 						if(answer == "true") {
 				            $("[name='"+the_field_name +"']").addClass('require');  
 							$("[name='"+the_field_name +"']").removeClass('require_ok');   
-							$("[name='"+the_field_name +"error']").html('Already taken');  
-				            to_submit = false;			
+							$("[name='"+the_field_name +"error']").html('Already taken');  			
 					    } else {
 				            $("[name='"+the_field_name +"']").addClass('require_ok');   
 							$("[name='"+the_field_name +"']").removeClass('require');   
-							$("[name='"+e_the_field_name +"error']").html('');  
+							$("[name='"+the_field_name +"error']").html(' ');  
 					    }
 		            }
 		      	});
 			}
 	    });
-	if (to_submit == true) {
-		$('#register').submit();
-	} 
-});
 
 

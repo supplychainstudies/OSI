@@ -75,7 +75,19 @@
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++; if ($i >10){ $i = 0;}
 			}}?>
-			
+			<? 
+			if (isset($parts['Input']["Energy and Work"]) == true) {
+				foreach ($parts['Input']["Energy and Work"] as $energy) {
+					$height = $energy['amount']*30;
+					if ($height < 30) { 
+						$height = 30; 
+					}
+					echo '<div class="bar_background"><div style="height:'.$height.'%;background-color:#ffff00;"></div></div>';
+					echo "<div class='flow_text'><p><amount>" . $energy['amount'] . "</amount> " . $energy['unit']["label"]; 
+					echo "<b> ".$energy['name'] . "</b></p></div>";
+				}
+			} 
+			?>
 			<? 
 			if (isset($parts['Input']["Liquid Volume"]) == true) { 
 			$color_liquid = array('1a6eff','1B64CE','1753AA','133E7C','2C4C7C');$i = 0;	
@@ -132,6 +144,19 @@
 					echo '<div class="bar_background"><div style="height:'.$height.'%;background-color:#002caa;"></div></div>';
 					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . $volume['unit']["label"]; 
 					echo "<b> ".$volume['name'] . "</b></p></div>";
+				}
+			} 
+			?>
+			<? 
+			if (isset($parts['Output']["Energy and Work"]) == true) {
+				foreach ($parts['Output']["Energy and Work"] as $energy) {
+					$height = $energy['amount']*30;
+					if ($height < 30) { 
+						$height = 30; 
+					}
+					echo '<div class="bar_background"><div style="height:'.$height.'%;background-color:#ffff00;"></div></div>';
+					echo "<div class='flow_text'><p><amount>" . $energy['amount'] . "</amount> " . $energy['unit']["label"]; 
+					echo "<b> ".$energy['name'] . "</b></p></div>";
 				}
 			} 
 			?>

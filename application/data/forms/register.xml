@@ -16,11 +16,11 @@
 	  <label>Email</label>
       <type>text</type>
     </email>
-    <openid rules="trim|xss_clean">
+    <openid rules="trim|xss_clean|url_validation">
       <type>text</type>
 	<label>Open ID</label>
     </openid>
-    <foaf rules="trim|xss_clean">
+    <foaf rules="trim|xss_clean|url_validation">
 	  <label>Friend of a friend URI</label>
 	<note>A friend of a friend file is a semantic document that has your biographical information and relationships. Include the URI of yours here.</note>
       <type>text</type>
