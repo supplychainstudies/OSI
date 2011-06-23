@@ -6,19 +6,26 @@ class Opencycmodel extends FT_Model{
     }
 
 	public function getOpenCycLabel($uri){
-		$q = "SELECT ?label from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
+		//var_dump($uri);
+		//$q = "SELECT ?label from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
+		//$results = $this->executeQuery($q);
+		//var_dump($results);
+		//$q = "SELECT * from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
+		//$results = $this->executeQuery($q);
+		//var_dump($results);
+		$q = "SELECT ?label from <".$uri."> WHERE { ?s rdfs:label ?label . FILTER regex(?s, '" . $uri . "', 'i') }";
 		$results = $this->executeQuery($q);
 		if (count($results) > 0) {
 			return $results[0]['label'];
 		} else {
-		//	$this->dumpOpencycConcept($uri);
-		//	$q = "SELECT ?label from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
-		//	$results = $this->executeQuery($q);
-		//	if (count($results) > 0) {
-		//		return $results[0]['label'];
-		//	} else {
+			$this->dumpOpencycConcept($uri);
+			$q = "SELECT ?label from <".$uri."> WHERE { <".$uri."> rdfs:label ?label }";
+			$results = $this->executeQuery($q);
+			if (count($results) > 0) {
+				return $results[0]['label'];
+			} else {
 				return false;
-		//	}
+			}
 		}
 	}
 	

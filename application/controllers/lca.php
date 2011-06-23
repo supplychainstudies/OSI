@@ -288,8 +288,19 @@ class Lca extends FT_Controller {
 				unset($parts[$key]);
 			}
 		}
-
 		$this->normalize($parts);
+		
+		$parts['year']= "";
+		foreach ($parts['bibliography'] as $b) { 
+			$parts['year'] = substr_replace($b['date'], '', 4); 
+			$parts['ref'] = $b["title"] . "Authors: ";
+			if (isset($b['authors']) == true) {
+				foreach ($b['authors'] as $author) {
+					$parts['ref'] .=  $author['lastName'] . ", " .$author['firstName'] . "; ";
+				}
+			}
+		}
+		
 		
 		// Turns exchanges into input and output array divided into categories 
 		if (isset($parts['exchanges']) == true) {
@@ -357,33 +368,33 @@ class Lca extends FT_Controller {
 		$parts['quantitativeReference']['amount'] = 1;
 		// If grams	
 		if (strpos("Gram", $parts['quantitativeReference']['unit']['label']) !== false) {
-			$ratio = $oldamount * 1000;
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+			$ratio = $oldamount / 1000;
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram"; $parts['quantitativeReference']['unit']['abbr'] = "kg";
 		}	
 		// If ounces
 		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Ounce" ) {
 			$ratio = $oldamount * 0.028345;
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram"; $parts['quantitativeReference']['unit']['abbr'] = "kg";
 		}
 		// If pounds
 		if ($parts['quantitativeReference']['unit']['label'] == "http://data.nasa.gov/qudt/owl/unit#Pound") {
 			$ratio = $oldamount * 0.45359237;
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";$parts['quantitativeReference']['unit']['abbr'] = "kg";
 		}
 		if ($parts['quantitativeReference']['unit']['label'] == "Pound Mass") {
 			$ratio = $oldamount * 0.45359237;
-			$parts['quantitativeReference']['unit']['label'] = "Kilogram";
+			$parts['quantitativeReference']['unit']['label'] = "Kilogram";$parts['quantitativeReference']['unit']['abbr'] = "kg";
 		}
 		// Normalizes the flows
 		if (isset($parts['exchanges']) == true) {
 			foreach ($parts['exchanges'] as &$exchanges) {
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
 				if ($exchanges['unit']['label'] == "Gram") {
-					$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";
+					$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram"; $exchanges['unit']['abbr'] = "kg";
 				}
 				if ($exchanges['unit']['label'] == "Pound Mass") {
 					$exchanges['amount'] = $exchanges['amount'] * 0.45359237; 
-					$exchanges['unit']['label'] = "Kilogram";
+					$exchanges['unit']['label'] = "Kilogram"; $exchanges['unit']['abbr'] = "kg";
 				}
 			}
 		}
@@ -393,11 +404,11 @@ class Lca extends FT_Controller {
 				$impactAssessment['amount'] = $impactAssessment['amount'] / $ratio;
 				if ($impactAssessment['unit']['label'] == "Gram") { 
 					$impactAssessment['amount']/=1000; 
-					$impactAssessment['unit']['label'] = "Kilogram"; 
+					$impactAssessment['unit']['label'] = "Kilogram"; $impactAssessment['unit']['abbr'] = "kg";
 				}
 				if ($impactAssessment['unit']['label'] == "Pound Mass") { 
 					$impactAssessment['amount']*=0.45359237; 
-					$impactAssessment['unit']['label'] = "Kilogram"; 
+					$impactAssessment['unit']['label'] = "Kilogram"; $impactAssessment['unit']['abbr'] = "kg";
 				}
 			}
 		}

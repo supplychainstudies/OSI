@@ -237,7 +237,7 @@ class FT_Controller extends CI_Controller {
      	if($this->session->userdata('id') == false) {
        		redirect('/users/login');
    		}else{
-			if($this->session->userdata('id') != ("bianca.saya" || "zapico"))  {redirect('/users/login'); }
+			if($this->session->userdata('id') != ("bianca.sayan" || "zapico" || "leo"))  {redirect('/users/login'); }
 		}
 	}
 }

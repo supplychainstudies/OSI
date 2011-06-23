@@ -17,8 +17,9 @@
 
 	<div id="lca_header">
 		<div id="lca_title"><h1><?=$parts['title'] ?></h1></div>
+		
 		<? /*<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
-		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["label"] ?></nr></h1></div>	
+		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["abbr"] ?></nr></h1></div>
 	</div>
 	<div id="lca_background">	
 		<div id="lca_impact" class="lca">
@@ -29,7 +30,7 @@
 				// Change color of the circle depending on the impact category	
 				switch ($impactAssessment['impactCategoryIndicator']['label']) {
 				    case 'Waste': $color = "#6B5344"; $max = 2000; $impacttext = "Waste";break;
-				    case 'Carbon Dioxide Equivalent': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub> (eq)";break;
+				    case 'Carbon Dioxide Equivalent': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub>e";break;
 					case 'Carbon Dioxide': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub>";break;
 				    case "Energy": $color = "#E8BF56"; $max = 20; $impacttext = "Energy";	break;
 					case "Water":$color = "#45A3D8"; $max = 2000; $impacttext = "Water"; break;
@@ -55,7 +56,7 @@
 			<div id="lca_flows" class="lca">
 			<h2>Flows</h2>
 			<? if (isset($parts['Input']) == true) { ?>
-				<? if ($totalinputliter != 0) { ?>	
+				<? if ($totalinput != 0) { ?>	
 					<h3>Total material input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
 					<? if($parts['quantitativeReference']['unit']['label'] == "Kilogram") { 
 						$ratio = ($totalinput/$parts['quantitativeReference']['amount']);
@@ -73,7 +74,7 @@
 					$width = round(100*$mass['amount']/$totalinput);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#'.$color_input[$i].';"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . $mass['amount'] . "</amount> " . $mass['unit']["label"]; 
+					echo "<div class='flow_text'><p><amount>" . $mass['amount'] . "</amount> " . $mass['unit']["abbr"]; 
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++; if ($i >10){ $i = 0;}
 			}}?>
@@ -127,7 +128,7 @@
 					$width = round(100*$mass['amount']/$totaloutput);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px; width:'.$width.'%;background-color:#'.$color_mass[$i].';"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . round($mass['amount'],6) . "</amount> " . $mass['unit']["label"]; 
+					echo "<div class='flow_text'><p><amount>" . round($mass['amount'],6) . "</amount> " . $mass['unit']["abbr"]; 
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++;
 					if ($i >12){ $i = 0;}
@@ -138,7 +139,7 @@
 				foreach ($parts['Output']["Liquid Volume"] as $volume) {
 					$width = round(100*$volume['amount']/1);
 					if ($width == 0) { $width = 1; }
-					echo '<div class="bar_background"><div style="height:20px;width:'.$height.'%;background-color:#002caa;"></div></div>';
+					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#002caa;"></div></div>';
 					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . $volume['unit']["label"]; 
 					echo "<b> ".$volume['name'] . "</b></p></div>";
 				}
@@ -158,16 +159,25 @@
 			</div>
 			<?}?>				
 
-			<? if (isset($parts['geography']) == true ) {
-				echo '<div id="map" class="lca"><h2>Geography</h2>';
-				
-				foreach ($parts['geography'] as $geo) {
-						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
-						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&center=".$geo['lat'].','.$geo['long']."&zoom=2&markers=size:big%7Ccolor:blue%7C".$geo['name']."&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
-						echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
+			<? 
+				// Shows the geography (map) and date
+				echo '<div id="map" class="lca"><h2>Applies to</h2>';
+				if($parts['year'] != 0){
+					echo '<p>Year: <b>'.$parts['year'].'</b></p>';
+				}else{
+					echo '<p>Year: <b>not available</b></p>';
+				}
+				if (isset($parts['geography']) == true ) {
+					foreach ($parts['geography'] as $geo) {
+						echo '<p>Geography: <b>'.$geo['name'].'</b></p>';
+						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x370&center=".$geo['lat'].','.$geo['long']."&zoom=2&markers=size:big%7Ccolor:blue%7C".$geo['name']."&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
+						echo '<div id="gmap"><img src="'.$map.'" alt="'.$geo['name'].'"/></div>';
 					}
+				} else {
+						echo '<p>Geography: <b>generic</b></p>';
+				}
 				echo "</div>";
-			 } ?>
+			 ?>
 
 			<div id="lca_meta"  class="lca">
 			<h2>Reference</h2>

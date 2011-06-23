@@ -53,6 +53,12 @@
 					</ul>
 				</div>	
 				<div class="menuabout"><h2><a href="/users/logout">Logout</a></h2></div>
+				<? 
+					if($this->session->userdata('id') == ("bianca.sayan" || "zapico" || "leo"))  {
+					echo '<div class="menuabout"><h2><a href="http://footprinted.org/admin/texts">Admin texts</a></h2></div>';
+					}
+				?>
+				
 		</div>
 	</div>	
 
