@@ -296,9 +296,6 @@
 			<?=$footerDisplay;?>
 		</div>
 
-
-		<script src="http://footprinted.org/assets/scripts/jquery/jquery-1.5.1.min.js"></script>
-		<script src="http://footprinted.org/assets/scripts/jquery/jquery.masonry.min.js"></script>
 		<script>
 
 		$(function(){

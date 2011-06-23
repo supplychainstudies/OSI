@@ -1,7 +1,5 @@
-<link REL="icon" type="image/ico" HREF="<?=base_url()?>assets/images/layout/favicon.ico"/>
+<link REL="icon" type="image/ico" HREF="<?=base_url()?>/favicon.ico"/>
 <link rel="alternate" type="application/rss+xml" title="Footprinted - Recent Activity Feed" href="<?php echo base_url();?>feed/" />
-<link rel="image_src" href="<?php echo base_url();?>assets/images/thumb.png" /> 
-<link rel="apple-touch-icon" href="<?php echo base_url();?>assets/images/apple-touch-icon.png"/>
 <? if ($mobile) {?><meta name="viewport" content="width=320"/><? } ?>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <meta http-equiv="content-language" content="en-us">
@@ -17,6 +15,7 @@
 <script src="http://footprinted.org/assets/scripts/jquery/jquery-1.5.1.min.js"></script>
 <script src="http://footprinted.org/assets/scripts/jquery/jquery-ui-1.7.2.min.js" type="text/javascript"></script>
 <script src="http://footprinted.org/assets/scripts/jquery/jquery.masonry.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];

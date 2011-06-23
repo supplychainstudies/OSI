@@ -16,7 +16,7 @@
 	
 	<div id="columnwide">
 				<div id="about">
-				<p>Free and open environmental impact information. <a href="/search">Search</a> the 500+ footprints available or explore some of the featured ones below:</p>
+				<p>Free and open environmental impact information. <a href="/search">Search</a> the 700+ footprints available or explore some of the featured ones below:</p>
 				<br/>
 				</div>
 				<?	foreach ($set as $parts) { 
