@@ -41,14 +41,12 @@
 				if ($size > 82) { $size = 82;}
 				if ($size < 20) { $size = 20;}
 				$margin = (100-$size)/2;
-				$margintop = (100-$size)/8;
+				$margintop = (100-$size)/3;
 				// Create a circle
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
-				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
-				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit']["label"] .'</p><p class="category">';
-				echo $impactAssessment['impactCategory']['label'] . " - " . $impactAssessment['impactCategoryIndicator']['label'];
-				echo "<p/></div>"; 
-				
+				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) .' '. $impactAssessment['unit']["abbr"] .'</h1></div>';
+				echo '<div class="meta"><p class="category">Category: <b>'. $impactAssessment['impactCategory']['label'] . "</b><br/>";
+				echo 'Indicator: <b>'. $impactAssessment['impactCategoryIndicator']['label'] . "</b></p></div>"; 				
 			} } ?>
 			</div>
 			
@@ -183,6 +181,7 @@
 			<h2>Reference</h2>
 			<?
 				if (isset($parts['bibliography']) == true) {
+					echo "<p>";
 					foreach ($parts['bibliography'] as $record) {
 						if (isset($record['uri']) == true) {
 							echo "<a href='/search?ref=" . $record['title'] . "' target='_blank'>";
@@ -197,9 +196,9 @@
 						if (isset($record["title"]) == true) 	{	$ref .= $record["title"];	}
 						if (isset($record['uri']) == true) 		{	echo $ref."</a>"; }
 					}
+					echo "</p>";
 				}
 			?>
-			<br/><br/>
 			</div>
 			<? if (isset($parts['sameAs']) == true || isset($parts['categoryOf']) == true) { ?>
 			<div id="lca_same" class="lca">

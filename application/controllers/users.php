@@ -214,6 +214,56 @@ class Users extends FT_Controller {
 		}
 	}
 	
+	// Gives back the user API key, if not existing, it autogenerates one
+	public function getAPIkey(){
+		if($this->session->userdata('id') == true) {
+		    $this->db->where('user_name',$this->session->userdata('id'));
+			$user = $this->db->get('users',1,0);
+			$user = $user->result();
+			if($user[0]->key){
+				$this->data("key", $user[0]->key);
+			} else {
+				// Generate a random key
+				$key = $this->createRandomKey();
+				// Check that it doesn't exist
+				$unique = false;
+				while($unique == false){
+					$this->db->where('key',$key);
+					$this->db->from('users');
+					if ($this->db->count_all_results() == 0){
+						$unique = true;
+					}else{
+						$key = $this->createRandomKey();
+					}
+				}
+				$data = array (
+					'key' => $key
+					);
+				$this->db->where('user_name',$this->session->userdata('id'));	
+				$this->db->update('users', $data);
+				$this->data("key", $key);
+			}
+			$this->display("Dashboard", "api_key_view");
+		} else {
+			$this->index();
+		}	
+	}
+	
+	private function createRandomKey() {
+	    $chars = "abcdefghijkmnopqrstuvwxyz023456789";
+	    srand((double)microtime()*1000000);
+	    $i = 0;
+	    $pass = '' ;
+	    while ($i <= 7) {
+	        $num = rand() % 33;
+	        $tmp = substr($chars, $num, 1);
+	        $pass = $pass . $tmp;
+	        $i++;
+	    }
+	    return $pass;
+	}
+
+	
 	public function registered() {
 		// Note: Most validation had already been done using jquery
 		// Step 1: Check recaptcha		

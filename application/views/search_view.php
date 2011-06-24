@@ -62,7 +62,7 @@
 							if($row->energy){$impacts .= " Energy";}
 							if($row->year == 0){$year="";}else{$year=$row->year;}
 							echo '<div class="medium grey square" id="'.$row->uri.'">
-							<div class="squareplace"><p>'.$row->country.'</p></div>
+							<div class="squareplace"><p>'.$row->geography.'</p></div>
 							<div class="squareyear"><p>'.$year.'</p></div>
 							<div class="squaretext"><p><a href="/'.$row->uri .'">'.$row->name.'</a></p></div>
 							<div class="squareimpacts"><p>'.$impacts.'</p></div>

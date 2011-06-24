@@ -78,10 +78,10 @@
 									</div>
 								</div>	
 
-								<? if (isset($parts->country) == true ) {
+								<? if (isset($parts->geography) == true ) {
 									echo '<div id="maplite">';		
-												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x155&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:big%7Ccolor:blue%7C".$parts->country.'"';
-									echo '<img src="'.$map.'" alt="'.$parts->country.'"/>';
+												$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=200x155&zoom=1&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100&markers=size:big%7Ccolor:blue%7C".$parts->geography.'"';
+									echo '<img src="'.$map.'" alt="'.$parts->geography.'"/>';
 									echo '<div id="infomap"></div>';
 									echo "</div>";
 								} ?>	
@@ -89,7 +89,7 @@
 									<p>Year: <b><?= $parts->year ?></b></p>
 								</div>
 								<div class="ref_lite">
-									<p>Location: <b><?= $parts->country?></b></p>
+									<p>Location: <b><?= $parts->geography?></b></p>
 								</div>
 								<div class="ref_lite">
 									<p><? echo "<a href='/".$parts->uri. "'>";?> More information</a></p>
