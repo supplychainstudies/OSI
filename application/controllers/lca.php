@@ -228,7 +228,7 @@ class Lca extends FT_Controller {
 	* @public
 	* Grabs all the triples for a particular URI and shows it in RDF
 	*/
-	public function viewRDF($URI = null) {
+	public function viewEcoRDF($URI = null) {
 		$parts['uri'] = $URI;
 		$parts['title'] = $this->lcamodel->getTitle("http://footprinted.org/rdfspace/lca/" . $URI);
 		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
@@ -243,6 +243,12 @@ class Lca extends FT_Controller {
 		header('Content-type: text/xml');
 		$this->normalize($parts);
 		var_dump($parts);
+	}	
+	public function viewRDF($URI = null) {
+		$rdf = $this->lcamodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
+		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
+		header('Content-type: text/xml');
+		var_dump($rdf);
 	}	
 
 	/***

@@ -231,12 +231,9 @@
 			<div id="lca_export" class="lca">
 			<h2>Export</h2>
 			<p><?
-
-				if(isset($links) == true) {
-
-					echo $links;
-
-				}	?>
+					echo "<p><a href='/".$URI.".rdf'>Export in RDF</a></p>";
+					echo "<p><a href='/".$URI.".json'>Export in JSON</a></p>";		
+				?>
 				</p>
 				<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
 					<img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/cc.svg" height='50px' />

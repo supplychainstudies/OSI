@@ -355,6 +355,12 @@ class Users extends FT_Controller {
 		$published = "";
 		if($this->session->userdata('id') == true) {
 		    $user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
+			$id = $this->session->userdata('id');
+			$this->db->where('user_name',$id);
+			$this->db->limit('1');
+			$rs = $this->db->get('users');
+			// Send data to the view
+			$this->data("set", $rs->result());
 			// IF there is friend of a friend data, send to dashboard
 			if (isset($user_data["foaf_uri"]) == true){
 				// Get the user activity (such as comments)
@@ -371,5 +377,67 @@ class Users extends FT_Controller {
 		$this->style(Array('style.css'));
 		$this->display("Dashboard", "dashboard_view");				
 	}
+	// Edit yourprofile                            
+	public function editprofile(){
+		if($this->session->userdata('id') == true) {
+		$id = $this->session->userdata('id');
+		$this->db->where('user_name',$id);
+		$this->db->limit('1');
+		$rs = $this->db->get('users');
+		// Send data to the view
+		$this->data("set", $rs->result());
+		$this->display("Admin","admin/edit_profile");
+		}
+	}
+	// Edit yourprofile                            
+	public function showprofiles(){
+		$this->check_if_logged_in();
+		// Get ID from form
+		parse_str($_SERVER['QUERY_STRING'],$_GET); 
+		if (isset($_GET["id"]) == false){
+			$id = $this->session->userdata('id');
+		}else{
+			$id = $_GET["id"];
+		}
+		$this->db->where('user_name',$id);
+		$this->db->limit('1');
+		$rs = $this->db->get('users');
+		$this->data("set", $rs->result());
+		$allusers = $this->db->get('users');
+		$this->data("allusers", $allusers->result());
+	
+		// Send data to the view
+		$this->display("All users","admin/your_profile");
+	}
+	public function allusers(){
+		$this->check_if_logged_in();
+		// Get ID from form
+		$allusers = $this->db->get('users');
+		$this->data("allusers", $allusers->result());
+		// Send data to the view
+		$this->display("All users","admin/all_users");
+	}
+	
+	// Save the changes for editing
+	public function saveprofile(){
+		$this->check_if_logged_in();
+
+		$id = $this->input->post('id');
+		 
+		// Create array for database fields & data  
+		$data = array();
+		$data['user_email'] = $this->input->post('user_email');
+		$data['firstname'] = $this->input->post('firstname');
+		$data['surname'] = $this->input->post('surname');
+		$data['bio'] = $this->input->post('bio');
+		$this->db->where('user_id', $id);
+		$result = $this->db->update('users', $data);
+		redirect('users/dashboard');
+	}
+	
+	
+	
+	
+	
 	
 }

@@ -11,7 +11,7 @@
 
 	<script type="text/javascript">
 	//tinyMCE.init({
-	//        mode : "textareas"
+	  //      mode : "textareas"
 	//});
 	</script>
 	
@@ -25,13 +25,19 @@
 	<div id="columnleft">
 		<div id="about">
 			<div id="editadmins">
-			<p>Edit text for <?= $set[0]->title;?></p>
+			<p>Edit your profile</p>
 			<?
-			echo form_open('admin/savetext');
+			echo form_open('users/saveprofile');
 			?>
 			<fieldset>
-			<? echo '<input type="hidden" name="id" readonly="true" value="'.$set[0]->id.'"/>';?>
-			<textarea id="text" name="text" rows="15" cols="80"><?php echo $set[0]->text;?></textarea>
+			<? echo '<input type="hidden" name="id" readonly="true" value="'.$set[0]->user_id.'"/>';?>
+			<p>Email</p>
+			<? echo '<input type="text" name="user_email" value="'.$set[0]->user_email.'"/>';?>
+			<p>Your Real Name</p>
+			<? echo '<input type="text" name="firstname" value="'.$set[0]->firstname.'"/>';?>
+			<? echo '<input type="text" name="surname" value="'.$set[0]->surname.'"/>';?>
+			<p>Your Bio</p>
+			<textarea id="bio" name="bio" rows="15" cols="40"><?php echo $set[0]->bio;?></textarea>
 			<br/><br/>
 			<input type="submit" value="Save" />
 			</fieldset>
