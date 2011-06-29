@@ -2,7 +2,7 @@
 <?=$metaDisplay;?>
 <html>
 <head>
-<title>Footprinted: Free and open LCA environmental data.</title>
+<title>Footprinted: Free and open environmental impact data.</title>
 	
 	<?=$styles;?>
 	<?=$headerDisplay;?>
