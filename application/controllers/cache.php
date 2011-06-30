@@ -309,6 +309,10 @@ class Cache extends FT_Controller {
 			$ratio = $oldamount * 0.0147867648;
 			$parts['quantitativeReference']['unit']['label'] = "Liter";$parts['quantitativeReference']['unit']['abbr'] = "L";
 		}
+		if ($parts['quantitativeReference']['unit']['label'] == "Ton Mile") {
+			$ratio = $oldamount * 1.609344;
+			$parts['quantitativeReference']['unit']['label'] = "Liter";$parts['quantitativeReference']['unit']['abbr'] = "Ton Km";
+		}
 		// Normalizes the flows
 		if (isset($parts['exchanges']) == true) {
 			foreach ($parts['exchanges'] as &$exchanges) {
