@@ -436,7 +436,7 @@ class Lca extends FT_Controller {
 			$this->db->order_by("uri", "ASC"); 
 			$featured = $this->db->get('featured');
 			$all = $this->db->get('featured');
-			$nr = count($all); 
+			$nr = count($all->results()); 
 			// Initializing array
 			$set = array();
 			foreach ($featured->result() as $feature) {
