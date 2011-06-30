@@ -1,5 +1,5 @@
 <div id="header">
-	<p class="imge"><a href="/"><img src="/assets/images/footprinted.png" alt="footprinted"></a></p>
+	<p class="imge"><a href="/"><img src="/assets/images/logobeta.png" alt="footprinted"></a></p>
 </div>
 <div id="menu">
 	<p class="menu">
