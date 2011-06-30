@@ -406,7 +406,7 @@ class Users extends FT_Controller {
 		$allusers = $this->db->get('users');
 		$this->data("allusers", $allusers->result());
 		
-		$user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
+		$user_data = $this->simpleloginsecure->userInfo($id);
 		if (isset($user_data["foaf_uri"]) == true){
 			// Get the user activity (such as comments)
 			//$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
