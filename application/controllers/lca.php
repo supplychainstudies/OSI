@@ -399,7 +399,7 @@ class Lca extends FT_Controller {
 			$ratio = $oldamount * 1.609344;
 			$parts['quantitativeReference']['unit']['label'] = "Liter";$parts['quantitativeReference']['unit']['abbr'] = "Ton Km";
 		}
-		if ($parts['quantitativeReference']['unit']['label'] == "Per Person Per Mil") {
+		if ($parts['quantitativeReference']['unit']['label'] == "Per Person Per Mile") {
 			$ratio = $oldamount * 1.609344;
 			$parts['quantitativeReference']['unit']['label'] = "Liter";$parts['quantitativeReference']['unit']['abbr'] = "Person Km";
 		}
