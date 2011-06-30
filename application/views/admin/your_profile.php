@@ -33,7 +33,10 @@
 			<? echo $set[0]->user_email; ?></p>
 			<p><b>Bio:</b>
 			<? echo $set[0]->bio;?></p>
-			<br/>	
+			<br/>
+			<? foreach($published as $lca){
+				var_dump($lca);
+			}?>	
 		</div>
 	</div>
 	<div id="columnright">

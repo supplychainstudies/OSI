@@ -389,9 +389,9 @@ class Users extends FT_Controller {
 		$this->display("Admin","admin/edit_profile");
 		}
 	}
-	// Edit yourprofile                            
+	// Show public profile                            
 	public function showprofiles(){
-		$this->check_if_logged_in();
+		//$this->check_if_logged_in();
 		// Get ID from form
 		parse_str($_SERVER['QUERY_STRING'],$_GET); 
 		if (isset($_GET["id"]) == false){
@@ -405,7 +405,15 @@ class Users extends FT_Controller {
 		$this->data("set", $rs->result());
 		$allusers = $this->db->get('users');
 		$this->data("allusers", $allusers->result());
-	
+		
+		$user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
+		if (isset($user_data["foaf_uri"]) == true){
+			// Get the user activity (such as comments)
+			//$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
+			// Get the LCAs that the user has published
+			$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
+			$this->data("published", $published);
+		}
 		// Send data to the view
 		$this->display("All users","admin/your_profile");
 	}
