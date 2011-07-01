@@ -678,4 +678,12 @@ class Converter extends FT_Controller {
 		}
 		return $info;
 	}
+	
+	public function index(){
+		$this->check_if_logged_in();
+		//$this->data("allusers", $allusers->result());
+		// Send data to the view
+		$this->display("Convert","converter_view");
+	}
+	
 }
