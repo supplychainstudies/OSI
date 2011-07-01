@@ -13,31 +13,28 @@
 		
 	<?= $navigationDisplay;?>
 
-	<div id="columnleft">
-		<div id="content">
-			
-			
-			<?=$view_string;?>
-		</div>
-
-	</div>
-
-
-	<div id="columnright">
-			<h1 class="hand">We want sustainability information to be free, open and easy to use.</h1>
-			<br/><br/>
-			<p><?
-
-				if(isset($links) == true) {
-
-					echo $links;
-
-				}
-
-			?></p>
-			<p><a href="/">Browse resources</a></p>
-			<p><a href="/create/start">Create new resource</a></p>
+	<div id="columnwide">
+		<div id="about">	
+			<p>Import EcoSpold files to Footprinted:</p>
 			<br/>
+			<form enctype="multipart/form-data" action="uploader.php" method="POST">
+				Choose format:
+				<select name="format">
+				  <option value="eco1">Ecospold1</option>
+				  <option value="eco2">Ecospold2</option>
+				  <option value="ilcd">ILCD</option>
+				</select>
+				<br/>
+			<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+			Choose a file to upload: <br/><input name="uploadedfile" type="file" /><br />
+
+			<br/>
+			<input type="submit" value="Upload File" />
+			</form>
+			<p><a href="/">Cancel</a></p>
+			<p><a href="/lca/create">Create a footprint by hand</a></p>
+			<br/>
+		</div>
 	</div>
 			<?=$footerDisplay;?>
 		</div>
