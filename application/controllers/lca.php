@@ -508,7 +508,27 @@ class Lca extends FT_Controller {
 				redirect("/search");
 			}
 		}
-				
+		
+		private function makePrivate($URI) {
+			$data = array (
+				'public' => false
+			);
+			$this->db->where('uri', $r->uri);
+			$this->db->update('footprints', $data);
+			$footprint = $this->db->update('footprints',1,0);
+			redirect("/search");
+		}
+		
+		private function makePublic($URI) {
+			$data = array (
+				'public' => true
+			);
+			$this->db->where('uri', $r->uri);
+			$this->db->update('footprints', $data);
+			$footprint = $this->db->update('footprints',1,0);
+			redirect("/search");
+		}
+			
 		private function addSameAs() {
 			parse_str($_SERVER['QUERY_STRING'],$_GET); 
 			$ids = $_GET;
