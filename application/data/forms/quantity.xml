@@ -5,7 +5,7 @@
 			<type>hidden</type>
 			<linked_type>eco:Quantity</linked_type>
 		</dataType>
-		<quantity rules="trim">
+		<quantity rules="trim|tiny">
 			<label>Quantity</label>
 			<type>text</type>
 		  	<linked_type>eco:hasMagnitude</linked_type>
@@ -16,9 +16,30 @@
 			<popup>unit</popup>
 		  	<linked_type>eco:hasUnitOfMeasure</linked_type>
 		</unit>	
+		<standardDeviation rules="trim|tiny">
+			<label>Standard Deviation</label>
+			<type>text</type>
+		  	<linked_type>ecoUD:standardDeviation95</linked_type>
+		</standardDeviation>
+		<minValue rules="trim|tiny">
+			<label>Unit</label>
+			<type>text</type>
+		  	<linked_type>ecoUD:minValue</linked_type>
+		</minValue>
+		<maxValue rules="trim|tiny">
+			<label>Maximum Value</label>
+			<type>text</type>
+		  	<linked_type>ecoUD:maxValue</linked_type>
+		</maxValue>
+		<meanValue rules="trim|tiny">
+			<label>Mean Value</label>
+			<type>text</type>
+		  	<linked_type>ecoUD:meanValue</linked_type>
+		</meanValue>
 	    <submit rules="trim">
 	        <type>submit</type>
 	        <value>Submit</value>
 	    </submit>
 </fieldset>
 </form>
+

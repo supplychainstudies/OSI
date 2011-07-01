@@ -43,6 +43,7 @@ class Form_extended extends Form {
 			$subject = toBNode("");
 		}
 		if (isset($group['__attrs']['linked_type']) == true) {
+			var_dump($change_predicates);
 			if (isset($change_predicates) == true) {
 				if (isset($change_predicates[$group['__attrs']['name']]) == true) {
 					$group['__attrs']['linked_type'] = $change_predicates[$group['__attrs']['name']];
@@ -94,7 +95,7 @@ class Form_extended extends Form {
 							}	
 						} 
 						
-						$triples_hold = $this->build_group_triples ($new_subject_attrs, $post_data, $_group, $new_path, $depth+1);
+						$triples_hold = $this->build_group_triples ($new_subject_attrs, $post_data, $_group, $new_path, $depth+1, $change_predicates);
 						if (count($triples_hold) > 0 && count($triples) > 0 ) {
 							$triples = array_merge($triples, $triples_hold);
 						}
@@ -585,19 +586,24 @@ class Form_extended extends Form {
 			            }
 			            elseif ($name == 'fieldset') {			
 			                foreach ($val as $_group) {	
-
+								if (isset($_group['__attrs']['root']) == true) {
+									$_group = $this->load($_group['__attrs']['root']);
+								}
+								if (isset($_group['__attrs']) == true) {
 								if(isset($xarray[$_group['__attrs']['name']]) == true) {
 									$html .= "<h1 class=\"level".$depth."\">" . $_group['__attrs']['name'] . "</h1><div class=\"level".$depth."\">";
 									foreach ($xarray[$_group['__attrs']['name']] as $_xarray) {
 										$html .= "$tabs\t<li>\n". $this->build_flat_edit ($_xarray, $_group, $depth+1, $multiple) ."$tabs\t</li>\n";
 									}
+								
 									$html .= "</div>";
+								}
 								}
 			                }				
 			            }
 			            else {
 								$_val = $val;
-								if(isset($xarray[$name]) == true) {
+								if(isset($xarray[$name]) == true && $name != "blank") {
 									//var_dump($xarray);
 									if(is_array($xarray[$name]) == false) {
 										$pass_array = array ($xarray[$name]);

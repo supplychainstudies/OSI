@@ -317,8 +317,10 @@ class Form {
                 continue;
             }
             elseif ($name == 'fieldset') {
-	
                 foreach ($val as $_group) {
+					if (isset($_group["__attrs"]["root"]) == true) {
+						$_group = $this->load($_group["__attrs"]["root"]);						
+					}
                    	$html .= $this->build_group ($_group, $depth+1, $multiple);
                 }
             }

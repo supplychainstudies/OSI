@@ -15,7 +15,8 @@ class People extends FT_Controller {
     public function People() {
         parent::__construct();
         $this->load->model(Array('peoplemodel')); 
-        $this->load->library(Array('form_extended', 'name_conversion'));
+        $this->load->library(Array('form_extended','session'));
+		$this->load->helper(Array('nameformat_helper'));
     }
     public $URI;
     public $data;
@@ -51,17 +52,26 @@ class People extends FT_Controller {
     * Generates a form, or, in the case where post data is passed, submits the data to the DB
     */
 	$this->check_if_logged_in();
-	
      if($_POST) {
-            $data = $this->form_extended->load('foaf'); 
-            $uri = "http://opensustainability.info/rdfspace/people/" . trim($_POST['firstName_']) . trim($_POST['lastName_']) . rand(1000000000,10000000000);
-            @$triples = $this->form_extended->build_triples($uri, $_POST, $data); 
-            var_dump($triples);
-            @$this->arcmodel->addTriples($triples);
+            $data = $this->form_extended->load('person'); 
+			$uri_name = "";
+			if ($_POST['firstName_'] != "" && $_POST['firstName_'] != "" ) {
+				$uri_name = $_POST['firstName_'].$_POST['firstName_'];
+			} elseif ($_POST['email_'] != "") {
+				$uri_name = $_POST['email_'];
+			} 
+            $uri = toURI("people",$uri_name);
+            $triples = $this->form_extended->build_group_triples($uri, $_POST, $data); 
+			var_dump($triples);
+            //@$this->peoplemodel->addTriples($triples);
             // Show the whole entry
             //$this->view($URI); 
+			var_dump($this->session->userdata('convert_json'));
+			if ($this->session->userdata('convert_json') == true) {
+				redirect("/converter/forms");
+			}
         } else {
-            $data = $this->form_extended->load('foaf'); 
+            $data = $this->form_extended->load('person'); 
             $the_form = $this->form_extended->build();
             $this->style(Array('style.css', 'form.css'));
             $this->script(Array('form.js', 'toggle.js', 'lookup.js'));
@@ -69,4 +79,6 @@ class People extends FT_Controller {
             $this->display("Form", "view");
         }
     }
+
+
 }

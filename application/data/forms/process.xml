@@ -1,4 +1,4 @@
-<form action="/lca/create/Process" name="Process">
+<form action="/lca/createpart/process" name="">
   <fieldset name="Process" linked_type="eco:models">
 		<name rules="trim">
 			<label>Name</label>
@@ -20,12 +20,20 @@
 			<label>Category</label>
 			<type>text</type>
 		  	<linked_type>eco:hasCategory</linked_type>
+			<multiple>yes</multiple>
 		</category>
-		<category rules="trim">
-			<label>Category</label>
-			<type>text</type>
-		  	<linked_type>eco:hasCategory</linked_type>
-		</category>
+		<fieldset name="Valid Time Period" linked_type="eco:validInterval">
+			<beginning rules="trim">
+				<label>Beginning</label>
+				<type>text</type>
+			  	<linked_type>time:hasBeginning</linked_type>
+			</beginning>
+			<end rules="trim">
+				<label>End</label>
+				<type>text</type>
+			  	<linked_type>time:hasEnd</linked_type>
+			</end>
+		</fieldset>
 		<geoLocation rules="trim">
 			<label>Geographic Location</label>
 			<type>text</type>

@@ -1,4 +1,4 @@
-<form action="/lca/create/person" name="Person Description">
+<form action="/people/create" name="Person Description">
 		<dataType rules="trim">
 			<label>Data Type</label>
 			<type>hidden</type>

@@ -230,7 +230,8 @@ class FT_Controller extends CI_Controller {
 	// For protecting pages
 	function check_if_logged_in() {
      	if($this->session->userdata('id') == false) {
-       		redirect('/users/login');}
+       		//redirect('/users/login');
+		}
    	}
 	// Protecting the site only for admins
 	function check_if_admin() {

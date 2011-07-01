@@ -34,23 +34,17 @@ class Peoplemodel extends FT_Model{
      
     public function searchPeople($info) {
         $filters = "";
-        $vars = "";
         $q = "";
         if (isset($info['uri']) == true) {
             $uri = "<" . $info['uri'] . ">";      
         } else {
-            $vars .= "?uri ";
             $uri = "?uri";
         }
-        /*
         if (isset($info['email']) == true) {
-            $q .= $uri . " '".$this->arc_config['ns']['foaf']."mbox_sha1sum' '" . $info['email'] . "' . ";       
+            $q .= $uri . " foaf:mbox_sha1sum '" . sha1($info['email']) . "' . ";       
         } else {
-            $vars .= "?email ";
-            $q .= $uri . " '".$this->arc_config['ns']['foaf']."mbox_sha1sum' ?email . "; 
-        }
-        */
-         
+            $q .= $uri . " foaf:mbox_sha1sum ?email . "; 
+        }        
         if (isset($info['firstName']) == true) {    
             $q .= "FILTER regex(?firstName, '" . $info['firstName'] . "', 'i')  ";  
         }
@@ -59,10 +53,10 @@ class Peoplemodel extends FT_Model{
         } 
          
          
-        $q = "select ".$vars."?firstName ?lastName where { " . 
-            //$uri . " '".$this->arc_config['ns']['rdfs']."type' '".$this->arc_config['ns']['foaf']."Person' . " .    
-            $uri . " '".$this->arc_config['ns']['foaf']."firstName' ?firstName . " . 
-            $uri . " '".$this->arc_config['ns']['foaf']."lastName' ?lastName . " . 
+        $q = "select * where { " . 
+            $uri . " rdfs:type foaf:Person . " .    
+            $uri . " foaf:firstName ?firstName . " . 
+            $uri . " foaf:lastName ?lastName . " . 
             $q . 
             "}";
         $records = $this->executeQuery($q);  

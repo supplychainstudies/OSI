@@ -18,7 +18,7 @@ class FT_Model extends CI_Model{
 	    $this->config->load('arc');	
 		$this->config->load('arcdb');	
 		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
-		$this->arc_config['store_name'] = "footprinted";
+		$this->arc_config['store_name'] = "ECOSPOLDTESTfootprinted";
 	}	
 	
 	// Configuration information for accessing the arc store
@@ -101,8 +101,8 @@ class FT_Model extends CI_Model{
 	 * @return Null
 	 * @param $triples Array		
 	 */
-	public function addTriples($triples) {	
-		$q = "insert into <http://footprinted.org/> { ";	
+	public function addTriples($triples, $graph = "http://footprinted.org/") {	
+		$q = "insert into <".$graph."> { ";	
 		// for each triple				
 		foreach ($triples as $triple) {
 			// for each value 
@@ -121,6 +121,7 @@ class FT_Model extends CI_Model{
 			$q .= " . ";
 		}
 		$q .= "}";
+		error_log($q,0);
 		$this->executeQuery($q);
 	}
 	
@@ -132,6 +133,31 @@ class FT_Model extends CI_Model{
 			}
 		}
 		return false;
+	}
+	
+	private function markThis($val) {
+		if (strstr($val, "http://") != false || strstr($val, "_:") != false ) {
+			return "<".$val.">";					
+		} elseif($this->isURI($val) == true) {
+			return $val;
+		}
+		// otherwise, put it in quotes
+		else {
+			return "'" . $val . "'";
+		}
+	}
+	
+	public function deleteTriple($graph, $triple) {
+		$q = "DELETE DATA FROM <".$graph."> { " . markThis($triple['s']) . " " . markThis($triple['p']) . " " . markThis($triple['o']) . " . }";
+		var_dump($q);
+		//$this->executeQuery($q);
+	}
+	
+	public function replaceTriple($graph, $old_triple, $new_triple) {
+		$q = "DELETE DATA FROM <".$graph."> { " . markThis($old_triple['s']) . " " . markThis($old_triple['p']) . " " . markThis($old_triple['o']) . " . }";
+		$q = "INSERT into <".$graph."> { " . markThis($new_triple['s']) . " " . markThis($new_triple['p']) . " " . markThis($new_triple['o']) . " . }";
+		var_dump($q);
+		//$this->executeQuery($q);
 	}
 
 	public function getURIbyLabel($string) {
@@ -147,6 +173,27 @@ class FT_Model extends CI_Model{
 	       $q = "select ?uri ?label where { " .
 	           "?uri rdfs:label ?label . " .
 	           "FILTER regex(?label, '".$string."?', 'i' )" .              
+	           "}";
+	       $results = $this->executeQuery($q);
+			if (count($results) > 0) {
+				return $results;
+			} else {		
+				return false;	
+			}
+		}
+	}
+	
+	public function getURIbyExactLabel($string) {
+		
+       $q = "select ?uri where { " .
+           "?uri rdf:label '".$string."' . " .             
+           "}";
+       $results = $this->executeQuery($q);
+		if (count($results) > 0) {
+			return $results;
+		} else {
+	       $q = "select ?uri where { " .
+	           "?uri rdfs:label '".$string."' . " .              
 	           "}";
 	       $results = $this->executeQuery($q);
 			if (count($results) > 0) {

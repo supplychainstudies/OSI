@@ -1,5 +1,5 @@
 <form action="create/bibliography" name="Bibliographic Reference">
-		<bibotype rules="">
+		<bibotype rules="uriparse">
 			<label>Reference Type</label>
 			<type>dropdown</type>
 			<linked_type>rdfs:type</linked_type>
@@ -32,14 +32,22 @@
 			<optional>yes</optional>
 			<multiple>yes</multiple>
 		</author>
-		<journal rules="trim">
+		<editor rules="trim">
+			<label>Author Name</label>
+			<type>popup</type>
+			<popup>people</popup>
+		  	<linked_type>bibo:editor</linked_type>
+			<optional>yes</optional>
+			<multiple>yes</multiple>
+		</editor>
+		<partOf rules="trim">
 			<label>Journal</label>
 			<type>text</type>
 			<lookup>journal</lookup>
 		  	<linked_type>dc:isPartOf</linked_type>
 			<optional>yes</optional>
 			<multiple>no</multiple>
-		</journal>		
+		</partOf>		
 		<date rules="trim">
 			<label>Date</label>
 			<type>date</type>
@@ -62,6 +70,27 @@
 			<optional>yes</optional>
 			<multiple>no</multiple>
 		</issue>
+		<publisher rules="trim">
+			<label>Publisher</label>
+			<type>text</type>
+		  	<linked_type>dc:publisher</linked_type>
+			<optional>yes</optional>
+			<multiple>no</multiple>
+		</publisher>
+		<partOf rules="trim">
+			<label>Part of</label>
+			<type>text</type>
+		  	<linked_type>dc:isPartOf</linked_type>
+			<optional>yes</optional>
+			<multiple>no</multiple>
+		</partOf>
+		<location rules="trim">
+			<label>Location</label>
+			<type>text</type>
+		  	<linked_type>address:locationName</linked_type>
+			<optional>yes</optional>
+			<multiple>no</multiple>
+		</location>
 		<pageStart rules="trim">
 			<label>Page Start</label>
 			<type>text</type>

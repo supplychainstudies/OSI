@@ -37,6 +37,21 @@ class Lca extends FT_Controller {
     * @public (For logged in users)
     * Generates a form, or, in the case where post data is passed, submits the data to the DB
     */
+
+	public function createpart($part) {
+		$data = $this->form_extended->load($part);
+		if ($this->session->userdata('convert_uris')) {
+			$uris = json_decode($this->session->userdata('convert_uris'));
+			$keys = array_keys($uris);
+			$uri = $uris[$keys[0]];
+		}
+		$triples = $this->form_extended->build_group_triples($uri, $_POST, $data);
+		//$this-lcamodel->addTriples($triples);
+		if ($this->session->userdata('convert_uris')) {
+			redirect("/converter/forms");
+		}
+	}
+	
 	public function create() {
 		$this->check_if_logged_in();
 		if ($post_data = $_POST) {	
@@ -264,7 +279,24 @@ class Lca extends FT_Controller {
 		$this->normalize($parts);
 		var_dump($parts);
 	}
+	public function viewEcospold1($URI = null) {
+		//$parts['uri'] = $URI;
+		//$parts['title'] = $this->lcamodel->getTitle("http://footprinted.org/rdfspace/lca/" . $URI);
+		echo '<?xml version="1.0" encoding="UTF-8"?>' .
+			'<ecoSpold xsi:schemaLocation="http://www.EcoInvent.org/EcoSpold01 ..\..\..\..\..\..\..\Programme\ecoinvent\EcoSpold\EcoSpold01Dataset.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.EcoInvent.org/EcoSpold01">' . 
+			'<dataset validCompanyCodes="CompanyCodes.xml" validRegionalCodes="RegionalCodes.xml" validCategories="Categories.xml" validUnits="Units.xml" number="1" generator="EcoInvent Excel2EcoSpold 1.9.8" timestamp="2007-07-03T13:30:33" internalSchemaVersion="1.0">' . 
+				'<metaInformation>' . 
+					'<processInformation>';
 		
+		$parts['exchanges'] = $this->lcamodel->convertExchanges($this->lcamodel->getExchanges("http://footprinted.org/rdfspace/lca/" . $URI));	
+		$parts['modeled'] = $this->lcamodel->convertModeled($this->lcamodel->getModeled("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['quantitativeReference'] = $this->lcamodel->convertQR($this->lcamodel->getQR("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $URI));
+		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
+		header('Content-type: application/json');
+		$this->normalize($parts);
+		var_dump($parts);
+	}		
 
 	/***
 	* @public
@@ -294,7 +326,7 @@ class Lca extends FT_Controller {
 		// Turns exchanges into input and output array divided into categories 
 		if (isset($parts['exchanges']) == true) {
 			foreach ($parts['exchanges'] as $exchange) {
-				if (isset($exchange['unit']['quantityKind']) == true) {
+				if ($exchange['unit']['quantityKind'] != "") {
 					$parts[$exchange['direction']][$exchange['unit']['quantityKind']][] = $exchange;				
 				} else {
 					$parts[$exchange['direction']]['misc'][] = $exchange;
@@ -321,7 +353,7 @@ class Lca extends FT_Controller {
 			foreach ($parts['Output']["Mass"] as $i) {
 				$totaloutput += $i['amount'];
 			}}
-		}		
+		}	
 		$links = '<p><a href="/'.$URI.'.rdf">Get this RDF</a></p><p><a href="/'.$URI.'.json">Get this in JSON</a></p>';
 		$this->data("links", $links);
 		$this->data("URI", $URI);
@@ -371,6 +403,7 @@ class Lca extends FT_Controller {
 		// Normalizes the flows
 		if (isset($parts['exchanges']) == true) {
 			foreach ($parts['exchanges'] as &$exchanges) {
+				var_dump($exchanges);
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
 				if ($exchanges['unit']['label'] == "Gram") {
 					$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram";

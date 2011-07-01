@@ -1,25 +1,30 @@
-<form action="/lca/create/" name="Organization Description">
-  <fieldset name="Organization" linked_type="foaf:organization">
-		<Name rules="trim">
-			<label>Organization Name</label>
-			<type>text</type>
-		  	<linked_type>skos:prefLabel</linked_type>
-			<optional>no</optional>
-			<multiple>no</multiple>
-		</Name>
-		<hasSite rules="trim">
-			<label>Website</label>
-			<type>text</type>
-		  	<linked_type>org:hasSite</linked_type>
-			<optional>yes</optional>
-			<multiple>yes</multiple>
-		</hasSite>
-		<classification rules="trim">
-			<label>Classification</label>
-			<type>text</type>
-		  	<linked_type>org:classification</linked_type>
-			<optional>no</optional>
-			<multiple>no</multiple>
-		</classification>		
-  </fieldset>
+<form action="/lca/createpart/organization" name="Organization Description">
+	<orgType>
+		<label>Organization Name</label>
+		<type>hidden</type>
+	  	<linked_type>foaf:Organization</linked_type>
+		<optional>no</optional>
+		<multiple>no</multiple>
+	</orgType>			
+	<name rules="trim">
+		<label>Organization Name</label>
+		<type>text</type>
+	  	<linked_type>skos:prefLabel</linked_type>
+		<optional>no</optional>
+		<multiple>no</multiple>
+	</name>
+	<site rules="trim">
+		<label>Website</label>
+		<type>text</type>
+	  	<linked_type>org:hasSite</linked_type>
+		<optional>yes</optional>
+		<multiple>yes</multiple>
+	</site>
+	<classification rules="trim">
+		<label>Classification</label>
+		<type>hidden</type>
+	  	<linked_type>org:classification</linked_type>
+		<optional>no</optional>
+		<multiple>no</multiple>
+	</classification>
 </form>

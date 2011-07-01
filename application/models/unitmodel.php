@@ -75,6 +75,16 @@ class Unitmodel extends FT_Model{
 		return $this->getSomething($uri, "qudt:abbreviation");	
 	}
 
+	public function getURIbyAbbr($abbr) {
+		$q = "SELECT ?uri where { ?uri qudt:abbreviation '".$abbr."' }";
+		$results = $this->executeQuery($q);
+		if (count($results) != 0) {
+			return $results[0]['uri'];
+		} else {
+			return false;
+		}
+	}
+
 	public function getQuantityKind($uri) {
 		$kind_uri =  $this->getSomething($uri, "qudt:quantityKind");
 		return $this->getLabel($kind_uri);	

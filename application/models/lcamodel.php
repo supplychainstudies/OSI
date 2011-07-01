@@ -3,7 +3,7 @@ class Lcamodel extends FT_Model{
     public function Lcamodel(){
         parent::__construct();
 		$this->load->model(Array('unitmodel','geographymodel','ecomodel','opencycmodel','dbpediamodel'));
-		$this->arc_config['store_name'] = "footprinted";
+		$this->arc_config['store_name'] = "ECOSPOLDTESTfootprinted";
     }
 
 
@@ -61,6 +61,7 @@ class Lcamodel extends FT_Model{
 	public function convertExchanges($dataset){
 			if ($dataset != false) {
 				$converted_dataset = array();
+				var_dump($dataset);
 				foreach($dataset as $key=>$record) {		
 					foreach($record[$this->arc_config['ns']['eco']."hasEffect"] as $_record) {
 						foreach ($_record[$this->arc_config['ns']['rdfs']."type"] as $__record) {
@@ -81,20 +82,35 @@ class Lcamodel extends FT_Model{
 						}
 						if (isset($_record[$this->arc_config['ns']['eco']."hasFlowable"]) == true) {
 							foreach($_record[$this->arc_config['ns']['eco']."hasFlowable"] as $flowable) {
-								$converted_dataset[$key]['name'] = str_replace("eco", "", $flowable);
+								if (is_array($flowable) == true) {
+									foreach($flowable[$this->arc_config['ns']['rdfs']."label"] as $label) {
+										$converted_dataset[$key]['name'] = $label;
+									}
+								} else {
+									$converted_dataset[$key]['name'] = $flowable;
+								}
 							} 	
 						}							
 					}
 					foreach ($record[$this->arc_config['ns']['eco']."hasQuantity"] as $_record) {
-						foreach($_record[$this->arc_config['ns']['eco']."hasMagnitude"] as $magnitude) {
-							$converted_dataset[$key]['amount'] = $magnitude;
-						} 
-						foreach($_record[$this->arc_config['ns']['eco']."hasUnitOfMeasure"] as $unitOfMeasure) {
-							$converted_dataset[$key]['unit'] = $this->unitmodel->makeToolTip($unitOfMeasure);
-						} 
+						if (isset($_record[$this->arc_config['ns']['eco']."hasMagnitude"]) == true) {
+							foreach($_record[$this->arc_config['ns']['eco']."hasMagnitude"] as $magnitude) {
+								$converted_dataset[$key]['amount'] = $magnitude;
+							} 
+						}
+						if (isset($_record[$this->arc_config['ns']['ecoUD']."meanValue"]) == true) {
+							foreach($_record[$this->arc_config['ns']['ecoUD']."meanValue"] as $magnitude) {
+								$converted_dataset[$key]['amount'] = $magnitude;
+							} 
+						}
+						if (isset($_record[$this->arc_config['ns']['eco']."hasUnitOfMeasure"]) == true) {
+							foreach($_record[$this->arc_config['ns']['eco']."hasUnitOfMeasure"] as $unitOfMeasure) {
+								$converted_dataset[$key]['unit'] = $this->unitmodel->makeToolTip($unitOfMeasure);
+							} 
+						}
 					}
 				}
-				return $converted_dataset; 
+				return $converted_dataset; 	
 			} else {
 				return false;
 			}
@@ -177,15 +193,18 @@ class Lcamodel extends FT_Model{
 	 */
 	 public function simpleSearch($value = null, $limit = 20, $offset = 0) {
 		$URIs = array();
-		$q = "select DISTINCT ?uri ?label where { " . 
+		$q = "select DISTINCT ?uri ?label ?created where { " . 
 			" ?uri eco:models ?bnode . "  .
-			" ?bnode rdfs:label ?label . " ;
+			" ?bnode rdfs:label ?label . " .
+			" ?bnode dcterms:created ?created . ";		
 		if ($value != null) {
 			$q .= "FILTER regex(?label, '" . $value . "', 'i')";
 		} 
 		$q .= "}" . 
 				"LIMIT " . $limit . " " . 
-				"OFFSET " . $offset . " ";
+				"OFFSET " . $offset . " ".
+				"ORDER BY DESC(?created) ";
+
 		$records = $this->executeQuery($q);	
 		return $records;
 	}	
@@ -197,7 +216,7 @@ class Lcamodel extends FT_Model{
 			" ?bnode eco:hasImpactCategoryIndicatorResult ?bnoder . " .			
 			"}";				
 		$records = $this->executeQuery($q);	
-		$full_records = array();
+		$full_record = array();
 		foreach($records as $record) {
 			$full_record[] = $this->getTriples($record['bnoder']);
 		}
@@ -335,7 +354,23 @@ class Lcamodel extends FT_Model{
 					$records[0]['magnitude'] = "1";				
 					return $records;
 				} else {
-					return false;
+					
+					$q = "select ?name ?unit ?magnitude where { " . 
+						" <".$URI."> eco:hasReferenceExchange ?exchange_bnode . " .
+						" ?exchange_bnode eco:hasEffect ?effect_bnode . " .
+						" ?exchange_bnode eco:hasQuantity ?quantity_bnode . " .
+						" { ?quantity_bnode eco:hasMagnitude ?magnitude . } UNION { ?quantity_bnode ecoUD:meanValue ?magnitude . } " .
+						" ?quantity_bnode eco:hasUnitOfMeasure ?unit . " .
+						" ?effect_bnode eco:hasTransferable ?transferable . " .	
+						" ?transferable rdfs:label ?name . " .			
+						"}";
+					//var_dump($q);
+					$records = $this->executeQuery($q);
+					if (count($records) > 0) {							
+						return $records;
+					} else {
+						return false;
+					}
 				}
 		}
 	}
@@ -508,7 +543,6 @@ class Lcamodel extends FT_Model{
 					'label'=> $this->opencycmodel->getOpenCycLabel($record['uri'])
 				);						
 			}
-			var_dump($categories);
 			return $categories;
 		} else {
 			return false;

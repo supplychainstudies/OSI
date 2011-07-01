@@ -1,28 +1,46 @@
-<form action="model/create" name="Model">
-	<modelType rules="trim">
+<form action="/lca/createpart/model" name="Model">
+	<modelType rules="trim|uriparse">
 		<label>Model Type</label>
 		<type>dropdown</type>
 		<options>
-			<FootprintModel>Footprint Model</FootprintModel>
-			<Model>Model</Model>
+			<eco_FootprintModel>Footprint Model</eco_FootprintModel>
+			<eco_Model>Model</eco_Model>
+			<eco_LCAModel>Model</eco_LCAModel>
 		</options>
+		<linked_type>rdfs:type</linked_type>
 	</modelType>
 	<name rules="trim">
 		<label>Name</label>
 		<type>text</type>
 	  	<linked_type>rdfs:label</linked_type>
 	</name>		
+	<dataSource rules="trim">
+		<label>Data Source</label>
+		<type>text</type>
+	  	<linked_type>eco:hasDataSource</linked_type>
+	</dataSource>
+	<description rules="trim">
+		<label>Description</label>
+		<type>textbox</type>
+	  	<linked_type>rdfs:description</linked_type>
+	</description>
+	<fieldset name="Valid Time Period" linked_type="eco:validInterval">
+		<beginning rules="trim">
+			<label>Beginning</label>
+			<type>text</type>
+		  	<linked_type>time:hasBeginning</linked_type>
+		</beginning>
+		<end rules="trim">
+			<label>End</label>
+			<type>text</type>
+		  	<linked_type>time:hasEnd</linked_type>
+		</end>
+	</fieldset>
 	<UUID rules="trim">
 		<label>UUID</label>
 		<type>hidden</type>
 	  	<linked_type>eco:hasUUID</linked_type>
 	</UUID>
-	<models rules="trim">
-		<label>Models</label>
-		<type>text</type>
-	  	<linked_type>eco:models</linked_type>
-		<multiple>yes</multiple>
-	</models>
     <submit>
         <type>submit</type>
         <value>Submit</value>

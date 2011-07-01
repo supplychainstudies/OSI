@@ -62,8 +62,11 @@ $config['arc_info']['ns'] = array(
 'wgs84_pos'=>'http://www.w3.org/2003/01/geo/wgs84_pos#',
 'gn'=>'http://www.geonames.org/ontology#',
 'owl' => 'http://www.w3.org/2002/07/owl#',
-'opencyc' => 'http://sw.opencyc.org/concept/'
-
+'opencyc' => 'http://sw.opencyc.org/concept/',
+'ISO3166' => 'http://downlode.org/Code/RDF/ISO-3166/schema#',
+'time' => 'http://www.w3.org/TR/owl-time/',
+'nace2' => 'http://ec.europa.eu/eurostat/ramon/rdfdata/nace_r2/',
+'nace' => 'http://ec.europa.eu/eurostat/ramon/ontologies/nace.rdf#'
 );		    
 $config['arc_info']['endpoint_features'] = array(
     'select', 'construct', 'ask', 'describe', // allow read

@@ -21,6 +21,51 @@ class Admin extends FT_Controller {
 		$this->check_if_admin();
 	}
 	
+	public function loadOpenCyc($cyc) {
+		$this->opencycmodel->getOpenCycLabel("http://sw.opencyc.org/concept/".$cyc);
+	}
+	
+	public function viewTriples ($URI) {
+		$triples = $this->lcamodel->getArcTriples("http://footprinted.org/rdfspace/lca/".$URI);
+		$this->script(Array('admin.js'));
+		$this->data("URI", $URI);
+		$this->data("triples", $triples);
+		$this->display("Admin - Edit", "adminEdit");
+	}
+	
+	public function changeTriple ($URI) {
+		if ($_POST['function'] == "Edit") {
+			$old_triple = array(
+				's' => $_POST['old_triple_s'],
+				'p' => $_POST['old_triple_p'],
+				'o' => $_POST['old_triple_o']				
+			);
+			$new_triple = array(
+				's' => $_POST['triple_s'],
+				'p' => $_POST['triple_p'],
+				'o' => $_POST['triple_o']				
+			);			
+			$this->lcamodel->replaceTriple("http://footprinted.org/",$old_triple, $new_triple);
+		} elseif ($_POST['function'] == "Delete") {
+			$triple = array(
+				's' => $_POST['triple_s'],
+				'p' => $_POST['triple_p'],
+				'o' => $_POST['triple_o']				
+			);
+			$this->lcamodel->deleteTriple("http://footprinted.org/",$triple);
+		} elseif ($_POST['function'] == "Add") {
+			$triples = array(
+				array(
+				's' => $_POST['triple_s'],
+				'p' => $_POST['triple_p'],
+				'o' => $_POST['triple_o']
+				)				
+			);
+			$this->lcamodel->addTriples($triples);
+		}
+		//redirect('/admin/viewTriples/'.$URI);
+	}
+	
 	public function testGraph() {
 		$uris = $this->lcamodel->getRecords();
 		$q = "SELECT * { GRAPH <http://footprinted.org> { ?x ?y ?z } }";

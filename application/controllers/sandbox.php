@@ -6,7 +6,27 @@ class Sandbox extends FT_Controller {
 		parent::__construct();
 		$this->check_if_admin(); 
 		//$this->load->library(Array('formats'));
-		$this->load->model(Array('lcamodel','loadmodel'));
+		$this->load->model(Array('lcamodel','loadmodel','geographymodel','nacemodel'));
+	}
+	
+	
+	function nace() {
+		$this->nacemodel->dump();
+	}
+	
+	function nacetest() {
+		var_dump($this->nacemodel->getURIbyCode("A01.1"));
+	}
+	
+	function countries() {
+		//$this->geographymodel->getAllCountries2();
+	}
+	
+	function cc() {
+		$boop=$this->geographymodel->getURIbyAlpha3("RER");
+		var_dump($boop);
+		//$this->geographymodel->eu();
+		//$this->geographymodel->bridge();
 	}
 	
 	function testprotection(){

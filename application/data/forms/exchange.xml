@@ -27,18 +27,54 @@
 		            <eco_Exchange>Exchange between the process and the environment</eco_Exchange>
 		            <eco_Transfer>Exchange between processes</eco_Transfer>
 		        </options>
-				<linked_type>rdfs:type</linked_type>
 		    </exchange>
-			<transferable rules="trim">
-				<label>Transferable</label>
-				<type>text</type>
-			  	<linked_type>eco:hasTransferable</linked_type>
-			</transferable>
-			<flowable rules="trim">
-				<label>Elemental Flow</label>
-				<type>text</type>
-			  	<linked_type>eco:hasFlowable</linked_type>
-			</flowable>		
+		  	<fieldset name="Transfer or Flow" linked_type="eco:hasTransferable">
+			  	<fieldset root="thing">
+					<blank rules="">
+						<type>hidden</type>
+					</blank>
+		 		</fieldset>
+	 		</fieldset>	
+		  	<fieldset name="Aggregation Category" linked_type="eco:hasEffectAggregationCategory">
+				<aggType rules="trim|uriparse">
+					<label>Effect Aggregation Category</label>
+					<type>hidden</type>
+					<linked_type>rdfs:type</linked_type>
+					<value>fasc_Compartment</value>
+				</aggType>
+				<compartment rules="trim|uriparse">
+					<label>Effect Aggregation Category</label>
+					<linked_type>fasc:CompartmentMedium</linked_type>
+					<type>dropdown</type>
+			        <options>
+						<fasc_agriculturalSoil>agricultural soil</fasc_agriculturalSoil>
+						<fasc_air>air</fasc_air>
+						<fasc_biotic>biotic</fasc_biotic>
+						<fasc_forestrySoil>forestry soil</fasc_forestrySoil>
+						<fasc_fossil>fossil</fasc_fossil>
+						<fasc_fossilWater>fossil water</fasc_fossilWater>
+						<fasc_freshWater>fresh water</fasc_freshWater>
+						<fasc_groundWater>ground water</fasc_groundWater>
+						<fasc_industrySoil>industry soil</fasc_industrySoil>
+						<fasc_lakeWater>lake water</fasc_lakeWater>
+						<fasc_lowAir>low air</fasc_lowAir>
+						<fasc_nonAgriculturalSoil>non-agricultural soil</fasc_nonAgriculturalSoil>
+						<fasc_resource>Resource</fasc_resource>
+						<fasc_resourceBiotic>resource biotic</fasc_resourceBiotic>
+						<fasc_resourceInAir>resource in air</fasc_resourceInAir>
+						<fasc_resourceInGround>resource in ground</fasc_resourceInGround>
+						<fasc_resourceInWater>resource in water</fasc_resourceInWater>
+						<fasc_resourceLand>resource land</fasc_resourceLand>
+						<fasc_riverWater>river water</fasc_riverWater>
+						<fasc_seaWater>sea water</fasc_seaWater>
+						<fasc_soil>soil</fasc_soil>
+						<fasc_surfaceWater>surface water</fasc_surfaceWater>
+						<fasc_tropoStratoSphere>tropo strato sphere</fasc_tropoStratoSphere>
+						<fasc_water>water</fasc_water>
+						<fasc_highAir>high air</fasc_highAir>
+			        </options>
+				</compartment>				
+	 		</fieldset>	
 		</fieldset>
 	  	<fieldset name="Quantity" linked_type="eco:hasQuantity" root="quantity">
 			<blank rules="">
@@ -51,4 +87,3 @@
         <value>Submit</value>
     </submit>
 </form>
-
