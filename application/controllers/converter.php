@@ -63,6 +63,13 @@ class Converter extends FT_Controller {
 							}
 						}
 					}
+				} elseif ($mvkey == "validation") { 
+					foreach ($mv as $validation) {
+						$_validation = $this->ecospold1Validation($validation);
+						if (count($_validation) > 0) {
+							$this->lca_datasets[$key]['validation'][] = $_validation;
+						}
+					}
 				}
 			}
 			if (count($this->ecospold1Model($dataset['metaInformation'])) != 0) {
@@ -408,6 +415,28 @@ class Converter extends FT_Controller {
 		}
 		return $info;
 	}
+	
+	private function ecospold1Validation($validation) {
+		$info = array();
+		$info['description'] = "";
+		if (isset($validation['proofReadingValidator']) == true) {
+			foreach ($this->lca_datasets as $set) {
+				foreach ($set['person'] as $ref) {
+					if ($ref['esref'] == $process['proofReadingValidator']) {
+						$info['responsibleAgent'] = $ref['local_uri'];
+					}
+				}
+			}
+		}
+		if (isset($validation['proofReadingDetails']) == true) {
+			$info['description'] .= $validation['proofReadingDetails'];
+		}
+		if (isset($validation['otherDetails']) == true) {
+			$info['description'] .= $validation['otherDetails'];
+		}		
+		return $info;
+	}
+	
 	
 	private function ecospold1Process($process) {
 		$info = array();
