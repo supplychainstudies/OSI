@@ -309,7 +309,10 @@ class Lca extends FT_Controller {
 	* Grabs all the triples for a particular URI and shows it in a friendly, human readable way
 	*/
 	public function view($URI = null) {	
-		// Gets everything from the linked database
+		//Check if private  
+		$this->isPrivate($URI);
+		
+		// Gets everything from the linked database	
 		$parts['uri'] = $URI;
 		$parts['impactAssessments'] = $this->lcamodel->convertImpactAssessments($this->lcamodel->getImpactAssessments("http://footprinted.org/rdfspace/lca/" . $URI));
 		$parts['bibliography'] = $this->bibliographymodel->convertBibliography($this->bibliographymodel->getBibliography("http://footprinted.org/rdfspace/lca/" . $URI));
@@ -496,6 +499,15 @@ class Lca extends FT_Controller {
 			$this->display("Browse","homepage_view");		
 		}
 		
+		// Check if LCA is private
+		private function isPrivate($URI) {
+			$this->db->where("uri",$URI);
+			$this->db->where("public",true);
+			$footprint = $this->db->get('footprints',1,0);
+			if(count($footprint->result()) == 0){
+				redirect("/search");
+			}
+		}
 				
 		private function addSameAs() {
 			parse_str($_SERVER['QUERY_STRING'],$_GET); 

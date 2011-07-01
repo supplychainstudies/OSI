@@ -44,7 +44,8 @@ class API extends FT_Controller {
 		// Querying the database for the footprints		
 		if($category){ $this->db->like('category', $category); }
 		if($name){$this->db->like('name', $name); }		
-		$this->db->order_by("name", "ASC"); 
+		$this->db->order_by("name", "ASC");
+		$this->db->where("public",true); 
 		$rs = $this->db->get('footprints', $limit, $offset);
 		if ($encode == 'json') {
 			header('Content-type: application/json');
