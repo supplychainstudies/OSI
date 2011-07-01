@@ -107,12 +107,28 @@ h1#title {
 }
 #about-people{
 	float:left;
-	width: 305px;
+	width: 750px;
 	padding-right:15px;
 	padding-left:15px;
-	padding-bottom:15px;
+	padding-bottom:10px;
 	margin-right:15px;
+	margin-bottom: 20px;
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
+}
+#about-people-pic{
+	float:left;
+	width: 300px;
+	padding-right:15px;
+	padding-left:15px;
+	margin-right:15px;
+}
+#about-people-text{
+	float:right;
+	width: 300px;
+	padding-right:15px;
+	padding-left:15px;
+	margin-right:15px;
+	margin-top: 30px;
 }
 #about h1{
 	font-size:34px;
@@ -142,7 +158,9 @@ h1.about {
 	float:left;
 	text-align: left;
 	width:920px;
-	padding: 30px;
+	padding: 25px;
+	padding-bottom: 0px;
+	padding-right: 25px;
 	background-color: #666;
 	margin-top:10px;
 }
@@ -150,7 +168,7 @@ h1.about {
 	float:left;
 	text-align: left;
 	width:920px;
-	padding: 30px;
+	padding: 25px;
 	background-color: #666;
 	margin-bottom:30px;
 	padding-top:0px;
@@ -161,19 +179,20 @@ h1.about {
 	width:400px;
 	padding: 20px;
 	background-color: #F5FAFF;
-	margin-right:20px;
+	margin-left:10px;
+	margin-right:10px;
 	margin-bottom:20px;
 	background: url(http://cesc.kth.se/wp-content/themes/themorningafter/images/bg/stripe.png) repeat;
 }
-#map{
-	height:460px;
+#gmap{
+	height:400px;
 }
 #lca_unit {
 	float:right;
 	top:15px;
 	margin-right:20px;
 	height: 70px;
-	width: 450px;
+	width: 150px;
 	text-align:right;
 	font-size: 20px;
 	font-family: 'PT Sans Narrow', arial, serif;
@@ -181,21 +200,24 @@ h1.about {
 }
 #lca_title {
 	float:left;
-	left:5px;
+	margin-left:10px;
 	height: 70px;
-	width: 450px;
+	width: 550px;
 }
 
 #lca_background .nr {
 	float: left;
-	height: 100px;
-	width: 130px;
+	height: 90px;
+	padding-top:10px;
+	width: 120px;
+	padding-left:5px;
 	text-align:center;
 }
 #lca_background .meta {
 	float:left;
-	height: 100px;
-	width: 150px;
+	height: 90px;
+	padding-top:10px;
+	width: 160px;
 	padding-left:15px;
 }
 #lca_background .circle {
@@ -227,7 +249,7 @@ h1.about {
 	background-repeat:none;
 }
 #lca_background  h1.nr {
-	font-size: 40px;
+	font-size: 30px;
 	font-family: 'Lato', arial, serif; 
 	color: #333;
 	width: 100%;

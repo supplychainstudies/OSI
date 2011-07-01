@@ -214,6 +214,56 @@ class Users extends FT_Controller {
 		}
 	}
 	
+	// Gives back the user API key, if not existing, it autogenerates one
+	public function getAPIkey(){
+		if($this->session->userdata('id') == true) {
+		    $this->db->where('user_name',$this->session->userdata('id'));
+			$user = $this->db->get('users',1,0);
+			$user = $user->result();
+			if($user[0]->key){
+				$this->data("key", $user[0]->key);
+			} else {
+				// Generate a random key
+				$key = $this->createRandomKey();
+				// Check that it doesn't exist
+				$unique = false;
+				while($unique == false){
+					$this->db->where('key',$key);
+					$this->db->from('users');
+					if ($this->db->count_all_results() == 0){
+						$unique = true;
+					}else{
+						$key = $this->createRandomKey();
+					}
+				}
+				$data = array (
+					'key' => $key
+					);
+				$this->db->where('user_name',$this->session->userdata('id'));	
+				$this->db->update('users', $data);
+				$this->data("key", $key);
+			}
+			$this->display("Dashboard", "api_key_view");
+		} else {
+			$this->index();
+		}	
+	}
+	
+	private function createRandomKey() {
+	    $chars = "abcdefghijkmnopqrstuvwxyz023456789";
+	    srand((double)microtime()*1000000);
+	    $i = 0;
+	    $pass = '' ;
+	    while ($i <= 7) {
+	        $num = rand() % 33;
+	        $tmp = substr($chars, $num, 1);
+	        $pass = $pass . $tmp;
+	        $i++;
+	    }
+	    return $pass;
+	}
+
+	
 	public function registered() {
 		// Note: Most validation had already been done using jquery
 		// Step 1: Check recaptcha		
@@ -305,6 +355,12 @@ class Users extends FT_Controller {
 		$published = "";
 		if($this->session->userdata('id') == true) {
 		    $user_data = $this->simpleloginsecure->userInfo($this->session->userdata('id'));
+			$id = $this->session->userdata('id');
+			$this->db->where('user_name',$id);
+			$this->db->limit('1');
+			$rs = $this->db->get('users');
+			// Send data to the view
+			$this->data("set", $rs->result());
 			// IF there is friend of a friend data, send to dashboard
 			if (isset($user_data["foaf_uri"]) == true){
 				// Get the user activity (such as comments)
@@ -321,5 +377,75 @@ class Users extends FT_Controller {
 		$this->style(Array('style.css'));
 		$this->display("Dashboard", "dashboard_view");				
 	}
+	// Edit yourprofile                            
+	public function editprofile(){
+		if($this->session->userdata('id') == true) {
+		$id = $this->session->userdata('id');
+		$this->db->where('user_name',$id);
+		$this->db->limit('1');
+		$rs = $this->db->get('users');
+		// Send data to the view
+		$this->data("set", $rs->result());
+		$this->display("Admin","admin/edit_profile");
+		}
+	}
+	// Show public profile                            
+	public function showprofiles(){
+		//$this->check_if_logged_in();
+		// Get ID from form
+		parse_str($_SERVER['QUERY_STRING'],$_GET); 
+		if (isset($_GET["id"]) == false){
+			$id = $this->session->userdata('id');
+		}else{
+			$id = $_GET["id"];
+		}
+		$this->db->where('user_name',$id);
+		$this->db->limit('1');
+		$rs = $this->db->get('users');
+		$this->data("set", $rs->result());
+		$allusers = $this->db->get('users');
+		$this->data("allusers", $allusers->result());
+		
+		$user_data = $this->simpleloginsecure->userInfo($id);
+		if (isset($user_data["foaf_uri"]) == true){
+			// Get the user activity (such as comments)
+			//$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
+			// Get the LCAs that the user has published
+			$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
+			$this->data("published", $published);
+		}
+		// Send data to the view
+		$this->display("All users","admin/your_profile");
+	}
+	public function allusers(){
+		$this->check_if_logged_in();
+		// Get ID from form
+		$allusers = $this->db->get('users');
+		$this->data("allusers", $allusers->result());
+		// Send data to the view
+		$this->display("All users","admin/all_users");
+	}
+	
+	// Save the changes for editing
+	public function saveprofile(){
+		$this->check_if_logged_in();
+
+		$id = $this->input->post('id');
+		 
+		// Create array for database fields & data  
+		$data = array();
+		$data['user_email'] = $this->input->post('user_email');
+		$data['firstname'] = $this->input->post('firstname');
+		$data['surname'] = $this->input->post('surname');
+		$data['bio'] = $this->input->post('bio');
+		$this->db->where('user_id', $id);
+		$result = $this->db->update('users', $data);
+		redirect('users/dashboard');
+	}
+	
+	
+	
+	
+	
 	
 }

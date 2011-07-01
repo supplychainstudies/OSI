@@ -39,12 +39,11 @@
 |
 */
 
-$route['default_controller'] = "info";
+$route['default_controller'] = "lca/featured";
 $route['scaffolding_trigger'] = "";
 $route['docs'] = "sitemaps/documentation";
 //$route['(:any)'] = "info/view/$1";
+$route['(:any)([0-9])'] = "lca/view/$1$2";
 $route['(:any).rdf'] = "lca/viewRDF/$1";
 $route['(:any).json'] = "lca/viewJSON/$1";
-
-
 ?>

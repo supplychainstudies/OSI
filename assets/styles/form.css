@@ -29,6 +29,7 @@ width: 400px;
 height: 180px;
 }
 
+
 /* For  registering */ 
 #div_register_at_footprint.org input {
 color: #333;
@@ -345,4 +346,14 @@ padding:8px;
 font-size:14px;
 width: 380px;
 height: 180px;
+}
+
+#editadmins textarea {
+color: #333;
+background: #fff;
+border: 1px solid #ccc;
+padding:8px;
+font-size:20px;
+width: 950px;
+height: 500px;
 }

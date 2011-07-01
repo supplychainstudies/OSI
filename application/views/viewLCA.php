@@ -17,8 +17,9 @@
 
 	<div id="lca_header">
 		<div id="lca_title"><h1><?=$parts['title'] ?></h1></div>
+		
 		<? /*<p>Model of the production <? if(isset($parts['modeled']['process'])==true) { echo "(" . $parts['modeled']['process'] . ")" ; } ?> <? if(isset($parts['modeled']['product'])==true) { echo " of " . $parts['modeled']['product'] ; } ?></p> */?>	
-		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["label"] ?></nr></h1></div>	
+		<div id="lca_unit"><h1><nr><?=$parts['quantitativeReference']['amount'] ?> <?= $parts['quantitativeReference']['unit']["abbr"] ?></nr></h1></div>
 	</div>
 	<div id="lca_background">	
 		<div id="lca_impact" class="lca">
@@ -29,7 +30,7 @@
 				// Change color of the circle depending on the impact category	
 				switch ($impactAssessment['impactCategoryIndicator']['label']) {
 				    case 'Waste': $color = "#6B5344"; $max = 2000; $impacttext = "Waste";break;
-				    case 'Carbon Dioxide Equivalent': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub> (eq)";break;
+				    case 'Carbon Dioxide Equivalent': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub>e";break;
 					case 'Carbon Dioxide': $color = "#FF7C00";	$max = 2000; $impacttext = "CO<sub>2</sub>";break;
 				    case "Energy": $color = "#E8BF56"; $max = 20; $impacttext = "Energy";	break;
 					case "Water":$color = "#45A3D8"; $max = 2000; $impacttext = "Water"; break;
@@ -40,26 +41,26 @@
 				if ($size > 82) { $size = 82;}
 				if ($size < 20) { $size = 20;}
 				$margin = (100-$size)/2;
-				$margintop = (100-$size)/8;
+				$margintop = (100-$size)/3;
 				// Create a circle
 				echo '<div class="circle"><div style="width:'.$size.'px; height:'.$size.'px;margin-left:'.$margin.'px;margin-top:'.$margintop.'px; background:'.$color.'; -moz-border-radius: 40px; -webkit-border-radius:40px;"></div></div>';
-				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) . '</h1></div>';
-				echo '<div class="meta"><p class="unit">'. $impactAssessment['unit']["label"] .'</p><p class="category">';
-				echo $impactAssessment['impactCategory']['label'] . " - " . $impactAssessment['impactCategoryIndicator']['label'];
-				echo "<p/></div>"; 
-				
+				echo '<div class="nr"><h1 class="nr">' . round($impactAssessment['amount'],2) .' '. $impactAssessment['unit']["abbr"] .'</h1></div>';
+				echo '<div class="meta"><p class="category">Category: <b>'. $impactAssessment['impactCategory']['label'] . "</b><br/>";
+				echo 'Indicator: <b>'. $impactAssessment['impactCategoryIndicator']['label'] . "</b></p></div>"; 				
 			} } ?>
 			</div>
 			
 			<? if(isset($parts['exchanges']  ) == true) { ?>
 			<div id="lca_flows" class="lca">
 			<h2>Flows</h2>
-			<? if ($totalinput != 0) { ?>
-			<h3>Total material input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
-			<? if($parts['quantitativeReference']['unit']['label'] == "Kilogram") { 
-					$ratio = ($totalinput/$parts['quantitativeReference']['amount']);
-					echo "<h3>Ratio input vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
-				} ?>
+			<? if (isset($parts['Input']) == true) { ?>
+				<? if ($totalinput != 0) { ?>	
+					<h3>Total material input:</h3> <h1 class="nr"><?=round($totalinput,2); ?> kg </h1>
+					<? if($parts['quantitativeReference']['unit']['label'] == "Kilogram") { 
+						$ratio = ($totalinput/$parts['quantitativeReference']['amount']);
+						echo "<h3>Ratio input vs production</h3><h1 class='nr'>".round($ratio).":1</h1>";
+						} ?>
+				<? } ?>
 			<? if ($totalinputliter != 0) { ?>
 					<h3>Total water input:</h3> <h1 class="nr"><?=round($totalinputliter,2); ?> liters </h1>
 			<? } ?>
@@ -71,23 +72,10 @@
 					$width = round(100*$mass['amount']/$totalinput);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#'.$color_input[$i].';"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . $mass['amount'] . "</amount> " . $mass['unit']["label"]; 
+					echo "<div class='flow_text'><p><amount>" . $mass['amount'] . "</amount> " . $mass['unit']["abbr"]; 
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++; if ($i >10){ $i = 0;}
 			}}?>
-			<? 
-			if (isset($parts['Input']["Energy and Work"]) == true) {
-				foreach ($parts['Input']["Energy and Work"] as $energy) {
-					$height = $energy['amount']*30;
-					if ($height < 30) { 
-						$height = 30; 
-					}
-					echo '<div class="bar_background"><div style="height:'.$height.'%;background-color:#ffff00;"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . $energy['amount'] . "</amount> " . $energy['unit']["label"]; 
-					echo "<b> ".$energy['name'] . "</b></p></div>";
-				}
-			} 
-			?>
 			<? 
 			if (isset($parts['Input']["Liquid Volume"]) == true) { 
 			$color_liquid = array('1a6eff','1B64CE','1753AA','133E7C','2C4C7C');$i = 0;	
@@ -108,7 +96,17 @@
 					echo "<div class='flow_text'><p><amount>" . $land['amount'] . "</amount> " . $land['unit']["label"]; 
 					echo "<b> ".$land['name'] . "</b></p></div>";
 			}}?>
-
+			<? 
+			if (isset($parts['Input']['Misc']) == true) {
+				foreach ($parts['Input']['Misc'] as $misc) {
+					$width = round(100*$misc['amount']/$misctotal);
+					if ($width == 0) { $width = 1; }
+					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#ffcc00;"></div></div>';
+					echo "<div class='flow_text'><p><amount>" . $misc['amount'] . "</amount> " . $misc['unit']["label"]; 
+					echo "<b> ".$misc['name'] . "</b></p></div>";
+				}
+			} 
+			?>
 			<?}?>
 			
 			<? if ($totaloutput != 0) { ?>	
@@ -128,7 +126,7 @@
 					$width = round(100*$mass['amount']/$totaloutput);
 					if ($width == 0) { $width = 1; }
 					echo '<div class="bar_background"><div style="height:20px; width:'.$width.'%;background-color:#'.$color_mass[$i].';"></div></div>';
-					echo "<div class='flow_text'><p><amount>" . round($mass['amount'],6) . "</amount> " . $mass['unit']["label"]; 
+					echo "<div class='flow_text'><p><amount>" . round($mass['amount'],6) . "</amount> " . $mass['unit']["abbr"]; 
 					echo "<b> ".$mass['name'] . "</b></p></div>";
 					$i++;
 					if ($i >12){ $i = 0;}
@@ -137,11 +135,9 @@
 			<? 
 			if (isset($parts['Output']["Liquid Volume"]) == true) {
 				foreach ($parts['Output']["Liquid Volume"] as $volume) {
-					$height = $volume['amount']*30;
-					if ($height < 30) { 
-						$height = 30; 
-					}
-					echo '<div class="bar_background"><div style="height:'.$height.'%;background-color:#002caa;"></div></div>';
+					$width = round(100*$volume['amount']/1);
+					if ($width == 0) { $width = 1; }
+					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#002caa;"></div></div>';
 					echo "<div class='flow_text'><p><amount>" . $volume['amount'] . "</amount> " . $volume['unit']["label"]; 
 					echo "<b> ".$volume['name'] . "</b></p></div>";
 				}
@@ -150,11 +146,9 @@
 			<? 
 			if (isset($parts['Output']["Energy and Work"]) == true) {
 				foreach ($parts['Output']["Energy and Work"] as $energy) {
-					$height = $energy['amount']*30;
-					if ($height < 30) { 
-						$height = 30; 
-					}
-					echo '<div class="bar_background"><div style="height:'.$height.'%;background-color:#ffff00;"></div></div>';
+					$width = round(100*$energy['amount']/1);
+					if ($width == 0) { $width = 1; }
+					echo '<div class="bar_background"><div style="height:20px;width:'.$width.'%;background-color:#ffcc00;"></div></div>';
 					echo "<div class='flow_text'><p><amount>" . $energy['amount'] . "</amount> " . $energy['unit']["label"]; 
 					echo "<b> ".$energy['name'] . "</b></p></div>";
 				}
@@ -162,22 +156,31 @@
 			?>
 			</div>
 			<?}?>				
-
-			<? if (isset($parts['geography']) == true ) {
-				echo '<div id="map" class="lca"><h2>Geography</h2>';
-				
-				foreach ($parts['geography'] as $geo) {
-						echo '<p>Located in: <b>'.$geo['name'].'</b></p>';
-						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x400&zoom=2&markers=size:big%7Ccolor:blue%7C".$geo['name']."&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
-						echo '<img src="'.$map.'" alt="'.$geo['name'].'"/>';
+			<? 
+				// Shows the geography (map) and date
+				echo '<div id="map" class="lca"><h2>Applies to</h2>';
+				if($parts['year'] != 0){
+					echo '<p>Year: <b>'.$parts['year'].'</b></p>';
+				}else{
+					echo '<p>Year: <b>not available</b></p>';
+				}
+				if (isset($parts['geography']) == true ) {
+					foreach ($parts['geography'] as $geo) {
+						echo '<p>Geography: <b>'.$geo['name'].'</b></p>';
+						$map = "http://maps.google.com/maps/api/staticmap?sensor=false&size=400x370&zoom=2&markers=size:big%7Ccolor:blue%7C".$geo['name']."&style=feature:road.local%7Celement:geometry%7Chue:0x00ff00%7Csaturation:100&style=feature:landscape%7Celement:geometry%7Clightness:-100&style=feature:poi.park%7Celement:geometry%7Clightness:-100";
+						echo '<div id="gmap"><img src="'.$map.'" alt="'.$geo['name'].'"/></div>';
 					}
+				} else {
+						echo '<p>Geography: <b>generic</b></p>';
+				}
 				echo "</div>";
-			 } ?>
+			 ?>
 
 			<div id="lca_meta"  class="lca">
 			<h2>Reference</h2>
 			<?
 				if (isset($parts['bibliography']) == true) {
+					echo "<p>";
 					foreach ($parts['bibliography'] as $record) {
 						if (isset($record['uri']) == true) {
 							echo "<a href='/search?ref=" . $record['title'] . "' target='_blank'>";
@@ -192,9 +195,9 @@
 						if (isset($record["title"]) == true) 	{	$ref .= $record["title"];	}
 						if (isset($record['uri']) == true) 		{	echo $ref."</a>"; }
 					}
+					echo "</p>";
 				}
 			?>
-			<br/><br/>
 			</div>
 			<? if (isset($parts['sameAs']) == true || isset($parts['categoryOf']) == true) { ?>
 			<div id="lca_same" class="lca">
@@ -227,12 +230,9 @@
 			<div id="lca_export" class="lca">
 			<h2>Export</h2>
 			<p><?
-
-				if(isset($links) == true) {
-
-					echo $links;
-
-				}	?>
+					echo "<p><a href='/".$URI.".rdf'>Export in RDF</a></p>";
+					echo "<p><a href='/".$URI.".json'>Export in JSON</a></p>";		
+				?>
 				</p>
 				<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
 					<img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/cc.svg" height='50px' />
@@ -291,9 +291,6 @@
 			<?=$footerDisplay;?>
 		</div>
 
-
-		<script src="http://footprinted.org/assets/scripts/jquery/jquery-1.5.1.min.js"></script>
-		<script src="http://footprinted.org/assets/scripts/jquery/jquery.masonry.min.js"></script>
 		<script>
 
 		$(function(){

@@ -74,6 +74,22 @@ class Admin extends FT_Controller {
 		var_dump($results);
 	}
 	
+	
+	
+	public function changeunits(){
+		$rs = $this->db->get('footprints');		
+		// Initializing array
+		foreach ($rs->result() as $r) {
+			if($r->unit == "piece"){
+				$data = array (
+					'unit' => "unit"
+				);
+				$this->db->where('uri', $r->uri);
+				$this->db->update('footprints', $data);
+			}
+
+		}
+	}
 	// Working function to normalize
 	/* public function normalize() {
 		$uris = $this->lcamodel->getRecords();
@@ -296,4 +312,50 @@ class Admin extends FT_Controller {
 	public function removeAsFeatured ($uri){
 		
 	}
+	
+	/*
+	Admin functions for dealing with static pages
+	*/
+	
+	// Show all the texts
+	public function texts(){
+		$rs = $this->db->get('texts');
+		// Send data to the view
+		$this->data("set", $rs);
+		$this->display("Admin","admin/text_view");
+	}
+	// Show one text
+	public function viewtext(){
+		parse_str($_SERVER['QUERY_STRING'],$_GET); 
+		$id = $_GET["id"];
+		$this->db->where('id',$id);
+		$rs = $this->db->get('texts');
+		// Send data to the view
+		$this->data("set", $rs);
+		$this->display("Admin","admin/viewtext_view");
+	}  
+	// Edit one text                               
+	public function edittext(){
+		parse_str($_SERVER['QUERY_STRING'],$_GET); 
+		$id = $_GET["id"];
+		$this->db->where('id',$id);
+		$this->db->limit('1');
+		$rs = $this->db->get('texts');
+		// Send data to the view
+		$this->data("set", $rs->result());
+		$this->display("Admin","admin/edittext_view");
+	}
+	// Save the changes for editing
+	public function savetext(){
+		// Get ID from form
+		$id = $this->input->post('id');
+		 // Create array for database fields & data  
+		$data = array();
+		$data['text'] = $this->input->post('text');
+		$this->db->where('id', $id);
+		$result = $this->db->update('texts', $data);
+		redirect('admin/texts');
+	}
+	
+	
 }
