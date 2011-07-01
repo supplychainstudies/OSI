@@ -63,11 +63,13 @@ class API extends FT_Controller {
 	
 	private function checkApiKey($key) {
      	if ( $key == "") {
+			echo "<p>Sorry, you have to have an API key, see instructions below</p>"
 			redirect('/about/api');
 		}else{
 			$this->db->where('key',$key);
 			$user = $this->db->get('users');
 			if (count($user->result()) == 0) {
+				echo "<p>Sorry, your API key was wrong,see instructions below</p>"
 				redirect('/about/api');}
    			}
 		}
