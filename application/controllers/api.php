@@ -30,28 +30,20 @@ class API extends FT_Controller {
 		$rs = array();
 		$category = null;
 		$name = null;
-		if (isset($search_terms['limit']) == true) {
-			$limit = $search_terms['limit'];
-		}
-		if (isset($search_terms['offset']) == true) {
-			$offset = $search_terms['offset'];
-		}
-		if (isset($search_terms['name']) == true) {
-			$name = $search_terms['name'];
-		}	
-		if (isset($search_terms['encode']) == true) {
-			$encode = $search_terms['encode'];
-		}
-		if (isset($search_terms['category']) == true) {
-			$category = $search_terms['category'];
-		}
+		// Check API key
+		$key = "";
+		if (isset($search_terms['key']) == true) { $key = $search_terms['key'];}
+		$this->checkApiKey($key);
+		
+		if (isset($search_terms['limit']) == true) { $limit = $search_terms['limit'];}
+		if (isset($search_terms['offset']) == true) { $offset = $search_terms['offset'];	}
+		if (isset($search_terms['name']) == true) {	$name = $search_terms['name'];}	
+		if (isset($search_terms['encode']) == true) {$encode = $search_terms['encode'];}
+		if (isset($search_terms['category']) == true) {$category = $search_terms['category'];}
+		
 		// Querying the database for the footprints		
-		if($category){
-			$this->db->like('category', $category); 
-		}
-		if($name){
-			$this->db->like('name', $name); 
-		}		
+		if($category){ $this->db->like('category', $category); }
+		if($name){$this->db->like('name', $name); }		
 		$this->db->order_by("name", "ASC"); 
 		$rs = $this->db->get('footprints', $limit, $offset);
 		if ($encode == 'json') {
@@ -66,7 +58,17 @@ class API extends FT_Controller {
 		} else if ($encode == 'html') {
 			header('Content-type: text/html');
 			var_dump($rs->result());			
-		}	
+		}
 	}
-
+	
+	private function checkApiKey($key) {
+     	if ( $key == "") {
+			redirect('/about/api');
+		}else{
+			$this->db->where('key',$key);
+			$user = $this->db->get('users');
+			if (count($user->result()) == 0) {
+				redirect('/about/api');}
+   			}
+		}
 }
