@@ -1,0 +1,36 @@
+<form action="/lca/create/exchange" name="Exchange">
+		<etype rules="trim|uriparse">
+	        <label>Type of Transfer/Flow</label>
+	        <type>dropdown</type>
+	        <options>
+	            <eco_Substance>Substance</eco_Substance>
+	            <eco_Product>Product</eco_Product>
+		        <eco_Energy>Energy</eco_Energy>
+	        </options>
+			<linked_type>rdfs:type</linked_type>
+	    </etype>
+		<name rules="trim">
+			<label>Name</label>
+			<type>text</type>
+			<linked_type>rdfs:label</linked_type>
+		</name>
+		<description rules="trim">
+			<label>Description</label>
+			<type>textbox</type>
+			<linked_type>rdfs:description</linked_type>
+		</description>
+		<formula rules="trim">
+			<label>Chemical Formula</label>
+			<type>text</type>
+			<linked_type>eco:chemicalFormula</linked_type>
+		</formula>
+		<CASNumber rules="trim">
+			<label>CAS Number</label>
+			<type>text</type>
+			<linked_type>eco:CASNumber</linked_type>
+		</CASNumber>
+    <submit>
+        <type>submit</type>
+        <value>Submit</value>
+    </submit>
+</form>

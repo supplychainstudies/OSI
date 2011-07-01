@@ -1,0 +1,19 @@
+<form action="/lca/create/validation">
+	<fieldset name="Validation" linked_type="eco:hasValidationResult">
+		<responsibleAgent rules="trim">
+			<label>Validator</label>
+			<type>popup</type>
+			<popup>person</popup>
+			<linked_type>eco:responsibleAgent</linked_type>
+		</dataType>
+		<description rules="trim">
+			<label>Description</label>
+			<type>textarea</type>
+			<linked_type>eco:Exchange</linked_type>
+		</description>
+	</fieldset>
+    <submit>
+        <type>submit</type>
+        <value>Submit</value>
+    </submit>
+</form>
