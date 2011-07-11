@@ -364,10 +364,10 @@ class Users extends FT_Controller {
 			// IF there is friend of a friend data, send to dashboard
 			if (isset($user_data["foaf_uri"]) == true){
 				// Get the user activity (such as comments)
-				$user_activity = $this->lcamodel->getLCAsByPublisher( $user_data["foaf_uri"]);
+				//$user_activity = $this->lcamodel->getLCAsByPublisher($user_data["foaf_uri"]);
 				// Get the LCAs that the user has published
 				$published = $this->lcamodel->getLCAsByPublisher($user_data['foaf_uri']);
-				$this->data("user_activity", $user_activity);
+				//$this->data("user_activity", $user_activity);
 				$this->data("published", $published);
 			}			
 		} else {

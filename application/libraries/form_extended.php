@@ -43,7 +43,6 @@ class Form_extended extends Form {
 			$subject = toBNode("");
 		}
 		if (isset($group['__attrs']['linked_type']) == true) {
-			var_dump($change_predicates);
 			if (isset($change_predicates) == true) {
 				if (isset($change_predicates[$group['__attrs']['name']]) == true) {
 					$group['__attrs']['linked_type'] = $change_predicates[$group['__attrs']['name']];

@@ -24,9 +24,9 @@
 		<br/>
 <div id="about">
 			<? 
-			if ($user_activity == true) {
+			if ($published == true) {
 			echo "<p>Your Footprints</p>";
-			foreach ($user_activity as $fp) {
+			foreach ($published as $fp) {
 				
 				echo "<a href='".$fp["uri"]."'/><p>".$fp["title"]."</p></a>>";
 				

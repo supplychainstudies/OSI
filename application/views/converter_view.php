@@ -17,7 +17,7 @@
 		<div id="about">	
 			<p>Import EcoSpold files to Footprinted:</p>
 			<br/>
-			<form enctype="multipart/form-data" action="uploader.php" method="POST">
+			<form enctype="multipart/form-data" action="/converter" method="POST">
 				Choose format:
 				<select name="format">
 				  <option value="eco1">Ecospold1</option>

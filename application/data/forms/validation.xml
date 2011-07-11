@@ -5,11 +5,11 @@
 			<type>popup</type>
 			<popup>person</popup>
 			<linked_type>eco:responsibleAgent</linked_type>
-		</dataType>
+		</responsibleAgent>
 		<description rules="trim">
 			<label>Description</label>
 			<type>textarea</type>
-			<linked_type>eco:Exchange</linked_type>
+			<linked_type>eco:hasReportText</linked_type>
 		</description>
 	</fieldset>
     <submit>

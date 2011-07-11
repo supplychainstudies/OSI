@@ -15,6 +15,11 @@
 		<type>hidden</type>
 		<linked_type>eco:assessmentOf</linked_type>
 	</assessmentOf>
+	<impactAssessmentMethod rules="trim">
+		<label>Impact Assessment Method</label>
+		<type>text</type>
+		<linked_type>eco:hasImpactAssessmentMethod</linked_type>
+	</impactAssessmentMethod>
 		<fieldset name="Impact Category Indicator Result" linked_type="eco:hasImpactCategoryIndicatorResult" multiple="yes">
 			<blank rules="trim">
 				<label></label>

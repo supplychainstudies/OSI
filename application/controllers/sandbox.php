@@ -9,7 +9,13 @@ class Sandbox extends FT_Controller {
 		$this->load->model(Array('lcamodel','loadmodel','geographymodel','nacemodel'));
 	}
 	
+	function meow() {
+		$this->lcamodel->dumptag();
+	}
 	
+	function foot() {
+		$this->lcamodel->blah();
+	}
 	function nace() {
 		$this->nacemodel->dump();
 	}

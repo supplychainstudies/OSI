@@ -18,7 +18,7 @@ class FT_Model extends CI_Model{
 	    $this->config->load('arc');	
 		$this->config->load('arcdb');	
 		$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
-		$this->arc_config['store_name'] = "ECOSPOLDTESTfootprinted";
+		$this->arc_config['store_name'] = "footprinted";
 	}	
 	
 	// Configuration information for accessing the arc store

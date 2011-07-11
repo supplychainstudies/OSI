@@ -438,7 +438,6 @@ class Lca extends FT_Controller {
 		// Normalizes the flows
 		if (isset($parts['exchanges']) == true) {
 			foreach ($parts['exchanges'] as &$exchanges) {
-				var_dump($exchanges);
 				$exchanges['amount'] = $exchanges['amount'] / $ratio;
 				if ($exchanges['unit']['label'] == "Gram") {
 					$exchanges['amount']/=1000; $exchanges['unit']['label'] = "Kilogram"; $exchanges['unit']['abbr'] = "kg";
@@ -464,6 +463,30 @@ class Lca extends FT_Controller {
 			}
 		}
 	}
+
+	/***
+    * @public
+    * Shows the homepage
+	* This is not functional for non-LCA entries and does not have search or filter capabilities yet
+	* Public function for exploring the repository
+    */
+	public function channel($agent) {
+		// Find the uri of the agent
+		$records = $this->lcamodel->getLCAsbyCreatorName($agent);
+		foreach ($records as $feature) {
+			//Get the URI
+			$uri = str_replace("http://footprinted.org/rdfspace/lca/","",$feature['uri']);
+			// Get the record
+			$this->db->where('uri',$uri);
+			$footprint = $this->db->get('footprints',1,0);
+			$set[$uri] = $footprint->result();
+	    }
+		// Send data to the view
+		$this->data("set", $set);
+		$this->data("nr", $nr);
+		$this->display("Browse","homepage_view");		
+	}
+
 		
 		/***
 	    * @public

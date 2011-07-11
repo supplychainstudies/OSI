@@ -21,6 +21,17 @@
 			<type>text</type>
 		  	<linked_type>ecoUD:standardDeviation95</linked_type>
 		</standardDeviation>
+		<uncertaintyDistribution rules="trim|uriparse">
+	        <label>Uncertainty Distribution</label>
+	        <type>dropdown</type>
+	        <options>
+				<ecoUD_LogNormalDistribution>Log Normal Distribution</ecoUD_LogNormalDistribution>
+				<ecoUD_NormalDistribution>Normal Distrubition</ecoUD_NormalDistribution>
+				<ecoUD_TriangularDistribution>Triangular Distribution</ecoUD_TriangularDistribution>
+				<ecoUD_UniformDistribution>Uniform Distribution</ecoUD_UniformDistribution>
+	        </options>
+			<linked_type>eco:hasUncertaintyDistribution</linked_type>
+	    </uncertaintyDistribution>
 		<minValue rules="trim|tiny">
 			<label>Unit</label>
 			<type>text</type>

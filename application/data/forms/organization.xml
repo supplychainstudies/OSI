@@ -1,30 +1,76 @@
 <form action="/lca/createpart/organization" name="Organization Description">
 	<orgType>
-		<label>Organization Name</label>
+		<label>Type</label>
 		<type>hidden</type>
 	  	<linked_type>foaf:Organization</linked_type>
 		<optional>no</optional>
 		<multiple>no</multiple>
-	</orgType>			
+	</orgType>	
+	<orgType2>
+		<label>Type</label>
+		<type>hidden</type>
+	  	<linked_type>vcard:Organization</linked_type>
+		<optional>no</optional>
+		<multiple>no</multiple>
+	</orgType2>		
 	<name rules="trim">
 		<label>Organization Name</label>
 		<type>text</type>
-	  	<linked_type>skos:prefLabel</linked_type>
+	  	<linked_type>foaf:name</linked_type>
 		<optional>no</optional>
 		<multiple>no</multiple>
 	</name>
 	<site rules="trim">
 		<label>Website</label>
 		<type>text</type>
-	  	<linked_type>org:hasSite</linked_type>
+	  	<linked_type>foaf:homepage</linked_type>
 		<optional>yes</optional>
 		<multiple>yes</multiple>
 	</site>
-	<classification rules="trim">
-		<label>Classification</label>
-		<type>hidden</type>
-	  	<linked_type>org:classification</linked_type>
-		<optional>no</optional>
-		<multiple>no</multiple>
-	</classification>
+	<address rules="trim">
+		<label>Address</label>
+		<type>text</type>
+	  	<linked_type>vcard:adr</linked_type>
+		<optional>yes</optional>
+		<multiple>yes</multiple>
+	</address>
+	<fieldset name="Telephone" linked_type="vcard:tel">
+		<telType rules="trim">
+			<label>Telephone Type</label>
+			<type>hidden</type>
+		  	<linked_type>rdfs:type</linked_type>
+			<value>vcard:Tel</value>
+			<multiple>no</multiple>
+		</telType>		
+		<phone rules="trim">
+			<label>Telephone</label>
+			<type>text</type>
+		  	<linked_type>rdf:value</linked_type>
+			<optional>yes</optional>
+			<multiple>yes</multiple>
+		</phone>				
+	</fieldset>
+	<fieldset name="Fax" linked_type="vcard:tel">
+		<telType rules="trim">
+			<label>Fax Type</label>
+			<type>hidden</type>
+		  	<linked_type>rdfs:type</linked_type>
+			<value>vcard:Fax</value>
+			<multiple>no</multiple>
+		</telType>		
+		<fax rules="trim">
+			<label>Fax</label>
+			<type>text</type>
+		  	<linked_type>rdf:value</linked_type>
+			<optional>yes</optional>
+			<multiple>yes</multiple>
+		</fax>				
+	</fieldset>
+	<location rules="trim">
+		<label>Location</label>
+		<type>text</type>
+	  	<linked_type>vcard:geo</linked_type>
+		<optional>yes</optional>
+		<multiple>yes</multiple>
+	</location>
 </form>

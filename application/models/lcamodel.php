@@ -3,7 +3,7 @@ class Lcamodel extends FT_Model{
     public function Lcamodel(){
         parent::__construct();
 		$this->load->model(Array('unitmodel','geographymodel','ecomodel','opencycmodel','dbpediamodel'));
-		$this->arc_config['store_name'] = "ECOSPOLDTESTfootprinted";
+		$this->arc_config['store_name'] = "footprinted";
     }
 
 
@@ -61,7 +61,6 @@ class Lcamodel extends FT_Model{
 	public function convertExchanges($dataset){
 			if ($dataset != false) {
 				$converted_dataset = array();
-				var_dump($dataset);
 				foreach($dataset as $key=>$record) {		
 					foreach($record[$this->arc_config['ns']['eco']."hasEffect"] as $_record) {
 						foreach ($_record[$this->arc_config['ns']['rdfs']."type"] as $__record) {
@@ -264,22 +263,55 @@ class Lcamodel extends FT_Model{
 	}
 	
 	public function getLCAsByPublisher($foaf_uri) {
-		$q = "select ?uri ?title where { " . 
-			" ?uri dcterms:publisher '" . $foaf_uri . "' . " . 	
-			" ?uri eco:models ?bnode . " . 
-			" ?bnode rdfs:label ?title . " . 		
+		$q = "select * where { " . 
+			" ?uri dcterms:creator '" . $foaf_uri . "' . " . 	
+			" ?uri rdfs:label ?title . " . 
+			" { ?uri rdfs:type eco:FootprintModel . } UNION { ?uri rdfs:type eco:Model . } UNION { ?uri rdfs:type eco:LCAModel . } " . 		
 			"}" . 
 			"LIMIT 10 ";
-
 		$records = $this->executeQuery($q);	
-
 		if (count($records) != 0) {
 			return $records;
 		} else {
 			return false;
 		}
 	}
-	
+
+	public function getLCAsByCreatorName($name) {
+		$q = "select ?uri where { " . 
+			" ?foaf_uri ?p ?name . " . 		
+			" ?uri dcterms:creator ?foaf_uri . " . 	
+			" ?uri rdfs:label ?title . " . 
+			" { ?uri rdfs:type eco:FootprintModel . } UNION { ?uri rdfs:type eco:Model . } UNION { ?uri rdfs:type eco:LCAModel . } " . 
+			"FILTER regex(?name, '" . $name . "', 'i')" .	
+			"}" . 
+			"LIMIT 10 ";
+		$records = $this->executeQuery($q);	
+		if (count($records) != 0) {
+			return $records;
+		} else {
+			return false;
+		}
+	}
+
+	public function dumptag() {
+		$x = $this->getRecords();
+		foreach ($x as $y) {
+			$triples = array(
+				array(
+					's' => $y['uri'],
+					'p' => 'dcterms:creator',
+					'o' => 'http://footprinted.org/rdfspace/agent/footprinted'
+				),
+				array(
+					's' => $y['uri'],
+					'p' => 'dcterms:created',
+					'o' => date('h:i:s-m:d:Y')
+				)	
+			);	
+			$this->addTriples($triples);	
+		}	
+	}	
 
 	// Get external links for a resource (DBPedia...)
 	public function getSameAs($URI){
@@ -364,7 +396,6 @@ class Lcamodel extends FT_Model{
 						" ?effect_bnode eco:hasTransferable ?transferable . " .	
 						" ?transferable rdfs:label ?name . " .			
 						"}";
-					//var_dump($q);
 					$records = $this->executeQuery($q);
 					if (count($records) > 0) {							
 						return $records;
@@ -590,6 +621,22 @@ class Lcamodel extends FT_Model{
 			}
 		}
 		return $records;
+	}
+	
+	public function blah() {
+		$triples = array(
+			array(
+				's' => 'http://footprinted.org/rdfspace/agent/footprinted',
+				'p' => 'rdfs:type',
+				'o' => 'foaf:Organization'
+			),
+			array(
+				's' => 'http://footprinted.org/rdfspace/agent/footprinted',
+				'p' => 'foaf:name',
+				'o' => 'Footprinted'
+			)		
+		);	
+		$this->addTriples($triples);
 	}
 
 }

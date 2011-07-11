@@ -46,4 +46,5 @@ $route['docs'] = "sitemaps/documentation";
 $route['(:any)([0-9])'] = "lca/view/$1$2";
 $route['(:any).rdf'] = "lca/viewRDF/$1";
 $route['(:any).json'] = "lca/viewJSON/$1";
+$route['(:any)Channel'] = "lca/channel/$1";
 ?>

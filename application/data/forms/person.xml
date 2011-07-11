@@ -6,6 +6,20 @@
 			<value>foaf:Person</value>
 			<multiple>no</multiple>
 		</dataType>		
+		<dataType2 rules="trim">
+			<label>Data Type</label>
+			<type>hidden</type>
+		  	<linked_type>rdfs:type</linked_type>
+			<value>vcard:VCard</value>
+			<multiple>no</multiple>
+		</dataType2>
+		<name rules="trim">
+			<label>Full Name</label>
+			<type>text</type>
+		  	<linked_type>foaf:name</linked_type>
+			<optional>yes</optional>
+			<multiple>no</multiple>
+		</name>
 		<firstName rules="trim">
 			<label>First Name</label>
 			<type>text</type>
@@ -26,7 +40,46 @@
 		  	<linked_type>foaf:mbox_sha1sum</linked_type>
 			<optional>yes</optional>
 			<multiple>no</multiple>
-		</email>	
+		</email>
+		<fieldset name="Telephone" linked_type="vcard:tel">
+			<telType rules="trim">
+				<label>Telephone Type</label>
+				<type>hidden</type>
+			  	<linked_type>rdfs:type</linked_type>
+				<value>vcard:Tel</value>
+				<multiple>no</multiple>
+			</telType>		
+			<phone rules="trim">
+				<label>Telephone</label>
+				<type>text</type>
+			  	<linked_type>rdf:value</linked_type>
+				<optional>yes</optional>
+				<multiple>yes</multiple>
+			</phone>				
+		</fieldset>
+		<fieldset name="Fax" linked_type="vcard:tel">
+			<telType rules="trim">
+				<label>Fax Type</label>
+				<type>hidden</type>
+			  	<linked_type>rdfs:type</linked_type>
+				<value>vcard:Fax</value>
+				<multiple>no</multiple>
+			</telType>		
+			<fax rules="trim">
+				<label>Fax</label>
+				<type>text</type>
+			  	<linked_type>rdf:value</linked_type>
+				<optional>yes</optional>
+				<multiple>yes</multiple>
+			</fax>				
+		</fieldset>	
+		<organization rules="trim|sha1">
+			<label>Organization</label>
+			<type>text</type>
+		  	<linked_type>vcard:org</linked_type>
+			<optional>yes</optional>
+			<multiple>no</multiple>
+		</organization>	
 	    <submit>
 	        <type>submit</type>
 	        <value>Submit</value>
