@@ -30,6 +30,7 @@ class Search extends FT_Controller {
 			$this->db->like('category', $search_terms['category']);
 			$this->data("category", $search_terms['category']);
 			$this->db->order_by("name", "ASC"); 
+			$this->db->where("public",true);
 			$rs = $this->db->get('footprints',100,0);
 			$this->data("set", $rs->result());
 		}
@@ -37,7 +38,8 @@ class Search extends FT_Controller {
 		if (isset($search_terms['ref']) == true) {
 			$this->db->like('ref', $search_terms['ref']);
 			$this->data("category", $search_terms['ref']);
-			$this->db->order_by("name", "ASC"); 
+			$this->db->order_by("name", "ASC");
+			$this->db->where("public",true); 
 			$rs = $this->db->get('footprints');
 			$this->data("set", $rs->result());
 		}
@@ -49,7 +51,8 @@ class Search extends FT_Controller {
 		}
 		if ($keyword != "") {
 			$this->db->like('name', $keyword); 
-			$this->db->order_by("name", "ASC"); 
+			$this->db->order_by("name", "ASC");
+			$this->db->where("public",true); 
 			$rs = $this->db->get('footprints',100,0);
 			$this->data("set", $rs->result());
 		}
