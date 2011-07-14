@@ -2,7 +2,7 @@
 
 class Sandbox extends FT_Controller {
 	
-	function Sandbox() {
+	public function __construct() {
 		parent::__construct();
 		$this->check_if_admin(); 
 		//$this->load->library(Array('formats'));

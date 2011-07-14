@@ -12,7 +12,7 @@
 
 
 class Sources extends SM_Controller {
-	public function Sources() {
+	public function __construct() {
 		parent::SM_Controller();
 		$this->load->model(Array('arcmodel', 'arcremotemodel', 'mysqlmodel'));	
 		$this->load->library(Array('form_extended', 'name_conversion'));

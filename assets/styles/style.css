@@ -13,6 +13,7 @@ h1,h2,h3,h4,h5 {
 a { 
 	color: #29ABE2; 
 	text-decoration:none;
+	cursor: pointer;
 }
 a:hover{
 	color: #29ABE2;
@@ -303,6 +304,7 @@ h1.top {
 	text-align: left;
 	width:980px;
 	margin-top:10px;
+	height: 60px;
 }
 #lca_lite{
 	float:left;
@@ -446,6 +448,7 @@ background: #fff;
 border: 1px solid #ccc; 
 padding:8px;
 font-size:14px;
+width: 150px;
 }
 
 #comment_form textarea {
@@ -454,8 +457,8 @@ background: #fff;
 border: 1px solid #ccc;
 padding:8px;
 font-size:14px;
-width: 275px;
-height: 200px;
+width: 200px;
+height: 100px;
 }
 
 
@@ -528,6 +531,9 @@ label {
 	clear: both;
 }
 
+.comments_container {
+	margin-left: 20px;
+}
 
 /* Footer */
 
@@ -782,7 +788,19 @@ h1.bignr {
 .linked_value {
 	color: #29ABE2;
 }
-
-
+#menu_search {
+	margin-bottom: -10px;
+}
+#menu_search input {
+	width: 150px;
+	height: 22px;
+	font-size: 10pt;
+	margin: 0px;
+	padding: 0px;
+	margin-left: 5px;
+}
+#menu_search .submit {
+	width: 60px;
+}
 	
 }

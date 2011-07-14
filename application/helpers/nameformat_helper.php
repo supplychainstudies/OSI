@@ -89,5 +89,13 @@
 	function toURI($type, $name) {
 		return "http://footprinted.org/rdfspace/" . $type . "/" . slug($name) . rand(999999,10000000);
 	}
+	
+	function isURI($str) {
+		if (strstr($str, "http://") != false) {
+			return true;					
+		} else {
+			return false;
+		}
+	}
 
 ?>

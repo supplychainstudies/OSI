@@ -10,7 +10,7 @@
 
 class About extends FT_Controller {
 	
-	public function About() {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model(Array());
 		$this->load->helper();

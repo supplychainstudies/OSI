@@ -295,14 +295,16 @@ text-transform:uppercase;
 	width:550px;
 	height:60px;
 }
+/* //border-bottom: 1px dotted #45A3D8; */
 #searchform input{
 color: #333;
 text-align: left;
 background: #fff;
 border:0px;
-border-bottom: 1px dotted #45A3D8;
+border: 0px solid #45A3D8; 
 width:120px;
-padding-top:14px;
+padding-top:12px;
+padding-bottom:12px;
 font-size:16px;
 font-size:11px;
 color:#333;

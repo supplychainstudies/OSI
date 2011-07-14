@@ -2,9 +2,14 @@
 	<p class="imge"><a href="/"><img src="http://footprinted.org/assets/images/logobeta.png" alt="footprinted"></a></p>
 </div>
 <div id="menu">
+	<div id="menu_search">
+		<form method="post" action="/search">
+			<input type="text" name="keyword" /><input type="submit" class="submit" value="Search" />
+		</form>
+	</div>
 	<p class="menu">
 	<a href="/about">About </a>| 
-	<a href="/search">Search </a>| 
+	<!--<a href="/search">Search </a>| -->
 	
 <?
 if ($this->session->userdata('id') == false) {

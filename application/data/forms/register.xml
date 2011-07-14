@@ -8,10 +8,14 @@
 	  <label>User Name</label>
       <type>text</type>
     </user_name>
-    <password rules="trim|xss_clean|required">
+    <password rules="trim|xss_clean|required|password_match">
 	  <label>Password</label>
       <type>password</type>
     </password>
+    <password2 rules="trim|xss_clean|required|password_match">
+	  <label>Password (Again)</label>
+      <type>password</type>
+    </password2>
     <email rules="trim|xss_clean|required|email_validation|email_taken">
 	  <label>Email</label>
       <type>text</type>

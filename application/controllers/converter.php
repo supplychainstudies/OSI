@@ -12,11 +12,12 @@
 
 
 class Converter extends FT_Controller {
-	public function Converter() {
+	public function __construct() {
 		parent::__construct();
 		$this->load->library(Array('xml', 'Simplexml', 'form_extended'));
-		$this->load->model(Array('lcamodel','peoplemodel','unitmodel','geographymodel'));		
+		$this->load->model(Array('lcamodel','peoplemodel','unitmodel','geographymodel','searchtablemodel'));		
 	}	
+	var $CI;
 	
 	// This function automatically parses an Ecospold v1 xml file, converts it to ECO and dumps it into the footprinted database. if you want to see the ecospold v1 schema, go to []
 	public function ecospold1auto($file = null) {
@@ -148,9 +149,12 @@ class Converter extends FT_Controller {
 					//var_dump($triples);
 				}
 			}
-			$view_string .= '<a href="/'.str_replace('http://footprinted.org/rdfspace/lca/','',$uris[$key]).'">'.$this->lca_datasets[$key]['process'][0]['name'][0].'</a><br />'.$this->lca_datasets[$key]['process'][0]['description'].'<br /><br />';
-			
+			$this->searchtablemodel->addToSearchTable(str_replace("http://footprinted.org/rdfspace/lca/","", $uris[$key]));
+			$view_string .= '<a href="/'.str_replace('http://footprinted.org/rdfspace/lca/','',$uris[$key]).'">'.$this->lca_datasets[$key]['process'][0]['name'][0].'</a><br />'.$this->lca_datasets[$key]['process'][0]['description'].'<br /><br />';			
 		}
+		
+
+		
 		$this->data("view_string",$view_string);
 		$this->display("Your New LCAs", "view");
 		
@@ -437,16 +441,16 @@ class Converter extends FT_Controller {
 		
 		// Time Period
 		if (isset($process->processInformation->timePeriod->startYear) == true) {
-			$info['beginning'][] = $process->processInformation->timePeriod->startYear;
+			$info['beginning'] = $process->processInformation->timePeriod->startYear;
 		}
 		if (isset($process->processInformation->timePeriod->endYear) == true) {
-			$info['end'][] = $process->processInformation->timePeriod->endYear;
+			$info['end'] = $process->processInformation->timePeriod->endYear;
 		}
 		if (isset($process->processInformation->timePeriod->startDate) == true) {
-			$info['beginning'][] = $process->processInformation->timePeriod->startDate;
+			$info['beginning'] = $process->processInformation->timePeriod->startDate;
 		}
 		if (isset($process->processInformation->timePeriod->endDate) == true) {
-			$info['end'][] = $process->processInformation->timePeriod->endDate;
+			$info['end'] = $process->processInformation->timePeriod->endDate;
 		}
 		return $info;
 	}
@@ -555,16 +559,16 @@ class Converter extends FT_Controller {
 		// Time Span
 		// Time Period
 		if (isset($process->timePeriod->startYear) == true) {
-			$info['beginning'][] = $process->timePeriod->startYear;
+			$info['beginning'] = $process->timePeriod->startYear;
 		}
 		if (isset($process->timePeriod->endYear) == true) {
-			$info['end'][] = $process->timePeriod->endYear;
+			$info['end'] = $process->timePeriod->endYear;
 		}
 		if (isset($process->timePeriod->startDate) == true) {
-			$info['beginning'][] = $process->timePeriod->startDate;
+			$info['beginning'] = $process->timePeriod->startDate;
 		}
 		if (isset($process->timePeriod->endDate) == true) {
-			$info['end'][] = $process->timePeriod->endDate;
+			$info['end'] = $process->timePeriod->endDate;
 		}
 		
 		// Done
@@ -699,12 +703,13 @@ class Converter extends FT_Controller {
 		
 		// Geography
 		if (isset($exchange->{"@attributes"}->location) == true) {
+			$cc = false;
 			//Look up the location by country code
 			if (strlen($exchange->{"@attributes"}->location) == 3) {
 				$cc = $this->geographymodel->getURIbyAlpha3($exchange->{"@attributes"}->location);
 			} elseif (strlen($exchange->{"@attributes"}->location) == 2) {
 				$cc = $this->geographymodel->getURIbyAlpha2($exchange->{"@attributes"}->location);
-			}
+			} 
 			if ($cc != false) {
 				$info['geoLocation'] = $cc;
 			} else {

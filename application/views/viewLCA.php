@@ -183,7 +183,7 @@
 					echo "<p>";
 					foreach ($parts['bibliography'] as $record) {
 						if (isset($record['uri']) == true) {
-							echo "<a href='/search?ref=" . $record['title'] . "' target='_blank'>";
+							echo "<a href='" . $record['uri'] . "' target='_blank'>";
 						}
 						$ref = "";
 						if (isset($record['authors']) == true) {
@@ -191,7 +191,7 @@
 								$ref .= $author['lastName'] . ", " .$author['firstName'] . ". ";
 							}
 						}
-						if (isset($record["date"]) == true) 	{ 	$ref .= "(".substr_replace($record['date'],'', 4).") "; }
+						if (isset($record["date"]) == true) 	{ 	if ($record["date"] != "") {		$ref .= "(".substr_replace($record['date'],'', 4).") "; } }
 						if (isset($record["title"]) == true) 	{	$ref .= $record["title"];	}
 						if (isset($record['uri']) == true) 		{	echo $ref."</a>"; }
 					}
@@ -207,23 +207,55 @@
 				if (isset($parts['sameAs']) == true) {
 					foreach ($parts['sameAs'] as $record) {
 					
-						if (isset($record['dbpedia']) == true) {
+						//if (isset($record['dbpedia']) == true) {
 							//echo '<p><img src="'.$record['img'].'" width="200 px" /></p>';
-							echo '<p>'.$record['description'].'</p>';
-							echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info at Dbpedia:". $record['dbpedia'].'</p></a>';
-						}
+							//echo '<p>'.$record['description'].'</p>';
+						//	echo "<p><a href='". $record['dbpedia']. "' target='_blank'>More info about <em>".$record['title']."</em> at Dbpedia:". $record['dbpedia'].'</p></a>';
+						//}
 						echo "<p><a href='" . $record['uri'] . "' target='_blank'>";
-						echo "Same as: ". $record['title'];
+						echo "Same as: ". $record['label'];
+						echo "</a></p>";
+						if (isset($record['info']) == true) {
+							echo '<p>'.$record['info'].'</p>';
+						}
+						echo "<p>from <a href='".$record['uri']."'>".$record['uri']."</a></p>";
+					}
+				}
+				if (isset($parts['categoryOf']) == true) {
+					foreach ($parts['categoryOf'] as $record) {
+						echo "<p><a href='".$record['uri']."' target='_blank'>";
+						echo "Category of: ". $record['label'];
+						echo "</a></p>";
+					}
+				}
+				
+			
+			?>
+			</div>
+			<div id="lca_search" class="lca">
+			<h2>Find Similar LCAs</h2>
+			<?
+				echo "Find LCAs that are: ";
+				if (isset($parts['sameAs']) == true) {
+					foreach ($parts['sameAs'] as $record) {
+						echo "<p><a href='/search/?sameAs=" . $record['uri'] . "' target='_blank'>";
+						echo "the same subject as ". $record['label'] . "&rsaquo; &rsaquo; ";
 						echo "</a></p>";
 					}
 				}
 				if (isset($parts['categoryOf']) == true) {
 					foreach ($parts['categoryOf'] as $record) {
 						echo "<p><a href='/search/?category=" .  $record['label'] . "' target='_blank'>";
-						echo "Belongs to Category: ". $record['label'];
+						echo "under the category of ". $record['label'] . "&rsaquo; &rsaquo; ";
 						echo "</a></p>";
 					}
 				}
+				if (isset($parts['bibliography']) == true) {
+					echo "<p>From the same reference source as:";
+					foreach ($parts['bibliography'] as $record) {
+							echo "<a href='/search?ref=" . $record['title'] . "' target='_blank'>".	$record['title'] . "&rsaquo; &rsaquo; " . "</a>";
+					}
+				}	
 			?>
 			</div>
 			<? } ?>
@@ -234,16 +266,16 @@
 					echo "<p><a href='/".$URI.".json'>Export in JSON</a></p>";		
 				?>
 				</p>
-				<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
+				
+				<!--<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
 					<img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/cc.svg" height='50px' />
-					<img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/by.svg" height='50px' /> <img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/sa.svg" height='50px'/></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" rel="dct:type">work</span> is licensed under:<br/><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
+					<img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/by.svg" height='50px' /> <img alt="Creative Commons License" style="border-width:0" src="http://mirrors.creativecommons.org/presskit/icons/sa.svg" height='50px'/></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" rel="dct:type">work</span> is licensed under:<br/><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p> -->
 					
 					<?php
 					# Get the actual URL
-						$thispage = "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI'];
+						//$thispage = "http://" . $_SERVER['HTTP_HOST']  . $_SERVER['REQUEST_URI'];
+						//echo '<p>Attribute to:<br/>'.$ref.'<i>via</i><a href="'.$thispage.'">'.$thispage.'</a></p>';
 					?>
-					<p>Attribute to:<br/>
-					<?=$ref?> <i>via</i> <? echo "<a href='".$thispage."'>"; ?> <?=$thispage?></a></p>
 			
 			</div>
 			<div id="lca_share" class="lca">
@@ -276,7 +308,7 @@
 			<h2>Comments</h2>
 			<?
 
-				if(isset($comment) == true) {
+				if(isset($comment_form) == true) {
 
 					include_once('parts/comments.php');
 

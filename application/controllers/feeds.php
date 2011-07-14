@@ -10,7 +10,7 @@
  */
 
 class Feeds extends FT_Controller {
-	public function feeds() {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model(Array('lcamodel'));	
 		$this->load->library(Array('form_extended','SimpleLoginSecure'));

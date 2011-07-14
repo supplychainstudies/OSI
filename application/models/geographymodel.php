@@ -23,6 +23,22 @@ class Geographymodel extends FT_Model{
 		}
 	}
 	
+	
+	public function getName($uri) {
+		// check if this uri is already loaded		
+		$this->isLoaded($uri);
+       $q = "select ?name where { " .
+           " <" . $uri . "> gn:name ?name . " .
+           "}";	
+
+		$results = $this->executeQuery($q);
+		if (count($results) != 0) {
+			return $results[0]['name'];
+		} else {
+			return false;
+		}
+	}
+	
 	public function test($string) {
        $q = "select ?predicate ?subject where { " .
            " ?subject ?predicate '".$string."' . " .    

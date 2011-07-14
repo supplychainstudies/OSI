@@ -12,7 +12,7 @@
 class Lca extends FT_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel'));	
+		$this->load->model(Array('lcamodel', 'geographymodel', 'bibliographymodel','peoplemodel','commentsmodel','ecomodel','searchtablemodel'));	
 		$this->load->library(Array('form_extended', 'xml'));
 		$this->load->helper(Array('nameformat_helper'));
 		$this->load->helper(Array('linkeddata_helper'));
@@ -128,7 +128,7 @@ class Lca extends FT_Controller {
 			$datasets['exchange'][] = array (
 					"direction_" => 'eco_Output',
 					"exchange_" => 'eco_Transfer',
-					"transferable_" => $post_data['productServiceName_'],
+					"name_" => $post_data['productServiceName_'],
 					"quantity_" => $post_data['qrQuantity_'],
 					"unit_" => $post_data['qrUnit_']
 				);
@@ -168,6 +168,11 @@ class Lca extends FT_Controller {
 					'subject' => $model_node,
 					'predicate' => 'dcterms:creator',
 					'object' => $this->session->userdata('foaf')
+				),
+				array(
+					'subject' => $model_node,
+					'predicate' => 'rdfs:label',
+					'object' => $post_data['productServiceName_']
 				),
 				array(
 					'subject' => $model_node,
@@ -231,7 +236,8 @@ class Lca extends FT_Controller {
 				);
 			}
 			$this->lcamodel->addTriples($triples);
-			redirect('/lca/view/'.str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
+				$this->searchtablemodel->addToSearchTable(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
+			redirect('/'.str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 			//$this->view(str_replace("http://footprinted.org/rdfspace/lca/","",$model_node));
 		}else {
 			redirect('/create/start');
@@ -263,7 +269,7 @@ class Lca extends FT_Controller {
 		$rdf = $this->lcamodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
 		header('Content-type: text/xml');
-		var_dump($rdf);
+		echo $rdf;
 	}	
 
 	/***
@@ -282,8 +288,8 @@ class Lca extends FT_Controller {
 		$parts['sameAs'] = $this->lcamodel->convertLinks($this->lcamodel->getSameAs("http://footprinted.org/rdfspace/lca/" . $URI));
 		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
 		header('Content-type: application/json');
-		$this->normalize($parts);
-		var_dump($parts);
+		$parts = $this->normalize($parts);
+		 echo $parts;
 	}
 	public function viewEcospold1($URI = null) {
 		//$parts['uri'] = $URI;
@@ -330,7 +336,6 @@ class Lca extends FT_Controller {
 			}
 		}
 		$this->normalize($parts);
-		
 		$parts['year']= "";
 		foreach ($parts['bibliography'] as $b) { 
 			$parts['year'] = substr_replace($b['date'], '', 4); 
@@ -390,12 +395,12 @@ class Lca extends FT_Controller {
 			$this->data("totalinputland", $totalinputland);
 			$this->data("misctotal", $misctotal);		
 		}	
-		$this->script(Array('comments.js', 'janrain.js'));
-		$comment_data = $this->form_extended->load('comment');
-		$comment = $this->form_extended->build();
+		$this->script(Array('comments.js'));
+		$this->form_extended->load('comment');
+		$comment_form = $this->form_extended->build();
 		$comments = $this->commentsmodel->getComments("http://footprinted.org/osi/rdfspace/lca/".$URI);
 		$this->data("comments", $comments);
-		$this->data("comment", $comment);
+		$this->data("comment_form", $comment_form);
 		$this->display("View " . $parts['quantitativeReference']['amount'] . " " . $parts['quantitativeReference']['unit'] . " of " .  $parts['quantitativeReference']['name'], "viewLCA");		
 	}
 
@@ -524,11 +529,13 @@ class Lca extends FT_Controller {
 		
 		// Check if LCA is private
 		private function isPrivate($URI) {
+			$creator = $this->lcamodel->getCreator("http://footprinted.org/rdfspace/lca/".$URI);
+			var_dump($URI);
 			$this->db->where("uri",$URI);
 			$this->db->where("public",true);
 			$footprint = $this->db->get('footprints',1,0);
-			if(count($footprint->result()) == 0){
-				redirect("/search");
+			if(count($footprint->result()) == 0 && $this->session->userdata('foaf') != $creator){
+				//redirect("/search");
 			}
 		}
 		

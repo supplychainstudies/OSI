@@ -12,17 +12,16 @@
 
 
 class Comments extends FT_Controller {
-	public function Comments() {
-		parent::SM_Controller();
-		$this->load->model(Array('arcmodel'));
-		$this->load->library(Array('name_conversion'));
-		
+	public function __construct() {
+		parent::__construct();
+		$this->load->model(Array('commentsmodel'));
+		$this->load->helper(Array('nameformat_helper'));	
 	}
 	
 	public function post() {
 		$this->check_if_logged_in();
-		$post = $this->name_conversion->toBNode('post');
-		$account = $this->name_conversion->toBNode('account');
+		$post = toBNode('post');
+		$account = toBNode('account');
 		$post_date = date("H:i:s-n:j:Y");
 		$triples = array( 
 			array(
@@ -57,7 +56,7 @@ class Comments extends FT_Controller {
 				"o" => $_REQUEST['author']
 			)
 		);
-		@$records = $this->arcmodel->addTriples($triples);	
+		@$records = $this->commentsmodel->addTriples($triples);	
 		echo json_encode(array("post" => $post, "date" => $post_date));
 	}
 }

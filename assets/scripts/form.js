@@ -300,5 +300,30 @@ $(".email_taken").keyup(function() {
 		      	});
 			}
 	    });
+		$(".password_match").keyup(function() {
+				var field1_name = $(this).attr('name');
+				if (field1_name.substr(field1_name.length-2,2) == "2_") {
+					var field2_name = field1_name.substr(0,field1_name.length-2)+"_";
+				} else {
+					var field2_name = field1_name.substr(0,field1_name.length-1)+"2_";
+				}
+				var val1 = $(this).val();
+				var val2 = $("[name='"+field2_name+"']").val();
+				if (val1 != val2) {
+			            $("[name='"+field1_name +"']").addClass('require');  
+						$("[name='"+field1_name +"']").removeClass('require_ok');   
+						$("[name='"+field2_name +"']").addClass('require');  
+						$("[name='"+field2_name +"']").removeClass('require_ok');
+						$("[name='"+field1_name +"error']").html('Passwords must match');  		
+						$("[name='"+field2_name +"error']").html('Passwords must match'); 	
+				    } else {
+			            $("[name='"+field1_name +"']").removeClass('require');  
+						$("[name='"+field1_name +"']").addClass('require_ok');   
+						$("[name='"+field2_name +"']").removeClass('require');  
+						$("[name='"+field2_name +"']").addClass('require_ok');
+						$("[name='"+field1_name +"error']").html('');
+						$("[name='"+field2_name +"error']").html('');
+				    }
+		    });
 
 

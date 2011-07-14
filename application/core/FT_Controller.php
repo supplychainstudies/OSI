@@ -168,29 +168,9 @@ class FT_Controller extends CI_Controller {
 		}
 		if($this->config->item("deploystatus") == "local") {			
 			$jspath = base_url() . 'assets/scripts/';
-			if($included) {
-				$scriptDisplay .= '<script type="text/javascript" src="'.$jspath.'main.js"></script>';
-			}
 			foreach($this->_scripts as $script) {
 				$scriptDisplay .= '<script type="text/javascript" src="'.$jspath.$script.'"></script>';
-			}		
-			if($included) {			
-				$scriptDisplay .= '<script type="text/javascript" src="'.$jspath.'messagebar.js"></script>';	
-			}		
-		}
-		else {
-			$jspath = 'assets/scripts/';
-				
-			if($included) {	$scriptDisplay .= '<script type="text/javascript" src="'.$minurl.$jspath.'main.js';}
-			else { $scriptDisplay .= '<script type="text/javascript" src="'.$minurl.$jspath.array_shift($this->_scripts); }			
-			
-			foreach($this->_scripts as $script) {
-				$scriptDisplay .= ','.$jspath . $script . '';
-			}		
-			if($included) { $scriptDisplay .= ",".$jspath.'messagebar.js"></script>';} 
-			else { $scriptDisplay .= '"></script>'; }		
-			
-			
+			}			
 		}
 		if($included) {
 			$scriptDisplay .= '<script type="text/javascript">'.$this->generateScriptVariables().'</script>';

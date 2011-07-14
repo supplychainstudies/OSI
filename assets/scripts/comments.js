@@ -14,7 +14,8 @@
 function submitComment() {
 	var str = $(this).attr('name');
 	var uri_value = $("input[name^='" + str.replace('submit','uri') + "']").val();
-	var author_value = $("input[name^='user_id']").val();
+	var author_value = $("input[name^='user_foaf']").val();
+	var author_id = $("input[name^='user_id']").val();
 	var comment_value = $("textarea[name^='" + str.replace('submit','comment') + "']").val();
 	var title_value = $("input[name^='" + str.replace('submit','title') + "']").val();		
 	$.ajax({ 
@@ -25,9 +26,9 @@ function submitComment() {
 			var returned_info = $.parseJSON(data);			
 			var new_post = "<div class=\"comments_container\">\n";
 			new_post += "<p class=\"comments_title\">" + title_value + "</p>\n";
-			new_post += "<p class=\"comments_subtitle\">" + author_value + " - " + returned_info.date + "</p>";
+			new_post += "<p class=\"comments_subtitle\">" + author_id + " - " + returned_info.date + "</p>";
 			new_post += "<p>" + comment_value + "</p>\n";
-			new_post += "<p class=\"comments_footer\"><a href=\"#\" name=\"comment_reply" + returned_info.post + "\" \>Reply</a></p>\n</div><hr />";
+			new_post += "<p class=\"comments_footer\"><a href=\"#comment_reply" + returned_info.post + "\" name=\"comment_reply" + returned_info.post + "\" \>Reply</a></p>\n</div><hr />";
 			if (str == "comment_submit_") {
 				var strstr = $("div[id='comments']").html() + new_post;
 				$("div[id='comments']").html(strstr);	
@@ -42,12 +43,13 @@ function submitComment() {
 function newComment() {
 	var node = $(this).attr('name');
 	node = node.replace("comment_reply", "");
-	var form_text = $("#comment").html();
+	var form_text = $("#div_your_comment").html();
 	form_text = "<div id=\"comment" + node + "\">" + form_text + "</div>";
 	form_text = form_text.replace("comment_submit_", "comment_submit" + node).replace("comment_title_", "comment_title" + node).replace("comment_comment_", "comment_comment" + node).replace("comment_uri_", "comment_uri" + node);
 	$(this).after(form_text);
 	$("input[name='comment_uri" + node + "']").val(node);		
 	$("input[name^='comment_submit_']").click(submitComment);
+	$("input[name^='comment_title" + node + "']").focus();
 }
 
 

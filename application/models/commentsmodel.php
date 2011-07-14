@@ -11,7 +11,10 @@ class Commentsmodel extends FT_Model{
 			"?post dcterms:created ?created . " .
 			"?post sioc:content ?comment . " .
 			"?post sioc:hasCreator ?account . " .			
-			"?account sioc:userAccount ?author . " . 
+			"?account sioc:userAccount ?a_bnode . " . 
+			"?a_bnode foaf:account ?aa_bnode . " .
+			"?aa_bnode foaf:accountName ?author . " .
+			"?aa_bnode foaf:accountServiceHomepage 'http://footprinted.org' . " .
 			"}";
 			//, ?comment, ?title, ?author, ?created	
 		$records = $this->executeQuery($q);	

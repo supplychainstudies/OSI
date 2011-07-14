@@ -12,7 +12,7 @@
  
  
 class People extends FT_Controller {
-    public function People() {
+    public function __construct() {
         parent::__construct();
         $this->load->model(Array('peoplemodel')); 
         $this->load->library(Array('form_extended','session'));

@@ -12,7 +12,7 @@
 
 
 class Bibliography extends FT_Controller {
-	public function Bibliography() {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model(Array('bibliographymodel'));	
 		$this->load->library(Array('form_extended'));

@@ -12,7 +12,7 @@
 
 
 class Create extends FT_Controller {
-	public function Create() {
+	public function __construct() {
 		parent::__construct();
 		$this->check_if_logged_in();
 		$this->load->model(Array('unitmodel','ecomodel'));	

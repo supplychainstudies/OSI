@@ -11,7 +11,7 @@
 
 
 class API extends FT_Controller {
-	public function API() {
+	public function __construct() {
 		parent::__construct();
 	}
 	public $URI;

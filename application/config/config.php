@@ -233,7 +233,7 @@ $config['encryption_key'] = "1hy2ra3X82sa4s5qu6as7hq8uz9Bw0k0";
 */
 
 $config['sess_cookie_name']     = 'footprinted';
-$config['sess_expiration']      = 7200;
+$config['sess_expiration']      = 0;
 
 // true is better for security reasons
 $config['sess_encrypt_cookie']  = TRUE;

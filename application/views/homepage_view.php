@@ -24,9 +24,9 @@
 						
 						<div id="lca_title_lite">
 								<h1>
+								<?	echo '<a href="/'.$parts->uri.'">'; ?>
 								1 
 								<?= $parts->unit ?> of
-								<?	echo '<a href="/'.$parts->uri.'">'; ?>
 								<?= $parts->name ?></a></h1>
 								<?
 									if (isset($parts->category) == true) {

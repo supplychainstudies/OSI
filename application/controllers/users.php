@@ -16,9 +16,9 @@ class Users extends FT_Controller {
 	var $openid_table = 'users_openids';
 	var $foaf_table = 'users_foaf';
 		
-	public function Users() {
+	public function __construct() {
 		parent::__construct();
-		$this->load->model(Array('usersmodel','lcamodel'));	
+		$this->load->model(Array('usersmodel','lcamodel','peoplemodel'));	
 		$this->lang->load('openid', 'english');
 	    $this->load->library(Array('openid','form_extended', 'form_validation', 'SimpleLoginSecure', 'recaptcha'));
 	    $this->load->helper('url');
@@ -26,11 +26,12 @@ class Users extends FT_Controller {
 	}
 	
 	public function index() {
+		$this->setLastPage();
+		$refer = $this->getNextPage();
 		// Step 1: Find out if someone is already logged in
 			// If so, go to dashboard
-			//var_dump($_POST);
 		if($this->session->userdata('id') == true) {
-			redirect('/lca/featured');
+			redirect($refer);
 		// If not logged in, figure out whether there is post info from janrain
 		} else {
 			// If there is post info from janrain, figure out whether this person is already in the system
@@ -40,7 +41,7 @@ class Users extends FT_Controller {
 					$auth_info = $this->janrainAuthInfo();
 					if ($this->simpleloginsecure->openID($auth_info['profile']['identifier']) != false) {
 						$this->session->set_userdata('id', $this->simpleloginsecure->openID($auth_info['profile']['identifier']));
-						redirect('/lca/featured');
+						redirect($refer);
 					// If they are not in the system yet, pass them to the register form
 					} else {
 						$this->register($auth_info);
@@ -65,31 +66,33 @@ class Users extends FT_Controller {
 				redirect('users/register');
 			}
 		} // end of not logged in
-	}
-/*	
-	public function loginerror() {
-		var_dump($_SERVER['HTTP_REFERER']);
-		$data = $this->form_extended->load('login'); 
-		$the_form = "<div<p>Hm, your user name or password doesn't seem to be right. Want to try again?</p></div>";
-		$the_form .= $this->form_extended->build();
-		$the_form .= "<div><p> Or <a href=\"users/register\">Register</a> with us.</p></div>";
-		$this->script(Array('form.js','register.js'));
-		$this->style(Array('style.css','form.css'));
-		$this->data("form_string", $the_form);
-		$this->display("Form", "form_view");
-	}
-*/	
-	public function login() { 	
+	}	
+	
+	public function setLastPage() {
 		if (isset($_SERVER['HTTP_REFERER']) == true) { 
 			if (strpos($_SERVER['HTTP_REFERER'], base_url()."users") === false) {
 				$this->session->set_userdata(array('last_page' => $_SERVER['HTTP_REFERER']));
 			}
 		}
+	}
+	
+	public function getNextPage() {
 		if ($this->session->userdata('last_page')) {
-			$refer = $this->session->userdata('last_page');
+			return $this->session->userdata('last_page');
 		} else {
-			$refer = base_url()."lca/featured";
+			return base_url()."users/dashboard";
 		}
+	}
+	
+	public function unsetLastPage() {
+		if ($this->session->userdata('last_page')) {
+			return $this->session->unset_userdata('last_page');
+		} 
+	}
+	
+	public function login() { 	
+		$this->setLastPage();
+		$refer = $this->getNextPage();
 		if (isset($_POST['open_id']) == true || isset($_POST['open_id_']) == true) {
 			if (isset($_POST['open_id_']) == true) {
 				$_POST['open_id'] = $_POST['open_id_'];
@@ -176,6 +179,7 @@ class Users extends FT_Controller {
 	}
 	
 	public function register($auth_info = false) {
+		$this->setLastPage();
 		if (isset($this->pass_data) == false) {
 			$this->pass_data = array (); }
 		if ($auth_info != false) {
@@ -265,6 +269,7 @@ class Users extends FT_Controller {
 
 	
 	public function registered() {
+		$refer = $this->getNextPage();
 		// Note: Most validation had already been done using jquery
 		// Step 1: Check recaptcha		
 		if ($_POST) {
@@ -310,7 +315,31 @@ class Users extends FT_Controller {
 							}
 					}		
 					if ($_POST['foaf_'] == "") {
-						$_POST['foaf_'] = toURI("people",$_POST['user_name_']);				
+						$_POST['foaf_'] = toURI("people",$_POST['user_name_']);	
+						$node = toBNode("account");
+						$triples = array (
+								array (
+									's' => $_POST['foaf_'],
+									'p' => "rdfs:type",
+									'o' => "foaf:Person"
+									),
+								array (
+									's' => $_POST['foaf_'],
+									'p' => "foaf:account",
+									'o' => $node
+									),
+								array (
+									's' => $node,
+									'p' => "foaf:accountName",
+									'o' => $_POST['user_name_']
+									),
+								array (
+									's' => $node,
+									'p' => "foaf:accountServiceHomepage",
+									'o' => "http://footprinted.org"
+									),
+							);
+						$this->peoplemodel->addTriples($triples);		
 					}
 					$data = array(
 								'user_id' => $id,
@@ -379,6 +408,7 @@ class Users extends FT_Controller {
 	}
 	// Edit yourprofile                            
 	public function editprofile(){
+		var_dump($this->session->userdata('id'));
 		if($this->session->userdata('id') == true) {
 		$id = $this->session->userdata('id');
 		$this->db->where('user_name',$id);
@@ -387,6 +417,8 @@ class Users extends FT_Controller {
 		// Send data to the view
 		$this->data("set", $rs->result());
 		$this->display("Admin","admin/edit_profile");
+		} else {
+			redirect("/users/login");
 		}
 	}
 	// Show public profile                            
@@ -445,7 +477,31 @@ class Users extends FT_Controller {
 	
 	
 	
-	
+	public function addStuff() {
+		$query = $this->db->query('SELECT users_foaf.foaf_uri as foaf_uri, users.user_name as user_name FROM users_foaf, users where users.user_id = users_foaf.user_id');
+		foreach ($query->result() as $row) {
+			$node = toBNode("account");
+			$triples = array (
+					array (
+						's' => $row->foaf_uri,
+						'p' => "foaf:account",
+						'o' => $node
+						),
+					array (
+						's' => $node,
+						'p' => "foaf:accountName",
+						'o' => $row->user_name
+						),
+					array (
+						's' => $node,
+						'p' => "foaf:accountServiceHomepage",
+						'o' => "http://footprinted.org"
+						),
+				);
+				var_dump($triples);
+				$this->peoplemodel->addTriples($triples);
+		}
+	}
 	
 	
 }

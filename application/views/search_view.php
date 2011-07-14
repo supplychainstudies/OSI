@@ -20,8 +20,8 @@
    	
 
 	<form action="/search/" method="post">
-	<div id="searchinput"><input type="text" name="keyword" /></div>
-	<div id="searchform"><input type="submit" value="Search by keyword" /></div>
+	<div id="searchinput"><input type="text" name="keyword" tabindex="5" /></div>
+	<div id="searchform"><input type="submit" value="Search by keyword &rsaquo; &rsaquo; " tabindex="6" /></div>
 	</form>
 	<?
 		if (isset($menu) == true) {
@@ -50,23 +50,26 @@
 				?>
 				<?	
 					if (isset($set) == true) {
-						
 						if (count($set) > 0) {
 						foreach ($set as $row) {
 							// Remove the footprinted part of the url
 							//$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
 							$impacts = "";
-							if($row->co2e){$impacts .= "CO2e";}
-							if($row->water){$impacts .= " Water";}
-							if($row->waste){$impacts .= " Waste";}
-							if($row->energy){$impacts .= " Energy";}
-							if($row->year == 0){$year="";}else{$year=$row->year;}
-							echo '<div class="medium grey square" id="'.$row->uri.'">
-							<div class="squareplace"><p>'.$row->geography.'</p></div>
+							if($row->co2e){$impacts .= "CO2e | ";}
+							if($row->water){$impacts .= " Water | ";}
+							if($row->waste){$impacts .= " Waste | ";}
+							if($row->energy){$impacts .= " Energy | ";}
+							if ($impacts != "") {
+								$impacts = substr($impacts, 0, -2);
+							}
+							if($row->year == 0){$year="-";}else{$year=$row->year;}
+							if($row->country == ""){$geo="-";}else{$geo=$row->country;}
+							echo '<a href="/'.$row->uri .'"><div class="medium grey square" id="'.$row->uri.'">
+							<div class="squareplace"><p>'.$geo.'</p></div>
 							<div class="squareyear"><p>'.$year.'</p></div>
-							<div class="squaretext"><p><a href="/'.$row->uri .'">'.$row->name.'</a></p></div>
+							<div class="squaretext"><p>'.$row->name.'</p></div>
 							<div class="squareimpacts"><p>'.$impacts.'</p></div>
-							</div>';
+							</div></a>';
 						}
 					} else {
 						echo "No results found.";
