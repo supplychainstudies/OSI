@@ -263,8 +263,8 @@ class Lca extends FT_Controller {
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
 		header('Content-type: text/xml');
 		$this->normalize($parts);
-		var_dump($parts);
-	}	
+	}
+		
 	public function viewRDF($URI = null) {
 		$rdf = $this->lcamodel->getRDF("http://footprinted.org/rdfspace/lca/".$URI);
 		header("Content-Disposition: attachment; filename=\"$URI.rdf\"");
@@ -307,7 +307,6 @@ class Lca extends FT_Controller {
 		$parts['categoryOf'] = $this->lcamodel->getCategories("http://footprinted.org/rdfspace/lca/" . $URI);
 		header('Content-type: application/json');
 		$this->normalize($parts);
-		var_dump($parts);
 	}		
 
 	/***
@@ -530,7 +529,6 @@ class Lca extends FT_Controller {
 		// Check if LCA is private
 		private function isPrivate($URI) {
 			$creator = $this->lcamodel->getCreator("http://footprinted.org/rdfspace/lca/".$URI);
-			var_dump($URI);
 			$this->db->where("uri",$URI);
 			$this->db->where("public",true);
 			$footprint = $this->db->get('footprints',1,0);
