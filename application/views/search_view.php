@@ -8,7 +8,7 @@
 	
 	<?=$styles;?>
 	<?=$headerDisplay;?>
-
+	<?=$scripts;?>
 
 
 </head>
@@ -20,10 +20,28 @@
    	
 
 	<form action="/search/" method="post">
-	<div id="searchinput"><input type="text" name="keyword" tabindex="5" /></div>
-	<div id="searchform"><input type="submit" value="Search by keyword &rsaquo; &rsaquo; " tabindex="6" /></div>
+	<div id="search">
+	<!--<div id="searchinput"><input type="text" name="keyword" tabindex="5" /></div>
+	<div id="searchform"><input type="submit" value="Search by keyword &rsaquo; &rsaquo; " tabindex="6" /></div>-->
+	<div><label>Keyword</label> <input type="text" name="keyword" tabindex="5" /></div>
+	<div><label>Year Interval</label> <input type="text" name="startYear" class="tiny" tabindex="5" /> <input type="text" name="endYear" class="tiny" tabindex="5" /><div>
+	<div><label>Country</label> <input type="text" name="country" tabindex="5" /> </div>
+	<div><label>Category</label> 
+	<input type="hidden" name="category" id="category" tabindex="5" /> 
+	<?
+		if (isset($menu) == true) {
+			//echo "<p>Explore by categories: ";
+			foreach ($menu as $menu_item) {
+				echo '<a href="#category" id="'.$menu_item['uri'].'" class="cat">'.$menu_item['label'].'</a> / ';
+			}
+			echo "</p>";
+		}
+	?>
+	<input type="submit" value="Search &rsaquo; &rsaquo; " tabindex="6" /></div>
+	</div>
 	</form>
 	<?
+		unset($menu);
 		if (isset($menu) == true) {
 			echo "<p>Explore by categories: ";
 			foreach ($menu as $menu_item) {
@@ -52,8 +70,6 @@
 					if (isset($set) == true) {
 						if (count($set) > 0) {
 						foreach ($set as $row) {
-							// Remove the footprinted part of the url
-							//$myString = str_replace ("http://footprinted.org/rdfspace/lca/", "", $row['uri']);
 							$impacts = "";
 							if($row->co2e){$impacts .= "CO2e | ";}
 							if($row->water){$impacts .= " Water | ";}

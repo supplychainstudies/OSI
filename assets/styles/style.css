@@ -804,3 +804,16 @@ h1.bignr {
 }
 	
 }
+
+.chosen_category {
+	color: #fff000;
+}
+
+#search .tiny {
+	width: 100px;
+}
+
+#search input {
+	height: 30px;
+	font-size: 12px;
+}

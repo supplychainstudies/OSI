@@ -22,6 +22,8 @@ class Search extends FT_Controller {
 	- ?keyword= free text search in the name
 	*/
 	public function index(){
+		
+		/*
 		// Get params
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
 		$search_terms = $_GET;
@@ -56,6 +58,68 @@ class Search extends FT_Controller {
 			$rs = $this->db->get('footprints',100,0);
 			$this->data("set", $rs->result());
 		}
+		*/	
+		if ($_GET) {
+			parse_str($_SERVER['QUERY_STRING'],$_GET);
+			$search_terms = $_GET;
+		}
+		if ($_POST) {
+			$search_terms = $_POST;
+		}
+		$do_search = false;
+		// Category search
+		if (isset($search_terms['category']) == true) {
+			if ($search_terms['category'] != "") {
+				$this->db->like('category', $search_terms['category']);
+				$this->data("category", $search_terms['category']);
+				$do_search = true;
+			}
+		}
+		// Country search
+		if (isset($search_terms['country']) == true) {
+			if ($search_terms['country'] != "") {
+				$this->db->like('country', $search_terms['country']);
+				$this->data("category", $search_terms['country']);
+				$do_search = true;
+			}
+		}
+		// Reference search (dataset ref)
+		if (isset($search_terms['ref']) == true) {
+			if ($search_terms['ref'] != "") {
+				$this->db->like('ref', $search_terms['ref']);
+				$this->data("category", $search_terms['ref']);
+				$do_search = true;
+			}
+		}
+		// Keyword search
+		if (isset($search_terms["keyword"]) == true){
+			if ($search_terms['keyword'] != "") {
+				$this->db->like('name', $search_terms['keyword']);
+				$this->data("category", $search_terms['keyword']);
+				$this->data("search_term", $search_terms['keyword']);
+				$do_search = true;
+			}
+		}
+		if (isset($search_terms["startYear"]) == true){
+			if ($search_terms['startYear'] != "") {
+				$this->db->where('year > ', $search_terms['startYear']);
+				$this->data("category", $search_terms['startYear']);
+				$do_search = true;
+			}
+		}
+		if (isset($search_terms["endYear"]) == true){
+			if ($search_terms['endYear'] != "") {
+				$this->db->where('year < ', $search_terms['endYear']);
+				$this->data("category", $search_terms['endYear']);
+				$do_search = true;
+			}
+		}
+		if ($do_search == true) {
+			$this->db->order_by("name", "ASC"); 
+			$this->db->where("public",true);
+			$rs = $this->db->get('footprints',100,0);
+			$this->data("set", $rs->result());
+		}
 		// Categories array for quick search menu 
 		$categories = array(
 			array("uri" => "chemical", "label" => "chemical compounds"),
@@ -67,7 +131,7 @@ class Search extends FT_Controller {
 			array("uri"=>"process",	"label"=> "transformation processes"),
 			array("uri"=>"electricity","label"=> "electricity"));
 		// Call the view
-		$this->data("search_term", $keyword);
+		$this->script(Array('search.js'));
 		$this->data("menu", $categories);
 		$this->display("Search","search_view");
 	}
