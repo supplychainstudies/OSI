@@ -2,7 +2,7 @@
 <?=$metaDisplay;?>
 <html>
 <head>
-<title>Footprinted: Free and open environmental impact data.</title>
+<title>Footprinted: Free and open life cycle assessment and carbon footprinting data.</title>
 	
 	<?=$styles;?>
 	<?=$headerDisplay;?>

@@ -9,11 +9,39 @@
 		</options>
 		<linked_type>rdfs:type</linked_type>
 	</modelType>
+	<includesInfrastructureEffects rules="trim">
+		<label>Includes Infrastructure Effects?</label>
+		<options>
+			<yes>Yes<yes>
+			<no>No</no>
+		</options>
+	  	<linked_type>eco:includesInfrastructureEffects</linked_type>
+	</includesInfrastructureEffects>	
 	<name rules="trim">
 		<label>Name</label>
 		<type>text</type>
 	  	<linked_type>rdfs:label</linked_type>
 	</name>		
+	<creator rules="trim">
+		<label>Creator</label>
+		<type>hidden</type>
+	  	<linked_type>dcterms:creator</linked_type>
+	</creator>
+	<created rules="trim">
+		<label>Created</label>
+		<type>hidden</type>
+	  	<linked_type>dcterms:created</linked_type>
+	</created>
+	<majorVersion rules="trim|small">
+		<label>Major Version Number</label>
+		<type>text</type>
+	  	<linked_type>eco:hasMajorVersionNumber</linked_type>
+	</majorVersion>
+	<minorVersion rules="trim|small">
+		<label>Minor Version Number</label>
+		<type>text</type>
+	  	<linked_type>eco:hasMinorVersionNumber</linked_type>
+	</minorVersion>
 	<dataSource rules="trim">
 		<label>Data Source</label>
 		<type>text</type>

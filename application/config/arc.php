@@ -67,7 +67,8 @@ $config['arc_info']['ns'] = array(
 'time' => 'http://www.w3.org/TR/owl-time/',
 'nace2' => 'http://ec.europa.eu/eurostat/ramon/rdfdata/nace_r2/',
 'nace' => 'http://ec.europa.eu/eurostat/ramon/ontologies/nace.rdf#',
-'vcard' => 'http://www.w3.org/2006/vcard/ns#'
+'vcard' => 'http://www.w3.org/2006/vcard/ns#',
+'copyr' => 'http://rhizomik.net/ontologies/2009/09/copyrightonto.owl'
 );		    
 $config['arc_info']['endpoint_features'] = array(
     'select', 'construct', 'ask', 'describe', // allow read

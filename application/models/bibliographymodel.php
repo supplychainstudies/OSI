@@ -4,6 +4,21 @@ class Bibliographymodel extends FT_Model{
         parent::__construct();
     }
 
+
+	public function getRefsAPA(){
+		$q = "select * where { " .
+				"?s rdfs:type bibo:Document . " . 
+				"?s ?p ?o . " . 
+		"} ";
+		$results = $this->executeQuery($q);
+		var_dump($results);
+		$APA = array();
+		foreach ($results as $result) {
+			$APA[] = $this->cite_APA($this->convertBibliography($results));
+		}
+		return $APA;
+	}
+
 	public function convertBibliography($dataset){
 		$converted_dataset = array();
 		foreach ($dataset as $key=>$record) {
@@ -30,14 +45,35 @@ class Bibliographymodel extends FT_Model{
 			} elseif (isset($record[$this->arc_config['ns']['dcterms']."creator"]) == true)  {
 				foreach($record[$this->arc_config['ns']['dcterms']."creator"] as $author_uri) {
 					$person = $this->getTriples($author_uri);
-					foreach ($person[$this->arc_config['ns']['foaf'].'firstName'] as $firstName) {
-						$person_array['firstName'] = $firstName;
-					} 
-					foreach ($person[$this->arc_config['ns']['foaf'].'lastName'] as $lastName) {
-						$person_array['lastName'] = $lastName;
+					if (isset($person[$this->arc_config['ns']['foaf'].'firstName']) == true) {
+						foreach ($person[$this->arc_config['ns']['foaf'].'firstName'] as $firstName) {
+							$person_array['firstName'] = $firstName;
+						} 
+						foreach ($person[$this->arc_config['ns']['foaf'].'lastName'] as $lastName) {
+							$person_array['lastName'] = $lastName;
+						}
+					}
+					if (isset($person[$this->arc_config['ns']['foaf'].'name']) == true) {
+						foreach ($person[$this->arc_config['ns']['foaf'].'name'] as $name) {
+							$person_array['name'] = $name;
+						}						
 					}
 					$converted_dataset[$key]['authors'][] = $person_array;						
 				}
+			}
+			if (isset($record[$this->arc_config['ns']['bibo']."issue"]) == true) {
+				foreach($record[$this->arc_config['ns']['bibo']."issue"] as $uri) {
+					$converted_dataset[$key]['issue'] = $uri;
+				}
+			} else {
+				$converted_dataset[$key]['issue'] = "";
+			}
+			if (isset($record[$this->arc_config['ns']['bibo']."volume"]) == true) {
+				foreach($record[$this->arc_config['ns']['bibo']."volume"] as $uri) {
+					$converted_dataset[$key]['volume'] = $uri;
+				}
+			} else {
+				$converted_dataset[$key]['volume'] = "";
 			}
 			if (isset($record[$this->arc_config['ns']['bibo']."uri"]) == true) {
 				foreach($record[$this->arc_config['ns']['bibo']."uri"] as $uri) {
@@ -85,7 +121,12 @@ class Bibliographymodel extends FT_Model{
 			$cite_string = "";
 			if (isset($dataset['authors']) == true) {
 				foreach ($dataset['authors'] as $author) {
-					$cite_string .= $author['lastName'].", ". substr($author['firstName'], 0, 1)."., ";
+					if (isset($author['lastName']) == true) {
+						$cite_string .= $author['lastName'].", ". substr($author['firstName'], 0, 1)."., ";
+					}
+					if (isset($author['name']) == true) {
+						$cite_string .= $author['name']."., ";
+					}
 				}
 				$cite_string = substr(trim($cite_string),0,strlen($cite_string)-1);
 			}
@@ -116,47 +157,21 @@ class Bibliographymodel extends FT_Model{
 			if (isset($dataset['doi']) == true) {
 				$cite_string .= trim($dataset['doi']);			
 			}	
-			/*
 			if (isset($dataset['uri']) == true) {
+				if (is_array($dataset['uri']) == false) {
+					$dataset['uri'] = array($dataset['uri']);
+				}
 				foreach ($dataset['uri'] as $uri) {
-					$cite_string .= ", from ".trim($uri);
+					$cite_string .= ", Retrieved from ".trim($uri);
 				}			
-			}*/
+			}
 			$refs[] = $cite_string;
 		}	
 		return $refs;
 	}
 	/* 
 	
-	
-	
-	
-	
-	
-	Examples:
 
-	Articles in journals, magazines, and newspapers
-
-	References to periodical articles must include the following elements: author(s), date of publication, article title, journal title, volume number, issue number (if applicable), and page numbers.
-
-	Journal article, one author, accessed online
-
-	Ku, G. (2008). Learning to de-escalate: The effects of regret in escalation of commitment. Organizational Behavior and Human Decision Processes, 105(2), 221-232. doi:10.1016/j.obhdp.2007.08.002
-
-
-	Journal article, two authors, accessed online
-
-	Sanchez, D., & King-Toler, E. (2007). Addressing disparities consultation and outreach strategies for university settings. Consulting Psychology Journal: Practice and Research, 59(4), 286-295. doi:10.1037/1065- 9293.59.4.286
-
-
-	Journal article, more than two authors, accessed online
-
-	Van Vugt, M., Hogan, R., & Kaiser, R. B. (2008). Leadership, followership, and evolution: Some lessons from the past. American Psychologist, 63(3), 182-196. doi:10.1037/0003-066X.63.3.182
-
-
-	Article from an Internet-only journal
-
-	Hirtle, P. B. (2008, July-August). Copyright renewal, copyright restoration, and the difficulty of determining copyright status. D-Lib Magazine, 14(7/8). doi:10.1045/july2008-hirtle
 
 
 	Journal article from a subscription database (no DOI)

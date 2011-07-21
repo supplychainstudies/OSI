@@ -26,7 +26,7 @@
 	        <type>dropdown</type>
 	        <options>
 				<ecoUD_LogNormalDistribution>Log Normal Distribution</ecoUD_LogNormalDistribution>
-				<ecoUD_NormalDistribution>Normal Distrubition</ecoUD_NormalDistribution>
+				<ecoUD_NormalDistribution>Normal Distribution</ecoUD_NormalDistribution>
 				<ecoUD_TriangularDistribution>Triangular Distribution</ecoUD_TriangularDistribution>
 				<ecoUD_UniformDistribution>Uniform Distribution</ecoUD_UniformDistribution>
 	        </options>

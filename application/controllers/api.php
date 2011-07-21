@@ -32,9 +32,11 @@ class API extends FT_Controller {
 		$name = null;
 		// Check API key
 		$key = "";
+
 		if (isset($search_terms['key']) == true) { $key = $search_terms['key'];}
-		$this->checkApiKey($key);
-		
+		if ($_SERVER['HTTP_REFERER'] != "http://sourcemap.com") {
+			$this->checkApiKey($key);
+		}
 		if (isset($search_terms['limit']) == true) { $limit = $search_terms['limit'];}
 		if (isset($search_terms['offset']) == true) { $offset = $search_terms['offset'];	}
 		if (isset($search_terms['name']) == true) {	$name = $search_terms['name'];}	

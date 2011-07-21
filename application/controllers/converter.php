@@ -42,9 +42,9 @@ class Converter extends FT_Controller {
 				$this->lca_datasets[$key]['process'] = array();
 				$this->lca_datasets[$key]['bibliography'] = array();
 				$this->lca_datasets[$key]['exchange'] = array();
-				$lang = array();
-				$lang[0] = $dataset->metaInformation->processInformation->dataSetInformation->{"@attributes"}->languageCode;
-				$lang[1] = $dataset->metaInformation->processInformation->dataSetInformation->{"@attributes"}->localLanguageCode;				
+				$this->lang = array();
+				$this->lang[0] = "@" . $dataset->metaInformation->processInformation->dataSetInformation->{"@attributes"}->languageCode;
+				$this->lang[1] = "@" .  $dataset->metaInformation->processInformation->dataSetInformation->{"@attributes"}->localLanguageCode;				
 			
 				foreach($dataset->metaInformation->administrativeInformation->person as $person) {
 					if (isset($person->{"@attributes"}) == true) {
@@ -105,9 +105,21 @@ class Converter extends FT_Controller {
 				}				
 				$exchanges = array();
 				foreach($dataset->flowData->exchange as $exchange) {
-					if (count($this->ecospold1Exchange($exchange)) != 0) {				
-						$this->lca_datasets[$key]['exchange'][] = $this->ecospold1Exchange($exchange);
+					$_exchange = $this->ecospold1Exchange($exchange);
+					if (count($_exchange) != 0) {				
+						$this->lca_datasets[$key]['exchange'][] = $_exchange;
 					}				
+				}
+				if (isset($dataset->flowData->allocation) == true) {
+					foreach($dataset->flowData->allocation as $allocation) {
+						$_allocation = $this->ecospold1Allocation($allocation);
+						if (count($_allocation) != 0) {				
+							$this->lca_datasets[$key]['allocation'][0][] = $_allocation;
+						}				
+					}
+				}		
+				if(isset($dataset->flowData->allocation->{"@attributes"}->allocationMethod) == true) {
+					$this->lca_datasets[$key]['allocation'][0]['allocationMethod'] = $dataset->flowData->allocation->{"@attributes"}->allocationMethod;
 				}
 				if (isset($this->lca_datasets[$key]['process'][0]['name'][0]) == true) {
 					$uris[] = toURI("lca", $this->lca_datasets[$key]['process'][0]['name'][0]);
@@ -145,12 +157,12 @@ class Converter extends FT_Controller {
 					} else {
 						$triples = $this->form_extended->build_group_triples($uri,$fixed_instance,$structure);
 					}
-					$this->lcamodel->addTriples($triples);
 					//var_dump($triples);
+					$this->lcamodel->addTriples($triples);
 				}
 			}
 			$this->searchtablemodel->addToSearchTable(str_replace("http://footprinted.org/rdfspace/lca/","", $uris[$key]));
-			$view_string .= '<a href="/'.str_replace('http://footprinted.org/rdfspace/lca/','',$uris[$key]).'">'.$this->lca_datasets[$key]['process'][0]['name'][0].'</a><br />'.$this->lca_datasets[$key]['process'][0]['description'].'<br /><br />';			
+			$view_string .= '<a href="/'.str_replace('http://footprinted.org/rdfspace/lca/','',$uris[$key]).'">'.$this->lca_datasets[$key]['process'][0]['name'][0].'</a><br />'.$this->lca_datasets[$key]['process'][0]['description'][0].'<br /><br />';			
 		}
 		
 
@@ -245,14 +257,25 @@ class Converter extends FT_Controller {
 	*/
 	private function ecospold1ImpactAssessment ($ia) {
 		if(isset($ia->processInformation->referenceFunction->{"@attributes"}->category) == true) {
-			$info['impactAssessmentMethod'] = $ia->processInformation->referenceFunction->{"@attributes"}->category;
+			$info['impactAssessmentMethod'] = $ia->processInformation->referenceFunction->{"@attributes"}->category.$this->lang[0];
 		}		
 		if(isset($ia->processInformation->referenceFunction->{"@attributes"}->subCategory) == true) {
-			$info['impactCategory'] = $ia->processInformation->referenceFunction->{"@attributes"}->subCategory;
+			$info['impactCategory'] = $ia->processInformation->referenceFunction->{"@attributes"}->subCategory.$this->lang[0];
 		}
+		if(isset($ia->processInformation->referenceFunction->{"@attributes"}->localCategory) == true) {
+			$info['impactAssessmentMethod'] = $ia->processInformation->referenceFunction->{"@attributes"}->localCategory.$this->lang[1];
+		}		
+		if(isset($ia->processInformation->referenceFunction->{"@attributes"}->localSubCategory) == true) {
+			$info['impactCategory'] = $ia->processInformation->referenceFunction->{"@attributes"}->localSubCategory.$this->lang[1];
+		}	
+		
 		if(isset($ia->processInformation->referenceFunction->{"@attributes"}->name) == true) {
-			$info['impactCategoryIndicator'] = $ia->processInformation->referenceFunction->{"@attributes"}->name;
+			$info['impactCategoryIndicator'] = $ia->processInformation->referenceFunction->{"@attributes"}->name.$this->lang[0];
 		}
+		if(isset($ia->processInformation->referenceFunction->{"@attributes"}->localName) == true) {
+			$info['impactCategoryIndicator'] = $ia->processInformation->referenceFunction->{"@attributes"}->localName.$this->lang[1];
+		}
+		
 		if(isset($ia->processInformation->referenceFunction->{"@attributes"}->amount) == true) {
 			$info['quantity'] = $ia->processInformation->referenceFunction->{"@attributes"}->amount;
 		}
@@ -291,7 +314,7 @@ class Converter extends FT_Controller {
 		if (isset($source->{"@attributes"}->nameOfEditors) == true) {
 			$editors = explode(",",$source['@attributes->editors']);
 			foreach ($editors as $editor) {
-				$_editor = $this->ecospold1Person((object)array('name'=>trim($editor)));
+				$_editor = $this->ecospold1Agent((object)array('name'=>trim($editor)));
 				if (isset($_editor['local_uri']) == true) {
 					$info['editor'][] = $_editor['local_uri'];
 					$info['pass_authors'][] = $_editor;
@@ -316,38 +339,29 @@ class Converter extends FT_Controller {
 			$info['comment'] = $source->{"@attributes"}->text;
 		}
 		if (isset($source->{"@attributes"}->firstAuthor) == true) {
-			if (count(explode(" ",$source->{"@attributes"}->firstAuthor)) == 1 || count(explode(" ",$source->{"@attributes"}->firstAuthor)) > 3) {
-				$_author = $this->ecospold1Organization((object)array('companyCode'=>$source->{"@attributes"}->firstAuthor));
-				if (isset($_author['local_uri']) == true) {
-					$info['author'][] = $_author['local_uri'];
-					$info['pass_org'][] = $_author;
-				} elseif (isset($_author['uri']) == true) {
-					$info['author'][] = $_author['uri'];
-				}
-			} else {
-				$_author = $this->ecospold1Person((object)array('name'=>$source->{"@attributes"}->firstAuthor));
-				if (isset($_author['local_uri']) == true) {
-					$info['author'][] = $_author['local_uri'];
-					$info['pass_authors'][] = $_author;
-				} elseif (isset($_author['uri']) == true) {
-					$info['author'][] = $_author['uri'];
-				}
-				if (isset($source->{"@attributes"}->additionalAuthors) == true) {	
-					if (trim($source->{"@attributes"}->additionalAuthors) != "") {
-						$authors = explode(",",$source->{"@attributes"}->additionalAuthors);
-						foreach ($authors as $author) {
-							$_author = $this->ecospold1Person((object)array('name'=>trim($author)));
-							if (isset($_author['local_uri']) == true) {
-								$info['author'][] = $_author['local_uri'];
-								$info['pass_authors'][] = $_author;
-							} elseif (isset($_author['uri']) == true) {
-								$info['author'][] = $_author['uri'];
-							}
+			$_author = $this->ecospold1Agent((object)array('name'=>$source->{"@attributes"}->firstAuthor));
+			if (isset($_author['local_uri']) == true) {
+				$info['author'][] = $_author['local_uri'];
+				$info['pass_authors'][] = $_author;
+			} elseif (isset($_author['uri']) == true) {
+				$info['author'][] = $_author['uri'];
+			}
+			if (isset($source->{"@attributes"}->additionalAuthors) == true) {	
+				if (trim($source->{"@attributes"}->additionalAuthors) != "") {
+					$authors = explode(",",$source->{"@attributes"}->additionalAuthors);
+					foreach ($authors as $author) {
+						$_author = $this->ecospold1Agent((object)array('name'=>trim($author)));
+						if (isset($_author['local_uri']) == true) {
+							$info['author'][] = $_author['local_uri'];
+							$info['pass_authors'][] = $_author;
+						} elseif (isset($_author['uri']) == true) {
+							$info['author'][] = $_author['uri'];
 						}
 					}
-				}	
-			}		
-		}
+				}
+			}	
+		}		
+		//}
 		if (isset($source->{"@attributes"}->sourceType) == true) {
 			// 0=Undefined (default) 1=Article 2=Chapters in anthology 3=Separate publication 4=Measurement on site 5=Oral communication 6=Personal written communication 7=Questionnaries
 			// FIX: figure out what each type will correspond to.
@@ -365,16 +379,16 @@ class Converter extends FT_Controller {
 			        $info['bibotype'] = "bibo_Document";			        
 			     	break;
 			    case 4:
-			        //$info['type'] = "Document";			        
+			        $info['bibotype'] = "bibo_Document";			        
 			     	break;
 			    case 5:
-			        //$info['type'] = "Document";			        
+			        $info['bibotype'] = "bibo_PersonalCommunication";			        
 			     	break;
 			    case 6:
-			        //$info['type'] = "Document";			        
+			        $info['bibotype'] = "bibo_PersonalCommunicationDocument";			        
 			     	break;
 			    case 7:
-			        //$info['type'] = "Document";			        
+			        $info['bibotype'] = "bibo_Document";			        
 			     	break;
 			}
 		}
@@ -388,17 +402,15 @@ class Converter extends FT_Controller {
 		$info['description'] = "";
 		$info['category'] = array();
 		if (isset($process->processInformation->referenceFunction->{"@attributes"}->name) == true) {
-			$info['name'][] = $process->processInformation->referenceFunction->{"@attributes"}->name;
+			$info['name'][] = $process->processInformation->referenceFunction->{"@attributes"}->name.$this->lang[0];
 		}
 		if (isset($process->processInformation->referenceFunction->{"@attributes"}->localName) == true) {
-			$info['name'][] = $process->processInformation->referenceFunction->{"@attributes"}->localName;
+			$info['name'][] = $process->processInformation->referenceFunction->{"@attributes"}->localName.$this->lang[1];
 		}
 		if (isset($process->administrativeInformation->dataGeneratorAndPublication->{"@attributes"}->copyright) == true) {
 			if ($process->administrativeInformation->dataGeneratorAndPublication->{"@attributes"}->copyright == 1) {
-				$info['rights'] = "Copyrighted";
-			} else {
-				$info['rights'] = "Not Copyrighted";
-			}
+				$info['rights'] = "copyr:Copyright";
+			} 
 		}
 		if (isset($process->administrativeInformation->dataGeneratorAndPublication->{"@attributes"}->referenceToPublishedSource) == true) {
 			foreach ($this->lca_datasets as $set) {
@@ -409,35 +421,72 @@ class Converter extends FT_Controller {
 				}
 			}
 		}
+		if (isset($process->processInformation->referenceFunction->{"@attributes"}->infrastructureIncluded) == true) {
+			$info['includesInfrastructureEffects'] = $process->processInformation->referenceFunction->{"@attributes"}->infrastructureIncluded;
+		}
+		
+		//Versioning
+		if (isset($process->processInformation->dataSetInformation->{"@attributes"}->version) == true) {
+			$info['majorVerson'] = $process->processInformation->dataSetInformation->{"@attributes"}->version;
+		}
+		if (isset($process->processInformation->dataSetInformation->{"@attributes"}->internalVersion) == true) {
+			$info['minorVersion'] = $process->processInformation->dataSetInformation->{"@attributes"}->internalVersion;
+		}
+		
+
+		//Maker and Date Stamp
+		if (isset($this->session->userdata('foaf_uri')) == true) {
+	        $info['creator'][] = $this->session->userdata('foaf_uri');
+		}
+		if (isset($process->administrativeInformation->dataEntryBy->{"@attributes"}->person) == true) {
+			foreach ($this->lca_datasets as $set) {
+				foreach ($set['person'] as $ref) {
+					if ($ref['esref'] == $process->administrativeInformation->dataEntryBy->{"@attributes"}->person) {
+						$info['creator'][] = $ref['local_uri'];
+					}
+				}
+			}
+		}
+		$info['created'][] = date('h:i:s-m:d:Y');
+		if (isset($process->processInformation->dataSetInformation->{"@attributes"}->timestamp) == true) {
+	        $info['created'][] = $process->processInformation->dataSetInformation->{"@attributes"}->timestamp;
+		}		
 		
 		// Big Description
-		if (isset($process->processInformation->referenceFunction->{"@attributes"}->includedProcesses) == true) {
-			$info['description'] .= $process->processInformation->referenceFunction->{"@attributes"}->includedProcesses;
-		}
 		if (isset($process->processInformation->referenceFunction->{"@attributes"}->generalComment) == true) {
-			$info['description'] .= $process->processInformation->referenceFunction->{"@attributes"}->generalComment;
+			$info['description'][] = $process->processInformation->referenceFunction->{"@attributes"}->generalComment.$this->lang[0];
+		}
+		if (isset($process->processInformation->referenceFunction->{"@attributes"}->includedProcesses) == true) {
+			$info['description'][] = "Included Processes:  ".$process->processInformation->referenceFunction->{"@attributes"}->includedProcesses.$this->lang[0];
 		}
 		if (isset($process->processInformation->referenceFunction->{"@attributes"}->infrastructureProcess) == true) {
 			if ($process->processInformation->referenceFunction->{"@attributes"}->infrastructureProcess == "Yes") {
-				$info['description'] .= "This includes infrastructure processes.";
+				$info['description'][] = "This includes infrastructure processes.";
 			} else {
-				$info['description'] .= "This does not include infrastructure processes.";
+				$info['description'][] = "This does not include infrastructure processes.";
 			}
 		}
 		if (isset($process->processInformation->geography->{"@attributes"}->text) == true) {
-				$info['description'] .= $process->processInformation->geography->{"@attributes"}->text;
+				$info['description'][] = $process->processInformation->geography->{"@attributes"}->text.$this->lang[0];
 		}
 		if (isset($process->processInformation->technology->{"@attributes"}->text) == true) {
-				$info['description'] .= $process->processInformation->technology->{"@attributes"}->text;
+				$info['description'][] = $process->processInformation->technology->{"@attributes"}->text.$this->lang[0];
 		}
 		
 		// Categories
 		if (isset($process->processInformation->referenceFunction->{"@attributes"}->category) == true) {
-			$info['category'][] = $process->processInformation->referenceFunction->{"@attributes"}->category;
+			$info['category'][] = $process->processInformation->referenceFunction->{"@attributes"}->category.$this->lang[0];
 		}
 		if (isset($process->processInformation->referenceFunction->{"@attributes"}->subCategory) == true) {
-			$info['category'][] = $process->processInformation->referenceFunction->{"@attributes"}->subCategory;
+			$info['category'][] = $process->processInformation->referenceFunction->{"@attributes"}->subCategory.$this->lang[0];
 		}
+		if (isset($process->processInformation->referenceFunction->{"@attributes"}->localCategory) == true) {
+			$info['category'][] = $process->processInformation->referenceFunction->{"@attributes"}->localCategory.$this->lang[1];
+		}
+		if (isset($process->processInformation->referenceFunction->{"@attributes"}->localSubCategory) == true) {
+			$info['category'][] = $process->processInformation->referenceFunction->{"@attributes"}->localSubCategory.$this->lang[1];
+		}		
+		
 		
 		// Time Period
 		if (isset($process->processInformation->timePeriod->startYear) == true) {
@@ -501,18 +550,23 @@ class Converter extends FT_Controller {
 		
 		// Process Names
 		if (isset($process->referenceFunction->{"@attributes"}->name) == true) {
-			$info['name'][] = $process->referenceFunction->{"@attributes"}->name;
+			$info['name'][] = $process->referenceFunction->{"@attributes"}->name.$this->lang[0];
 		}
 		if (isset($process->referenceFunction->{"@attributes"}->synonym) == true) {
 			foreach (explode("//",$process->referenceFunction->{"@attributes"}->synonym) as $name) {
-				$info['name'][] = $name;
+				$info['name'][] = $name.$this->lang[0];
 			}
 		}
 		// NACE Classification
+		// We'll look for the NACE Classification in our NACE dataset
+		// If we cant find it we'll just assign the string
+		// Its a category now, because, well, that's what it is
 		if (isset($process->referenceFunction->{"@attributes"}->statisticalClassification) == true) {
 			$nace = $this->nacemodel->getURIbyCode($process->referenceFunction->{"@attributes"}->statisticalClassification);
 			if ($nace != false) {
 				$info['category'][] = $nace;				
+			} else {
+				$info['category'][] = $process->referenceFunction->{"@attributes"}->statisticalClassification;
 			}
 		}
 		
@@ -529,35 +583,34 @@ class Converter extends FT_Controller {
 			} else {
 				$info['geoLocation'] = $process->geography->{"@attributes"}->location;
 			}
+			$info['description'][] = "Geography: " . $process->geography->{"@attributes"}->text;
 		}
 		
-		// Piece together a description
-		$info['description'] = "";
 		if (isset($process->referenceFunction->{"@attributes"}->includedProcesses) == true) {
-			$info['description'] .= $process->referenceFunction->{"@attributes"}->includedProcesses;
+			$info['description'][] = "Included Processes: " . $process->referenceFunction->{"@attributes"}->includedProcesses;
 		}
 		if (isset($process->referenceFunction->{"@attributes"}->generalComment) == true) {
-			$info['description'] .= $process->referenceFunction->{"@attributes"}->generalComment;
+			$info['description'][] = $process->referenceFunction->{"@attributes"}->generalComment;
 		}
 		if (isset($process->referenceFunction->{"@attributes"}->infrastructureProcess) == true) {
 			if ($process->referenceFunction->{"@attributes"}->infrastructureProcess == "Yes") {
-				$info['description'] .= "This includes infrastructure processes.";
+				$info['description'][] = "This includes infrastructure processes.";
 			} else {
-				$info['description'] .= "This does not include infrastructure processes.";
+				$info['description'][] = "This does not include infrastructure processes.";
 			}
 		}
 		if (isset($process->geography->{"@attributes"}->text) == true) {
-				$info['description'] .= $process->geography->{"@attributes"}->text;
+				$info['description'][] = $process->geography->{"@attributes"}->text;
 		}	
 		if (isset($process->technology->{"@attributes"}->text) == true) {
-				$info['description'] .= $process->technology->{"@attributes"}->text;
+				$info['description'][] = $process->technology->{"@attributes"}->text;
 		}	
-		if ($info['description'] == "") {
-			unset($info['description']);
-		}
 		
 		// Time Span
 		// Time Period
+		if (isset($process->timePeriod->text) == true) {
+			$info['description'][] = "Time Period" . $process->timePeriod->text.$this->lang[0];
+		}
 		if (isset($process->timePeriod->startYear) == true) {
 			$info['beginning'] = $process->timePeriod->startYear;
 		}
@@ -639,6 +692,12 @@ class Converter extends FT_Controller {
 	
 	
 	private function ecospold1Exchange($exchange, $ex = false) {
+			//internal reference
+			// Values & uncertainty
+			if (isset($exchange->{"@attributes"}->number) == true) {
+				$info['esref'] = $exchange->{"@attributes"}->number;
+			}
+
 		$info['name'] = $exchange->{"@attributes"}->name;
 		if ($ex != false) {
 			$info['change_predicates']['Exchange'] = $ex;
@@ -691,7 +750,14 @@ class Converter extends FT_Controller {
 				$info['category'][] = $exchange->{"@attributes"}->subCategory;
 			}
 		}	
-			
+		
+		if (isset($exchange->{"@attributes"}->localCategory) == true) {
+			$info['category'][] = $exchange->{"@attributes"}->localCategory.$this->lang[1];
+		}
+		if (isset($exchange->{"@attributes"}->localSubCategory) == true) {
+			$info['category'][] = $exchange->{"@attributes"}->localSubCategory.$this->lang[1];
+		}
+					
 		// Chemical-related fields
 		if (isset($exchange->{"@attributes"}->CASNumber) == true) {
 			$info['CASNumber'] = $exchange->{"@attributes"}->CASNumber;
@@ -809,6 +875,38 @@ class Converter extends FT_Controller {
 		$info['local_uri'] = toURI('organization',$info['name']);
 		return $info;
 	}
+	
+	
+	private function ecospold1Agent($agent) {
+		$info = array();
+		$info['dataType'] = "foaf_Agent";
+		if (isset($agent->number) == true) {
+			$info['esref'] = $agent->number;
+		}
+		if (isset($agent->name) == true) {
+			$info['name'] = $agent->name;
+		}
+		if (isset($agent->companyCode) == true) {
+			$info['companyCode'] = $agent->companyCode;
+		}
+		if (isset($agent->address) == true) {
+			$info['address'] = $agent->address;
+		}
+		if (isset($agent->telephone) == true) {
+			$info['phone'] = $agent->telephone;
+		}
+		if (isset($agent->telefax) == true) {
+			$info['fax'] = $agent->telefax;
+		}
+		if (isset($agent->countryCode) == true) {
+			$info['location'] = $agent->countryCode;
+		}
+		if (isset($agent->email) == true) {
+			$info['email'] = $agent->email;
+		}
+		$info['local_uri'] = toURI('agent',$info['name']);
+		return $info;
+	}
 
 	/*
 	Ecospold 1 looks something like:
@@ -912,6 +1010,36 @@ class Converter extends FT_Controller {
 		} else {
 			$info['local_uri'] = toURI('person',$info['name']);
 		}
+		return $info;
+	}
+	
+	
+	/*
+	This function is completely untested. If you have an ecospold doc with allocation methods and feel like sharing it, or you want to fix the code yourself, please do. 
+	
+	*/
+	private function ecospold1Allocation($allocation) {
+		$info = array();
+		if(isset($allocation->{"@attributes"}->fraction) == true) {
+			$info['allocationProportion'] = $allocation->{"@attributes"}->fraction;
+		}
+		if(isset($allocation->{"@attributes"}->explanation) == true) {
+			$info['description'] = $allocation->{"@attributes"}->explanation;
+		}
+		foreach ($this->lca_datasets[$key] as $set) {
+			foreach ($set['exchange'] as $ref) {
+				if ($ref['esref'] == $exchange->{"@attributes"}->referenceToCoProduct) {
+					$info['allocatedFrom'] = $ref['uri'];
+				}
+			}
+		}
+		foreach ($this->lca_datasets[$key] as $set) {
+			foreach ($set['exchange'] as $ref) {
+				if ($ref['esref'] == $exchange->{"@attributes"}->referenceToInputOutput) {
+					$info['allocatedTo'] = $ref['uri'];
+				}
+			}
+		}	
 		return $info;
 	}
 

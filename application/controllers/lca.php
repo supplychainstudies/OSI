@@ -341,7 +341,11 @@ class Lca extends FT_Controller {
 			$parts['ref'] = $b["title"] . "Authors: ";
 			if (isset($b['authors']) == true) {
 				foreach ($b['authors'] as $author) {
-					$parts['ref'] .=  $author['lastName'] . ", " .$author['firstName'] . "; ";
+					if (isset($author['lastName']) == true) {
+						$parts['ref'] .=  $author['lastName'] . ", " .$author['firstName'] . "; ";
+					} elseif (isset($author['name']) == true) {
+						$parts['ref'] .=  $author['name'] . "; ";
+					}
 				}
 			}
 		}

@@ -32,5 +32,10 @@ class Bibliography extends FT_Controller {
 	    $this->data("view_string", $the_form);
 	    $this->display("Form", "view");
 	 }
+	
+	public function browse() {
+		$refs = $this->bibliographymodel->getRefsAPA();
+		var_dump($refs);
+	}
 
 }

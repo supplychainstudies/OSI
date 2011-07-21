@@ -106,6 +106,7 @@ class FT_Model extends CI_Model{
 		// for each triple				
 		foreach ($triples as $triple) {
 			// for each value 
+			
 			foreach ($triple as $val) {
 				// if the value is a uri,url,or blank node, surround it in <>
 				if (strstr($val, "http://") != false || strstr($val, "_:") != false ) {
@@ -114,7 +115,13 @@ class FT_Model extends CI_Model{
 					$q .= "".$val." ";
 				}
 				// otherwise, put it in quotes
+				elseif ($this->hasLang($val) == true) {
+					
+					$q .= "'" . substr($val,0,strlen($val)-3) . "'".substr($val,strlen($val)-3)." ";
+				}
+				// otherwise, put it in quotes
 				else {
+					
 					$q .= "'" . $val . "' ";
 				}
 			}
@@ -123,6 +130,14 @@ class FT_Model extends CI_Model{
 		$q .= "}";
 		error_log($q,0);
 		$this->executeQuery($q);
+	}
+
+	public function hasLang($val) {
+		if (substr($val, -3, 1) == "@") {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public function isURI($val) {

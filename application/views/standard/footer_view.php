@@ -4,8 +4,8 @@
 	<div class="footer-list">
 	<ul>
 	<li><h2>Footprinted.org</h2></li>
-	<li><p>Is an service for sharing and using environmental impact information in open formats using linked data.<br/><br/>
-		Footprinted is still in beta.</p></li>
+	<li><p>Free and open environmental impact data<br/><br/>
+		Footprinted is in beta.</p></li>
 	</ul>	
 	</div>
 	<div class="footer-list">
@@ -23,14 +23,14 @@
 	<li><p><a href="/documentation/data">Data</a></p></li>
 	<li><p><a href="/documentation/API">API</a></p></li>
 	<li><p><a href="/documentation/endpoint">SPARQL Endpoint</a></p></li>	
-	<li><p><a href="">Source Code: coming soon</a></p></li>
+	<li><p><a href="https://github.com/Sourcemap/Footprinted">Source Code@Github</a></p></li>
 	</ul>	
 	</div>
 	<div class="footer-list">
 	<ul>
 	<li><p>A project of</p></li>
-	<li><p><a href="http://cesc.kth.se" target="_blank">CESC KTH</a></p></li>
 	<li><p><a href="http://sourcemap.com" target="_blank">Sourcemap</a></p></li>
+	<li><p><a href="http://cesc.kth.se" target="_blank">CESC KTH</a></p></li>
 	<li><p><a href="http://media.mit.edu" target="_blank">MIT Media Lab</a></p></li>
 	<li><p><a href="http://uwaterloo.ca" target="_blank">U. Waterloo</a></p></li>
 	</ul>	

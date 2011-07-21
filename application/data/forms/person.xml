@@ -1,5 +1,5 @@
 <form action="/people/create" name="Person Description">
-		<dataType rules="trim">
+		<dataType rules="trim|uriparse">
 			<label>Data Type</label>
 			<type>hidden</type>
 		  	<linked_type>rdfs:type</linked_type>

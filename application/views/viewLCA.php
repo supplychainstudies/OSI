@@ -180,8 +180,8 @@
 			<h2>Reference</h2>
 			<?
 				if (isset($parts['bibliography']) == true) {
-					echo "<p>";
 					foreach ($parts['bibliography'] as $record) {
+						echo "<p>";						
 						if (isset($record['uri']) == true) {
 							echo "<a href='" . $record['uri'] . "' target='_blank'>";
 						}
@@ -194,8 +194,8 @@
 						if (isset($record["date"]) == true) 	{ 	if ($record["date"] != "") {		$ref .= "(".substr_replace($record['date'],'', 4).") "; } }
 						if (isset($record["title"]) == true) 	{	$ref .= $record["title"];	}
 						if (isset($record['uri']) == true) 		{	echo $ref."</a>"; }
+						echo "</p>";
 					}
-					echo "</p>";
 				}
 			?>
 			</div>
@@ -253,7 +253,7 @@
 				if (isset($parts['bibliography']) == true) {
 					echo "<p>From the same reference source as:";
 					foreach ($parts['bibliography'] as $record) {
-							echo "<a href='/search?ref=" . $record['title'] . "' target='_blank'>".	$record['title'] . "&rsaquo; &rsaquo; " . "</a>";
+							echo "<p><a href='/search?ref=" . $record['title'] . "' target='_blank'>".	$record['title'] . "&rsaquo; &rsaquo; " . "</a></p>";
 					}
 				}	
 			?>

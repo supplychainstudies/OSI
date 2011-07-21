@@ -12,21 +12,21 @@
 
 
 class Endpoint extends FT_Controller {
-	public function Endpoint() {
-		parent::__construct();
+	public function __construct() {
+		parent::__construct();			
 			$this->load->library('arc2/ARC2', '', 'arc');	
 			$this->config->load('arc');	
 			$this->config->load('arcdb');	
-			$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));	
+			$this->arc_config = array_merge($this->config->item("arc_info"), $this->config->item("db_arc_info"));
+			$this->arc_config['store_name']="footprinted";	
 			}	
 		/**
 		 * This function is a generic call to the arc store.
 		 * @return Array of triples.
 		 * @param $q string - query string.
 		 */
-		public function i($store="footprinted") {
+		public function index() {
 			/* instantiation */
-			$this->arc_config['store_name']=$store;
 			@$ep = $this->arc->getStoreEndpoint($this->arc_config);
 
 			if (!$ep->isSetUp()) {

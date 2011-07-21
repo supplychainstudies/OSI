@@ -102,14 +102,14 @@ class Search extends FT_Controller {
 		}
 		if (isset($search_terms["startYear"]) == true){
 			if ($search_terms['startYear'] != "") {
-				$this->db->where('year > ', $search_terms['startYear']);
+				$this->db->where('year >= ', $search_terms['startYear']);
 				$this->data("category", $search_terms['startYear']);
 				$do_search = true;
 			}
 		}
 		if (isset($search_terms["endYear"]) == true){
 			if ($search_terms['endYear'] != "") {
-				$this->db->where('year < ', $search_terms['endYear']);
+				$this->db->where('year <= ', $search_terms['endYear']);
 				$this->data("category", $search_terms['endYear']);
 				$do_search = true;
 			}

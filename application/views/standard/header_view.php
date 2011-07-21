@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <meta http-equiv="content-language" content="en-us">
 <meta name="description" content="Footprinted.org" />
-<meta name="keywords" content="linked data, open data, sustainability, life cycle assessment, LCA, open source" />
+<meta name="keywords" content="linked data, open data, sustainability, life cycle assessment, LCA, open source, carbon footprint, carbon footprinting, environmental impact assessment, water footprint, energy footprint, GHG, greenhouse gas emissions, life cycle inventory, life cycle analysis, life cycle, life cycle thinking" />
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
